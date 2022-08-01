@@ -28,8 +28,8 @@
         <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5 text-center" href="#"><img
-                        src="{{ asset('images/logo.jpg') }}" class="mr-2" alt="logo" /></a>
+                <a class="navbar-brand brand-logo mr-5" href="#"><img src="images/logo.jpg" class="mr-2"
+                        alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="#"><img src="images/logo-mini.svg"
                         alt="logo" /></a>
             </div>
@@ -40,16 +40,31 @@
 
                 <ul class="navbar-nav navbar-nav-right">
 
-                    <a class="dropdown-item" href="{{ route('logout') }}"
-                        onclick="event.preventDefault();
-                                          document.getElementById('logout-form').submit();">
-                        <i class="ti-power-off text-primary"></i>
-                        {{ __('Logout') }}
-                    </a>
+                    <li class="nav-item nav-profile dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
+                            <img src="images/faces/face28.jpg" alt="profile" />
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
+                            aria-labelledby="profileDropdown">
+                            <a class="dropdown-item">
+                                <i class="ti-settings text-primary"></i>
+                                Settings
+                            </a>
 
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                        @csrf
-                    </form>
+                            <a class="dropdown-item" href="{{ route('logout') }}"
+                                onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+                                <i class="ti-power-off text-primary"></i>
+                                {{ __('Logout') }}
+                            </a>
+
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </div>
+                    </li>
+
+                </ul>
             </div>
             </li>
             </ul>
@@ -182,11 +197,11 @@
                 </li>
             </ul>
         </nav>
-        <!-- partial -->
-        @yield('content')
-        <!-- main-panel ends -->
-    </div>
-    <!-- page-body-wrapper ends -->
+            <!-- partial -->
+            @yield('content')
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
     </div>
     <!-- container-scroller -->
 
@@ -195,7 +210,8 @@
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="vendors/chart.js/Chart.min.js"></script>
-    <script src="vendors/datatables.net/jquery.dataTables.js"></script>
+    {{-- <script src="vendors/datatables.net/jquery.dataTables.js"></script> --}}
+    <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
     <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
     <script src="js/dataTables.select.min.js"></script>
 
@@ -211,6 +227,9 @@
     <script src="js/dashboard.js"></script>
     <script src="js/Chart.roundedBarCharts.js"></script>
     <!-- End custom js for this page-->
+    <script src="js/custom.js"></script>
+
+
 </body>
 
 </html>
