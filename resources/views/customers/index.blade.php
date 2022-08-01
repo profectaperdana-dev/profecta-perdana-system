@@ -41,7 +41,7 @@
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">
-                                        <table id="example" class="display expandable-table" style="width:100%">
+                                        <table id="myTable" class="display expandable-table" style="width:100%">
                                             <thead>
                                                 <tr>
                                                     <th>Code</th>
@@ -54,19 +54,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-
-                                            </tbody>
-                                            @foreach ($customers as $customer)
-                                            <tr>
-                                                <td>{{ $customer->kode_cust }}</td>
-                                                <td>{{ $customer->nama_cust }}</td>
-                                                <td>{{ $customer->alamat_cust }}</td>
-                                                <td>{{ $customer->no_telepon_cust }}</td>
-                                                <td>{{ $customer->email_cust }}</td>
-                                                <td>{{ $customer->kategori_cust }}</td>
-                                                <td>{{ $customer->area_cust }}</td>
-                                            </tr>
+                                                @foreach ($customers as $customer)
+                                                <tr>
+                                                    <td>{{ $customer->kode_cust }}</td>
+                                                    <td>{{ $customer->nama_cust }}</td>
+                                                    <td>{{ $customer->alamat_cust }}</td>
+                                                    <td>{{ $customer->no_telepon_cust }}</td>
+                                                    <td>{{ $customer->email_cust }}</td>
+                                                    <td>{{ $customer->kategori_cust }}</td>
+                                                    <td>{{ $customer->area_cust }}</td>
+                                                </tr>
                                             @endforeach
+                                            </tbody>
                                         </table>
                                     </div>
                                 </div>
