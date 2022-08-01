@@ -43,7 +43,22 @@
                                             <tbody>
                                                 @foreach ($data as $key => $value)
                                                     <tr>
-                                                        <td></td>
+                                                        <td>
+                                                            <div class="dropdown">
+                                                                <button type="button" class="btn"
+                                                                    id="dropdownMenuIconButton7" data-toggle="dropdown"
+                                                                    aria-haspopup="true" aria-expanded="false">
+                                                                    <i class="ti-menu-alt"></i>
+                                                                </button>
+                                                                <div class="dropdown-menu"
+                                                                    aria-labelledby="dropdownMenuIconButton7">
+                                                                    <h6 class="dropdown-header">Settings</h6>
+                                                                    <a class="dropdown-item" href="#">Edit</a>
+                                                                    <a class="dropdown-item" href="#">Delete</a>
+
+                                                                </div>
+                                                            </div>
+                                                        </td>
                                                         <td>{{ $key + 1 }}</td>
                                                         <td>{{ $value->kode_barang }}</td>
                                                         <td>{{ $value->nama_barang }}</td>

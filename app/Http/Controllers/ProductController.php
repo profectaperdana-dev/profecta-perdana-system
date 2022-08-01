@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function index()
     {
         $title = 'Data Products';
-        $data = ProductModel::latest()->get();
+        $data = ProductModel::latest()->limit('10')->get();
         // var_dump($data);
         return view('products.index', compact('data', 'title'));
     }
