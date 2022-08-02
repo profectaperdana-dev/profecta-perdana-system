@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CustomerCategoriesModel;
+use App\Models\CustomerAreaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class CustomerCategoriesController extends Controller
+class CustomerAreasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,14 +15,24 @@ class CustomerCategoriesController extends Controller
      */
     public function index()
     {
-        $all_customer_categories=CustomerCategoriesModel::all();
+        $all_customer_areas = CustomerAreaModel::all();
         $data=[
-            'title' => "Customer Categories",
-            'customer_categories' => $all_customer_categories
+            'title' => 'Customer Area',
+            'customer_areas' => $all_customer_areas
         ];
 
-        return view('customer_categories.index', $data);
+        return view('customer_areas.index', $data);
+        
+    }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -34,13 +44,13 @@ class CustomerCategoriesController extends Controller
     public function store(Request $request)
     {
         $validated_data = $request->validate([
-            'category_name' => 'required'
+            'area_name' => 'required'
         ]);
         $validated_data['created_by'] = Auth::user()->id;
 
-        CustomerCategoriesModel::create($validated_data);
+        CustomerAreaModel::create($validated_data);
 
-        return redirect('/customer_categories')->with('success', 'Customer Category Add Success');
+        return redirect('/customer_areas')->with('success', 'Customer Area Add Success');
     }
 
     /**
@@ -53,14 +63,14 @@ class CustomerCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'category_name' => 'required'
+            'area_name' => 'required'
         ]);
 
-        $customer_category = CustomerCategoriesModel::where('id', $id)->firstOrFail();
-        $customer_category->category_name = $validateData['category_name'];
-        $customer_category->save();
+        $customer_area = CustomerAreaModel::where('id', $id)->firstOrFail();
+        $customer_area->area_name = $validateData['area_name'];
+        $customer_area->save();
 
-        return redirect('/customer_categories')->with('success', 'Customer Categories Edit Success');
+        return redirect('/customer_areas')->with('success', 'Customer Areas Edit Success');
     }
 
     /**
@@ -71,8 +81,8 @@ class CustomerCategoriesController extends Controller
      */
     public function destroy($id)
     {
-        CustomerCategoriesModel::where('id', $id)->delete();
+        CustomerAreaModel::where('id', $id)->delete();
 
-        return redirect('/customer_categories')->with('success', 'Customer Categories Delete Success');
+        return redirect('/customer_areas')->with('success', 'Customer Areas Delete Success');
     }
 }

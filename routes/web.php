@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerAreasController;
 use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
@@ -28,3 +29,4 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::resource('/products', ProductController::class);
 Route::resource('/customers', CustomerController::class);
 Route::resource('/customer_categories', CustomerCategoriesController::class);
+Route::resource('/customer_areas', CustomerAreasController::class);
