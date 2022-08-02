@@ -3,8 +3,11 @@
 use App\Http\Controllers\CustomerAreasController;
 use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\UomController;
 use App\Models\CustomerModel;
+use App\Models\MaterialModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,3 +33,5 @@ Route::resource('/products', ProductController::class);
 Route::resource('/customers', CustomerController::class);
 Route::resource('/customer_categories', CustomerCategoriesController::class);
 Route::resource('/customer_areas', CustomerAreasController::class);
+Route::resource('/product_uoms', UomController::class);
+Route::resource('/product_materials', MaterialController::class);
