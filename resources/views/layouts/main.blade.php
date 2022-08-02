@@ -89,7 +89,14 @@
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/products_uoms') }}">Uoms</a>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/product_uoms') }}">Uoms</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ url('/product_materials') }}">Materials
+                                    </a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/products_uoms') }}">Sub
+                                        Materials </a>
                                 </li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/products') }}">Products</a>
                                 </li>

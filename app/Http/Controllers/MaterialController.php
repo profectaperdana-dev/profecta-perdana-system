@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UomModel;
+use App\Models\MaterialModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
-class UomController extends Controller
+class MaterialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,10 +15,10 @@ class UomController extends Controller
      */
     public function index()
     {
-        $title = 'Data Unit of Measurement';
-        $data = UomModel::latest()->get();
+        $title = 'Data Product Material';
+        $data = MaterialModel::latest()->get();
 
-        return view('uoms.index', compact('title', 'data'));
+        return view('materials.index', compact('title', 'data'));
     }
 
     /**
@@ -29,7 +28,6 @@ class UomController extends Controller
      */
     public function create()
     {
-        //
     }
 
     /**
@@ -40,17 +38,16 @@ class UomController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
-            'satuan' => 'required',
+            'nama_material' => 'required',
 
         ]);
-        $model = new UomModel();
-        $model->satuan = $request->get('satuan');
+        $model = new MaterialModel();
+        $model->nama_material = $request->get('nama_material');
         $model->created_by = Auth::user()->id;
         $model->save();
 
-        return redirect('/product_uoms')->with('success', 'Add Data Unit of Measurement Success');
+        return redirect('/product_materials')->with('success', 'Add Data Product Material Success');
     }
 
     /**
@@ -85,15 +82,14 @@ class UomController extends Controller
     public function update(Request $request, $id)
     {
         $request->validate([
-            'editSatuan' => 'required',
+            'editnama_material' => 'required',
 
         ]);
-        $model = UomModel::find($id);
-        $model->satuan = $request->get('editSatuan');
+        $model = MaterialModel::find($id);
+        $model->nama_material = $request->get('editnama_material');
         $model->created_by = Auth::user()->id;
         $model->save();
-
-        return redirect('/product_uoms')->with('info', 'Changes Data Unit of Measurement Success');
+        return redirect('/product_materials')->with('info', 'Changes Data Product Material Success');
     }
 
     /**
@@ -104,8 +100,8 @@ class UomController extends Controller
      */
     public function destroy($id)
     {
-        $model = UomModel::find($id);
+        $model = MaterialModel::find($id);
         $model->delete();
-        return redirect('/product_uoms')->with('error', 'Delete Data Unit of Measurement Success');
+        return redirect('/product_materials')->with('error', 'Delete Data Product Material Success');
     }
 }
