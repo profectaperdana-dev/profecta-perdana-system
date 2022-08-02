@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\ProductController;
 use App\Models\CustomerModel;
@@ -26,3 +27,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 Route::resource('/products', ProductController::class);
 Route::resource('/customers', CustomerController::class);
+Route::resource('/customer_categories', CustomerCategoriesController::class);

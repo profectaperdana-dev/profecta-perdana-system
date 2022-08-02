@@ -7,9 +7,7 @@
                     <div class="row">
                         <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                             <h3 class="font-weight-bold">{{ $title }}</h3>
-                            <h6 class="font-weight-normal mb-0">All systems are running smoothly! You have
-                                <span class="text-primary">3 unread alerts!</span>
-                            </h6>
+                            
                         </div>
                         <div class="col-12 col-xl-4">
                             <div class="justify-content-end d-flex">
@@ -37,7 +35,11 @@
                 <div class="col-md-12 grid-margin stretch-card">
                     <div class="card">
                         <div class="card-body">
-                            <p class="card-title">Advanced Table</p>
+                            <p class="card-title">Customers Table</p>
+                            <div>
+                                <button class="btn btn-md btn-success" data-toggle="modal" data-target="#addModal">+ Add Customer</button>
+                                <hr>
+                            </div>
                             <div class="row">
                                 <div class="col-12">
                                     <div class="table-responsive">
@@ -72,26 +74,78 @@
                             </div>
                         </div>
                     </div>
-
-
                 </div>
             </div>
         </div>
-        <!-- content-wrapper ends -->
-        <!-- partial:partials/_footer.html -->
-        <footer class="footer">
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Copyright © 2021.
-                    Premium <a href="https://www.bootstrapdash.com/" target="_blank">Bootstrap admin
-                        template</a> from BootstrapDash. All rights reserved.</span>
-                <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Hand-crafted & made
-                    with <i class="ti-heart text-danger ml-1"></i></span>
+
+        <!-- Modal -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog modal-xl" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add Customer</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Name</label>
+                                <input type="text" class="form-control" placeholder="Customer Name">
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Phone Number</label>
+                                <input type="text" class="form-control" placeholder="Customer Phone Number">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input type="text" class="form-control form-control-lg" placeholder="Customer Address">                       
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label>Email</label>
+                                <input type="email" class="form-control" placeholder="Email Customer">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputState">Category</label>
+                                <select id="inputState" class="form-control">
+                                    <option selected>Choose Category Customer</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="inputState">Area</label>
+                                <select id="inputState" class="form-control">
+                                    <option selected>Choose Customer Area</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label>Credit Limit</label>
+                                <input type="number" class="form-control" placeholder="Credit Limit Customer">
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Status</label>
+                                <select class="form-control">
+                                    <option selected>Choose Customer Status</option>
+                                    <option>...</option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-success">Add</button>
+                    </div>
+                    </form>
             </div>
-            <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">Distributed by <a
-                        href="https://www.themewagon.com/" target="_blank">Themewagon</a></span>
             </div>
-        </footer>
-        <!-- partial -->
+        </div>
     </div>
 @endsection
