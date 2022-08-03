@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ProductModel;
+use App\Models\SubMaterialModel;
 use Illuminate\Http\Request;
-use Products;
+use Illuminate\Support\Facades\Auth;
 
-class ProductController extends Controller
+class SubMaterialController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,10 +15,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $title = 'Data Products';
-        $data = ProductModel::latest()->limit('10')->get();
-        // var_dump($data);
-        return view('products.index', compact('data', 'title'));
+        $title = 'Data Product Sub Material';
+        $data = SubMaterialModel::latest()->get();
+
+        return view('submaterials.index', compact('title', 'data'));
     }
 
     /**
@@ -28,10 +28,7 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $title = 'Data Products';
-        $data = ProductModel::latest()->limit('10')->get();
-        // var_dump($data);
-        return view('products.create', compact('data', 'title'));
+        //
     }
 
     /**
@@ -42,7 +39,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nama_sub_material' => 'required',
+
+        ]);
+        $model = new SubMaterialModel();
+        $model->nama_sub_material = $request->get('nama_sub_material');
+        $model->created_by = Auth::user()->id;
+        $model->save();
+
+        return redirect('/product_sub_materials')->with('success', 'Add Data Product Sub Material Success');
     }
 
     /**
@@ -76,7 +82,15 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'editnama_submaterial' => 'required',
+
+        ]);
+        $model = SubMaterialModel::find($id);
+        $model->nama_sub_material = $request->get('editnama_submaterial');
+        $model->created_by = Auth::user()->id;
+        $model->save();
+        return redirect('/product_sub_materials')->with('info', 'Changes Data Product Sub Material Success');
     }
 
     /**
@@ -87,6 +101,8 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = SubMaterialModel::find($id);
+        $model->delete();
+        return redirect('/product_sub_materials')->with('error', 'Delete Data Product Sub Material Success');
     }
 }
