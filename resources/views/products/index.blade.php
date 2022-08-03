@@ -16,10 +16,17 @@
 
 
         <div class="row">
-
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong class="text-capitalize">{{ session('success') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         {{-- Modul Tambah Produk --}}
                         <a class="btn btn-success" href="{{ url('products/create') }}">
                             + Add Products
@@ -56,7 +63,7 @@
                                                                 aria-labelledby="dropdownMenuIconButton7">
                                                                 <h6 class="dropdown-header">Settings</h6>
                                                                 <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#detailData{{ $value->id }}">
+                                                                    data-target="#detailData{{ $value->kode_barang }}">
                                                                     Detail
                                                                 </a>
                                                                 <a class="dropdown-item" href="#" data-toggle="modal"
@@ -71,7 +78,7 @@
                                                         </div>
                                                     </td>
                                                     {{-- Modul Detail Product --}}
-                                                    <div class="modal fade" id="detailData{{ $value->id }}"
+                                                    <div class="modal fade" id="detailData{{ $value->kode_barang }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-xl" role="document">
@@ -84,8 +91,8 @@
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
-                                                                            Detail {{ $title }} :
-                                                                            {{ $value->nama_sub_material }}</h5>
+                                                                            Detail Product {{ $title }} :
+                                                                            {{ $value->nama_barang }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -93,24 +100,143 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="form-group row">
-                                                                                    <div class="col-md-12">
-                                                                                        <label class="font-weight-bold">Name
-                                                                                            Product Sub Material</label>
+                                                                            <div class="col-md-4">
+                                                                                <img width="100%"
+                                                                                    style="border: 2px solid rgb(0, 0, 0);"
+                                                                                    src="{{ asset('foto_produk/' . $value->foto_barang) }}"
+                                                                                    alt="">
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Product Code</label>
                                                                                         <input type="text"
-                                                                                            class="form-control text-capitalize "
-                                                                                            name="editnama_submaterial"
-                                                                                            value="{{ $value->nama_sub_material }}"
-                                                                                            placeholder="Name Unit of Measurement">
-                                                                                        @error('editnama_submaterial')
-                                                                                            <small class="text-danger">The
-                                                                                                Product Sub Material field is
-                                                                                                required.</small>
-                                                                                        @enderror
+                                                                                            class="form-control"
+                                                                                            placeholder="Product Code"
+                                                                                            readonly
+                                                                                            value="{{ $value->kode_barang }}">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Product Name</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control "
+                                                                                            placeholder="Product Name"
+                                                                                            readonly
+                                                                                            value="{{ $value->nama_barang }}">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Serial Number</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $value->no_seri }}">
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="col-md-4">
+
+                                                                                        <label>
+                                                                                            Unit of Measurement</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $value->satuan }}">
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>
+                                                                                            Material</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $value->nama_material }}">
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>
+                                                                                            Sub Material</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $value->nama_sub_material }}">
                                                                                     </div>
 
                                                                                 </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Purchase Price
+                                                                                        </label>
+                                                                                        <input type="text" readonly
+                                                                                            class="form-control"
+                                                                                            value="@currency($value->harga_beli)">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Retail Selling Price </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            placeholder="Retail Selling Price"
+                                                                                            value="@currency($value->harga_jual)">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Non Retail Selling
+                                                                                            Price</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            placeholder="Non Retail Selling Price"
+                                                                                            value="@currency($value->harga_jual_nonretail)">
+
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="col-md-3">
+                                                                                        <label>Product Weight <span><small
+                                                                                                    class="text-info">Gram</small></span></label>
+                                                                                        <input type="number"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->berat }}">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <label>Qty Stock </label>
+                                                                                        <input type="number"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->qty }}">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <label>Min Stock</label>
+                                                                                        <input type="number"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->minstok }}">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-3">
+                                                                                        <label>Status</label>
+                                                                                        <input type="number"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->status }}">
+
+                                                                                    </div>
+
+
+
+                                                                                </div>
+
 
                                                                             </div>
                                                                         </div>
@@ -118,10 +244,7 @@
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger"
                                                                             data-dismiss="modal">Close</button>
-                                                                        <button type="reset"
-                                                                            class="btn btn-warning">Reset</button>
-                                                                        <button type="submit" class="btn btn-primary">Save
-                                                                            changes</button>
+
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -241,9 +364,9 @@
                                                     <td>{{ $value->kode_barang }}</td>
                                                     <td>{{ $value->nama_barang }}</td>
                                                     <td>{{ $value->no_seri }}</td>
-                                                    <td>{{ $value->uom }}</td>
-                                                    <td>{{ $value->material_grup }}</td>
-                                                    <td>{{ $value->sub_material }}</td>
+                                                    <td>{{ $value->satuan }}</td>
+                                                    <td>{{ $value->nama_material }}</td>
+                                                    <td>{{ $value->nama_sub_material }}</td>
                                                 </tr>
                                             @endforeach
                                         </tbody>
@@ -253,8 +376,6 @@
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>

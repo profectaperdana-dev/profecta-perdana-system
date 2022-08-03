@@ -37,8 +37,9 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label class="font-weight-bold">Name Product Material</label>
-                                                <input type="text" class="form-control text-capitalize "
-                                                    name="nama_material" placeholder="Name Product Material">
+                                                <input type="text"
+                                                    class="form-control text-capitalize {{ $errors->first('nama_material') ? ' is-invalid' : '' }}"
+                                                    name="nama_material" placeholder="Name Product Material ">
                                                 @error('nama_material')
                                                     <small class="text-danger">The Product Material field is
                                                         required.</small>
@@ -151,7 +152,7 @@
                                                                                             class="font-weight-bold">Name
                                                                                             Product Material</label>
                                                                                         <input type="text"
-                                                                                            class="form-control text-capitalize "
+                                                                                            class="form-control text-capitalize {{ $errors->first('editnama_material') ? ' is-invalid' : '' }}"
                                                                                             name="editnama_material"
                                                                                             value="{{ $value->nama_material }}"
                                                                                             placeholder="Name Unit of Measurement">
