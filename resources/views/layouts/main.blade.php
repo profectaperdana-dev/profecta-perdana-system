@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>{{ $title }}</title>
+    <title>{{ $title ?? 'undefined' }}</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="vendors/feather/feather.css">
     <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
@@ -31,8 +31,7 @@
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
                 <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.jpg" class="mr-2"
                         alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="#"><img src="images/logo.jpg"
-                        alt="logo" />
+                <a class="navbar-brand brand-logo-mini" href="#"><img src="images/logo.jpg" alt="logo" />
                 </a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
