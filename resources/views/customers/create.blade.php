@@ -44,7 +44,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Category</label>
-                                    <select name="category_cust_id" class="form-control">
+                                    <select name="category_cust_id" class="form-control category-cust">
                                         <option>Choose Category Customer</option>
                                         @foreach ($customer_categories as $customer_category)
                                             <option value="{{ $customer_category->id }}">
@@ -54,7 +54,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label>Area</label>
-                                    <select name="area_cust_id" class="form-control">
+                                    <select name="area_cust_id" class="form-control area-cust">
                                         <option selected>Choose Customer Area</option>
                                         @foreach ($customer_areas as $customer_area)
                                             <option value="{{ $customer_area->id }}">
@@ -78,25 +78,26 @@
                                     <label>Status</label>
                                     <select class="form-control">
                                         <option selected>Choose Customer Status</option>
-                                        <option>...</option>
+                                        <option value="1">Aktif</option>
+                                        <option value="0">Tidak Aktif</option>
                                     </select>
+                                </div>
+                                <div class="form-group col-md-8">
+                                    <label>Reference Image Customer</label>
+                                    <input type="file" id="inputreference" class="form-control">
                                 </div>
                             </div>
                             <div class="form-row">
-                                <div class="form-group custom-file col-md-4">
-                                    <input type="file" id="inputreference" class="custom-file-input">
-                                    <label class="custom-file-label">Choose Reference Image
-                                        Customer</label>
-                                </div>
                                 <div class="form-group">
-                                    <img src="#" id="previewimg" class="img-fluid" />
+                                    <img src="#" id="previewimg" class="img-fluid" hidden />
                                 </div>
                             </div>
 
                     </div>
-                    <div class="card-footer bg-white float-right">
-                        <a href=""><button class="btn btn-md btn-warning">Back</button></a>
-                        <button type="button" class="btn btn-success">Add</button>
+                    <div class="card-footer bg-white">
+                        <a href=""><button class="btn btn-md btn-danger">Back</button></a>
+                        <button type="reset" class="btn btn-warning">Reset</button>
+                        <button type="button" class="btn btn-primary">Add</button>
                     </div>
                     </form>
                 </div>
