@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class Customers extends Migration
+class AddCustomers extends Migration
 {
     /**
      * Run the migrations.
@@ -20,8 +20,13 @@ class Customers extends Migration
             $table->string('alamat_cust');
             $table->string('no_telepon_cust');
             $table->string('email_cust')->unique();
-            $table->string('kategori_cust');
-            $table->string('area_cust');
+            $table->integer('category_cust_id');
+            $table->integer('area_cust_id');
+            $table->string('coordinate');
+            $table->integer('credit_limit');
+            $table->boolean('status');
+            $table->string('reference_image');
+            $table->integer('created_by');
             $table->timestamps();
         });
     }
