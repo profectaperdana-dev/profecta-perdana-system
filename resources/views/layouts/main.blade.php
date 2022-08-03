@@ -240,10 +240,10 @@
     <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
     {{-- <script src="{{ asset('') }}vendors/datatables.net/jquery.dataTables.js"></script> --}}
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
-    <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
+    {{-- <script src="{{ asset('vendors/select2/select2.min.js') }}"></script> --}}
 
     <!-- End plugin js for this page -->
     <!-- inject:js -->
@@ -258,12 +258,8 @@
     <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
     <!-- End custom js for this page-->
     <script src="{{ asset('js/custom.js') }}"></script>
-    {{-- <script src="{{ asset('')js/ }}select2.js"></script> --}}
-    <script>
-        $(document).ready(function() {
-            $('.js-example-basic-single').select2();
-        });
-    </script>
+    <script src="{{ asset('js/select.js') }}"></script>
+
 </body>
 
 </html>

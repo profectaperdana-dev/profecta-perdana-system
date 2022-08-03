@@ -18,64 +18,14 @@
                 <div class="card">
                     <div class="card-body">
                         {{-- Modul Tambah Produk --}}
-                        <a class="btn btn-success" href="{{ url('products/create') }}">
-                            Back
+                        <a class="btn btn-danger" href="{{ url('products/') }}"> <i class="ti ti-arrow-left"> </i> Back
                         </a>
 
                         <hr>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div class="form-group row font-weight-bold">
-                                    <div class="col-md-4">
-                                        <label>Product Code</label>
-                                        <input type="text" class="form-control" placeholder="Product Code">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Product Name</label>
-                                        <input type="text" class="form-control" placeholder="Product Name">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Serial Number</label>
-                                        <input type="text" class="form-control" placeholder="Serial Number">
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <div class="col-md-4">
-                                        <label>Single select box using select 2</label>
-                                        <select class="js-example-basic-single form-control">
-                                            <option value="AL">Alabama</option>
-                                            <option value="WY">Wyoming</option>
-                                            <option value="AM">America</option>
-                                            <option value="CA">Canada</option>
-                                            <option value="RU">Russia</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="form-group row font-weight-bold">
-                                    <div class="col-md-4">
-                                        <label>Name
-                                            Unit of Measurement</label>
-                                        <select name="" id="uoms" class="form-control">
-                                            <option value="">dfsdf</option>
-                                            <option value="">dfsdf</option>
-                                            <option value="">dfsdf</option>
-                                            <option value="">dfsdf</option>
-                                            <option value="">dfsdf</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Product Name</label>
-                                        <input type="text" class="form-control" placeholder="Product Name">
-                                    </div>
-                                    <div class="col-md-4">
-                                        <label>Serial Number</label>
-                                        <input type="text" class="form-control" placeholder="Serial Number">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        <form method="post" action="{{ url('/products') }}" enctype="multipart/form-data">
+                            @csrf
+                            @include('products._form')
+                        </form>
                     </div>
                 </div>
             </div>
