@@ -6,7 +6,7 @@
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
                         <h3 class="font-weight-bold">{{ $title }}</h3>
-                        <h6 class="font-weight-normal mb-0">Create, Read, Update and Delete {{ $title }}
+                        <h6 class="font-weight-normal mb-0">Let's {{ $title }}
                         </h6>
                     </div>
                 </div>
@@ -15,15 +15,10 @@
 
 
         <div class="row">
-            <div class="col-md-12 grid-margin stretch-card">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <p class="card-title">Customers Table</p>
-                        <div>
-                            <button class="btn btn-md btn-success" data-toggle="modal" data-target="#addModal">+ Add
-                                Customer</button>
-                            <hr>
-                        </div>
+                        <p class="card-title">Customers Add Form</p>
                         <form>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
@@ -89,24 +84,23 @@
                             </div>
                             <div class="form-row">
                                 <div class="form-group custom-file col-md-4">
-                                    <input type="file" class="custom-file-input">
+                                    <input type="file" id="inputreference" class="custom-file-input">
                                     <label class="custom-file-label">Choose Reference Image
                                         Customer</label>
                                 </div>
                                 <div class="form-group">
-                                    <img src="..." class="img-fluid" alt="Responsive image">
+                                    <img src="#" id="previewimg" class="img-fluid" />
                                 </div>
                             </div>
 
                     </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <div class="card-footer bg-white float-right">
+                        <a href=""><button class="btn btn-md btn-warning">Back</button></a>
                         <button type="button" class="btn btn-success">Add</button>
                     </div>
                     </form>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
