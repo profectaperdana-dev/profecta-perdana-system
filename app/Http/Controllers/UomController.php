@@ -42,11 +42,11 @@ class UomController extends Controller
     {
 
         $request->validate([
-            'satuan' => 'required',
+            'uom' => 'required',
 
         ]);
         $model = new UomModel();
-        $model->satuan = $request->get('satuan');
+        $model->satuan = $request->get('uom');
         $model->created_by = Auth::user()->id;
         $model->save();
 

@@ -37,11 +37,11 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label class="font-weight-bold">Name Unit of Measurement</label>
-                                                <input type="text" class="form-control text-capitalize " name="satuan"
-                                                    placeholder="Name Unit of Measurement">
-                                                @error('satuan')
-                                                    <small class="text-danger">The Unit of Measurement field is
-                                                        required.</small>
+                                                <input type="text"
+                                                    class="form-control text-capitalize {{ $errors->first('uom') ? ' is-invalid' : '' }}"
+                                                    name="uom" placeholder="Name Unit of Measurement" required>
+                                                @error('uom')
+                                                    <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
                                             </div>
 
@@ -153,13 +153,13 @@
                                                                                             class="font-weight-bold">Name
                                                                                             Unit of Measurement</label>
                                                                                         <input type="text"
-                                                                                            class="form-control text-capitalize "
+                                                                                            class="form-control text-capitalize {{ $errors->first('editSatuan') ? ' is-invalid' : '' }}"
                                                                                             name="editSatuan"
                                                                                             value="{{ $value->satuan }}"
                                                                                             placeholder="Name Unit of Measurement">
                                                                                         @error('editSatuan')
-                                                                                            <small class="text-danger">The
-                                                                                                Unit of Measurement field is
+                                                                                            <small class="text-danger">The Unit
+                                                                                                of Measurement is
                                                                                                 required.</small>
                                                                                         @enderror
                                                                                     </div>

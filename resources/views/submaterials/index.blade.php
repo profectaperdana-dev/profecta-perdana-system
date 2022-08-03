@@ -37,7 +37,8 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label class="font-weight-bold">Name Product Sub Material</label>
-                                                <input type="text" class="form-control text-capitalize "
+                                                <input type="text"
+                                                    class="form-control text-capitalize {{ $errors->first('nama_sub_material') ? ' is-invalid' : '' }}"
                                                     name="nama_sub_material" placeholder="Name Product Sub Material">
                                                 @error('nama_sub_material')
                                                     <small class="text-danger">The Product Sub Material field is
@@ -151,7 +152,7 @@
                                                                                             class="font-weight-bold">Name
                                                                                             Product Sub Material</label>
                                                                                         <input type="text"
-                                                                                            class="form-control text-capitalize "
+                                                                                            class="form-control text-capitalize {{ $errors->first('editnama_submaterial') ? ' is-invalid' : '' }}"
                                                                                             name="editnama_submaterial"
                                                                                             value="{{ $value->nama_sub_material }}"
                                                                                             placeholder="Name Unit of Measurement">
