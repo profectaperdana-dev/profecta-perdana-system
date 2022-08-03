@@ -10,6 +10,7 @@
     const reader = new FileReader();
     reader.onload = (e) => {
         imgEl.src = e.target.result;
+        imgEl.removeAttribute('hidden');
     }
     reader.readAsDataURL(imgInput.files[0]);
     }
