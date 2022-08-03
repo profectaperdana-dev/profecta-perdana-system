@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MaterialModel;
 use App\Models\ProductModel;
+use App\Models\SubMaterialModel;
+use App\Models\UomModel;
 use Illuminate\Http\Request;
 use Products;
 
@@ -29,9 +32,11 @@ class ProductController extends Controller
     public function create()
     {
         $title = 'Data Products';
-        $data = ProductModel::latest()->limit('10')->get();
+        $uom = UomModel::latest()->get();
+        $material = MaterialModel::latest()->get();
+        $subMaterial = SubMaterialModel::latest()->get();
         // var_dump($data);
-        return view('products.create', compact('data', 'title'));
+        return view('products.create', compact('title', 'uom', 'material', 'subMaterial'));
     }
 
     /**
