@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\SubMaterialController;
 use App\Http\Controllers\UomController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
@@ -31,3 +32,4 @@ Route::resource('/products', ProductController::class);
 Route::resource('/customers', CustomerController::class);
 Route::resource('/product_uoms', UomController::class);
 Route::resource('/product_materials', MaterialController::class);
+Route::resource('/product_sub_materials', SubMaterialController::class);

@@ -25,27 +25,25 @@
                                 </button>
                             </div>
                         @endif
-                        <h5>Add Data Unit of Measurement</h5>
+                        <h5>Add {{ $title }}</h5>
                         <hr>
                         <div class="container-fluid">
-                            <form class="form-label-left input_mask" method="post" action="{{ url('/product_uoms') }}"
-                                enctype="multipart/form-data">
+                            <form class="form-label-left input_mask" method="post"
+                                action="{{ url('/product_sub_materials') }}" enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
 
                                     <div class="col-md-12">
                                         <div class="form-group row">
                                             <div class="col-md-12">
-                                                <label class="font-weight-bold">Name Unit of Measurement</label>
-                                                <input type="text" class="form-control text-capitalize " name="satuan"
-                                                    placeholder="Name Unit of Measurement">
-                                                @error('satuan')
-                                                    <small class="text-danger">The Unit of Measurement field is
+                                                <label class="font-weight-bold">Name Product Sub Material</label>
+                                                <input type="text" class="form-control text-capitalize "
+                                                    name="nama_sub_material" placeholder="Name Product Sub Material">
+                                                @error('nama_sub_material')
+                                                    <small class="text-danger">The Product Sub Material field is
                                                         required.</small>
                                                 @enderror
                                             </div>
-
-
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-12">
@@ -84,7 +82,7 @@
                                 </button>
                             </div>
                         @endif
-                        <h5>All Data Unit of Measurement</h5>
+                        <h5>All {{ $title }}</h5>
                         <hr>
                         <div class="row">
                             <div class="col-12">
@@ -95,7 +93,7 @@
                                             <tr>
                                                 <th></th>
                                                 <th>#</th>
-                                                <th>Uom</th>
+                                                <th>Sub Material</th>
 
                                             </tr>
                                         </thead>
@@ -129,7 +127,7 @@
                                                         aria-hidden="true">
                                                         <div class="modal-dialog " role="document">
                                                             <form method="post"
-                                                                action="{{ url('product_uoms/' . $value->id) }}"
+                                                                action="{{ url('product_sub_materials/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="PATCH">
@@ -137,8 +135,8 @@
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
-                                                                            Change Data Products Unit of Measurement :
-                                                                            {{ $value->satuan }}</h5>
+                                                                            Change {{ $title }} :
+                                                                            {{ $value->nama_sub_material }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -151,15 +149,15 @@
                                                                                     <div class="col-md-12">
                                                                                         <label
                                                                                             class="font-weight-bold">Name
-                                                                                            Unit of Measurement</label>
+                                                                                            Product Sub Material</label>
                                                                                         <input type="text"
                                                                                             class="form-control text-capitalize "
-                                                                                            name="editSatuan"
-                                                                                            value="{{ $value->satuan }}"
+                                                                                            name="editnama_submaterial"
+                                                                                            value="{{ $value->nama_sub_material }}"
                                                                                             placeholder="Name Unit of Measurement">
-                                                                                        @error('editSatuan')
+                                                                                        @error('editnama_submaterial')
                                                                                             <small class="text-danger">The
-                                                                                                Unit of Measurement field is
+                                                                                                Product Sub Material field is
                                                                                                 required.</small>
                                                                                         @enderror
                                                                                     </div>
@@ -189,7 +187,7 @@
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <form method="post"
-                                                                action="{{ url('product_uoms/' . $value->id) }}"
+                                                                action="{{ url('product_sub_materials/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="delete">
@@ -197,8 +195,8 @@
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
-                                                                            Delete Data Products Unit of Measurement :
-                                                                            {{ $value->satuan }}</h5>
+                                                                            Delete {{ $title }} :
+                                                                            {{ $value->nama_material }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -232,7 +230,7 @@
                                                     </div>
                                                     {{-- End Modal Delete UOM --}}
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $value->satuan }}</td>
+                                                    <td>{{ $value->nama_sub_material }}</td>
 
 
                                                 </tr>

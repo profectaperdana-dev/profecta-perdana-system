@@ -7,28 +7,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ $title }}</title>
     <!-- plugins:css -->
-    <link rel="stylesheet" href="vendors/feather/feather.css">
-    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" href="vendors/css/vendor.bundle.base.css">
+    <link rel="stylesheet" href="{{ asset('vendors/feather/feather.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="vendors/datatables.net-bs4/dataTables.bootstrap4.css">
-    <link rel="stylesheet" href="vendors/ti-icons/css/themify-icons.css">
-    <link rel="stylesheet" type="text/css" href="js/select.dataTables.min.css">
+
+    <link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
+    <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
+    {{-- <link rel="stylesheet" href="{{ asset('') }}vendors/select2/select2.min.css"> --}}
+    {{-- <link rel="stylesheet" href="{{ asset('') }}vendors/select2-bootstrap-theme/select2-bootstrap.min.css"> --}}
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
     <!-- End plugin css for this page -->
-    <link rel="stylesheet" href="vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="{{ asset('vendors/mdi/css/materialdesignicons.min.css') }}">
     <!-- inject:css -->
-    <link rel="stylesheet" href="css/vertical-layout-light/style.css">
+    <link rel="stylesheet" href="{{ asset('css/vertical-layout-light/style.css') }}">
     <!-- endinject -->
-    <link rel="shortcut icon" href="images/favicon.png" />
+    <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
+
 </head>
 
 <body>
     <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="images/logo.jpg" class="mr-2"
-                        alt="logo" /></a>
+                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="{{ asset('images/logo.jpg') }}"
+                        class="mr-2" alt="logo" /></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg"
                         alt="logo" /></a>
             </div>
@@ -84,28 +90,25 @@
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
                             <i class="mdi mdi-database menu-icon"></i>
-                            <span class="menu-title">Master</span>
+                            <span class="menu-title">Master Products</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
                             <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/products') }}">Products</a>
+                                </li>
                                 <li class="nav-item"> <a class="nav-link" href="{{ url('/product_uoms') }}">Uoms</a>
                                 </li>
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ url('/product_materials') }}">Materials
                                     </a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/products_uoms') }}">Sub
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ url('/product_sub_materials') }}">Sub
                                         Materials </a>
                                 </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/products') }}">Products</a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/customers') }}">Customers</a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/dropdowns.html">Dropdowns</a></li>
-                                <li class="nav-item"> <a class="nav-link"
-                                        href="pages/ui-features/typography.html">Typography</a></li>
+
+
                             </ul>
                         </div>
                     </li>
@@ -231,30 +234,36 @@
     <!-- container-scroller -->
 
     <!-- plugins:js -->
-    <script src="vendors/js/vendor.bundle.base.js"></script>
+    <script src="{{ asset('vendors/js/vendor.bundle.base.js') }}"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
-    <script src="vendors/chart.js/Chart.min.js"></script>
-    {{-- <script src="vendors/datatables.net/jquery.dataTables.js"></script> --}}
+    <script src="{{ asset('vendors/chart.js/Chart.min.js') }}"></script>
+    {{-- <script src="{{ asset('') }}vendors/datatables.net/jquery.dataTables.js"></script> --}}
     <script src="//cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
-    <script src="vendors/datatables.net-bs4/dataTables.bootstrap4.js"></script>
-    <script src="js/dataTables.select.min.js"></script>
+    {{-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> --}}
+    <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
+    <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
+    <script src="{{ asset('vendors/select2/select2.min.js') }}"></script>
 
     <!-- End plugin js for this page -->
     <!-- inject:js -->
-    <script src="js/off-canvas.js"></script>
-    <script src="js/hoverable-collapse.js"></script>
-    <script src="js/template.js"></script>
-    <script src="js/settings.js"></script>
-    <script src="js/todolist.js"></script>
+    <script src="{{ asset('js/off-canvas.js') }}"></script>
+    <script src="{{ asset('js/hoverable-collapse.js') }}"></script>
+    <script src="{{ asset('js/template.js') }}"></script>
+    <script src="{{ asset('js/settings.js') }}"></script>
+    <script src="{{ asset('js/todolist.js') }}"></script>
     <!-- endinject -->
     <!-- Custom js for this page-->
-    <script src="js/dashboard.js"></script>
-    <script src="js/Chart.roundedBarCharts.js"></script>
+    <script src="{{ asset('js/dashboard.js') }}"></script>
+    <script src="{{ asset('js/Chart.roundedBarCharts.js') }}"></script>
     <!-- End custom js for this page-->
-    <script src="js/custom.js"></script>
-
-
+    <script src="{{ asset('js/custom.js') }}"></script>
+    {{-- <script src="{{ asset('')js/ }}select2.js"></script> --}}
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-single').select2();
+        });
+    </script>
 </body>
 
 </html>
