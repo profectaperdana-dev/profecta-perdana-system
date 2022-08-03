@@ -35,11 +35,20 @@
                                     @csrf
                                     <div class="form-group">
                                         <label>Area Name</label>
-                                        <input type="text" name="area_name" class="form-control"
+                                        <input type="text" name="area_name"
+                                            class="form-control @error('area_name') is-invalid @enderror"
                                             placeholder="Enter Area Name" required>
                                         @error('area_name')
-                                            <small class="text-danger">The Area Name field is
-                                                required.</small>
+                                            <small class="text-danger">{{ $message }}</small>
+                                        @enderror
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Area Code</label>
+                                        <input type="text" name="area_code"
+                                            class="form-control @error('area_code') is-invalid @enderror"
+                                            placeholder="Enter Area Code" required>
+                                        @error('area_code')
+                                            <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <button type="reset" class="btn btn-warning">Reset</button>
@@ -63,6 +72,7 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
+                                                <th>Code</th>
                                                 <th>Created By</th>
                                             </tr>
                                         </thead>
@@ -87,6 +97,7 @@
                                                         </div>
                                                     </td>
                                                     <td>{{ $customer_area->area_name }}</td>
+                                                    <td>{{ $customer_area->area_code }}</td>
                                                     <td>{{ $customer_area->created_by }}</td>
 
                                                     <!-- Edit Modal -->
@@ -114,11 +125,24 @@
                                                                                     <div class="col-md-12">
                                                                                         <label>Name</label>
                                                                                         <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="area_name"
+                                                                                            class="form-control @error('area_name_edit') is-invalid @enderror"
+                                                                                            name="area_name_edit"
                                                                                             value="{{ $customer_area->area_name }}"
                                                                                             placeholder="Customer Area Name"
                                                                                             required>
+                                                                                        @error('area_name_edit')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}</small>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                    <div class="col-md-12">
+                                                                                        <label>Area Code</label>
+                                                                                        <input type="text"
+                                                                                            name="area_code_edit"
+                                                                                            class="form-control @error('area_code_edit') is-invalid @enderror"
+                                                                                            value="{{ $customer_area->area_code }}"
+                                                                                            placeholder="Enter Area Code"
+                                                                                            readonly>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -129,7 +153,8 @@
                                                                             data-dismiss="modal">Close</button>
                                                                         <button type="reset"
                                                                             class="btn btn-warning">Reset</button>
-                                                                        <button type="submit" class="btn btn-primary">Save
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Save
                                                                             Change</button>
                                                                     </div>
                                                                 </div>

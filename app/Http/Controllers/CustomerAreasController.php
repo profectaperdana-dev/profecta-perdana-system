@@ -16,23 +16,12 @@ class CustomerAreasController extends Controller
     public function index()
     {
         $all_customer_areas = CustomerAreaModel::all();
-        $data=[
+        $data = [
             'title' => 'Customer Area',
             'customer_areas' => $all_customer_areas
         ];
 
         return view('customer_areas.index', $data);
-        
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -44,8 +33,10 @@ class CustomerAreasController extends Controller
     public function store(Request $request)
     {
         $validated_data = $request->validate([
-            'area_name' => 'required'
+            'area_name' => 'required',
+            'area_code' => 'required|unique:customer_areas'
         ]);
+
         $validated_data['created_by'] = Auth::user()->id;
 
         CustomerAreaModel::create($validated_data);
@@ -63,11 +54,11 @@ class CustomerAreasController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'area_name' => 'required'
+            'area_name_edit' => 'required',
         ]);
 
         $customer_area = CustomerAreaModel::where('id', $id)->firstOrFail();
-        $customer_area->area_name = $validateData['area_name'];
+        $customer_area->area_name = $validateData['area_name_edit'];
         $customer_area->save();
 
         return redirect('/customer_areas')->with('success', 'Customer Areas Edit Success');
