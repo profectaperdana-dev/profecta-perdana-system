@@ -65,11 +65,11 @@
                                                             <div class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuIconButton7">
                                                                 <h6 class="dropdown-header">Settings</h6>
-                                                                <a class="dropdown-item" data-toggle="modal"
+                                                                <a class="dropdown-item" href="#" data-toggle="modal"
                                                                     data-target="#detailModal{{ $customer->code_cust }}">Detail</a>
                                                                 <a class="dropdown-item"
                                                                     href="{{ url('/customers/' . $customer->code_cust . '/edit') }}">Edit</a>
-                                                                <a class="dropdown-item" data-toggle="modal"
+                                                                <a class="dropdown-item" href="#" data-toggle="modal"
                                                                     data-target="#delModal{{ $customer->code_cust }}">Delete</a>
                                                             </div>
                                                         </div>
