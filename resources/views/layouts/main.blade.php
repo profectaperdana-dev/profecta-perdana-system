@@ -107,8 +107,27 @@
                                         href="{{ url('/product_sub_materials') }}">Sub
                                         Materials </a>
                                 </li>
-
-
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false"
+                            aria-controls="customer">
+                            <i class="mdi mdi-database menu-icon"></i>
+                            <span class="menu-title">Master Customers</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="customer">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ url('/customers') }}">Customers</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ url('/customer_categories') }}">Customer Categories</Colgroup></a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link"
+                                        href="{{ url('/customer_areas') }}">Customer Areas</a>
+                                </li>
                             </ul>
                         </div>
                     </li>

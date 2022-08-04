@@ -30,7 +30,7 @@
 
                         <p class="card-title">Customers Table</p>
                         <div>
-                            <a href="/customers/create">
+                            <a href="{{ url('/customers/create') }}">
                                 <button class="btn btn-md btn-success">+ Add
                                     Customer</button>
                             </a>
@@ -66,11 +66,11 @@
                                                                 aria-labelledby="dropdownMenuIconButton7">
                                                                 <h6 class="dropdown-header">Settings</h6>
                                                                 <a class="dropdown-item" data-toggle="modal"
-                                                                    data-target="#detailModal{{ $customer->id }}">Detail</a>
+                                                                    data-target="#detailModal{{ $customer->code_cust }}">Detail</a>
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url('/customers/' . $customer->code_cust . '/edit') }}">Edit</a>
                                                                 <a class="dropdown-item" data-toggle="modal"
-                                                                    data-target="#editModal{{ $customer->id }}">Edit</a>
-                                                                <a class="dropdown-item" data-toggle="modal"
-                                                                    data-target="#delModal{{ $customer->id }}">Delete</a>
+                                                                    data-target="#delModal{{ $customer->code_cust }}">Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>
@@ -82,22 +82,158 @@
                                                     <td>{{ $customer->coordinate }}</td>
                                                     <td>
                                                         @if ($customer->status == 1)
-                                                            <div class="badge badge-success">Aktif</div>
+                                                            <div class="badge badge-success">Active</div>
                                                         @else
-                                                            <div class="badge badge-danger">Tidak Aktif</div>
+                                                            <div class="badge badge-danger">Nonactive</div>
                                                         @endif
                                                     </td>
 
+                                                    {{-- Modal Detail Product --}}
+                                                    <div class="modal fade" id="detailModal{{ $customer->code_cust }}"
+                                                        tabindex="-1" role="dialog" aria-hidden="true">
+                                                        <div class="modal-dialog modal-xl modal-dialog-scrollable"
+                                                            role="document">
+                                                            <form>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title text-capitalize">
+                                                                            Customer Detail :
+                                                                            {{ $customer->name_cust }}</h5>
+                                                                        <button type="button" class="close"
+                                                                            data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="row">
+                                                                            <div class="col-md-4 font-weight-bold">
+                                                                                <label>Preview Image</label>
+                                                                                <img width="100%"
+                                                                                    style="border: 2px solid rgb(0, 0, 0);"
+                                                                                    src="{{ asset('images/customers/' . $customer->reference_image) }}"
+                                                                                    alt="Preview Image">
+                                                                            </div>
+                                                                            <div class="col-md-8">
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="col-md-6">
+                                                                                        <label>Code Customer </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Product Code"
+                                                                                            readonly
+                                                                                            value="{{ $customer->code_cust }}">
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label>Name Customer</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control "
+                                                                                            placeholder="Product Name"
+                                                                                            readonly
+                                                                                            value="{{ $customer->name_cust }}">
+                                                                                    </div>
+                                                                                </div>
 
-                                                    <!-- Detail Modal -->
-                                                    <div class="modal fade" id="detailModal{{ $customer->id }}"
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="col-md-12">
+                                                                                        <label>Address Customer</label>
+                                                                                        <textarea class="form-control" rows="3" readonly>{{ $customer->address_cust }}</textarea>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="col-md-4">
+                                                                                        <label>
+                                                                                            Phone Customer</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $customer->phone_cust }}">
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>
+                                                                                            Customer Email</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $customer->email_cust }}">
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>
+                                                                                            Customer Category</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $customer->category_name }}">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Customer Area
+                                                                                        </label>
+                                                                                        <input type="text" readonly
+                                                                                            class="form-control"
+                                                                                            value="{{ $customer->area_name }}">
+
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Coordinate</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $customer->coordinate }}">
+                                                                                    </div>
+                                                                                    <div class="col-md-4">
+                                                                                        <label>Credit Limit</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $customer->credit_limit }}">
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="col-md-3">
+                                                                                        <label>Status</label>
+                                                                                        <br>
+                                                                                        @if ($customer->status == 1)
+                                                                                            <h1
+                                                                                                class="badge badge-pill badge-success">
+                                                                                                Active</h1>
+                                                                                        @else
+                                                                                            <span
+                                                                                                class="badge badge-pill badge-danger">Nonactive</span>
+                                                                                        @endif
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-danger"
+                                                                            data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    {{-- End Modal Detail Product --}}
+
+                                                    <!-- Delete Modal -->
+                                                    <div class="modal fade" id="delModal{{ $customer->code_cust }}"
                                                         tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title">
-                                                                        Detail :
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                                        Costumer :
                                                                         {{ $customer->code_cust }}</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
@@ -105,24 +241,25 @@
                                                                     </button>
                                                                 </div>
                                                                 <div class="modal-body">
-                                                                    <div class="row">
-                                                                        <div class="col-md-12">
-
-                                                                        </div>
-                                                                    </div>
+                                                                    Are you sure delete this costumer?
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-danger"
                                                                         data-dismiss="modal">Close</button>
-                                                                    <button type="reset"
-                                                                        class="btn btn-warning">Reset</button>
-                                                                    <button type="submit" class="btn btn-primary">Save
-                                                                        Change</button>
+                                                                    <form
+                                                                        action="{{ url('/customers/' . $customer->code_cust) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Yes, delete</button>
+                                                                    </form>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <!--End Edit Modal -->
+                                                    <!--End Delete Modal -->
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
