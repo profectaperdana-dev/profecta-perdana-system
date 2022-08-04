@@ -35,11 +35,11 @@
                                     @csrf
                                     <div class="form-group">
                                         <label>Category Name</label>
-                                        <input type="text" name="category_name" class="form-control"
+                                        <input type="text" name="category_name"
+                                            class="form-control @error('category_name') is-invalid @enderror"
                                             placeholder="Enter Category Name" required>
                                         @error('category_name')
-                                            <small class="text-danger">The Category Name field is
-                                                required.</small>
+                                            <small class="text-danger">{{ $message }}</small>
                                         @enderror
                                     </div>
                                     <button type="reset" class="btn btn-warning">Reset</button>
@@ -114,11 +114,14 @@
                                                                                     <div class="col-md-12">
                                                                                         <label>Name</label>
                                                                                         <input type="text"
-                                                                                            class="form-control"
-                                                                                            name="category_name"
+                                                                                            class="form-control @error('category_name_edit') is-invalid @enderror"
+                                                                                            name="category_name_edit"
                                                                                             value="{{ $customer_category->category_name }}"
                                                                                             placeholder="Customer Category Name"
                                                                                             required>
+                                                                                        @error('category_name_edit')
+                                                                                            {{ $message }}
+                                                                                        @enderror
                                                                                     </div>
                                                                                 </div>
                                                                             </div>

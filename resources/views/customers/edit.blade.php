@@ -17,9 +17,11 @@
             <div class="col-md-12 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        {{-- Modul Tambah Customer --}}
-                        <form method="post" action="{{ url('/customers') }}" enctype="multipart/form-data">
+                        {{-- Modul Edit Customer --}}
+                        <form method="post" action="{{ url('/customers/' . $customer->code_cust) }}"
+                            enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             @include('customers._form')
                         </form>
                     </div>

@@ -2,7 +2,7 @@
         $('#myTable').DataTable()
 
 
-        const imgInput = document.getElementById('inputreference');
+    const imgInput = document.getElementById('inputreference');
     const imgEl = document.getElementById('previewimg');
     const previewLabel = document.getElementById('previewLabel');
     imgInput.addEventListener('change', () => {

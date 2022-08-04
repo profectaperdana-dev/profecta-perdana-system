@@ -10,4 +10,9 @@ class CustomerModel extends Model
     use HasFactory;
     protected $table = 'customers';
     protected $guarded = ["id"];
+
+    public function getRouteKeyName()
+    {
+        return 'code_cust';
+    }
 }
