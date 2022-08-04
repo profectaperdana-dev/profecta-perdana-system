@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SubMaterialController;
 use App\Http\Controllers\UomController;
 use App\Models\CustomerModel;
@@ -30,6 +31,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::resource('/roles', RoleController::class);
 Route::resource('/products', ProductController::class);
 Route::resource('/customers', CustomerController::class);
 Route::resource('/customer_categories', CustomerCategoriesController::class);
