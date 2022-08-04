@@ -15,14 +15,13 @@ class CustomerCategoriesController extends Controller
      */
     public function index()
     {
-        $all_customer_categories=CustomerCategoriesModel::all();
-        $data=[
+        $all_customer_categories = CustomerCategoriesModel::all();
+        $data = [
             'title' => "Customer Categories",
             'customer_categories' => $all_customer_categories
         ];
 
         return view('customer_categories.index', $data);
-
     }
 
     /**
@@ -53,11 +52,11 @@ class CustomerCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         $validateData = $request->validate([
-            'category_name' => 'required'
+            'category_name_edit' => 'required'
         ]);
 
         $customer_category = CustomerCategoriesModel::where('id', $id)->firstOrFail();
-        $customer_category->category_name = $validateData['category_name'];
+        $customer_category->category_name = $validateData['category_name_edit'];
         $customer_category->save();
 
         return redirect('/customer_categories')->with('success', 'Customer Categories Edit Success');

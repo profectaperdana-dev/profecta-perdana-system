@@ -31,7 +31,7 @@
                         <p class="card-title">Add Customer Area</p>
                         <div class="row">
                             <div class="col-12">
-                                <form action="/customer_areas" method="POST">
+                                <form action="{{ url('/customer_areas') }}" method="POST">
                                     @csrf
                                     <div class="form-group">
                                         <label>Area Name</label>
@@ -104,7 +104,8 @@
                                                     <div class="modal fade" id="editModal{{ $customer_area->id }}"
                                                         tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <form action="/customer_areas/{{ $customer_area->id }}"
+                                                            <form
+                                                                action="{{ url('/customer_areas/' . $customer_area->id) }}"
                                                                 method="POST">
                                                                 @method('PUT')
                                                                 @csrf
@@ -184,7 +185,7 @@
                                                                     <button type="button" class="btn btn-danger"
                                                                         data-dismiss="modal">Close</button>
                                                                     <form
-                                                                        action="/customer_areas/{{ $customer_area->id }}"
+                                                                        action="{{ url('/customer_areas/' . $customer_area->id) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('delete')
