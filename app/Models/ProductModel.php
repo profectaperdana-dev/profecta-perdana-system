@@ -9,9 +9,11 @@ class ProductModel extends Model
 {
     use HasFactory;
     protected $table = "products";
+    protected $guarded = ['id'];
 
-    public function createdBy()
+
+    public function getRouteKeyName()
     {
-        return $this->hasOne(User::class, 'id', 'created_by');
+        return 'kode_barang';
     }
 }

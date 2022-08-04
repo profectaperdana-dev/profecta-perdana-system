@@ -27,6 +27,22 @@
                                 </button>
                             </div>
                         @endif
+                        @if (session()->has('info'))
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong class="text-capitalize">{{ session('info') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
+                        @if (session()->has('error'))
+                            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                <strong class="text-capitalize">{{ session('error') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         {{-- Modul Tambah Produk --}}
                         <a class="btn btn-success" href="{{ url('products/create') }}">
                             + Add Products
@@ -63,11 +79,11 @@
                                                                 aria-labelledby="dropdownMenuIconButton7">
                                                                 <h6 class="dropdown-header">Settings</h6>
                                                                 <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#detailData{{ $value->kode_barang }}">
+                                                                    data-target="#detailData{{ $value->id }}">
                                                                     Detail
                                                                 </a>
-                                                                <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#changeData{{ $value->id }}">
+                                                                <a class="dropdown-item"
+                                                                    href="{{ url('/products/' . $value->id . '/edit') }}">
                                                                     Edit
                                                                 </a>
                                                                 <a class="dropdown-item" href="#" data-toggle="modal"
@@ -78,7 +94,7 @@
                                                         </div>
                                                     </td>
                                                     {{-- Modul Detail Product --}}
-                                                    <div class="modal fade" id="detailData{{ $value->kode_barang }}"
+                                                    <div class="modal fade" id="detailData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-xl" role="document">
@@ -251,73 +267,14 @@
                                                         </div>
                                                     </div>
                                                     {{-- End Modal Detail Product --}}
-                                                    {{-- Modul Edit Product --}}
-                                                    <div class="modal fade" id="changeData{{ $value->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog " role="document">
-                                                            <form method="post"
-                                                                action="{{ url('product_sub_materials/' . $value->id) }}"
-                                                                enctype="multipart/form-data">
-                                                                @csrf
-                                                                <input name="_method" type="hidden" value="PATCH">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title text-capitalize"
-                                                                            id="exampleModalLabel">
-                                                                            Change {{ $title }} :
-                                                                            {{ $value->nama_sub_material }}</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal" aria-label="Close">
-                                                                            <span aria-hidden="true">&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="row">
-                                                                            <div class="col-md-12">
-                                                                                <div class="form-group row">
-                                                                                    <div class="col-md-12">
-                                                                                        <label
-                                                                                            class="font-weight-bold">Name
-                                                                                            Product Sub Material</label>
-                                                                                        <input type="text"
-                                                                                            class="form-control text-capitalize "
-                                                                                            name="editnama_submaterial"
-                                                                                            value="{{ $value->nama_sub_material }}"
-                                                                                            placeholder="Name Unit of Measurement">
-                                                                                        @error('editnama_submaterial')
-                                                                                            <small class="text-danger">The
-                                                                                                Product Sub Material field is
-                                                                                                required.</small>
-                                                                                        @enderror
-                                                                                    </div>
 
-                                                                                </div>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-danger"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="reset"
-                                                                            class="btn btn-warning">Reset</button>
-                                                                        <button type="submit"
-                                                                            class="btn btn-primary">Save
-                                                                            changes</button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    {{-- End Modal Edit Product --}}
                                                     {{-- Modul Delete Product --}}
                                                     <div class="modal fade" id="deleteData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <form method="post"
-                                                                action="{{ url('product_sub_materials/' . $value->id) }}"
+                                                                action="{{ url('products/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="delete">
@@ -326,7 +283,7 @@
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
                                                                             Delete {{ $title }} :
-                                                                            {{ $value->nama_material }}</h5>
+                                                                            {{ $value->nama_barang }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
