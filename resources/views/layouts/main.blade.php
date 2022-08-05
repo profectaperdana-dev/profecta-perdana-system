@@ -113,7 +113,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false"
                             aria-controls="customer">
-                            <i class="mdi mdi-database menu-icon"></i>
+                            <i class="mdi mdi-account-box menu-icon"></i>
                             <span class="menu-title">Master Customers</span>
                             <i class="menu-arrow"></i>
                         </a>
