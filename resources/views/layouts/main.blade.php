@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('') }}vendors/select2/select2.min.css"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('') }}vendors/select2-bootstrap-theme/select2-bootstrap.min.css"> --}}
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- End plugin css for this page -->
@@ -33,8 +32,9 @@
     <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo mr-5" href="index.html"><img src="{{ asset('images/logo.jpg') }}"
-                        class="mr-2" alt="logo" /></a>
+                <a class="navbar-brand brand-logo mr-5" href="index.html"><i class="fa fa-flip"
+                        style="--fa-animation-duration: 3s;"><img src="{{ asset('images/logo.jpg') }}" class="mr-2"
+                            alt="logo" /></i></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg"
                         alt="logo" /></a>
             </div>
@@ -82,15 +82,14 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">
-                            <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <i class="fas fa-home">&nbsp;</i> <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
-                            <i class="mdi mdi-database menu-icon"></i>
-                            <span class="menu-title">Master Products</span>
+                            <i class="fa-solid fa fa-database">&nbsp;&nbsp;</i>
+                            <span class="menu-title">Master Products </span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="ui-basic">
@@ -113,8 +112,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false"
                             aria-controls="customer">
-                            <i class="mdi mdi-account-box menu-icon"></i>
-                            <span class="menu-title">Master Customers</span>
+                            <i class="fas fa-address-card">&nbsp;</i> <span class="menu-title">Master Customers</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="customer">
@@ -133,8 +131,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/warehouses') }}">
-                            <i class="mdi mdi-archive menu-icon"></i>
-                            <span class="menu-title">Master Warehouse</span>
+                            <i class="fas fa-warehouse">&nbsp;</i><span class="menu-title">Master
+                                Warehouse</span>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -269,7 +267,7 @@
     <script src="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.js') }}"></script>
     <script src="{{ asset('js/dataTables.select.min.js') }}"></script>
     {{-- <script src="{{ asset('vendors/select2/select2.min.js') }}"></script> --}}
-
+    <script src="https://kit.fontawesome.com/e355a54691.js" crossorigin="anonymous"></script>
     <!-- End plugin js for this page -->
     <!-- inject:js -->
     <script src="{{ asset('js/off-canvas.js') }}"></script>
