@@ -39,7 +39,9 @@
                                             class="form-control @error('area_name') is-invalid @enderror"
                                             placeholder="Enter Area Name" required>
                                         @error('area_name')
-                                            <small class="text-danger">{{ $message }}</small>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                     <div class="form-group">
@@ -48,7 +50,9 @@
                                             class="form-control @error('area_code') is-invalid @enderror"
                                             placeholder="Enter Area Code" required>
                                         @error('area_code')
-                                            <small class="text-danger">{{ $message }}</small>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                     <button type="reset" class="btn btn-warning">Reset</button>
@@ -132,8 +136,9 @@
                                                                                             placeholder="Customer Area Name"
                                                                                             required>
                                                                                         @error('area_name_edit')
-                                                                                            <small
-                                                                                                class="text-danger">{{ $message }}</small>
+                                                                                            <div class="invalid-feedback">
+                                                                                                {{ $message }}
+                                                                                            </div>
                                                                                         @enderror
                                                                                     </div>
                                                                                     <div class="col-md-12">

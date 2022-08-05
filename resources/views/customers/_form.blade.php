@@ -6,9 +6,11 @@
                 <input type="text" name="name_cust" value="{{ old('name_cust', $customer->name_cust) }}"
                     class="form-control
                     @error('name_cust') is-invalid @enderror"
-                    placeholder="Customer Name" required>
+                    placeholder="Customer Name" id="eventLocation" required>
                 @error('name_cust')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
             <div class="form-group col-md-6">
@@ -17,7 +19,9 @@
                     class="form-control @error('phone_cust') is-invalid @enderror" placeholder="Customer Phone Number"
                     required>
                 @error('phone_cust')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
         </div>
@@ -27,7 +31,9 @@
                 class="form-control form-control-lg @error('address_cust') is-invalid @enderror"
                 placeholder="Customer Address" required>
             @error('address_cust')
-                {{ $message }}
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
             @enderror
         </div>
         <div class="form-row">
@@ -37,7 +43,9 @@
                     class="form-control @error('email_cust') is-invalid @enderror" placeholder="Email Customer"
                     required>
                 @error('email_cust')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
             <div class="form-group col-md-4">
@@ -52,7 +60,9 @@
                     @endforeach
                 </select>
                 @error('category_cust_id')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
             <div class="form-group col-md-4">
@@ -67,48 +77,63 @@
                     @endforeach
                 </select>
                 @error('area_cust_id')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
         </div>
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label>Coordinate</label>
-                <input type="text" name="coordinate" value="{{ old('coordinate', $customer->coordinate) }}"
-                    class="form-control @error('coordinate') is-invalid @enderror"
-                    placeholder="Enter Customer Coordinate" required>
-                @error('coordinate')
-                    {{ $message }}
-                @enderror
-            </div>
             <div class="form-group col-md-6">
                 <label>Credit Limit</label>
                 <input type="number" name="credit_limit" value="{{ old('credit_limit', $customer->credit_limit) }}"
                     class="form-control @error('credit_limit') is-invalid @enderror" placeholder="Credit Limit Customer"
                     required>
                 @error('credit_limit')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-        </div>
-        <div class="form-row">
-            <div class="form-group col-md-4">
+            <div class="form-group col-md-6">
                 <label>Status</label>
-                <select name="status" class="form-control @error('status') {{ $message }} @enderror" required>
+                <select name="status"
+                    class="form-control @error('status') <div class="invalid-feedback">
+                        {{ $message }}
+                    </div> @enderror"
+                    required>
                     <option value="" selected>Choose Customer Status</option>
                     <option value="1" @if ($customer->status == 1) selected @endif>Active</option>
                     <option value="0" @if ($customer->status == 0) selected @endif>Nonactive</option>
                 </select>
                 @error('status')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
-            <div class="form-group col-md-8">
-                <label>Reference Image Customer</label>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Customer Reference Image</label>
                 <input type="file" name="reference_image" id="inputreference"
                     class="form-control @error('reference_image') is-invalid @enderror">
                 @error('reference_image')
-                    {{ $message }}
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group col-md-6">
+                <label>Customer Coordinate Location</label>
+                <button type="button" class="btn btn-secondary form-control" id="coorGenerate">Generate Customer
+                    Location</button>
+                <input type="text" class="form-control  @error('coordinate') is-invalid @enderror" name="coordinate"
+                    id="coor" hidden>
+                @error('coordinate')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
                 @enderror
             </div>
         </div>
