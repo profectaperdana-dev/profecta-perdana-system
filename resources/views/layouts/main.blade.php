@@ -113,7 +113,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false"
                             aria-controls="customer">
-                            <i class="mdi mdi-database menu-icon"></i>
+                            <i class="mdi mdi-account-box menu-icon"></i>
                             <span class="menu-title">Master Customers</span>
                             <i class="menu-arrow"></i>
                         </a>
@@ -130,6 +130,12 @@
                                 </li>
                             </ul>
                         </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/warehouses') }}">
+                            <i class="mdi mdi-archive menu-icon"></i>
+                            <span class="menu-title">Master Warehouse</span>
+                        </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#form-elements" aria-expanded="false"
