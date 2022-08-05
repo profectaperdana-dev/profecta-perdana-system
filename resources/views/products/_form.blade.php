@@ -188,19 +188,17 @@
             </div>
 
         </div>
-        <div class="form-group">
-            <div class="col-md-4 offset-md-4 text-center">
-                <h3 id="previewLabel" hidden>Preview Image</h3>
-                <img style="width:250px;border: 5px solid rgb(0, 0, 0);" hidden src="#" id="previewimg"
-                    class="img-fluid" />
+        <div class="form-row">
+            <div class="form-group col-md-4 offset-md-4 text-center">
+                <label id="previewLabel" hidden>Preview Image</label>
+                <img src="#" id="previewimg" class="img-fluid shadow-lg" style="width:350px;" hidden />
             </div>
         </div>
-        <div class="form-group row">
-            <div class="col-md-12">
-                <a href="{{ url('/products') }}" class="btn btn-danger">Back</a>
-                <button type="reset" class="btn btn-warning" data-dismiss="modal">Reset</button>
-                <button type="submit" class="btn btn-primary">Save Changes</button>
-            </div>
+        <div class="form-group">
+            <a class="btn btn-danger" href="{{ url('customers/') }}"> <i class="ti ti-arrow-left"> </i> Back
+            </a>
+            <button type="reset" class="btn btn-warning">Reset</button>
+            <button type="submit" class="btn btn-primary">Add</button>
         </div>
     </div>
 </div>
