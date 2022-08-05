@@ -80,7 +80,8 @@
                                                     <td>{{ $customer->category_name }}</td>
                                                     <td>{{ $customer->area_name }}</td>
                                                     <td><a href="https://maps.google.com/?q={{ $customer->coordinate }}"
-                                                            target="_blank">See on Google Maps</a></td>
+                                                            target="_blank"><i class="fas fa-map-marked-alt fa-2x"></i></a>
+                                                    </td>
                                                     <td>
                                                         @if ($customer->status == 1)
                                                             <div class="badge badge-success">Active</div>
