@@ -28,32 +28,30 @@
                             </div>
                         @endif
 
-                        <p class="card-title">Add Customer Area</p>
+                        <p class="card-title">Add User's Role</p>
                         <div class="row">
                             <div class="col-12">
-                                <form action="{{ url('/customer_areas') }}" method="POST">
+                                <form action="{{ url('/roles') }}" method="POST">
                                     @csrf
-                                    <div class="form-group">
-                                        <label>Area Name</label>
-                                        <input type="text" name="area_name"
-                                            class="form-control @error('area_name') is-invalid @enderror"
-                                            placeholder="Enter Area Name" required>
-                                        @error('area_name')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Area Code</label>
-                                        <input type="text" name="area_code"
-                                            class="form-control @error('area_code') is-invalid @enderror"
-                                            placeholder="Enter Area Code" required>
-                                        @error('area_code')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label>Role Name</label>
+                                            <input type="text" name="name"
+                                                class="form-control @error('name') is-invalid @enderror"
+                                                placeholder="Enter Role Name" required>
+                                            @error('name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
+                                        <div class="col-md-12">
+                                            <label>Guard Name</label>
+                                            <input type="text" name="guard_name"
+                                                class="form-control @error('guard_name') is-invalid @enderror"
+                                                placeholder="Enter Guard Name" required>
+                                            @error('guard_name')
+                                                <small class="text-danger">{{ $message }}</small>
+                                            @enderror
+                                        </div>
                                     </div>
                                     <button type="reset" class="btn btn-warning">Reset</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
@@ -67,7 +65,7 @@
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        <p class="card-title">Customer Areas Table</p>
+                        <p class="card-title">User's Roles Table</p>
                         <div class="row">
                             <div class="col-12">
                                 <div class="table-responsive">
@@ -76,12 +74,11 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Code</th>
-                                                <th>Created By</th>
+                                                <th>Guard Name</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($customer_areas as $customer_area)
+                                            @foreach ($roles as $role)
                                                 <tr>
                                                     <td>
                                                         <div class="dropdown">
@@ -94,30 +91,27 @@
                                                                 aria-labelledby="dropdownMenuIconButton7">
                                                                 <h6 class="dropdown-header">Settings</h6>
                                                                 <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#editModal{{ $customer_area->id }}">Edit</a>
+                                                                    data-target="#editModal{{ $role->id }}">Edit</a>
                                                                 <a class="dropdown-item" href="#" data-toggle="modal"
-                                                                    data-target="#delModal{{ $customer_area->id }}">Delete</a>
+                                                                    data-target="#delModal{{ $role->id }}">Delete</a>
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>{{ $customer_area->area_name }}</td>
-                                                    <td>{{ $customer_area->area_code }}</td>
-                                                    <td>{{ $customer_area->created_by }}</td>
+                                                    <td>{{ $role->name }}</td>
+                                                    <td>{{ $role->guard_name }}</td>
 
-                                                    <!-- Edit Modal -->
-                                                    <div class="modal fade" id="editModal{{ $customer_area->id }}"
-                                                        tabindex="-1" role="dialog" aria-hidden="true">
+                                                    <!-- Edit Mod -->
+                                                    <div class="modal fade" id="editModal{{ $role->id }}" tabindex="-1"
+                                                        role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
-                                                            <form
-                                                                action="{{ url('/customer_areas/' . $customer_area->id) }}"
-                                                                method="POST">
+                                                            <form action="{{ url('/roles/' . $role->id) }}" method="POST">
                                                                 @method('PUT')
                                                                 @csrf
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Edit Area Costumers :
-                                                                            {{ $customer_area->area_name }}</h5>
+                                                                        <h5 class="modal-title" id="exampleModalLabel">Edit
+                                                                            User's Role :
+                                                                            {{ $role->name }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -130,25 +124,27 @@
                                                                                     <div class="col-md-12">
                                                                                         <label>Name</label>
                                                                                         <input type="text"
-                                                                                            class="form-control @error('area_name_edit') is-invalid @enderror"
-                                                                                            name="area_name_edit"
-                                                                                            value="{{ $customer_area->area_name }}"
-                                                                                            placeholder="Customer Area Name"
+                                                                                            class="form-control @error('name_edit') is-invalid @enderror"
+                                                                                            name="name_edit"
+                                                                                            value="{{ $role->name }}"
+                                                                                            placeholder="Customer Category Name"
                                                                                             required>
-                                                                                        @error('area_name_edit')
-                                                                                            <div class="invalid-feedback">
-                                                                                                {{ $message }}
-                                                                                            </div>
+                                                                                        @error('name_edit')
+                                                                                            {{ $message }}
                                                                                         @enderror
                                                                                     </div>
                                                                                     <div class="col-md-12">
-                                                                                        <label>Area Code</label>
+                                                                                        <label>Guard Name</label>
                                                                                         <input type="text"
-                                                                                            name="area_code_edit"
-                                                                                            class="form-control @error('area_code_edit') is-invalid @enderror"
-                                                                                            value="{{ $customer_area->area_code }}"
-                                                                                            placeholder="Enter Area Code"
-                                                                                            readonly>
+                                                                                            name="guard_name_edit"
+                                                                                            class="form-control @error('guard_name_edit') is-invalid @enderror"
+                                                                                            placeholder="Enter Guard Name"
+                                                                                            value="{{ $role->guard_name }}"
+                                                                                            required>
+                                                                                        @error('guard_name_edit')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}</small>
+                                                                                        @enderror
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
@@ -170,14 +166,14 @@
                                                     <!--End Edit Modal -->
 
                                                     <!-- Delete Modal -->
-                                                    <div class="modal fade" id="delModal{{ $customer_area->id }}"
+                                                    <div class="modal fade" id="delModal{{ $role->id }}"
                                                         tabindex="-1" role="dialog" aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">
-                                                                        Delete Area Costumers :
-                                                                        {{ $customer_area->area_name }}</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">Delete
+                                                                        User's Role :
+                                                                        {{ $role->name }}</h5>
                                                                     <button type="button" class="close"
                                                                         data-dismiss="modal" aria-label="Close">
                                                                         <span aria-hidden="true">&times;</span>
@@ -189,14 +185,12 @@
                                                                 <div class="modal-footer">
                                                                     <button type="button" class="btn btn-danger"
                                                                         data-dismiss="modal">Close</button>
-                                                                    <form
-                                                                        action="{{ url('/customer_areas/' . $customer_area->id) }}"
+                                                                    <form action="{{ url('/roles/' . $role->id) }}"
                                                                         method="POST">
                                                                         @csrf
                                                                         @method('delete')
                                                                         <button type="submit"
-                                                                            class="btn btn-primary">Yes,
-                                                                            delete</button>
+                                                                            class="btn btn-primary">Yes, delete</button>
                                                                     </form>
                                                                 </div>
                                                             </div>

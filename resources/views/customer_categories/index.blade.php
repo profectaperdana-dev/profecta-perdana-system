@@ -39,7 +39,9 @@
                                             class="form-control @error('category_name') is-invalid @enderror"
                                             placeholder="Enter Category Name" required>
                                         @error('category_name')
-                                            <small class="text-danger">{{ $message }}</small>
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
                                         @enderror
                                     </div>
                                     <button type="reset" class="btn btn-warning">Reset</button>
@@ -121,7 +123,9 @@
                                                                                             placeholder="Customer Category Name"
                                                                                             required>
                                                                                         @error('category_name_edit')
-                                                                                            {{ $message }}
+                                                                                            <div class="invalid-feedback">
+                                                                                                {{ $message }}
+                                                                                            </div>
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>

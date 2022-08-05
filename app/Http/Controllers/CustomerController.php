@@ -9,6 +9,8 @@ use Customers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Stevebauman\Location\Facades\Location;
+
 
 class CustomerController extends Controller
 {
@@ -33,7 +35,7 @@ class CustomerController extends Controller
         return view('customers.index', $data);
     }
 
-    public function create()
+    public function create(Request $request)
     {
         $all_customer_categories = CustomerCategoriesModel::all();
         $all_customer_areas = CustomerAreaModel::all();
@@ -67,6 +69,8 @@ class CustomerController extends Controller
             'coordinate' => 'required',
             'status' => 'required|numeric',
             'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
+        ], [
+            'coordinate.required' => 'Generate Location Button must be clicked'
         ]);
 
         //create create by
@@ -93,17 +97,6 @@ class CustomerController extends Controller
         CustomerModel::create($validated_data);
 
         return redirect('/customers')->with('success', 'Customer Add Success');
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
     }
 
     /**
