@@ -79,9 +79,9 @@
                                                             <div class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuIconButton7">
                                                                 <h6 class="dropdown-header">Settings</h6>
-                                                                <a class="dropdown-item" data-toggle="modal"
+                                                                <a class="dropdown-item" href="#" data-toggle="modal"
                                                                     data-target="#editModal{{ $customer_category->id }}">Edit</a>
-                                                                <a class="dropdown-item" data-toggle="modal"
+                                                                <a class="dropdown-item" href="#" data-toggle="modal"
                                                                     data-target="#delModal{{ $customer_category->id }}">Delete</a>
                                                             </div>
                                                         </div>
