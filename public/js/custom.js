@@ -18,10 +18,17 @@
 
     let eventLoc = document.getElementById('coorGenerate');
     let coor = document.getElementById('coor');
-    eventLoc.addEventListener ("click", getLocation, false);
+    /**
+    const options = {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: Infinity
+      };
+    */
+      eventLoc.addEventListener ("click", getLocation, false);
     function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, function() {}, {enableHighAccuracy:true});
+        navigator.geolocation.getCurrentPosition(showPosition, function() {}, {enableHighAccuracy: true});
     } else {
         coor.innerHTML = "Geolocation is not supported by this browser.";
     }
@@ -31,8 +38,7 @@
         coor.removeAttribute('hidden');
         coor.setAttribute('readonly', 'true');
         coor.value = position.coords.latitude + ", " + position.coords.longitude;
-    }
-       
+    }       
 
     });
 

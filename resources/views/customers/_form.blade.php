@@ -126,8 +126,8 @@
             </div>
             <div class="form-group col-md-6">
                 <label>Customer Coordinate Location</label>
-                <button type="button" class="btn btn-secondary form-control" id="coorGenerate">Generate Customer
-                    Location</button>
+                <button type="button" class="btn btn-secondary form-control" id="coorGenerate">Click this to
+                    Generate</button>
                 <input type="text" class="form-control  @error('coordinate') is-invalid @enderror" name="coordinate"
                     id="coor" hidden>
                 @error('coordinate')
