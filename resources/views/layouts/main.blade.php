@@ -16,8 +16,7 @@
     <link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
-    {{-- <link rel="stylesheet" href="{{ asset('') }}vendors/select2/select2.min.css"> --}}
-    {{-- <link rel="stylesheet" href="{{ asset('') }}vendors/select2-bootstrap-theme/select2-bootstrap.min.css"> --}}
+
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
     <!-- End plugin css for this page -->
@@ -83,14 +82,13 @@
                 <ul class="nav">
                     <li class="nav-item">
                         <a class="nav-link" href="index.html">
-                            <i class="icon-grid menu-icon"></i>
-                            <span class="menu-title">Dashboard</span>
+                            <i class="fas fa-home">&nbsp;</i> <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
-                            <i class="fa-solid fa fa-database fa-beat">&nbsp; </i>
+                            <i class="fa-solid fa fa-database">&nbsp;&nbsp;</i>
                             <span class="menu-title">Master Products </span>
                             <i class="menu-arrow"></i>
                         </a>
@@ -114,8 +112,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false"
                             aria-controls="customer">
-                            <i class="mdi mdi-account-box menu-icon"></i>
-                            <span class="menu-title">Master Customers</span>
+                            <i class="fas fa-address-card">&nbsp;</i> <span class="menu-title">Master Customers</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="customer">
@@ -134,8 +131,8 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/warehouses') }}">
-                            <i class="mdi mdi-archive menu-icon"></i>
-                            <span class="menu-title">Master Warehouse</span>
+                            <i class="fas fa-warehouse">&nbsp;</i><span class="menu-title">Master
+                                Warehouse</span>
                         </a>
                     </li>
                     <li class="nav-item">
