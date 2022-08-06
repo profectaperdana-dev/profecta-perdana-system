@@ -28,7 +28,7 @@
                         <h5>Add {{ $title }}</h5>
                         <hr>
                         <div class="container-fluid">
-                            <form class="form-label-left input_mask" method="post" action="{{ url('/product_materials') }}"
+                            <form class="form-label-left input_mask" method="post" action="{{ url('/suppliers') }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
@@ -37,9 +37,9 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label class="font-weight-bold">Supplier Name</label>
-                                                <input type="text"
+                                                <input type="text" value="{{ old('nama_supplier') }}"
                                                     class="form-control text-capitalize {{ $errors->first('nama_supplier') ? ' is-invalid' : '' }}"
-                                                    name="nama_supplier" placeholder="Name Product Material ">
+                                                    name="nama_supplier" placeholder="Supplier Name" required>
                                                 @error('nama_supplier')
                                                     <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
@@ -48,10 +48,42 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label class="font-weight-bold">Address</label>
-                                                <textarea placeholder="Address Warehouses" name="alamat_supplier" id="" cols="30" rows="5"
-                                                    class="form-control text-capitalize {{ $errors->first('alamat_supplier') ? ' is-invalid' : '' }}" required></textarea>
-
+                                                <textarea placeholder="Supplier Address" name="alamat_supplier" id="" cols="30" rows="5"
+                                                    class="form-control text-capitalize {{ $errors->first('alamat_supplier') ? ' is-invalid' : '' }}" required>{{ old('alamat_supplier') }}</textarea>
                                                 @error('alamat_supplier')
+                                                    <small class="text-danger">{{ $message }}.</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label class="font-weight-bold">Phone Number</label>
+                                                <input type="text" value="{{ old('no_telepon_supplier') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('no_telepon_supplier') ? ' is-invalid' : '' }}"
+                                                    name="no_telepon_supplier" placeholder="Phone Number" required>
+                                                @error('no_telepon_supplier')
+                                                    <small class="text-danger">{{ $message }}.</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label class="font-weight-bold">NPWP Supplier</label>
+                                                <input type="text" value="{{ old('npwp_supplier') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('npwp_supplier') ? ' is-invalid' : '' }}"
+                                                    name="npwp_supplier" placeholder="NPWP Supplier" required>
+                                                @error('npwp_supplier')
+                                                    <small class="text-danger">{{ $message }}.</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label class="font-weight-bold">PIC Supplier</label>
+                                                <input type="text" value="{{ old('pic_supplier') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('pic_supplier') ? ' is-invalid' : '' }}"
+                                                    name="pic_supplier" placeholder="PIC Supplier" required>
+                                                @error('pic_supplier')
                                                     <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
                                             </div>
@@ -64,7 +96,6 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
@@ -104,7 +135,12 @@
                                             <tr>
                                                 <th></th>
                                                 <th>#</th>
-                                                <th>Material</th>
+                                                <th>Name Supplier</th>
+                                                <th>Addres</th>
+                                                <th>Phone Number</th>
+                                                <th>NPWP</th>
+                                                <th>PIC</th>
+                                                <th>Status</th>
 
                                             </tr>
                                         </thead>
@@ -121,11 +157,13 @@
                                                             <div class="dropdown-menu"
                                                                 aria-labelledby="dropdownMenuIconButton7">
                                                                 <h6 class="dropdown-header">Settings</h6>
-                                                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                                                <a class="dropdown-item" href="#"
+                                                                    data-toggle="modal"
                                                                     data-target="#changeData{{ $value->id }}">
                                                                     Edit
                                                                 </a>
-                                                                <a class="dropdown-item" href="#" data-toggle="modal"
+                                                                <a class="dropdown-item" href="#"
+                                                                    data-toggle="modal"
                                                                     data-target="#deleteData{{ $value->id }}">
                                                                     Delete
                                                                 </a>
@@ -136,9 +174,9 @@
                                                     <div class="modal fade" id="changeData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
-                                                        <div class="modal-dialog " role="document">
+                                                        <div class="modal-dialog modal-xl" role="document">
                                                             <form method="post"
-                                                                action="{{ url('product_materials/' . $value->id) }}"
+                                                                action="{{ url('suppliers/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="PATCH">
@@ -147,7 +185,7 @@
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
                                                                             Change {{ $title }} :
-                                                                            {{ $value->nama_material }}</h5>
+                                                                            {{ $value->nama_supplier }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -155,24 +193,110 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="row">
+
                                                                             <div class="col-md-12">
                                                                                 <div class="form-group row">
-                                                                                    <div class="col-md-12">
+                                                                                    <div class="col-md-6">
                                                                                         <label
-                                                                                            class="font-weight-bold">Name
-                                                                                            Product Material</label>
+                                                                                            class="font-weight-bold">Supplier
+                                                                                            Name</label>
                                                                                         <input type="text"
-                                                                                            class="form-control text-capitalize {{ $errors->first('editnama_material') ? ' is-invalid' : '' }}"
-                                                                                            name="editnama_material"
-                                                                                            value="{{ $value->nama_material }}"
-                                                                                            placeholder="Name Unit of Measurement">
-                                                                                        @error('editnama_material')
-                                                                                            <small class="text-danger">The
-                                                                                                Product Material field is
-                                                                                                required.</small>
+                                                                                            value="{{ old('nama_supplier_', $value->nama_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('nama_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="nama_supplier_"
+                                                                                            placeholder="Supplier Name"
+                                                                                            required>
+                                                                                        @error('nama_supplier_')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}.</small>
                                                                                         @enderror
                                                                                     </div>
 
+                                                                                    <div class="col-md-6">
+                                                                                        <label
+                                                                                            class="font-weight-bold">Address</label>
+                                                                                        <textarea placeholder="Supplier Address" name="alamat_supplier_" id="" cols="30" rows="5"
+                                                                                            class="form-control text-capitalize {{ $errors->first('alamat_supplier_') ? ' is-invalid' : '' }}" required>{{ old('alamat_supplier_', $value->alamat_supplier) }}</textarea>
+                                                                                        @error('alamat_supplier_')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}.</small>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <div class="col-md-6">
+                                                                                        <label
+                                                                                            class="font-weight-bold">Phone
+                                                                                            Number</label>
+                                                                                        <input type="text"
+                                                                                            value="{{ old('no_telepon_supplier_', $value->no_telepon_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('no_telepon_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="no_telepon_supplier_"
+                                                                                            placeholder="Phone Number"
+                                                                                            required>
+                                                                                        @error('no_telepon_supplier_')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}.</small>
+                                                                                        @enderror
+                                                                                    </div>
+
+                                                                                    <div class="col-md-6">
+                                                                                        <label
+                                                                                            class="font-weight-bold">NPWP
+                                                                                            Supplier</label>
+                                                                                        <input type="text"
+                                                                                            value="{{ old('npwp_supplier_', $value->npwp_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('npwp_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="npwp_supplier_"
+                                                                                            placeholder="NPWP Supplier"
+                                                                                            required>
+                                                                                        @error('npwp_supplier_')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}.</small>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="font-weight-bold">PIC
+                                                                                            Supplier</label>
+                                                                                        <input type="text"
+                                                                                            value="{{ old('pic_supplier_', $value->pic_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('pic_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="pic_supplier_"
+                                                                                            placeholder="PIC Supplier"
+                                                                                            required>
+                                                                                        @error('pic_supplier_')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}.</small>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
+                                                                                        <label>
+                                                                                            Status</label>
+                                                                                        <select id="" required
+                                                                                            name="status_supplier"
+                                                                                            class="form-control uoms {{ $errors->first('status_supplier') ? ' is-invalid' : '' }}">
+                                                                                            <option
+                                                                                                value="{{ $value->status_supplier }}"
+                                                                                                selected>
+                                                                                                @if ($value->status_supplier == 0)
+                                                                                                    Non Active
+                                                                                                @else
+                                                                                                    Active
+                                                                                                @endif
+                                                                                            </option>
+                                                                                            <option value="1">Active
+                                                                                            </option>
+                                                                                            <option value="0">Non
+                                                                                                Active</option>
+                                                                                        </select>
+                                                                                        @error('status_supplier')
+                                                                                            <div class="invalid-feedback">
+                                                                                                {{ $message }}
+                                                                                            </div>
+                                                                                        @enderror
+                                                                                    </div>
                                                                                 </div>
 
                                                                             </div>
@@ -198,7 +322,7 @@
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <form method="post"
-                                                                action="{{ url('product_materials/' . $value->id) }}"
+                                                                action="{{ url('suppliers/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="delete">
@@ -207,7 +331,7 @@
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
                                                                             Delete {{ $title }} :
-                                                                            {{ $value->nama_material }}</h5>
+                                                                            {{ $value->nama_supplier }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -241,7 +365,20 @@
                                                     </div>
                                                     {{-- End Modal Delete UOM --}}
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $value->nama_material }}</td>
+                                                    <td>{{ $value->nama_supplier }}</td>
+                                                    <td>
+                                                        <address>{{ $value->alamat_supplier }}</address>
+                                                    </td>
+                                                    <td>{{ $value->no_telepon_supplier }}</td>
+                                                    <td>{{ $value->npwp_supplier }}</td>
+                                                    <td>{{ $value->pic_supplier }}</td>
+                                                    <td>
+                                                        @if ($value->status_supplier == 0)
+                                                            <div><span class="badge badge-danger">Non Active</span></div>
+                                                        @else
+                                                            <div><span class="badge badge-success"> Active</span></div>
+                                                        @endif
+                                                    </td>
 
 
                                                 </tr>

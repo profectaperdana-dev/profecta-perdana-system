@@ -370,7 +370,9 @@
                                                     {{-- End Modal Delete Warehouses --}}
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->warehouses }}</td>
-                                                    <td>{{ $value->alamat }}</td>
+                                                    <td>
+                                                        <address>{{ $value->alamat }}</address>
+                                                    </td>
                                                     <td>{{ $value->area_name }}</td>
                                                     <td>{{ $value->latitude }},{{ $value->longitude }} </td>
                                                     <td>
