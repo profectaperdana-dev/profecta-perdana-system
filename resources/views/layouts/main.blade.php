@@ -40,8 +40,9 @@
                 <a class="navbar-brand brand-logo mr-5" href="index.html"><i class="fa fa-flip"
                         style="--fa-animation-duration: 3s;"><img src="{{ asset('images/logo.jpg') }}" class="mr-2"
                             alt="logo" /></i></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="images/logo-mini.svg"
-                        alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><i class="fa fa-flip"
+                        style="--fa-animation-duration: 3s;"><img src="{{ asset('images/logo.jpg') }}" class="mr-2"
+                            alt="logo" /></i></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -93,7 +94,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false"
                             aria-controls="ui-basic">
-                            <i class="fa-solid fa fa-database">&nbsp;&nbsp;</i>
+                            <i class="fa fa-barcode">&nbsp;&nbsp;</i>
                             <span class="menu-title">Master Products </span>
                             <i class="menu-arrow"></i>
                         </a>
@@ -117,7 +118,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#customer" aria-expanded="false"
                             aria-controls="customer">
-                            <i class="fas fa-address-card">&nbsp;</i> <span class="menu-title">Master Customers</span>
+                            <i class="far fa-address-card">&nbsp;</i> <span class="menu-title">Master Customers</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="customer">
@@ -136,8 +137,14 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/warehouses') }}">
-                            <i class="fas fa-warehouse">&nbsp;</i><span class="menu-title">Master
-                                Warehouse</span>
+                            <i class="far fa-flag">&nbsp;</i><span class="menu-title">Master
+                                Warehouses</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ url('/suppliers') }}">
+                            <i class="far fa-handshake">&nbsp;</i><span class="menu-title">Master
+                                Suppliers</span>
                         </a>
                     </li>
                     <li class="nav-item">

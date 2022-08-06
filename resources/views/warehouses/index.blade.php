@@ -39,9 +39,9 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label class="font-weight-bold">Address</label>
-                                                <input type="text"
-                                                    class="form-control text-capitalize {{ $errors->first('alamat') ? ' is-invalid' : '' }}"
-                                                    name="alamat" placeholder="Address Warehouses" required>
+                                                <textarea placeholder="Address Warehouses" name="alamat" id="" cols="30" rows="5"
+                                                    class="form-control text-capitalize {{ $errors->first('alamat') ? ' is-invalid' : '' }}" required></textarea>
+
                                                 @error('alamat')
                                                     <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
@@ -220,12 +220,9 @@
                                                                                     <div class="col-md-4">
                                                                                         <label
                                                                                             class="font-weight-bold">Address</label>
-                                                                                        <input type="text"
-                                                                                            value="{{ $value->alamat }}"
-                                                                                            class="form-control text-capitalize {{ $errors->first('alamat_') ? ' is-invalid' : '' }}"
-                                                                                            name="alamat_"
-                                                                                            placeholder="Address Warehouses"
-                                                                                            required>
+                                                                                        <textarea placeholder="Address Warehouses" name="alamat_" id="" cols="30" rows="5"
+                                                                                            class="form-control text-capitalize {{ $errors->first('alamat_') ? ' is-invalid' : '' }}" required>{{ $value->alamat }}</textarea>
+
                                                                                         @error('alamat_')
                                                                                             <small
                                                                                                 class="text-danger">{{ $message }}.</small>
