@@ -109,7 +109,7 @@
                                                                     <div class="modal-body">
                                                                         <div class="row">
                                                                             <div class="col-md-4 font-weight-bold">
-                                                                                <label>Preview Image</label>
+                                                                                <label>Customer Reference Image</label>
                                                                                 <img width="100%"
                                                                                     style="border: 2px solid rgb(0, 0, 0);"
                                                                                     src="{{ asset('images/customers/' . $customer->reference_image) }}"
