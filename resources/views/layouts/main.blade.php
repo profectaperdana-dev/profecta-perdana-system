@@ -12,12 +12,6 @@
     <link rel="stylesheet" href="{{ asset('vendors/css/vendor.bundle.base.css') }}">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.8.0/dist/leaflet.css"
-        integrity="sha512-hoalWLoI8r4UszCkZ5kL8vayOGVae1oxXe/2A4AO6J9+580uKHDO3JdHb7NzwwzK5xr/Fs0W40kiNHxM9vyTtQ=="
-        crossorigin="" />
-    <script src="https://unpkg.com/leaflet@1.8.0/dist/leaflet.js"
-        integrity="sha512-BB3hKbKWOc9Ez/TAwyWxNXeoV9c1v6FIeYiBieIWkpLjauysF18NzgR1MBNBXf8/KABdlkX68nAhlwcDFLGPCQ=="
-        crossorigin=""></script>
     <link rel="stylesheet" href="{{ asset('vendors/datatables.net-bs4/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" href="{{ asset('vendors/ti-icons/css/themify-icons.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('js/select.dataTables.min.css') }}">
@@ -52,7 +46,11 @@
 
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-                            <img src="images/faces/face28.jpg" alt="profile" />
+                            @if (auth()->user()->photo_profile == null)
+                                <img src="{{ asset('images/blank.png') }}" alt="profile" />
+                            @else
+                                <img src="{{ asset('images/' . auth()->user()->photo_profile) }}" alt="profile" />
+                            @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
@@ -124,6 +122,22 @@
                                 </li>
                                 <li class="nav-item"> <a class="nav-link"
                                         href="{{ url('/customer_areas') }}">Customer Areas</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false"
+                            aria-controls="customer">
+                            <i class="fas fa-address-card">&nbsp;</i> <span class="menu-title">Master Accounts</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                        <div class="collapse" id="account">
+                            <ul class="nav flex-column sub-menu">
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/users') }}">Accounts</a>
+                                </li>
+                                <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Roles
+                                        </Colgroup></a>
                                 </li>
                             </ul>
                         </div>
