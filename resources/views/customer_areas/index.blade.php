@@ -77,7 +77,6 @@
                                                 <th>#</th>
                                                 <th>Name</th>
                                                 <th>Code</th>
-                                                <th>Created By</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -102,7 +101,6 @@
                                                     </td>
                                                     <td>{{ $customer_area->area_name }}</td>
                                                     <td>{{ $customer_area->area_code }}</td>
-                                                    <td>{{ $customer_area->created_by }}</td>
 
                                                     <!-- Edit Modal -->
                                                     <div class="modal fade" id="editModal{{ $customer_area->id }}"

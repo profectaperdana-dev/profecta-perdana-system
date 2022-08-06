@@ -65,7 +65,6 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Created By</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -89,7 +88,6 @@
                                                         </div>
                                                     </td>
                                                     <td>{{ $customer_category->category_name }}</td>
-                                                    <td>{{ $customer_category->created_by }}</td>
 
                                                     <!-- Edit Modal -->
                                                     <div class="modal fade" id="editModal{{ $customer_category->id }}"
