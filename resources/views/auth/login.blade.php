@@ -26,9 +26,18 @@
                 <div class="row w-100 mx-0">
                     <div class="col-lg-4 mx-auto">
                         <div class="auth-form-light text-left py-5 px-4 px-sm-5">
-                            <div class="brand-logo"><i class="fa fa-flip" style="--fa-animation-duration: 3s;"><img
-                                        src="{{ asset('images/logo.jpg') }}" class="mr-2" alt="logo" /></i>
-                                {{-- <img src="{{ asset('images/logo.jpg') }}" alt="logo"> --}}
+
+                            @if (session()->has('error'))
+                                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                    {{ session('error') }}
+                                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                            @endif
+
+                            <div class="brand-logo">
+                                <img src="{{ asset('images/logo.jpg') }}" alt="logo">
                             </div>
                             <h4>Hello! let's get started</h4>
                             <h6 class="font-weight-light">Sign in to continue.</h6>
