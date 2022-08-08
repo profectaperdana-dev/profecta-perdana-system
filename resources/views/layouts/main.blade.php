@@ -55,7 +55,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"
                             aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
+                            <a class="dropdown-item" href="{{ url('/profiles') }}">
                                 <i class="ti-settings text-primary"></i>
                                 My Profile
                             </a>
@@ -130,7 +130,7 @@
                     <li class="nav-item">
                         <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false"
                             aria-controls="customer">
-                            <i class="fas fa-address-card">&nbsp;</i> <span class="menu-title">Master Accounts</span>
+                            <i class="far fa-id-badge">&nbsp;</i> <span class="menu-title">Master Accounts</span>
                             <i class="menu-arrow"></i>
                         </a>
                         <div class="collapse" id="account">
