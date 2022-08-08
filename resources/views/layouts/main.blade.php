@@ -48,9 +48,9 @@
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             @if (auth()->user()->photo_profile == null)
-                                <img src="{{ asset('images/blank.png') }}" alt="profile" />
-                            @else
                                 <img src="{{ asset('images/' . auth()->user()->photo_profile) }}" alt="profile" />
+                            @else
+                                <img src="{{ asset('images/blank.png') }}" alt="profile" />
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"

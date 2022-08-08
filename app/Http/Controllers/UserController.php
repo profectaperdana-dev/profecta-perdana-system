@@ -50,6 +50,7 @@ class UserController extends Controller
             'email' => 'required|email:dns|unique:users,email',
             'role_id' => 'required|numeric',
             'warehouse_id' => 'required|numeric'
+
         ]);
 
         $validated_data['password'] = bcrypt('profecta123');

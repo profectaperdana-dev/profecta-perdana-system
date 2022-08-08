@@ -18,8 +18,8 @@ class ProfileController extends Controller
         $title = "Profile ";
         $id =  Auth::user()->id;
         $data = User::where('users.id',  $id)
-            ->leftJoin('roles', 'users.role_id', '=', 'roles.id')
-            ->leftJoin('warehouses', 'users.warehouse_id', '=', 'warehouses.id')
+            ->join('roles', 'users.role_id', '=', 'roles.id')
+            ->join('warehouses', 'users.warehouse_id', '=', 'warehouses.id')
             ->select('users.*', 'roles.name AS role_name', 'warehouses.warehouses AS warehouse_name')
             ->first();
         // dd(Auth::user()->id);
@@ -31,9 +31,19 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function changePhoto(Request $request, $id)
     {
-        //
+        $request->validate([
+            'photo_profile' => 'required',
+
+        ]);
+        $model = User::find($id);
+        if ($model->photo_profile == null) {
+            $file = $request->photo_profile;
+            $nama_file = time() . '.' . $file->getClientOriginalExtension();
+            $file->move("foto_produk/", $nama_file);
+            $model->photo_profile = $nama_file;
+        }
     }
 
     /**

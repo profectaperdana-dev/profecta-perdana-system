@@ -44,12 +44,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/product_sub_materials', SubMaterialController::class);
     Route::resource('/warehouses', WarehouseController::class);
     Route::resource('/users', UserController::class)->middleware('can:isSuperAdmin');
+    Route::resource('/profiles', ProfileController::class);
+    Route::get('/logout', [LoginController::class, 'logout']);
+    Route::patch('/profiles/{id}/photo', [ProfileController::class, 'changePhoto']);
 });
 
 Route::group(['middleware' => 'guest'], function () {
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
-    Route::get('/logout', [LoginController::class, 'logout']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
