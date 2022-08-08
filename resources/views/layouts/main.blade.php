@@ -126,22 +126,24 @@
                             </ul>
                         </div>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false"
-                            aria-controls="customer">
-                            <i class="fas fa-address-card">&nbsp;</i> <span class="menu-title">Master Accounts</span>
-                            <i class="menu-arrow"></i>
-                        </a>
-                        <div class="collapse" id="account">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/users') }}">Accounts</a>
-                                </li>
-                                <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Roles
-                                        </Colgroup></a>
-                                </li>
-                            </ul>
-                        </div>
-                    </li>
+                    @can('isSuperAdmin')
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="collapse" href="#account" aria-expanded="false"
+                                aria-controls="customer">
+                                <i class="fas fa-address-card">&nbsp;</i> <span class="menu-title">Master Accounts</span>
+                                <i class="menu-arrow"></i>
+                            </a>
+                            <div class="collapse" id="account">
+                                <ul class="nav flex-column sub-menu">
+                                    <li class="nav-item"> <a class="nav-link" href="{{ url('/users') }}">Accounts</a>
+                                    </li>
+                                    <li class="nav-item"> <a class="nav-link" href="{{ url('/roles') }}">Roles
+                                            </Colgroup></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    @endcan
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url('/warehouses') }}">
                             <i class="fas fa-warehouse">&nbsp;</i><span class="menu-title">Master

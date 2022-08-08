@@ -18,17 +18,17 @@
 
     let eventLoc = document.getElementById('coorGenerate');
     let coor = document.getElementById('coor');
-    /**
+    
     const options = {
         enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: Infinity
+        timeout: 10000,
+        maximumAge: 0
       };
-    */
+    
       eventLoc.addEventListener ("click", getLocation, false);
     function getLocation() {
     if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition, function() {}, {enableHighAccuracy: true});
+        navigator.geolocation.watchPosition(showPosition, function() {}, options);
     } else {
         coor.innerHTML = "Geolocation is not supported by this browser.";
     }

@@ -31,17 +31,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::group(['middleware' => 'auth'], function () {
+    Route::resource('/roles', RoleController::class);
+    Route::resource('/products', ProductController::class);
+    Route::resource('/customers', CustomerController::class);
+    Route::resource('/customer_categories', CustomerCategoriesController::class);
+    Route::resource('/customer_areas', CustomerAreasController::class);
+    Route::resource('/product_uoms', UomController::class);
+    Route::resource('/product_materials', MaterialController::class);
+    Route::resource('/product_sub_materials', SubMaterialController::class);
+    Route::resource('/warehouses', WarehouseController::class);
+    Route::resource('/users', UserController::class)->middleware('can:isSuperAdmin');
+});
+
+Route::group(['middleware' => 'guest'], function () {
+    Route::get('/login', [LoginController::class, 'index'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate']);
+    Route::get('/logout', [LoginController::class, 'logout']);
+});
+
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/login', [LoginController::class, 'index'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate']);
-Route::get('/logout', [LoginController::class, 'logout']);
-Route::resource('/roles', RoleController::class);
-Route::resource('/products', ProductController::class);
-Route::resource('/customers', CustomerController::class);
-Route::resource('/customer_categories', CustomerCategoriesController::class);
-Route::resource('/customer_areas', CustomerAreasController::class);
-Route::resource('/product_uoms', UomController::class);
-Route::resource('/product_materials', MaterialController::class);
-Route::resource('/product_sub_materials', SubMaterialController::class);
-Route::resource('/warehouses', WarehouseController::class);
-Route::resource('/users', UserController::class);
