@@ -101,6 +101,8 @@
     <script src="js/template.js"></script>
     <script src="js/settings.js"></script>
     <script src="js/todolist.js"></script>
+    <script src="https://kit.fontawesome.com/e355a54691.js" crossorigin="anonymous"></script>
+
     <!-- endinject -->
 </body>
 

@@ -118,7 +118,7 @@
                                                                         <div class="row">
                                                                             <div class="col-md-4">
                                                                                 <img width="100%"
-                                                                                    style="border: 2px solid rgb(0, 0, 0);"
+                                                                                    class="img-fluid shadow-lg"
                                                                                     src="{{ asset('foto_produk/' . $value->foto_barang) }}"
                                                                                     alt="">
                                                                             </div>

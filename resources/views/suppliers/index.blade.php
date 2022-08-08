@@ -17,21 +17,30 @@
             <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
+                        @if (session()->has('success'))
+                            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                <strong class="text-capitalize">{{ session('success') }}</strong>
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                        @endif
                         <h5>Add {{ $title }}</h5>
                         <hr>
                         <div class="container-fluid">
-                            <form class="form-label-left input_mask" method="post" action="{{ url('/warehouses') }}"
+                            <form class="form-label-left input_mask" method="post" action="{{ url('/suppliers') }}"
                                 enctype="multipart/form-data">
                                 @csrf
                                 <div class="row">
+
                                     <div class="col-md-12">
                                         <div class="form-group row">
                                             <div class="col-md-12">
-                                                <label class="font-weight-bold">Name Warehouses</label>
-                                                <input type="text"
-                                                    class="form-control text-capitalize {{ $errors->first('warehouses') ? ' is-invalid' : '' }}"
-                                                    name="warehouses" placeholder="Name Warehouses" required>
-                                                @error('warehouses')
+                                                <label class="font-weight-bold">Supplier Name</label>
+                                                <input type="text" value="{{ old('nama_supplier') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('nama_supplier') ? ' is-invalid' : '' }}"
+                                                    name="nama_supplier" placeholder="Supplier Name" required>
+                                                @error('nama_supplier')
                                                     <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
                                             </div>
@@ -39,51 +48,42 @@
                                         <div class="form-group row">
                                             <div class="col-md-12">
                                                 <label class="font-weight-bold">Address</label>
-                                                <textarea placeholder="Address Warehouses" name="alamat" id="" cols="30" rows="5"
-                                                    class="form-control text-capitalize {{ $errors->first('alamat') ? ' is-invalid' : '' }}" required></textarea>
-
-                                                @error('alamat')
+                                                <textarea placeholder="Supplier Address" name="alamat_supplier" id="" cols="30" rows="5"
+                                                    class="form-control text-capitalize {{ $errors->first('alamat_supplier') ? ' is-invalid' : '' }}" required>{{ old('alamat_supplier') }}</textarea>
+                                                @error('alamat_supplier')
                                                     <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-12">
-                                                <label>
-                                                    Sales Area</label>
-                                                <select id="" required name="id_area"
-                                                    class="form-control uoms {{ $errors->first('id_area') ? ' is-invalid' : '' }}">
-                                                    <option value="" selected>-Choose Area-</option>
-                                                    @foreach ($areas as $list_area)
-                                                        <option value="{{ $list_area->id }}">
-                                                            {{ $list_area->area_name }}</option>
-                                                    @endforeach
-                                                </select>
-                                                @error('id_area')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                        </div>
-                                        <div class="form-group row">
-                                            <div class="col-md-12">
-                                                <label class="font-weight-bold">Latitude</label>
-                                                <input type="text"
-                                                    class="form-control text-capitalize {{ $errors->first('latitude') ? ' is-invalid' : '' }}"
-                                                    name="latitude" placeholder="Latitude Warehouses" required>
-                                                @error('latitude')
+                                                <label class="font-weight-bold">Phone Number</label>
+                                                <input type="text" value="{{ old('no_telepon_supplier') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('no_telepon_supplier') ? ' is-invalid' : '' }}"
+                                                    name="no_telepon_supplier" placeholder="Phone Number" required>
+                                                @error('no_telepon_supplier')
                                                     <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
                                             </div>
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-12">
-                                                <label class="font-weight-bold">Longitude</label>
-                                                <input type="text"
-                                                    class="form-control text-capitalize {{ $errors->first('longitude') ? ' is-invalid' : '' }}"
-                                                    name="longitude" placeholder="Longitude Warehouses" required>
-                                                @error('longitude')
+                                                <label class="font-weight-bold">NPWP Supplier</label>
+                                                <input type="text" value="{{ old('npwp_supplier') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('npwp_supplier') ? ' is-invalid' : '' }}"
+                                                    name="npwp_supplier" placeholder="NPWP Supplier" required>
+                                                @error('npwp_supplier')
+                                                    <small class="text-danger">{{ $message }}.</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
+                                                <label class="font-weight-bold">PIC Supplier</label>
+                                                <input type="text" value="{{ old('pic_supplier') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('pic_supplier') ? ' is-invalid' : '' }}"
+                                                    name="pic_supplier" placeholder="PIC Supplier" required>
+                                                @error('pic_supplier')
                                                     <small class="text-danger">{{ $message }}.</small>
                                                 @enderror
                                             </div>
@@ -96,24 +96,18 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </form>
                         </div>
+
+
                     </div>
                 </div>
+
             </div>
             <div class="col-md-8 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong class="text-capitalize">{{ session('success') }}</strong>
-                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                    <span aria-hidden="true">&times;</span>
-                                </button>
-                            </div>
-                        @endif
                         @if (session()->has('info'))
                             <div class="alert alert-info alert-dismissible fade show" role="alert">
                                 <strong class="text-capitalize">{{ session('info') }}</strong>
@@ -141,10 +135,11 @@
                                             <tr>
                                                 <th></th>
                                                 <th>#</th>
-                                                <th>Warehouese</th>
-                                                <th>Address</th>
-                                                <th>Sales Area</th>
-                                                <th>Coordinate Point</th>
+                                                <th>Name Supplier</th>
+                                                <th>Addres</th>
+                                                <th>Phone Number</th>
+                                                <th>NPWP</th>
+                                                <th>PIC</th>
                                                 <th>Status</th>
 
                                             </tr>
@@ -175,13 +170,13 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    {{-- Modul Edit Warehouses --}}
+                                                    {{-- Modul Edit UOM --}}
                                                     <div class="modal fade" id="changeData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-xl" role="document">
                                                             <form method="post"
-                                                                action="{{ url('warehouses/' . $value->id) }}"
+                                                                action="{{ url('suppliers/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="PATCH">
@@ -190,7 +185,7 @@
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
                                                                             Change {{ $title }} :
-                                                                            {{ $value->warehouses }}</h5>
+                                                                            {{ $value->nama_supplier }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -198,98 +193,94 @@
                                                                     </div>
                                                                     <div class="modal-body">
                                                                         <div class="row">
-                                                                            <div class="col-md-12 font-weight-bold">
-                                                                                <div
-                                                                                    class="form-group row font-weight-bold">
-                                                                                    <div class="col-md-4">
+
+                                                                            <div class="col-md-12">
+                                                                                <div class="form-group row">
+                                                                                    <div class="col-md-6">
                                                                                         <label
-                                                                                            class="font-weight-bold">Name
-                                                                                            Warehouses</label>
+                                                                                            class="font-weight-bold">Supplier
+                                                                                            Name</label>
                                                                                         <input type="text"
-                                                                                            class="form-control text-capitalize {{ $errors->first('warehouses_') ? ' is-invalid' : '' }}"
-                                                                                            name="warehouses_"
-                                                                                            value="{{ $value->warehouses }}"
-                                                                                            placeholder="Name Warehouses"
+                                                                                            value="{{ old('nama_supplier_', $value->nama_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('nama_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="nama_supplier_"
+                                                                                            placeholder="Supplier Name"
                                                                                             required>
-                                                                                        @error('warehouses_')
+                                                                                        @error('nama_supplier_')
                                                                                             <small
                                                                                                 class="text-danger">{{ $message }}.</small>
                                                                                         @enderror
                                                                                     </div>
 
-                                                                                    <div class="col-md-4">
+                                                                                    <div class="col-md-6">
                                                                                         <label
                                                                                             class="font-weight-bold">Address</label>
-                                                                                        <textarea placeholder="Address Warehouses" name="alamat_" id="" cols="30" rows="5"
-                                                                                            class="form-control text-capitalize {{ $errors->first('alamat_') ? ' is-invalid' : '' }}" required>{{ $value->alamat }}</textarea>
-
-                                                                                        @error('alamat_')
+                                                                                        <textarea placeholder="Supplier Address" name="alamat_supplier_" id="" cols="30" rows="5"
+                                                                                            class="form-control text-capitalize {{ $errors->first('alamat_supplier_') ? ' is-invalid' : '' }}" required>{{ old('alamat_supplier_', $value->alamat_supplier) }}</textarea>
+                                                                                        @error('alamat_supplier_')
                                                                                             <small
                                                                                                 class="text-danger">{{ $message }}.</small>
-                                                                                        @enderror
-                                                                                    </div>
-
-                                                                                    <div class="col-md-4">
-                                                                                        <label>
-                                                                                            Sales Area</label>
-                                                                                        <select id="" required
-                                                                                            name="id_area_"
-                                                                                            class="form-control uoms {{ $errors->first('id_area_') ? ' is-invalid' : '' }}">
-                                                                                            @foreach ($areas as $list_area)
-                                                                                                <option
-                                                                                                    value="{{ $list_area->id }}"
-                                                                                                    @if ($value->id_area == $list_area->id) selected @endif>
-                                                                                                    {{ $list_area->area_name }}
-                                                                                                </option>
-                                                                                            @endforeach
-                                                                                        </select>
-                                                                                        @error('id_area_')
-                                                                                            <div class="invalid-feedback">
-                                                                                                {{ $message }}
-                                                                                            </div>
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>
                                                                                 <div class="form-group row">
-                                                                                    <div class="col-md-4">
+                                                                                    <div class="col-md-6">
                                                                                         <label
-                                                                                            class="font-weight-bold">Latitude</label>
+                                                                                            class="font-weight-bold">Phone
+                                                                                            Number</label>
                                                                                         <input type="text"
-                                                                                            value="{{ $value->latitude }}"
-                                                                                            class="form-control text-capitalize {{ $errors->first('latitude_') ? ' is-invalid' : '' }}"
-                                                                                            name="latitude_"
-                                                                                            placeholder="Latitude Warehouses"
+                                                                                            value="{{ old('no_telepon_supplier_', $value->no_telepon_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('no_telepon_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="no_telepon_supplier_"
+                                                                                            placeholder="Phone Number"
                                                                                             required>
-                                                                                        @error('latitude_')
+                                                                                        @error('no_telepon_supplier_')
                                                                                             <small
                                                                                                 class="text-danger">{{ $message }}.</small>
                                                                                         @enderror
                                                                                     </div>
 
-                                                                                    <div class="col-md-4">
+                                                                                    <div class="col-md-6">
                                                                                         <label
-                                                                                            class="font-weight-bold">Longitude</label>
+                                                                                            class="font-weight-bold">NPWP
+                                                                                            Supplier</label>
                                                                                         <input type="text"
-                                                                                            value="{{ $value->longitude }}"
-                                                                                            class="form-control text-capitalize {{ $errors->first('longitude_') ? ' is-invalid' : '' }}"
-                                                                                            name="longitude_"
-                                                                                            placeholder="Longitude Warehouses"
+                                                                                            value="{{ old('npwp_supplier_', $value->npwp_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('npwp_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="npwp_supplier_"
+                                                                                            placeholder="NPWP Supplier"
                                                                                             required>
-                                                                                        @error('longitude_')
+                                                                                        @error('npwp_supplier_')
                                                                                             <small
                                                                                                 class="text-danger">{{ $message }}.</small>
                                                                                         @enderror
                                                                                     </div>
-                                                                                    <div class="col-md-4">
+                                                                                </div>
+                                                                                <div class="form-group row">
+                                                                                    <div class="col-md-6">
+                                                                                        <label class="font-weight-bold">PIC
+                                                                                            Supplier</label>
+                                                                                        <input type="text"
+                                                                                            value="{{ old('pic_supplier_', $value->pic_supplier) }}"
+                                                                                            class="form-control text-capitalize {{ $errors->first('pic_supplier_') ? ' is-invalid' : '' }}"
+                                                                                            name="pic_supplier_"
+                                                                                            placeholder="PIC Supplier"
+                                                                                            required>
+                                                                                        @error('pic_supplier_')
+                                                                                            <small
+                                                                                                class="text-danger">{{ $message }}.</small>
+                                                                                        @enderror
+                                                                                    </div>
+                                                                                    <div class="col-md-6">
                                                                                         <label>
                                                                                             Status</label>
                                                                                         <select id="" required
-                                                                                            name="status"
-                                                                                            class="form-control uoms {{ $errors->first('status') ? ' is-invalid' : '' }}">
+                                                                                            name="status_supplier"
+                                                                                            class="form-control uoms {{ $errors->first('status_supplier') ? ' is-invalid' : '' }}">
                                                                                             <option
-                                                                                                value="{{ $value->status }}"
+                                                                                                value="{{ $value->status_supplier }}"
                                                                                                 selected>
-                                                                                                @if ($value->status == 0)
+                                                                                                @if ($value->status_supplier == 0)
                                                                                                     Non Active
                                                                                                 @else
                                                                                                     Active
@@ -300,13 +291,14 @@
                                                                                             <option value="0">Non
                                                                                                 Active</option>
                                                                                         </select>
-                                                                                        @error('status')
+                                                                                        @error('status_supplier')
                                                                                             <div class="invalid-feedback">
                                                                                                 {{ $message }}
                                                                                             </div>
                                                                                         @enderror
                                                                                     </div>
                                                                                 </div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
@@ -323,14 +315,14 @@
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    {{-- End Modal Edit Warehouses --}}
-                                                    {{-- Modul Delete Warehouses --}}
+                                                    {{-- End Modal Edit UOM --}}
+                                                    {{-- Modul Delete UOM --}}
                                                     <div class="modal fade" id="deleteData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog" role="document">
                                                             <form method="post"
-                                                                action="{{ url('warehouses/' . $value->id) }}"
+                                                                action="{{ url('suppliers/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
                                                                 <input name="_method" type="hidden" value="delete">
@@ -339,7 +331,7 @@
                                                                         <h5 class="modal-title text-capitalize"
                                                                             id="exampleModalLabel">
                                                                             Delete {{ $title }} :
-                                                                            {{ $value->warehouses }}</h5>
+                                                                            {{ $value->nama_supplier }}</h5>
                                                                         <button type="button" class="close"
                                                                             data-dismiss="modal" aria-label="Close">
                                                                             <span aria-hidden="true">&times;</span>
@@ -352,14 +344,18 @@
                                                                                     <div class="col-md-12">
                                                                                         <h4>Are you sure delete this data ?
                                                                                         </h4>
+
                                                                                     </div>
+
                                                                                 </div>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-danger"
                                                                             data-dismiss="modal">Close</button>
+
                                                                         <button type="submit"
                                                                             class="btn btn-primary">Yes, Delete</button>
                                                                     </div>
@@ -367,16 +363,17 @@
                                                             </form>
                                                         </div>
                                                     </div>
-                                                    {{-- End Modal Delete Warehouses --}}
+                                                    {{-- End Modal Delete UOM --}}
                                                     <td>{{ $key + 1 }}</td>
-                                                    <td>{{ $value->warehouses }}</td>
+                                                    <td>{{ $value->nama_supplier }}</td>
                                                     <td>
-                                                        <address>{{ $value->alamat }}</address>
+                                                        <address>{{ $value->alamat_supplier }}</address>
                                                     </td>
-                                                    <td>{{ $value->area_name }}</td>
-                                                    <td>{{ $value->latitude }},{{ $value->longitude }} </td>
+                                                    <td>{{ $value->no_telepon_supplier }}</td>
+                                                    <td>{{ $value->npwp_supplier }}</td>
+                                                    <td>{{ $value->pic_supplier }}</td>
                                                     <td>
-                                                        @if ($value->status == 0)
+                                                        @if ($value->status_supplier == 0)
                                                             <div><span class="badge badge-danger">Non Active</span></div>
                                                         @else
                                                             <div><span class="badge badge-success"> Active</span></div>
