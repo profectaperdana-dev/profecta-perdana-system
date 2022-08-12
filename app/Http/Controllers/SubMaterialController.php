@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\MaterialModel;
 use App\Models\SubMaterialModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,19 +17,30 @@ class SubMaterialController extends Controller
     public function index()
     {
         $title = 'Data Product Sub Material';
-        $data = SubMaterialModel::latest()->get();
+        $data = SubMaterialModel::join('product_materials', 'product_sub_materials.material_id', '=', 'product_materials.id')
+            ->select('product_sub_materials.*', 'product_materials.nama_material')
+            ->latest()
+            ->get();
+        $materials = MaterialModel::latest()->get();
 
-        return view('submaterials.index', compact('title', 'data'));
+        return view('submaterials.index', compact('title', 'data', 'materials'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function select($id)
     {
-        //
+        $sub_materials = [];
+        $material_id = $id;
+
+        if (request()->has('q')) {
+            $search = request()->q;
+            $sub_materials = SubMaterialModel::select("id", "nama_sub_material")
+                ->where('nama_sub_material', 'LIKE', '%', $search, '%')
+                ->where('material_id', $id)
+                ->get();
+        } else {
+            $sub_materials = SubMaterialModel::where('material_id', $material_id)->get();
+        }
+        return response()->json($sub_materials);
     }
 
     /**
@@ -41,10 +53,12 @@ class SubMaterialController extends Controller
     {
         $request->validate([
             'nama_sub_material' => 'required',
+            'material_id' => 'required|numeric'
 
         ]);
         $model = new SubMaterialModel();
         $model->nama_sub_material = $request->get('nama_sub_material');
+        $model->material_id = $request->get('material_id');
         $model->created_by = Auth::user()->id;
         $model->save();
 
@@ -84,10 +98,12 @@ class SubMaterialController extends Controller
     {
         $request->validate([
             'editnama_submaterial' => 'required',
+            'material_id_edit' => 'required|numeric'
 
         ]);
         $model = SubMaterialModel::find($id);
         $model->nama_sub_material = $request->get('editnama_submaterial');
+        $model->material_id = $request->get('material_id_edit');
         $model->created_by = Auth::user()->id;
         $model->save();
         return redirect('/product_sub_materials')->with('info', 'Changes Data Product Sub Material Success');

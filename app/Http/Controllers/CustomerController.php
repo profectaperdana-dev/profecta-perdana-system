@@ -28,7 +28,7 @@ class CustomerController extends Controller
             ->get();
 
         $data = [
-            "title" => 'Customers',
+            "title" => 'Data Customers',
             "customers" => $all_customer
         ];
 
@@ -42,7 +42,7 @@ class CustomerController extends Controller
         $empty_customer = new CustomerModel();
 
         $data = [
-            'title' => 'Create Customer',
+            'title' => 'Data Customer',
             'customer_categories' => $all_customer_categories,
             'customer_areas' => $all_customer_areas,
             'customer' => $empty_customer
@@ -61,11 +61,15 @@ class CustomerController extends Controller
         $validated_data = $request->validate([
             'name_cust' => 'required',
             'phone_cust' => 'required',
+            'id_card_number' => 'required',
             'address_cust' => 'required',
-            'email_cust' => 'required|email:dns',
+            'npwp' => 'required',
+            'email_cust' => 'required',
             'category_cust_id' => 'required|numeric',
             'area_cust_id' => 'required|numeric',
             'credit_limit' => 'required|numeric',
+            'label' => 'required',
+            'due_date' => 'required|numeric',
             'coordinate' => 'required',
             'status' => 'required|numeric',
             'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
@@ -112,7 +116,7 @@ class CustomerController extends Controller
         $choosed_customer = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
 
         $data = [
-            'title' => 'Edit Customer',
+            'title' => 'Data Customer',
             'customer_categories' => $all_customer_categories,
             'customer_areas' => $all_customer_areas,
             'customer' => $choosed_customer
@@ -133,12 +137,15 @@ class CustomerController extends Controller
         $validated_data = $request->validate([
             'name_cust' => 'required',
             'phone_cust' => 'required',
+            'id_card_number' => 'required',
             'address_cust' => 'required',
-            'email_cust' => 'required|email:dns',
+            'npwp' => 'required',
+            'email_cust' => 'required',
             'category_cust_id' => 'required|numeric',
             'area_cust_id' => 'required|numeric',
             'credit_limit' => 'required|numeric',
-            'coordinate' => 'required',
+            'label' => 'required',
+            'due_date' => 'required|numeric',
             'status' => 'required|numeric',
             'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
         ]);
@@ -146,12 +153,15 @@ class CustomerController extends Controller
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
         $customer_current->name_cust = $validated_data['name_cust'];
         $customer_current->phone_cust = $validated_data['phone_cust'];
+        $customer_current->id_card_number = $validated_data['id_card_number'];
         $customer_current->address_cust = $validated_data['address_cust'];
+        $customer_current->npwp = $validated_data['npwp'];
         $customer_current->email_cust = $validated_data['email_cust'];
         $customer_current->category_cust_id = $validated_data['category_cust_id'];
         $customer_current->area_cust_id = $validated_data['area_cust_id'];
         $customer_current->credit_limit = $validated_data['credit_limit'];
-        $customer_current->coordinate = $validated_data['coordinate'];
+        $customer_current->label = $validated_data['label'];
+        $customer_current->due_date = $validated_data['due_date'];
         $customer_current->status = $validated_data['status'];
 
         //process image

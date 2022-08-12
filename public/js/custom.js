@@ -18,13 +18,13 @@
 
     let eventLoc = document.getElementById('coorGenerate');
     let coor = document.getElementById('coor');
-    
+
     const options = {
         enableHighAccuracy: true,
         timeout: 10000,
         maximumAge: 0
       };
-    
+
       eventLoc.addEventListener ("click", getLocation, false);
     function getLocation() {
     if (navigator.geolocation) {
@@ -38,7 +38,7 @@
         coor.removeAttribute('hidden');
         coor.setAttribute('readonly', 'true');
         coor.value = position.coords.latitude + ", " + position.coords.longitude;
-    }       
+    }
 
     });
 

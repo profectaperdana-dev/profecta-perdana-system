@@ -17,7 +17,7 @@ class RoleController extends Controller
     {
         $all_roles = RoleModel::latest()->get();
         $data = [
-            'title' => "User's Role",
+            'title' => "Data Accounts Role",
             'roles' => $all_roles
         ];
 

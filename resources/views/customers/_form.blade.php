@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="form-row">
-            <div class="form-group col-md-6">
+        <div class="row">
+            <div class="form-group col-md-4">
                 <label>Name</label>
                 <input type="text" name="name_cust" value="{{ old('name_cust', $customer->name_cust) }}"
                     class="form-control
@@ -13,7 +13,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-4">
                 <label>Phone Number</label>
                 <input type="text" name="phone_cust" value="{{ old('phone_cust', $customer->phone_cust) }}"
                     class="form-control @error('phone_cust') is-invalid @enderror" placeholder="Customer Phone Number"
@@ -24,22 +24,47 @@
                     </div>
                 @enderror
             </div>
+            <div class="form-group col-md-4">
+                <label>ID Card Number</label>
+                <input type="text" name="id_card_number"
+                    value="{{ old('id_card_number', $customer->id_card_number) }}"
+                    class="form-control @error('id_card_number') is-invalid @enderror"
+                    placeholder="Customer ID Card Number" required>
+                @error('id_card_number')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
         </div>
-        <div class="form-group">
-            <label>Address</label>
-            <input type="text" name="address_cust" value="{{ old('address_cust', $customer->address_cust) }}"
-                class="form-control form-control-lg @error('address_cust') is-invalid @enderror"
-                placeholder="Customer Address" required>
-            @error('address_cust')
-                <div class="invalid-feedback">
-                    {{ $message }}
-                </div>
-            @enderror
+        <div class="row">
+            <div class="form-group col-md-6">
+                <label>Address</label>
+                <input type="text" name="address_cust" value="{{ old('address_cust', $customer->address_cust) }}"
+                    class="form-control form-control-lg @error('address_cust') is-invalid @enderror"
+                    placeholder="Customer Address" required>
+                @error('address_cust')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group col-md-6">
+                <label>NPWP</label>
+                <input type="text" name="npwp" value="{{ old('npwp', $customer->npwp) }}"
+                    class="form-control form-control-lg @error('npwp') is-invalid @enderror" placeholder="Customer NPWP"
+                    required>
+                @error('npwp')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
         </div>
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-4">
                 <label>Email</label>
-                <input type="email" name="email_cust" value="{{ old('email_cust', $customer->email_cust) }}"
+                <input type="text" name="email_cust" value="{{ old('email_cust', $customer->email_cust) }}"
                     class="form-control @error('email_cust') is-invalid @enderror" placeholder="Email Customer"
                     required>
                 @error('email_cust')
@@ -83,24 +108,41 @@
                 @enderror
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group col-md-6">
+        <div class="row">
+            <div class="form-group col-md-3">
                 <label>Credit Limit</label>
                 <input type="number" name="credit_limit" value="{{ old('credit_limit', $customer->credit_limit) }}"
-                    class="form-control @error('credit_limit') is-invalid @enderror" placeholder="Credit Limit Customer"
-                    required>
+                    class="form-control @error('credit_limit') is-invalid @enderror"
+                    placeholder="Customer Credit Limit" required>
                 @error('credit_limit')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>
                 @enderror
             </div>
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-3">
+                <label>Label</label>
+                <select name="label"
+                    class="form-control @error('label') invalid-feedback
+                        {{ $message }} @enderror"
+                    required>
+                    <option value="" selected>Choose Customer Label</option>
+                    <option value="Prospect" @if ($customer->label == 'Prospect') selected @endif>Prospect</option>
+                    <option value="Customer" @if ($customer->label == 'Customer') selected @endif>Customer</option>
+                    <option value="Bad Customer" @if ($customer->label == 'Bad Customer') selected @endif>Bad Customer
+                    </option>
+                </select>
+                @error('label')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
+            <div class="form-group col-md-3">
                 <label>Status</label>
                 <select name="status"
-                    class="form-control @error('status') <div class="invalid-feedback">
-                        {{ $message }}
-                    </div> @enderror"
+                    class="form-control @error('status') invalid-feedback
+                        {{ $message }} @enderror"
                     required>
                     <option value="" selected>Choose Customer Status</option>
                     <option value="1" @if ($customer->status == 1) selected @endif>Active</option>
@@ -112,8 +154,19 @@
                     </div>
                 @enderror
             </div>
+            <div class="form-group col-md-3">
+                <label>Due Date</label>
+                <input type="number" name="due_date" value="{{ old('due_date', $customer->due_date) }}"
+                    class="form-control @error('due_date') is-invalid @enderror" placeholder="Customer Due Date"
+                    required>
+                @error('due_date')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
+            </div>
         </div>
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-6">
                 <label>Customer Reference Image</label>
                 <input type="file" name="reference_image" id="inputreference"
@@ -128,8 +181,8 @@
                 <label>Customer Coordinate Location</label>
                 <button type="button" class="btn btn-secondary form-control" id="coorGenerate">Click this to
                     Generate</button>
-                <input type="text" class="form-control  @error('coordinate') is-invalid @enderror" name="coordinate"
-                    id="coor" hidden>
+                <input type="text" class="form-control  @error('coordinate') is-invalid @enderror"
+                    name="coordinate" id="coor" hidden>
                 @error('coordinate')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -137,7 +190,7 @@
                 @enderror
             </div>
         </div>
-        <div class="form-row">
+        <div class="row">
             <div class="form-group col-md-4 offset-md-4 text-center">
                 <label id="previewLabel" hidden>Preview Image</label>
                 <img src="#" id="previewimg" class="img-fluid shadow-lg" style="width:350px;" hidden />
@@ -147,7 +200,7 @@
             <a class="btn btn-danger" href="{{ url('customers/') }}"> <i class="ti ti-arrow-left"> </i> Back
             </a>
             <button type="reset" class="btn btn-warning">Reset</button>
-            <button type="submit" class="btn btn-primary">Add</button>
+            <button type="submit" class="btn btn-primary">Save</button>
         </div>
     </div>
 </div>

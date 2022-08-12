@@ -5,7 +5,8 @@
             <div class="col-md-12 grid-margin">
                 <div class="row">
                     <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                        <h3 class="font-weight-bold">{{ $title }} | {{ $data->name }} </h3>
+                        <h3 class="font-weight-bold">{{ $title }} | {{ $data->name }}
+                        </h3>
                         <h6 class="font-weight-normal mb-0">Let's see you {{ $title }}
                         </h6>
                     </div>
@@ -13,13 +14,14 @@
                 </div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-4 grid-margin stretch-card">
                 <div class="card">
                     <div class="card-body">
-                        @if (session()->has('success'))
-                            <div class="alert alert-success alert-dismissible fade show" role="alert">
-                                <strong class="text-capitalize">{{ session('success') }}</strong>
+                        @if (session()->has('info'))
+                            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                                <strong class="text-capitalize">{{ session('info') }}</strong>
                                 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                                     <span aria-hidden="true">&times;</span>
                                 </button>
@@ -31,11 +33,11 @@
                             <div class="form-group">
 
                                 @if ($data->photo_profile == null)
-                                    <img class="img-fluid shadow-lg" src="{{ asset('images/' . $data->photo_profile) }}"
-                                        alt="profile" />
-                                @else
                                     <img class="img-fluid shadow-lg" src="{{ asset('images/blank.png') }}" alt="profile"
                                         width="100%" />
+                                @else
+                                    <img class="img-fluid shadow-lg"
+                                        src="{{ asset('foto_profile/' . $data->photo_profile) }}" alt="profile" />
                                 @endif
 
                             </div>
@@ -77,6 +79,8 @@
                                                     @error('photo_profile')
                                                         <small class="text-danger">{{ $message }}.</small>
                                                     @enderror
+                                                    <input hidden type="text" name="url_lama" id=""
+                                                        value="{{ $data->photo_profile }}">
                                                 </div>
 
                                             </div>

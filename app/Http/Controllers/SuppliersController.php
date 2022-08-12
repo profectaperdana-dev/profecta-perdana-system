@@ -60,7 +60,7 @@ class SuppliersController extends Controller
         $model->created_by = Auth::user()->id;
         $model->save();
 
-        return redirect('/suppliers')->with('success', 'Add Data Suppliers Success');
+        return redirect('/supliers')->with('success', 'Add Data Suppliers Success');
     }
 
     /**
@@ -113,7 +113,7 @@ class SuppliersController extends Controller
         $model->created_by = Auth::user()->id;
         $model->save();
 
-        return redirect('/suppliers')->with('info', 'Changes Data Suppliers Success');
+        return redirect('/supliers')->with('info', 'Changes Data Suppliers Success');
     }
 
     /**
@@ -126,6 +126,6 @@ class SuppliersController extends Controller
     {
         $model = SuppliersModel::find($id);
         $model->delete();
-        return redirect('/suppliers')->with('error', 'Delete Data Suppliers Success');
+        return redirect('/supliers')->with('error', 'Delete Data Suppliers Success');
     }
 }

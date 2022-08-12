@@ -35,7 +35,7 @@
                         style="--fa-animation-duration: 3s;"><img src="{{ asset('images/logo.jpg') }}" class="mr-2"
                             alt="logo" /></i></a>
                 <a class="navbar-brand brand-logo-mini" href="index.html"><i class="fa fa-flip"
-                        style="--fa-animation-duration: 3s;"><img src="{{ asset('images/logo.jpg') }}" class="mr-2"
+                        style="--fa-animation-duration: 3s;"><img src="{{ asset('images/logo.png') }}" class="mr-2"
                             alt="logo" /></i></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
@@ -48,9 +48,10 @@
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
                             @if (auth()->user()->photo_profile == null)
-                                <img src="{{ asset('images/' . auth()->user()->photo_profile) }}" alt="profile" />
-                            @else
                                 <img src="{{ asset('images/blank.png') }}" alt="profile" />
+                            @else
+                                <img src="{{ asset('foto_profile/' . auth()->user()->photo_profile) }}"
+                                    alt="profile" />
                             @endif
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown"

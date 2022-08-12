@@ -17,7 +17,7 @@ class CustomerCategoriesController extends Controller
     {
         $all_customer_categories = CustomerCategoriesModel::all();
         $data = [
-            'title' => "Customer Categories",
+            'title' => "Data Customer Categories",
             'customer_categories' => $all_customer_categories
         ];
 

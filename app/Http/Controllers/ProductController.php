@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MaterialModel;
 use App\Models\ProductModel;
 use App\Models\SubMaterialModel;
+use App\Models\SubTypeModel;
 use App\Models\UomModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -24,10 +25,11 @@ class ProductController extends Controller
         $data = ProductModel::join('uoms', 'uoms.id', '=', 'products.id_uom')
             ->join('product_materials', 'product_materials.id', '=', 'products.id_material')
             ->join('product_sub_materials', 'product_sub_materials.id', '=', 'products.id_sub_material')
+            ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
             ->latest('products.id')
-            ->get(['products.*', 'uoms.satuan', 'product_materials.nama_material', 'product_sub_materials.nama_sub_material']);
+            ->get(['products.*', 'uoms.satuan', 'product_materials.nama_material', 'product_sub_materials.nama_sub_material', 'product_sub_types.type_name']);
 
-
+        // dd($data);
         return view('products.index', compact('data', 'title'));
     }
 
@@ -42,9 +44,8 @@ class ProductController extends Controller
         $data = new ProductModel();
         $uom = UomModel::latest()->get();
         $material = MaterialModel::latest()->get();
-        $subMaterial = SubMaterialModel::latest()->get();
         // var_dump($data);
-        return view('products.create', compact('title', 'uom', 'material', 'subMaterial', 'data'));
+        return view('products.create', compact('title', 'uom', 'material', 'data'));
     }
 
     /**
@@ -63,13 +64,14 @@ class ProductController extends Controller
                 'uom' => 'required',
                 'material_grup' => 'required',
                 'sub_material' => 'required',
+                'sub_type' => 'required',
                 'berat' => 'required',
                 'harga_beli' => 'required',
                 'harga_jual' => 'required',
                 'harga_jual_nonretail' => 'required',
                 'qty' => 'required',
                 'minstok' => 'required',
-                'status' => 'required',
+                'tgl_produksi' => 'required',
                 'foto_barang' => 'required',
 
             ],
@@ -80,13 +82,14 @@ class ProductController extends Controller
                 'uom.required' => 'You have to choose Unit of Measurement',
                 'material_grup.required' => 'You have to choose Product Material',
                 'sub_material.required' => 'You have to choose Product Sub Material',
+                'sub_type.required' => 'You have to choose Product Sub Material Type',
                 'berat.required' => 'The Product Weight is required',
                 'harga_beli.required' => 'The Purchase Price is required',
                 'harga_jual.required' => 'The Retail Selling Price is required',
                 'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
                 'qty.required' => 'The Qty is required',
                 'minstok.required' => 'The Min Stock required',
-                'status.required' => 'The Status is required',
+                'tgl_produksi.required' => 'The Date of Production is required',
                 'foto_barang.required' => 'You have to choose Product Photo File',
 
             ]
@@ -99,13 +102,15 @@ class ProductController extends Controller
         $model->id_uom = $request->get('uom');
         $model->id_material = $request->get('material_grup');
         $model->id_sub_material = $request->get('sub_material');
+        $model->id_sub_type = $request->get('sub_type');
         $model->berat = $request->get('berat');
         $model->harga_beli = $request->get('harga_beli');
         $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->qty = $request->get('qty');
         $model->minstok = $request->get('minstok');
-        $model->status = $request->get('status');
+        $model->tgl_produksi = $request->get('tgl_produksi');
+        $model->status = 1;
         $file = $request->foto_barang;
         $nama_file = time() . '.' . $file->getClientOriginalExtension();
         $file->move("foto_produk/", $nama_file);
@@ -139,7 +144,10 @@ class ProductController extends Controller
         $material = MaterialModel::latest()->get();
         $subMaterial = SubMaterialModel::latest()->get();
         $data = ProductModel::where('id', $id)->firstOrFail();
-        return view('products.edit', compact('title', 'uom', 'material', 'subMaterial', 'data'));
+        $data_sub = SubMaterialModel::select('nama_sub_material')->where('id', $data->id_sub_material)->firstOrFail();
+        $data_sub_type = SubTypeModel::select('type_name')->where('id', $data->id_sub_type)->firstOrFail();
+        // dd($data_sub);
+        return view('products.edit', compact('title', 'uom', 'material', 'subMaterial', 'data', 'data_sub', 'data_sub_type'));
     }
 
     /**
@@ -166,6 +174,8 @@ class ProductController extends Controller
                 'qty' => 'required',
                 'minstok' => 'required',
                 'status' => 'required',
+                'tgl_produksi' => 'required',
+
 
             ],
             [
@@ -182,6 +192,8 @@ class ProductController extends Controller
                 'qty.required' => 'The Qty is required',
                 'minstok.required' => 'The Min Stock required',
                 'status.required' => 'The Status is required',
+                'tgl_produksi.required' => 'The Date of Production is required',
+
 
             ]
         );
@@ -198,6 +210,7 @@ class ProductController extends Controller
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->qty = $request->get('qty');
         $model->minstok = $request->get('minstok');
+        $model->tgl_produksi = $request->get('tgl_produksi');
         $model->status = $request->get('status');
 
         $url_lama = $request->get('url_lama');

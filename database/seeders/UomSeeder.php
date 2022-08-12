@@ -14,9 +14,11 @@ class UomSeeder extends Seeder
      */
     public function run()
     {
-        $model = new UomModel();
-        $model->satuan = 'PCS';
-        $model->created_by = '3';
-        $model->save();
+        for ($i = 0; $i < 1000; $i++) {
+            $model = new UomModel();
+            $model->satuan = 'PCS' . $i;
+            $model->created_by = '3';
+            $model->save();
+        }
     }
 }

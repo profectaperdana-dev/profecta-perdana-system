@@ -38,11 +38,22 @@ class ProfileController extends Controller
 
         ]);
         $model = User::find($id);
+
         if ($model->photo_profile == null) {
             $file = $request->photo_profile;
             $nama_file = time() . '.' . $file->getClientOriginalExtension();
-            $file->move("foto_produk/", $nama_file);
+            $file->move("foto_profile/", $nama_file);
             $model->photo_profile = $nama_file;
+            $model->save();
+            return redirect('profiles')->with('info', 'Changes Photo Profile is Success');
+        } else {
+            unlink('foto_profile/' . $request->get('url_lama'));
+            $file = $request->photo_profile;
+            $nama_file = time() . '.' . $file->getClientOriginalExtension();
+            $file->move("foto_profile/", $nama_file);
+            $model->photo_profile = $nama_file;
+            $model->save();
+            return redirect('profiles')->with('info', 'Changes Photo Profile is Success');
         }
     }
 

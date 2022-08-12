@@ -17,7 +17,7 @@ class CustomerAreasController extends Controller
     {
         $all_customer_areas = CustomerAreaModel::all();
         $data = [
-            'title' => 'Customer Area',
+            'title' => 'Data Customer Area',
             'customer_areas' => $all_customer_areas
         ];
 
