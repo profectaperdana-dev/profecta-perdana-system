@@ -1,8 +1,13 @@
 <header class="main-nav">
-    <div class="sidebar-user text-center"><a class="setting-primary" href="javascript:void(0)"><i
-                data-feather="settings"></i></a><img class="img-90 rounded-circle"
-            src="{{ asset('assets') }}/images/dashboard/1.png" alt="">
-        <div class="badge-bottom"><span class="badge badge-primary">New</span></div><a href="user-profile.html">
+    <div class="sidebar-user text-center"><a class="setting-primary" href="{{ url('/profiles') }}"><i
+                data-feather="settings"></i></a>
+        @if (Auth::user()->photo_profile == null)
+            <img class="img-90 rounded-circle" src="{{ asset('images/blank.png') }}" alt="">
+        @else
+            <img class="img-90 rounded-circle" src="{{ asset('foto_profile/' . Auth::user()->photo_profile) }}"
+                alt="">
+        @endif
+        <div class="badge-bottom"></div><a href="user-profile.html">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>
         </a>
         <p class="mb-0 font-roboto text-capitalize">
@@ -50,7 +55,7 @@
                             </li>
                             <li>
                                 <a href="{{ url('/stocks') }}"
-                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Stocks</a>
+                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Products Stocks</a>
                             </li>
                             <li>
                                 <a href="{{ url('/product_materials') }}"

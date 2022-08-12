@@ -8,6 +8,7 @@ use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\StockController;
 use App\Http\Controllers\SubMaterialController;
 use App\Http\Controllers\SubTypeController;
 use App\Http\Controllers\SuppliersController;
@@ -48,10 +49,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/profiles', ProfileController::class);
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::patch('/profiles/{id}/photo', [ProfileController::class, 'changePhoto']);
+    Route::patch('/profiles/{id}/password', [ProfileController::class, 'changePassword']);
     Route::resource('/product_sub_types', SubTypeController::class);
     Route::get('/product_sub_materials/select/{id}', [SubMaterialController::class, 'select']);
     Route::get('/product_sub_types/select/{id}', [SubTypeController::class, 'select']);
     Route::resource('/supliers', SuppliersController::class);
+    Route::resource('/stocks', StockController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

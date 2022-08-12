@@ -26,21 +26,21 @@
      crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  @if (Session::has('success'))
      <script>
-         swal("Berhasil !", "{!! Session::get('success') !!}", "success", {
-             button: "Ok",
-         });
-     </script>
- @endif
- @if (Session::has('error'))
-     <script>
-         swal("Berhasil !", "{!! Session::get('error') !!}", "success", {
+         swal("Success !", "{!! Session::get('success') !!}", "success", {
              button: "Ok",
          });
      </script>
  @endif
  @if (Session::has('info'))
      <script>
-         swal("Berhasil !", "{!! Session::get('info') !!}", "success", {
+         swal("info !", "{!! Session::get('info') !!}", "info", {
+             button: "Ok",
+         });
+     </script>
+ @endif
+ @if (Session::has('error'))
+     <script>
+         swal("error !", "{!! Session::get('error') !!}", "error", {
              button: "Ok",
          });
      </script>

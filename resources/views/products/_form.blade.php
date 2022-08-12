@@ -113,10 +113,6 @@
                     </div>
                 @enderror
             </div>
-
-
-
-
             <div class="col-md-3 form-group">
                 <label>Product Weight</label>
                 <input type="number" class="form-control {{ $errors->first('berat') ? ' is-invalid' : '' }}" required
@@ -156,17 +152,6 @@
                     placeholder="Non Retail Selling Price" name="harga_jual_nonretail"
                     value="{{ old('harga_jual_nonretail', $data->harga_jual_nonretail) }}">
                 @error('harga_jual_nonretail')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-
-            <div class="col-md-3 form-group">
-                <label>Qty Stock</label>
-                <input type="number" class="form-control {{ $errors->first('qty') ? ' is-invalid' : '' }}" required
-                    placeholder="Qty Stock" name="qty" value="{{ old('qty', $data->qty) }}">
-                @error('qty')
                     <div class="invalid-feedback">
                         {{ $message }}
                     </div>

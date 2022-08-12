@@ -69,7 +69,6 @@ class ProductController extends Controller
                 'harga_beli' => 'required',
                 'harga_jual' => 'required',
                 'harga_jual_nonretail' => 'required',
-                'qty' => 'required',
                 'minstok' => 'required',
                 'tgl_produksi' => 'required',
                 'foto_barang' => 'required',
@@ -87,7 +86,6 @@ class ProductController extends Controller
                 'harga_beli.required' => 'The Purchase Price is required',
                 'harga_jual.required' => 'The Retail Selling Price is required',
                 'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
-                'qty.required' => 'The Qty is required',
                 'minstok.required' => 'The Min Stock required',
                 'tgl_produksi.required' => 'The Date of Production is required',
                 'foto_barang.required' => 'You have to choose Product Photo File',
@@ -107,7 +105,6 @@ class ProductController extends Controller
         $model->harga_beli = $request->get('harga_beli');
         $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
-        $model->qty = $request->get('qty');
         $model->minstok = $request->get('minstok');
         $model->tgl_produksi = $request->get('tgl_produksi');
         $model->status = 1;
@@ -171,7 +168,6 @@ class ProductController extends Controller
                 'harga_beli' => 'required',
                 'harga_jual' => 'required',
                 'harga_jual_nonretail' => 'required',
-                'qty' => 'required',
                 'minstok' => 'required',
                 'status' => 'required',
                 'tgl_produksi' => 'required',
@@ -189,7 +185,6 @@ class ProductController extends Controller
                 'harga_beli.required' => 'The Purchase Price is required',
                 'harga_jual.required' => 'The Retail Selling Price is required',
                 'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
-                'qty.required' => 'The Qty is required',
                 'minstok.required' => 'The Min Stock required',
                 'status.required' => 'The Status is required',
                 'tgl_produksi.required' => 'The Date of Production is required',
@@ -208,7 +203,6 @@ class ProductController extends Controller
         $model->harga_beli = $request->get('harga_beli');
         $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
-        $model->qty = $request->get('qty');
         $model->minstok = $request->get('minstok');
         $model->tgl_produksi = $request->get('tgl_produksi');
         $model->status = $request->get('status');

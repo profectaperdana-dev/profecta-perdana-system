@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -15,7 +16,7 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        $title = "Profile ";
+        $title = "Data Profile ";
         $id =  Auth::user()->id;
         $data = User::where('users.id',  $id)
             ->join('roles', 'users.role_id', '=', 'roles.id')
@@ -31,6 +32,26 @@ class ProfileController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function changePassword(Request $request, $id)
+    {
+        $this->validate($request, [
+            'old_password' => 'min:8|required:',
+            'new_password' => 'min:8|required',
+            'password_confirmation' => 'same:new_password|min:8'
+        ]);
+
+
+        $model = User::find($id);
+        $password = $request->get('old_password');
+        // dd($password);
+        if (Hash::check($password, $model->password)) {
+            $model->password = bcrypt($request->get('new_password'));
+            $model->save();
+            return redirect('profiles')->with('info', 'Changes Password is Success');
+        } else {
+            return redirect('profiles')->with('error', 'Changes Password is failed ');
+        }
+    }
     public function changePhoto(Request $request, $id)
     {
         $request->validate([
@@ -65,7 +86,6 @@ class ProfileController extends Controller
      */
     public function store(Request $request)
     {
-        //
     }
 
     /**
@@ -99,7 +119,17 @@ class ProfileController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'phone_number' => 'required',
+        ]);
+        $model = User::find($id);
+        $model->name = $request->get('name');
+        $model->email = $request->get('email');
+        $model->phone_number = $request->get('phone_number');
+        $model->save();
+        return redirect('profiles')->with('info', 'Changes Data Profile is Success');
     }
 
     /**
