@@ -151,4 +151,76 @@ $(document).ready(function () {
     $(document).on("click", ".remfields", function () {
         $(this).parents(".form-group").remove();
     });
+
+    // sales order
+    let x = 0;
+$("#addSo").on("click", function() {
+    ++x;
+    let form =
+    '<div class="form-group row">'+
+        '<div class="form-group col-4">'+
+        '<label>Product</label>'+
+        '<select name="soFields['+ x +'][product_id]" class="form-control product-append" required>'+
+        '<option value=""> Choose Product </option> '+
+        '</select>'+
+        '</div>'+
+
+        '<div class="col-3 col-md-3 form-group">'+
+        '<label> Qty </label> '+
+        '<input class="form-control" name="soFields['+x+'][qty]">'+
+        '</div> '+
+        '<div class="col-3 col-md-4 form-group">'+
+        '<label>Discount %</label>'+
+        '<input class="form-control" name="soFields[0][discount]" id="">'+
+        '</div>'+
+
+        '<div class="col-2 col-md-1 form-group">'+
+        '<label for=""> &nbsp; </label>'+
+        '<a class="form-control text-white remSo text-center" style="border:none; background-color:red">'+
+        '- </a> '+
+        '</div>'+
+
+
+        ' </div>';
+    $("#formSo").append(form);
+    $(".product-append").select2({
+        width: "100%",
+        ajax: {
+            type: "GET",
+            url: "/products/select",
+            data: {
+                _token: csrf,
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return [{
+                            text: item.nama_barang,
+                            id: item.id,
+                        }, ];
+                    }),
+                };
+            },
+        },
+    });
+});
+$(document).on("click", ".remSo", function() {
+    $(this).parents(".form-group").remove();
+});
+
+$('.customer-append').change(function(){
+    let customer_id = $('.customer-append').val();
+    $('.product-append').change(function(){
+        let product_id = $('.product-append').val();
+      $.get('/discount/select/'+customer_id+'/'+product_id,function(data){
+        $('.discount-append').val(data);
+      })
+    });
+});
+
+
+
+
 });

@@ -45,8 +45,11 @@
         <!-- Page Body Start-->
         <div class="page-body-wrapper horizontal-menu">
             <!-- Page Sidebar Start-->
-            @include('layouts.partials.sidebar')
-
+            @can('isSalesMan')
+                @include('layouts.partials.sidebar_salesman')
+            @else
+                @include('layouts.partials.sidebar')
+            @endcan
             <!-- Page Sidebar Ends-->
             <div class="page-body">
                 @yield('content')
