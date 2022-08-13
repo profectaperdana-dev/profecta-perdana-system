@@ -120,7 +120,7 @@ $(document).ready(function () {
             'class="form-control" placeholder="Enter Discount" required>' +
             '</div>  <div class="form-group col-2">' +
             '<label for="">&nbsp;</label>' +
-            '<a href="javascript:void(0)" class="form-control text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
+            '<a href="javascript:void(0)" class="form-control text-center text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
 
         $("#formdynamic").append(form);
         $(".product-append").select2({
