@@ -163,11 +163,6 @@
                                                                                     readonly value="{{ $value->berat }}">
                                                                             </div>
                                                                             <div class="form-group col-md-3">
-                                                                                <label>Qty Stock </label>
-                                                                                <input type="number" class="form-control"
-                                                                                    readonly value="{{ $value->qty }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-3">
                                                                                 <label>Min Stock</label>
                                                                                 <input type="number" class="form-control"
                                                                                     readonly
@@ -175,7 +170,6 @@
                                                                             </div>
                                                                             <div class="form-group col-md-3">
                                                                                 <label>Status</label>
-
                                                                                 @if ($value->status == 0)
                                                                                     <div>
                                                                                         <span
