@@ -9,6 +9,7 @@ use Customers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Gate;
 use Stevebauman\Location\Facades\Location;
 
 
@@ -109,8 +110,17 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function show()
+    {
+
+        abort(404);
+    }
     public function edit(CustomerModel $customer)
     {
+        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
+            abort(403);
+        }
         $all_customer_categories = CustomerCategoriesModel::all();
         $all_customer_areas = CustomerAreaModel::all();
         $choosed_customer = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
@@ -134,6 +144,9 @@ class CustomerController extends Controller
      */
     public function update(Request $request, CustomerModel $customer)
     {
+        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
+            abort(403);
+        }
         $validated_data = $request->validate([
             'name_cust' => 'required',
             'phone_cust' => 'required',
@@ -188,6 +201,9 @@ class CustomerController extends Controller
      */
     public function destroy(CustomerModel $customer)
     {
+        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
+            abort(403);
+        }
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
         $path = public_path('images/customers/') . $customer_current->reference_image;
         if (File::exists($path)) {

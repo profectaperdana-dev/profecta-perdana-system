@@ -1,6 +1,7 @@
 @extends('layouts.master')
 @section('content')
     @push('css')
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
         <style>
             tr.group,

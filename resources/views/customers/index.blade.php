@@ -33,7 +33,9 @@
                             <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th></th>
+                                        @if (Gate::check('isSuperAdmin') || Gate::check('isAdmin'))
+                                            <th></th>
+                                        @endif
                                         <th>#</th>
                                         <th>Code</th>
                                         <th>Name</th>
@@ -47,20 +49,22 @@
                                 <tbody>
                                     @foreach ($customers as $key => $value)
                                         <tr>
-                                            <td style="width: 10%">
-                                                <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i data-feather="settings"></i></a>
-                                                <div class="dropdown-menu" aria-labelledby="">
-                                                    <h5 class="dropdown-header">Actions</h5>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-original-title="test"
-                                                        data-bs-target="#detailData{{ $value->id }}">Detail</a>
-                                                    <a class="dropdown-item"
-                                                        href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-original-title="test"
-                                                        data-bs-target="#deleteData{{ $value->id }}">Delete</a>
-                                                </div>
+                                            @if (Gate::check('isSuperAdmin') || Gate::check('isAdmin'))
+                                                <td style="width: 10%">
+                                                    <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                        aria-expanded="false"><i data-feather="settings"></i></a>
+                                                    <div class="dropdown-menu" aria-labelledby="">
+                                                        <h5 class="dropdown-header">Actions</h5>
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                            data-original-title="test"
+                                                            data-bs-target="#detailData{{ $value->id }}">Detail</a>
+                                                        <a class="dropdown-item"
+                                                            href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
+                                                        <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                            data-original-title="test"
+                                                            data-bs-target="#deleteData{{ $value->id }}">Delete</a>
+                                                    </div>
+                                            @endif
                                             </td>
                                             {{-- Modul Detail UOM --}}
                                             <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"

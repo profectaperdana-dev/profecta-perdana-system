@@ -35,6 +35,20 @@ class DiscountController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function select($customer_id, $product_id)
+    {
+        try {
+            $discount = [];
+            $discount = DiscountModel::select("id", "discount")
+                ->where('customer_id', $customer_id)
+                ->where('product_id', $product_id)
+                ->first();
+
+            return response()->json($discount);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
     public function create()
     {
         //
