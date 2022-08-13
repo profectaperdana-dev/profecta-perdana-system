@@ -99,8 +99,9 @@
                         </ul>
                     </li>
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('home') ? 'active' : '' }}"
-                            href="{{ url('/home') }}"><i data-feather="percent"></i><span>Master Diskon</span></a>
+                        <a class="nav-link menu-title link-nav {{ request()->is('discounts') ? 'active' : '' }}"
+                            href="{{ url('/discounts') }}"><i data-feather="percent"></i><span>Master
+                                Discount</span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('warehouses') ? 'active' : '' }}"

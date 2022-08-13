@@ -3,6 +3,7 @@
 use App\Http\Controllers\CustomerAreasController;
 use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
+use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
@@ -35,6 +36,12 @@ Route::get('/', function () {
 });
 
 Route::group(['middleware' => 'auth'], function () {
+    //ajax route
+    Route::get('/product_sub_materials/select/{id}', [SubMaterialController::class, 'select']);
+    Route::get('/product_sub_types/select/{id}', [SubTypeController::class, 'select']);
+    Route::get('/products/select', [ProductController::class, 'select']);
+    Route::get('/products/coba', [ProductController::class, 'coba']);
+
     Route::resource('/roles', RoleController::class);
     Route::resource('/products', ProductController::class);
     Route::resource('/customers', CustomerController::class);
@@ -49,9 +56,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::patch('/profiles/{id}/photo', [ProfileController::class, 'changePhoto']);
     Route::resource('/product_sub_types', SubTypeController::class);
-    Route::get('/product_sub_materials/select/{id}', [SubMaterialController::class, 'select']);
-    Route::get('/product_sub_types/select/{id}', [SubTypeController::class, 'select']);
     Route::resource('/supliers', SuppliersController::class);
+    Route::resource('/discounts', DiscountController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

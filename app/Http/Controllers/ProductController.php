@@ -33,6 +33,24 @@ class ProductController extends Controller
         return view('products.index', compact('data', 'title'));
     }
 
+    public function select(Request $request)
+    {
+        try {
+            $product = [];
+            if ($request->has('q')) {
+                $search = $request->q;
+                $product = ProductModel::select("id", "nama_barang")
+                    ->where('nama_barang', 'LIKE', "%$search%")
+                    ->get();
+            } else {
+                $product = ProductModel::latest()->get();
+            }
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
     /**
      * Show the form for creating a new resource.
      *
