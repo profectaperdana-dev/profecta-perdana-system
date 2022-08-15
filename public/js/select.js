@@ -170,7 +170,7 @@ $("#addSo").on("click", function() {
         '<input class="form-control" name="soFields['+x+'][qty]">'+
         '</div> '+
         '<div class="col-3 col-md-4 form-group">'+
-        '<label>Discount %</label>'+
+        '<label>Discount</label>'+
         '<input class="form-control" name="soFields[0][discount]" id="">'+
         '</div>'+
 
