@@ -44,6 +44,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/product_sub_types/select/{id}', [SubTypeController::class, 'select']);
     Route::get('/products/select', [ProductController::class, 'select']);
     Route::get('/discounts/select/{customer_id}/{product_id}', [DiscountController::class, 'select']);
+    Route::get('/products/select_without', [ProductController::class, 'selectWithout']);
 
     Route::resource('/roles', RoleController::class);
     Route::resource('/products', ProductController::class);
