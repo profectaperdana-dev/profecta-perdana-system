@@ -8,6 +8,7 @@ use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use phpDocumentor\Reflection\Types\Null_;
 
 class StockController extends Controller
 {
@@ -55,21 +56,31 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-        $request->validate([
-            'warehouses_id' => 'required',
-            'products_id' => 'required',
-            'stock' => 'required',
+        $id_product = $request->get('products_id');
+        $id_warehouse = $request->get('warehouses_id');
+        $cek = StockModel::where('products_id', $id_product)
+            ->where('warehouses_id', $id_warehouse)
+            ->count();
+        if ($cek != Null) {
+            return redirect('/stocks')->with('error', 'This product already in warehouse');
+        } else {
+            // dd($cek);
+            // dd($request->all());
+            $request->validate([
+                'warehouses_id' => 'required',
+                'products_id' => 'required',
+                'stock' => 'required',
 
-        ]);
-        $model = new StockModel();
-        $model->warehouses_id = $request->get('warehouses_id');
-        $model->products_id = $request->get('products_id');
-        $model->stock = $request->get('stock');
-        $model->created_by = Auth::user()->id;
-        $model->save();
+            ]);
+            $model = new StockModel();
+            $model->warehouses_id = $request->get('warehouses_id');
+            $model->products_id = $request->get('products_id');
+            $model->stock = $request->get('stock');
+            $model->created_by = Auth::user()->id;
+            $model->save();
 
-        return redirect('/stocks')->with('success', 'Create Data Stocks Success');
+            return redirect('/stocks')->with('success', 'Create Data Stocks Success');
+        }
     }
 
     /**
@@ -114,6 +125,8 @@ class StockController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $model = StockModel::find($id);
+        $model->delete();
+        return redirect('/stocks')->with('error', 'Delete Data Stocks Success');
     }
 }

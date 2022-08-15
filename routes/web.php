@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CheckStockController;
 use App\Http\Controllers\CustomerAreasController;
 use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
@@ -63,6 +64,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/stocks', StockController::class);
     Route::resource('/discounts', DiscountController::class);
     Route::resource('/sales_order', SalesOrderController::class);
+    Route::resource('/check_stock', CheckStockController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {
