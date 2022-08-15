@@ -48,8 +48,14 @@
 
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('sales_order') ? 'active' : '' }}"
-                            href="{{ url('/sales_order') }}"><i data-feather="shopping-cart"></i><span>Create Saler
+                            href="{{ url('/sales_order') }}"><i data-feather="shopping-cart"></i><span>Create Sales
                                 Order
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('check_stock') ? 'active' : '' }}"
+                            href="{{ url('/check_stock') }}"><i data-feather="inbox"></i><span>Check
+                                Stock
                             </span></a>
                     </li>
 

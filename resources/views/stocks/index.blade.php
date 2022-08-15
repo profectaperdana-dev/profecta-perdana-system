@@ -50,9 +50,9 @@
                                                     class="form-control role-acc @error('warehouses_id') is-invalid @enderror"
                                                     required>
                                                     <option value="">Choose Warehouse</option>
-                                                    @foreach ($warehouse as $warehouse)
-                                                        <option value="{{ $warehouse->id }}">
-                                                            {{ $warehouse->warehouses }}</option>
+                                                    @foreach ($warehouse as $warehouses)
+                                                        <option value="{{ $warehouses->id }}">
+                                                            {{ $warehouses->warehouses }}</option>
                                                     @endforeach
                                                 </select>
                                                 @error('warehouses_id')
@@ -69,9 +69,9 @@
                                                 class="form-control role-acc @error('products_id') is-invalid @enderror"
                                                 required>
                                                 <option value="">Choose Products</option>
-                                                @foreach ($product as $product)
-                                                    <option value="{{ $product->id }}">
-                                                        {{ $product->nama_barang }}</option>
+                                                @foreach ($product as $products)
+                                                    <option value="{{ $products->id }}">
+                                                        {{ $products->nama_barang }}</option>
                                                 @endforeach
                                             </select>
                                             @error('products_id')
@@ -161,18 +161,64 @@
                                                             <div class="modal-body">
                                                                 <div class="container-fluid">
                                                                     <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <label class="font-weight-bold ">Name
-                                                                                Unit of Measurement</label>
-                                                                            <input type="text"
-                                                                                class="form-control text-capitalize {{ $errors->first('stock') ? ' is-invalid' : '' }}"
-                                                                                name="editSatuan"
-                                                                                placeholder="Name Unit o">
-                                                                            @error('editSatuan')
+                                                                        @if (Gate::check('isSuperAdmin') || Gate::check('isWarehouseKeeper'))
+                                                                            <div class="form-group col-md-12">
+                                                                                <label>Warehouse</label>
+                                                                                <select name="warehouses_id_"
+                                                                                    class="form-control role-acc @error('warehouses_id_') is-invalid @enderror"
+                                                                                    required>
+                                                                                    <option value="">Choose Warehouse
+                                                                                    </option>
+                                                                                    @foreach ($warehouse as $warehouses)
+                                                                                        <option
+                                                                                            value="{{ $warehouses->id }}"
+                                                                                            @if ($warehouses->id == $value->warehouses_id) selected @endif>
+                                                                                            {{ $warehouses->warehouses }}
+                                                                                        </option>
+                                                                                    @endforeach
+                                                                                </select>
+                                                                                @error('warehouses_id_')
+                                                                                    <div class="invalid-feedback">
+                                                                                        {{ $message }}
+                                                                                    </div>
+                                                                                @enderror
+                                                                            </div>
+                                                                        @endif
+
+                                                                        <div class="form-group col-md-12">
+                                                                            <label>Product</label>
+                                                                            <select name="products_id_"
+                                                                                class="form-control role-acc @error('products_id_') is-invalid @enderror"
+                                                                                required>
+                                                                                <option value="">Choose Products
+                                                                                </option>
+                                                                                @foreach ($product as $products)
+                                                                                    <option value="{{ $products->id }}"
+                                                                                        @if ($products->id == $value->products_id) selected @endif>
+                                                                                        {{ $products->nama_barang }}
+                                                                                    </option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                            @error('products_id_')
+                                                                                <div class="invalid-feedback">
+                                                                                    {{ $message }}
+                                                                                </div>
+                                                                            @enderror
+                                                                        </div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <label class="font-weight-bold ">Qty
+                                                                                Stock</label>
+                                                                            <input type="number"
+                                                                                class="form-control text-capitalize {{ $errors->first('stock_') ? ' is-invalid' : '' }}"
+                                                                                name="stock_"
+                                                                                value="{{ old('stock_', $value->stock) }}"
+                                                                                placeholder="Quantity of Stock">
+                                                                            @error('stock_')
                                                                                 <small
                                                                                     class="text-danger">{{ $message }}.</small>
                                                                             @enderror
                                                                         </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -193,14 +239,14 @@
                                             <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('product_uoms/' . $value->id) }}"
+                                                    <form method="post" action="{{ url('stocks/' . $value->id) }}"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <input name="_method" type="hidden" value="DELETE">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                                                    {{ $value->satuan }}</h5>
+                                                                    {{ $value->productBy->nama_barang }}</h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>

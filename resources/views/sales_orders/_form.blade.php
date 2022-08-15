@@ -93,8 +93,8 @@
                     <label>Qty</label>
                     <input class="form-control" name="soFields[0][qty]" id="">
                 </div>
-                <div class="col-3 col-md-4 form-group">
-                    <label>Discount %</label>
+                <div class="col-3 col-md-3 form-group">
+                    <label>Discount</label>
                     <input class="form-control discount-append" name="soFields[0][discount]" id="">
                 </div>
                 <div class="col-2 col-md-1 form-group">
@@ -119,5 +119,4 @@
         <button type="reset" class="btn btn-warning">Reset</button>
         <button type="submit" class="btn btn-primary">Save</button>
     </div>
-</div>
 </div>
