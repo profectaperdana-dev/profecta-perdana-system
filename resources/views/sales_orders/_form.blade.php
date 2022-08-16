@@ -79,8 +79,7 @@
                 <div class="form-group col-4">
                     <label>Product</label>
                     <select name="soFields[0][product_id]"
-                        class="form-control product-append @error('soFields[0][product_id]') is-invalid @enderror"
-                        required>
+                        class="form-control productSo @error('soFields[0][product_id]') is-invalid @enderror" required>
                         <option value="">Choose Product</option>
                     </select>
                     @error('soFields[0][product_id]')
@@ -95,7 +94,7 @@
                 </div>
                 <div class="col-3 col-md-3 form-group">
                     <label>Discount</label>
-                    <input class="form-control discount-append" name="soFields[0][discount]" id="">
+                    <input class="form-control discount-append" name="soFields[0][discount]" id="" readonly>
                 </div>
                 <div class="col-2 col-md-1 form-group">
 
