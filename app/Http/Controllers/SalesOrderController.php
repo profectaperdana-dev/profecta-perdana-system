@@ -139,4 +139,13 @@ class SalesOrderController extends Controller
     {
         //
     }
+
+    public function verifate(SalesOrderModel $salesorder)
+    {
+        $selected_so = SalesOrderModel::where('order_number', $salesorder->order_number)->firstOrFail();
+        $selected_so->isverified = 1;
+        $selected_so->save();
+
+        return redirect('/sales_orders')->with('Success', "Sales Order Verifate Success");
+    }
 }

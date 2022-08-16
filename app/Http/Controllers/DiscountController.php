@@ -6,7 +6,8 @@ use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
+
+use function PHPUnit\Framework\isEmpty;
 
 class DiscountController extends Controller
 {
@@ -69,17 +70,28 @@ class DiscountController extends Controller
             "discountFields.*.discount" => "required|numeric"
         ]);
 
+        $message_duplicate = "";
         foreach ($request->discountFields as $key => $value) {
             $model = new DiscountModel();
             $model->customer_id = $request->get('customer_id');
             $model->product_id = $value['product_id'];
             $model->discount = $value['discount'];
-            $model->created_by = Auth::user()->id;
-            $model->save();
-        }
 
-        if ($model->save()) {
+            $check_duplicate = DiscountModel::where('customer_id', $model->customer_id)
+                ->where('product_id', $model->product_id)
+                ->count();
+
+            if ($check_duplicate > 0) {
+                $message_duplicate = "You enter duplication of products. Please recheck the discount you set.";
+                continue;
+            } else {
+                $model->save();
+            }
+        }
+        if (empty($message_duplicate)) {
             return redirect('/discounts')->with('success', 'Add Discount Success');
+        } elseif (!empty($message_duplicate)) {
+            return redirect('/discounts')->with('success', 'Some of Discounts add maybe Success! ' . $message_duplicate);
         } else {
             return redirect('/discounts')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');
         }

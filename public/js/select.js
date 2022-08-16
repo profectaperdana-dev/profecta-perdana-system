@@ -204,25 +204,26 @@ let y = 0;
         $(this).parents(".form-group").remove();
     });
 
-    // sales order
-
+    // sales order //
     $(".productSo").select2({
         width: "100%",
         ajax: {
             type: "GET",
-            url: "/products/select ",
+            url: "/products/select",
             data: {
                 _token: csrf,
             },
             dataType: "json",
             delay: 250,
-            processResults: function(data) {
+            processResults: function (data) {
                 return {
-                    results: $.map(data, function(item) {
-                        return [{
-                            text: item.nama_barang,
-                            id: item.id,
-                        }, ];
+                    results: $.map(data, function (item) {
+                        return [
+                            {
+                                text: item.nama_barang,
+                                id: item.id,
+                            },
+                        ];
                     }),
                 };
             },
@@ -231,14 +232,14 @@ let y = 0;
 
     //Get Customer ID
     let customer_id = "";
-    $(".customer-append").change(function() {
+    $(".customer-append").change(function () {
         customer_id = $(".customer-append").val();
     });
 
     let x = 0;
     let product_id = 0;
     //Get discount depent on product
-    $(document).on("change", ".productSo", function() {
+    $(document).on("change", ".productSo", function () {
         product_id = $(this).val();
 
         let parent_product = $(this)
@@ -250,13 +251,13 @@ let y = 0;
             type: "GET",
             url: "/discounts/select" + "/" + customer_id + "/" + product_id,
             dataType: "json",
-            success: function(data) {
+            success: function (data) {
                 parent_product.val(data.discount);
             },
         });
     });
 
-    $("#addSo").on("click", function() {
+    $("#addSo").on("click", function () {
         ++x;
         let form =
             '<div class="form-group row">' +
@@ -274,9 +275,9 @@ let y = 0;
             x +
             '][qty]">' +
             "</div> " +
-            '<div class="col-3 col-md-3 form-group">' +
-            "<label>Discount%</label>" +
-            '<input class="form-control discount-append" name="soFields['+ x +'][discount]" id="" readonly>' +
+            '<div class="col-3 col-md-4 form-group">' +
+            "<label>Discount %</label>" +
+            '<input class="form-control discount-append" name="soFields[0][discount]" id="" readonly>' +
             "</div>" +
             '<div class="col-2 col-md-1 form-group">' +
             '<label for=""> &nbsp; </label>' +
@@ -296,38 +297,24 @@ let y = 0;
                 },
                 dataType: "json",
                 delay: 250,
-                processResults: function(data) {
+                processResults: function (data) {
                     return {
-                        results: $.map(data, function(item) {
-                            return [{
-                                text: item.nama_barang,
-                                id: item.id,
-                            }, ];
+                        results: $.map(data, function (item) {
+                            return [
+                                {
+                                    text: item.nama_barang,
+                                    id: item.id,
+                                },
+                            ];
                         }),
                     };
                 },
             },
         });
-
-
     });
 
     //remove Sales Order fields
-    $(document).on("click", ".remSo", function() {
+    $(document).on("click", ".remSo", function () {
         $(this).parents(".form-group").remove();
     });
-
-    $('#payment_method').change(function(){
-        if ($(this).val()==1){
-        $('#payment').removeAttr('hidden');
-        $('#payment_type').removeAttr('hidden');
-        $('#top').attr('hidden','true');
-
-            }else{
-        $('#top').removeAttr('hidden');
-        $('#payment').attr('hidden','true');
-        $('#payment_type').attr('hidden','true');
-            }
-            });
-
 });
