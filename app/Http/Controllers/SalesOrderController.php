@@ -7,8 +7,12 @@ use App\Models\ProductModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
 use Carbon\Carbon;
+use DateTime;
+use DateTimeImmutable;
+use DateTimeZone;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 use function Symfony\Component\VarDumper\Dumper\esc;
 
@@ -26,7 +30,19 @@ class SalesOrderController extends Controller
         $customer = CustomerModel::where('status', 1)->latest()->get();
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
+    public function getRecentData()
+    {
+        $title = 'Recent Sales Order';
 
+        $dataSalesOrder = SalesOrderDetailModel::join('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
+            ->select('sales_orders.*', 'sales_order_details.*')
+            ->where('top', NULL)
+            // ->groupBy('sales_order_details.id')
+            ->groupBy('sales_order_details.sales_orders_id')
+            ->get();
+        // dd($dataSalesOrder);
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -35,6 +51,12 @@ class SalesOrderController extends Controller
     public function create()
     {
         //
+    }
+    public function cekJam()
+    {
+        $dt = new DateTimeImmutable("2022-08-16 00:00:00", new DateTimeZone('Asia/Jakarta'));
+        $dt = $dt->modify("+1 month");
+        dd($dt);
     }
 
     /**
@@ -62,7 +84,7 @@ class SalesOrderController extends Controller
         $month = Carbon::now()->format('m'); // 2022
         $order_number = 'SOPP/' . $year . '/' . $month . '/' . $cust_number_id . '';
         // dd($month);
-
+        // DB::rollback();
         $model = new SalesOrderModel();
         $model->order_number = $order_number;
         $model->order_date = Carbon::now()->format('Y-m-d');
