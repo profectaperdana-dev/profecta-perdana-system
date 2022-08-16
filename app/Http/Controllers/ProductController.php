@@ -9,9 +9,7 @@ use App\Models\SubTypeModel;
 use App\Models\UomModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Log;
 use Products;
-use Symfony\Component\Console\Input\Input;
 
 class ProductController extends Controller
 {
@@ -52,28 +50,6 @@ class ProductController extends Controller
             dd($th);
         }
     }
-
-    public function selectWithout(Request $request)
-    {
-        try {
-            $product = [];
-            $allparams = $request->all();
-            $list_product_id = $allparams['data'];
-            if ($request->has('q')) {
-                $search = $request->q;
-                $product = ProductModel::select("id", "nama_barang")
-                    ->whereNotIn('id', $list_product_id)
-                    ->where('nama_barang', 'LIKE', "%$search%")
-                    ->get();
-            } else {
-                $product = ProductModel::select("id", "nama_barang")->whereNotIn('id', $list_product_id)->get();
-            }
-            return response()->json($product);
-        } catch (\Throwable $th) {
-            dd($th);
-        }
-    }
-
 
     /**
      * Show the form for creating a new resource.

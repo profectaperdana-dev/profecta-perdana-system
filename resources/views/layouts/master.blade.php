@@ -47,6 +47,8 @@
             <!-- Page Sidebar Start-->
             @can('isSalesMan')
                 @include('layouts.partials.sidebar_salesman')
+            @elsecan('isVerificator')
+                @include('layouts.partials.sidebar_sales_admin')
             @else
                 @include('layouts.partials.sidebar')
             @endcan

@@ -31,9 +31,11 @@
                     <div class="card-header pb-0">
                         <h5>Create Data</h5>
                         <hr class="bg-primary">
+                        <div class="row justify-content-end">
+                            <button class="col-2 btn btn-primary btn-sm" id="addStock">+</button>
+                        </div>
                     </div>
                     <div class="card-body">
-
                         <form class="form-label-left input_mask" method="post" action="{{ url('/stocks') }}"
                             enctype="multipart/form-data">
                             @csrf
@@ -41,57 +43,58 @@
 
 
                                 <div class="col-md-12">
-
-                                    <div class="form-group row">
-                                        @if (Gate::check('isSuperAdmin') || Gate::check('isWarehouseKeeper'))
+                                    <div class="col-md-12" id="formdynamic">
+                                        <div class="form-group row">
                                             <div class="form-group col-md-12">
-                                                <label>Warehouse</label>
-                                                <select name="warehouses_id"
-                                                    class="form-control role-acc @error('warehouses_id') is-invalid @enderror"
+                                                @if (Gate::check('isSuperAdmin') || Gate::check('isWarehouseKeeper'))
+                                                    <div class="form-group col-md-12">
+                                                        <label>Warehouse</label>
+                                                        <select name="warehouses_id"
+                                                            class="form-control role-acc @error('warehouses_id') is-invalid @enderror"
+                                                            required>
+                                                            <option value="">Choose Warehouse</option>
+                                                            @foreach ($warehouse as $warehouses)
+                                                                <option value="{{ $warehouses->id }}">
+                                                                    {{ $warehouses->warehouses }}</option>
+                                                            @endforeach
+                                                        </select>
+                                                        @error('warehouses_id')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="form-group col-md-5">
+                                                <label>Product</label>
+                                                <select name="stockFields[0][product_id]" id="product"
+                                                    class="form-control @error('stockFields[0][product_id]') is-invalid @enderror product-append"
                                                     required>
-                                                    <option value="">Choose Warehouse</option>
-                                                    @foreach ($warehouse as $warehouses)
-                                                        <option value="{{ $warehouses->id }}">
-                                                            {{ $warehouses->warehouses }}</option>
-                                                    @endforeach
+                                                    <option value="">Choose Product</option>
                                                 </select>
-                                                @error('warehouses_id')
+                                                @error('stockFields[0][product_id]')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
-                                        @endif
-
-                                        <div class="form-group col-md-12">
-                                            <label>Product</label>
-                                            <select name="products_id"
-                                                class="form-control role-acc @error('products_id') is-invalid @enderror"
-                                                required>
-                                                <option value="">Choose Products</option>
-                                                @foreach ($product as $products)
-                                                    <option value="{{ $products->id }}">
-                                                        {{ $products->nama_barang }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('products_id')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                            <div class="form-group col-md-5">
+                                                <label>Stock</label>
+                                                <input type="number" name="stockFields[0][stock]" id="stock"
+                                                    class="form-control @error('stockFields[0][stock]') is-invalid @enderror"
+                                                    placeholder="Enter stock" required>
+                                                @error('stockFields[0][stock]')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="font-weight-bold ">Qty Stock</label>
-                                            <input type="number"
-                                                class="form-control text-capitalize {{ $errors->first('stock') ? ' is-invalid' : '' }}"
-                                                name="stock" placeholder="Quantity of Stock">
-                                            @error('stock')
-                                                <small class="text-danger">{{ $message }}.</small>
-                                            @enderror
-                                        </div>
-
-
                                     </div>
+
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <button type="reset" class="btn btn-warning"
@@ -147,64 +150,20 @@
                                             <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('product_uoms/' . $value->id) }}"
+                                                    <form method="post" action="{{ url('stocks/' . $value->id) }}"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <input name="_method" type="hidden" value="PATCH">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                                                    {{ $value->satuan }}</h5>
+                                                                    {{ $value->productBy->nama_barang }}</h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="container-fluid">
                                                                     <div class="form-group row">
-                                                                        @if (Gate::check('isSuperAdmin') || Gate::check('isWarehouseKeeper'))
-                                                                            <div class="form-group col-md-12">
-                                                                                <label>Warehouse</label>
-                                                                                <select name="warehouses_id_"
-                                                                                    class="form-control role-acc @error('warehouses_id_') is-invalid @enderror"
-                                                                                    required>
-                                                                                    <option value="">Choose Warehouse
-                                                                                    </option>
-                                                                                    @foreach ($warehouse as $warehouses)
-                                                                                        <option
-                                                                                            value="{{ $warehouses->id }}"
-                                                                                            @if ($warehouses->id == $value->warehouses_id) selected @endif>
-                                                                                            {{ $warehouses->warehouses }}
-                                                                                        </option>
-                                                                                    @endforeach
-                                                                                </select>
-                                                                                @error('warehouses_id_')
-                                                                                    <div class="invalid-feedback">
-                                                                                        {{ $message }}
-                                                                                    </div>
-                                                                                @enderror
-                                                                            </div>
-                                                                        @endif
-
-                                                                        <div class="form-group col-md-12">
-                                                                            <label>Product</label>
-                                                                            <select name="products_id_"
-                                                                                class="form-control role-acc @error('products_id_') is-invalid @enderror"
-                                                                                required>
-                                                                                <option value="">Choose Products
-                                                                                </option>
-                                                                                @foreach ($product as $products)
-                                                                                    <option value="{{ $products->id }}"
-                                                                                        @if ($products->id == $value->products_id) selected @endif>
-                                                                                        {{ $products->nama_barang }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                            @error('products_id_')
-                                                                                <div class="invalid-feedback">
-                                                                                    {{ $message }}
-                                                                                </div>
-                                                                            @enderror
-                                                                        </div>
                                                                         <div class="form-group col-md-12">
                                                                             <label class="font-weight-bold ">Qty
                                                                                 Stock</label>
