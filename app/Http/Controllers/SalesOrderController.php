@@ -34,13 +34,13 @@ class SalesOrderController extends Controller
     {
         $title = 'Recent Sales Order';
 
-        $dataSalesOrder = SalesOrderDetailModel::join('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
-            ->select('sales_orders.*', 'sales_order_details.*')
+
+        $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
+            ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
             ->where('top', NULL)
             // ->groupBy('sales_order_details.id')
             ->groupBy('sales_order_details.sales_orders_id')
             ->get();
-        // dd($dataSalesOrder);
         return view('recent_sales_order.index', compact('title', 'dataSalesOrder'));
     }
     /**
