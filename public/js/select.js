@@ -103,24 +103,76 @@ $(document).ready(function () {
     });
     //  Event on change select regency:end
 
+
+// Stock
+let y = 0;
+
+    $("#addStock").on("click", function () {
+        ++y;
+        let form =
+            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
+            y +
+            '][product_id]"' +
+            'class="form-control product-append" required> <option value=""> Choose Product </option> </select>' +
+            '</div> <div class="form-group col-5">' +
+            '<label> Stock </label> <input type="number" name="stockFields[' +
+            y +
+            '][stock]" id="discount"' +
+            'class="form-control" placeholder="Enter Stocks" required>' +
+            '</div>  <div class="form-group col-2">' +
+            '<label for="">&nbsp;</label>' +
+            '<a href="javascript:void(0)" class="form-control text-white remStock text-center" style="border:none; background-color:red">X</a></div></div>';
+
+        $("#formdynamic").append(form);
+        $(".product-append").select2({
+            width: "100%",
+            ajax: {
+                type: "GET",
+                url: "/products/select",
+                data: {
+                    _token: csrf,
+                },
+                dataType: "json",
+                delay: 250,
+                processResults: function (data) {
+                    return {
+                        results: $.map(data, function (item) {
+                            return [
+                                {
+                                    text: item.nama_barang,
+                                    id: item.id,
+                                },
+                            ];
+                        }),
+                    };
+                },
+            },
+        });
+    });
+    $(document).on("click", ".remStock", function () {
+        $(this).parents(".form-group").remove();
+    });
+
+// end Stock
+
     //select2 product
     let i = 0;
 
     $("#addfields").on("click", function () {
         ++i;
         let form =
-            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="discountFields[' +
+            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
             i +
             '][product_id]"' +
             'class="form-control product-append" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
-            '<label> Discount </label> <input type="number" name="discountFields[' +
+            '<label> Discount </label> <input type="number" name="stockFields[' +
             i +
             '][discount]" id="discount"' +
             'class="form-control" placeholder="Enter Discount" required>' +
             '</div>  <div class="form-group col-2">' +
             '<label for="">&nbsp;</label>' +
-            '<a href="javascript:void(0)" class="form-control text-center text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
+            '<a href="javascript:void(0)" class="form-control text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
 
         $("#formdynamic").append(form);
         $(".product-append").select2({
@@ -152,5 +204,75 @@ $(document).ready(function () {
         $(this).parents(".form-group").remove();
     });
 
-    // sales order //
+    // sales order
+    let x = 0;
+$("#addSo").on("click", function() {
+    ++x;
+    let form =
+    '<div class="form-group row">'+
+        '<div class="form-group col-4">'+
+        '<label>Product</label>'+
+        '<select name="soFields['+ x +'][product_id]" class="form-control product-append" required>'+
+        '<option value=""> Choose Product </option> '+
+        '</select>'+
+        '</div>'+
+
+        '<div class="col-3 col-md-3 form-group">'+
+        '<label> Qty </label> '+
+        '<input class="form-control" name="soFields['+x+'][qty]">'+
+        '</div> '+
+        '<div class="col-3 col-md-4 form-group">'+
+        '<label>Discount</label>'+
+        '<input class="form-control" name="soFields[0][discount]" id="">'+
+        '</div>'+
+
+        '<div class="col-2 col-md-1 form-group">'+
+        '<label for=""> &nbsp; </label>'+
+        '<a class="form-control text-white remSo text-center" style="border:none; background-color:red">'+
+        '- </a> '+
+        '</div>'+
+
+
+        ' </div>';
+    $("#formSo").append(form);
+    $(".product-append").select2({
+        width: "100%",
+        ajax: {
+            type: "GET",
+            url: "/products/select",
+            data: {
+                _token: csrf,
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function(data) {
+                return {
+                    results: $.map(data, function(item) {
+                        return [{
+                            text: item.nama_barang,
+                            id: item.id,
+                        }, ];
+                    }),
+                };
+            },
+        },
+    });
+});
+$(document).on("click", ".remSo", function() {
+    $(this).parents(".form-group").remove();
+});
+
+$('.customer-append').change(function(){
+    let customer_id = $('.customer-append').val();
+    $('.product-append').change(function(){
+        let product_id = $('.product-append').val();
+      $.get('/discount/select/'+customer_id+'/'+product_id,function(data){
+        $('.discount-append').val(data);
+      })
+    });
+});
+
+
+
+
 });

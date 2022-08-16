@@ -6,6 +6,7 @@ use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DiscountController extends Controller
 {
@@ -73,6 +74,7 @@ class DiscountController extends Controller
             $model->customer_id = $request->get('customer_id');
             $model->product_id = $value['product_id'];
             $model->discount = $value['discount'];
+            $model->created_by = Auth::user()->id;
             $model->save();
         }
 

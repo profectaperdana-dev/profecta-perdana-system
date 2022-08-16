@@ -34,7 +34,7 @@
                     </li>
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Master Data </h6>
+                            <h6>Master Data</h6>
                         </div>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('product_materials') ||
@@ -118,7 +118,16 @@
                             href="{{ url('/supliers') }}"><i data-feather="battery"></i><span>Master
                                 Suppliers</span></a>
                     </li>
-
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('supliers') ? 'active' : '' }}"
+                            href="{{ url('/print-invoice') }}"><i data-feather="battery"></i><span>Master
+                                Suppliers</span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Purchase Order </h6>
+                        </div>
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

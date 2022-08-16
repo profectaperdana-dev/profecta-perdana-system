@@ -56,30 +56,33 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $id_product = $request->get('products_id');
-        $id_warehouse = $request->get('warehouses_id');
-        $cek = StockModel::where('products_id', $id_product)
-            ->where('warehouses_id', $id_warehouse)
-            ->count();
-        if ($cek != Null) {
-            return redirect('/stocks')->with('error', 'This product already in warehouse');
-        } else {
-            // dd($cek);
-            // dd($request->all());
-            $request->validate([
-                'warehouses_id' => 'required',
-                'products_id' => 'required',
-                'stock' => 'required',
 
-            ]);
+        $validate_data = $request->validate([
+            "warehouses_id" => "required|numeric",
+            "stockFields.*.product_id" => "required|numeric",
+            "stockFields.*.stock" => "required|numeric"
+        ]);
+
+        foreach ($request->stockFields as $key => $value) {
             $model = new StockModel();
             $model->warehouses_id = $request->get('warehouses_id');
-            $model->products_id = $request->get('products_id');
-            $model->stock = $request->get('stock');
+            $model->products_id = $value['product_id'];
+            $model->stock = $value['stock'];
             $model->created_by = Auth::user()->id;
-            $model->save();
+            $cek = StockModel::where('products_id', $value['product_id'])
+                ->where('warehouses_id', $request->get('warehouses_id'))
+                ->count();
+            if ($cek != Null) {
+                return redirect('/stocks')->with('info', 'there are some items that already exist, other than that its a success');
+            } else {
+                $model->save();
+            }
+        }
 
-            return redirect('/stocks')->with('success', 'Create Data Stocks Success');
+        if ($model->save()) {
+            return redirect('/stocks')->with('success', 'Create Stocks Success');
+        } else {
+            return redirect('/stocks')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
         }
     }
 
@@ -114,7 +117,15 @@ class StockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validate_data = $request->validate([
+            "stock_" => "required|numeric",
+
+        ]);
+
+        $model = StockModel::where('id', $id)->firstOrFail();
+        $model->stock = $validate_data['stock_'];
+        $model->save();
+        return redirect('/stocks')->with('success', 'Stocks Edit Success');
     }
 
     /**
