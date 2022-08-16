@@ -46,5 +46,7 @@
          });
      </script>
  @endif
+ <script src="{{ asset('js/custom.js') }}"></script>
+
  <!-- login js-->
  <!-- Plugin used-->

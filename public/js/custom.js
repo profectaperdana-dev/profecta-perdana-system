@@ -40,6 +40,8 @@
         coor.value = position.coords.latitude + ", " + position.coords.longitude;
     }
 
+
+
     });
 
 
