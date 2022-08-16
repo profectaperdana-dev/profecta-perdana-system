@@ -66,6 +66,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/discounts', DiscountController::class);
     Route::resource('/sales_order', SalesOrderController::class);
     Route::resource('/check_stock', CheckStockController::class);
+    Route::get('/recent_sales_order', [SalesOrderController::class, 'getRecentData']);
+    Route::get('/cek_jam', [SalesOrderController::class, 'cekJam']);
 });
 
 Route::group(['middleware' => 'guest'], function () {
