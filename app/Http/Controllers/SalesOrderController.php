@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
+use App\Models\SalesOrderModel;
 use Illuminate\Http\Request;
 
 class SalesOrderController extends Controller
@@ -85,5 +86,14 @@ class SalesOrderController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function verifate(SalesOrderModel $salesorder)
+    {
+        $selected_so = SalesOrderModel::where('order_number', $salesorder->order_number)->firstOrFail();
+        $selected_so->isverified = 1;
+        $selected_so->save();
+
+        return redirect('/sales_orders')->with('Success', "Sales Order Verifate Success");
     }
 }
