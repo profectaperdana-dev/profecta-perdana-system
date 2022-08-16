@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\RealTimeMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\ProductModel;
@@ -29,6 +30,8 @@ class DiscountController extends Controller
             'customers' => $all_customers,
             'products' => $all_products
         ];
+
+        event(new RealTimeMessage('Hello World'));
 
         return view('discounts.index', $data);
     }
