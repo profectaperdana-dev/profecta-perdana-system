@@ -9,6 +9,7 @@ class SalesOrderModel extends Model
 {
     use HasFactory;
     protected $table = 'sales_orders';
+    protected $hidden = ['id'];
 
     public function customerBy()
     {
