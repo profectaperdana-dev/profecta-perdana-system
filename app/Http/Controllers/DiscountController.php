@@ -6,6 +6,7 @@ use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -76,6 +77,7 @@ class DiscountController extends Controller
             $model->customer_id = $request->get('customer_id');
             $model->product_id = $value['product_id'];
             $model->discount = $value['discount'];
+            $model->created_by = Auth::user()->id;
 
             $check_duplicate = DiscountModel::where('customer_id', $model->customer_id)
                 ->where('product_id', $model->product_id)
