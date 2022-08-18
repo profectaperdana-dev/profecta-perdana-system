@@ -31,8 +31,6 @@ class DiscountController extends Controller
             'products' => $all_products
         ];
 
-        event(new RealTimeMessage('Hello World'));
-
         return view('discounts.index', $data);
     }
 
@@ -75,6 +73,7 @@ class DiscountController extends Controller
         ]);
 
         $message_duplicate = "";
+        $issaved = false;
         foreach ($request->discountFields as $key => $value) {
             $model = new DiscountModel();
             $model->customer_id = $request->get('customer_id');
@@ -90,12 +89,12 @@ class DiscountController extends Controller
                 $message_duplicate = "You enter duplication of products. Please recheck the discount you set.";
                 continue;
             } else {
-                $model->save();
+                $issaved = $model->save();
             }
         }
-        if (empty($message_duplicate)) {
+        if (empty($message_duplicate) && $issaved == true) {
             return redirect('/discounts')->with('success', 'Add Discount Success');
-        } elseif (!empty($message_duplicate)) {
+        } elseif (!empty($message_duplicate) && $issaved == true) {
             return redirect('/discounts')->with('success', 'Some of Discounts add maybe Success! ' . $message_duplicate);
         } else {
             return redirect('/discounts')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');
