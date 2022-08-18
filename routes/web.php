@@ -45,6 +45,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/products/select', [ProductController::class, 'select']);
     Route::get('/discounts/select/{customer_id}/{product_id}', [DiscountController::class, 'select']);
     Route::get('/products/select_without', [ProductController::class, 'selectWithout']);
+    Route::get('/recent_sales_order', [SalesOrderController::class, 'getRecentData']);
+    Route::put('/updateso/{id}/editso', [SalesOrderController::class, 'updateSo']);
+    Route::get('/cek_jam', [SalesOrderController::class, 'cekJam']);
+    Route::get('/logout', [LoginController::class, 'logout']);
 
     Route::resource('/roles', RoleController::class);
     Route::resource('/products', ProductController::class);
@@ -57,7 +61,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/warehouses', WarehouseController::class);
     Route::resource('/users', UserController::class)->middleware('can:isSuperAdmin');
     Route::resource('/profiles', ProfileController::class);
-    Route::get('/logout', [LoginController::class, 'logout']);
     Route::patch('/profiles/{id}/photo', [ProfileController::class, 'changePhoto']);
     Route::patch('/profiles/{id}/password', [ProfileController::class, 'changePassword']);
     Route::resource('/product_sub_types', SubTypeController::class);
@@ -66,8 +69,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/discounts', DiscountController::class);
     Route::resource('/sales_order', SalesOrderController::class);
     Route::resource('/check_stock', CheckStockController::class);
-    Route::get('/recent_sales_order', [SalesOrderController::class, 'getRecentData']);
-    Route::get('/cek_jam', [SalesOrderController::class, 'cekJam']);
 });
 
 Route::group(['middleware' => 'guest'], function () {

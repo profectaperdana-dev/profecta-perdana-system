@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(
-        ".uoms,.materials,.submaterials, .category-cust, .area-cust, .role-acc, .warehouse-acc, .sub_type, .discount"
+        ".editPayments,.uoms,.materials,.submaterials, .category-cust, .area-cust, .role-acc, .warehouse-acc, .sub_type, .discount"
     ).select2({
         width: "100%",
     });
@@ -271,7 +271,7 @@ let y = 0;
             "</div>" +
             '<div class="col-3 col-md-3 form-group">' +
             "<label> Qty </label> " +
-            '<input class="form-control" name="soFields[' +
+            '<input class="form-control" required name="soFields[' +
             x +
             '][qty]">' +
             "</div> " +
@@ -330,4 +330,31 @@ if ($(this).val()==1) {
 }
 
     });
+
+
+    $('.editPayment_method').click(function(){
+        if ($('.editPayments').val()==1) {
+            $('#editpayment').removeAttr('hidden');
+            $('#editpayment_type').removeAttr('hidden');
+            $('#edittop').attr('hidden','true');
+        }else{
+            $('#editpayment').attr('hidden','true');
+            $('#editpayment_type').attr('hidden','true');
+            $('#edittop').removeAttr('hidden');
+        }
+
+        $('.changePayment').change(function(){
+            if ($('.editPayments').val()==1) {
+                $('#editpayment').removeAttr('hidden');
+                $('#editpayment_type').removeAttr('hidden');
+                $('#edittop').attr('hidden','true');
+            }else{
+                $('#editpayment').attr('hidden','true');
+                $('#editpayment_type').attr('hidden','true');
+                $('#edittop').removeAttr('hidden');
+            }
+
+                });
+            });
+
 });

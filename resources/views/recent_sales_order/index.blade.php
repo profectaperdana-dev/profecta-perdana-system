@@ -57,8 +57,6 @@
                                                 <th>Customer</th>
                                                 <th>Remark</th>
                                                 <th>Verified</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -69,8 +67,8 @@
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">
                                                             <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
+                                                            <a class="dropdown-item editPayment_method" href="#"
+                                                                data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#changeDataNodebt{{ $value->id }}">Edit
                                                                 Sales
                                                                 Order</a>
@@ -90,10 +88,10 @@
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-lg" role="document">
                                                             <form method="post"
-                                                                action="{{ url('product_uoms/' . $value->id) }}"
+                                                                action="{{ url('updateso/' . $value->id . '/editso') }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
-                                                                <input name="_method" type="hidden" value="PATCH">
+                                                                @method('PUT')
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">
@@ -109,23 +107,20 @@
                                                                                 <div class="col-md-6 form-group">
                                                                                     <label>
                                                                                         Customers
-                                                                                        {{ $value->soBy->customers_id }}</label>
-                                                                                    <select name="customer_id"
-                                                                                        id="" required
+                                                                                    </label>
+                                                                                    <select name="customer_id" required
                                                                                         class="form-control sub_type customer-append">
                                                                                         <option value="">
                                                                                             -Choose Customers-</option>
                                                                                         @foreach ($customer as $dataCust)
                                                                                             <option
                                                                                                 value="{{ $dataCust->id }}"
-                                                                                                @if ($dataCust->id == $value->soBy->customers_id) selected @endif>
+                                                                                                @if ($dataCust->id == $value->soBy->id) selected @endif>
                                                                                                 {{ $dataCust->code_cust }}
                                                                                                 |
                                                                                                 {{ $dataCust->name_cust }}
                                                                                             </option>
                                                                                         @endforeach
-                                                                                        <option value="">
-                                                                                            {{ $dataCust->id }}</option>
                                                                                     </select>
                                                                                     @error('sub_material')
                                                                                         <div class="invalid-feedback">
@@ -133,68 +128,66 @@
                                                                                         </div>
                                                                                     @enderror
                                                                                 </div>
-                                                                                {{-- <div class="col-md-4 form-group">
-                                                                                    <label for="">PPN 11%</label><br>
-                                                                                    <select name="ppn" id="" class="sub_type form-control">
-                                                                                        <option value="" selected>-Choose PPN-</option>
-                                                                                        <option value="1">Include PPN</option>
-                                                                                        <option value="2">Without PPN</option>
-                                                                                    </select>
-                                                                                </div> --}}
                                                                                 <div class="col-md-6 form-group mr-5">
                                                                                     <label>Payment Method</label>
                                                                                     <select name="payment_method"
-                                                                                        id="payment_method" required
-                                                                                        class="form-control sub_type ">
+                                                                                        id="" required
+                                                                                        class="form-control changePayment editPayments">
                                                                                         <option value="" selected>
                                                                                             -Choose Payment-</option>
-                                                                                        <option value="1">Paid
+                                                                                        <option value="1"
+                                                                                            @if ($value->payment_method == 1) selected @endif>
+                                                                                            Paid
                                                                                         </option>
-                                                                                        <option value="2">Debt
+                                                                                        <option value="2"
+                                                                                            @if ($value->payment_method == 2) selected @endif>
+                                                                                            Debt
                                                                                         </option>
                                                                                     </select>
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
 
-                                                                                <div id="top" hidden
-                                                                                    class="col-md-12 form-group">
+                                                                                <div id="edittop" hidden
+                                                                                    class="col-md-12 form-group ">
                                                                                     <label>Terms of Payment</label>
                                                                                     <input type="text"
-                                                                                        class="form-control {{ $errors->first('top') ? ' is-invalid' : '' }}"
+                                                                                        class="form-control "
                                                                                         placeholder="Product Name"
-                                                                                        name="top"
-                                                                                        value="{{ old('top') }}">
-                                                                                    @error('top')
-                                                                                        <div class="invalid-feedback">
-                                                                                            {{ $message }}
-                                                                                        </div>
-                                                                                    @enderror
+                                                                                        name="top" value="">
+
                                                                                 </div>
-                                                                                <div id="payment" hidden
+                                                                                <div id="editpayment" hidden
                                                                                     class="col-md-6 form-group mr-6">
                                                                                     <label>Payment</label>
                                                                                     <select name="payment" id=""
                                                                                         class="form-control sub_type ">
                                                                                         <option value="" selected>
                                                                                             -Choose Payment-</option>
-                                                                                        <option value="1">CBD
+                                                                                        <option value="1"
+                                                                                            @if ($value->payment == 1) selected @endif>
+                                                                                            CBD
                                                                                         </option>
-                                                                                        <option value="2">COD
+                                                                                        <option value="2"
+                                                                                            @if ($value->payment == 2) selected @endif>
+                                                                                            COD
                                                                                         </option>
                                                                                     </select>
                                                                                 </div>
-                                                                                <div id="payment_type" hidden
+                                                                                <div id="editpayment_type" hidden
                                                                                     class="col-md-6 form-group mr-6">
                                                                                     <label>Payment Type</label>
                                                                                     <select name="payment_type"
-                                                                                        id="sub-type"
                                                                                         class="form-control sub_type ">
                                                                                         <option value="" selected>
                                                                                             -Choose Payment-</option>
-                                                                                        <option value="Cash">Cash
+                                                                                        <option value="Cash"
+                                                                                            @if ($value->payment_type == 'Cash') selected @endif>
+                                                                                            Cash
                                                                                         </option>
-                                                                                        <option value="Transfer">Transfer
+                                                                                        <option value="Transfer"
+                                                                                            @if ($value->payemnt_type == 'Transfer') selected @endif>
+                                                                                            Transfer
                                                                                         </option>
                                                                                     </select>
                                                                                 </div>
@@ -202,7 +195,7 @@
                                                                             <div class="form-group row">
                                                                                 <div class="col-md-12 form-group mr-5">
                                                                                     <label>Remarks</label>
-                                                                                    <textarea class="form-control" name="remark" id="" cols="30" rows="5"></textarea>
+                                                                                    <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -252,8 +245,6 @@
                                                 <th>Customer</th>
                                                 <th>Remark</th>
                                                 <th>Verified</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
