@@ -20,7 +20,7 @@ class DiscountController extends Controller
      */
     public function index()
     {
-        $all_discounts = DiscountModel::latest()->get();
+        $all_discounts = DiscountModel::with(['customerBy', 'productBy'])->latest()->get();
         $all_customers = CustomerModel::latest()->get();
         $all_products = ProductModel::latest()->get();
 
