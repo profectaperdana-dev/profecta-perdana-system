@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomerModel;
+use App\Models\DiscountModel;
 use App\Models\ProductModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
@@ -14,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+use function PHPUnit\Framework\isEmpty;
 use function Symfony\Component\VarDumper\Dumper\esc;
 
 class SalesOrderController extends Controller
@@ -38,9 +40,14 @@ class SalesOrderController extends Controller
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
             ->where('top', NULL)
-            ->groupBy('sales_orders.order_number')
+            ->groupBy('sales_order_details.sales_orders_id')
             ->get();
-        return view('recent_sales_order.index', compact('title', 'dataSalesOrder'));
+        $dataSalesOrderDebt = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
+            ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
+            ->where('top', '!=', NULL)
+            ->groupBy('sales_order_details.sales_orders_id')
+            ->get();
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt'));
     }
     /**
      * Show the form for creating a new resource.
@@ -54,7 +61,7 @@ class SalesOrderController extends Controller
     public function cekJam()
     {
         $dt = new DateTimeImmutable("2022-08-16 00:00:00", new DateTimeZone('Asia/Jakarta'));
-        $dt = $dt->modify("+1 month");
+        $dt = $dt->modify("+1 days");
         dd($dt);
     }
 
@@ -82,34 +89,62 @@ class SalesOrderController extends Controller
         $year = Carbon::now()->format('Y'); // 2022
         $month = Carbon::now()->format('m'); // 2022
         $order_number = 'SOPP/' . $year . '/' . $month . '/' . $cust_number_id . '';
-        // dd($month);
-        // DB::rollback();
         $model = new SalesOrderModel();
         $model->order_number = $order_number;
         $model->order_date = Carbon::now()->format('Y-m-d');
         $model->customers_id = $request->get('customer_id');
-        $model->ppn = $request->get('ppn');
         $model->remark = $request->get('remark');
         $model->created_by = Auth::user()->id;
         $model->top = $request->get('top');
         $model->payment = $request->get('payment');
         $model->isapprove = 0;
         $model->isverified = 0;
+
+        if ($model->top != NULL) {
+            $dt = new DateTimeImmutable(Carbon::now()->format('Y-m-d'), new DateTimeZone('Asia/Jakarta'));
+            $dt = $dt->modify("+" . $model->top . " days");
+        } else {
+            $dt = NULL;
+        }
+        $model->isoverdue = $dt;
         $model->save();
 
+        $total = 0;
+        $message_duplicate = '';
         if ($model->save()) {
             foreach ($request->soFields as $key => $value) {
                 $data = new SalesOrderDetailModel();
-                // $data->customer_id = $request->get('customer_id');
                 $data->products_id = $value['product_id'];
-                $data->sales_orders_id = $model->id;
-                $data->discount = $value['discount'];
                 $data->qty = $value['qty'];
+                $data->discount = $value['discount'];
+
+                $data->sales_orders_id = $model->id;
+
                 $data->created_by = Auth::user()->id;
-                $data->save();
+                $check_duplicate = SalesOrderDetailModel::where('sales_orders_id', $data->sales_orders_id)
+                    ->where('products_id', $data->products_id)
+                    ->count();
+
+                if ($check_duplicate > 0) {
+                    $message_duplicate = "You enter duplication of products. Please recheck the discount you set.";
+                    continue;
+                } else {
+                    $harga = ProductModel::find($data->products_id);
+                    $diskon =  $value['discount'] / 100;
+                    $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
+                    $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+                    $total = $total + ($hargaAfterDiskon * $data->qty);
+                    $data->save();
+                }
             }
         }
-        if ($data->save()) {
+        $ppn = 0.11 * $total;
+        $model->ppn = $ppn;
+        $model->total = $total;
+        $model->total_after_ppn = $total - $ppn;
+        $model->save();
+
+        if (isEmpty($message_duplicate)) {
             return redirect('/sales_order')->with('success', 'Add Discount Success');
         } else {
             return redirect('/sales_order')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');

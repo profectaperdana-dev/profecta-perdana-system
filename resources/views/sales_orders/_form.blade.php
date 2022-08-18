@@ -2,7 +2,7 @@
     <div class="col-md-12">
         <div class="row font-weight-bold " id="formSo">
             <div class="form-group row">
-                <div class="col-md-4 form-group">
+                <div class="col-md-6 form-group">
                     <label>
                         Customers</label>
                     <select name="customer_id" id="" required
@@ -19,15 +19,15 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-md-4 form-group">
+                {{-- <div class="col-md-4 form-group">
                     <label for="">PPN 11%</label><br>
                     <select name="ppn" id="" class="sub_type form-control">
                         <option value="" selected>-Choose PPN-</option>
                         <option value="1">Include PPN</option>
                         <option value="2">Without PPN</option>
                     </select>
-                </div>
-                <div class="col-md-4 form-group mr-5">
+                </div> --}}
+                <div class="col-md-6 form-group mr-5">
                     <label>Payment Method</label>
                     <select name="payment_method" id="payment_method" required class="form-control sub_type ">
                         <option value="" selected>-Choose Payment-</option>
@@ -109,6 +109,7 @@
                     <a id="addSo" href="javascript:void(0)" class="form-control text-white  text-center"
                         style="border:none; background-color:green">+</a>
                 </div>
+
             </div>
         </div>
 

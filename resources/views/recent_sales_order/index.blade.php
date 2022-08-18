@@ -26,7 +26,7 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-xl-6 xl-100">
+            <div class="col-sm-12 col-xl-12 xl-100">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>All Data Sales Order Not Verified</h5>
@@ -50,7 +50,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                                <th>Action</th>
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
@@ -73,7 +73,8 @@
                                                             <h5 class="dropdown-header">Actions</h5>
                                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                                 data-original-title="test"
-                                                                data-bs-target="#changeData{{ $value->id }}">Edit Sales
+                                                                data-bs-target="#changeDataNodebt{{ $value->id }}">Edit
+                                                                Sales
                                                                 Order</a>
                                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                                 data-original-title="test"
@@ -84,8 +85,59 @@
                                                                 data-bs-target="#deleteData{{ $value->id }}">Add
                                                                 Product</a>
                                                         </div>
-
                                                     </td>
+                                                    {{-- Edit No Debt SO --}}
+                                                    <div class="modal fade" id="changeDataNodebt{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form method="post"
+                                                                action="{{ url('product_uoms/' . $value->id) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                <input name="_method" type="hidden" value="PATCH">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Change Data
+                                                                            {{ $value->satuan }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <label class="font-weight-bold ">Name
+                                                                                        Unit of Measurement</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control text-capitalize {{ $errors->first('editSatuan') ? ' is-invalid' : '' }}"
+                                                                                        name="editSatuan"
+                                                                                        value="{{ $value->satuan }}"
+                                                                                        placeholder="Name Unit of Measurement">
+                                                                                    @error('editSatuan')
+                                                                                        <small
+                                                                                            class="text-danger">{{ $message }}.</small>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-danger" type="button"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                        <button type="reset"
+                                                                            class="btn btn-warning">Reset</button>
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Save
+                                                                            changes</button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    {{-- End Edit No Debt SO --}}
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->order_number }}</td>
                                                     <td>{{ $value->order_date }}</td>
@@ -94,15 +146,12 @@
                                                     <td class="text-center"><a class="btn btn-primary btn-sm"
                                                             href="{{ url('/cek_jam') }}">Verificate</td>
                                                     </a>
-
-
                                                 </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
                                 </div>
                                 </p>
-
                             </div>
                             <div class="tab-pane fade" id="pills-warningprofile" role="tabpanel"
                                 aria-labelledby="pills-warningprofile-tab">
@@ -112,10 +161,12 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th></th>
+                                                <th>Action</th>
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
+                                                <th>TOP</th>
+                                                <th>Over Due Date</th>
                                                 <th>Customer</th>
                                                 <th>Remark</th>
                                                 <th>Verified</th>
@@ -124,7 +175,7 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($dataSalesOrder as $key => $value)
+                                            @foreach ($dataSalesOrderDebt as $key => $value)
                                                 <tr>
 
 
@@ -133,12 +184,12 @@
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">
                                                             <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
+                                                            <a class="dropdown-item" href="#"
+                                                                data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#changeData{{ $value->id }}">Edit Sales
                                                                 Order</a>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
+                                                            <a class="dropdown-item" href="#"
+                                                                data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#changeData{{ $value->id }}">Edit
                                                                 Product</a>
                                                             <a class="dropdown-item" href="#"
@@ -151,6 +202,8 @@
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->order_number }}</td>
                                                     <td>{{ $value->order_date }}</td>
+                                                    <td>{{ $value->top }}</td>
+                                                    <td>{{ $value->isoverdue }}</td>
                                                     <td>{{ $value->soBy->name_cust }}</td>
                                                     <td>{{ $value->remark }}</td>
                                                     <td class="text-center"><a class="btn btn-primary btn-sm"
@@ -170,18 +223,7 @@
                     </div>
                 </div>
             </div>
-            {{-- <div class="col-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>All Data</h5>
-                        <hr class="bg-primary">
 
-                    </div>
-                    <div class="card-body">
-
-                    </div>
-                </div>
-            </div> --}}
         </div>
     </div>
     <!-- Container-fluid Ends-->
@@ -222,6 +264,7 @@
                         },
                         'colvis'
                     ]
+
                 });
                 $('#example1').DataTable({
                     dom: 'Bfrtip',

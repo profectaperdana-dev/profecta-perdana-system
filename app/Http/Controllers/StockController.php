@@ -30,7 +30,7 @@ class StockController extends Controller
             return view('stocks.index', compact('title', 'data', 'product', 'warehouse'));
         } else {
             $title = 'Data Stocks Product All Warehouse';
-            $data = StockModel::latest()->get();
+            $data = StockModel::with('warehouseStockBy', 'productBy')->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::latest()->get();
 
