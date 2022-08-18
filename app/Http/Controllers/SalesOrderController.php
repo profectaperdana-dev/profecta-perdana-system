@@ -36,7 +36,8 @@ class SalesOrderController extends Controller
     {
         $title = 'Recent Sales Order';
 
-
+        $product = ProductModel::latest()->get();
+        $customer = CustomerModel::where('status', 1)->latest()->get();
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
             ->where('top', NULL)
@@ -47,7 +48,7 @@ class SalesOrderController extends Controller
             ->where('top', '!=', NULL)
             ->groupBy('sales_order_details.sales_orders_id')
             ->get();
-        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt'));
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'product', 'customer'));
     }
     /**
      * Show the form for creating a new resource.

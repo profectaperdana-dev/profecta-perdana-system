@@ -50,7 +50,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Action</th>
+                                                <th style="width: 5%">Action</th>
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
@@ -64,9 +64,7 @@
                                         <tbody>
                                             @foreach ($dataSalesOrder as $key => $value)
                                                 <tr>
-
-
-                                                    <td style="width: 10%">
+                                                    <td style="width: 5%">
                                                         <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">
@@ -90,7 +88,7 @@
                                                     <div class="modal fade" id="changeDataNodebt{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
+                                                        <div class="modal-dialog modal-lg" role="document">
                                                             <form method="post"
                                                                 action="{{ url('product_uoms/' . $value->id) }}"
                                                                 enctype="multipart/form-data">
@@ -100,7 +98,7 @@
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">
                                                                             Change Data
-                                                                            {{ $value->satuan }}</h5>
+                                                                        </h5>
                                                                         <button class="btn-close" type="button"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
@@ -108,18 +106,103 @@
                                                                     <div class="modal-body">
                                                                         <div class="container-fluid">
                                                                             <div class="form-group row">
-                                                                                <div class="col-md-12">
-                                                                                    <label class="font-weight-bold ">Name
-                                                                                        Unit of Measurement</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control text-capitalize {{ $errors->first('editSatuan') ? ' is-invalid' : '' }}"
-                                                                                        name="editSatuan"
-                                                                                        value="{{ $value->satuan }}"
-                                                                                        placeholder="Name Unit of Measurement">
-                                                                                    @error('editSatuan')
-                                                                                        <small
-                                                                                            class="text-danger">{{ $message }}.</small>
+                                                                                <div class="col-md-6 form-group">
+                                                                                    <label>
+                                                                                        Customers
+                                                                                        {{ $value->soBy->customers_id }}</label>
+                                                                                    <select name="customer_id"
+                                                                                        id="" required
+                                                                                        class="form-control sub_type customer-append">
+                                                                                        <option value="">
+                                                                                            -Choose Customers-</option>
+                                                                                        @foreach ($customer as $dataCust)
+                                                                                            <option
+                                                                                                value="{{ $dataCust->id }}"
+                                                                                                @if ($dataCust->id == $value->soBy->customers_id) selected @endif>
+                                                                                                {{ $dataCust->code_cust }}
+                                                                                                |
+                                                                                                {{ $dataCust->name_cust }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                        <option value="">
+                                                                                            {{ $dataCust->id }}</option>
+                                                                                    </select>
+                                                                                    @error('sub_material')
+                                                                                        <div class="invalid-feedback">
+                                                                                            {{ $message }}
+                                                                                        </div>
                                                                                     @enderror
+                                                                                </div>
+                                                                                {{-- <div class="col-md-4 form-group">
+                                                                                    <label for="">PPN 11%</label><br>
+                                                                                    <select name="ppn" id="" class="sub_type form-control">
+                                                                                        <option value="" selected>-Choose PPN-</option>
+                                                                                        <option value="1">Include PPN</option>
+                                                                                        <option value="2">Without PPN</option>
+                                                                                    </select>
+                                                                                </div> --}}
+                                                                                <div class="col-md-6 form-group mr-5">
+                                                                                    <label>Payment Method</label>
+                                                                                    <select name="payment_method"
+                                                                                        id="payment_method" required
+                                                                                        class="form-control sub_type ">
+                                                                                        <option value="" selected>
+                                                                                            -Choose Payment-</option>
+                                                                                        <option value="1">Paid
+                                                                                        </option>
+                                                                                        <option value="2">Debt
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+
+                                                                                <div id="top" hidden
+                                                                                    class="col-md-12 form-group">
+                                                                                    <label>Terms of Payment</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control {{ $errors->first('top') ? ' is-invalid' : '' }}"
+                                                                                        placeholder="Product Name"
+                                                                                        name="top"
+                                                                                        value="{{ old('top') }}">
+                                                                                    @error('top')
+                                                                                        <div class="invalid-feedback">
+                                                                                            {{ $message }}
+                                                                                        </div>
+                                                                                    @enderror
+                                                                                </div>
+                                                                                <div id="payment" hidden
+                                                                                    class="col-md-6 form-group mr-6">
+                                                                                    <label>Payment</label>
+                                                                                    <select name="payment" id=""
+                                                                                        class="form-control sub_type ">
+                                                                                        <option value="" selected>
+                                                                                            -Choose Payment-</option>
+                                                                                        <option value="1">CBD
+                                                                                        </option>
+                                                                                        <option value="2">COD
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div id="payment_type" hidden
+                                                                                    class="col-md-6 form-group mr-6">
+                                                                                    <label>Payment Type</label>
+                                                                                    <select name="payment_type"
+                                                                                        id="sub-type"
+                                                                                        class="form-control sub_type ">
+                                                                                        <option value="" selected>
+                                                                                            -Choose Payment-</option>
+                                                                                        <option value="Cash">Cash
+                                                                                        </option>
+                                                                                        <option value="Transfer">Transfer
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12 form-group mr-5">
+                                                                                    <label>Remarks</label>
+                                                                                    <textarea class="form-control" name="remark" id="" cols="30" rows="5"></textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -133,7 +216,6 @@
                                                                             type="submit">Save
                                                                             changes</button>
                                                                     </div>
-                                                                </div>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -161,7 +243,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Action</th>
+                                                <th style="width: 3%">Action</th>
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
@@ -179,7 +261,7 @@
                                                 <tr>
 
 
-                                                    <td style="width: 10%">
+                                                    <td style="width: 3%">
                                                         <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">
