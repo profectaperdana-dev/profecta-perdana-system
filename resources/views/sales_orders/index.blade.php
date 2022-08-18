@@ -40,18 +40,9 @@
   @push('scripts')
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script src="{{ asset('js/app.js') }}"></script>
     <script>
-      let pusher = new Pusher("{{ env('PUSHER_APP_KEY') }}", {
-        encrypted: true
-      });
-
-      // Subscribe to the channel we specified in our Laravel Event
-      let channel = pusher.subscribe('so-created');
-
-      channel.bind('App\\Events\\SOMessage', function(data) {
-        console.log(data.message);
-      });
+      Echo.channel('so-created').listen('SOMessage', (e) => console.log('RealTimeMessage: ' + e.message));
     </script>
   @endpush
 @endsection

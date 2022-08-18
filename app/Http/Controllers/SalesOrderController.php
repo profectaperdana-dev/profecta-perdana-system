@@ -36,7 +36,7 @@ class SalesOrderController extends Controller
     public function getRecentData()
     {
         $title = 'Recent Sales Order';
-        event(new SOMessage('Woy'));
+        event(new SOMessage('Halloooo'));
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
             ->where('top', NULL)
@@ -196,7 +196,7 @@ class SalesOrderController extends Controller
         //
     }
 
-    public function verifate(SalesOrderModel $salesorder)
+    public function verificate(SalesOrderModel $salesorder)
     {
         $selected_so = SalesOrderModel::where('order_number', $salesorder->order_number)->firstOrFail();
         $selected_so->isverified = 1;

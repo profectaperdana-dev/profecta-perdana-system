@@ -21,7 +21,7 @@ class SOMessage implements ShouldBroadcast
      */
     public function __construct($message)
     {
-        $this->$message = $message;
+        $this->message = $message;
     }
 
     /**
@@ -29,8 +29,8 @@ class SOMessage implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn()
+    public function broadcastOn(): Channel
     {
-        return ['so-created'];
+        return new Channel('so-created');
     }
 }
