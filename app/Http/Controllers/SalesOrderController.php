@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\SOMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\ProductModel;
@@ -35,8 +36,7 @@ class SalesOrderController extends Controller
     public function getRecentData()
     {
         $title = 'Recent Sales Order';
-
-
+        event(new SOMessage('Woy'));
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
             ->where('top', NULL)

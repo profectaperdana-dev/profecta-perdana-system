@@ -31,8 +31,6 @@ class DiscountController extends Controller
             'products' => $all_products
         ];
 
-        event(new RealTimeMessage('Hello World'));
-
         return view('discounts.index', $data);
     }
 

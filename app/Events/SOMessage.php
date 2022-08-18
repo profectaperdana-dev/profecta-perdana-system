@@ -10,19 +10,18 @@ use Illuminate\Contracts\Broadcasting\ShouldBroadcast;
 use Illuminate\Foundation\Events\Dispatchable;
 use Illuminate\Queue\SerializesModels;
 
-class RealTimeMessage
+class SOMessage implements ShouldBroadcast
 {
     use Dispatchable, InteractsWithSockets, SerializesModels;
-    public string $message;
-
+    public $message;
     /**
      * Create a new event instance.
      *
      * @return void
      */
-    public function __construct(string $message)
+    public function __construct($message)
     {
-        $this->message = $message;
+        $this->$message = $message;
     }
 
     /**
@@ -30,8 +29,8 @@ class RealTimeMessage
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-    public function broadcastOn(): Channel
+    public function broadcastOn()
     {
-        return new Channel('events');
+        return ['so-created'];
     }
 }
