@@ -63,6 +63,8 @@ class StockController extends Controller
             "stockFields.*.stock" => "required|numeric"
         ]);
 
+        $message_duplicate = "";
+        $issaved = false;
         foreach ($request->stockFields as $key => $value) {
             $model = new StockModel();
             $model->warehouses_id = $request->get('warehouses_id');
@@ -72,15 +74,19 @@ class StockController extends Controller
             $cek = StockModel::where('products_id', $value['product_id'])
                 ->where('warehouses_id', $request->get('warehouses_id'))
                 ->count();
-            if ($cek != Null) {
-                return redirect('/stocks')->with('info', 'there are some items that already exist, other than that its a success');
+
+            if ($cek > 0) {
+                $message_duplicate = "You enter duplication of products. Please recheck the Stock you set.";
+                continue;
             } else {
-                $model->save();
+                $issaved = $model->save();
             }
         }
 
-        if ($model->save()) {
+        if (empty($message_duplicate) && $issaved == true) {
             return redirect('/stocks')->with('success', 'Create Stocks Success');
+        } elseif (!empty($message_duplicate) && $issaved == true) {
+            return redirect('/stocks')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
         } else {
             return redirect('/stocks')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
         }
