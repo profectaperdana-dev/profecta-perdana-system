@@ -50,29 +50,25 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Action</th>
+                                                <th style="width: 5%">Action</th>
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
                                                 <th>Customer</th>
                                                 <th>Remark</th>
                                                 <th>Verified</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($dataSalesOrder as $key => $value)
                                                 <tr>
-
-
-                                                    <td style="width: 10%">
+                                                    <td style="width: 5%">
                                                         <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">
                                                             <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
+                                                            <a class="dropdown-item editPayment_method" href="#"
+                                                                data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#changeDataNodebt{{ $value->id }}">Edit
                                                                 Sales
                                                                 Order</a>
@@ -90,17 +86,17 @@
                                                     <div class="modal fade" id="changeDataNodebt{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
+                                                        <div class="modal-dialog modal-lg" role="document">
                                                             <form method="post"
-                                                                action="{{ url('product_uoms/' . $value->id) }}"
+                                                                action="{{ url('updateso/' . $value->id . '/editso') }}"
                                                                 enctype="multipart/form-data">
                                                                 @csrf
-                                                                <input name="_method" type="hidden" value="PATCH">
+                                                                @method('PUT')
                                                                 <div class="modal-content">
                                                                     <div class="modal-header">
                                                                         <h5 class="modal-title" id="exampleModalLabel">
                                                                             Change Data
-                                                                            {{ $value->satuan }}</h5>
+                                                                        </h5>
                                                                         <button class="btn-close" type="button"
                                                                             data-bs-dismiss="modal"
                                                                             aria-label="Close"></button>
@@ -108,18 +104,98 @@
                                                                     <div class="modal-body">
                                                                         <div class="container-fluid">
                                                                             <div class="form-group row">
-                                                                                <div class="col-md-12">
-                                                                                    <label class="font-weight-bold ">Name
-                                                                                        Unit of Measurement</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control text-capitalize {{ $errors->first('editSatuan') ? ' is-invalid' : '' }}"
-                                                                                        name="editSatuan"
-                                                                                        value="{{ $value->satuan }}"
-                                                                                        placeholder="Name Unit of Measurement">
-                                                                                    @error('editSatuan')
-                                                                                        <small
-                                                                                            class="text-danger">{{ $message }}.</small>
+                                                                                <div class="col-md-6 form-group">
+                                                                                    <label>
+                                                                                        Customers
+                                                                                    </label>
+                                                                                    <select name="customer_id" required
+                                                                                        class="form-control sub_type customer-append">
+                                                                                        <option value="">
+                                                                                            -Choose Customers-</option>
+                                                                                        @foreach ($customer as $dataCust)
+                                                                                            <option
+                                                                                                value="{{ $dataCust->id }}"
+                                                                                                @if ($dataCust->id == $value->soBy->id) selected @endif>
+                                                                                                {{ $dataCust->code_cust }}
+                                                                                                |
+                                                                                                {{ $dataCust->name_cust }}
+                                                                                            </option>
+                                                                                        @endforeach
+                                                                                    </select>
+                                                                                    @error('sub_material')
+                                                                                        <div class="invalid-feedback">
+                                                                                            {{ $message }}
+                                                                                        </div>
                                                                                     @enderror
+                                                                                </div>
+                                                                                <div class="col-md-6 form-group mr-5">
+                                                                                    <label>Payment Method</label>
+                                                                                    <select name="payment_method"
+                                                                                        id="" required
+                                                                                        class="form-control changePayment editPayments">
+                                                                                        <option value="" selected>
+                                                                                            -Choose Payment-</option>
+                                                                                        <option value="1"
+                                                                                            @if ($value->payment_method == 1) selected @endif>
+                                                                                            Paid
+                                                                                        </option>
+                                                                                        <option value="2"
+                                                                                            @if ($value->payment_method == 2) selected @endif>
+                                                                                            Debt
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+
+                                                                                <div id="edittop" hidden
+                                                                                    class="col-md-12 form-group ">
+                                                                                    <label>Terms of Payment</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control "
+                                                                                        placeholder="Product Name"
+                                                                                        name="top" value="">
+
+                                                                                </div>
+                                                                                <div id="editpayment" hidden
+                                                                                    class="col-md-6 form-group mr-6">
+                                                                                    <label>Payment</label>
+                                                                                    <select name="payment" id=""
+                                                                                        class="form-control sub_type ">
+                                                                                        <option value="" selected>
+                                                                                            -Choose Payment-</option>
+                                                                                        <option value="1"
+                                                                                            @if ($value->payment == 1) selected @endif>
+                                                                                            CBD
+                                                                                        </option>
+                                                                                        <option value="2"
+                                                                                            @if ($value->payment == 2) selected @endif>
+                                                                                            COD
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                                <div id="editpayment_type" hidden
+                                                                                    class="col-md-6 form-group mr-6">
+                                                                                    <label>Payment Type</label>
+                                                                                    <select name="payment_type"
+                                                                                        class="form-control sub_type ">
+                                                                                        <option value="" selected>
+                                                                                            -Choose Payment-</option>
+                                                                                        <option value="Cash"
+                                                                                            @if ($value->payment_type == 'Cash') selected @endif>
+                                                                                            Cash
+                                                                                        </option>
+                                                                                        <option value="Transfer"
+                                                                                            @if ($value->payemnt_type == 'Transfer') selected @endif>
+                                                                                            Transfer
+                                                                                        </option>
+                                                                                    </select>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12 form-group mr-5">
+                                                                                    <label>Remarks</label>
+                                                                                    <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
                                                                                 </div>
                                                                             </div>
                                                                         </div>
@@ -133,7 +209,6 @@
                                                                             type="submit">Save
                                                                             changes</button>
                                                                     </div>
-                                                                </div>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -161,7 +236,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th>Action</th>
+                                                <th style="width: 3%">Action</th>
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
@@ -170,8 +245,6 @@
                                                 <th>Customer</th>
                                                 <th>Remark</th>
                                                 <th>Verified</th>
-
-
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -179,7 +252,7 @@
                                                 <tr>
 
 
-                                                    <td style="width: 10%">
+                                                    <td style="width: 3%">
                                                         <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">

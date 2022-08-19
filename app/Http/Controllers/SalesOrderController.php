@@ -37,17 +37,19 @@ class SalesOrderController extends Controller
     {
         $title = 'Recent Sales Order';
         event(new SOMessage('Halloooo'));
+        $product = ProductModel::latest()->get();
+        $customer = CustomerModel::where('status', 1)->latest()->get();
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
-            ->where('top', NULL)
+            ->where('payment_method', 1)
             ->groupBy('sales_order_details.sales_orders_id')
             ->get();
         $dataSalesOrderDebt = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
-            ->where('top', '!=', NULL)
+            ->where('payment_method', 2)
             ->groupBy('sales_order_details.sales_orders_id')
             ->get();
-        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt'));
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'product', 'customer'));
     }
     /**
      * Show the form for creating a new resource.
@@ -78,6 +80,7 @@ class SalesOrderController extends Controller
 
         $request->validate([
             "customer_id" => "required|numeric",
+            "payment_method" => "required|numeric",
             "soFields.*.product_id" => "required|numeric",
             "soFields.*.qty" => "required|numeric"
         ]);
@@ -97,6 +100,7 @@ class SalesOrderController extends Controller
         $model->created_by = Auth::user()->id;
         $model->top = $request->get('top');
         $model->payment = $request->get('payment');
+        $model->payment_method = $request->get('payment_method');
         $model->isapprove = 0;
         $model->isverified = 0;
 
@@ -116,15 +120,16 @@ class SalesOrderController extends Controller
                 $data = new SalesOrderDetailModel();
                 $data->products_id = $value['product_id'];
                 $data->qty = $value['qty'];
-                $data->discount = $value['discount'];
-
+                if ($value['discount'] == NULL) {
+                    $data->discount = 0;
+                } else {
+                    $data->discount = $value['discount'];
+                }
                 $data->sales_orders_id = $model->id;
-
                 $data->created_by = Auth::user()->id;
                 $check_duplicate = SalesOrderDetailModel::where('sales_orders_id', $data->sales_orders_id)
                     ->where('products_id', $data->products_id)
                     ->count();
-
                 if ($check_duplicate > 0) {
                     $message_duplicate = "You enter duplication of products. Please recheck the discount you set.";
                     continue;
@@ -141,7 +146,7 @@ class SalesOrderController extends Controller
         $ppn = 0.11 * $total;
         $model->ppn = $ppn;
         $model->total = $total;
-        $model->total_after_ppn = $total - $ppn;
+        $model->total_after_ppn = $total + $ppn;
         $model->save();
 
         if (isEmpty($message_duplicate)) {
@@ -150,7 +155,22 @@ class SalesOrderController extends Controller
             return redirect('/sales_order')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');
         }
     }
+    public function updateSo(Request $request, $id)
+    {
+        $request->validate([
+            "customer_id" => "required|numeric",
+            "payment_method" => "required|numeric",
 
+        ]);
+
+        $model = SalesOrderDetailModel::find($id);
+        $model->customer_id = $request->get('customer_id');
+
+        $dataProduk =  DiscountModel::where('customer_id', $request->get('customer_id'))
+            ->where('product_id', $model->products_id)
+            ->get();
+        dd($dataProduk);
+    }
     /**
      * Display the specified resource.
      *

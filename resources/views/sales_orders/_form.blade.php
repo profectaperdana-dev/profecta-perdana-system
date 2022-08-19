@@ -6,14 +6,14 @@
                     <label>
                         Customers</label>
                     <select name="customer_id" id="" required
-                        class="form-control sub_type customer-append {{ $errors->first('sub_type') ? ' is-invalid' : '' }}">
+                        class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
                         <option value="" selected>-Choose Customers-</option>
                         @foreach ($customer as $customer)
                             <option value="{{ $customer->id }}">{{ $customer->code_cust }} | {{ $customer->name_cust }}
                             </option>
                         @endforeach
                     </select>
-                    @error('sub_material')
+                    @error('customer_id')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
@@ -29,21 +29,26 @@
                 </div> --}}
                 <div class="col-md-6 form-group mr-5">
                     <label>Payment Method</label>
-                    <select name="payment_method" id="payment_method" required class="form-control sub_type ">
+                    <select name="payment_method" id="payment_method" required
+                        class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
                         <option value="" selected>-Choose Payment-</option>
                         <option value="1">Paid
                         </option>
                         <option value="2">Debt
                         </option>
                     </select>
+                    @error('payment_method')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
                 </div>
             </div>
             <div class="form-group row">
 
                 <div id="top" hidden class="col-md-12 form-group">
                     <label>Terms of Payment</label>
-                    <input type="text" class="form-control {{ $errors->first('top') ? ' is-invalid' : '' }}"
-                        placeholder="Product Name" name="top" value="{{ old('top') }}">
+                    <input type="text" class="form-control" placeholder="Product Name" name="top" value="">
                     @error('top')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -80,8 +85,7 @@
             <div class="form-group row">
                 <div class="form-group col-4">
                     <label>Product</label>
-                    <select name="soFields[0][product_id]"
-                        class="form-control productSo @error('soFields[0][product_id]') is-invalid @enderror" required>
+                    <select name="soFields[0][product_id]" class="form-control productSo" required>
                         <option value="">Choose Product</option>
                     </select>
                     @error('soFields[0][product_id]')
@@ -92,14 +96,14 @@
                 </div>
                 <div class="col-3 col-md-3 form-group">
                     <label>Qty</label>
-                    <input class="form-control {{ $errors->first('soFields[0][qty]') ? ' is-invalid' : '' }}"
-                        name="soFields[0][qty]" id="">
+                    <input class="form-control" required name="soFields[0][qty]" id="">
                     @error('soFields[0][qty]')
                         <div class="invalid-feedback">
                             {{ $message }}
                         </div>
                     @enderror
                 </div>
+
                 <div class="col-3 col-md-3 form-group">
                     <label>Discount%</label>
                     <input class="form-control discount-append" name="soFields[0][discount]" id="" readonly>
