@@ -103,9 +103,8 @@ $(document).ready(function () {
     });
     //  Event on change select regency:end
 
-
-// Stock
-let y = 0;
+    // Stock
+    let y = 0;
 
     $("#addStock").on("click", function () {
         ++y;
@@ -153,7 +152,7 @@ let y = 0;
         $(this).parents(".form-group").remove();
     });
 
-// end Stock
+    // end Stock
 
     //select2 product
     let i = 0;
@@ -277,7 +276,9 @@ let y = 0;
             "</div> " +
             '<div class="col-3 col-md-4 form-group">' +
             "<label>Discount %</label>" +
-            '<input class="form-control discount-append" name="soFields['+ x +'][discount]" id="" readonly>' +
+            '<input class="form-control discount-append" name="soFields[' +
+            x +
+            '][discount]" id="" readonly>' +
             "</div>" +
             '<div class="col-2 col-md-1 form-group">' +
             '<label for=""> &nbsp; </label>' +
@@ -318,43 +319,40 @@ let y = 0;
         $(this).parents(".form-group").remove();
     });
 
-    $('#payment_method').change(function(){
-if ($(this).val()==1) {
-    $('#payment').removeAttr('hidden');
-    $('#payment_type').removeAttr('hidden');
-    $('#top').attr('hidden','true');
-}else{
-    $('#payment').attr('hidden','true');
-    $('#payment_type').attr('hidden','true');
-    $('#top').removeAttr('hidden');
-}
-
+    $("#payment_method").change(function () {
+        if ($(this).val() == 1) {
+            $("#payment").removeAttr("hidden");
+            $("#payment_type").removeAttr("hidden");
+            $("#top").attr("hidden", "true");
+        } else {
+            $("#payment").attr("hidden", "true");
+            $("#payment_type").attr("hidden", "true");
+            $("#top").removeAttr("hidden");
+        }
     });
 
-
-    $('.editPayment_method').click(function(){
-        if ($('.editPayments').val()==1) {
-            $('#editpayment').removeAttr('hidden');
-            $('#editpayment_type').removeAttr('hidden');
-            $('#edittop').attr('hidden','true');
-        }else{
-            $('#editpayment').attr('hidden','true');
-            $('#editpayment_type').attr('hidden','true');
-            $('#edittop').removeAttr('hidden');
+    $(".editPayment_method").click(function () {
+        let edit_so_parent = $(this).parents("td").siblings("div");
+        if (edit_so_parent.find(".editPayments").val() == 1) {
+            edit_so_parent.find("#editpayment").removeAttr("hidden");
+            edit_so_parent.find("#editpayment_type").removeAttr("hidden");
+            edit_so_parent.find("#edittop").attr("hidden", "true");
+        } else {
+            edit_so_parent.find("#editpayment").attr("hidden", "true");
+            edit_so_parent.find("#editpayment_type").attr("hidden", "true");
+            edit_so_parent.find("#edittop").removeAttr("hidden");
         }
 
-        $('.changePayment').change(function(){
-            if ($('.editPayments').val()==1) {
-                $('#editpayment').removeAttr('hidden');
-                $('#editpayment_type').removeAttr('hidden');
-                $('#edittop').attr('hidden','true');
-            }else{
-                $('#editpayment').attr('hidden','true');
-                $('#editpayment_type').attr('hidden','true');
-                $('#edittop').removeAttr('hidden');
+        edit_so_parent.find(".changePayment").change(function () {
+            if (edit_so_parent.find(".editPayments").val() == 1) {
+                edit_so_parent.find("#editpayment").removeAttr("hidden");
+                edit_so_parent.find("#editpayment_type").removeAttr("hidden");
+                edit_so_parent.find("#edittop").attr("hidden", "true");
+            } else {
+                edit_so_parent.find("#editpayment").attr("hidden", "true");
+                edit_so_parent.find("#editpayment_type").attr("hidden", "true");
+                edit_so_parent.find("#edittop").removeAttr("hidden");
             }
-
-                });
-            });
-
+        });
+    });
 });

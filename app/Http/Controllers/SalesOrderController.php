@@ -170,6 +170,7 @@ class SalesOrderController extends Controller
             ->get();
         dd($dataProduk);
     }
+
     /**
      * Display the specified resource.
      *
@@ -215,12 +216,16 @@ class SalesOrderController extends Controller
         //
     }
 
-    public function verifate(SalesOrderModel $salesorder)
+    public function verificate(SalesOrderModel $salesorder)
     {
-        $selected_so = SalesOrderModel::where('order_number', $salesorder->order_number)->firstOrFail();
+        $selected_so = SalesOrderModel::where('id', $salesorder->id)->firstOrFail();
+        $getCredential = CustomerModel::select('isOverDue', 'isOverPlafoned')->where('id', $selected_so->customers_id)->firstOrFail();
         $selected_so->isverified = 1;
+        if ($getCredential->isOverDue != 1 || $getCredential->isOverPlafoned != 1) {
+            $selected_so->isapprove = 1;
+        }
         $selected_so->save();
 
-        return redirect('/sales_orders')->with('Success', "Sales Order Verifate Success");
+        return redirect('/sales_orders')->with('Success', "Sales Order Verification Success");
     }
 }
