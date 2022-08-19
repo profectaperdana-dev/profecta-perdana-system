@@ -67,9 +67,8 @@
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">
                                                             <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item editPayment_method" href="#"
-                                                                data-bs-toggle="modal" data-original-title="test"
-                                                                data-bs-target="#changeDataNodebt{{ $value->id }}">Edit
+                                                            <a class="dropdown-item editPayment_method"
+                                                                href="{{ url('/edit_sales_order/' . $value->sales_orders_id) }}">Edit
                                                                 Sales
                                                                 Order</a>
                                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
@@ -82,137 +81,7 @@
                                                                 Product</a>
                                                         </div>
                                                     </td>
-                                                    {{-- Edit No Debt SO --}}
-                                                    <div class="modal fade" id="changeDataNodebt{{ $value->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <form method="post"
-                                                                action="{{ url('updateso/' . $value->id . '/editso') }}"
-                                                                enctype="multipart/form-data">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Change Data
-                                                                        </h5>
-                                                                        <button class="btn-close" type="button"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="container-fluid">
-                                                                            <div class="form-group row">
-                                                                                <div class="col-md-6 form-group">
-                                                                                    <label>
-                                                                                        Customers
-                                                                                    </label>
-                                                                                    <select name="customer_id" required
-                                                                                        class="form-control sub_type customer-append">
-                                                                                        <option value="">
-                                                                                            -Choose Customers-</option>
-                                                                                        @foreach ($customer as $dataCust)
-                                                                                            <option
-                                                                                                value="{{ $dataCust->id }}"
-                                                                                                @if ($dataCust->id == $value->soBy->id) selected @endif>
-                                                                                                {{ $dataCust->code_cust }}
-                                                                                                |
-                                                                                                {{ $dataCust->name_cust }}
-                                                                                            </option>
-                                                                                        @endforeach
-                                                                                    </select>
-                                                                                    @error('sub_material')
-                                                                                        <div class="invalid-feedback">
-                                                                                            {{ $message }}
-                                                                                        </div>
-                                                                                    @enderror
-                                                                                </div>
-                                                                                <div class="col-md-6 form-group mr-5">
-                                                                                    <label>Payment Method</label>
-                                                                                    <select name="payment_method"
-                                                                                        id="" required
-                                                                                        class="form-control changePayment editPayments">
-                                                                                        <option value="" selected>
-                                                                                            -Choose Payment-</option>
-                                                                                        <option value="1"
-                                                                                            @if ($value->payment_method == 1) selected @endif>
-                                                                                            Paid
-                                                                                        </option>
-                                                                                        <option value="2"
-                                                                                            @if ($value->payment_method == 2) selected @endif>
-                                                                                            Debt
-                                                                                        </option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
 
-                                                                                <div id="edittop" hidden
-                                                                                    class="col-md-12 form-group ">
-                                                                                    <label>Terms of Payment</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control "
-                                                                                        placeholder="Product Name"
-                                                                                        name="top" value="">
-
-                                                                                </div>
-                                                                                <div id="editpayment" hidden
-                                                                                    class="col-md-6 form-group mr-6">
-                                                                                    <label>Payment</label>
-                                                                                    <select name="payment" id=""
-                                                                                        class="form-control sub_type ">
-                                                                                        <option value="" selected>
-                                                                                            -Choose Payment-</option>
-                                                                                        <option value="1"
-                                                                                            @if ($value->payment == 1) selected @endif>
-                                                                                            CBD
-                                                                                        </option>
-                                                                                        <option value="2"
-                                                                                            @if ($value->payment == 2) selected @endif>
-                                                                                            COD
-                                                                                        </option>
-                                                                                    </select>
-                                                                                </div>
-                                                                                <div id="editpayment_type" hidden
-                                                                                    class="col-md-6 form-group mr-6">
-                                                                                    <label>Payment Type</label>
-                                                                                    <select name="payment_type"
-                                                                                        class="form-control sub_type ">
-                                                                                        <option value="" selected>
-                                                                                            -Choose Payment-</option>
-                                                                                        <option value="Cash"
-                                                                                            @if ($value->payment_type == 'Cash') selected @endif>
-                                                                                            Cash
-                                                                                        </option>
-                                                                                        <option value="Transfer"
-                                                                                            @if ($value->payemnt_type == 'Transfer') selected @endif>
-                                                                                            Transfer
-                                                                                        </option>
-                                                                                    </select>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <div class="col-md-12 form-group mr-5">
-                                                                                    <label>Remarks</label>
-                                                                                    <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button class="btn btn-danger" type="button"
-                                                                            data-bs-dismiss="modal">Close</button>
-                                                                        <button type="reset"
-                                                                            class="btn btn-warning">Reset</button>
-                                                                        <button class="btn btn-primary"
-                                                                            type="submit">Save
-                                                                            changes</button>
-                                                                    </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    {{-- End Edit No Debt SO --}}
                                                     <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->order_number }}</td>
                                                     <td>{{ $value->order_date }}</td>
@@ -257,12 +126,13 @@
                                                             aria-expanded="false"><i data-feather="settings"></i></a>
                                                         <div class="dropdown-menu" aria-labelledby="">
                                                             <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item" href="#"
-                                                                data-bs-toggle="modal" data-original-title="test"
-                                                                data-bs-target="#changeData{{ $value->id }}">Edit Sales
+                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                                data-original-title="test"
+                                                                data-bs-target="#changeData{{ $value->order_number }}">Edit
+                                                                Sales
                                                                 Order</a>
-                                                            <a class="dropdown-item" href="#"
-                                                                data-bs-toggle="modal" data-original-title="test"
+                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                                data-original-title="test"
                                                                 data-bs-target="#changeData{{ $value->id }}">Edit
                                                                 Product</a>
                                                             <a class="dropdown-item" href="#"

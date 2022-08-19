@@ -332,29 +332,30 @@ if ($(this).val()==1) {
     });
 
 
-    $('.editPayment_method').click(function(){
-        if ($('.editPayments').val()==1) {
-            $('#editpayment').removeAttr('hidden');
-            $('#editpayment_type').removeAttr('hidden');
-            $('#edittop').attr('hidden','true');
-        }else{
-            $('#editpayment').attr('hidden','true');
-            $('#editpayment_type').attr('hidden','true');
-            $('#edittop').removeAttr('hidden');
-        }
 
-        $('.changePayment').change(function(){
-            if ($('.editPayments').val()==1) {
-                $('#editpayment').removeAttr('hidden');
-                $('#editpayment_type').removeAttr('hidden');
-                $('#edittop').attr('hidden','true');
-            }else{
-                $('#editpayment').attr('hidden','true');
-                $('#editpayment_type').attr('hidden','true');
-                $('#edittop').removeAttr('hidden');
-            }
+    // $('.editPayment_method').click(function(){
+    //     if ($('.editPayments').val()==1) {
+    //         $('#editpayment').removeAttr('hidden');
+    //         $('#editpayment_type').removeAttr('hidden');
+    //         $('#edittop').attr('hidden','true');
+    //     }else{
+    //         $('#editpayment').attr('hidden','true');
+    //         $('#editpayment_type').attr('hidden','true');
+    //         $('#edittop').removeAttr('hidden');
+    //     }
 
-                });
-            });
+    //     $('.changePayment').change(function(){
+    //         if ($('.editPayments').val()==1) {
+    //             $('#editpayment').removeAttr('hidden');
+    //             $('#editpayment_type').removeAttr('hidden');
+    //             $('#edittop').attr('hidden','true');
+    //         }else{
+    //             $('#editpayment').attr('hidden','true');
+    //             $('#editpayment_type').attr('hidden','true');
+    //             $('#edittop').removeAttr('hidden');
+    //         }
+
+    //             });
+    //         });
 
 });
