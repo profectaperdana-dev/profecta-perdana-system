@@ -331,28 +331,28 @@ $(document).ready(function () {
         }
     });
 
-    $(".editPayment_method").click(function () {
-        let edit_so_parent = $(this).parents("td").siblings("div");
-        if (edit_so_parent.find(".editPayments").val() == 1) {
-            edit_so_parent.find("#editpayment").removeAttr("hidden");
-            edit_so_parent.find("#editpayment_type").removeAttr("hidden");
-            edit_so_parent.find("#edittop").attr("hidden", "true");
-        } else {
-            edit_so_parent.find("#editpayment").attr("hidden", "true");
-            edit_so_parent.find("#editpayment_type").attr("hidden", "true");
-            edit_so_parent.find("#edittop").removeAttr("hidden");
-        }
+    // $('.editPayment_method').click(function(){
+    //     if ($('.editPayments').val()==1) {
+    //         $('#editpayment').removeAttr('hidden');
+    //         $('#editpayment_type').removeAttr('hidden');
+    //         $('#edittop').attr('hidden','true');
+    //     }else{
+    //         $('#editpayment').attr('hidden','true');
+    //         $('#editpayment_type').attr('hidden','true');
+    //         $('#edittop').removeAttr('hidden');
+    //     }
 
-        edit_so_parent.find(".changePayment").change(function () {
-            if (edit_so_parent.find(".editPayments").val() == 1) {
-                edit_so_parent.find("#editpayment").removeAttr("hidden");
-                edit_so_parent.find("#editpayment_type").removeAttr("hidden");
-                edit_so_parent.find("#edittop").attr("hidden", "true");
-            } else {
-                edit_so_parent.find("#editpayment").attr("hidden", "true");
-                edit_so_parent.find("#editpayment_type").attr("hidden", "true");
-                edit_so_parent.find("#edittop").removeAttr("hidden");
-            }
-        });
-    });
+    //     $('.changePayment').change(function(){
+    //         if ($('.editPayments').val()==1) {
+    //             $('#editpayment').removeAttr('hidden');
+    //             $('#editpayment_type').removeAttr('hidden');
+    //             $('#edittop').attr('hidden','true');
+    //         }else{
+    //             $('#editpayment').attr('hidden','true');
+    //             $('#editpayment_type').attr('hidden','true');
+    //             $('#edittop').removeAttr('hidden');
+    //         }
+
+    //             });
+    //         });
 });

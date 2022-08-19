@@ -2,18 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use DateTime;
+use DateTimeZone;
+use Carbon\Carbon;
+use DateTimeImmutable;
+use App\Models\ProductModel;
+use Illuminate\Http\Request;
+use App\Events\SOMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
-use App\Models\ProductModel;
-use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
-use Carbon\Carbon;
-use DateTime;
-use DateTimeImmutable;
-use DateTimeZone;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use App\Models\SalesOrderDetailModel;
 
 use function PHPUnit\Framework\isEmpty;
 use function Symfony\Component\VarDumper\Dumper\esc;
@@ -30,12 +31,12 @@ class SalesOrderController extends Controller
         $title = 'Create Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
+        event(new SOMessage('From:' . Auth::user()->name, 'Halloooo'));
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
     public function getRecentData()
     {
         $title = 'Recent Sales Order';
-
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
@@ -100,6 +101,7 @@ class SalesOrderController extends Controller
         $model->top = $request->get('top');
         $model->payment = $request->get('payment');
         $model->payment_method = $request->get('payment_method');
+        $model->payment_type = $request->get('payment_type');
         $model->isapprove = 0;
         $model->isverified = 0;
 
@@ -154,6 +156,15 @@ class SalesOrderController extends Controller
             return redirect('/sales_order')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');
         }
     }
+
+
+    public function editSo($id)
+    {
+        $title = 'Edit Data Sales Order';
+        $value = SalesOrderModel::find($id);
+        $customer = CustomerModel::where('status', 1)->latest()->get();
+        return view('recent_sales_order.edit', compact('title', 'value', 'customer'));
+    }
     public function updateSo(Request $request, $id)
     {
         $request->validate([
@@ -161,14 +172,51 @@ class SalesOrderController extends Controller
             "payment_method" => "required|numeric",
 
         ]);
+        $model = SalesOrderModel::find($id);
+        if ($request->get('customer_id') != $model->customers_id) {
 
-        $model = SalesOrderDetailModel::find($id);
-        $model->customer_id = $request->get('customer_id');
+            $arraySod = [];
+            $arrayDiscount = [];
+            $sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
+            foreach ($sod as $key => $value) {
+                array_push($arraySod, $value->products_id);
+                array_push($arrayDiscount, $value->discount);
+            }
+            $customer_id = $request->get('customer_id');
+            $total = 0;
+            foreach ($sod as $key => $item) {
+                $discount = DiscountModel::where('customer_id', $customer_id)
+                    ->where('product_id', $item->products_id)->first();
+                $discountValue = 0;
+                if (!isset($discount)) {
+                    $discountValue = 0;
+                } else {
+                    $discountValue = $discount->discount;
+                }
+                $produkDiscount = SalesOrderDetailModel::where('products_id', $item->products_id)->where('sales_orders_id', $id)->first();
+                $produkDiscount->discount = $discountValue;
+                $dataHarga = ProductModel::select('harga_jual_nonretail')->where('id', $item->products_id)->first();
+                $diskon =   $produkDiscount->discount / 100;
+                $hargaDiskon = $dataHarga->harga_jual_nonretail * $diskon;
+                $hargaAfterDiskon = $dataHarga->harga_jual_nonretail -  $hargaDiskon;
+                $total = $total + ($hargaAfterDiskon * $produkDiscount->qty);
 
-        $dataProduk =  DiscountModel::where('customer_id', $request->get('customer_id'))
-            ->where('product_id', $model->products_id)
-            ->get();
-        dd($dataProduk);
+                $produkDiscount->save();
+            }
+
+            $ppn = 0.11 * $total;
+            $model->ppn = $ppn;
+            $model->total = $total;
+            $model->total_after_ppn = $total + $ppn;
+            $model->customers_id = $request->get('customer_id');
+            $model->save();
+
+            // dd($arrayDiscount);
+        }
+        if ($model->save()) {
+
+            return redirect('/recent_sales_order')->with('success', 'Add Discount Success');
+        }
     }
 
     /**

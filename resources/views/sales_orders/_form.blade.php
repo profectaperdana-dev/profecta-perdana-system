@@ -69,9 +69,9 @@
                     <label>Payment Type</label>
                     <select name="payment_type" id="sub-type" class="form-control sub_type ">
                         <option value="" selected>-Choose Payment-</option>
-                        <option value="Cash">Cash
+                        <option value="1">Cash
                         </option>
-                        <option value="Transfer">Transfer
+                        <option value="2">Transfer
                         </option>
                     </select>
                 </div>
