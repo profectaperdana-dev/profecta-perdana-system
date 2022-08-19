@@ -124,11 +124,11 @@ let y = 0;
             '<a href="javascript:void(0)" class="form-control text-white remStock text-center" style="border:none; background-color:red">X</a></div></div>';
 
         $("#formdynamic").append(form);
-        $(".product-append").select2({
+        $(".product-append-stock").select2({
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/select",
+                url: "/products/selectSo",
                 data: {
                     _token: csrf,
                 },
@@ -149,6 +149,8 @@ let y = 0;
             },
         });
     });
+
+
     $(document).on("click", ".remStock", function () {
         $(this).parents(".form-group").remove();
     });
@@ -179,7 +181,7 @@ let y = 0;
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/select",
+                url: "/products/selectSo",
                 data: {
                     _token: csrf,
                 },
@@ -255,7 +257,24 @@ let y = 0;
                 parent_product.val(data.discount);
             },
         });
+
+
     });
+    $(document).on("change",".cekQty",function () {
+        $.ajax({
+            type: "GET",
+            url: "/stocks/cekQty/"+ product_id,
+            dataType: "json",
+            success: function (data) {
+                if ($('.cekQty').val() > data.stock){
+                    console.log('barang besar');
+                    // $(this).css('background-color','red');
+                }
+            },
+        });
+
+    });
+
 
     $("#addSo").on("click", function () {
         ++x;

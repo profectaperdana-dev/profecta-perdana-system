@@ -96,7 +96,7 @@
                 </div>
                 <div class="col-3 col-md-3 form-group">
                     <label>Qty</label>
-                    <input class="form-control" required name="soFields[0][qty]" id="">
+                    <input class="form-control cekQty" required name="soFields[0][qty]" id="">
                     @error('soFields[0][qty]')
                         <div class="invalid-feedback">
                             {{ $message }}

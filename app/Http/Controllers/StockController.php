@@ -98,6 +98,20 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function cekQty($product_id)
+    {
+        try {
+            $qty = StockModel::select("id", "stock")
+                ->where('warehouses_id', Auth::user()->warehouseBy->id)
+                ->where('products_id', $product_id)
+                ->first();
+
+            return response()->json($qty);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
     public function show($id)
     {
         //

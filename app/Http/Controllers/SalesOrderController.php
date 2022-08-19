@@ -147,7 +147,8 @@ class SalesOrderController extends Controller
         $model->ppn = $ppn;
         $model->total = $total;
         $model->total_after_ppn = $total + $ppn;
-        $model->save();
+
+
 
         if (isEmpty($message_duplicate)) {
             return redirect('/sales_order')->with('success', 'Add Discount Success');
@@ -171,6 +172,8 @@ class SalesOrderController extends Controller
             "payment_method" => "required|numeric",
 
         ]);
+        // dd($request->get('payment_method'));
+
         $model = SalesOrderModel::find($id);
         if ($request->get('customer_id') != $model->customers_id) {
 
@@ -208,10 +211,24 @@ class SalesOrderController extends Controller
             $model->total = $total;
             $model->total_after_ppn = $total + $ppn;
             $model->customers_id = $request->get('customer_id');
-            $model->save();
 
             // dd($arrayDiscount);
         }
+        if ($request->get('payment_method') == 1) {
+            $model->top = '';
+            $model->payment = $request->get('payment');
+            $model->payment_type = $request->get('payment_type');
+        } else {
+            $model->top = $request->get('top');
+            $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
+            $dt = $dt->modify("+" . $model->top . " days");
+            $model->payment = '';
+            $model->payment_type = '';
+            $model->isoverdue = $dt;
+        }
+        $model->payment_method = $request->get('payment_method');
+        $model->remark = $request->get('remark');
+        $model->save();
         if ($model->save()) {
 
             return redirect('/recent_sales_order')->with('success', 'Add Discount Success');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MaterialModel;
 use App\Models\ProductModel;
+use App\Models\StockModel;
 use App\Models\SubMaterialModel;
 use App\Models\SubTypeModel;
 use App\Models\UomModel;
@@ -32,8 +33,7 @@ class ProductController extends Controller
         // dd($data);
         return view('products.index', compact('data', 'title'));
     }
-
-    public function select(Request $request)
+    public function selectSo(Request $request)
     {
         try {
             $product = [];
@@ -44,6 +44,29 @@ class ProductController extends Controller
                     ->get();
             } else {
                 $product = ProductModel::latest()->get();
+            }
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    public function select(Request $request)
+    {
+        try {
+            $product = [];
+            if ($request->has('q')) {
+                $search = $request->q;
+                $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
+                    ->select('stocks.*', 'products.nama_barang')
+                    ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                    ->where('products.nama_barang', 'LIKE', "%$search%")
+
+                    ->get();
+            } else {
+                $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang')
+                    ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                    ->latest()->get();
             }
             return response()->json($product);
         } catch (\Throwable $th) {
