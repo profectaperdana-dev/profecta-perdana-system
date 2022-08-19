@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use App\Events\SOMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
+use App\Models\NotificationsModel;
 use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -152,9 +153,16 @@ class SalesOrderController extends Controller
         $model->save();
 
         if (isEmpty($message_duplicate)) {
-            return redirect('/sales_order')->with('success', 'Add Discount Success');
+            $message = $model->order_number . ' Sales Order has been created! Please check';
+            event(new SOMessage('From: ' . Auth::user()->name,  $message));
+            $notif = new NotificationsModel();
+            $notif->message = $message;
+            $notif->status = 0;
+            $notif->role_id = 5;
+            $notif->save();
+            return redirect('/sales_order')->with('success', 'Add Sales Order Success');
         } else {
-            return redirect('/sales_order')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');
+            return redirect('/sales_order')->with('error', 'Add Sales Order Fail! Please make sure you have filled all the input');
         }
     }
 

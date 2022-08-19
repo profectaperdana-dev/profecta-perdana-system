@@ -122,15 +122,15 @@
                                 data-feather="settings"></i></a>
                             <div class="dropdown-menu" aria-labelledby="">
                               <h5 class="dropdown-header">Actions</h5>
-                              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                                data-bs-target="#changeData{{ $value->order_number }}">Edit
+                              <a class="dropdown-item editPayment_method"
+                                href="{{ url('/edit_sales_order/' . $value->sales_orders_id) }}">Edit
                                 Sales
                                 Order</a>
                               <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
                                 data-bs-target="#changeData{{ $value->id }}">Edit
                                 Product</a>
-                              <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                data-original-title="test" data-bs-target="#deleteData{{ $value->id }}">Add
+                              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
+                                data-bs-target="#deleteData{{ $value->id }}">Add
                                 Product</a>
                             </div>
 

@@ -105,14 +105,37 @@ $(document).ready(function () {
 
     // Stock
     let y = 0;
-
+    $(".product-append-all").select2({
+        width: "100%",
+        ajax: {
+            type: "GET",
+            url: "/products/selectAll",
+            data: {
+                _token: csrf,
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return [
+                            {
+                                text: item.nama_barang,
+                                id: item.id,
+                            },
+                        ];
+                    }),
+                };
+            },
+        },
+    });
     $("#addStock").on("click", function () {
         ++y;
         let form =
             '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
             y +
             '][product_id]"' +
-            'class="form-control product-append" required> <option value=""> Choose Product </option> </select>' +
+            'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
             '<label> Stock </label> <input type="number" name="stockFields[' +
             y +
@@ -123,11 +146,11 @@ $(document).ready(function () {
             '<a href="javascript:void(0)" class="form-control text-white remStock text-center" style="border:none; background-color:red">X</a></div></div>';
 
         $("#formdynamic").append(form);
-        $(".product-append").select2({
+        $(".product-append-all").select2({
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/select",
+                url: "/products/selectAll",
                 data: {
                     _token: csrf,
                 },
@@ -148,6 +171,7 @@ $(document).ready(function () {
             },
         });
     });
+
     $(document).on("click", ".remStock", function () {
         $(this).parents(".form-group").remove();
     });
@@ -163,7 +187,7 @@ $(document).ready(function () {
             '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
             i +
             '][product_id]"' +
-            'class="form-control product-append" required> <option value=""> Choose Product </option> </select>' +
+            'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
             '<label> Discount </label> <input type="number" name="stockFields[' +
             i +
@@ -174,11 +198,11 @@ $(document).ready(function () {
             '<a href="javascript:void(0)" class="form-control text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
 
         $("#formdynamic").append(form);
-        $(".product-append").select2({
+        $(".product-append-all").select2({
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/select",
+                url: "/products/selectAll",
                 data: {
                     _token: csrf,
                 },
@@ -252,6 +276,19 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 parent_product.val(data.discount);
+            },
+        });
+    });
+    $(document).on("change", ".cekQty", function () {
+        $.ajax({
+            type: "GET",
+            url: "/stocks/cekQty/" + product_id,
+            dataType: "json",
+            success: function (data) {
+                if ($(".cekQty").val() > data.stock) {
+                    console.log("barang besar");
+                    // $(this).css('background-color','red');
+                }
             },
         });
     });

@@ -37,7 +37,23 @@ class StockController extends Controller
             return view('stocks.index', compact('title', 'data', 'product', 'warehouse'));
         }
     }
-
+    public function cekProduk(Request $request)
+    {
+        try {
+            $product = [];
+            if ($request->has('q')) {
+                $search = $request->q;
+                $product = ProductModel::select("id", "nama_barang")
+                    ->where('nama_barang', 'LIKE', "%$search%")
+                    ->get();
+            } else {
+                $product = ProductModel::latest()->get();
+            }
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -98,6 +114,20 @@ class StockController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+
+    public function cekQty($product_id)
+    {
+        try {
+            $qty = StockModel::select("id", "stock")
+                ->where('warehouses_id', Auth::user()->warehouseBy->id)
+                ->where('products_id', $product_id)
+                ->first();
+
+            return response()->json($qty);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
     public function show($id)
     {
         //

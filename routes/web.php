@@ -40,9 +40,11 @@ Route::get('/', function () {
 
 Route::group(['middleware' => 'auth'], function () {
     //ajax route
+    Route::get('/products/cekproduct', [StockController::class, 'cekProduk']);
     Route::get('/product_sub_materials/select/{id}', [SubMaterialController::class, 'select']);
     Route::get('/product_sub_types/select/{id}', [SubTypeController::class, 'select']);
     Route::get('/products/select', [ProductController::class, 'select']);
+    Route::get('/products/selectAll', [ProductController::class, 'selectAll']);
     Route::get('/discounts/select/{customer_id}/{product_id}', [DiscountController::class, 'select']);
     Route::get('/products/select_without', [ProductController::class, 'selectWithout']);
     Route::get('/recent_sales_order', [SalesOrderController::class, 'getRecentData']);
@@ -50,6 +52,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cek_jam', [SalesOrderController::class, 'cekJam']);
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('/edit_sales_order/{id}', [SalesOrderController::class, 'editSo']);
+    Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
     Route::get('/sales_orders/verificate/{id}', [SalesOrderController::class, 'verificate']);
 
     Route::resource('/roles', RoleController::class);
