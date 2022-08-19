@@ -32,7 +32,6 @@ class SalesOrderController extends Controller
         $title = 'Create Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        event(new SOMessage('From:' . Auth::user()->name, 'Sales Order indicated overdue or overceiling. Please check immediately!'));
 
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
