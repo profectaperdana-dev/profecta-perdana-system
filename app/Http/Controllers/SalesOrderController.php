@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use DateTimeImmutable;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
+use App\Events\SOMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\SalesOrderModel;
@@ -30,12 +31,12 @@ class SalesOrderController extends Controller
         $title = 'Create Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
+        event(new SOMessage('From:' . Auth::user()->name, 'Halloooo'));
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
     public function getRecentData()
     {
         $title = 'Recent Sales Order';
-
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
@@ -279,7 +280,7 @@ class SalesOrderController extends Controller
         //
     }
 
-    public function verifate(SalesOrderModel $salesorder)
+    public function verificate(SalesOrderModel $salesorder)
     {
         $selected_so = SalesOrderModel::where('order_number', $salesorder->order_number)->firstOrFail();
         $selected_so->isverified = 1;
