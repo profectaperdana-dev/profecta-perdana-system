@@ -103,17 +103,39 @@ $(document).ready(function () {
     });
     //  Event on change select regency:end
 
-
-// Stock
-let y = 0;
-
+    // Stock
+    let y = 0;
+    $(".product-append-all").select2({
+        width: "100%",
+        ajax: {
+            type: "GET",
+            url: "/products/selectAll",
+            data: {
+                _token: csrf,
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function (data) {
+                return {
+                    results: $.map(data, function (item) {
+                        return [
+                            {
+                                text: item.nama_barang,
+                                id: item.id,
+                            },
+                        ];
+                    }),
+                };
+            },
+        },
+    });
     $("#addStock").on("click", function () {
         ++y;
         let form =
             '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
             y +
             '][product_id]"' +
-            'class="form-control product-append" required> <option value=""> Choose Product </option> </select>' +
+            'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
             '<label> Stock </label> <input type="number" name="stockFields[' +
             y +
@@ -124,11 +146,11 @@ let y = 0;
             '<a href="javascript:void(0)" class="form-control text-white remStock text-center" style="border:none; background-color:red">X</a></div></div>';
 
         $("#formdynamic").append(form);
-        $(".product-append").select2({
+        $(".product-append-all").select2({
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/cekproduct",
+                url: "/products/selectAll",
                 data: {
                     _token: csrf,
                 },
@@ -148,14 +170,13 @@ let y = 0;
                 },
             },
         });
-
     });
 
     $(document).on("click", ".remStock", function () {
         $(this).parents(".form-group").remove();
     });
 
-// end Stock
+    // end Stock
 
     //select2 product
     let i = 0;
@@ -166,7 +187,7 @@ let y = 0;
             '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
             i +
             '][product_id]"' +
-            'class="form-control product-append" required> <option value=""> Choose Product </option> </select>' +
+            'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
             '<label> Discount </label> <input type="number" name="stockFields[' +
             i +
@@ -177,11 +198,11 @@ let y = 0;
             '<a href="javascript:void(0)" class="form-control text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
 
         $("#formdynamic").append(form);
-        $(".product-append").select2({
+        $(".product-append-all").select2({
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/selectSo",
+                url: "/products/selectAll",
                 data: {
                     _token: csrf,
                 },
@@ -257,24 +278,20 @@ let y = 0;
                 parent_product.val(data.discount);
             },
         });
-
-
     });
-    $(document).on("change",".cekQty",function () {
+    $(document).on("change", ".cekQty", function () {
         $.ajax({
             type: "GET",
-            url: "/stocks/cekQty/"+ product_id,
+            url: "/stocks/cekQty/" + product_id,
             dataType: "json",
             success: function (data) {
-                if ($('.cekQty').val() > data.stock){
-                    console.log('barang besar');
+                if ($(".cekQty").val() > data.stock) {
+                    console.log("barang besar");
                     // $(this).css('background-color','red');
                 }
             },
         });
-
     });
-
 
     $("#addSo").on("click", function () {
         ++x;
@@ -296,7 +313,9 @@ let y = 0;
             "</div> " +
             '<div class="col-3 col-md-4 form-group">' +
             "<label>Discount %</label>" +
-            '<input class="form-control discount-append" name="soFields['+ x +'][discount]" id="" readonly>' +
+            '<input class="form-control discount-append" name="soFields[' +
+            x +
+            '][discount]" id="" readonly>' +
             "</div>" +
             '<div class="col-2 col-md-1 form-group">' +
             '<label for=""> &nbsp; </label>' +
@@ -337,20 +356,17 @@ let y = 0;
         $(this).parents(".form-group").remove();
     });
 
-    $('#payment_method').change(function(){
-if ($(this).val()==1) {
-    $('#payment').removeAttr('hidden');
-    $('#payment_type').removeAttr('hidden');
-    $('#top').attr('hidden','true');
-}else{
-    $('#payment').attr('hidden','true');
-    $('#payment_type').attr('hidden','true');
-    $('#top').removeAttr('hidden');
-}
-
+    $("#payment_method").change(function () {
+        if ($(this).val() == 1) {
+            $("#payment").removeAttr("hidden");
+            $("#payment_type").removeAttr("hidden");
+            $("#top").attr("hidden", "true");
+        } else {
+            $("#payment").attr("hidden", "true");
+            $("#payment_type").attr("hidden", "true");
+            $("#top").removeAttr("hidden");
+        }
     });
-
-
 
     // $('.editPayment_method').click(function(){
     //     if ($('.editPayments').val()==1) {
@@ -376,5 +392,4 @@ if ($(this).val()==1) {
 
     //             });
     //         });
-
 });
