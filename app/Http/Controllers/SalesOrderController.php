@@ -31,7 +31,6 @@ class SalesOrderController extends Controller
         $title = 'Create Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        event(new SOMessage('From:' . Auth::user()->name, 'Halloooo'));
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
     public function getRecentData()
@@ -148,13 +147,13 @@ class SalesOrderController extends Controller
         $model->ppn = $ppn;
         $model->total = $total;
         $model->total_after_ppn = $total + $ppn;
-
-
+        $model->save();
 
         if (isEmpty($message_duplicate)) {
-            return redirect('/sales_order')->with('success', 'Add Discount Success');
+            event(new SOMessage('From: ' . Auth::user()->name, 'Sales Order has been created! Please check'));
+            return redirect('/sales_order')->with('success', 'Add Sales Order Success');
         } else {
-            return redirect('/sales_order')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');
+            return redirect('/sales_order')->with('error', 'Add Sales Order Fail! Please make sure you have filled all the input');
         }
     }
 
@@ -173,8 +172,6 @@ class SalesOrderController extends Controller
             "payment_method" => "required|numeric",
 
         ]);
-        // dd($request->get('payment_method'));
-
         $model = SalesOrderModel::find($id);
         if ($request->get('customer_id') != $model->customers_id) {
 
@@ -212,24 +209,10 @@ class SalesOrderController extends Controller
             $model->total = $total;
             $model->total_after_ppn = $total + $ppn;
             $model->customers_id = $request->get('customer_id');
+            $model->save();
 
             // dd($arrayDiscount);
         }
-        if ($request->get('payment_method') == 1) {
-            $model->top = '';
-            $model->payment = $request->get('payment');
-            $model->payment_type = $request->get('payment_type');
-        } else {
-            $model->top = $request->get('top');
-            $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
-            $dt = $dt->modify("+" . $model->top . " days");
-            $model->payment = '';
-            $model->payment_type = '';
-            $model->isoverdue = $dt;
-        }
-        $model->payment_method = $request->get('payment_method');
-        $model->remark = $request->get('remark');
-        $model->save();
         if ($model->save()) {
 
             return redirect('/recent_sales_order')->with('success', 'Add Discount Success');
