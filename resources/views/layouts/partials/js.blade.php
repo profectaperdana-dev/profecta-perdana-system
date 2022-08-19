@@ -23,30 +23,36 @@
  <script src="{{ asset('assets') }}/js/script.js"></script>
  {{-- <script src="{{ asset('assets') }}/js/theme-customizer/customizer.js"></script> --}}
  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-     integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
-     crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+   integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
  @if (Session::has('success'))
-     <script>
-         swal("Success !", "{!! Session::get('success') !!}", "success", {
-             button: "Ok",
-         });
-     </script>
+   <script>
+     swal("Success !", "{!! Session::get('success') !!}", "success", {
+       button: "Ok",
+     });
+   </script>
  @endif
  @if (Session::has('info'))
-     <script>
-         swal("info !", "{!! Session::get('info') !!}", "info", {
-             button: "Ok",
-         });
-     </script>
+   <script>
+     swal("info !", "{!! Session::get('info') !!}", "info", {
+       button: "Ok",
+     });
+   </script>
  @endif
  @if (Session::has('error'))
-     <script>
-         swal("error !", "{!! Session::get('error') !!}", "error", {
-             button: "Ok",
-         });
-     </script>
+   <script>
+     swal("error !", "{!! Session::get('error') !!}", "error", {
+       button: "Ok",
+     });
+   </script>
  @endif
+ <script src="{{ asset('assets') }}/js/notify/bootstrap-notify.min.js"></script>
+ <script src="{{ asset('assets') }}/js/notify/notify-script.js"></script>
  <script src="{{ asset('js/custom.js') }}"></script>
+ <script src="{{ asset('js/app.js') }}"></script>
 
  <!-- login js-->
  <!-- Plugin used-->
+
+ <!-- Notification -->
+ @include('layouts.partials.notify')

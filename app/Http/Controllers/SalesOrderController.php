@@ -31,12 +31,12 @@ class SalesOrderController extends Controller
         $title = 'Create Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
+        event(new SOMessage('From:' . Auth::user()->name, 'Halloooo'));
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
     public function getRecentData()
     {
         $title = 'Recent Sales Order';
-        event(new SOMessage('Halloooo'));
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
         $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')

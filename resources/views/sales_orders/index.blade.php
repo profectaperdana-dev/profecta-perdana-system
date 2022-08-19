@@ -41,8 +41,5 @@
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
     <script src="{{ asset('js/app.js') }}"></script>
-    <script>
-      Echo.channel('so-created').listen('SOMessage', (e) => console.log('RealTimeMessage: ' + e.message));
-    </script>
   @endpush
 @endsection
