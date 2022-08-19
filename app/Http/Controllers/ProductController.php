@@ -28,7 +28,6 @@ class ProductController extends Controller
             ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
             ->latest('products.id')
             ->get(['products.*', 'uoms.satuan', 'product_materials.nama_material', 'product_sub_materials.nama_sub_material', 'product_sub_types.type_name']);
-
         // dd($data);
         return view('products.index', compact('data', 'title'));
     }

@@ -32,3 +32,5 @@ window.Echo = new Echo({
     wsHost: window.location.hostname,
     wsPort: 6001,
 });
+
+require("bootstrap/dist/js/bootstrap.bundle");
