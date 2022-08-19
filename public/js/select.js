@@ -105,11 +105,11 @@ $(document).ready(function () {
 
     // Stock
     let y = 0;
-    $(".product-append-stock").select2({
+    $(".product-append-all").select2({
         width: "100%",
         ajax: {
             type: "GET",
-            url: "/products/selectSo",
+            url: "/products/selectAll",
             data: {
                 _token: csrf,
             },
@@ -135,7 +135,7 @@ $(document).ready(function () {
             '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
             y +
             '][product_id]"' +
-            'class="form-control product-append-stock" required> <option value=""> Choose Product </option> </select>' +
+            'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
             '<label> Stock </label> <input type="number" name="stockFields[' +
             y +
@@ -146,11 +146,11 @@ $(document).ready(function () {
             '<a href="javascript:void(0)" class="form-control text-white remStock text-center" style="border:none; background-color:red">X</a></div></div>';
 
         $("#formdynamic").append(form);
-        $(".product-append-stock").select2({
+        $(".product-append-all").select2({
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/selectSo",
+                url: "/products/selectAll",
                 data: {
                     _token: csrf,
                 },
@@ -187,7 +187,7 @@ $(document).ready(function () {
             '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
             i +
             '][product_id]"' +
-            'class="form-control product-append" required> <option value=""> Choose Product </option> </select>' +
+            'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
             '<label> Discount </label> <input type="number" name="stockFields[' +
             i +
@@ -198,11 +198,11 @@ $(document).ready(function () {
             '<a href="javascript:void(0)" class="form-control text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
 
         $("#formdynamic").append(form);
-        $(".product-append").select2({
+        $(".product-append-all").select2({
             width: "100%",
             ajax: {
                 type: "GET",
-                url: "/products/selectSo",
+                url: "/products/selectAll",
                 data: {
                     _token: csrf,
                 },

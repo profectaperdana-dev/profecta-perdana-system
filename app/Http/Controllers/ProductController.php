@@ -33,7 +33,7 @@ class ProductController extends Controller
         // dd($data);
         return view('products.index', compact('data', 'title'));
     }
-    public function selectSo(Request $request)
+    public function selectAll(Request $request)
     {
         try {
             $product = [];

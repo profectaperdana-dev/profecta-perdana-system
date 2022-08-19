@@ -70,7 +70,7 @@
                       <div class="form-group col-md-5">
                         <label>Product</label>
                         <select name="stockFields[0][product_id]"
-                          class="form-control @error('stockFields[0][product_id]') is-invalid @enderror product-append-stock"
+                          class="form-control @error('stockFields[0][product_id]') is-invalid @enderror product-append-all"
                           required>
                           <option value="">Choose Product</option>
                         </select>
