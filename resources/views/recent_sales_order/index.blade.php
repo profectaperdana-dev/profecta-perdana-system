@@ -85,7 +85,7 @@
                           <td>{{ $value->soBy->name_cust }}</td>
                           <td>{{ $value->remark }}</td>
                           <td class="text-center"><a class="btn btn-primary btn-sm"
-                              href="{{ url('/cek_jam') }}">Verificate</td>
+                              href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate</td>
                           </a>
                         </tr>
                       @endforeach

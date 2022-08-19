@@ -50,6 +50,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/cek_jam', [SalesOrderController::class, 'cekJam']);
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('/edit_sales_order/{id}', [SalesOrderController::class, 'editSo']);
+    Route::get('/sales_orders/verificate/{id}', [SalesOrderController::class, 'verificate']);
 
     Route::resource('/roles', RoleController::class);
     Route::resource('/products', ProductController::class);

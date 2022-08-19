@@ -31,7 +31,6 @@ class SalesOrderController extends Controller
         $title = 'Create Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        event(new SOMessage('From:' . Auth::user()->name, 'Halloooo'));
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
     public function getRecentData()
@@ -264,13 +263,18 @@ class SalesOrderController extends Controller
         //
     }
 
-    public function verificate(SalesOrderModel $salesorder)
+    public function verificate($id)
     {
-        $selected_so = SalesOrderModel::where('id', $salesorder->id)->firstOrFail();
+        $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
         $getCredential = CustomerModel::select('isOverDue', 'isOverPlafoned')->where('id', $selected_so->customers_id)->firstOrFail();
         $selected_so->isverified = 1;
-        if ($getCredential->isOverDue != 1 || $getCredential->isOverPlafoned != 1) {
+        if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1) {
             $selected_so->isapprove = 1;
+            $so_number = $selected_so->order_number;
+            $so_number = str_replace('SOPP', 'IVPP', $so_number);
+            $selected_so->order_number = $so_number;
+        } else {
+            event(new SOMessage('From:' . Auth::user()->name, 'Sales Order indicated overdue or overceiling. Please check immediately!'));
         }
         $selected_so->save();
 

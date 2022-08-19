@@ -33,6 +33,6 @@ class SOMessage implements ShouldBroadcast
      */
     public function broadcastOn(): Channel
     {
-        return new Channel('so-created');
+        return new Channel('realtimeNotif');
     }
 }
