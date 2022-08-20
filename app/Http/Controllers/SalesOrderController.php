@@ -40,11 +40,7 @@ class SalesOrderController extends Controller
         $title = 'Recent Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        $dataSalesOrder = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
-            ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
-            ->where('payment_method', 1)
-            ->groupBy('sales_order_details.sales_orders_id')
-            ->get();
+        $dataSalesOrder = SalesOrderModel::where('payment_method', 1)->latest()->get();
         $dataSalesOrderDebt = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
             ->where('payment_method', 2)
@@ -82,6 +78,7 @@ class SalesOrderController extends Controller
         $request->validate([
             "customer_id" => "required|numeric",
             "payment_method" => "required|numeric",
+            "remark" => "required",
             "soFields.*.product_id" => "required|numeric",
             "soFields.*.qty" => "required|numeric"
         ]);

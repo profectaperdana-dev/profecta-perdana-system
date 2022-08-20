@@ -19,4 +19,8 @@ class SalesOrderDetailModel extends Model
     {
         return $this->hasOne(CustomerModel::class, 'id', 'customers_id');
     }
+    public function salesorders()
+    {
+        return $this->belongsTo(SalesOrderModel::class, 'id', 'sales_orders_id');
+    }
 }

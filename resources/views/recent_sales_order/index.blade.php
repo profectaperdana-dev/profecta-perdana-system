@@ -66,7 +66,10 @@
                                 data-feather="settings"></i></a>
                             <div class="dropdown-menu" aria-labelledby="">
                               <h5 class="dropdown-header">Actions</h5>
-                              <a class="dropdown-item editPayment_method"
+                              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
+                                data-bs-target="#detailData{{ $value->id }}">Products Detail</a>
+                              <a class="dropdown-item
+                                editPayment_method"
                                 href="{{ url('/edit_sales_order/' . $value->sales_orders_id) }}">Edit
                                 Sales
                                 Order</a>
@@ -82,12 +85,71 @@
                           <td>{{ $key + 1 }}</td>
                           <td>{{ $value->order_number }}</td>
                           <td>{{ $value->order_date }}</td>
-                          <td>{{ $value->soBy->name_cust }}</td>
+                          <td>{{ $value->customerBy->name_cust }}</td>
                           <td>{{ $value->remark }}</td>
                           <td class="text-center"><a class="btn btn-primary btn-sm"
                               href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate</td>
                           </a>
                         </tr>
+
+                        <!-- Detail Product Modal Start -->
+                        <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <form>
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Product Detail:
+                                    {{ $value->order_number }}</h5>
+                                  <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="form-group row">
+                                      @foreach ($value->salesOrderDetailsBy as $detail)
+                                        <div class="form-group col-4">
+                                          <label>Product</label>
+                                          <input class="form-control" value="{{ $detail->productSales->nama_barang }}"
+                                            id="" readonly>
+                                        </div>
+
+                                        <div class="col-3 col-md-3 form-group">
+                                          <label>Qty</label>
+                                          <input class="form-control" value="{{ $detail->qty }}" readonly>
+                                        </div>
+
+                                        <div class="col-3 col-md-3 form-group">
+                                          <label>Discount%</label>
+                                          <input class="form-control" value="{{ $detail->discount }}" readonly>
+                                        </div>
+                                      @endforeach
+                                      <div class="form-group col-4">
+                                        <label>Product</label>
+                                        <input class="form-control" value="{{ $detail->productSales->nama_barang }}"
+                                          id="" readonly>
+                                      </div>
+
+                                      <div class="col-3 col-md-3 form-group">
+                                        <label>Qty</label>
+                                        <input class="form-control" value="{{ $detail->qty }}" readonly>
+                                      </div>
+
+                                      <div class="col-3 col-md-3 form-group">
+                                        <label>Discount%</label>
+                                        <input class="form-control" value="{{ $detail->discount }}" readonly>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    <button class="btn btn-danger" type="button"
+                                      data-bs-dismiss="modal">Close</button>
+                                  </div>
+                                </div>
+                            </form>
+                          </div>
+                        </div>
+                        <!-- Detail Product Modal End -->
                       @endforeach
                     </tbody>
                   </table>
@@ -98,7 +160,8 @@
                 aria-labelledby="pills-warningprofile-tab">
                 <p class="mb-0 m-t-30">
                 <div class="table-responsive">
-                  <table id="example1" class="display expandable-table text-capitalize table-hover" style="width:100%">
+                  <table id="example1" class="display expandable-table text-capitalize table-hover"
+                    style="width:100%">
                     <thead>
                       <tr>
                         <th style="width: 3%">Action</th>
@@ -126,11 +189,11 @@
                                 href="{{ url('/edit_sales_order/' . $value->sales_orders_id) }}">Edit
                                 Sales
                                 Order</a>
-                              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                                data-bs-target="#changeData{{ $value->id }}">Edit
+                              <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-original-title="test" data-bs-target="#changeData{{ $value->id }}">Edit
                                 Product</a>
-                              <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                                data-bs-target="#deleteData{{ $value->id }}">Add
+                              <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                data-original-title="test" data-bs-target="#deleteData{{ $value->id }}">Add
                                 Product</a>
                             </div>
 

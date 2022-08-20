@@ -15,6 +15,12 @@ class SalesOrderModel extends Model
     {
         return $this->hasOne(CustomerModel::class, 'id', 'customers_id');
     }
+
+    public function salesOrderDetailsBy()
+    {
+        return $this->hasMany(SalesOrderDetailModel::class, 'sales_orders_id');
+    }
+
     public function createdSalesOrder()
     {
         return $this->hasOne(User::class, 'id', 'created_by');
