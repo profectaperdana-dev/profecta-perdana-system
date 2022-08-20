@@ -212,15 +212,17 @@ class SalesOrderController extends Controller
                 $produkDiscount->save();
             }
 
-            $ppn = 0.11 * $total;
-            $model->ppn = $ppn;
-            $model->total = $total;
-            $model->total_after_ppn = $total + $ppn;
-            $model->customers_id = $request->get('customer_id');
-            $model->save();
 
             // dd($arrayDiscount);
         }
+        $ppn = 0.11 * $total;
+        $model->ppn = $ppn;
+        $model->total = $total;
+        $model->total_after_ppn = $total + $ppn;
+        $model->customers_id = $request->get('customer_id');
+        $model->remark = $request->get('remark');
+        $model->save();
+
         if ($model->save()) {
 
             return redirect('/recent_sales_order')->with('success', 'Add Discount Success');
