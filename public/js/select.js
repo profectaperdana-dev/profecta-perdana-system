@@ -184,12 +184,12 @@ $(document).ready(function () {
     $("#addfields").on("click", function () {
         ++i;
         let form =
-            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
+            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="discountFields[' +
             i +
             '][product_id]"' +
             'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-5">' +
-            '<label> Discount </label> <input type="number" name="stockFields[' +
+            '<label> Discount </label> <input type="number" name="discountFields[' +
             i +
             '][discount]" id="discount"' +
             'class="form-control" placeholder="Enter Discount" required>' +
@@ -279,15 +279,26 @@ $(document).ready(function () {
             },
         });
     });
-    $(document).on("change", ".cekQty", function () {
+    $(document).on("input", ".cekQty", function () {
+        let qtyValue = $(this).val();
+        let toRed = $(this).css("background-color", "red");
+        let toWhite = $(this).css("background-color", "white");
+
         $.ajax({
             type: "GET",
             url: "/stocks/cekQty/" + product_id,
             dataType: "json",
             success: function (data) {
-                if ($(".cekQty").val() > data.stock) {
-                    console.log("barang besar");
-                    // $(this).css('background-color','red');
+                if (parseInt(qtyValue) > parseInt(data.stock)) {
+                    $(".cekQty")
+                        .closest("form-group")
+                        .append("<small>Jumlah Barang melebihi stock</small>");
+                } else {
+                    $(".cekQty")
+                        .closest("form-group")
+                        .append(
+                            "<small>Jumlah Barang tidak melebihi stock</small>"
+                        );
                 }
             },
         });
@@ -307,7 +318,7 @@ $(document).ready(function () {
             "</div>" +
             '<div class="col-3 col-md-3 form-group">' +
             "<label> Qty </label> " +
-            '<input class="form-control" required name="soFields[' +
+            '<input class="form-control cekQty" required name="soFields[' +
             x +
             '][qty]">' +
             "</div> " +
