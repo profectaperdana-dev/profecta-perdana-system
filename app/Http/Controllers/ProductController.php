@@ -57,13 +57,13 @@ class ProductController extends Controller
             if ($request->has('q')) {
                 $search = $request->q;
                 $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
-                    ->select('stocks.*', 'products.nama_barang')
+                    ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
                     ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
                     ->where('products.nama_barang', 'LIKE', "%$search%")
 
                     ->get();
             } else {
-                $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang')
+                $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
                     ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
                     ->latest()->get();
             }
