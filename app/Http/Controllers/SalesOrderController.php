@@ -40,13 +40,8 @@ class SalesOrderController extends Controller
         $title = 'Recent Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        $dataSalesOrder = SalesOrderModel::where('payment_method', 1)->latest()->get();
-        // dd($dataSalesOrder[0]->salesOrderDetailsBy);
-        $dataSalesOrderDebt = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
-            ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
-            ->where('payment_method', 2)
-            ->groupBy('sales_order_details.sales_orders_id')
-            ->get();
+        $dataSalesOrder = SalesOrderModel::where('payment_method', 1)->latest('created_at')->get();
+        $dataSalesOrderDebt = SalesOrderModel::where('payment_method', 2)->latest('created_at')->get();
         return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'product', 'customer'));
     }
     /**
@@ -73,8 +68,6 @@ class SalesOrderController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->all());
-
 
         $request->validate([
             "customer_id" => "required|numeric",
@@ -110,7 +103,7 @@ class SalesOrderController extends Controller
         } else {
             $dt = NULL;
         }
-        $model->duedate = $dt;
+        $model->due_date = $dt;
         $model->save();
 
         $total = 0;
@@ -134,7 +127,7 @@ class SalesOrderController extends Controller
                     $message_duplicate = "You enter duplication of products. Please recheck the SO you set.";
                     continue;
                 } else {
-                    $harga = ProductModel::find($data->products_id);
+                    $harga = ProductModel::where('id', $data->products_id)->first();
                     $diskon =  $value['discount'] / 100;
                     $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
                     $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;

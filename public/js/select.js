@@ -279,19 +279,30 @@ $(document).ready(function () {
             },
         });
     });
-    // $(document).on("change", ".cekQty", function () {
-    //     $.ajax({
-    //         type: "GET",
-    //         url: "/stocks/cekQty/" + product_id,
-    //         dataType: "json",
-    //         success: function (data) {
-    //             if ($(".cekQty").val() > data.stock) {
-    //                 console.log("barang besar");
-    //                 // $(this).css('background-color','red');
-    //             }
-    //         },
-    //     });
-    // });
+    $(document).on("input", ".cekQty", function () {
+        let qtyValue = $(this).val();
+        let toRed = $(this).css("background-color", "red");
+        let toWhite = $(this).css("background-color", "white");
+
+        $.ajax({
+            type: "GET",
+            url: "/stocks/cekQty/" + product_id,
+            dataType: "json",
+            success: function (data) {
+                if (parseInt(qtyValue) > parseInt(data.stock)) {
+                    $(".cekQty")
+                        .closest("form-group")
+                        .append("<small>Jumlah Barang melebihi stock</small>");
+                } else {
+                    $(".cekQty")
+                        .closest("form-group")
+                        .append(
+                            "<small>Jumlah Barang tidak melebihi stock</small>"
+                        );
+                }
+            },
+        });
+    });
 
     $("#addSo").on("click", function () {
         ++x;
@@ -307,7 +318,7 @@ $(document).ready(function () {
             "</div>" +
             '<div class="col-3 col-md-3 form-group">' +
             "<label> Qty </label> " +
-            '<input class="form-control" required name="soFields[' +
+            '<input class="form-control cekQty" required name="soFields[' +
             x +
             '][qty]">' +
             "</div> " +
