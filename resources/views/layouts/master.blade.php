@@ -49,6 +49,8 @@
                 @include('layouts.partials.sidebar_salesman')
             @elsecan('isVerificator')
                 @include('layouts.partials.sidebar_sales_admin')
+            @elsecan('isAdmin')
+                @include('layouts.partials.sidebar_admin')
             @else
                 @include('layouts.partials.sidebar')
             @endcan

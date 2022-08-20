@@ -41,6 +41,7 @@ class SalesOrderController extends Controller
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
         $dataSalesOrder = SalesOrderModel::where('payment_method', 1)->latest()->get();
+        // dd($dataSalesOrder[0]->salesOrderDetailsBy);
         $dataSalesOrderDebt = SalesOrderDetailModel::select('sales_orders.*', 'sales_order_details.*')
             ->leftJoin('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
             ->where('payment_method', 2)
@@ -109,7 +110,7 @@ class SalesOrderController extends Controller
         } else {
             $dt = NULL;
         }
-        $model->isoverdue = $dt;
+        $model->duedate = $dt;
         $model->save();
 
         $total = 0;
@@ -130,7 +131,7 @@ class SalesOrderController extends Controller
                     ->where('products_id', $data->products_id)
                     ->count();
                 if ($check_duplicate > 0) {
-                    $message_duplicate = "You enter duplication of products. Please recheck the discount you set.";
+                    $message_duplicate = "You enter duplication of products. Please recheck the SO you set.";
                     continue;
                 } else {
                     $harga = ProductModel::find($data->products_id);
@@ -156,7 +157,17 @@ class SalesOrderController extends Controller
             $notif->status = 0;
             $notif->role_id = 5;
             $notif->save();
-            return redirect('/sales_order')->with('success', 'Add Sales Order Success');
+            return redirect('/sales_order')->with('success', 'Create SO  Success');
+        } elseif (!empty($message_duplicate)) {
+            $message = $model->order_number . ' Sales Order has been created! Please check';
+
+            event(new SOMessage('From: ' . Auth::user()->name,  $message));
+            $notif = new NotificationsModel();
+            $notif->message = $message;
+            $notif->status = 0;
+            $notif->role_id = 5;
+            $notif->save();
+            return redirect('/sales_order')->with('success', 'Some of SO add maybe Success! ' . $message_duplicate);
         } else {
             return redirect('/sales_order')->with('error', 'Add Sales Order Fail! Please make sure you have filled all the input');
         }
@@ -209,15 +220,29 @@ class SalesOrderController extends Controller
                 $produkDiscount->save();
             }
 
-
+            $ppn = 0.11 * $total;
+            $model->ppn = $ppn;
+            $model->total = $total;
+            $model->total_after_ppn = $total + $ppn;
             // dd($arrayDiscount);
         }
-        $ppn = 0.11 * $total;
-        $model->ppn = $ppn;
-        $model->total = $total;
-        $model->total_after_ppn = $total + $ppn;
+
         $model->customers_id = $request->get('customer_id');
         $model->remark = $request->get('remark');
+        $model->payment_method = $request->get('payment_method');
+        if ($request->get('payment_method') == 1) {
+            $model->top = '';
+            $model->payment = $request->get('payment');
+            $model->payment_type = $request->get('payment_type');
+            $model->duedate = '';
+        } else {
+            $model->top = $request->get('top');
+            $model->payment = '';
+            $model->payment_type = '';
+            $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
+            $dt = $dt->modify("+" . $model->top . " days");
+            $model->duedate = $dt;
+        }
         $model->save();
 
         if ($model->save()) {
