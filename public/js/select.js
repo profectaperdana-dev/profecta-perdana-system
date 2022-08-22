@@ -290,9 +290,9 @@ $(document).ready(function () {
             dataType: "json",
             success: function (data) {
                 if (parseInt(qtyValue) > parseInt(data.stock)) {
-                    $(".cekQty")
-                        .closest("form-group")
-                        .append("<small>Jumlah Barang melebihi stock</small>");
+                    $(".cekQty").append(
+                        "<small>Jumlah Barang melebihi stock</small>"
+                    );
                 } else {
                     $(".cekQty")
                         .closest("form-group")
