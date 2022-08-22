@@ -36,6 +36,52 @@
       </div>
     </div>
     <div class="row">
+      <div class="form-group col-md-3">
+        <label>Province</label>
+        <select name="province" class="form-control province @error('province') is-invalid @enderror" required>
+          <option value="" selected>Choose Province</option>
+        </select>
+        @error('province')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="form-group col-md-3">
+        <label>City</label>
+        <select name="city" class="form-control city @error('city') is-invalid @enderror" required>
+          <option value="" selected>Choose City</option>
+        </select>
+        @error('city')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="form-group col-md-3">
+        <label>District</label>
+        <select name="district" class="form-control district @error('district') is-invalid @enderror" required>
+          <option value="" selected>Choose District</option>
+        </select>
+        @error('district')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="form-group col-md-3">
+        <label>Village</label>
+        <select name="village" class="form-control village @error('village') is-invalid @enderror" required>
+          <option value="" selected>Choose Village</option>
+        </select>
+        @error('village')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+    </div>
+    <div class="row">
       <div class="form-group col-md-6">
         <label>Address</label>
         <input type="text" name="address_cust" value="{{ old('address_cust', $customer->address_cust) }}"
@@ -88,7 +134,8 @@
       </div>
       <div class="form-group col-md-4">
         <label>Area</label>
-        <select name="area_cust_id" class="form-control area-cust @error('area_cust_id') is-invalid @enderror" required>
+        <select name="area_cust_id" class="form-control area-cust @error('area_cust_id') is-invalid @enderror"
+          required>
           <option value="">Choose Customer Area</option>
           @foreach ($customer_areas as $customer_area)
             <option value="{{ $customer_area->id }}"

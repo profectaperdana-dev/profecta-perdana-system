@@ -6,10 +6,13 @@ use App\Models\CustomerAreaModel;
 use App\Models\CustomerCategoriesModel;
 use App\Models\CustomerModel;
 use Customers;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Http;
 use Stevebauman\Location\Facades\Location;
 
 
@@ -63,6 +66,10 @@ class CustomerController extends Controller
             'name_cust' => 'required',
             'phone_cust' => 'required',
             'id_card_number' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+            'village' => 'required',
             'address_cust' => 'required',
             'npwp' => 'required',
             'email_cust' => 'required',
@@ -88,6 +95,16 @@ class CustomerController extends Controller
         $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
         $validated_data['code_cust'] = $area_code . $cust_number_id;
 
+        //Get Province, City, District, Village
+        $province_name = $this->getNameProvince($validated_data['province']);
+        $validated_data['province'] = ucwords(strtolower($province_name));
+        $city_name = $this->getNameCity($validated_data['city']);
+        $validated_data['city'] = ucwords(strtolower($city_name));
+        $district_name = $this->getNameDistrict($validated_data['district']);
+        $validated_data['district'] = ucwords(strtolower($district_name));
+        $village_name = $this->getNameVillage($validated_data['village']);
+        $validated_data['village'] = ucwords(strtolower($village_name));
+
         //Process Image
         $file = $request->file('reference_image');
         if ($file) {
@@ -97,7 +114,6 @@ class CustomerController extends Controller
             $name_file = "blank";
         }
         $validated_data['reference_image'] = $name_file;
-
 
         CustomerModel::create($validated_data);
 
@@ -211,5 +227,61 @@ class CustomerController extends Controller
         }
         $customer_current->delete();
         return redirect('/customers')->with('success', 'Customer Delete Success');
+    }
+
+    public function getProvince()
+    {
+        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+        $getProvinces = $getAPI->json();
+        return response()->json($getProvinces);
+    }
+
+    public function getNameProvince($id)
+    {
+        $getAPI = Http::get('https://emsifa.github.io/api-wilayah-indonesia/api/province/' . $id . '.json');
+        $getProvinces = $getAPI->json();
+        return $getProvinces['name'];
+    }
+
+    public function getCity($province_id)
+    {
+        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/regencies/' . $province_id . '.json');
+        $getCities = $getAPI->json();
+        return response()->json($getCities);
+    }
+
+    public function getNameCity($id)
+    {
+        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/regency/' . $id . '.json');
+        $getCities = $getAPI->json();
+        return $getCities['name'];
+    }
+
+    public function getDistrict($city_id)
+    {
+        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/districts/' . $city_id . '.json');
+        $getDistricts = $getAPI->json();
+        return response()->json($getDistricts);
+    }
+
+    public function getNameDistrict($id)
+    {
+        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/district/' . $id . '.json');
+        $getDistricts = $getAPI->json();
+        return $getDistricts['name'];
+    }
+
+    public function getVillage($district_id)
+    {
+        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/villages/' . $district_id . '.json');
+        $getVillages = $getAPI->json();
+        return response()->json($getVillages);
+    }
+
+    public function getNameVillage($id)
+    {
+        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/village/' . $id . '.json');
+        $getVillages = $getAPI->json();
+        return $getVillages['name'];
     }
 }

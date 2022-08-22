@@ -54,6 +54,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit_sales_order/{id}', [SalesOrderController::class, 'editSo']);
     Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
     Route::get('/sales_orders/verificate/{id}', [SalesOrderController::class, 'verificate']);
+    Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
+    Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
+    Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
+    Route::get('/customers/getVillage/{district_id}', [CustomerController::class, 'getVillage']);
+
+
+
 
     Route::resource('/roles', RoleController::class);
     Route::resource('/products', ProductController::class);
