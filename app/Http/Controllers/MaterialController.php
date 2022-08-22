@@ -40,14 +40,16 @@ class MaterialController extends Controller
     {
         $request->validate([
             'nama_material' => 'required',
+            'code_materials' => 'min:3|required|max:3',
 
         ]);
         $model = new MaterialModel();
         $model->nama_material = $request->get('nama_material');
+        $model->code_materials = $request->get('code_materials');
         $model->created_by = Auth::user()->id;
         $model->save();
 
-        return redirect('/product_materials')->with('success', 'Add Data Product Material Success');
+        return redirect('/product_materials')->with('success', 'Create data product material ' . $model->nama_material . ' is success');
     }
 
     /**
@@ -83,13 +85,15 @@ class MaterialController extends Controller
     {
         $request->validate([
             'editnama_material' => 'required',
+            'editcode_material' => 'min:3|required|max:3',
 
         ]);
         $model = MaterialModel::find($id);
         $model->nama_material = $request->get('editnama_material');
+        $model->code_materials = $request->get('editcode_material');
         $model->created_by = Auth::user()->id;
         $model->save();
-        return redirect('/product_materials')->with('info', 'Changes Data Product Material Success');
+        return redirect('/product_materials')->with('info', 'Edit data product material ' . $model->nama_material . ' is success');
     }
 
     /**
@@ -102,6 +106,6 @@ class MaterialController extends Controller
     {
         $model = MaterialModel::find($id);
         $model->delete();
-        return redirect('/product_materials')->with('error', 'Delete Data Product Material Success');
+        return redirect('/product_materials')->with('error', 'Delete data product material ' . $model->nama_material . ' is success');
     }
 }

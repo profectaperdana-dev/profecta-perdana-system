@@ -40,17 +40,17 @@
                     </li>
 
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
-                            href="{{ url('/recent_sales_order') }}"><i data-feather="clipboard"></i><span>SO
+                        <a class="nav-link menu-title link-nav {{ request()->is('need_approval') ? 'active' : '' }}"
+                            href="{{ url('/need_approval') }}"><i data-feather="clipboard"></i><span>SO
                                 Need Approval
                             </span></a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
                             href="{{ url('/recent_sales_order') }}"><i data-feather="clipboard"></i><span>Recent Sales
                                 Order
                             </span></a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('customers') ? 'active' : '' }}"
                             href="{{ url('/customers') }}"><i data-feather="user-check"></i><span>Create Customers

@@ -47,7 +47,20 @@
                     </div>
                 </li>
                 <li class="onhover-dropdown">
-                    <div class="notification-box"><i data-feather="bell"></i><span class="dot-animated"></span>
+                    <div class="notification-box">
+                        @can('isVerificator')
+
+                            @if (count($notif) > 0)
+                                <i class="fa-2x far fa-bell fa-shake"></i>
+                                <span class="dot-animated"></span>
+                            @else
+                                <i class="fa-2x far fa-bell"></i>
+                                {{-- <span class="dot-animated"></span> --}}
+                            @endif
+                        @else
+                            <i class="fa-2x far fa-bell"></i>
+                            {{-- <span class="dot-animated"></span> --}}
+                        @endcan
                     </div>
                     <ul class="notification-dropdown onhover-show-div">
                         <li>

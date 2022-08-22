@@ -193,12 +193,14 @@
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
+                                                <th>TOP</th>
+                                                <th>Due Date</th>
                                                 <th>Customer</th>
                                                 <th>Verified</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($dataSalesOrderDebt as $value)
+                                            @foreach ($dataSalesOrderDebt as $key => $value)
                                                 <tr>
 
 
@@ -226,11 +228,11 @@
                                                         </div>
 
                                                     </td>
-                                                    {{-- <td>{{ $key + 1 }}</td> --}}
+                                                    <td>{{ $key + 1 }}</td>
                                                     <td>{{ $value->order_number }}</td>
                                                     <td>{{ $value->order_date }}</td>
                                                     <td>{{ $value->top }}</td>
-                                                    <td>{{ $value->isoverdue }}</td>
+                                                    <td>{{ $value->duedate }}</td>
                                                     <td>{{ $value->customerBy->name_cust }}</td>
                                                     <td class="text-center"><a class="btn btn-primary btn-sm"
                                                             href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate

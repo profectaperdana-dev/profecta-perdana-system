@@ -36,6 +36,7 @@ class AppServiceProvider extends ServiceProvider
             $notif = NotificationsModel::where('status', '0')
                 ->where('role_id', @auth()->user()->role_id)
                 ->latest()
+                ->limit(4)
                 ->get();
 
             View::share('notif', $notif);
