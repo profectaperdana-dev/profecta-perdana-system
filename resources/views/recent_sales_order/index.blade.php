@@ -206,7 +206,7 @@
                             </div>
 
                           </td>
-                          <td>{{ $key + 1 }}</td>
+                          <td>{{ $loop->iteration }}</td>
                           <td>{{ $value->order_number }}</td>
                           <td>{{ $value->order_date }}</td>
                           <td>{{ $value->top }}</td>
