@@ -260,7 +260,10 @@ class SalesOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $modelSalesOrder = SalesOrderModel::where('id', $id)->first();
+        $modelSalesOrder->salesOrderDetailsBy()->delete();
+        $modelSalesOrder->delete();
+        return redirect('/recent_sales_order')->with('success', 'Delete Data Sales Order Success');
     }
 
     public function verificate($id)
