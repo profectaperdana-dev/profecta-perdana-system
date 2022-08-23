@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\RealTimeMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
-use App\Models\ProductModel;
+use App\Models\SubTypeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,13 +22,11 @@ class DiscountController extends Controller
     {
         $all_discounts = DiscountModel::with(['customerBy', 'productBy'])->latest()->get();
         $all_customers = CustomerModel::latest()->get();
-        $all_products = ProductModel::latest()->get();
 
         $data = [
             'title' => 'Discount',
             'discounts' => $all_discounts,
-            'customers' => $all_customers,
-            'products' => $all_products
+            'customers' => $all_customers
         ];
 
         return view('discounts.index', $data);
@@ -97,7 +95,7 @@ class DiscountController extends Controller
         } elseif (!empty($message_duplicate) && $issaved == true) {
             return redirect('/discounts')->with('success', 'Some of Discounts add maybe Success! ' . $message_duplicate);
         } else {
-            return redirect('/discounts')->with('error', 'Add Discount Fail! Please make sure you have filled all the input');
+            return redirect('/discounts')->with('error', 'Add Discount Fail! Maybe the discount already set or check your input again');
         }
     }
 
@@ -111,17 +109,26 @@ class DiscountController extends Controller
     public function update(Request $request, $id)
     {
         $validate_data = $request->validate([
-            "customer_id_edit" => "required|numeric",
             "product_id_edit" => "required|numeric",
             "discount_edit" => "required|numeric"
         ]);
 
         $current_discount = DiscountModel::where('id', $id)->firstOrFail();
-        $current_discount->customer_id = $validate_data['customer_id_edit'];
+        $temp_product = $current_discount->product_id;
+        $temp_discount = $current_discount->discount;
         $current_discount->product_id = $validate_data['product_id_edit'];
         $current_discount->discount = $validate_data['discount_edit'];
         $current_discount->save();
 
+        $check = DiscountModel::where('customer_id', $current_discount->customer_id)
+            ->where('product_id', $current_discount->product_id)
+            ->count();
+        if ($check > 1) {
+            $current_discount->product_id = $temp_product;
+            $current_discount->discount = $temp_discount;
+            $current_discount->save();
+            return redirect('/discounts')->with('error', 'The Product already exist!');
+        }
         return redirect('/discounts')->with('success', 'Discount Edit Success');
     }
 

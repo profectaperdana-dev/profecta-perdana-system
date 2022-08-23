@@ -71,17 +71,22 @@
                                                                 data-original-title="test"
                                                                 data-bs-target="#detailData{{ $value->id }}">Products
                                                                 Detail</a>
-                                                            <a class="dropdown-item editPayment_method"
+                                                            <a class="dropdown-item
+                                editPayment_method"
                                                                 href="{{ url('/edit_sales_order/' . $value->id) }}">Edit
                                                                 Sales
                                                                 Order</a>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
+                                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                                data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#changeData{{ $value->id }}">Edit
-                                                                Product Discount</a>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
-                                                                data-bs-target="#deleteData{{ $value->id }}">Add
+                                                                Product</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                                data-bs-toggle="modal" data-original-title="test"
+                                                                data-bs-target="#addData{{ $value->id }}">Add
+                                                                Product</a>
+                                                            <a class="dropdown-item" href="javascript:void(0)"
+                                                                data-bs-toggle="modal"
+                                                                data-bs-target="#deleteData{{ $value->id }}">Delete
                                                                 Product</a>
                                                         </div>
                                                     </td>
@@ -94,99 +99,129 @@
                                                             href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
                                                     </td>
                                                     </a>
-                                                </tr>
-                                                <!-- Detail Product Modal Start -->
-                                                <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
-                                                    role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg" role="document">
-                                                        <form>
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Product
-                                                                        Detail:
-                                                                        {{ $value->order_number }}</h5>
-                                                                    <button class="btn-close" type="button"
-                                                                        data-bs-dismiss="modal" aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="container-fluid">
-                                                                        <div class="form-group row">
-                                                                            @foreach ($value->salesOrderDetailsBy as $detail)
-                                                                                <div class="form-group col-4">
-                                                                                    <label>Product</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ $detail->productSales->nama_barang }}"
-                                                                                        id="" readonly>
+
+                                                    <!-- Delete Product Modal Start -->
+                                                    <div class="modal fade" id="deleteData{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form method="post"
+                                                                action="{{ url('sales_order/' . $value->id) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Delete Data:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <h5>Are you sure delete this data ?</h5>
                                                                                 </div>
-
-                                                                                <div class="col-3 col-md-3 form-group">
-                                                                                    <label>Qty</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ $detail->qty }}"
-                                                                                        readonly>
-                                                                                </div>
-
-                                                                                <div class="col-3 col-md-3 form-group">
-                                                                                    <label>Discount%</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ $detail->discount }}"
-                                                                                        readonly>
-                                                                                </div>
-                                                                            @endforeach
-                                                                        </div>
-                                                                        <hr>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-12 form-group">
-                                                                                <label>Payment Method</label>
-                                                                                <input class="form-control"
-                                                                                    value=" @if ($value->payment_method == 1) Cash On Delivery
-                                                                                            @elseif($value->payment_method)
-                                                                                            Cash Before Delivery
-                                                                                            @else
-                                                                                            Credit @endif
-                                                                                            "
-                                                                                    readonly>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="form-group row">
-                                                                            <div class="col-12 form-group">
-                                                                                <label>Remarks</label>
-                                                                                <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <div class="form-group col-lg-3">
-                                                                                <label>PPN</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ $value->ppn }}"
-                                                                                    id="" readonly>
-                                                                            </div>
-
-                                                                            <div class="col-lg-3 form-group">
-                                                                                <label>Total (Before PPN)</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ 'Rp. ' . $value->total }}"
-                                                                                    readonly>
-                                                                            </div>
-
-                                                                            <div class="col-lg-3 form-group">
-                                                                                <label>Total (After PPN)</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ 'Rp. ' . $value->total_after_ppn }}"
-                                                                                    readonly>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button class="btn btn-danger" type="button"
                                                                             data-bs-dismiss="modal">Close</button>
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Yes, delete
+                                                                        </button>
                                                                     </div>
                                                                 </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- Detail Product Modal End -->
+                                                    <!-- Delete Product Modal End -->
+
+                                                    <!-- Detail Product Modal Start -->
+                                                    <div class="modal fade" id="detailData{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <form>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Product Detail:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                @foreach ($value->salesOrderDetailsBy as $detail)
+                                                                                    <div class="form-group col-4">
+                                                                                        <label>Product</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->productSales->nama_barang }}"
+                                                                                            id="" readonly>
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Qty</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->qty }}"
+                                                                                            readonly>
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Discount%</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->discount }}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-12 form-group">
+                                                                                    <label>Remarks</label>
+                                                                                    <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="form-group col-lg-3">
+                                                                                    <label>PPN</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ $value->ppn }}"
+                                                                                        id="" readonly>
+                                                                                </div>
+
+                                                                                <div class="col-lg-3 form-group">
+                                                                                    <label>Total (Before PPN)</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ 'Rp. ' . $value->total }}"
+                                                                                        readonly>
+                                                                                </div>
+
+                                                                                <div class="col-lg-3 form-group">
+                                                                                    <label>Total (After PPN)</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ 'Rp. ' . $value->total_after_ppn }}"
+                                                                                        readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-danger" type="button"
+                                                                                data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Detail Product Modal End -->
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>
@@ -205,14 +240,12 @@
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
-                                                <th>TOP</th>
-                                                <th>Due Date</th>
                                                 <th>Customer</th>
                                                 <th>Verified</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @foreach ($dataSalesOrderDebt as $key => $value)
+                                            @foreach ($dataSalesOrderDebt as $value)
                                                 <tr>
 
 
@@ -235,126 +268,171 @@
                                                                 Product</a>
                                                             <a class="dropdown-item" href="#"
                                                                 data-bs-toggle="modal" data-original-title="test"
-                                                                data-bs-target="#deleteData{{ $value->id }}">Add
+                                                                data-bs-target="#addData{{ $value->id }}">Add
+                                                                Product</a>
+                                                            <a class="dropdown-item" href="#"
+                                                                data-bs-toggle="modal" data-original-title="test"
+                                                                data-bs-target="#deleteData{{ $value->id }}">Delete
                                                                 Product</a>
                                                         </div>
 
                                                     </td>
-                                                    <td>{{ $key + 1 }}</td>
+                                                    <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $value->order_number }}</td>
                                                     <td>{{ $value->order_date }}</td>
-                                                    <td>{{ $value->top }}</td>
-                                                    <td>
-                                                        @php
-                                                            $date = date('d F Y', strtotime($value->duedate));
-                                                        @endphp
-                                                        {{ $date }}
-                                                    </td>
+                                                    {{-- <td>
+                            @php
+                              $date = date('d F Y', strtotime($value->duedate));
+                            @endphp
+                            {{ $date }}
+                          </td> --}}
                                                     <td>{{ $value->customerBy->name_cust }}</td>
                                                     <td class="text-center"><a class="btn btn-primary btn-sm"
                                                             href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
                                                     </td>
                                                     </a>
 
-
-                                                </tr>
-
-                                                <!-- Detail Product Modal Start -->
-                                                <div class="modal fade" id="detailDataDebt{{ $value->id }}"
-                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                    aria-hidden="true">
-                                                    <div class="modal-dialog modal-lg" role="document">
-                                                        <form>
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Product
-                                                                        Detail:
-                                                                        {{ $value->order_number }}</h5>
-                                                                    <button class="btn-close" type="button"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="container-fluid">
-                                                                        <div class="form-group row">
-                                                                            @foreach ($value->salesOrderDetailsBy as $detail)
-                                                                                <div class="form-group col-4">
-                                                                                    <label>Product</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ $detail->productSales->nama_barang }}"
-                                                                                        id="" readonly>
+                                                    <!-- Delete Product Modal Start -->
+                                                    <div class="modal fade" id="deleteData{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form method="post"
+                                                                action="{{ url('sales_order/' . $value->id) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Delete Data:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <h5>Are you sure delete this data ?</h5>
                                                                                 </div>
-
-                                                                                <div class="col-3 col-md-3 form-group">
-                                                                                    <label>Qty</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ $detail->qty }}"
-                                                                                        readonly>
-                                                                                </div>
-
-                                                                                <div class="col-3 col-md-3 form-group">
-                                                                                    <label>Discount%</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ $detail->discount }}"
-                                                                                        readonly>
-                                                                                </div>
-                                                                            @endforeach
-                                                                        </div>
-                                                                        <hr>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-12 form-group">
-                                                                                <label>Remarks</label>
-                                                                                <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <div class="form-group col-6">
-                                                                                <label>TOP</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ $value->top . ' Days' }}"
-                                                                                    id="" readonly>
-                                                                            </div>
-
-                                                                            <div class="col-6 form-group">
-                                                                                <label>Due Date</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ $value->duedate }}"
-                                                                                    readonly>
-                                                                            </div>
-
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <div class="form-group col-lg-3">
-                                                                                <label>PPN</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ $value->ppn }}"
-                                                                                    id="" readonly>
-                                                                            </div>
-
-                                                                            <div class="col-lg-3 form-group">
-                                                                                <label>Total (Before PPN)</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ 'Rp. ' . $value->total }}"
-                                                                                    readonly>
-                                                                            </div>
-
-                                                                            <div class="col-lg-3 form-group">
-                                                                                <label>Total (After PPN)</label>
-                                                                                <input class="form-control"
-                                                                                    value="{{ 'Rp. ' . $value->total_after_ppn }}"
-                                                                                    readonly>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                     <div class="modal-footer">
                                                                         <button class="btn btn-danger" type="button"
                                                                             data-bs-dismiss="modal">Close</button>
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Yes, delete
+                                                                        </button>
                                                                     </div>
                                                                 </div>
-                                                        </form>
+                                                            </form>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- Detail Product Modal End -->
+                                                    <!-- Delete Product Modal End -->
+
+                                                    <!-- Detail Product Modal Start -->
+                                                    <div class="modal fade" id="detailDataDebt{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <form>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Product Detail:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                @foreach ($value->salesOrderDetailsBy as $detail)
+                                                                                    <div class="form-group col-4">
+                                                                                        <label>Product</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->productSales->nama_barang }}"
+                                                                                            id="" readonly>
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Qty</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->qty }}"
+                                                                                            readonly>
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Discount%</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->discount }}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-12 form-group">
+                                                                                    <label>Remarks</label>
+                                                                                    <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="form-group col-6">
+                                                                                    <label>TOP</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ $value->top . ' Days' }}"
+                                                                                        id="" readonly>
+                                                                                </div>
+
+                                                                                <div class="col-6 form-group">
+                                                                                    <label>Due Date</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ $value->due_date }}"
+                                                                                        readonly>
+                                                                                </div>
+
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="form-group col-lg-3">
+                                                                                    <label>PPN</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ $value->ppn }}"
+                                                                                        id="" readonly>
+                                                                                </div>
+
+                                                                                <div class="col-lg-3 form-group">
+                                                                                    <label>Total (Before PPN)</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ 'Rp. ' . $value->total }}"
+                                                                                        readonly>
+                                                                                </div>
+
+                                                                                <div class="col-lg-3 form-group">
+                                                                                    <label>Total (After PPN)</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ 'Rp. ' . $value->total_after_ppn }}"
+                                                                                        readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-danger" type="button"
+                                                                                data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Detail Product Modal End -->
+
+
+
+                                                </tr>
                                             @endforeach
                                         </tbody>
                                     </table>

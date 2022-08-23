@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/products/cekproduct', [StockController::class, 'cekProduk']);
     Route::get('/product_sub_materials/select/{id}', [SubMaterialController::class, 'select']);
     Route::get('/product_sub_types/select/{id}', [SubTypeController::class, 'select']);
+    Route::get('/product_sub_types/selectAll', [SubTypeController::class, 'selectAll']);
     Route::get('/products/select', [ProductController::class, 'select']);
     Route::get('/products/selectAll', [ProductController::class, 'selectAll']);
     Route::get('/discounts/select/{customer_id}/{product_id}', [DiscountController::class, 'select']);
@@ -55,6 +56,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
     Route::get('/sales_orders/verificate/{id}', [SalesOrderController::class, 'verificate']);
     Route::get('/need_approval', [SalesOrderController::class, 'getInvoiceData']);
+    Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
+    Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
+    Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
+    Route::get('/customers/getVillage/{district_id}', [CustomerController::class, 'getVillage']);
+
+
+
 
     Route::resource('/roles', RoleController::class);
     Route::resource('/products', ProductController::class);

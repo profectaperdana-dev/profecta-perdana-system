@@ -9,4 +9,9 @@ class MaterialModel extends Model
 {
     use HasFactory;
     protected $table = 'product_materials';
+
+    public function sub_materials()
+    {
+        return $this->hasMany(SubMaterialModel::class, 'material_id');
+    }
 }

@@ -18,6 +18,6 @@ class DiscountModel extends Model
 
     public function productBy()
     {
-        return $this->hasOne(ProductModel::class, 'id', 'product_id');
+        return $this->hasOne(SubTypeModel::class, 'id', 'product_id');
     }
 }

@@ -34,7 +34,7 @@ class CustomerAreasController extends Controller
     {
         $validated_data = $request->validate([
             'area_name' => 'required',
-            'area_code' => 'required|unique:customer_areas'
+            'area_code' => 'required|unique:customer_areas|max:3'
         ]);
 
         $validated_data['created_by'] = Auth::user()->id;
