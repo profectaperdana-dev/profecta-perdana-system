@@ -17,7 +17,7 @@
  @stack('scripts')
  <script src="{{ asset('js/select.js') }}"></script>
  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-
+ <script src="https://kit.fontawesome.com/e355a54691.js" crossorigin="anonymous"></script>
 
 
  <!-- Plugins JS Ends-->
@@ -30,21 +30,21 @@
  @if (Session::has('success'))
      <script>
          swal("Success !", "{!! Session::get('success') !!}", "success", {
-             button: "Ok",
+             button: "Close",
          });
      </script>
  @endif
  @if (Session::has('info'))
      <script>
-         swal("info !", "{!! Session::get('info') !!}", "info", {
-             button: "Ok",
+         swal("For you information !", "{!! Session::get('info') !!}", "info", {
+             button: "Close",
          });
      </script>
  @endif
  @if (Session::has('error'))
      <script>
-         swal("error !", "{!! Session::get('error') !!}", "error", {
-             button: "Ok",
+         swal("Attention !", "{!! Session::get('error') !!}", "error", {
+             button: "Close",
          });
      </script>
  @endif

@@ -176,12 +176,12 @@
                                                                                     readonly
                                                                                     value="@if ($value->last_transaction == null) No Transaction @else {{ $value->last_transaction }} @endif">
                                                                             </div>
-                                                                            <div class="form-group col-md-3">
+                                                                            {{-- <div class="form-group col-md-3">
                                                                                 <label>Due Date</label>
                                                                                 <input type="text" class="form-control"
                                                                                     readonly
                                                                                     value="{{ $value->due_date }}">
-                                                                            </div>
+                                                                            </div> --}}
                                                                             <div class="form-group col-md-3">
                                                                                 <label>Label</label>
                                                                                 <br>

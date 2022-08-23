@@ -63,6 +63,17 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="font-weight-bold ">Code Product Sub
+                                            Material</label>
+                                        <input type="text"
+                                            class="form-control text-uppercase {{ $errors->first('code_sub_type') ? ' is-invalid' : '' }}"
+                                            name="code_sub_type" placeholder="code of product sub materials" max="3"
+                                            required value="{{ old('code_sub_type') }}">
+                                        @error('code_sub_type')
+                                            <small class="text-danger">{{ $message }}.</small>
+                                        @enderror
+                                    </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <button type="reset" class="btn btn-warning"
@@ -93,6 +104,7 @@
                                         <th>#</th>
                                         <th>Sub Material</th>
                                         <th>Material Source</th>
+                                        <th>Code Sub Type</th>
 
                                     </tr>
                                 </thead>
@@ -169,6 +181,20 @@
                                                                             @enderror
                                                                         </div>
                                                                     </div>
+                                                                    <div class="form-group col-md-12">
+                                                                        <label class="font-weight-bold ">Code Product Sub
+                                                                            Material</label>
+                                                                        <input type="text"
+                                                                            class="form-control text-uppercase {{ $errors->first('code_sub_type_edit') ? ' is-invalid' : '' }}"
+                                                                            name="code_sub_type_edit"
+                                                                            placeholder="code of product sub type"
+                                                                            max="3" required
+                                                                            value="{{ $value->code_sub_type }}">
+                                                                        @error('code_sub_type_edit')
+                                                                            <small
+                                                                                class="text-danger">{{ $message }}.</small>
+                                                                        @enderror
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                             <div class="modal-footer">
@@ -223,6 +249,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->type_name }}</td>
                                             <td>{{ $value->nama_sub_material }}</td>
+                                            <td class="text-uppercase">{{ $value->code_sub_type }}</td>
 
 
                                         </tr>

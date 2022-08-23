@@ -70,7 +70,7 @@ class CustomerController extends Controller
             'area_cust_id' => 'required|numeric',
             'credit_limit' => 'required|numeric',
             'label' => 'required',
-            'due_date' => 'required|numeric',
+            // 'due_date' => 'required|numeric',
             'coordinate' => 'required',
             'status' => 'required|numeric',
             'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
@@ -158,7 +158,7 @@ class CustomerController extends Controller
             'area_cust_id' => 'required|numeric',
             'credit_limit' => 'required|numeric',
             'label' => 'required',
-            'due_date' => 'required|numeric',
+            // 'due_date' => 'required|numeric',
             'status' => 'required|numeric',
             'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
         ]);
@@ -174,7 +174,7 @@ class CustomerController extends Controller
         $customer_current->area_cust_id = $validated_data['area_cust_id'];
         $customer_current->credit_limit = $validated_data['credit_limit'];
         $customer_current->label = $validated_data['label'];
-        $customer_current->due_date = $validated_data['due_date'];
+        // $customer_current->due_date = $validated_data['due_date'];
         $customer_current->status = $validated_data['status'];
 
         //process image
