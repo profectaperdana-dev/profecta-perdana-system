@@ -129,17 +129,17 @@
                           </div>
                           <!-- Delete Product Modal End -->
 
-                          <!-- Delete Product Modal Start -->
+                          <!-- Edit Product Modal Start -->
                           <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <form method="post" action="{{ url('sales_order/' . $value->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                @method('delete')
+                                @method('PUT')
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Delete Data:
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data:
                                       {{ $value->order_number }}</h5>
                                     <button class="btn-close" type="button" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
@@ -147,26 +147,38 @@
                                   <div class="modal-body">
                                     <div class="container-fluid">
                                       <div class="form-group row">
-                                        <div class="col-md-12">
-                                          @foreach ($value->salesOrderDetailsBy as $detail)
-                                            <div class="form-group col-4">
-                                              <label>Product</label>
-                                              <input class="form-control"
-                                                value="{{ $detail->productSales->nama_barang }}" id=""
-                                                readonly>
-                                            </div>
+                                        @foreach ($value->salesOrderDetailsBy as $detail)
+                                          <div class="form-group col-4">
+                                            <label>Product</label>
+                                            <select name="soFields[{{ $loop->index }}][product_id]"
+                                              class="form-control productSo" required>
+                                              <option value="">Choose Product</option>
+                                            </select>
+                                            @error('soFields[{{ $loop->index }}][product_id]')
+                                              <div class="invalid-feedback">
+                                                {{ $message }}
+                                              </div>
+                                            @enderror
+                                          </div>
 
-                                            <div class="col-3 col-md-3 form-group">
-                                              <label>Qty</label>
-                                              <input class="form-control" value="{{ $detail->qty }}" readonly>
-                                            </div>
+                                          <div class="col-3 col-md-3 form-group">
+                                            <label>Qty</label>
+                                            <input class="form-control cekQty" required
+                                              name="soFields[{{ $loop->index }}][qty]" id="">
+                                            @error('soFields[{{ $loop->index }}][qty]')
+                                              <div class="invalid-feedback">
+                                                {{ $message }}
+                                              </div>
+                                            @enderror
+                                          </div>
 
-                                            <div class="col-3 col-md-3 form-group">
-                                              <label>Discount%</label>
-                                              <input class="form-control" value="{{ $detail->discount }}" readonly>
-                                            </div>
-                                          @endforeach
-                                        </div>
+                                          <div class="col-3 col-md-3 form-group">
+                                            <label>Discount%</label>
+                                            <input class="form-control discount-append"
+                                              name="soFields[{{ $loop->index }}][discount]" id="">
+                                          </div>
+                                        @endforeach
+
                                       </div>
                                     </div>
                                   </div>
@@ -180,7 +192,7 @@
                               </form>
                             </div>
                           </div>
-                          <!-- Delete Product Modal End -->
+                          <!-- Edit Product Modal End -->
 
                           <!-- Detail Product Modal Start -->
                           <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
@@ -351,17 +363,17 @@
                           </div>
                           <!-- Delete Product Modal End -->
 
-                          <!-- Delete Product Modal Start -->
+                          <!-- Edit Product Modal Start -->
                           <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
                               <form method="post" action="{{ url('sales_order/' . $value->id) }}"
                                 enctype="multipart/form-data">
                                 @csrf
-                                @method('delete')
+                                @method('PUT')
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Delete Data:
+                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data:
                                       {{ $value->order_number }}</h5>
                                     <button class="btn-close" type="button" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
@@ -369,9 +381,38 @@
                                   <div class="modal-body">
                                     <div class="container-fluid">
                                       <div class="form-group row">
-                                        <div class="col-md-12">
-                                          <h5>HELLOOOOOOOOOOOOOOOOOOOOOOOOOO</h5>
-                                        </div>
+                                        @foreach ($value->salesOrderDetailsBy as $detail)
+                                          <div class="form-group col-4">
+                                            <label>Product</label>
+                                            <select name="soFields[{{ $loop->index }}][product_id]"
+                                              class="form-control productSo" required>
+                                              <option value="">Choose Product</option>
+                                            </select>
+                                            @error('soFields[{{ $loop->index }}][product_id]')
+                                              <div class="invalid-feedback">
+                                                {{ $message }}
+                                              </div>
+                                            @enderror
+                                          </div>
+
+                                          <div class="col-3 col-md-3 form-group">
+                                            <label>Qty</label>
+                                            <input class="form-control cekQty" required
+                                              name="soFields[{{ $loop->index }}][qty]" id="">
+                                            @error('soFields[{{ $loop->index }}][qty]')
+                                              <div class="invalid-feedback">
+                                                {{ $message }}
+                                              </div>
+                                            @enderror
+                                          </div>
+
+                                          <div class="col-3 col-md-3 form-group">
+                                            <label>Discount%</label>
+                                            <input class="form-control discount-append"
+                                              name="soFields[{{ $loop->index }}][discount]" id="">
+                                          </div>
+                                        @endforeach
+
                                       </div>
                                     </div>
                                   </div>
@@ -385,7 +426,7 @@
                               </form>
                             </div>
                           </div>
-                          <!-- Delete Product Modal End -->
+                          <!-- Edit Product Modal End -->
 
                           <!-- Detail Product Modal Start -->
                           <div class="modal fade" id="detailDataDebt{{ $value->id }}" tabindex="-1"
