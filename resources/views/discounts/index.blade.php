@@ -261,8 +261,11 @@
           ajax: {
             type: "GET",
             url: "/product_sub_types/selectAll",
-            data: {
-              _token: csrf,
+            data: function(params) {
+              return {
+                _token: csrf,
+                q: params.term, // search term
+              };
             },
             dataType: "json",
             delay: 250,
@@ -304,8 +307,11 @@
             ajax: {
               type: "GET",
               url: "/product_sub_types/selectAll",
-              data: {
-                _token: csrf,
+              data: function(params) {
+                return {
+                  _token: csrf,
+                  q: params.term, // search term
+                };
               },
               dataType: "json",
               delay: 250,

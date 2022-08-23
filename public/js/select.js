@@ -46,7 +46,12 @@ $(document).ready(function () {
                 ajax: {
                     type: "GET",
                     url: "/product_sub_materials/select/" + material_id,
-                    data: { _token: csrf },
+                    data: function (params) {
+                        return {
+                            _token: csrf,
+                            q: params.term, // search term
+                        };
+                    },
                     dataType: "json",
                     delay: 250,
                     processResults: function (data) {
@@ -82,7 +87,12 @@ $(document).ready(function () {
                 ajax: {
                     type: "GET",
                     url: "/product_sub_types/select/" + sub_material_id,
-                    data: { _token: csrf },
+                    data: function (params) {
+                        return {
+                            _token: csrf,
+                            q: params.term, // search term
+                        };
+                    },
                     dataType: "json",
                     delay: 250,
                     processResults: function (data) {
@@ -186,8 +196,11 @@ $(document).ready(function () {
         ajax: {
             type: "GET",
             url: "/products/select",
-            data: {
-                _token: csrf,
+            data: function (params) {
+                return {
+                    _token: csrf,
+                    q: params.term, // search term
+                };
             },
             dataType: "json",
             delay: 250,
@@ -196,7 +209,13 @@ $(document).ready(function () {
                     results: $.map(data, function (item) {
                         return [
                             {
-                                text: item.nama_barang,
+                                text:
+                                    item.nama_barang +
+                                    " (" +
+                                    item.type_name +
+                                    ", " +
+                                    item.nama_sub_material +
+                                    ")",
                                 id: item.id,
                             },
                         ];
@@ -294,8 +313,11 @@ $(document).ready(function () {
             ajax: {
                 type: "GET",
                 url: "/products/select",
-                data: {
-                    _token: csrf,
+                data: function (params) {
+                    return {
+                        _token: csrf,
+                        q: params.term, // search term
+                    };
                 },
                 dataType: "json",
                 delay: 250,

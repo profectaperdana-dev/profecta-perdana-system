@@ -50,20 +50,26 @@ class ProductController extends Controller
         }
     }
 
-    public function select(Request $request)
+    public function select()
     {
         try {
             $product = [];
-            if ($request->has('q')) {
-                $search = $request->q;
+            if (request()->has('q')) {
+                $search = request()->q;
                 $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
-                    ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                    ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                    ->where('product_sub_types.type_name', 'LIKE', "%$search%")
                     ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
-                    ->where('products.nama_barang', 'LIKE', "%$search%")
-
+                    ->orWhere('products.nama_barang', 'LIKE', "%$search%")
+                    ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
                     ->get();
             } else {
                 $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                    ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
                     ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
                     ->latest()->get();
             }
