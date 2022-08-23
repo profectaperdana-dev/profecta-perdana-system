@@ -71,76 +71,21 @@
                                                                 data-original-title="test"
                                                                 data-bs-target="#detailData{{ $value->id }}">Products
                                                                 Detail</a>
-                                                            <a class="dropdown-item
-                                editPayment_method"
+                                                            <a class="dropdown-item editPayment_method"
                                                                 href="{{ url('/edit_sales_order/' . $value->id) }}">Edit
                                                                 Sales
                                                                 Order</a>
                                                             <a class="dropdown-item" href="javascript:void(0)"
                                                                 data-bs-toggle="modal" data-original-title="test"
-                                                                data-bs-target="#changeData{{ $value->id }}">Edit
-                                                                Product</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"
-                                                                data-bs-toggle="modal" data-original-title="test"
-                                                                data-bs-target="#addData{{ $value->id }}">Add
-                                                                Product</a>
+                                                                data-bs-target="#editDiscount{{ $value->id }}">Edit
+                                                                Product </a>
                                                             <a class="dropdown-item" href="javascript:void(0)"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#deleteData{{ $value->id }}">Delete
-                                                                Product</a>
+                                                                Sales Orders</a>
                                                         </div>
+
                                                     </td>
-
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $value->order_number }}</td>
-                                                    <td>{{ $value->order_date }}</td>
-                                                    <td>{{ $value->customerBy->name_cust }}</td>
-                                                    <td class="text-center"><a class="btn btn-primary btn-sm"
-                                                            href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
-                                                    </td>
-                                                    </a>
-
-                                                    <!-- Delete Product Modal Start -->
-                                                    <div class="modal fade" id="deleteData{{ $value->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog" role="document">
-                                                            <form method="post"
-                                                                action="{{ url('sales_order/' . $value->id) }}"
-                                                                enctype="multipart/form-data">
-                                                                @csrf
-                                                                @method('delete')
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Delete Data:
-                                                                            {{ $value->order_number }}</h5>
-                                                                        <button class="btn-close" type="button"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="container-fluid">
-                                                                            <div class="form-group row">
-                                                                                <div class="col-md-12">
-                                                                                    <h5>Are you sure delete this data ?</h5>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button class="btn btn-danger" type="button"
-                                                                            data-bs-dismiss="modal">Close</button>
-                                                                        <button class="btn btn-primary"
-                                                                            type="submit">Yes, delete
-                                                                        </button>
-                                                                    </div>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Delete Product Modal End -->
-
                                                     <!-- Detail Product Modal Start -->
                                                     <div class="modal fade" id="detailData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -221,6 +166,106 @@
                                                         </div>
                                                     </div>
                                                     <!-- Detail Product Modal End -->
+                                                    {{-- edit product discount --}}
+                                                    <div class="modal fade" id="editDiscount{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <form>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Edit Product Discount:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                @foreach ($value->salesOrderDetailsBy as $detail)
+                                                                                    <div class="form-group col-4">
+                                                                                        <label>Product</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->productSales->nama_barang }}"
+                                                                                            id="">
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Qty</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->qty }}">
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Discount%</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->discount }}">
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-danger" type="button"
+                                                                                data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    {{-- edit product discount end --}}
+                                                    <!-- Delete Product Modal Start -->
+                                                    <div class="modal fade" id="deleteData{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form method="post"
+                                                                action="{{ url('sales_order/' . $value->id) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Delete Data:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <h5>Are you sure delete this data ?</h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-danger" type="button"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Yes, delete
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Delete Product Modal End -->
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $value->order_number }}</td>
+                                                    <td>{{ $value->order_date }}</td>
+                                                    <td>{{ $value->customerBy->name_cust }}</td>
+                                                    <td class="text-center"><a class="btn btn-primary btn-sm"
+                                                            href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
+                                                    </td>
+
+
+
+
                                                 </tr>
                                             @endforeach
                                         </tbody>
