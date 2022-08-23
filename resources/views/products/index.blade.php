@@ -38,7 +38,7 @@
                                         <th>Code</th>
                                         <th>Products</th>
                                         <th>S/N</th>
-                                        <th>Date of Production</th>
+                                        <th>Weight <span><small class="badge badge-danger">gram</small></span></th>
                                         <th>Materials</th>
                                     </tr>
 
@@ -84,7 +84,8 @@
                                                                         <div class="form-group row font-weight-bold">
                                                                             <div class="form-group col-md-4">
                                                                                 <label>Product Code</label>
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="text"
+                                                                                    class="form-control text-uppercase"
                                                                                     placeholder="Product Code" readonly
                                                                                     value="{{ $value->kode_barang }}">
                                                                             </div>
@@ -230,11 +231,11 @@
                                             </div>
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->kode_barang }}</td>
+                                            <td class="text-uppercase">{{ $value->kode_barang }}</td>
                                             <td>{{ $value->nama_barang }}</td>
                                             <td>{{ $value->no_seri }}</td>
-                                            <td>{{ $value->tgl_produksi }}</td>
-                                            <td>{{ $value->type_name }}/{{ $value->nama_sub_material }}/{{ $value->nama_material }}
+                                            <td>{{ $value->berat }}</td>
+                                            <td>{{ $value->nama_material }}/{{ $value->nama_sub_material }}/{{ $value->type_name }}
                                             </td>
 
                                         </tr>

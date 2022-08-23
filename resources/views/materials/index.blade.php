@@ -33,14 +33,24 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group row">
-                                        <div class="col-md-12">
+                                        <div class=" form-group col-md-12">
                                             <label class="font-weight-bold">Name Product Material</label>
                                             <input type="text"
                                                 class="form-control text-capitalize {{ $errors->first('nama_material') ? ' is-invalid' : '' }}"
-                                                name="nama_material" placeholder="Name Product Material" required>
+                                                name="nama_material" placeholder="Name Product Material" required
+                                                value="{{ old('nama_material') }}">
                                             @error('nama_material')
-                                                <small class="text-danger">The Product Material field is
-                                                    required.</small>
+                                                <small class="text-danger">{{ $message }}.</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-12">
+                                            <label class="font-weight-bold">Code Product Material</label>
+                                            <input type="text"
+                                                class="form-control text-uppercase {{ $errors->first('code_materials') ? ' is-invalid' : '' }}"
+                                                name="code_materials" placeholder="Code Product Material" required
+                                                max="3">
+                                            @error('code_materials')
+                                                <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>
 
@@ -75,6 +85,7 @@
                                         <th style="width: 10%"></th>
                                         <th>#</th>
                                         <th>Name Materials</th>
+                                        <th>Code Materials</th>
 
                                     </tr>
                                 </thead>
@@ -113,19 +124,32 @@
                                                             <div class="modal-body">
                                                                 <div class="container-fluid">
                                                                     <div class="form-group row">
-                                                                        <div class="col-md-12">
+                                                                        <div class="form-group col-md-12">
                                                                             <label class="font-weight-bold ">Name Product
                                                                                 Material</label>
                                                                             <input type="text"
                                                                                 class="form-control text-capitalize {{ $errors->first('editnama_material') ? ' is-invalid' : '' }}"
                                                                                 name="editnama_material"
                                                                                 value="{{ $value->nama_material }}"
-                                                                                placeholder="Name Unit of Measurement"
+                                                                                placeholder="name of product materials"
                                                                                 required>
                                                                             @error('editnama_material')
-                                                                                <small class="text-danger">The
-                                                                                    Product Material field is
-                                                                                    required.</small>
+                                                                                <small
+                                                                                    class="text-danger">{{ $message }}.</small>
+                                                                            @enderror
+                                                                        </div>
+                                                                        <div class="form-group col-md-12">
+                                                                            <label class="font-weight-bold ">Code Product
+                                                                                Material</label>
+                                                                            <input type="text"
+                                                                                class="form-control text-uppercase {{ $errors->first('editcode_material') ? ' is-invalid' : '' }}"
+                                                                                name="editcode_material"
+                                                                                value="{{ $value->code_materials }}"
+                                                                                placeholder="code of product materials"
+                                                                                max="3" required>
+                                                                            @error('editcode_material')
+                                                                                <small
+                                                                                    class="text-danger">{{ $message }}.</small>
                                                                             @enderror
                                                                         </div>
                                                                     </div>
@@ -182,6 +206,7 @@
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->nama_material }}</td>
+                                            <td class="text-uppercase">{{ $value->code_materials }}</td>
 
 
                                         </tr>

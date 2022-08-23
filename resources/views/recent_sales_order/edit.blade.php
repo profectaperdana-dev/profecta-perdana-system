@@ -23,7 +23,7 @@
             <div class="col-sm-12 col-xl-12 xl-100">
                 <div class="card">
                     <div class="card-header pb-0">
-                        {{-- <h5>All Data Sales Order Not Verified</h5> --}}
+                        <h5>{{ $value->order_number }}</h5>
                     </div>
                     <div class="card-body">
                         <form method="post" action="{{ url('updateso/' . $value->id . '/editso') }}"
@@ -35,7 +35,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-6 form-group">
                                             <label>
-                                                Customers {{ $value->customers_id }}</label>
+                                                Customers</label>
                                             <select name="customer_id" id="" required
                                                 class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
                                                 <option value="" selected>-Choose Customers-</option>

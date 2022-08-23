@@ -196,7 +196,7 @@
           </div>
         @enderror
       </div>
-      <div class="form-group col-md-3">
+      {{-- <div class="form-group col-md-3">
         <label>Due Date</label>
         <input type="number" name="due_date" value="{{ old('due_date', $customer->due_date) }}"
           class="form-control @error('due_date') is-invalid @enderror" placeholder="Customer Due Date" required>
@@ -205,7 +205,7 @@
             {{ $message }}
           </div>
         @enderror
-      </div>
+      </div> --}}
     </div>
     <div class="row">
       <div class="form-group col-md-6">

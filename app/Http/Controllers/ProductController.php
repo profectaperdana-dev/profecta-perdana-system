@@ -99,7 +99,6 @@ class ProductController extends Controller
     {
         $request->validate(
             [
-                'kode_barang' => 'required',
                 'nama_barang' => 'required',
                 'no_seri' => 'required',
                 'uom' => 'required',
@@ -111,12 +110,10 @@ class ProductController extends Controller
                 'harga_jual' => 'required',
                 'harga_jual_nonretail' => 'required',
                 'minstok' => 'required',
-                'tgl_produksi' => 'required',
                 'foto_barang' => 'required',
 
             ],
             [
-                'kode_barang.required' => 'The Product Code is required',
                 'nama_barang.required' => 'The Product Name is required',
                 'no_seri.required' => 'The Serial Number is required',
                 'uom.required' => 'You have to choose Unit of Measurement',
@@ -128,14 +125,19 @@ class ProductController extends Controller
                 'harga_jual.required' => 'The Retail Selling Price is required',
                 'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
                 'minstok.required' => 'The Min Stock required',
-                'tgl_produksi.required' => 'The Date of Production is required',
                 'foto_barang.required' => 'You have to choose Product Photo File',
 
             ]
         );
 
+        $materials = MaterialModel::select('code_materials')->where('id', $request->get('material_grup'))->firstOrFail();
+        $sub_materials = SubMaterialModel::select('code_sub_material')->where('id', $request->get('sub_material'))->firstOrFail();
+        $sub_types = SubTypeModel::select('code_sub_type')->where('id', $request->get('sub_type'))->firstOrFail();
+
         $model = new ProductModel();
-        $model->kode_barang = $request->get('kode_barang');
+        // dd($sub_types);
+        $text = substr($request->get('nama_barang'), -4);
+        $model->kode_barang = $materials->code_materials  .  $sub_materials->code_sub_material .  $sub_types->code_sub_type . $text;
         $model->nama_barang = $request->get('nama_barang');
         $model->no_seri = $request->get('no_seri');
         $model->id_uom = $request->get('uom');
@@ -147,7 +149,7 @@ class ProductController extends Controller
         $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->minstok = $request->get('minstok');
-        $model->tgl_produksi = $request->get('tgl_produksi');
+        // $model->tgl_produksi = $request->get('tgl_produksi');
         $model->status = 1;
         $file = $request->foto_barang;
         $nama_file = time() . '.' . $file->getClientOriginalExtension();
@@ -155,7 +157,7 @@ class ProductController extends Controller
         $model->foto_barang = $nama_file;
         $model->created_by = Auth::user()->id;
         $model->save();
-        return redirect('/products')->with('success', 'Add Data Product Success');
+        return redirect('/products')->with('success', 'Create data product  ' . $model->nama_barang . ' is success');
     }
 
     /**
@@ -199,7 +201,6 @@ class ProductController extends Controller
     {
         $request->validate(
             [
-                'kode_barang' => 'required',
                 'nama_barang' => 'required',
                 'no_seri' => 'required',
                 'uom' => 'required',
@@ -211,12 +212,10 @@ class ProductController extends Controller
                 'harga_jual_nonretail' => 'required',
                 'minstok' => 'required',
                 'status' => 'required',
-                'tgl_produksi' => 'required',
 
 
             ],
             [
-                'kode_barang.required' => 'The Product Code is required',
                 'nama_barang.required' => 'The Product Name is required',
                 'no_seri.required' => 'The Serial Number is required',
                 'uom.required' => 'You have to choose Unit of Measurement',
@@ -228,13 +227,16 @@ class ProductController extends Controller
                 'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
                 'minstok.required' => 'The Min Stock required',
                 'status.required' => 'The Status is required',
-                'tgl_produksi.required' => 'The Date of Production is required',
 
 
             ]
         );
+        $materials = MaterialModel::select('code_materials')->where('id', $request->get('material_grup'))->firstOrFail();
+        $sub_materials = SubMaterialModel::select('code_sub_material')->where('id', $request->get('sub_material'))->firstOrFail();
+        $sub_types = SubTypeModel::select('code_sub_type')->where('id', $request->get('sub_type'))->firstOrFail();
         $model = ProductModel::find($id);
-        $model->kode_barang = $request->get('kode_barang');
+        $text = substr($request->get('nama_barang'), -4);
+        $model->kode_barang = $materials->code_materials  .  $sub_materials->code_sub_material .  $sub_types->code_sub_type . $text;
         $model->nama_barang = $request->get('nama_barang');
         $model->no_seri = $request->get('no_seri');
         $model->id_uom = $request->get('uom');
@@ -245,7 +247,6 @@ class ProductController extends Controller
         $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->minstok = $request->get('minstok');
-        $model->tgl_produksi = $request->get('tgl_produksi');
         $model->status = $request->get('status');
 
         $url_lama = $request->get('url_lama');
@@ -261,7 +262,7 @@ class ProductController extends Controller
         }
         $model->created_by = Auth::user()->id;
         $model->save();
-        return redirect('/products')->with('info', 'Changes Data Product Success');
+        return redirect('/products')->with('info', 'Edit data product  ' . $model->nama_barang . ' is success');
     }
 
     /**
@@ -276,6 +277,6 @@ class ProductController extends Controller
         unlink("foto_produk/" . $model->foto_barang);
 
         $model->delete();
-        return redirect('/products')->with('error', 'Delete Data Product Success');
+        return redirect('/products')->with('error', 'Delete data product  ' . $model->nama_barang . ' is success');
     }
 }

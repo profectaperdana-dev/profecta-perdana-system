@@ -53,16 +53,18 @@ class SubMaterialController extends Controller
     {
         $request->validate([
             'nama_sub_material' => 'required',
-            'material_id' => 'required|numeric'
+            'material_id' => 'required|numeric',
+            'code_sub_material' => 'required|max:3|min:2'
 
         ]);
         $model = new SubMaterialModel();
         $model->nama_sub_material = $request->get('nama_sub_material');
         $model->material_id = $request->get('material_id');
+        $model->code_sub_material = $request->get('code_sub_material');
         $model->created_by = Auth::user()->id;
         $model->save();
 
-        return redirect('/product_sub_materials')->with('success', 'Add Data Product Sub Material Success');
+        return redirect('/product_sub_materials')->with('success', 'Create data sub product material ' . $model->nama_sub_material . ' is success');
     }
 
     /**
@@ -104,9 +106,10 @@ class SubMaterialController extends Controller
         $model = SubMaterialModel::find($id);
         $model->nama_sub_material = $request->get('editnama_submaterial');
         $model->material_id = $request->get('material_id_edit');
+        $model->code_sub_material = $request->get('editcode_sub_material');
         $model->created_by = Auth::user()->id;
         $model->save();
-        return redirect('/product_sub_materials')->with('info', 'Changes Data Product Sub Material Success');
+        return redirect('/product_sub_materials')->with('info', 'Edit data sub product material ' . $model->nama_sub_material . ' is success');
     }
 
     /**
@@ -119,6 +122,6 @@ class SubMaterialController extends Controller
     {
         $model = SubMaterialModel::find($id);
         $model->delete();
-        return redirect('/product_sub_materials')->with('error', 'Delete Data Product Sub Material Success');
+        return redirect('/product_sub_materials')->with('error', 'Delete data sub product material ' . $model->nama_sub_material . ' is success');
     }
 }

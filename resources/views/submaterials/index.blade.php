@@ -47,7 +47,7 @@
                                             </select>
                                             @error('material_id')
                                                 <div class="invalid-feedback">
-                                                    {{ $message }}
+                                                    {{ $message }}.
                                                 </div>
                                             @enderror
                                         </div>
@@ -57,12 +57,23 @@
                                             <label class="font-weight-bold">Name Product Sub Material</label>
                                             <input type="text"
                                                 class="form-control text-capitalize {{ $errors->first('nama_sub_material') ? ' is-invalid' : '' }}"
-                                                name="nama_sub_material" placeholder="Name Product Sub Material">
+                                                name="nama_sub_material" placeholder="Name Product Sub Material"
+                                                value="{{ old('nama_sub_material') }}">
                                             @error('nama_sub_material')
-                                                <small class="text-danger">The Product Sub Material field is
-                                                    required.</small>
+                                                <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>
+                                    </div>
+                                    <div class="form-group col-md-12">
+                                        <label class="font-weight-bold ">Code Product Sub
+                                            Material</label>
+                                        <input type="text"
+                                            class="form-control text-uppercase {{ $errors->first('code_sub_material') ? ' is-invalid' : '' }}"
+                                            name="code_sub_material" placeholder="code of product sub materials"
+                                            max="3" required value="{{ old('code_sub_material') }}">
+                                        @error('code_sub_material')
+                                            <small class="text-danger">{{ $message }}.</small>
+                                        @enderror
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
@@ -94,6 +105,7 @@
                                         <th>#</th>
                                         <th>Sub Material</th>
                                         <th>Material Source</th>
+                                        <th>Code Sub Material</th>
 
                                     </tr>
                                 </thead>
@@ -149,7 +161,7 @@
                                                                             </select>
                                                                             @error('material_id_edit')
                                                                                 <div class="invalid-feedback">
-                                                                                    {{ $message }}
+                                                                                    {{ $message }}.
                                                                                 </div>
                                                                             @enderror
                                                                         </div>
@@ -164,11 +176,24 @@
                                                                                 value="{{ $value->nama_sub_material }}"
                                                                                 placeholder="Name Unit of Measurement">
                                                                             @error('editnama_submaterial')
-                                                                                <small class="text-danger">The
-                                                                                    Product Sub Material field is
-                                                                                    required.</small>
+                                                                                <small class="text-danger">
+                                                                                    {{ $message }}.</small>
                                                                             @enderror
                                                                         </div>
+                                                                    </div>
+                                                                    <div class="form-group col-md-12">
+                                                                        <label class="font-weight-bold ">Code Product Sub
+                                                                            Material</label>
+                                                                        <input type="text"
+                                                                            class="form-control text-uppercase {{ $errors->first('editcode_sub_material') ? ' is-invalid' : '' }}"
+                                                                            name="editcode_sub_material"
+                                                                            placeholder="code of product sub materials"
+                                                                            max="3" required
+                                                                            value="{{ $value->editcode_sub_material }}">
+                                                                        @error('editcode_sub_material')
+                                                                            <small
+                                                                                class="text-danger">{{ $message }}.</small>
+                                                                        @enderror
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -224,6 +249,7 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->nama_sub_material }}</td>
                                             <td>{{ $value->nama_material }}</td>
+                                            <td class="text-uppercase">{{ $value->code_sub_material }}</td>
 
 
                                         </tr>

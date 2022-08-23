@@ -39,6 +39,7 @@
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('product_materials') ||
                         request()->is('products') ||
+                        request()->is('stocks') ||
                         request()->is('product_sub_materials') ||
                         request()->is('product_sub_types') ||
                         request()->is('product_uoms')) active @endif"
@@ -46,6 +47,7 @@
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('product_materials') ||
                                 request()->is('products') ||
+                                request()->is('stocks') ||
                                 request()->is('product_sub_materials') ||
                                 request()->is('product_sub_types') ||
                                 request()->is('product_uoms')) block @else none @endif ">
@@ -118,11 +120,11 @@
                             href="{{ url('/supliers') }}"><i data-feather="battery"></i><span>Master
                                 Suppliers</span></a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('supliers') ? 'active' : '' }}"
                             href="{{ url('/print-invoice') }}"><i data-feather="battery"></i><span>Master
                                 Suppliers</span></a>
-                    </li>
+                    </li> --}}
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Purchase Order </h6>

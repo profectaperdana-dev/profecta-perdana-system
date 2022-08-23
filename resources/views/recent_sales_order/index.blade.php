@@ -66,7 +66,8 @@
                             <div class="dropdown-menu" aria-labelledby="">
                               <h5 class="dropdown-header">Actions</h5>
                               <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                                data-bs-target="#detailData{{ $value->id }}">Products Detail</a>
+                                data-bs-target="#detailData{{ $value->id }}">Products
+                                Detail</a>
                               <a class="dropdown-item
                                 editPayment_method"
                                 href="{{ url('/edit_sales_order/' . $value->id) }}">Edit

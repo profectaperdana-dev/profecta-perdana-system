@@ -85,16 +85,20 @@ class SubTypeController extends Controller
      */
     public function store(Request $request)
     {
-        $validated_data = $request->validate([
+
+        $request->validate([
             'sub_material_id' => 'required|numeric',
-            'type_name' => 'required'
+            'type_name' => 'required',
+            'code_sub_type' => 'required|max:3|min:2'
 
         ]);
-        $validated_data['created_by'] = Auth::user()->id;
-
-        SubTypeModel::create($validated_data);
-
-        return redirect('/product_sub_types')->with('success', 'Sub Material Type Add Success');
+        $model = new SubTypeModel();
+        $model->sub_material_id = $request->get('sub_material_id');
+        $model->type_name = $request->get('type_name');
+        $model->code_sub_type = $request->get('code_sub_type');
+        $model->created_by = Auth::user()->id;
+        $model->save();
+        return redirect('/product_sub_types')->with('success', 'Create data sub product type ' . $model->type_name . ' is success');
     }
 
     /**
@@ -130,15 +134,17 @@ class SubTypeController extends Controller
     {
         $validated_data = $request->validate([
             'sub_material_id_edit' => 'required|numeric',
-            'type_name_edit' => 'required'
+            'type_name_edit' => 'required',
+            'code_sub_type_edit' => 'required|max:3|min:2',
         ]);
 
         $current_type = SubTypeModel::where('id', $id)->firstOrFail();
         $current_type->sub_material_id = $validated_data['sub_material_id_edit'];
         $current_type->type_name = $validated_data['type_name_edit'];
+        $current_type->code_sub_type = $validated_data['code_sub_type_edit'];
         $current_type->save();
 
-        return redirect('/product_sub_types')->with('success', 'Sub Material Type Edit Success');
+        return redirect('/product_sub_types')->with('info', 'Create data sub product type ' . $current_type->type_name . ' is success');
     }
 
     /**
@@ -149,8 +155,9 @@ class SubTypeController extends Controller
      */
     public function destroy($id)
     {
-        SubTypeModel::where('id', $id)->delete();
+        $current_type = SubTypeModel::find($id);
+        $current_type->delete();
 
-        return redirect('/product_sub_types')->with('success', 'Sub Material Type Delete Success');
+        return redirect('/product_sub_types')->with('error', 'Create data sub product type ' . $current_type->type_name . ' is success');
     }
 }
