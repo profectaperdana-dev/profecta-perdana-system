@@ -198,6 +198,13 @@ class SalesOrderController extends Controller
         $customer = CustomerModel::where('status', 1)->latest()->get();
         return view('recent_sales_order.edit', compact('title', 'value', 'customer'));
     }
+    public function editProduct($id)
+    {
+        $title = 'Edit Data Product in Sales Order :';
+        $value = SalesOrderModel::find($id);
+        $customer = CustomerModel::where('status', 1)->latest()->get();
+        return view('recent_sales_order.edit_product', compact('title', 'value', 'customer'));
+    }
 
     public function updateSo(Request $request, $id)
     {

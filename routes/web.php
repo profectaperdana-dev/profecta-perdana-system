@@ -60,7 +60,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
     Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
     Route::get('/customers/getVillage/{district_id}', [CustomerController::class, 'getVillage']);
-
+    Route::get('/edit_product/{id}', [SalesOrderController::class, 'editProduct']);
 
 
 
