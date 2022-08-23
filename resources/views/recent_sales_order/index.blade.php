@@ -378,6 +378,47 @@
                                                     </div>
                                                     <!-- Delete Product Modal End -->
 
+                                                    <!-- Delete Product Modal Start -->
+                                                    <div class="modal fade" id="changeData{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form method="post"
+                                                                action="{{ url('sales_order/' . $value->id) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('delete')
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Delete Data:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <h5>HELLOOOOOOOOOOOOOOOOOOOOOOOOOO</h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-danger" type="button"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Yes, delete
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Delete Product Modal End -->
+
                                                     <!-- Detail Product Modal Start -->
                                                     <div class="modal fade" id="detailDataDebt{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
