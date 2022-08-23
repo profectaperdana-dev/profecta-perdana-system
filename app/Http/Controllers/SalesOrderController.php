@@ -118,19 +118,16 @@ class SalesOrderController extends Controller
         // metode bayar
         if ($model->payment_method == 3) {
             $model->top = $request->get('top');
+            $dt = new DateTimeImmutable(Carbon::now()->format('Y-m-d'), new DateTimeZone('Asia/Jakarta'));
+            $dt = $dt->modify("+" . $model->top . " days");
+            $model->duedate = $dt;
         } else {
-            $model->top = '';
+            $model->top = NULL;
+            $model->duedate = NULL;
         }
         $model->isapprove = 0;
         $model->isverified = 0;
 
-        if ($model->top != NULL) {
-            $dt = new DateTimeImmutable(Carbon::now()->format('Y-m-d'), new DateTimeZone('Asia/Jakarta'));
-            $dt = $dt->modify("+" . $model->top . " days");
-        } else {
-            $dt = NULL;
-        }
-        $model->duedate = $dt;
         $model->save();
 
         // save sales order details
@@ -178,10 +175,9 @@ class SalesOrderController extends Controller
             $notif->status = 0;
             $notif->role_id = 5;
             $notif->save();
-            return redirect('/sales_order')->with('success', 'Create SO  Success');
+            return redirect('/recent_sales_order')->with('success', 'Create sales orders ' . $model->order_number . ' success');
         } elseif (!empty($message_duplicate)) {
             $message = $model->order_number . ' Sales Order has been created! Please check';
-
             event(new SOMessage('From: ' . Auth::user()->name,  $message));
             $notif = new NotificationsModel();
             $notif->message = $message;
@@ -208,7 +204,6 @@ class SalesOrderController extends Controller
         $request->validate([
             "customer_id" => "required|numeric",
             "payment_method" => "required|numeric",
-
         ]);
         $model = SalesOrderModel::find($id);
         if ($request->get('customer_id') != $model->customers_id) {
@@ -250,22 +245,18 @@ class SalesOrderController extends Controller
         $model->customers_id = $request->get('customer_id');
         $model->remark = $request->get('remark');
         $model->payment_method = $request->get('payment_method');
-        if ($request->get('payment_method') == 1) {
-            $model->top = '';
-            $model->payment = $request->get('payment');
-            $model->payment_type = $request->get('payment_type');
-            $model->duedate = '';
-        } else {
+        if ($request->get('payment_method') == 3) {
             $model->top = $request->get('top');
-            $model->payment = '';
-            $model->payment_type = '';
             $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
             $dt = $dt->modify("+" . $model->top . " days");
             $model->duedate = $dt;
+        } else {
+            $model->top = NULL;
+            $model->duedate = NULL;
         }
         $model->save();
         if ($model->save()) {
-            return redirect('/recent_sales_order')->with('success', 'Add Discount Success');
+            return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
         }
     }
 

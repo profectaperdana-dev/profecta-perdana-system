@@ -67,10 +67,13 @@
                                                 class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
                                                 <option value="" selected>-Choose Payment-</option>
                                                 <option value="1" @if ($value->payment_method == 1) selected @endif>
-                                                    Paid
+                                                    Cash On Delivery
                                                 </option>
                                                 <option value="2" @if ($value->payment_method == 2) selected @endif>
-                                                    Debt
+                                                    Cash Before Delivery
+                                                </option>
+                                                <option value="3" @if ($value->payment_method == 3) selected @endif>
+                                                    Credit
                                                 </option>
                                             </select>
                                             @error('payment_method')
@@ -92,28 +95,7 @@
                                                 </div>
                                             @enderror
                                         </div>
-                                        <div id="payment" hidden class="col-md-6 form-group mr-6">
-                                            <label>Payment</label>
-                                            <select name="payment" id="" class="form-control sub_type ">
-                                                <option value="" selected>-Choose Payment-</option>
-                                                <option value="1" @if ($value->payment == 1) selected @endif>CBD
-                                                </option>
-                                                <option value="2" @if ($value->payment == 2) selected @endif>COD
-                                                </option>
-                                            </select>
-                                        </div>
-                                        <div id="payment_type" hidden class="col-md-6 form-group mr-6">
-                                            <label>Payment Type</label>
-                                            <select name="payment_type" id="sub-type" class="form-control sub_type ">
-                                                <option value="" selected>-Choose Payment-</option>
-                                                <option value="1" @if ($value->payment_type == 1) selected @endif>
-                                                    Cash
-                                                </option>
-                                                <option value="2" @if ($value->payment_type == 2) selected @endif>
-                                                    Transfer
-                                                </option>
-                                            </select>
-                                        </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-12 form-group mr-5">

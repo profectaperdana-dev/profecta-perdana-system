@@ -71,15 +71,14 @@
                                                                 data-original-title="test"
                                                                 data-bs-target="#detailData{{ $value->id }}">Products
                                                                 Detail</a>
-                                                            <a class="dropdown-item
-                                editPayment_method"
+                                                            <a class="dropdown-item editPayment_method"
                                                                 href="{{ url('/edit_sales_order/' . $value->id) }}">Edit
                                                                 Sales
                                                                 Order</a>
                                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                                 data-original-title="test"
                                                                 data-bs-target="#changeData{{ $value->id }}">Edit
-                                                                Product</a>
+                                                                Product Discount</a>
                                                             <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                                 data-original-title="test"
                                                                 data-bs-target="#deleteData{{ $value->id }}">Add
@@ -96,7 +95,6 @@
                                                     </td>
                                                     </a>
                                                 </tr>
-
                                                 <!-- Detail Product Modal Start -->
                                                 <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
                                                     role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -137,6 +135,20 @@
                                                                             @endforeach
                                                                         </div>
                                                                         <hr>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-12 form-group">
+                                                                                <label>Payment Method</label>
+                                                                                <input class="form-control"
+                                                                                    value=" @if ($value->payment_method == 1) Cash On Delivery
+                                                                                            @elseif($value->payment_method)
+                                                                                            Cash Before Delivery
+                                                                                            @else
+                                                                                            Credit @endif
+                                                                                            "
+                                                                                    readonly>
+                                                                            </div>
+                                                                        </div>
+
                                                                         <div class="form-group row">
                                                                             <div class="col-12 form-group">
                                                                                 <label>Remarks</label>
@@ -306,7 +318,7 @@
                                                                             <div class="col-6 form-group">
                                                                                 <label>Due Date</label>
                                                                                 <input class="form-control"
-                                                                                    value="{{ $value->due_date }}"
+                                                                                    value="{{ $value->duedate }}"
                                                                                     readonly>
                                                                             </div>
 
