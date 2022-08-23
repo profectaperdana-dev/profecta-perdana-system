@@ -52,19 +52,24 @@
                 <div class="card">
                     <div class="card-header pb-0">
                         @php
-                            $now = Auth::user()->created_at->format('Y-m-d');
-                            $reminder = date('Y-m-d', strtotime('+30 days', strtotime($now))); //kurang tanggal sebanyak 6 bulan
+                            $date = Auth::user()->created_at->format('Y-m-d');
+                            $now = date('Y-m-d');
+                            $reminder = date('Y-m-d', strtotime('+30 days', strtotime($date))); //kurang tanggal sebanyak 6 bulan
                         @endphp
-                        <a href="{{ url('/profiles') }}" class="text-white">
-                            <div class="alert alert-primary dark alert-dismissible fade show" role="alert"><strong>Hallo,
-                                    {{ Auth::user()->name }} !
-                                </strong> Don't forget to change your account password regularly.
-                                Click This ! {{ $reminder }}
+                        @if ($now < $reminder)
+                            <a href="{{ url('/profiles') }}" class="text-white">
+                                <div class="alert alert-primary dark alert-dismissible fade show" role="alert">
+                                    <strong>Hallo,
+                                        {{ Auth::user()->name }} !
+                                    </strong> Don't forget to change your account password regularly.
+                                    Click This ! {{ $reminder }}
 
-                                <button class="btn-close" type="button" data-bs-dismiss="alert"
-                                    aria-label="Close"></button>
-                            </div>
-                        </a>
+                                    <button class="btn-close" type="button" data-bs-dismiss="alert"
+                                        aria-label="Close"></button>
+                                </div>
+                            </a>
+                        @endif
+
                         <h5>Sample Card</h5><span>lorem ipsum dolor sit amet, consectetur adipisicing
                             elit</span>
                     </div>

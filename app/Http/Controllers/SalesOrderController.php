@@ -16,6 +16,7 @@ use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
+use App\Models\WarehouseModel;
 
 use function PHPUnit\Framework\isEmpty;
 use function Symfony\Component\VarDumper\Dumper\esc;
@@ -38,16 +39,21 @@ class SalesOrderController extends Controller
     }
     public function getRecentData()
     {
-        // $now = Carbon::now()->format('Y-m-d');
-        // $get = '2022-07-02';
-        // if ($now > $get) {
-        //     dd('is over due');
-        // }
+
         $title = 'Recent Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        $dataSalesOrder = SalesOrderModel::where('payment_method', 1)->latest('created_at')->get();
-        $dataSalesOrderDebt = SalesOrderModel::where('payment_method', 2)->latest('created_at')->get();
+        // get kode area
+        $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+            ->select('customer_areas.area_code', 'warehouses.id')
+            ->where('warehouses.id', Auth::user()->warehouse_id)
+            ->first();
+
+        // get sales no debt
+        $dataSalesOrder = SalesOrderModel::whereIn('payment_method', [1, 2])->where('order_number', 'like', "%$kode_area->area_code%")->get();
+
+        // get sales with
+        $dataSalesOrderDebt = SalesOrderModel::where('payment_method', 3)->where('order_number', 'like', "%$kode_area->area_code%")->get();
 
 
         return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'product', 'customer'));
@@ -77,7 +83,7 @@ class SalesOrderController extends Controller
      */
     public function store(Request $request)
     {
-
+        // validasi sebelum save
         $request->validate([
             "customer_id" => "required|numeric",
             "payment_method" => "required|numeric",
@@ -86,23 +92,35 @@ class SalesOrderController extends Controller
             "soFields.*.qty" => "required|numeric"
         ]);
 
-
-        $length = 4;
-        $id = intval(SalesOrderModel::max('id')) + 1;
+        // query cek kode warehouse/area sales orders
+        $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+            ->select('customer_areas.area_code', 'warehouses.id')
+            ->where('warehouses.id', Auth::user()->warehouse_id)
+            ->first();
+        $length = 3;
+        $id = intval(SalesOrderModel::where('order_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
         $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
         $year = Carbon::now()->format('Y'); // 2022
         $month = Carbon::now()->format('m'); // 2022
-        $order_number = 'SOPP/' . $year . '/' . $month . '/' . $cust_number_id . '';
+        $tahun = substr($year, -2);
+        $order_number = 'SOPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $cust_number_id;
+        //
+
+        // save sales orders
         $model = new SalesOrderModel();
         $model->order_number = $order_number;
         $model->order_date = Carbon::now()->format('Y-m-d');
         $model->customers_id = $request->get('customer_id');
         $model->remark = $request->get('remark');
         $model->created_by = Auth::user()->id;
-        $model->top = $request->get('top');
-        $model->payment = $request->get('payment');
         $model->payment_method = $request->get('payment_method');
-        $model->payment_type = $request->get('payment_type');
+
+        // metode bayar
+        if ($model->payment_method == 3) {
+            $model->top = $request->get('top');
+        } else {
+            $model->top = '';
+        }
         $model->isapprove = 0;
         $model->isverified = 0;
 
@@ -115,6 +133,7 @@ class SalesOrderController extends Controller
         $model->duedate = $dt;
         $model->save();
 
+        // save sales order details
         $total = 0;
         $message_duplicate = '';
         if ($model->save()) {
@@ -183,6 +202,7 @@ class SalesOrderController extends Controller
         $customer = CustomerModel::where('status', 1)->latest()->get();
         return view('recent_sales_order.edit', compact('title', 'value', 'customer'));
     }
+
     public function updateSo(Request $request, $id)
     {
         $request->validate([

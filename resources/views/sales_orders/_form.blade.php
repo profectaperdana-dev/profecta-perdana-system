@@ -32,9 +32,11 @@
                     <select name="payment_method" id="payment_method" required
                         class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
                         <option value="" selected>-Choose Payment-</option>
-                        <option value="1">Paid
+                        <option value="1">Cash On Delivery
                         </option>
-                        <option value="2">Debt
+                        <option value="2">Cash Before Delivery
+                        </option>
+                        <option value="3">Credit
                         </option>
                     </select>
                     @error('payment_method')
@@ -45,7 +47,6 @@
                 </div>
             </div>
             <div class="form-group row">
-
                 <div id="top" hidden class="col-md-12 form-group">
                     <label>Terms of Payment</label>
                     <input type="text" class="form-control" placeholder="Product Name" name="top" value="">
@@ -54,26 +55,6 @@
                             {{ $message }}
                         </div>
                     @enderror
-                </div>
-                <div id="payment" hidden class="col-md-6 form-group mr-6">
-                    <label>Payment</label>
-                    <select name="payment" id="" class="form-control sub_type ">
-                        <option value="" selected>-Choose Payment-</option>
-                        <option value="1">CBD
-                        </option>
-                        <option value="2">COD
-                        </option>
-                    </select>
-                </div>
-                <div id="payment_type" hidden class="col-md-6 form-group mr-6">
-                    <label>Payment Type</label>
-                    <select name="payment_type" id="sub-type" class="form-control sub_type ">
-                        <option value="" selected>-Choose Payment-</option>
-                        <option value="1">Cash
-                        </option>
-                        <option value="2">Transfer
-                        </option>
-                    </select>
                 </div>
             </div>
             <div class="form-group row">

@@ -252,9 +252,16 @@
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $value->order_number }}</td>
                           <td>{{ $value->order_date }}</td>
+                          {{-- <td>
+                            @php
+                              $date = date('d F Y', strtotime($value->duedate));
+                            @endphp
+                            {{ $date }}
+                          </td> --}}
                           <td>{{ $value->customerBy->name_cust }}</td>
                           <td class="text-center"><a class="btn btn-primary btn-sm"
-                              href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate</td>
+                              href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
+                          </td>
                           </a>
 
                           <!-- Delete Product Modal Start -->
