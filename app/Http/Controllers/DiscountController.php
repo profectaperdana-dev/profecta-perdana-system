@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\RealTimeMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
-use App\Models\ProductModel;
+use App\Models\SubTypeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,13 +22,11 @@ class DiscountController extends Controller
     {
         $all_discounts = DiscountModel::with(['customerBy', 'productBy'])->latest()->get();
         $all_customers = CustomerModel::latest()->get();
-        $all_products = ProductModel::latest()->get();
 
         $data = [
             'title' => 'Discount',
             'discounts' => $all_discounts,
-            'customers' => $all_customers,
-            'products' => $all_products
+            'customers' => $all_customers
         ];
 
         return view('discounts.index', $data);

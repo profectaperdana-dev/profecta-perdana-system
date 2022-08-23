@@ -43,6 +43,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/products/cekproduct', [StockController::class, 'cekProduk']);
     Route::get('/product_sub_materials/select/{id}', [SubMaterialController::class, 'select']);
     Route::get('/product_sub_types/select/{id}', [SubTypeController::class, 'select']);
+    Route::get('/product_sub_types/selectAll', [SubTypeController::class, 'selectAll']);
     Route::get('/products/select', [ProductController::class, 'select']);
     Route::get('/products/selectAll', [ProductController::class, 'selectAll']);
     Route::get('/discounts/select/{customer_id}/{product_id}', [DiscountController::class, 'select']);

@@ -52,6 +52,31 @@ class SubTypeController extends Controller
         }
     }
 
+    public function selectAll()
+    {
+        try {
+            $sub_types = [];
+
+            if (request()->has('q')) {
+                $search = request()->q;
+                $sub_types = SubTypeModel::join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                    ->join('product_materials', 'product_materials.id', '=', 'product_sub_materials.material_id')
+                    ->select("product_sub_types.*", "product_sub_materials.nama_sub_material", "product_materials.nama_material")
+                    ->where('type_name', 'LIKE', "%$search%")
+                    ->get();
+            } else {
+                $sub_types = SubTypeModel::join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                    ->join('product_materials', 'product_materials.id', '=', 'product_sub_materials.material_id')
+                    ->select("product_sub_types.*", "product_sub_materials.nama_sub_material", "product_materials.nama_material")
+                    ->latest()
+                    ->get();
+            }
+            return response()->json($sub_types);
+        } catch (\Throwable $th) {
+            print($th);
+        }
+    }
+
     /**
      * Store a newly created resource in storage.
      *

@@ -91,7 +91,7 @@ class CustomerController extends Controller
         //Create Customer Code
         $area_code = CustomerAreaModel::where('id', $validated_data['area_cust_id'])->firstOrFail()->area_code;
         $length = 4;
-        $id = intval(CustomerModel::max('id')) + 1;
+        $id = intval(CustomerModel::where('code_cust', 'LIKE', "%$area_code%")->count()) + 1;
         $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
         $validated_data['code_cust'] = $area_code . $cust_number_id;
 

@@ -42,7 +42,7 @@
                         <option value="">Choose Customer</option>
                         @foreach ($customers as $customer)
                           <option value="{{ $customer->id }}" @if ($customer->id == old('customer_id')) selected @endif>
-                            {{ $customer->name_cust }}</option>
+                            {{ $customer->name_cust . ' | ' . $customer->code_cust }}</option>
                         @endforeach
                       </select>
                       @error('customer_id')
@@ -56,7 +56,7 @@
                     <div class="form-group col-md-5">
                       <label>Product</label>
                       <select name="discountFields[0][product_id]"
-                        class="form-control @error('discountFields[0][product_id]') is-invalid @enderror product-append-all"
+                        class="form-control @error('discountFields[0][product_id]') is-invalid @enderror product-append-discount"
                         required>
                         <option value="">Choose Product</option>
                       </select>
@@ -135,7 +135,7 @@
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                  {{ $discount->customerBy->name_cust . '| Product: ' . $discount->productBy->nama_barang }}
+                                  {{ $discount->customerBy->name_cust . '| Product: ' . $discount->productBy->type_name }}
                                 </h5>
                                 <button class="btn-close" type="button" data-bs-dismiss="modal"
                                   aria-label="Close"></button>
@@ -170,7 +170,7 @@
                                         class="form-control @error('product_id_edit') is-invalid @enderror product-append"
                                         required>
                                         <option selected value="{{ $discount->product_id }}">
-                                          {{ $discount->productBy->nama_barang }}
+                                          {{ $discount->productBy->type_name }}
                                         </option>
                                       </select>
                                       @error('product_id_edit')
@@ -214,7 +214,7 @@
                             @method('delete') <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                  {{ $discount->customerBy->name_cust . '| Product: ' . $discount->productBy->nama_barang }}
+                                  {{ $discount->customerBy->name_cust . '| Product: ' . $discount->productBy->type_name }}
                                 </h5>
                                 <button class="btn-close" type="button" data-bs-dismiss="modal"
                                   aria-label="Close"></button>
@@ -240,7 +240,7 @@
                       {{-- End Modal Delete UOM --}}
                       <td>{{ $key + 1 }}</td>
                       <td>{{ $discount->customerBy->name_cust }}</td>
-                      <td>{{ $discount->productBy->nama_barang }}</td>
+                      <td>{{ $discount->productBy->type_name }}</td>
                       <td>{{ $discount->discount }}</td>
 
 
@@ -267,6 +267,80 @@
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
     <script>
       $(document).ready(function() {
+        let csrf = $('meta[name="csrf-token"]').attr("content");
+
+        $(".product-append-discount").select2({
+          width: "100%",
+          ajax: {
+            type: "GET",
+            url: "/product_sub_types/selectAll",
+            data: {
+              _token: csrf,
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  return [{
+                    text: item.type_name + ' (' + item.nama_sub_material + ', ' + item.nama_material +
+                      ')',
+                    id: item.id,
+                  }, ];
+                }),
+              };
+            },
+          },
+        });
+
+        let i = 0;
+
+        $("#addfields").on("click", function() {
+          ++i;
+          let form =
+            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="discountFields[' +
+            i +
+            '][product_id]"' +
+            'class="form-control product-append-discount" required> <option value=""> Choose Product </option> </select>' +
+            '</div> <div class="form-group col-5">' +
+            '<label> Discount </label> <input type="number" name="discountFields[' +
+            i +
+            '][discount]" id="discount"' +
+            'class="form-control" placeholder="Enter Discount" required>' +
+            '</div>  <div class="form-group col-2">' +
+            '<label for="">&nbsp;</label>' +
+            '<a href="javascript:void(0)" class="form-control text-white remfields" style="border:none; background-color:red">&#9747;</a> </div> </div>';
+
+          $("#formdynamic").append(form);
+          $(".product-append-discount").select2({
+            width: "100%",
+            ajax: {
+              type: "GET",
+              url: "/product_sub_types/selectAll",
+              data: {
+                _token: csrf,
+              },
+              dataType: "json",
+              delay: 250,
+              processResults: function(data) {
+                return {
+                  results: $.map(data, function(item) {
+                    return [{
+                      text: item.type_name + ' (' + item.nama_sub_material + ', ' + item
+                        .nama_material +
+                        ')',
+                      id: item.id,
+                    }, ];
+                  }),
+                };
+              },
+            },
+          });
+        });
+        $(document).on("click", ".remfields", function() {
+          $(this).parents(".form-group").remove();
+        });
+
         var table =
 
           $('#basic-2').DataTable({
