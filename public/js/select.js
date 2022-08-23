@@ -368,13 +368,13 @@ $(document).ready(function () {
     });
 
     $("#payment_method").change(function () {
-        if ($(this).val() == 1) {
-            $("#payment").removeAttr("hidden");
-            $("#payment_type").removeAttr("hidden");
+        if ($(this).val() == 1 || $(this).val() == 2) {
+            // $("#payment").removeAttr("hidden");
+            // $("#payment_type").removeAttr("hidden");
             $("#top").attr("hidden", "true");
         } else {
-            $("#payment").attr("hidden", "true");
-            $("#payment_type").attr("hidden", "true");
+            // $("#payment").attr("hidden", "true");
+            // $("#payment_type").attr("hidden", "true");
             $("#top").removeAttr("hidden");
         }
     });
