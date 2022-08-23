@@ -62,62 +62,65 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        $validated_data = $request->validate([
-            'name_cust' => 'required',
-            'phone_cust' => 'required',
-            'id_card_number' => 'required',
-            'province' => 'required',
-            'city' => 'required',
-            'district' => 'required',
-            'village' => 'required',
-            'address_cust' => 'required',
-            'npwp' => 'required',
-            'email_cust' => 'required',
-            'category_cust_id' => 'required|numeric',
-            'area_cust_id' => 'required|numeric',
-            'credit_limit' => 'required|numeric',
-            'label' => 'required',
-            // 'due_date' => 'required|numeric',
-            'coordinate' => 'required',
-            'status' => 'required|numeric',
-            'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
-        ], [
-            'coordinate.required' => 'Generate Location Button must be clicked'
-        ]);
+        try {
+            $validated_data = $request->validate([
+                'name_cust' => 'required',
+                'phone_cust' => 'required',
+                'id_card_number' => 'required',
+                'province' => 'required',
+                'city' => 'required',
+                'district' => 'required',
+                'village' => 'required',
+                'address_cust' => 'required',
+                'npwp' => 'required',
+                'email_cust' => 'required',
+                'category_cust_id' => 'required|numeric',
+                'area_cust_id' => 'required|numeric',
+                'credit_limit' => 'required|numeric',
+                'label' => 'required',
+                'due_date' => 'required|numeric',
+                'coordinate' => 'required',
+                'status' => 'required|numeric',
+                'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
+            ], [
+                'coordinate.required' => 'Generate Location Button must be clicked'
+            ]);
 
-        //create create by
-        $validated_data['created_by'] = Auth::user()->id;
+            //create create by
+            $validated_data['created_by'] = Auth::user()->id;
 
-        //Create Customer Code
-        $area_code = CustomerAreaModel::where('id', $validated_data['area_cust_id'])->firstOrFail()->area_code;
-        $length = 4;
-        $id = intval(CustomerModel::where('code_cust', 'LIKE', "%$area_code%")->count()) + 1;
-        $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
-        $validated_data['code_cust'] = $area_code . $cust_number_id;
+            //Create Customer Code
+            $area_code = CustomerAreaModel::where('id', $validated_data['area_cust_id'])->firstOrFail()->area_code;
+            $length = 4;
+            $id = intval(CustomerModel::where('code_cust', 'LIKE', "%$area_code%")->max('id')) + 1;
+            $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
+            $validated_data['code_cust'] = $area_code . $cust_number_id;
 
-        //Get Province, City, District, Village
-        $province_name = $this->getNameProvince($validated_data['province']);
-        $validated_data['province'] = ucwords(strtolower($province_name));
-        $city_name = $this->getNameCity($validated_data['city']);
-        $validated_data['city'] = ucwords(strtolower($city_name));
-        $district_name = $this->getNameDistrict($validated_data['district']);
-        $validated_data['district'] = ucwords(strtolower($district_name));
-        $village_name = $this->getNameVillage($validated_data['village']);
-        $validated_data['village'] = ucwords(strtolower($village_name));
+            //Get Province, City, District, Village
+            $province_name = $this->getNameProvince($validated_data['province']);
+            $validated_data['province'] = ucwords(strtolower($province_name));
+            $city_name = $this->getNameCity($validated_data['city']);
+            $validated_data['city'] = ucwords(strtolower($city_name));
+            $district_name = $this->getNameDistrict($validated_data['district']);
+            $validated_data['district'] = ucwords(strtolower($district_name));
+            $village_name = $this->getNameVillage($validated_data['village']);
+            $validated_data['village'] = ucwords(strtolower($village_name));
 
-        //Process Image
-        $file = $request->file('reference_image');
-        if ($file) {
-            $name_file = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('images/customers'), $name_file);
-        } else {
-            $name_file = "blank";
+            //Process Image
+            $file = $request->file('reference_image');
+            if ($file) {
+                $name_file = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/customers'), $name_file);
+            } else {
+                $name_file = "blank";
+            }
+            $validated_data['reference_image'] = $name_file;
+            CustomerModel::create($validated_data);
+
+            return redirect('/customers')->with('success', 'Customer Add Success');
+        } catch (\Throwable $th) {
+            return redirect('/customers/create')->with('error', $th->getMessage());
         }
-        $validated_data['reference_image'] = $name_file;
-
-        CustomerModel::create($validated_data);
-
-        return redirect('/customers')->with('success', 'Customer Add Success');
     }
 
     /**
@@ -167,6 +170,10 @@ class CustomerController extends Controller
             'name_cust' => 'required',
             'phone_cust' => 'required',
             'id_card_number' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+            'village' => 'required',
             'address_cust' => 'required',
             'npwp' => 'required',
             'email_cust' => 'required',
@@ -174,7 +181,7 @@ class CustomerController extends Controller
             'area_cust_id' => 'required|numeric',
             'credit_limit' => 'required|numeric',
             'label' => 'required',
-            // 'due_date' => 'required|numeric',
+            'due_date' => 'required|numeric',
             'status' => 'required|numeric',
             'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
         ]);
@@ -183,6 +190,16 @@ class CustomerController extends Controller
         $customer_current->name_cust = $validated_data['name_cust'];
         $customer_current->phone_cust = $validated_data['phone_cust'];
         $customer_current->id_card_number = $validated_data['id_card_number'];
+        if ($customer_current->province != $validated_data['province']) {
+            $province_name = $this->getNameProvince($validated_data['province']);
+            $customer_current->province = ucwords(strtolower($province_name));
+            $city_name = $this->getNameCity($validated_data['city']);
+            $customer_current->city = ucwords(strtolower($city_name));
+            $district_name = $this->getNameDistrict($validated_data['district']);
+            $customer_current->district = ucwords(strtolower($district_name));
+            $village_name = $this->getNameVillage($validated_data['village']);
+            $customer_current->village = ucwords(strtolower($village_name));
+        }
         $customer_current->address_cust = $validated_data['address_cust'];
         $customer_current->npwp = $validated_data['npwp'];
         $customer_current->email_cust = $validated_data['email_cust'];
@@ -190,7 +207,7 @@ class CustomerController extends Controller
         $customer_current->area_cust_id = $validated_data['area_cust_id'];
         $customer_current->credit_limit = $validated_data['credit_limit'];
         $customer_current->label = $validated_data['label'];
-        // $customer_current->due_date = $validated_data['due_date'];
+        $customer_current->due_date = $validated_data['due_date'];
         $customer_current->status = $validated_data['status'];
 
         //process image

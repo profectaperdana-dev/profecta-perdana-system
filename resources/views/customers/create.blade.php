@@ -47,7 +47,9 @@
       $(document).ready(function() {
         $(".province").select2({
           width: "100%",
+          placeholder: "Select Customer Province",
           minimumResultsForSearch: -1,
+          sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
           ajax: {
             type: "GET",
             url: "/customers/getProvince",
@@ -75,6 +77,8 @@
           $(".city").select2({
             width: "100%",
             minimumResultsForSearch: -1,
+            placeholder: "Select Customer City",
+            sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
             ajax: {
               type: "GET",
               url: "/customers/getCity/" + province_value,
@@ -103,6 +107,8 @@
           $(".district").select2({
             width: "100%",
             minimumResultsForSearch: -1,
+            placeholder: "Select Customer District",
+            sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
             ajax: {
               type: "GET",
               url: "/customers/getDistrict/" + city_value,
@@ -131,6 +137,8 @@
           $(".village").select2({
             width: "100%",
             minimumResultsForSearch: -1,
+            placeholder: "Select Customer Village",
+            sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
             ajax: {
               type: "GET",
               url: "/customers/getVillage/" + district_value,

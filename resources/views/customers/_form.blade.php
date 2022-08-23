@@ -39,7 +39,10 @@
       <div class="form-group col-md-3">
         <label>Province</label>
         <select name="province" class="form-control province @error('province') is-invalid @enderror" required>
-          <option value="" selected>Choose Province</option>
+          @if ($customer->province != null)
+            <option selected value="{{ $customer->province }}">{{ $customer->province }}
+            </option>
+          @endif
         </select>
         @error('province')
           <div class="invalid-feedback">
@@ -50,7 +53,10 @@
       <div class="form-group col-md-3">
         <label>City</label>
         <select name="city" class="form-control city @error('city') is-invalid @enderror" required>
-          <option value="" selected>Choose City</option>
+          @if ($customer->city != null)
+            <option selected value="{{ $customer->city }}">{{ $customer->city }}
+            </option>
+          @endif
         </select>
         @error('city')
           <div class="invalid-feedback">
@@ -61,7 +67,10 @@
       <div class="form-group col-md-3">
         <label>District</label>
         <select name="district" class="form-control district @error('district') is-invalid @enderror" required>
-          <option value="" selected>Choose District</option>
+          @if ($customer->district != null)
+            <option selected value="{{ $customer->district }}">{{ $customer->district }}
+            </option>
+          @endif
         </select>
         @error('district')
           <div class="invalid-feedback">
@@ -72,7 +81,10 @@
       <div class="form-group col-md-3">
         <label>Village</label>
         <select name="village" class="form-control village @error('village') is-invalid @enderror" required>
-          <option value="" selected>Choose Village</option>
+          @if ($customer->village != null)
+            <option selected value="{{ $customer->village }}">{{ $customer->village }}
+            </option>
+          @endif
         </select>
         @error('village')
           <div class="invalid-feedback">
@@ -196,7 +208,7 @@
           </div>
         @enderror
       </div>
-      {{-- <div class="form-group col-md-3">
+      <div class="form-group col-md-3">
         <label>Due Date</label>
         <input type="number" name="due_date" value="{{ old('due_date', $customer->due_date) }}"
           class="form-control @error('due_date') is-invalid @enderror" placeholder="Customer Due Date" required>
@@ -205,7 +217,7 @@
             {{ $message }}
           </div>
         @enderror
-      </div> --}}
+      </div>
     </div>
     <div class="row">
       <div class="form-group col-md-6">

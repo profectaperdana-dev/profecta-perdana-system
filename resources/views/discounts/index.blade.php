@@ -145,29 +145,16 @@
                                   <div class="form-group row">
                                     <div class="form-group col-md-12">
                                       <label>Customer</label>
-                                      <select name="customer_id_edit"
-                                        class="form-control role-acc @error('customer_id_edit') is-invalid @enderror"
-                                        required>
-                                        <option value="">Choose Customer
-                                        </option>
-                                        @foreach ($customers as $customer)
-                                          <option value="{{ $customer->id }}"
-                                            @if ($discount->customer_id == $customer->id) selected @endif>
-                                            {{ $customer->name_cust }}</option>
-                                        @endforeach
-                                      </select>
-                                      @error('customer_id_edit')
-                                        <div class="invalid-feedback">
-                                          {{ $message }}
-                                        </div>
-                                      @enderror
+                                      <input class="form-control" type="text" name="" id=""
+                                        value="{{ $discount->customerBy->name_cust . ' | ' . $discount->customerBy->code_cust }}"
+                                        readonly>
                                     </div>
                                   </div>
                                   <div class="form-group row">
                                     <div class="form-group col-md-6">
                                       <label>Product</label>
                                       <select name="product_id_edit"
-                                        class="form-control @error('product_id_edit') is-invalid @enderror product-append"
+                                        class="form-control @error('product_id_edit') is-invalid @enderror product-append-discount"
                                         required>
                                         <option selected value="{{ $discount->product_id }}">
                                           {{ $discount->productBy->type_name }}
