@@ -16,6 +16,7 @@ use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
+use App\Models\StockModel;
 use App\Models\WarehouseModel;
 
 use function PHPUnit\Framework\isEmpty;
@@ -175,7 +176,7 @@ class SalesOrderController extends Controller
             $notif->status = 0;
             $notif->role_id = 5;
             $notif->save();
-            return redirect('/recent_sales_order')->with('success', 'Create sales orders ' . $model->order_number . ' success');
+            return redirect('/sales_order')->with('success', 'Create sales orders ' . $model->order_number . ' success');
         } elseif (!empty($message_duplicate)) {
             $message = $model->order_number . ' Sales Order has been created! Please check';
             event(new SOMessage('From: ' . Auth::user()->name,  $message));
@@ -202,10 +203,46 @@ class SalesOrderController extends Controller
     {
         $title = 'Edit Data Product in Sales Order :';
         $value = SalesOrderModel::find($id);
+        $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
+            ->select('products.*', 'stocks.warehouses_id')
+            ->where('stocks.warehouses_id', Auth::user()->warehouse_id)
+            ->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        return view('recent_sales_order.edit_product', compact('title', 'value', 'customer'));
+        return view('recent_sales_order.edit_product', compact('title', 'value', 'customer', 'product'));
     }
+    public function deleteProduct($id_so, $id_sod)
+    {
+        $cekDetail = SalesOrderDetailModel::where('sales_orders_id', $id_so)->count();
 
+        if ($cekDetail > 1) {
+            // dd($model);
+            $cekProduct = SalesOrderDetailModel::find($id_sod);
+            $hapus =  $cekProduct->delete();
+            $total = 0;
+            if ($hapus) {
+                $productDetail = SalesOrderDetailModel::where('sales_orders_id', $id_so)->get();
+                // dd($productDetail);
+
+                foreach ($productDetail as $produk) {
+                    $harga = ProductModel::where('id', $produk->products_id)->first();
+                    $diskon =  $produk['discount'] / 100;
+                    $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
+                    $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+                    $total = $total + ($hargaAfterDiskon * $produk->qty);
+                    // dd($produk);
+                }
+            }
+            $model = SalesOrderModel::find($id_so);
+            $ppn = 0.11 * $total;
+            $model->ppn = $ppn;
+            $model->total = $total;
+            $model->total_after_ppn = $total + $ppn;
+            $model->save();
+            return redirect('/recent_sales_order')->with('error', 'Delete product in sales orders success');
+        } else {
+            return redirect('/recent_sales_order')->with('error', 'Delete product in sales orders fail because the product in the sales order cannot be empty');
+        }
+    }
     public function updateSo(Request $request, $id)
     {
         $request->validate([
