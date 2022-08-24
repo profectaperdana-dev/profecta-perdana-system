@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Events\RealTimeMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
+use App\Models\ProductModel;
 use App\Models\SubTypeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -41,9 +42,10 @@ class DiscountController extends Controller
     {
         try {
             $discount = [];
+            $sub_type = ProductModel::select('id_sub_type')->where('id', $product_id)->first();
             $discount = DiscountModel::select("id", "discount")
                 ->where('customer_id', $customer_id)
-                ->where('product_id', $product_id)
+                ->where('product_id', $sub_type->id_sub_type)
                 ->first();
 
             return response()->json($discount);

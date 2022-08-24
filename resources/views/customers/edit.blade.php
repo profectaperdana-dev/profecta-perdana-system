@@ -53,8 +53,11 @@
           ajax: {
             type: "GET",
             url: "/customers/getProvince",
-            data: {
-              _token: csrf,
+            data: function(params) {
+              return {
+                _token: csrf,
+                q: params.term, // search term
+              };
             },
             dataType: "json",
             delay: 250,
@@ -85,8 +88,11 @@
             ajax: {
               type: "GET",
               url: "/customers/getCity/" + province_value,
-              data: {
-                _token: csrf,
+              data: function(params) {
+                return {
+                  _token: csrf,
+                  q: params.term, // search term
+                };
               },
               dataType: "json",
               delay: 250,
@@ -114,8 +120,11 @@
             ajax: {
               type: "GET",
               url: "/customers/getDistrict/" + city_value,
-              data: {
-                _token: csrf,
+              data: function(params) {
+                return {
+                  _token: csrf,
+                  q: params.term, // search term
+                };
               },
               dataType: "json",
               delay: 250,
@@ -143,8 +152,11 @@
             ajax: {
               type: "GET",
               url: "/customers/getVillage/" + district_value,
-              data: {
-                _token: csrf,
+              data: function(params) {
+                return {
+                  _token: csrf,
+                  q: params.term, // search term
+                };
               },
               dataType: "json",
               delay: 250,
