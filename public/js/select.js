@@ -326,7 +326,13 @@ $(document).ready(function () {
                         results: $.map(data, function (item) {
                             return [
                                 {
-                                    text: item.nama_barang,
+                                    text:
+                                        item.nama_barang +
+                                        " (" +
+                                        item.type_name +
+                                        ", " +
+                                        item.nama_sub_material +
+                                        ")",
                                     id: item.id,
                                 },
                             ];
@@ -340,18 +346,6 @@ $(document).ready(function () {
     //remove Sales Order fields
     $(document).on("click", ".remSo", function () {
         $(this).parents(".form-group").remove();
-    });
-
-    $("#payment_method").change(function () {
-        if ($(this).val() == 1 || $(this).val() == 2) {
-            // $("#payment").removeAttr("hidden");
-            // $("#payment_type").removeAttr("hidden");
-            $("#top").attr("hidden", "true");
-        } else {
-            // $("#payment").attr("hidden", "true");
-            // $("#payment_type").attr("hidden", "true");
-            $("#top").removeAttr("hidden");
-        }
     });
 
     // $('.editPayment_method').click(function(){

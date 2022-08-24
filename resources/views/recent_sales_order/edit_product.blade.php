@@ -1,262 +1,320 @@
 @extends('layouts.master')
 @section('content')
-    @push('css')
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-    @endpush
+  @push('css')
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+  @endpush
 
-    <div class="container-fluid">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-sm-12 col-12">
-                    <h3 class="font-weight-bold">{{ $title }} {{ $value->order_number }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        Edit sales orders discount & product</h6>
-                </div>
-
-            </div>
+  <div class="container-fluid">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-sm-12 col-12">
+          <h3 class="font-weight-bold">{{ $title }} {{ $value->order_number }}</h3>
+          <h6 class="font-weight-normal mb-0 breadcrumb-item active">
+            Edit sales orders discount & product</h6>
         </div>
+
+      </div>
     </div>
-    <!-- Container-fluid starts-->
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Edit Product</h5>
-                        <hr>
+  </div>
+  <!-- Container-fluid starts-->
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-header pb-0">
+            <h5>Edit Product</h5>
+            <hr>
+          </div>
+          <div class="card-body">
+            <form method="post" action="{{ url('update_product/' . $value->id . '/edit_product') }}"
+              enctype="multipart/form-data" id="">
+              @csrf
+              @method('PUT')
+              <div class="container-fluid">
+                <div class="form-group row">
+                  @foreach ($value->salesOrderDetailsBy as $detail)
+                    <div class="form-group row">
+                      <div class="col-md-7 col-4 form-group">
+                        <label>
+                          Product </label>
+                        <select name="editProduct[{{ $loop->index }}][products_id]" id="" required
+                          class="form-control productSo {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
+                          @if ($detail->products_id != null)
+                            <option value="{{ $detail->products_id }}" selected>
+                              {{ $detail->productSales->nama_barang .
+                                  ' (' .
+                                  $detail->productSales->sub_types->type_name .
+                                  ', ' .
+                                  $detail->productSales->sub_materials->nama_sub_material .
+                                  ')' }}
+                            </option>
+                          @endif
+                        </select>
+                        @error('editProduct[' . $loop->index . '][products_id]s')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+                      <div class="col-md-2 col-3 form-group">
+                        <label>Qty</label>
+                        <input type="text" class="form-control" placeholder="Product Name"
+                          name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}">
+                        @error('top')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+                      {{-- id sod --}}
+                      <input hidden type="text" name="editProduct[{{ $loop->index }}][id_sod]"
+                        value="{{ $detail->id }}">
+                      <div class="col-md-2 col-3 form-group">
+                        <label>Discount</label>
+                        <input type="text" class="form-control" placeholder="Product Name"
+                          name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}">
+                        @error('top')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+                      <div class="col-md-1 col-2 form-group">
+                        <label>&nbsp;</label>
+                        <a href="{{ url('delete_product/' . $value->id . '/' . $detail->id) }}"
+                          class="btn btn-danger">X</a>
+                      </div>
                     </div>
-                    <div class="card-body">
-                        <form method="post" action="{{ url('update_product/' . $value->id . '/edit_product') }}"
-                            enctype="multipart/form-data" id="">
-                            @csrf
-                            @method('PUT')
-                            <div class="container-fluid">
-                                <div class="form-group row">
-                                    @foreach ($value->salesOrderDetailsBy as $detail)
-                                        <div class="form-group row">
-                                            <div class="col-md-7 col-4 form-group">
-                                                <label>
-                                                    Product </label>
-                                                <select name="editProduct[{{ $loop->index }}][products_id]" id=""
-                                                    required
-                                                    class="form-control sub_type  {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
-                                                    <option value="" selected>-Choose Product-</option>
-                                                    @foreach ($product as $valueProduct)
-                                                        <option value="{{ $valueProduct->id }}"
-                                                            @if ($valueProduct->id == $detail->products_id) selected @endif>
-                                                            <div>
-                                                                {{ strtoupper($valueProduct->kode_barang) }} |
-                                                                {{ $valueProduct->nama_barang }}
-                                                            </div>
-                                                        </option>
-                                                    @endforeach
-                                                </select>
-                                                @error('customer_id')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            {{-- <div class="form-group col-4">
-                                                <label>Product</label>
-                                                <select name="soFields[0][product_id]" class="form-control productSo"
-                                                    required>
-                                                    <option value="">Choose Product</option>
-                                                </select>
-                                                @error('soFields[0][product_id]')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div> --}}
-                                            <div class="col-md-2 col-3 form-group">
-                                                <label>Qty</label>
-                                                <input type="text" class="form-control" placeholder="Product Name"
-                                                    name="editProduct[{{ $loop->index }}][qty]"
-                                                    value="{{ $detail->qty }}">
-                                                @error('top')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            {{-- id sod --}}
-                                            <input hidden type="text" name="editProduct[{{ $loop->index }}][id_sod]"
-                                                value="{{ $detail->id }}">
-                                            <div class="col-md-2 col-3 form-group">
-                                                <label>Discount</label>
-                                                <input type="text" class="form-control" placeholder="Product Name"
-                                                    name="editProduct[{{ $loop->index }}][discount]"
-                                                    value="{{ $detail->discount }}">
-                                                @error('top')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-                                            <div class="col-md-1 col-2 form-group">
-                                                <label>&nbsp;</label>
-                                                <a href="{{ url('delete_product/' . $value->id . '/' . $detail->id) }}"
-                                                    class="btn btn-danger">X</a>
-                                            </div>
-                                        </div>
-                                    @endforeach
-                                    <div class="form-group">
-                                        <a class="btn btn-danger" href="{{ url('recent_sales_order/') }}"> <i
-                                                class="ti ti-arrow-left"> </i> Back
-                                        </a>
-                                        <button type="reset" class="btn btn-warning">Reset</button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </form>
-
-                    </div>
+                  @endforeach
+                  <div class="form-group">
+                    <a class="btn btn-danger" href="{{ url('recent_sales_order/') }}"> <i class="ti ti-arrow-left"> </i>
+                      Back
+                    </a>
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
                 </div>
-            </div>
-            <div class="col-12 col-md-6">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Add Product</h5>
-                    </div>
-                    <div class="card-body">
+              </div>
+            </form>
 
-
-                    </div>
-                </div>
-
-            </div>
+          </div>
         </div>
+      </div>
+      <div class="col-12 col-md-6">
+        <div class="card">
+          <div class="card-header pb-0">
+            <h5>Add Product</h5>
+          </div>
+          <div class="card-body">
+            <form method="post" action="{{ url('update_product/' . $value->id . '/add_product') }}"
+              enctype="multipart/form-data" id="">
+              @csrf
+              <div class="col-md-12">
+                <div class="row font-weight-bold " id="formSo-edit">
+                  <div class="form-group row">
+                    <input type="hidden" id="customer_selected" value="{{ $value->customers_id }}">
+                    <div class="form-group col-md-7 col-4">
+                      <label>Product</label>
+                      <select name="soFields[0][product_id]" class="form-control productSo-edit" required>
+                        <option value="">Choose Product</option>
+                      </select>
+                      @error('soFields[0][product_id]')
+                        <div class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+                    <div class="col-3 col-md-2 form-group">
+                      <label>Qty</label>
+                      <input class="form-control cekQty-edit" required name="soFields[0][qty]" id="">
+                      @error('soFields[0][qty]')
+                        <div class="invalid-feedback">
+                          {{ $message }}
+                        </div>
+                      @enderror
+                    </div>
+
+                    <div class="col-3 col-md-2 form-group">
+                      <label>Discount%</label>
+                      <input class="form-control discount-append-edit" name="soFields[0][discount]" id=""
+                        readonly>
+                    </div>
+                    <div class="col-2 col-md-1 form-group">
+                      <label for="">&nbsp;</label>
+                      <a id="addSo-edit" href="javascript:void(0)" class="btn btn-success form-control text-white">+</a>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <button type="reset" class="btn btn-warning">Reset</button>
+                  <button type="submit" class="btn btn-primary">Add</button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+
+      </div>
     </div>
-    <!-- Container-fluid Ends-->
-    @push('scripts')
-        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-        {{-- <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script> --}}
-        <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
-        <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
-        <script>
-            $(document).ready(function() {
-                $('#payment_method').change(function() {
-                    if ($(this).val() == 1) {
-                        $('#payment').removeAttr('hidden');
-                        $('#payment_type').removeAttr('hidden');
-                        $('#top').attr('hidden', 'true');
-                    } else {
-                        $('#payment').attr('hidden', 'true');
-                        $('#payment_type').attr('hidden', 'true');
-                        $('#top').removeAttr('hidden');
-                    }
+  </div>
+  <!-- Container-fluid Ends-->
+  @push('scripts')
+    <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+    <script>
+      $(document).ready(function() {
+        let csrf = $('meta[name="csrf-token"]').attr("content");
 
-                });
-                if ($('#payment_method').val() == 1) {
-                    $('#payment').removeAttr('hidden');
-                    $('#payment_type').removeAttr('hidden');
-                    $('#top').attr('hidden', 'true');
-                } else {
-                    $('#payment').attr('hidden', 'true');
-                    $('#payment_type').attr('hidden', 'true');
-                    $('#top').removeAttr('hidden');
-                }
+        $(".productSo-edit").select2({
+          width: "100%",
+          ajax: {
+            type: "GET",
+            url: "/products/select",
+            data: function(params) {
+              return {
+                _token: csrf,
+                q: params.term, // search term
+              };
+            },
+            dataType: "json",
+            delay: 250,
+            processResults: function(data) {
+              return {
+                results: $.map(data, function(item) {
+                  return [{
+                    text: item.nama_barang +
+                      " (" +
+                      item.type_name +
+                      ", " +
+                      item.nama_sub_material +
+                      ")",
+                    id: item.id,
+                  }, ];
+                }),
+              };
+            },
+          },
+        });
 
-                $('#example').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            title: 'RAB',
-                            extend: 'pdf',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            title: 'Data Stock Profecta ',
-                            extend: 'print',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            extend: 'excel',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        'colvis'
-                    ]
+        //Get Customer ID
+        let customer_id = $('#customer_selected').val();
+        let x = 0;
+        let product_id = 0;
+        //Get discount depent on product
+        $(document).on("change", ".productSo-edit", function() {
+          product_id = $(this).val();
 
-                });
-                $('#example1').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            title: 'RAB',
-                            extend: 'pdf',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            title: 'Data Stock Profecta ',
-                            extend: 'print',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            extend: 'excel',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        'colvis'
-                    ]
-                });
-                //     var table = ,
-                //         "columnDefs": [{
-                //             "visible": false,
-                //             "targets": 2
-                //         }],
-                //         "order": [
-                //             [2, 'asc']
-                //         ],
-                //         "displayLength": 25,
-                //         "drawCallback": function(settings) {
-                //             var api = this.api();
-                //             var rows = api.rows({
-                //                 page: 'current'
-                //             }).nodes();
-                //             var last = null;
+          let parent_product = $(this)
+            .parent()
+            .siblings()
+            .find(".discount-append-edit");
 
-                //             api.column(2, {
-                //                 page: 'current'
-                //             }).data().each(function(group, i) {
-                //                 if (last !== group) {
-                //                     $(rows).eq(i).before(
-                //                         '<tr class="group"><td colspan="4">' + group + '</td></tr>'
-                //                     );
+          $.ajax({
+            type: "GET",
+            url: "/discounts/select" + "/" + customer_id + "/" + product_id,
+            dataType: "json",
+            success: function(data) {
+              parent_product.val(data.discount);
+            },
+          });
+        });
+        $(document).on("input", ".cekQty-edit", function() {
+          let qtyValue = $(this).val();
+          let toRed = $(this).css("background-color", "red");
+          let toWhite = $(this).css("background-color", "white");
 
-                //                     last = group;
-                //                 }
-                //             });
-                //         }
-                // });
-                // Order by the grouping
-                $('#example tbody').on('click', 'tr.group', function() {
-                    var currentOrder = table.order()[0];
-                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                        table.order([2, 'desc']).draw();
-                    } else {
-                        table.order([2, 'asc']).draw();
-                    }
-                });
-            });
-        </script>
-    @endpush
+          $.ajax({
+            type: "GET",
+            url: "/stocks/cekQty/" + product_id,
+            dataType: "json",
+            success: function(data) {
+              if (parseInt(qtyValue) > parseInt(data.stock)) {
+                $(".cekQty-edit").append(
+                  "<small>Jumlah Barang melebihi stock</small>"
+                );
+              } else {
+                $(".cekQty-edit")
+                  .closest("form-group")
+                  .append(
+                    "<small>Jumlah Barang tidak melebihi stock</small>"
+                  );
+              }
+            },
+          });
+        });
+
+        $("#addSo-edit").on("click", function() {
+          ++x;
+          let form =
+            '<div class="form-group row">' +
+            '<div class="form-group col-4">' +
+            "<label>Product</label>" +
+            '<select name="soFields[' +
+            x +
+            '][product_id]" class="form-control productSo-edit" required>' +
+            '<option value=""> Choose Product </option> ' +
+            "</select>" +
+            "</div>" +
+            '<div class="col-3 col-md-3 form-group">' +
+            "<label> Qty </label> " +
+            '<input class="form-control cekQty-edit" required name="soFields[' +
+            x +
+            '][qty]">' +
+            "</div> " +
+            '<div class="col-3 col-md-4 form-group">' +
+            "<label>Discount %</label>" +
+            '<input class="form-control discount-append-edit" name="soFields[' +
+            x +
+            '][discount]" id="" readonly>' +
+            "</div>" +
+            '<div class="col-2 col-md-1 form-group">' +
+            '<label for=""> &nbsp; </label>' +
+            '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
+            "- </a> " +
+            "</div>" +
+            " </div>";
+          $("#formSo-edit").append(form);
+
+          $(".productSo-edit").select2({
+            width: "100%",
+            ajax: {
+              type: "GET",
+              url: "/products/select",
+              data: function(params) {
+                return {
+                  _token: csrf,
+                  q: params.term, // search term
+                };
+              },
+              dataType: "json",
+              delay: 250,
+              processResults: function(data) {
+                return {
+                  results: $.map(data, function(item) {
+                    return [{
+                      text: item.nama_barang +
+                        " (" +
+                        item.type_name +
+                        ", " +
+                        item.nama_sub_material +
+                        ")",
+                      id: item.id,
+                    }, ];
+                  }),
+                };
+              },
+            },
+          });
+        });
+
+        //remove Sales Order fields
+        $(document).on("click", ".remSo-edit", function() {
+          $(this).parents(".form-group").remove();
+        });
+
+      });
+    </script>
+  @endpush
 @endsection

@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit_product/{id}', [SalesOrderController::class, 'editProduct']);
     route::get('/delete_product/{id_so}/{id_sod}', [SalesOrderController::class, 'deleteProduct']);
     route::put('/update_product/{id}/edit_product', [SalesOrderController::class, 'updateProduct']);
+    route::post('/update_product/{id}/add_product', [SalesOrderController::class, 'addProduct']);
+
 
 
 

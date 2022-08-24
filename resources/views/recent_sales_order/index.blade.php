@@ -54,6 +54,7 @@
                         <th>SO Number</th>
                         <th>Order Date</th>
                         <th>Customer</th>
+                        <th>Payment</th>
                         <th>Verified</th>
                       </tr>
                     </thead>
@@ -73,15 +74,12 @@
                                 href="{{ url('/edit_sales_order/' . $value->id) }}">Edit
                                 Sales
                                 Order</a>
-                              <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
-                                data-original-title="test" data-bs-target="#changeData{{ $value->id }}">Edit
-                                Product</a>
-                              <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
-                                data-original-title="test" data-bs-target="#addData{{ $value->id }}">Add
+                              <a class="dropdown-item editPayment_method"
+                                href="{{ url('/edit_product/' . $value->id) }}">Edit
                                 Product</a>
                               <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
                                 data-bs-target="#deleteData{{ $value->id }}">Delete
-                                Product</a>
+                                Sales Order</a>
                             </div>
                           </td>
 
@@ -89,6 +87,11 @@
                           <td>{{ $value->order_number }}</td>
                           <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
                           <td>{{ $value->customerBy->name_cust }}</td>
+                          @if ($value->payment_method == 1)
+                            <td>COD</td>
+                          @else
+                            <td>CBD</td>
+                          @endif
                           <td class="text-center"><a class="btn btn-primary btn-sm"
                               href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify</td>
                           </a>
@@ -118,8 +121,7 @@
                                     </div>
                                   </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-danger" type="button"
-                                      data-bs-dismiss="modal">Close</button>
+                                    <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
                                     <button class="btn btn-primary" type="submit">Yes, delete
                                     </button>
                                   </div>
@@ -213,7 +215,13 @@
                                           <div class="form-group col-4">
                                             <label>Product</label>
                                             <input class="form-control"
-                                              value="{{ $detail->productSales->nama_barang }}" id="" readonly>
+                                              value="{{ $detail->productSales->nama_barang .
+                                                  ' (' .
+                                                  $detail->productSales->sub_types->type_name .
+                                                  ', ' .
+                                                  $detail->productSales->sub_materials->nama_sub_material .
+                                                  ')' }}"
+                                              id="" readonly>
                                           </div>
 
                                           <div class="col-3 col-md-3 form-group">
@@ -302,15 +310,12 @@
                                 href="{{ url('/edit_sales_order/' . $value->id) }}">Edit
                                 Sales
                                 Order</a>
-                              <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                data-original-title="test" data-bs-target="#changeData{{ $value->id }}">Edit
-                                Product</a>
-                              <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                data-original-title="test" data-bs-target="#addData{{ $value->id }}">Add
+                              <a class="dropdown-item editPayment_method"
+                                href="{{ url('/edit_product/' . $value->id) }}">Edit
                                 Product</a>
                               <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                 data-original-title="test" data-bs-target="#deleteData{{ $value->id }}">Delete
-                                Product</a>
+                                Sales Order</a>
                             </div>
 
                           </td>
@@ -447,7 +452,13 @@
                                           <div class="form-group col-4">
                                             <label>Product</label>
                                             <input class="form-control"
-                                              value="{{ $detail->productSales->nama_barang }}" id="" readonly>
+                                              value="{{ $detail->productSales->nama_barang .
+                                                  ' (' .
+                                                  $detail->productSales->sub_types->type_name .
+                                                  ', ' .
+                                                  $detail->productSales->sub_materials->nama_sub_material .
+                                                  ')' }}"
+                                              id="" readonly>
                                           </div>
 
                                           <div class="col-3 col-md-3 form-group">

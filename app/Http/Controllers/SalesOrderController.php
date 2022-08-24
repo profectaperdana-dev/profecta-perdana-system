@@ -120,7 +120,8 @@ class SalesOrderController extends Controller
 
         // metode bayar
         if ($model->payment_method == 3) {
-            $model->top = $request->get('top');
+            $top = CustomerModel::where('id', $model->customers_id)->first();
+            $model->top = $top->due_date;
             $dt = new DateTimeImmutable(Carbon::now()->format('Y-m-d'), new DateTimeZone('Asia/Jakarta'));
             $dt = $dt->modify("+" . $model->top . " days");
             $model->duedate = $dt;
@@ -131,12 +132,12 @@ class SalesOrderController extends Controller
         $model->isapprove = 0;
         $model->isverified = 0;
 
-        $model->save();
+        $saved = $model->save();
 
         // save sales order details
         $total = 0;
         $message_duplicate = '';
-        if ($model->save()) {
+        if ($saved) {
             foreach ($request->soFields as $key => $value) {
                 $data = new SalesOrderDetailModel();
                 $data->products_id = $value['product_id'];
@@ -168,9 +169,9 @@ class SalesOrderController extends Controller
         $model->ppn = $ppn;
         $model->total = $total;
         $model->total_after_ppn = $total + $ppn;
-        $model->save();
+        $saved = $model->save();
 
-        if (isEmpty($message_duplicate)) {
+        if (isEmpty($message_duplicate) && $saved) {
             $message = $model->order_number . ' Sales Order has been created! Please check';
             event(new SOMessage('From: ' . Auth::user()->name,  $message));
             $notif = new NotificationsModel();
@@ -179,7 +180,7 @@ class SalesOrderController extends Controller
             $notif->role_id = 5;
             $notif->save();
             return redirect('/sales_order')->with('success', 'Create sales orders ' . $model->order_number . ' success');
-        } elseif (!empty($message_duplicate)) {
+        } elseif (!empty($message_duplicate) && $saved) {
             $message = $model->order_number . ' Sales Order has been created! Please check';
             event(new SOMessage('From: ' . Auth::user()->name,  $message));
             $notif = new NotificationsModel();
@@ -211,13 +212,8 @@ class SalesOrderController extends Controller
         $model = SalesOrderModel::find($id);
         // if ($request->get('customer_id') != $model->customers_id) {
 
-        $arraySod = [];
-        $arrayDiscount = [];
         $sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
-        foreach ($sod as $key => $value) {
-            array_push($arraySod, $value->products_id);
-            array_push($arrayDiscount, $value->discount);
-        }
+
         $customer_id = $request->get('customer_id');
         $total = 0;
 
@@ -250,7 +246,8 @@ class SalesOrderController extends Controller
         $model->remark = $request->get('remark');
         $model->payment_method = $request->get('payment_method');
         if ($request->get('payment_method') == 3) {
-            $model->top = $request->get('top');
+            $top = CustomerModel::where('id', $model->customers_id)->first();
+            $model->top = $top->due_date;
             $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
             $dt = $dt->modify("+" . $model->top . " days");
             $model->duedate = $dt;
@@ -278,6 +275,60 @@ class SalesOrderController extends Controller
         return view('recent_sales_order.edit_product', compact('title', 'value', 'customer', 'product'));
     }
 
+    public function addProduct(Request $request, $id)
+    {
+        $request->validate([
+            "soFields.*.product_id" => "required|numeric",
+            "soFields.*.qty" => "required|numeric"
+        ]);
+
+        $model = SalesOrderModel::where('id', $id)->first();
+        $total = 0;
+        $message_duplicate = "";
+        foreach ($request->soFields as $value) {
+            $data = new SalesOrderDetailModel();
+            $data->products_id = $value['product_id'];
+            $data->qty = $value['qty'];
+            if ($value['discount'] == NULL) {
+                $data->discount = 0;
+            } else {
+                $data->discount = $value['discount'];
+            }
+            $data->sales_orders_id = $model->id;
+            $data->created_by = Auth::user()->id;
+            $check_duplicate = SalesOrderDetailModel::where('sales_orders_id', $data->sales_orders_id)
+                ->where('products_id', $data->products_id)
+                ->count();
+            if ($check_duplicate > 0) {
+                $message_duplicate = "You enter duplication of products. Please recheck the Detail Product you set.";
+                continue;
+            } else {
+                $data->save();
+                $harga = ProductModel::where('id', $data->products_id)->first();
+                $diskon =  $data->discount / 100;
+                $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
+                $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+                $total = $total + ($hargaAfterDiskon * $data->qty);
+            }
+        }
+        $old_ppn = $model->ppn;
+        $old_total = $model->total;
+        $old_total_after_ppn = $model->total_after_ppn;
+
+        $ppn = 0.11 * $total;
+        $model->ppn = $ppn + $old_ppn;
+        $model->total = $total + $old_total;
+        $model->total_after_ppn = ($total + $ppn) + $old_total_after_ppn;
+        $saved = $model->save();
+        if (empty($message_duplicate) && $saved) {
+            return redirect('/recent_sales_order')->with('success', 'Add Products to Sales Order ' . $model->order_number . ' success');
+        } elseif (!empty($message_duplicate) && $saved) {
+            return redirect('/recent_sales_order')->with('info', 'Some of Products add maybe Success! ' . $message_duplicate);
+        } else {
+            return redirect('/recent_sales_order')->with('error', 'Add Products Fail! Please make sure you have filled all the input');
+        }
+    }
+
     // updateProduct()
     public function updateProduct(Request $request, $id)
     {
@@ -285,10 +336,9 @@ class SalesOrderController extends Controller
         $model = SalesOrderModel::find($id);
         // dd($model);
         $total = 0;
-
+        $isduplicate = false;
         foreach ($request->editProduct as $key => $value) {
-            $sod = SalesOrderDetailModel::where('products_id', $value['products_id'])->where('sales_orders_id', $id)->first();
-            $dataHarga = ProductModel::select('harga_jual_nonretail')->where('id', $value['products_id'])->first();
+            $sod = SalesOrderDetailModel::where('id', $value['id_sod'])->first();
             $temp_product = $sod->products_id;
             $temp_discount = $sod->discount;
             $temp_qty = $sod->qty;
@@ -304,24 +354,25 @@ class SalesOrderController extends Controller
                 $sod->discount = $temp_discount;
                 $sod->qty = $temp_qty;
                 $sod->save();
-            } else {
-                $sod->products_id = $value['products_id'];
-                $sod->qty = $value['qty'];
-                $sod->discount = $value['discount'];
-                $diskon =   $sod->discount / 100;
-                $hargaDiskon = $dataHarga->harga_jual_nonretail * $diskon;
-                $hargaAfterDiskon = $dataHarga->harga_jual_nonretail -  $hargaDiskon;
-                $total = $total + ($hargaAfterDiskon * $sod->qty);
-                $cekSod = $sod->save();
+                $isduplicate = true;
             }
+            $dataHarga = ProductModel::select('harga_jual_nonretail')->where('id', $sod->products_id)->first();
+            $diskon =   $sod->discount / 100;
+            $hargaDiskon = $dataHarga->harga_jual_nonretail * $diskon;
+            $hargaAfterDiskon = $dataHarga->harga_jual_nonretail -  $hargaDiskon;
+            $total = $total + ($hargaAfterDiskon * $sod->qty);
         }
-        if ($cekSod) {
-            $ppn = 0.11 * $total;
-            $model->ppn = $ppn;
-            $model->total = $total;
-            $model->total_after_ppn = $total + $ppn;
-            $model->save();
+
+        $ppn = 0.11 * $total;
+        $model->ppn = $ppn;
+        $model->total = $total;
+        $model->total_after_ppn = $total + $ppn;
+        $saved = $model->save();
+
+        if ($saved && $isduplicate == false) {
             return redirect('/recent_sales_order')->with('success', 'Update product in sales orders ' . $model->order_number . 'success');
+        } elseif ($saved && $isduplicate == true) {
+            return redirect('/recent_sales_order')->with('info', 'Some of update product in sales orders ' . $model->order_number . 'maybe success, but you enter existing products. Please check again!');
         } else {
             return redirect('/recent_sales_order')->with('error', 'Update product in sales orders ' . $model->order_number . 'fail');
         }
@@ -422,22 +473,30 @@ class SalesOrderController extends Controller
     {
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
         $getCredential = CustomerModel::where('id', $selected_so->customers_id)->firstOrFail();
-        checkOverPlafone($selected_so->customers_id);
         $selected_so->isverified = 1;
-        if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1 && $getCredential->label != 'Bad Customer') {
+        if ($selected_so->payment_method != 3) {
             $selected_so->isapprove = 1;
             $so_number = $selected_so->order_number;
             $so_number = str_replace('SOPP', 'IVPP', $so_number);
             $selected_so->order_number = $so_number;
         } else {
-            $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
-            event(new SOMessage('From:' . Auth::user()->name, $message));
-            $notif = new NotificationsModel();
-            $notif->message = $message;
-            $notif->status = 0;
-            $notif->role_id = 1;
-            $notif->save();
+            checkOverPlafone($selected_so->customers_id);
+            if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1 && $getCredential->label != 'Bad Customer') {
+                $selected_so->isapprove = 1;
+                $so_number = $selected_so->order_number;
+                $so_number = str_replace('SOPP', 'IVPP', $so_number);
+                $selected_so->order_number = $so_number;
+            } else {
+                $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
+                event(new SOMessage('From:' . Auth::user()->name, $message));
+                $notif = new NotificationsModel();
+                $notif->message = $message;
+                $notif->status = 0;
+                $notif->role_id = 1;
+                $notif->save();
+            }
         }
+
         $selected_so->save();
 
         return redirect('/recent_sales_order')->with('Success', "Sales Order Verification Success");
