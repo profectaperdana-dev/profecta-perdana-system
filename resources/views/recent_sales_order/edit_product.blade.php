@@ -8,10 +8,10 @@
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="font-weight-bold">{{ $title }}</h3>
+                <div class="col-sm-12 col-12">
+                    <h3 class="font-weight-bold">{{ $title }} {{ $value->order_number }}</h3>
                     <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        {{ $title }}
+                        Edit sales orders discount & product</h6>
                 </div>
 
             </div>
@@ -20,89 +20,88 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12 col-xl-12 xl-100">
+            <div class="col-12 col-md-6">
                 <div class="card">
                     <div class="card-header pb-0">
-                        <h5>{{ $value->order_number }}</h5>
+                        <h5>Edit Product</h5>
+                        <hr>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ url('updateso/' . $value->id . '/editso') }}"
+                        <form method="post" action="{{ url('update_product/' . $value->id . '/edit_product') }}"
                             enctype="multipart/form-data" id="">
                             @csrf
                             @method('PUT')
                             <div class="container-fluid">
                                 <div class="form-group row">
-                                    <div class="form-group row">
-                                        <div class="col-md-6 form-group">
-                                            <label>
-                                                Customers</label>
-                                            <select name="customer_id" id="" required
-                                                class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
-                                                <option value="" selected>-Choose Customers-</option>
-                                                @foreach ($customer as $customer)
-                                                    <option value="{{ $customer->id }}"
-                                                        @if ($customer->id == $value->customers_id) selected @endif>
-                                                        {{ $customer->code_cust }} |
-                                                        {{ $customer->name_cust }}
-                                                    </option>
-                                                @endforeach
-                                            </select>
-                                            @error('customer_id')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
+                                    @foreach ($value->salesOrderDetailsBy as $detail)
+                                        <div class="form-group row">
+                                            <div class="col-md-7 col-4 form-group">
+                                                <label>
+                                                    Product </label>
+                                                <select name="editProduct[{{ $loop->index }}][products_id]" id=""
+                                                    required
+                                                    class="form-control sub_type  {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
+                                                    <option value="" selected>-Choose Product-</option>
+                                                    @foreach ($product as $valueProduct)
+                                                        <option value="{{ $valueProduct->id }}"
+                                                            @if ($valueProduct->id == $detail->products_id) selected @endif>
+                                                            <div>
+                                                                {{ strtoupper($valueProduct->kode_barang) }} |
+                                                                {{ $valueProduct->nama_barang }}
+                                                            </div>
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('customer_id')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            {{-- <div class="form-group col-4">
+                                                <label>Product</label>
+                                                <select name="soFields[0][product_id]" class="form-control productSo"
+                                                    required>
+                                                    <option value="">Choose Product</option>
+                                                </select>
+                                                @error('soFields[0][product_id]')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div> --}}
+                                            <div class="col-md-2 col-3 form-group">
+                                                <label>Qty</label>
+                                                <input type="text" class="form-control" placeholder="Product Name"
+                                                    name="editProduct[{{ $loop->index }}][qty]"
+                                                    value="{{ $detail->qty }}">
+                                                @error('top')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            {{-- id sod --}}
+                                            <input hidden type="text" name="editProduct[{{ $loop->index }}][id_sod]"
+                                                value="{{ $detail->id }}">
+                                            <div class="col-md-2 col-3 form-group">
+                                                <label>Discount</label>
+                                                <input type="text" class="form-control" placeholder="Product Name"
+                                                    name="editProduct[{{ $loop->index }}][discount]"
+                                                    value="{{ $detail->discount }}">
+                                                @error('top')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-1 col-2 form-group">
+                                                <label>&nbsp;</label>
+                                                <a href="{{ url('delete_product/' . $value->id . '/' . $detail->id) }}"
+                                                    class="btn btn-danger">X</a>
+                                            </div>
                                         </div>
-                                        {{-- <div class="col-md-4 form-group">
-                                        <label for="">PPN 11%</label><br>
-                                        <select name="ppn" id="" class="sub_type form-control">
-                                            <option value="" selected>-Choose PPN-</option>
-                                            <option value="1">Include PPN</option>
-                                            <option value="2">Without PPN</option>
-                                        </select>
-                                    </div> --}}
-                                        <div class="col-md-6 form-group mr-5">
-                                            <label>Payment Method</label>
-                                            <select name="payment_method" id="payment_method" required
-                                                class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
-                                                <option value="" selected>-Choose Payment-</option>
-                                                <option value="1" @if ($value->payment_method == 1) selected @endif>
-                                                    Cash On Delivery
-                                                </option>
-                                                <option value="2" @if ($value->payment_method == 2) selected @endif>
-                                                    Cash Before Delivery
-                                                </option>
-                                                <option value="3" @if ($value->payment_method == 3) selected @endif>
-                                                    Credit
-                                                </option>
-                                            </select>
-                                            @error('payment_method')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-
-                                        <div id="top" hidden class="col-md-12 form-group">
-                                            <label>Terms of Payment</label>
-                                            <input type="text" class="form-control" placeholder="Product Name"
-                                                name="top" value="{{ $value->top }}">
-                                            @error('top')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
-
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-12 form-group mr-5">
-                                            <label>Remarks</label>
-                                            <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
-                                        </div>
-                                    </div>
+                                    @endforeach
                                     <div class="form-group">
                                         <a class="btn btn-danger" href="{{ url('recent_sales_order/') }}"> <i
                                                 class="ti ti-arrow-left"> </i> Back
@@ -113,6 +112,17 @@
                                 </div>
                             </div>
                         </form>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-6">
+                <div class="card">
+                    <div class="card-header pb-0">
+                        <h5>Add Product</h5>
+                    </div>
+                    <div class="card-body">
+
 
                     </div>
                 </div>

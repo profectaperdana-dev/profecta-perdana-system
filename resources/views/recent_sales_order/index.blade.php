@@ -370,7 +370,8 @@
                                 @method('PUT')
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Edit Data:
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                      Edit Data:
                                       {{ $value->order_number }}</h5>
                                     <button class="btn-close" type="button" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
@@ -383,7 +384,8 @@
                                             <label>Product</label>
                                             <select name="soFields[{{ $loop->index }}][product_id]"
                                               class="form-control productSo" required>
-                                              <option value="">Choose Product</option>
+                                              <option value="">Choose
+                                                Product</option>
                                             </select>
                                             @error('soFields[{{ $loop->index }}][product_id]')
                                               <div class="invalid-feedback">
@@ -432,7 +434,8 @@
                               <form>
                                 <div class="modal-content">
                                   <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Product Detail:
+                                    <h5 class="modal-title" id="exampleModalLabel">
+                                      Product Detail:
                                       {{ $value->order_number }}</h5>
                                     <button class="btn-close" type="button" data-bs-dismiss="modal"
                                       aria-label="Close"></button>
