@@ -5,16 +5,16 @@ namespace App\Http\Controllers;
 use App\Models\CustomerAreaModel;
 use App\Models\CustomerCategoriesModel;
 use App\Models\CustomerModel;
-use Customers;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\GuzzleException;
+use App\Models\SalesOrderModel;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
-use Stevebauman\Location\Facades\Location;
 
+use function App\Helpers\checkOverDue;
+use function App\Helpers\setOverDue;
 
 class CustomerController extends Controller
 {
@@ -35,6 +35,8 @@ class CustomerController extends Controller
             "title" => 'Data Customers',
             "customers" => $all_customer
         ];
+
+        checkOverDue();
 
         return view('customers.index', $data);
     }
@@ -248,56 +250,56 @@ class CustomerController extends Controller
 
     public function getProvince()
     {
-        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/provinces.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/provinces.json');
         $getProvinces = $getAPI->json();
         return response()->json($getProvinces);
     }
 
     public function getNameProvince($id)
     {
-        $getAPI = Http::get('https://emsifa.github.io/api-wilayah-indonesia/api/province/' . $id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/province/' . $id . '.json');
         $getProvinces = $getAPI->json();
         return $getProvinces['name'];
     }
 
     public function getCity($province_id)
     {
-        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/regencies/' . $province_id . '.json');
+        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regencies/' . $province_id . '.json');
         $getCities = $getAPI->json();
         return response()->json($getCities);
     }
 
     public function getNameCity($id)
     {
-        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/regency/' . $id . '.json');
+        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regency/' . $id . '.json');
         $getCities = $getAPI->json();
         return $getCities['name'];
     }
 
     public function getDistrict($city_id)
     {
-        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/districts/' . $city_id . '.json');
+        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/districts/' . $city_id . '.json');
         $getDistricts = $getAPI->json();
         return response()->json($getDistricts);
     }
 
     public function getNameDistrict($id)
     {
-        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/district/' . $id . '.json');
+        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/district/' . $id . '.json');
         $getDistricts = $getAPI->json();
         return $getDistricts['name'];
     }
 
     public function getVillage($district_id)
     {
-        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/villages/' . $district_id . '.json');
+        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/villages/' . $district_id . '.json');
         $getVillages = $getAPI->json();
         return response()->json($getVillages);
     }
 
     public function getNameVillage($id)
     {
-        $getAPI = Http::get('http://www.emsifa.com/api-wilayah-indonesia/api/village/' . $id . '.json');
+        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/village/' . $id . '.json');
         $getVillages = $getAPI->json();
         return $getVillages['name'];
     }

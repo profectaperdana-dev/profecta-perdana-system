@@ -87,10 +87,10 @@
 
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $value->order_number }}</td>
-                          <td>{{ $value->order_date }}</td>
+                          <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
                           <td>{{ $value->customerBy->name_cust }}</td>
                           <td class="text-center"><a class="btn btn-primary btn-sm"
-                              href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate</td>
+                              href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify</td>
                           </a>
 
                           <!-- Delete Product Modal Start -->
@@ -235,18 +235,18 @@
                                         </div>
                                       </div>
                                       <div class="form-group row">
-                                        <div class="form-group col-lg-3">
+                                        <div class="form-group col-lg-4">
                                           <label>PPN</label>
-                                          <input class="form-control" value="{{ $value->ppn }}" id=""
-                                            readonly>
+                                          <input class="form-control" value="{{ 'Rp. ' . $value->ppn }}"
+                                            id="" readonly>
                                         </div>
 
-                                        <div class="col-lg-3 form-group">
+                                        <div class="col-lg-4 form-group">
                                           <label>Total (Before PPN)</label>
                                           <input class="form-control" value="{{ 'Rp. ' . $value->total }}" readonly>
                                         </div>
 
-                                        <div class="col-lg-3 form-group">
+                                        <div class="col-lg-4 form-group">
                                           <label>Total (After PPN)</label>
                                           <input class="form-control" value="{{ 'Rp. ' . $value->total_after_ppn }}"
                                             readonly>
@@ -262,6 +262,7 @@
                             </div>
                           </div>
                           <!-- Detail Product Modal End -->
+
                         </tr>
                       @endforeach
                     </tbody>
@@ -281,6 +282,7 @@
                         <th>#</th>
                         <th>SO Number</th>
                         <th>Order Date</th>
+                        <th>Due Date</th>
                         <th>Customer</th>
                         <th>Verified</th>
                       </tr>
@@ -314,16 +316,11 @@
                           </td>
                           <td>{{ $loop->iteration }}</td>
                           <td>{{ $value->order_number }}</td>
-                          <td>{{ $value->order_date }}</td>
-                          {{-- <td>
-                            @php
-                              $date = date('d F Y', strtotime($value->duedate));
-                            @endphp
-                            {{ $date }}
-                          </td> --}}
+                          <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
+                          <td>{{ date('d-M-Y', strtotime($value->duedate)) }}</td>
                           <td>{{ $value->customerBy->name_cust }}</td>
                           <td class="text-center"><a class="btn btn-primary btn-sm"
-                              href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
+                              href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify
                           </td>
                           </a>
 
@@ -469,23 +466,30 @@
                                         </div>
                                       </div>
                                       <div class="form-group row">
-                                        <div class="form-group col-6">
+                                        <div class="form-group col-4">
                                           <label>TOP</label>
                                           <input class="form-control" value="{{ $value->top . ' Days' }}"
                                             id="" readonly>
                                         </div>
 
-                                        <div class="col-6 form-group">
+                                        <div class="col-4 form-group">
+                                          <label>Order Date</label>
+                                          <input class="form-control"
+                                            value="{{ date('d-M-Y', strtotime($value->order_date)) }}" readonly>
+                                        </div>
+
+                                        <div class="col-4 form-group">
                                           <label>Due Date</label>
-                                          <input class="form-control" value="{{ $value->due_date }}" readonly>
+                                          <input class="form-control"
+                                            value="{{ date('d-M-Y', strtotime($value->duedate)) }}" readonly>
                                         </div>
 
                                       </div>
                                       <div class="form-group row">
                                         <div class="form-group col-lg-3">
                                           <label>PPN</label>
-                                          <input class="form-control" value="{{ $value->ppn }}" id=""
-                                            readonly>
+                                          <input class="form-control" value="{{ 'Rp. ' . $value->ppn }}"
+                                            id="" readonly>
                                         </div>
 
                                         <div class="col-lg-3 form-group">

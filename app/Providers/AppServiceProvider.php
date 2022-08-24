@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\CustomerModel;
 use App\Models\NotificationsModel;
+use App\Models\SalesOrderModel;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -32,6 +35,7 @@ class AppServiceProvider extends ServiceProvider
             return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
         });
 
+        //notification
         view()->composer('*', function ($view) {
             $notif = NotificationsModel::where('status', '0')
                 ->where('role_id', @auth()->user()->role_id)
@@ -41,7 +45,5 @@ class AppServiceProvider extends ServiceProvider
 
             View::share('notif', $notif);
         });
-
-        //
     }
 }

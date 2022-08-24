@@ -18,6 +18,10 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
 use App\Models\WarehouseModel;
 
+use function App\Helpers\checkOverDue;
+use function App\Helpers\checkOverPlafone;
+use function App\Helpers\setOverDue;
+use function App\Helpers\setOverPlafone;
 use function PHPUnit\Framework\isEmpty;
 use function Symfony\Component\VarDumper\Dumper\esc;
 
@@ -39,7 +43,6 @@ class SalesOrderController extends Controller
     }
     public function getRecentData()
     {
-
         $title = 'Recent Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
@@ -55,6 +58,7 @@ class SalesOrderController extends Controller
         // get sales with
         $dataSalesOrderDebt = SalesOrderModel::where('payment_method', 3)->where('order_number', 'like', "%$kode_area->area_code%")->get();
 
+        checkOverDue();
 
         return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'product', 'customer'));
     }
@@ -324,12 +328,13 @@ class SalesOrderController extends Controller
 
         return view('need_approval.index', compact('title', 'dataInvoice'));
     }
-    public function verificate($id)
+    public function verify($id)
     {
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
-        $getCredential = CustomerModel::select('isOverDue', 'isOverPlafoned')->where('id', $selected_so->customers_id)->firstOrFail();
+        $getCredential = CustomerModel::where('id', $selected_so->customers_id)->firstOrFail();
+        checkOverPlafone($selected_so->customers_id);
         $selected_so->isverified = 1;
-        if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1) {
+        if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1 && $getCredential->label != 'Bad Customer') {
             $selected_so->isapprove = 1;
             $so_number = $selected_so->order_number;
             $so_number = str_replace('SOPP', 'IVPP', $so_number);
@@ -345,6 +350,6 @@ class SalesOrderController extends Controller
         }
         $selected_so->save();
 
-        return redirect('/sales_orders')->with('Success', "Sales Order Verification Success");
+        return redirect('/recent_sales_order')->with('Success', "Sales Order Verification Success");
     }
 }
