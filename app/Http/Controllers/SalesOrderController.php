@@ -53,10 +53,10 @@ class SalesOrderController extends Controller
             ->first();
 
         // get sales no debt
-        $dataSalesOrder = SalesOrderModel::whereIn('payment_method', [1, 2])->where('order_number', 'like', "%$kode_area->area_code%")->get();
+        $dataSalesOrder = SalesOrderModel::whereIn('payment_method', [1, 2])->where('isverified', 0)->where('order_number', 'like', "%$kode_area->area_code%")->get();
 
         // get sales with
-        $dataSalesOrderDebt = SalesOrderModel::where('payment_method', 3)->where('order_number', 'like', "%$kode_area->area_code%")->get();
+        $dataSalesOrderDebt = SalesOrderModel::where('payment_method', 3)->where('isverified', 0)->where('order_number', 'like', "%$kode_area->area_code%")->get();
 
         checkOverDue();
 
