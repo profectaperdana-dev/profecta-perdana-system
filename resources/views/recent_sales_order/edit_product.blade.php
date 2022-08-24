@@ -27,7 +27,7 @@
                         <hr>
                     </div>
                     <div class="card-body">
-                        <form method="post" action="{{ url('updateso/' . $value->id . '/editso') }}"
+                        <form method="post" action="{{ url('update_product/' . $value->id . '/edit_product') }}"
                             enctype="multipart/form-data" id="">
                             @csrf
                             @method('PUT')
@@ -35,10 +35,11 @@
                                 <div class="form-group row">
                                     @foreach ($value->salesOrderDetailsBy as $detail)
                                         <div class="form-group row">
-                                            <div class="col-md-7 form-group">
+                                            <div class="col-md-7 col-4 form-group">
                                                 <label>
                                                     Product </label>
-                                                <select name="customer_id" id="" required
+                                                <select name="editProduct[{{ $loop->index }}][products_id]" id=""
+                                                    required
                                                     class="form-control sub_type  {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
                                                     <option value="" selected>-Choose Product-</option>
                                                     @foreach ($product as $valueProduct)
@@ -57,27 +58,44 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-2 form-group">
+                                            {{-- <div class="form-group col-4">
+                                                <label>Product</label>
+                                                <select name="soFields[0][product_id]" class="form-control productSo"
+                                                    required>
+                                                    <option value="">Choose Product</option>
+                                                </select>
+                                                @error('soFields[0][product_id]')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div> --}}
+                                            <div class="col-md-2 col-3 form-group">
                                                 <label>Qty</label>
                                                 <input type="text" class="form-control" placeholder="Product Name"
-                                                    name="discount" value="{{ $detail->discount }}">
+                                                    name="editProduct[{{ $loop->index }}][qty]"
+                                                    value="{{ $detail->qty }}">
                                                 @error('top')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-2 form-group">
+                                            {{-- id sod --}}
+                                            <input hidden type="text" name="editProduct[{{ $loop->index }}][id_sod]"
+                                                value="{{ $detail->id }}">
+                                            <div class="col-md-2 col-3 form-group">
                                                 <label>Discount</label>
                                                 <input type="text" class="form-control" placeholder="Product Name"
-                                                    name="discount" value="{{ $detail->discount }}">
+                                                    name="editProduct[{{ $loop->index }}][discount]"
+                                                    value="{{ $detail->discount }}">
                                                 @error('top')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-md-1 form-group">
+                                            <div class="col-md-1 col-2 form-group">
                                                 <label>&nbsp;</label>
                                                 <a href="{{ url('delete_product/' . $value->id . '/' . $detail->id) }}"
                                                     class="btn btn-danger">X</a>
