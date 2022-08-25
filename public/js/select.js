@@ -257,20 +257,20 @@ $(document).ready(function () {
         let toWhite = $(this).css("background-color", "white");
 
         $.ajax({
+            context: this,
             type: "GET",
             url: "/stocks/cekQty/" + product_id,
             dataType: "json",
             success: function (data) {
                 if (parseInt(qtyValue) > parseInt(data.stock)) {
-                    $(".cekQty").append(
-                        "<small>Jumlah Barang melebihi stock</small>"
-                    );
+                    $(this).parent().find(".qty-warning").removeAttr("hidden");
+                    $(this).addClass("is-invalid");
                 } else {
-                    $(".cekQty")
-                        .closest("form-group")
-                        .append(
-                            "<small>Jumlah Barang tidak melebihi stock</small>"
-                        );
+                    $(this)
+                        .parent()
+                        .find(".qty-warning")
+                        .attr("hidden", "true");
+                    $(this).removeClass("is-invalid");
                 }
             },
         });
@@ -293,7 +293,8 @@ $(document).ready(function () {
             '<input class="form-control cekQty" required name="soFields[' +
             x +
             '][qty]">' +
-            "</div> " +
+            '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
+            "</div>" +
             '<div class="col-3 col-md-4 form-group">' +
             "<label>Discount %</label>" +
             '<input class="form-control discount-append" name="soFields[' +

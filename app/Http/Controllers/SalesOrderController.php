@@ -95,6 +95,16 @@ class SalesOrderController extends Controller
             "soFields.*.qty" => "required|numeric"
         ]);
 
+        //Check Stock
+        foreach ($request->soFields as $qty) {
+            $getStock = StockModel::where('products_id', $qty['product_id'])
+                ->where('warehouses_id', Auth::user()->warehouse_id)
+                ->first();
+            if ($qty['qty'] > $getStock->stock) {
+                return redirect('/sales_order')->with('error', 'Add Sales Order Fail! The number of items exceeds the stock');
+            }
+        }
+
         // query cek kode warehouse/area sales orders
         $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
             ->select('customer_areas.area_code', 'warehouses.id')

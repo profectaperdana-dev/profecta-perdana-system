@@ -67,6 +67,7 @@
         <div class="col-3 col-md-3 form-group">
           <label>Qty</label>
           <input class="form-control cekQty" required name="soFields[0][qty]" id="">
+          <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
           @error('soFields[0][qty]')
             <div class="invalid-feedback">
               {{ $message }}
