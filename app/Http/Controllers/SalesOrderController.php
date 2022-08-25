@@ -62,22 +62,35 @@ class SalesOrderController extends Controller
     public function getRecentData()
     {
         $title = 'Recent Sales Order';
-        $product = ProductModel::latest()->get();
-        $customer = CustomerModel::where('status', 1)->latest()->get();
         // get kode area
         $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
             ->select('customer_areas.area_code', 'warehouses.id')
             ->where('warehouses.id', Auth::user()->warehouse_id)
             ->first();
         // get sales no debt
-        $dataSalesOrder = SalesOrderModel::whereIn('payment_method', [1, 2])->where('isverified', 0)->where('order_number', 'like', "%$kode_area->area_code%")->get();
+        $dataSalesOrder = SalesOrderModel::with([
+            'customerBy',
+            'salesOrderDetailsBy.productSales.sub_types',
+            'salesOrderDetailsBy.productSales.sub_materials'
+        ])
+            ->whereIn('payment_method', [1, 2])
+            ->where('isverified', 0)
+            ->where('order_number', 'like', "%$kode_area->area_code%")->get();
 
         // get sales with
-        $dataSalesOrderDebt = SalesOrderModel::where('payment_method', 3)->where('isverified', 0)->where('order_number', 'like', "%$kode_area->area_code%")->get();
+        $dataSalesOrderDebt = SalesOrderModel::with([
+            'customerBy',
+            'salesOrderDetailsBy.productSales.sub_types',
+            'salesOrderDetailsBy.productSales.sub_materials'
+        ])
+            ->where('payment_method', 3)
+            ->where('isverified', 0)
+            ->where('order_number', 'like', "%$kode_area->area_code%")
+            ->get();
 
         checkOverDue();
 
-        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'product', 'customer'));
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt'));
     }
 
     /**
@@ -369,6 +382,16 @@ class SalesOrderController extends Controller
         // dd($request->all());
         $model = SalesOrderModel::find($id);
         // dd($model);
+
+        //Check Stock
+        foreach ($request->editProduct as $qty) {
+            $getStock = StockModel::where('products_id', $qty['products_id'])
+                ->where('warehouses_id', Auth::user()->warehouse_id)
+                ->first();
+            if ($qty['qty'] > $getStock->stock) {
+                return Redirect::back()->with('error', 'Add Sales Order Fail! The number of items exceeds the stock');
+            }
+        }
         $total = 0;
         $isduplicate = false;
         foreach ($request->editProduct as $key => $value) {
@@ -513,6 +536,21 @@ class SalesOrderController extends Controller
             $so_number = $selected_so->order_number;
             $so_number = str_replace('SOPP', 'IVPP', $so_number);
             $selected_so->order_number = $so_number;
+
+            //Potong Stock
+            $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
+            foreach ($selected_sod as $value) {
+                $getStock = StockModel::where('products_id', $value->products_id)
+                    ->where('warehouses_id', Auth::user()->warehouse_id)
+                    ->first();
+                $old_stock = $getStock->stock;
+                $getStock->stock = $old_stock - $value->qty;
+                if ($getStock->stock < 0) {
+                    return Redirect::back()->with('error', 'Verification Fail! Not enough stock. Please re-confirm to the customer.');
+                } else {
+                    $getStock->save();
+                }
+            }
         } else {
             checkOverPlafone($selected_so->customers_id);
             if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1 && $getCredential->label != 'Bad Customer') {
@@ -520,6 +558,21 @@ class SalesOrderController extends Controller
                 $so_number = $selected_so->order_number;
                 $so_number = str_replace('SOPP', 'IVPP', $so_number);
                 $selected_so->order_number = $so_number;
+
+                //Potong Stock
+                $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
+                foreach ($selected_sod as $value) {
+                    $getStock = StockModel::where('products_id', $value->products_id)
+                        ->where('warehouses_id', Auth::user()->warehouse_id)
+                        ->first();
+                    $old_stock = $getStock->stock;
+                    $getStock->stock = $old_stock - $value->qty;
+                    if ($getStock->stock < 0) {
+                        return Redirect::back()->with('error', 'Verification Fail! Not enough stock. Please re-confirm to the customer.');
+                    } else {
+                        $getStock->save();
+                    }
+                }
             } else {
                 $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
                 event(new SOMessage('From:' . Auth::user()->name, $message));

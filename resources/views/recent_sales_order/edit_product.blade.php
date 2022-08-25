@@ -250,7 +250,7 @@
           ++x;
           let form =
             '<div class="form-group row">' +
-            '<div class="form-group col-4">' +
+            '<div class="form-group col-md-7 col-4">' +
             "<label>Product</label>" +
             '<select name="soFields[' +
             x +
@@ -258,13 +258,14 @@
             '<option value=""> Choose Product </option> ' +
             "</select>" +
             "</div>" +
-            '<div class="col-3 col-md-3 form-group">' +
+            '<div class="col-3 col-md-2 form-group">' +
             "<label> Qty </label> " +
             '<input class="form-control cekQty-edit" required name="soFields[' +
             x +
             '][qty]">' +
+            '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
             "</div> " +
-            '<div class="col-3 col-md-4 form-group">' +
+            '<div class="col-3 col-md-2 form-group">' +
             "<label>Discount %</label>" +
             '<input class="form-control discount-append-edit" name="soFields[' +
             x +

@@ -2,10 +2,8 @@
 
 namespace App\Providers;
 
-use App\Models\CustomerModel;
-use App\Models\NotificationsModel;
-use App\Models\SalesOrderModel;
 use Carbon\Carbon;
+use App\Views\Composers\NotificationComposer;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\Blade;
@@ -37,13 +35,6 @@ class AppServiceProvider extends ServiceProvider
 
         //notification
         view()->composer('*', function ($view) {
-            $notif = NotificationsModel::where('status', '0')
-                ->where('role_id', @auth()->user()->role_id)
-                ->latest()
-                ->limit(4)
-                ->get();
-
-            View::share('notif', $notif);
         });
     }
 }
