@@ -45,6 +45,11 @@
                                 Need Approval
                             </span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('invoice') ? 'active' : '' }}"
+                            href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
+                            </span></a>
+                    </li>
                     {{-- <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
                             href="{{ url('/recent_sales_order') }}"><i data-feather="clipboard"></i><span>Recent Sales

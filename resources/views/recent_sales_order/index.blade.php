@@ -78,9 +78,7 @@
                                                             <a class="dropdown-item editPayment_method"
                                                                 href="{{ url('/edit_product/' . $value->id) }}">Edit
                                                                 Product</a>
-                                                            <a class="dropdown-item editPayment_method"
-                                                                href="{{ url('/add_product/' . $value->id) }}">
-                                                                Add Product</a>
+
                                                             <a class="dropdown-item" href="javascript:void(0)"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#deleteData{{ $value->id }}">Delete
@@ -262,9 +260,7 @@
                                                             <a class="dropdown-item editPayment_method"
                                                                 href="{{ url('/edit_product/' . $value->id) }}">
                                                                 Edit Product</a>
-                                                            <a class="dropdown-item editPayment_method"
-                                                                href="{{ url('/add_product/' . $value->id) }}">
-                                                                Add Product</a>
+
                                                             <a class="dropdown-item" href="#"
                                                                 data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#deleteData{{ $value->id }}">Delete

@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
 use App\Models\WarehouseModel;
+use Yajra\DataTables\Contracts\DataTable;
+use Yajra\DataTables\Facades\DataTables;
+use PDF;
 
 use function PHPUnit\Framework\isEmpty;
 use function Symfony\Component\VarDumper\Dumper\esc;
@@ -405,7 +408,7 @@ class SalesOrderController extends Controller
         $modelSalesOrder->delete();
         return redirect('/recent_sales_order')->with('success', 'Delete Data Sales Order Success');
     }
-    public function getInvoiceData()
+    public function soNeedApproval()
     {
         $title = 'Sales Order Need Approval By Admin';
 
@@ -435,5 +438,63 @@ class SalesOrderController extends Controller
         $selected_so->save();
 
         return redirect('/sales_orders')->with('Success', "Sales Order Verification Success");
+    }
+
+    // getInvoiceData() : Tampilkan data invoice dengan yajra
+    public function getInvoiceData(Request $request)
+    {
+        // get kode area
+
+        if ($request->ajax()) {
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', Auth::user()->warehouse_id)
+                ->first();
+            $invoice = SalesOrderModel::with('customerBy')
+                ->with('createdSalesOrder')
+                ->where('isapprove', 1)
+                ->where('isverified', 1)
+                ->where('order_number', 'like', "%$kode_area->area_code%")
+                ->latest()
+                ->get();
+
+            return datatables()->of($invoice)
+                ->editColumn('payment_method', function ($data) {
+                    if ($data->payment_method == 1) {
+                        return 'COD';
+                    } elseif ($data->payment_method == 1) {
+                        return 'CBD';
+                    } else {
+                        return 'Credit';
+                    }
+                })
+
+                ->addColumn('customerBy', function (SalesOrderModel $SalesOrderModel) {
+                    return $SalesOrderModel->customerBy->name_cust;
+                })
+                ->addColumn('createdSalesOrder', function (SalesOrderModel $SalesOrderModel) {
+                    return $SalesOrderModel->createdSalesOrder->name;
+                })
+                ->addIndexColumn() //memberikan penomoran
+                ->addColumn('action', 'invoice._option')
+                ->rawColumns(['action'], ['customerBy'])
+                // ->rawColumns()
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "All data invoice in profecta perdana : " . Auth::user()->warehouseBy->warehouses,
+            // 'order_number' =>
+        ];
+
+        return view('invoice.index', $data);
+    }
+    // print invoice dengan PPN
+    public function printInoiceWithPpn($id)
+    {
+        $sod = SalesOrderModel::find($id);
+
+        $pdf = \PDF::loadview('invoice.invoice_with_ppn', ['sod' => $sod])->setOptions(['defaultFont' => 'sans-serif']);;
+        return $pdf->download($sod->order_number . '.pdf');
     }
 }

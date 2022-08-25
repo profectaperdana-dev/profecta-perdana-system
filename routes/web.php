@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit_sales_order/{id}', [SalesOrderController::class, 'editSo']);
     Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
     Route::get('/sales_orders/verificate/{id}', [SalesOrderController::class, 'verificate']);
-    Route::get('/need_approval', [SalesOrderController::class, 'getInvoiceData']);
+    Route::get('/need_approval', [SalesOrderController::class, 'soNeedApproval']);
     Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
     Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
     Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
@@ -63,6 +63,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/edit_product/{id}', [SalesOrderController::class, 'editProduct']);
     route::get('/delete_product/{id_so}/{id_sod}', [SalesOrderController::class, 'deleteProduct']);
     route::put('/update_product/{id}/edit_product', [SalesOrderController::class, 'updateProduct']);
+    Route::get('/invoice/', [SalesOrderController::class, 'getInvoiceData']);
+    Route::get('/invoice/{id}/invoice_with_ppn', [SalesOrderController::class, 'printInoiceWithPpn']);
 
 
 
