@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
 use App\Models\WarehouseModel;
+use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 use function App\Helpers\checkOverDue;
 use function App\Helpers\checkOverPlafone;
@@ -292,6 +294,16 @@ class SalesOrderController extends Controller
             "soFields.*.qty" => "required|numeric"
         ]);
 
+        //Check Stock
+        foreach ($request->soFields as $qty) {
+            $getStock = StockModel::where('products_id', $qty['product_id'])
+                ->where('warehouses_id', Auth::user()->warehouse_id)
+                ->first();
+            if ($qty['qty'] > $getStock->stock) {
+                return Redirect::back()->with('error', 'Add Sales Order Fail! The number of items exceeds the stock');
+            }
+        }
+
         $model = SalesOrderModel::where('id', $id)->first();
         $total = 0;
         $message_duplicate = "";
@@ -331,11 +343,11 @@ class SalesOrderController extends Controller
         $model->total_after_ppn = ($total + $ppn) + $old_total_after_ppn;
         $saved = $model->save();
         if (empty($message_duplicate) && $saved) {
-            return redirect('/recent_sales_order')->with('success', 'Add Products to Sales Order ' . $model->order_number . ' success');
+            return Redirect::back()->with('success', 'Add Products to Sales Order ' . $model->order_number . ' success');
         } elseif (!empty($message_duplicate) && $saved) {
-            return redirect('/recent_sales_order')->with('info', 'Some of Products add maybe Success! ' . $message_duplicate);
+            return Redirect::back()->with('info', 'Some of Products add maybe Success! ' . $message_duplicate);
         } else {
-            return redirect('/recent_sales_order')->with('error', 'Add Products Fail! Please make sure you have filled all the input');
+            return Redirect::back()->with('error', 'Add Products Fail! Please make sure you have filled all the input');
         }
     }
 
@@ -380,11 +392,11 @@ class SalesOrderController extends Controller
         $saved = $model->save();
 
         if ($saved && $isduplicate == false) {
-            return redirect('/recent_sales_order')->with('success', 'Update product in sales orders ' . $model->order_number . 'success');
+            return Redirect::back()->with('success', 'Update product in sales orders ' . $model->order_number . 'success');
         } elseif ($saved && $isduplicate == true) {
-            return redirect('/recent_sales_order')->with('info', 'Some of update product in sales orders ' . $model->order_number . 'maybe success, but you enter existing products. Please check again!');
+            return Redirect::back()->with('info', 'Some of update product in sales orders ' . $model->order_number . 'maybe success, but you enter existing products. Please check again!');
         } else {
-            return redirect('/recent_sales_order')->with('error', 'Update product in sales orders ' . $model->order_number . 'fail');
+            return Redirect::back()->with('error', 'Update product in sales orders ' . $model->order_number . 'fail');
         }
     }
     // deleteProduct() : HAPUS DATA PRODUCT PADA SO DAN UPDATE JUMLAH HARGA SERTA TOTAL
@@ -416,9 +428,9 @@ class SalesOrderController extends Controller
             $model->total = $total;
             $model->total_after_ppn = $total + $ppn;
             $model->save();
-            return redirect('/recent_sales_order')->with('error', 'Delete product in sales orders success');
+            return Redirect::back()->with('error', 'Delete product in sales orders success');
         } else {
-            return redirect('/recent_sales_order')->with('error', 'Delete product in sales orders fail because the product in the sales order cannot be empty');
+            return Redirect::back()->with('error', 'Delete product in sales orders fail because the product in the sales order cannot be empty');
         }
     }
 

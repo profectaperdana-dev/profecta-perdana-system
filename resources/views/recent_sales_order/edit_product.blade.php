@@ -20,7 +20,7 @@
   <!-- Container-fluid starts-->
   <div class="container-fluid">
     <div class="row">
-      <div class="col-12 col-md-6">
+      <div class="col-12">
         <div class="card">
           <div class="card-header pb-0">
             <h5>Edit Product</h5>
@@ -39,7 +39,7 @@
                         <label>
                           Product </label>
                         <select name="editProduct[{{ $loop->index }}][products_id]" id="" required
-                          class="form-control productSo {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
+                          class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
                           @if ($detail->products_id != null)
                             <option value="{{ $detail->products_id }}" selected>
                               {{ $detail->productSales->nama_barang .
@@ -59,8 +59,9 @@
                       </div>
                       <div class="col-md-2 col-3 form-group">
                         <label>Qty</label>
-                        <input type="text" class="form-control" placeholder="Product Name"
+                        <input type="text" class="form-control cekQty-edit"
                           name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}">
+                        <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
                         @error('top')
                           <div class="invalid-feedback">
                             {{ $message }}
@@ -101,7 +102,7 @@
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-6">
+      <div class="col-12">
         <div class="card">
           <div class="card-header pb-0">
             <h5>Add Product</h5>
@@ -128,6 +129,7 @@
                     <div class="col-3 col-md-2 form-group">
                       <label>Qty</label>
                       <input class="form-control cekQty-edit" required name="soFields[0][qty]" id="">
+                      <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
                       @error('soFields[0][qty]')
                         <div class="invalid-feedback">
                           {{ $message }}
@@ -222,24 +224,23 @@
         });
         $(document).on("input", ".cekQty-edit", function() {
           let qtyValue = $(this).val();
-          let toRed = $(this).css("background-color", "red");
-          let toWhite = $(this).css("background-color", "white");
+          let product_id = $(this).parents('.form-group').siblings('.form-group').find('.productSo-edit').val();
 
           $.ajax({
+            context: this,
             type: "GET",
             url: "/stocks/cekQty/" + product_id,
             dataType: "json",
             success: function(data) {
               if (parseInt(qtyValue) > parseInt(data.stock)) {
-                $(".cekQty-edit").append(
-                  "<small>Jumlah Barang melebihi stock</small>"
-                );
+                $(this).parent().find(".qty-warning").removeAttr("hidden");
+                $(this).addClass("is-invalid");
               } else {
-                $(".cekQty-edit")
-                  .closest("form-group")
-                  .append(
-                    "<small>Jumlah Barang tidak melebihi stock</small>"
-                  );
+                $(this)
+                  .parent()
+                  .find(".qty-warning")
+                  .attr("hidden", "true");
+                $(this).removeClass("is-invalid");
               }
             },
           });

@@ -253,8 +253,6 @@ $(document).ready(function () {
     });
     $(document).on("input", ".cekQty", function () {
         let qtyValue = $(this).val();
-        let toRed = $(this).css("background-color", "red");
-        let toWhite = $(this).css("background-color", "white");
 
         $.ajax({
             context: this,
