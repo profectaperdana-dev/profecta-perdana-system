@@ -1,181 +1,108 @@
-@extends('layouts.master')
-@section('content')
-    @push('css')
-        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-    @endpush
-    <div>
-        <div>
-            <div class="row invo-header">
-                <div class="col-sm-6">
-                    <div class="media">
-                        <div class="media-left"><a href="index.html"><img class="media-object img-60" src=""
-                                    alt=""></a></div>
-                        <div class="media-body m-l-20">
-                            <h4 class="media-heading f-w-600">Viho</h4>
-                            <p>hello@viho.in<br><span class="digits">289-335-6503</span></p>
-                        </div>
-                    </div>
-                    <!-- End Info-->
-                </div>
-                <div class="col-sm-6">
-                    <div class="text-md-end text-xs-center">
-                        <h3>Invoice #<span class="digits counter">1069</span></h3>
-                        <p>Issued: May<span class="digits"> 27, 2015</span><br> Payment Due: June <span class="digits">27,
-                                2015</span></p>
-                    </div>
-                    <!-- End Title                                 -->
-                </div>
-            </div>
-        </div>
-        <!-- End InvoiceTop-->
-        <div class="row invo-profile">
-            <div class="col-xl-4">
-                <div class="media">
-                    <div class="media-left"><img class="media-object rounded-circle img-60" src="" alt="">
-                    </div>
-                    <div class="media-body m-l-20">
-                        <h4 class="media-heading f-w-600">Johan Deo</h4>
-                        <p>JohanDeo@gmail.com<br><span class="digits">555-555-5555</span></p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-8">
-                <div class="text-xl-end" id="project">
-                    <h6>Project Description</h6>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry.It is a
-                        long established fact that a reader will be distracted by the readable content
-                        of a page when looking at its layout.</p>
-                </div>
-            </div>
-        </div>
-        <!-- End Invoice Mid-->
-        <div>
-            <div class="table-responsive invoice-table" id="table">
-                <table class="table table-bordered table-striped">
-                    <tbody>
-                        <tr>
-                            <td class="item">
-                                <h6 class="p-2 mb-0">Item Description</h6>
-                            </td>
-                            <td class="Hours">
-                                <h6 class="p-2 mb-0">Hours</h6>
-                            </td>
-                            <td class="Rate">
-                                <h6 class="p-2 mb-0">Rate</h6>
-                            </td>
-                            <td class="subtotal">
-                                <h6 class="p-2 mb-0">Sub-total</h6>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Lorem Ipsum</label>
-                                <p class="m-0">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">5</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$75</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$375.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Lorem Ipsum</label>
-                                <p class="m-0">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">3</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$75</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$225.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Lorem Ipsum</label>
-                                <p class="m-0">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">10</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$75</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$750.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <label>Lorem Ipsum</label>
-                                <p class="m-0">Lorem Ipsum is simply dummy text of the printing and
-                                    typesetting industry.</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">10</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$75</p>
-                            </td>
-                            <td>
-                                <p class="itemtext digits">$750.00</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <p class="itemtext"></p>
-                            </td>
-                            <td>
-                                <p class="m-0">HST</p>
-                            </td>
-                            <td>
-                                <p class="m-0 digits">13%</p>
-                            </td>
-                            <td>
-                                <p class="m-0 digits">$419.25</p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td class="Rate">
-                                <h6 class="mb-0 p-2">Total</h6>
-                            </td>
-                            <td class="payment digits">
-                                <h6 class="mb-0 p-2">$3,644.25</h6>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <!-- End Table-->
-            <div class="row mt-3">
-                <div class="col-md-8">
-                    <div>
-                        <p class="legal"><strong>Thank you for your business!</strong> Payment is
-                            expected within 31 days; please process this invoice within that time. There
-                            will be a 5% interest charge per month on late invoices.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <form class="text-end invo-pal">
-                        <input type="image" src="" name="submit"
-                            alt="PayPal - The safer, easier way to pay online!">
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- End InvoiceBot-->
-    </div>
-@endsection
+<html>
+
+<head>
+    <style>
+        /**
+                Set the margins of the page to 0, so the footer and the header
+                can be of the full height and width !
+             **/
+        @page {
+            margin: 1cm 1cm;
+        }
+
+        /** Define now the real margins of every page in the PDF **/
+        body {
+            margin-top: 6cm;
+            margin-left: 2cm;
+            margin-right: 2cm;
+            margin-bottom: 2cm;
+        }
+
+        /** Define the header rules **/
+        header {
+            position: fixed;
+            top: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 6cm;
+            font-size: 14px;
+            font-family: 'Arial';
+            /** Extra personal styles **/
+            background-color: #ffffff;
+            color: rgb(0, 0, 0);
+            text-align: left;
+            /* line-height: 1.5cm; */
+        }
+
+        /** Define the footer rules **/
+        footer {
+            position: fixed;
+            bottom: 0cm;
+            left: 0cm;
+            right: 0cm;
+            height: 1cm;
+
+            /** Extra personal styles **/
+            background-color: #03a9f4;
+            color: white;
+            text-align: center;
+            line-height: 1.5cm;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Define header and footer blocks before your content -->
+    <header>
+
+        <table style="width: 100%">
+            <tr>
+                <td style="width: 20%"><img style="width: 100px;margin-top:15px;"
+                        src="{{ public_path('images/logo.png') }}" alt=""></td>
+                <td style="width: 34%;text-align:left">
+                    <b>CV. Profecta Perdana</b> <br>
+                    {{ $warehouse->alamat }} <br>
+                    Phone : 0713-82536
+                </td>
+                <td style="width: 5%"></td>
+                <td></td>
+                <td style="width: 30%;text-align:left">
+                    Invoice : {{ $data->order_number }} <br>
+                    Revision : 0 <br>
+                    Customer : {{ $data->customerBy->code_cust }}
+
+                </td>
+            </tr>
+            <tr>
+                <th colspan="5">
+                    <hr>
+                </th>
+            </tr>
+            <tr>
+                <th colspan="5" style="text-align: center">INVOICE</th>
+            </tr>
+            <tr>
+                <td colspan="3" style="width: 50%;text-align:left">Invoice To : <br>
+                    {{ $data->customerBy->name_cust }}
+
+                </td>
+                <td colspan="2" style="width: 50%;text-align:left"></td>
+
+            </tr>
+        </table>
+
+
+
+    </header>
+
+    <footer>
+        Copyright &copy; <?php echo date('Y'); ?>
+    </footer>
+
+    <!-- Wrap the content of your PDF inside a main tag -->
+    <main>
+        <h1>Hello World</h1>
+    </main>
+</body>
+
+</html>

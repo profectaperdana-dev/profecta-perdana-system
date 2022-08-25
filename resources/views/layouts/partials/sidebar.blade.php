@@ -127,8 +127,14 @@
                     </li> --}}
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Purchase Order </h6>
+                            <h6>Transaction</h6>
                         </div>
+
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('invoice') ? 'active' : '' }}"
+                            href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
+                            </span></a>
                     </li>
                 </ul>
             </div>

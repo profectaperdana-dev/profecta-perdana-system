@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use DateTime;
 use DateTimeZone;
 use Carbon\Carbon;
 use DateTimeImmutable;
@@ -13,20 +12,19 @@ use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\NotificationsModel;
 use App\Models\SalesOrderModel;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
 use App\Models\WarehouseModel;
-use Yajra\DataTables\Contracts\DataTable;
-use Yajra\DataTables\Facades\DataTables;
+use Barryvdh\DomPDF\PDF as DomPDFPDF;
+// use Barryvdh\DomPDF\PDF;
 use PDF;
 
 use function PHPUnit\Framework\isEmpty;
-use function Symfony\Component\VarDumper\Dumper\esc;
 
 class SalesOrderController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -42,6 +40,17 @@ class SalesOrderController extends Controller
 
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
+
+
+    // print invoice dengan PPN
+    public function printInoiceWithPpn($id)
+    {
+        $data = SalesOrderModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
+        return $pdf->download('ahsha.pdf');
+    }
+
 
     // getRecentData() : READ DATA RECENT SALES ORDERS ADMIN & SALES ADMIN
     public function getRecentData()
@@ -488,13 +497,5 @@ class SalesOrderController extends Controller
         ];
 
         return view('invoice.index', $data);
-    }
-    // print invoice dengan PPN
-    public function printInoiceWithPpn($id)
-    {
-        $sod = SalesOrderModel::find($id);
-
-        $pdf = \PDF::loadview('invoice.invoice_with_ppn', ['sod' => $sod])->setOptions(['defaultFont' => 'sans-serif']);;
-        return $pdf->download($sod->order_number . '.pdf');
     }
 }

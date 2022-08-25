@@ -29,7 +29,6 @@
                         <div class="form-group row col-12">
                             <div class="col-5">
                                 <label class="col-form-label text-end">Start Date</label>
-
                                 <div class="input-group">
                                     <input class="datepicker-here form-control digits" type="text" data-language="en"
                                         placeholder="Start">
