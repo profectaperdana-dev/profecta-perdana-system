@@ -56,6 +56,7 @@
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
                                                 <th>Customer</th>
+                                                <th>Payment</th>
                                                 <th>Verified</th>
                                             </tr>
                                         </thead>
@@ -71,101 +72,35 @@
                                                                 data-original-title="test"
                                                                 data-bs-target="#detailData{{ $value->id }}">Products
                                                                 Detail</a>
-                                                            <a class="dropdown-item editPayment_method"
+                                                            <a class="dropdown-item
+                                editPayment_method"
                                                                 href="{{ url('/edit_sales_order/' . $value->id) }}">Edit
                                                                 Sales
                                                                 Order</a>
                                                             <a class="dropdown-item editPayment_method"
                                                                 href="{{ url('/edit_product/' . $value->id) }}">Edit
                                                                 Product</a>
-
                                                             <a class="dropdown-item" href="javascript:void(0)"
                                                                 data-bs-toggle="modal"
                                                                 data-bs-target="#deleteData{{ $value->id }}">Delete
-                                                                Sales Orders</a>
+                                                                Sales Order</a>
                                                         </div>
-
                                                     </td>
-                                                    <!-- Detail Product Modal Start -->
-                                                    <div class="modal fade" id="detailData{{ $value->id }}"
-                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                                        aria-hidden="true">
-                                                        <div class="modal-dialog modal-lg" role="document">
-                                                            <form>
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title" id="exampleModalLabel">
-                                                                            Product Detail:
-                                                                            {{ $value->order_number }}</h5>
-                                                                        <button class="btn-close" type="button"
-                                                                            data-bs-dismiss="modal"
-                                                                            aria-label="Close"></button>
-                                                                    </div>
-                                                                    <div class="modal-body">
-                                                                        <div class="container-fluid">
-                                                                            <div class="form-group row">
-                                                                                @foreach ($value->salesOrderDetailsBy as $detail)
-                                                                                    <div class="form-group col-4">
-                                                                                        <label>Product</label>
-                                                                                        <input class="form-control"
-                                                                                            value="{{ $detail->productSales->nama_barang }}"
-                                                                                            id="" readonly>
-                                                                                    </div>
 
-                                                                                    <div class="col-3 col-md-3 form-group">
-                                                                                        <label>Qty</label>
-                                                                                        <input class="form-control"
-                                                                                            value="{{ $detail->qty }}"
-                                                                                            readonly>
-                                                                                    </div>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $value->order_number }}</td>
+                                                    <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
+                                                    <td>{{ $value->customerBy->name_cust }}</td>
+                                                    @if ($value->payment_method == 1)
+                                                        <td>COD</td>
+                                                    @else
+                                                        <td>CBD</td>
+                                                    @endif
+                                                    <td class="text-center"><a class="btn btn-primary btn-sm"
+                                                            href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify
+                                                    </td>
+                                                    </a>
 
-                                                                                    <div class="col-3 col-md-3 form-group">
-                                                                                        <label>Discount%</label>
-                                                                                        <input class="form-control"
-                                                                                            value="{{ $detail->discount }}"
-                                                                                            readonly>
-                                                                                    </div>
-                                                                                @endforeach
-                                                                            </div>
-                                                                            <hr>
-                                                                            <div class="form-group row">
-                                                                                <div class="col-12 form-group">
-                                                                                    <label>Remarks</label>
-                                                                                    <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
-                                                                                </div>
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <div class="form-group col-lg-3">
-                                                                                    <label>PPN</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ $value->ppn }}"
-                                                                                        id="" readonly>
-                                                                                </div>
-
-                                                                                <div class="col-lg-3 form-group">
-                                                                                    <label>Total (Before PPN)</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ 'Rp. ' . $value->total }}"
-                                                                                        readonly>
-                                                                                </div>
-
-                                                                                <div class="col-lg-3 form-group">
-                                                                                    <label>Total (After PPN)</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ 'Rp. ' . $value->total_after_ppn }}"
-                                                                                        readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn btn-danger" type="button"
-                                                                                data-bs-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Detail Product Modal End -->
                                                     <!-- Delete Product Modal Start -->
                                                     <div class="modal fade" id="deleteData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
@@ -206,16 +141,169 @@
                                                         </div>
                                                     </div>
                                                     <!-- Delete Product Modal End -->
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $value->order_number }}</td>
-                                                    <td>{{ $value->order_date }}</td>
-                                                    <td>{{ $value->customerBy->name_cust }}</td>
-                                                    <td class="text-center"><a class="btn btn-primary btn-sm"
-                                                            href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
-                                                    </td>
 
+                                                    <!-- Edit Product Modal Start -->
+                                                    <div class="modal fade" id="changeData{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog" role="document">
+                                                            <form method="post"
+                                                                action="{{ url('sales_order/' . $value->id) }}"
+                                                                enctype="multipart/form-data">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Edit Data:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                @foreach ($value->salesOrderDetailsBy as $detail)
+                                                                                    <div class="form-group col-4">
+                                                                                        <label>Product</label>
+                                                                                        <select
+                                                                                            name="soFields[{{ $loop->index }}][product_id]"
+                                                                                            class="form-control productSo"
+                                                                                            required>
+                                                                                            <option value="">Choose
+                                                                                                Product</option>
+                                                                                        </select>
+                                                                                        @error('soFields[{{ $loop->index }}][product_id]')
+                                                                                            <div class="invalid-feedback">
+                                                                                                {{ $message }}
+                                                                                            </div>
+                                                                                        @enderror
+                                                                                    </div>
 
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Qty</label>
+                                                                                        <input class="form-control cekQty"
+                                                                                            required
+                                                                                            name="soFields[{{ $loop->index }}][qty]"
+                                                                                            id="">
+                                                                                        @error('soFields[{{ $loop->index }}][qty]')
+                                                                                            <div class="invalid-feedback">
+                                                                                                {{ $message }}
+                                                                                            </div>
+                                                                                        @enderror
+                                                                                    </div>
 
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Discount%</label>
+                                                                                        <input
+                                                                                            class="form-control discount-append"
+                                                                                            name="soFields[{{ $loop->index }}][discount]"
+                                                                                            id="">
+                                                                                    </div>
+                                                                                @endforeach
+
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-danger" type="button"
+                                                                            data-bs-dismiss="modal">Close</button>
+                                                                        <button class="btn btn-primary"
+                                                                            type="submit">Yes, delete
+                                                                        </button>
+                                                                    </div>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Edit Product Modal End -->
+
+                                                    <!-- Detail Product Modal Start -->
+                                                    <div class="modal fade" id="detailData{{ $value->id }}"
+                                                        tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                        aria-hidden="true">
+                                                        <div class="modal-dialog modal-lg" role="document">
+                                                            <form>
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title" id="exampleModalLabel">
+                                                                            Product Detail:
+                                                                            {{ $value->order_number }}</h5>
+                                                                        <button class="btn-close" type="button"
+                                                                            data-bs-dismiss="modal"
+                                                                            aria-label="Close"></button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        <div class="container-fluid">
+                                                                            <div class="form-group row">
+                                                                                @foreach ($value->salesOrderDetailsBy as $detail)
+                                                                                    <div class="form-group col-4">
+                                                                                        <label>Product</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->productSales->nama_barang .
+                                                                                                ' (' .
+                                                                                                $detail->productSales->sub_types->type_name .
+                                                                                                ', ' .
+                                                                                                $detail->productSales->sub_materials->nama_sub_material .
+                                                                                                ')' }}"
+                                                                                            id="" readonly>
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Qty</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->qty }}"
+                                                                                            readonly>
+                                                                                    </div>
+
+                                                                                    <div class="col-3 col-md-3 form-group">
+                                                                                        <label>Discount%</label>
+                                                                                        <input class="form-control"
+                                                                                            value="{{ $detail->discount }}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                @endforeach
+                                                                            </div>
+                                                                            <hr>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-12 form-group">
+                                                                                    <label>Remarks</label>
+                                                                                    <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="form-group col-lg-4">
+                                                                                    <label>PPN</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ 'Rp. ' . $value->ppn }}"
+                                                                                        id="" readonly>
+                                                                                </div>
+
+                                                                                <div class="col-lg-4 form-group">
+                                                                                    <label>Total (Before PPN)</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ 'Rp. ' . $value->total }}"
+                                                                                        readonly>
+                                                                                </div>
+
+                                                                                <div class="col-lg-4 form-group">
+                                                                                    <label>Total (After PPN)</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ 'Rp. ' . $value->total_after_ppn }}"
+                                                                                        readonly>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button class="btn btn-danger" type="button"
+                                                                                data-bs-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                    <!-- Detail Product Modal End -->
 
                                                 </tr>
                                             @endforeach
@@ -236,9 +324,9 @@
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
-                                                <th>Customer</th>
                                                 <th>Due Date</th>
-                                                <th>Verify</th>
+                                                <th>Customer</th>
+                                                <th>Verified</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -258,29 +346,22 @@
                                                                 Sales
                                                                 Order</a>
                                                             <a class="dropdown-item editPayment_method"
-                                                                href="{{ url('/edit_product/' . $value->id) }}">
-                                                                Edit Product</a>
-
+                                                                href="{{ url('/edit_product/' . $value->id) }}">Edit
+                                                                Product</a>
                                                             <a class="dropdown-item" href="#"
                                                                 data-bs-toggle="modal" data-original-title="test"
                                                                 data-bs-target="#deleteData{{ $value->id }}">Delete
-                                                                Product</a>
+                                                                Sales Order</a>
                                                         </div>
 
                                                     </td>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $value->order_number }}</td>
-                                                    <td>{{ $value->order_date }}</td>
-
+                                                    <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
+                                                    <td>{{ date('d-M-Y', strtotime($value->duedate)) }}</td>
                                                     <td>{{ $value->customerBy->name_cust }}</td>
-                                                    <td>
-                                                        @php
-                                                            $date = date('d F Y', strtotime($value->duedate));
-                                                        @endphp
-                                                        {{ $date }}
-                                                    </td>
                                                     <td class="text-center"><a class="btn btn-primary btn-sm"
-                                                            href="{{ url('/sales_orders/verificate/' . $value->id) }}">Verificate
+                                                            href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify
                                                     </td>
                                                     </a>
 
@@ -424,7 +505,12 @@
                                                                                     <div class="form-group col-4">
                                                                                         <label>Product</label>
                                                                                         <input class="form-control"
-                                                                                            value="{{ $detail->productSales->nama_barang }}"
+                                                                                            value="{{ $detail->productSales->nama_barang .
+                                                                                                ' (' .
+                                                                                                $detail->productSales->sub_types->type_name .
+                                                                                                ', ' .
+                                                                                                $detail->productSales->sub_materials->nama_sub_material .
+                                                                                                ')' }}"
                                                                                             id="" readonly>
                                                                                     </div>
 
@@ -451,17 +537,24 @@
                                                                                 </div>
                                                                             </div>
                                                                             <div class="form-group row">
-                                                                                <div class="form-group col-6">
+                                                                                <div class="form-group col-4">
                                                                                     <label>TOP</label>
                                                                                     <input class="form-control"
                                                                                         value="{{ $value->top . ' Days' }}"
                                                                                         id="" readonly>
                                                                                 </div>
 
-                                                                                <div class="col-6 form-group">
+                                                                                <div class="col-4 form-group">
+                                                                                    <label>Order Date</label>
+                                                                                    <input class="form-control"
+                                                                                        value="{{ date('d-M-Y', strtotime($value->order_date)) }}"
+                                                                                        readonly>
+                                                                                </div>
+
+                                                                                <div class="col-4 form-group">
                                                                                     <label>Due Date</label>
                                                                                     <input class="form-control"
-                                                                                        value="{{ $value->due_date }}"
+                                                                                        value="{{ date('d-M-Y', strtotime($value->duedate)) }}"
                                                                                         readonly>
                                                                                 </div>
 
@@ -470,7 +563,7 @@
                                                                                 <div class="form-group col-lg-3">
                                                                                     <label>PPN</label>
                                                                                     <input class="form-control"
-                                                                                        value="{{ $value->ppn }}"
+                                                                                        value="{{ 'Rp. ' . $value->ppn }}"
                                                                                         id="" readonly>
                                                                                 </div>
 

@@ -11,6 +11,15 @@ class ProductModel extends Model
     protected $table = "products";
     protected $guarded = ['id'];
 
+    public function sub_types()
+    {
+        return $this->hasOne(SubTypeModel::class, 'id', 'id_sub_type');
+    }
+
+    public function sub_materials()
+    {
+        return $this->hasOne(SubMaterialModel::class, 'id', 'id_sub_material');
+    }
 
     public function getRouteKeyName()
     {
