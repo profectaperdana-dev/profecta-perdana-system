@@ -163,39 +163,36 @@
                                                     role="dialog" aria-labelledby="exampleModalLabel"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog " role="document">
-                                                        <form>
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Sales
-                                                                        Order
-                                                                        :
-                                                                        {{ $value->order_number }}</h5>
-                                                                    <button class="btn-close" type="button"
-                                                                        data-bs-dismiss="modal"
-                                                                        aria-label="Close"></button>
-                                                                </div>
-                                                                <div class="modal-body">
-                                                                    <div class="container-fluid">
-                                                                        <div class="form-group row">
-                                                                            <h5> Are you sure to approval this SO ?</h5>
-                                                                        </div>
-
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">Sales
+                                                                    Order
+                                                                    :
+                                                                    {{ $value->order_number }}</h5>
+                                                                <button class="btn-close" type="button"
+                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                <div class="container-fluid">
+                                                                    <div class="form-group row">
+                                                                        <h5> Are you sure to approval this SO ?</h5>
                                                                     </div>
 
                                                                 </div>
-                                                                <div class="modal-footer">
-                                                                    <button class="btn btn-danger" type="button"
-                                                                        data-bs-dismiss="modal">Close</button>
-                                                                    <a
-                                                                        href="{{ url('/sales_orders/approve/' . $value->id) }}"><button
-                                                                            class="btn btn-primary" type="submit">Yes,
-                                                                            approve
-                                                                        </button></a>
-                                                                </div>
-                                                        </form>
+
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button class="btn btn-danger" type="button"
+                                                                    data-bs-dismiss="modal">Close</button>
+                                                                <a class="btn btn-primary"
+                                                                    href="{{ url('/sales_orders/approve/' . $value->id) }}">
+                                                                    Yes,
+                                                                    approve
+                                                                </a>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <!-- Detail Product Modal End -->
+                                                    <!-- Detail Product Modal End -->
                                             @endforeach
                                         </tbody>
                                     </table>
