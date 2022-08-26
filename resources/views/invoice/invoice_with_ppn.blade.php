@@ -35,7 +35,7 @@
             color: rgb(0, 0, 0);
             text-align: left;
             font-size: 9.5pt;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-family: 'Courier New', Courier, monospace;
 
             /* line-height: 1.5cm; */
         }
