@@ -116,7 +116,7 @@
     </header>
 
     <footer>
-        <b>Page -<span class="pagenum"></span>-</b>
+        <b>Page-<span class="pagenum"></span>-</b>
 
     </footer>
 
@@ -125,7 +125,7 @@
 
         <table style="width:100%;">
             <thead style="border:1px solid black">
-                <tr style="">
+                <tr>
                     <td style="text-align:center;padding:2px">No</td>
                     <td style="text-align:center;padding:2px">Item Description</td>
                     <td style="text-align:center;padding:2px">Price</td>
@@ -142,10 +142,14 @@
                     <tr>
                         <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
                         <td style="text-align:left;padding:2px">{{ $value->productSales->nama_barang }}</td>
-                        <td style="text-align:right;padding:2px">@currency($value->productSales->harga_jual_nonretail)</td>
+                        @php
+                            $hargaAfterPpn = $value->productSales->harga_jual_nonretail * 0.11;
+                            $dataHarga = $value->productSales->harga_jual_nonretail + $hargaAfterPpn;
+                        @endphp
+                        <td style="text-align:right;padding:2px">@currency($dataHarga)</td>
                         <td style="text-align:right;padding:2px">{{ $value->qty }}</td>
                         @php
-                            $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
+                            $sub_total = $dataHarga * $value->qty;
                             $total = $total + $sub_total;
                         @endphp
                         <td style="text-align:right">@currency($sub_total)</td>
@@ -175,13 +179,13 @@
 
                 </tr>
                 <tr>
-                    <td colspan="4" style="text-align: right">Total net value excl. tax</td>
+                    <td colspan="4" style="text-align: right">Sub Total</td>
                     <td style="text-align: right">@currency($total)</td>
                 </tr>
-                <tr>
+                {{-- <tr>
                     <td colspan="4" style="text-align: right">PPN 11%</td>
                     <td style="text-align: right">@currency($data->ppn)</td>
-                </tr>
+                </tr> --}}
                 <tr>
                     <td colspan="4" style="text-align: right">
 

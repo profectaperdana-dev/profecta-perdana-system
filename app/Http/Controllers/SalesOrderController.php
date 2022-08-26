@@ -54,7 +54,24 @@ class SalesOrderController extends Controller
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
-        return $pdf->download('ahsha.pdf');
+        return $pdf->download($data->order_number . '.pdf');
+    }
+    // print invoice tanpa PPN
+    public function printInoiceWithoutPpn($id)
+    {
+        $data = SalesOrderModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = PDF::loadView('invoice.invoice_without_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
+        return $pdf->download($data->order_number . '.pdf');
+    }
+
+    //print delivery order
+    public function deliveryOrder($id)
+    {
+        $data = SalesOrderModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
+        return $pdf->download($data->order_number . '.pdf');
     }
 
 
