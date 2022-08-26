@@ -83,7 +83,7 @@
                 <td style="width: 20%">
                     @php
                         $so_number = $data->order_number;
-                        $so_number = str_replace('SOPP', 'DOPP', $so_number);
+                        $so_number = str_replace('IVPP', 'DOPP', $so_number);
                         $do = $so_number;
                     @endphp
                     : {{ $do }} <br>
