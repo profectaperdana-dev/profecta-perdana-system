@@ -4,6 +4,6 @@
     <h5 class="dropdown-header">Actions</h5>
     <a class="dropdown-item" href="#">Send Invoice by Email</a>
     <a class="dropdown-item" href="{{ url('invoice/' . $id . '/invoice_with_ppn') }}">Print Invoice with PPN</a>
-    <a class="dropdown-item" href="">Print Invoice without PPN</a>
-    <a class="dropdown-item" href="#">Print Delivary Order</a>
+    <a class="dropdown-item" href="{{ url('invoice/' . $id . '/invoice_without_ppn') }}">Print Invoice without PPN</a>
+    <a class="dropdown-item" href="{{ url('invoice/' . $id . '/delivery_order') }}">Print Delivary Order</a>
 </div>

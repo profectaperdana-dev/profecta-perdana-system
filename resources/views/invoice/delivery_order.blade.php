@@ -75,16 +75,20 @@
                     Phone : 0713-82536
                 </td>
                 <td></td>
-                <td style="width: 5%;text-align:left">
-                    Invoice <br>
-                    Revision <br>
-                    Customer
+                <td style="width: 20%;text-align:left">
+                    Delivery Order Number <br>
+                    From Invoice
 
                 </td>
                 <td style="width: 20%">
-                    : {{ $data->order_number }}<br>
-                    : 0<br>
-                    : {{ $data->customerBy->code_cust }}
+                    @php
+                        $so_number = $data->order_number;
+                        $so_number = str_replace('SOPP', 'DOPP', $so_number);
+                        $do = $so_number;
+                    @endphp
+                    : {{ $do }} <br>
+                    : {{ $data->order_number }}
+
                 </td>
             </tr>
             <tr>
@@ -93,22 +97,22 @@
                 </th>
             </tr>
             <tr>
-                <th colspan="6" style="text-align: center">INVOICE
+                <th colspan="6" style="text-align: center">DELIVERY ORDER
 
                 </th>
             </tr>
             <tr>
-                <td colspan="3" style="width: 90%;text-align:left">Invoice To : <br>
+                <td colspan="3" style="width: 90%;text-align:left">Delivery To : <br>
                     {{ $data->customerBy->name_cust }} <br>
                     {{ $data->customerBy->address_cust }} <br>
-                    Remarks : {{ $data->remark }}
+                    Phone Customer : {{ $data->customerBy->phone_cust }}
                 </td>
-                <td>Date <br>
-                    Due Date
+                <td>Delivery Date <br>
+
                 </td>
                 <td style="text-align:left">
-                    : {{ $data->order_date }} <br>
-                    : {{ $data->duedate }}
+                    : {{ $now = date('Y-m-d') }} <br>
+
                 </td>
 
             </tr>
@@ -127,10 +131,10 @@
             <thead style="border:1px solid black">
                 <tr style="">
                     <td style="text-align:center;padding:2px">No</td>
-                    <td style="text-align:center;padding:2px">Item Description</td>
-                    <td style="text-align:center;padding:2px">Price</td>
+                    <td style="text-align:left;padding:2px">Item Description</td>
+                    <td style="text-align:center;padding:2px">Weight (Kg)</td>
                     <td style="text-align:center;padding:2px">Qty</td>
-                    <td style="text-align:center;padding:2px">Total</td>
+                    <td style="text-align:center;padding:2px">Total (Kg)</td>
                 </tr>
             </thead>
             <tbody>
@@ -142,80 +146,64 @@
                     <tr>
                         <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
                         <td style="text-align:left;padding:2px">{{ $value->productSales->nama_barang }}</td>
-                        <td style="text-align:right;padding:2px">@currency($value->productSales->harga_jual_nonretail)</td>
-                        <td style="text-align:right;padding:2px">{{ $value->qty }}</td>
+                        <td style="text-align:center;padding:2px">{{ $value->productSales->berat / 1000 }}</td>
+                        <td style="text-align:center;padding:2px">{{ $value->qty }}</td>
                         @php
-                            $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
+                            $sub_total = ($value->productSales->berat / 1000) * $value->qty;
                             $total = $total + $sub_total;
                         @endphp
-                        <td style="text-align:right">@currency($sub_total)</td>
+                        <td style="text-align:center">{{ $sub_total }}</td>
                     </tr>
                     {{-- @endfor --}}
                 @endforeach
             </tbody>
-
+            <tfoot>
+                <tr>
+                    <td colspan="6" style="text-align: right">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                    <td style="text-align: center">Weight Total (Kg)</td>
+                    <td style="text-align: center">{{ $total }}</td>
+                </tr>
+            </tfoot>
 
 
         </table>
         <table style="width: 100%">
             <thead>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <th style="width: 33%">&nbsp;</th>
+                    <th style="width: 33%">&nbsp;</th>
+                    <th style="width: 33%">&nbsp;</th>
+                </tr>
+                <tr>
+                    <th style="text-align: center;width: 33%"><i>Customer,</i> </th>
+                    <th style="text-align: center;width: 33%"><i>Warehoues,</i> </th>
+                    <th style="text-align: center;width: 33%"><i>Driver,</i></th>
+
+
+                </tr>
+                <tr>
+                    <th style="width: 33%">&nbsp;</th>
+                    <th style="width: 33%">&nbsp;</th>
+                    <th style="width: 33%">&nbsp;</th>
+                </tr>
+                <tr>
+                    <th style="width: 33%">&nbsp;</th>
+                    <th style="width: 33%">&nbsp;</th>
+                    <th style="width: 33%">&nbsp;</th>
+                </tr>
+                <tr>
+                    <th style="text-align: center;width: 33%"><i>( {{ $data->customerBy->name_cust }} )</i> </th>
+                    <th style="width: 33%">&nbsp;</th>
+                    <th style="width: 33%">&nbsp;</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td colspan="6" style="text-align: right">
-                        <hr>
-                    </td>
-
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: right">Total net value excl. tax</td>
-                    <td style="text-align: right">@currency($total)</td>
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: right">PPN 11%</td>
-                    <td style="text-align: right">@currency($data->ppn)</td>
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: right">
-
-                    </td>
-                    <td style="text-align: right">
-                        <hr>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="4" style="text-align: right">Total Due</th>
-                    <th style="text-align: right">@currency($data->total_after_ppn)</th>
-                </tr>
-                <tr>
-                    <th colspan="4">&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <tr>
-                    <td colspan="3" style="text-align: left">Payment Method :
-                        @if ($data->payment_method == 1)
-                            Cash On Delivery <br>
-                        @elseif ($data->payment_method == 2)
-                            Cash Before Delivery <br>
-                        @else
-                            Credit with Terms of Payment <br>
-                        @endif
-                        Bank Mandiri 113-00-7779777-1 : an. CV Profecta Perdana <br>
-                        Bank BCA 853-085-3099 : an. CV Profecta Perdana <br>
-                        Thank You ! <br>
-                        We're looking fordward to working with you again
-                    </td>
-
-                    <th colspan="2" style="text-align: left"><i>Sincerely Yours,</i></th>
-                </tr>
-            </tbody>
         </table>
     </main>
 </body>
