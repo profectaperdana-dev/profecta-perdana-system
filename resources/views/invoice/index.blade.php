@@ -135,7 +135,6 @@
                                 name: 'DT_Row_Index',
                                 "className": "text-center",
                                 orderable: false,
-                                searchable: false
                             },
                             {
                                 data: 'order_number',
