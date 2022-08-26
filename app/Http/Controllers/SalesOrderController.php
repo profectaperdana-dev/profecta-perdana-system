@@ -684,7 +684,8 @@ class SalesOrderController extends Controller
         $so_number = str_replace('SOPP', 'IVPP', $so_number);
         $selected_so->order_number = $so_number;
         $selected_so->isapprove = 1;
-        $selected_so->approveBy = Auth::user()->id;
+        $selected_so->approvedBy = Auth::user()->id;
+        dd($selected_so->all());
         $selected_so->save();
 
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
