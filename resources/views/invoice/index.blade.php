@@ -26,28 +26,34 @@
                         <h5></h5>
                     </div>
                     <div class="card-body">
+
                         <div class="form-group row col-12">
-                            <div class="col-5">
+                            <div class="col-4">
                                 <label class="col-form-label text-end">Start Date</label>
                                 <div class="input-group">
-                                    <input class="datepicker-here form-control digits" type="text" data-language="en"
-                                        placeholder="Start">
+                                    <input class="form-control digits" type="date" data-language="en" placeholder="Start"
+                                        name="from_date" id="from_date">
                                 </div>
                             </div>
-                            <div class="col-5">
+                            <div class="col-4">
                                 <label class="col-form-label text-end">End Date</label>
                                 <div class="input-group">
-                                    <input class="datepicker-here form-control digits" type="text" data-language="en"
-                                        placeholder="Start">
+                                    <input class="form-control digits" type="date" data-language="en" placeholder="Start"
+                                        name="to_date" id="to_date">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <label class="col-form-label text-end">&nbsp;</label>
                                 <div class="input-group">
-                                    <button class="btn btn-primary">Filter</button>
+                                    <button class="btn btn-primary" name="filter" id="filter">Filter</button>
                                 </div>
                             </div>
-
+                            <div class="col-2">
+                                <label class="col-form-label text-end">&nbsp;</label>
+                                <div class="input-group">
+                                    <button class="btn btn-warning" name="refresh" id="refresh">Refresh</button>
+                                </div>
+                            </div>
                         </div>
                         <div class="table-responsive">
                             <table id="example1"
@@ -104,108 +110,136 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
-                $('#example1').DataTable({
-                    processing: true,
-                    serverSide: true,
 
-                    ajax: "{{ url('/invoice') }}",
-                    columns: [{
-                            width: '5%',
-                            data: 'action',
-                            name: 'action',
-                            orderable: false,
-                        }, {
-                            width: '5%',
-                            data: 'DT_RowIndex',
-                            name: 'DT_Row_Index',
-                            "className": "text-center",
-                            orderable: false,
-                            searchable: false
-                        },
-                        {
-                            data: 'order_number',
-                            name: 'order_number'
+                load_data();
 
-                        },
-                        {
-                            data: 'order_date',
-                            name: 'order_date'
-
-                        },
-                        {
-                            data: 'duedate',
-                            name: 'duedate'
-
-                        },
-                        {
-                            data: 'customerBy',
-                            name: 'customerBy.name_cust',
-                        },
-                        {
-                            data: 'remark',
-                            name: 'remark',
-                        },
-                        {
-                            data: 'createdSalesOrder',
-                            name: 'createdSalesOrder.name',
-                        },
-                        {
-                            data: 'top',
-                            name: 'top',
-                        },
-                        {
-                            data: 'ppn',
-                            name: 'ppn',
-                        },
-                        {
-                            data: 'total',
-                            name: 'total',
-                        },
-                        {
-                            data: 'total_after_ppn',
-                            name: 'total_after_ppn',
-                        },
-                        {
-                            data: 'payment_method',
-                            name: 'payment_method',
-                        },
-                        {
-                            data: 'isPaid',
-                            name: 'isPaid',
-                        },
-                    ],
-                    order: [
-                        [0, 'desc']
-                    ],
-                    dom: 'Bfrtip',
-                    lengthMenu: [
-                        [10, 25, 50, -1],
-                        ['10 rows', '25 rows', '50 rows', 'Show All']
-                    ],
-                    buttons: ['pageLength',
-                        {
-                            title: ' Data Invoice Profecta Perdana in {{ Auth::user()->warehouseBy->warehouses }}',
-                            extend: 'print',
-                            customize: function(win) {
-                                $(win.document.body).find('table')
-                                    .addClass('compact')
-                                    .css('font-size', 'inherit');
-                            },
-                            orientation: 'landscape',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            extend: 'excel',
-                            exportOptions: {
-                                columns: ':visible'
+                function load_data(from_date = '', to_date = '') {
+                    $('#example1').DataTable({
+                        processing: true,
+                        serverSide: true,
+                        ajax: {
+                            url: "{{ url('/invoice') }}",
+                            data: {
+                                from_date: from_date,
+                                to_date: to_date
                             }
                         },
-                        'colvis'
-                    ],
+                        columns: [{
+                                width: '5%',
+                                data: 'action',
+                                name: 'action',
+                                orderable: false,
+                            }, {
+                                width: '5%',
+                                data: 'DT_RowIndex',
+                                name: 'DT_Row_Index',
+                                "className": "text-center",
+                                orderable: false,
+                                searchable: false
+                            },
+                            {
+                                data: 'order_number',
+                                name: 'order_number'
 
+                            },
+                            {
+                                data: 'order_date',
+                                name: 'order_date'
+
+                            },
+                            {
+                                data: 'duedate',
+                                name: 'duedate'
+
+                            },
+                            {
+                                data: 'customerBy',
+                                name: 'customerBy.name_cust',
+                            },
+                            {
+                                data: 'remark',
+                                name: 'remark',
+                            },
+                            {
+                                data: 'createdSalesOrder',
+                                name: 'createdSalesOrder.name',
+                            },
+                            {
+                                data: 'top',
+                                name: 'top',
+                            },
+                            {
+                                data: 'ppn',
+                                name: 'ppn',
+                            },
+                            {
+                                data: 'total',
+                                name: 'total',
+                            },
+                            {
+                                data: 'total_after_ppn',
+                                name: 'total_after_ppn',
+                            },
+                            {
+                                data: 'payment_method',
+                                name: 'payment_method',
+                            },
+                            {
+                                data: 'isPaid',
+                                name: 'isPaid',
+                            },
+                        ],
+                        order: [
+                            [0, 'desc']
+                        ],
+                        dom: 'Bfrtip',
+                        lengthMenu: [
+                            [10, 25, 50, -1],
+                            ['10 rows', '25 rows', '50 rows', 'Show All']
+                        ],
+                        buttons: ['pageLength',
+                            {
+                                title: ' Data Invoice Profecta Perdana in {{ Auth::user()->warehouseBy->warehouses }}',
+                                extend: 'print',
+                                customize: function(win) {
+                                    $(win.document.body).find('table')
+                                        .addClass('compact')
+                                        .css('font-size', 'inherit');
+                                },
+                                orientation: 'landscape',
+                                exportOptions: {
+                                    columns: ':visible'
+                                },
+                            },
+                            {
+                                extend: 'excel',
+                                exportOptions: {
+                                    columns: ':visible'
+                                }
+                            },
+                            'colvis'
+                        ],
+
+                    });
+                }
+                $('#filter').click(function() {
+                    var from_date = $('#from_date').val();
+                    var to_date = $('#to_date').val();
+                    if (from_date != '' && to_date != '') {
+                        $('#example1').DataTable().destroy();
+                        load_data(from_date, to_date);
+                    } else {
+                        alert('Both Date is required');
+                    }
                 });
+
+                $('#refresh').click(function() {
+                    $('#from_date').val('');
+                    $('#to_date').val('');
+                    $('#order_table').DataTable().destroy();
+                    load_data();
+                });
+
             });
         </script>
     @endpush

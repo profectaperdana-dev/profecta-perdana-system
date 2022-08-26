@@ -621,20 +621,30 @@ class SalesOrderController extends Controller
     public function getInvoiceData(Request $request)
     {
         // get kode area
-
+        // dd($request->all());
         if ($request->ajax()) {
             $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
                 ->select('customer_areas.area_code', 'warehouses.id')
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
-            $invoice = SalesOrderModel::with('customerBy')
-                ->with('createdSalesOrder')
-                ->where('isapprove', 1)
-                ->where('isverified', 1)
-                ->where('order_number', 'like', "%$kode_area->area_code%")
-                ->latest()
-                ->get();
-
+            if (!empty($request->from_date)) {
+                $invoice = SalesOrderModel::with('customerBy')
+                    ->with('createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->whereBetween('order_date', array($request->from_date, $request->to_date))
+                    ->latest()
+                    ->get();
+            } else {
+                $invoice = SalesOrderModel::with('customerBy')
+                    ->with('createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->latest()
+                    ->get();
+            }
             return datatables()->of($invoice)
                 ->editColumn('payment_method', function ($data) {
                     if ($data->payment_method == 1) {
@@ -697,9 +707,8 @@ class SalesOrderController extends Controller
         $so_number = str_replace('SOPP', 'IVPP', $so_number);
         $selected_so->order_number = $so_number;
         $selected_so->isapprove = 1;
-        $selected_so->approveBy = Auth::user()->id;
+        $selected_so->approvedBy = Auth::user()->id;
         $selected_so->save();
-
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
     }
 }
