@@ -38,16 +38,20 @@
                             <h6>Admin Feature </h6>
                         </div>
                     </li>
-
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
+                            href="{{ url('/recent_sales_order') }}"><i data-feather="clipboard"></i><span>SO Need Verify
+                            </span></a>
+                    </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('need_approval') ? 'active' : '' }}"
                             href="{{ url('/need_approval') }}"><i data-feather="clipboard"></i><span>SO
-                                Need Approval
+                                Need Approve
                             </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('invoice') ? 'active' : '' }}"
-                            href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
+                            href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Data Invoice
                             </span></a>
                     </li>
                     {{-- <li>

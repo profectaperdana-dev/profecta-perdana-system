@@ -41,8 +41,7 @@
 
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
-                            href="{{ url('/recent_sales_order') }}"><i data-feather="clipboard"></i><span>Recent Sales
-                                Order
+                            href="{{ url('/recent_sales_order') }}"><i data-feather="clipboard"></i><span>SO Need Verify
                             </span></a>
                     </li>
                     <li>

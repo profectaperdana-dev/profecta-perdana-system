@@ -261,6 +261,7 @@ class CustomerController extends Controller
         $getProvinces = $getAPI->json();
         // dd($getProvinces['name']);
         return $getProvinces['name'];
+        // dd($getProvinces['name']);
     }
 
     public function getCity($province_id)

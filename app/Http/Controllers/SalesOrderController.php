@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ApprovalMessage;
 use DateTimeZone;
 use Carbon\Carbon;
 use DateTimeImmutable;
@@ -92,7 +93,9 @@ class SalesOrderController extends Controller
         ])
             ->whereIn('payment_method', [1, 2])
             ->where('isverified', 0)
-            ->where('order_number', 'like', "%$kode_area->area_code%")->get();
+            ->where('order_number', 'like', "%$kode_area->area_code%")
+            ->latest()
+            ->get();
 
         // get sales with
         $dataSalesOrderDebt = SalesOrderModel::with([
@@ -103,6 +106,7 @@ class SalesOrderController extends Controller
             ->where('payment_method', 3)
             ->where('isverified', 0)
             ->where('order_number', 'like', "%$kode_area->area_code%")
+            ->latest()
             ->get();
 
         checkOverDue();
@@ -593,7 +597,7 @@ class SalesOrderController extends Controller
                 }
             } else {
                 $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
-                event(new SOMessage('From:' . Auth::user()->name, $message));
+                event(new ApprovalMessage('From:' . Auth::user()->name, $message));
                 $notif = new NotificationsModel();
                 $notif->message = $message;
                 $notif->status = 0;
