@@ -38,13 +38,19 @@
             </div>
           </li>
           <li>
+            <a class="nav-link menu-title link-nav {{ request()->is('sales_order') ? 'active' : '' }}"
+              href="{{ url('/sales_order') }}"><i data-feather="shopping-cart"></i><span>Create Sales
+                Order
+              </span></a>
+          </li>
+          <li>
             <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
-              href="{{ url('/recent_sales_order') }}"><i data-feather="clipboard"></i><span>SO Need Verify
+              href="{{ url('/recent_sales_order') }}"><i data-feather="star"></i><span>SO Need Verify
               </span></a>
           </li>
           <li>
             <a class="nav-link menu-title link-nav {{ request()->is('need_approval') ? 'active' : '' }}"
-              href="{{ url('/need_approval') }}"><i data-feather="clipboard"></i><span>SO
+              href="{{ url('/need_approval') }}"><i data-feather="toggle-right"></i><span>SO
                 Need Approve
               </span></a>
           </li>
@@ -65,12 +71,7 @@
               </span></a>
           </li>
 
-          <li>
-            <a class="nav-link menu-title link-nav {{ request()->is('sales_order') ? 'active' : '' }}"
-              href="{{ url('/sales_order') }}"><i data-feather="shopping-cart"></i><span>Create Sales
-                Order
-              </span></a>
-          </li>
+
           <li>
             <a class="nav-link menu-title link-nav {{ request()->is('check_stock') ? 'active' : '' }}"
               href="{{ url('/check_stock') }}"><i data-feather="inbox"></i><span>Check

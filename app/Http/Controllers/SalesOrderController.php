@@ -18,6 +18,7 @@ use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
 use App\Models\WarehouseModel;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Illuminate\Support\Facades\Gate;
 // use Barryvdh\DomPDF\PDF;
 use PDF;
 use Illuminate\Support\Facades\Redirect;
@@ -314,8 +315,13 @@ class SalesOrderController extends Controller
             $model->duedate = NULL;
         }
         $model->save();
+
         if ($model->save()) {
-            return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+            if (Gate::allows('isAdmin')) {
+                return redirect('/need_approval')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+            } else {
+                return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+            }
         }
     }
 
@@ -626,20 +632,30 @@ class SalesOrderController extends Controller
     public function getInvoiceData(Request $request)
     {
         // get kode area
-
+        // dd($request->all());
         if ($request->ajax()) {
             $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
                 ->select('customer_areas.area_code', 'warehouses.id')
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
-            $invoice = SalesOrderModel::with('customerBy')
-                ->with('createdSalesOrder')
-                ->where('isapprove', 1)
-                ->where('isverified', 1)
-                ->where('order_number', 'like', "%$kode_area->area_code%")
-                ->latest()
-                ->get();
-
+            if (!empty($request->from_date)) {
+                $invoice = SalesOrderModel::with('customerBy')
+                    ->with('createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->whereBetween('order_date', array($request->from_date, $request->to_date))
+                    ->latest()
+                    ->get();
+            } else {
+                $invoice = SalesOrderModel::with('customerBy')
+                    ->with('createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->latest()
+                    ->get();
+            }
             return datatables()->of($invoice)
                 ->editColumn('payment_method', function ($data) {
                     if ($data->payment_method == 1) {
@@ -648,6 +664,13 @@ class SalesOrderController extends Controller
                         return 'CBD';
                     } else {
                         return 'Credit';
+                    }
+                })
+                ->editColumn('isPaid', function ($data) {
+                    if ($data->isPaid == 0) {
+                        return 'Unpaid';
+                    } else {
+                        return 'Paid';
                     }
                 })
 
@@ -702,7 +725,6 @@ class SalesOrderController extends Controller
         $selected_so->isapprove = 1;
         $selected_so->approvedBy = Auth::user()->id;
         $selected_so->save();
-
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
     }
 
