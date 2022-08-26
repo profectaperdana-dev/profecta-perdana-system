@@ -92,9 +92,9 @@
                             <td>CBD</td>
                           @endif
                           <td class="text-center"><a class="btn btn-primary btn-sm"
-                              href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify
+                              href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify</a>
                           </td>
-                          </a>
+
 
                           <!-- Delete Product Modal Start -->
                           <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"

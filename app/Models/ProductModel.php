@@ -21,6 +21,11 @@ class ProductModel extends Model
         return $this->hasOne(SubMaterialModel::class, 'id', 'id_sub_material');
     }
 
+    public function uoms()
+    {
+        return $this->hasOne(UomModel::class, 'id', 'id_uom');
+    }
+
     public function getRouteKeyName()
     {
         return 'kode_barang';

@@ -59,7 +59,7 @@
                             $value->productBy->sub_materials->nama_sub_material .
                             ')' }}
                       </td>
-                      <td>{{ $value->stock }}</td>
+                      <td>{{ $value->stock . ' ' . $value->productBy->uoms->satuan }}</td>
 
 
                     </tr>

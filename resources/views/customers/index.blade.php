@@ -33,9 +33,7 @@
               <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
                 <thead>
                   <tr>
-                    @if (Gate::check('isSuperAdmin') || Gate::check('isAdmin'))
-                      <th></th>
-                    @endif
+                    <th></th>
                     <th>#</th>
                     <th>Code</th>
                     <th>Name</th>
@@ -49,22 +47,22 @@
                 <tbody>
                   @foreach ($customers as $key => $value)
                     <tr>
-                      @if (Gate::check('isSuperAdmin') || Gate::check('isAdmin'))
-                        <td style="width: 10%">
-                          <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                              data-feather="settings"></i></a>
-                          <div class="dropdown-menu" aria-labelledby="">
-                            <h5 class="dropdown-header">Actions</h5>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                              data-bs-target="#detailData{{ $value->id }}">Detail</a>
+                      <td style="width: 10%">
+                        <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
+                            data-feather="settings"></i></a>
+                        <div class="dropdown-menu" aria-labelledby="">
+                          <h5 class="dropdown-header">Actions</h5>
+                          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
+                            data-bs-target="#detailData{{ $value->id }}">Detail</a>
+                          @if (Gate::check('isSuperAdmin') || Gate::check('isAdmin') || Gate::check('isVerificator'))
                             <a class="dropdown-item"
                               href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
                             <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
                               data-bs-target="#deleteData{{ $value->id }}">Delete</a>
-                          </div>
-                      @endif
+                          @endif
+                        </div>
                       </td>
-                      {{-- Modul Detail UOM --}}
+                      {{-- Modul Detail --}}
                       <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-xl" role="document">
@@ -216,6 +214,28 @@
                                         @endif
                                       </div>
                                     </div>
+                                    <div class="form-group row font-weight-bold">
+                                      <div class="form-group col-md-4">
+                                        <label>Status Overdue</label>
+                                        <br>
+                                        @if ($value->isOverDue == 0)
+                                          <h1 class="badge badge-pill badge-success">
+                                            No</h1>
+                                        @else
+                                          <span class="badge badge-pill badge-danger">Yes</span>
+                                        @endif
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        <label>Status OverPlafond</label>
+                                        <br>
+                                        @if ($value->isOverPlafoned == 0)
+                                          <h1 class="badge badge-pill badge-success">
+                                            No</h1>
+                                        @else
+                                          <span class="badge badge-pill badge-danger">Yes</span>
+                                        @endif
+                                      </div>
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -226,7 +246,7 @@
                           </div>
                         </div>
                       </div>
-                      {{-- End Modal Detail UOM --}}
+                      {{-- End Modal Detail --}}
                       {{-- Modul Delete UOM --}}
                       <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">

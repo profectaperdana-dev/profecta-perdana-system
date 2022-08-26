@@ -183,6 +183,8 @@ class CustomerController extends Controller
             'area_cust_id' => 'required|numeric',
             'credit_limit' => 'required|numeric',
             'label' => 'required',
+            'isOverDue' => 'required|numeric',
+            'isOverPlafoned' => 'required|numeric',
             'due_date' => 'required|numeric',
             'status' => 'required|numeric',
             'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
@@ -210,6 +212,8 @@ class CustomerController extends Controller
         $customer_current->credit_limit = $validated_data['credit_limit'];
         $customer_current->label = $validated_data['label'];
         $customer_current->due_date = $validated_data['due_date'];
+        $customer_current->isOverDue = $validated_data['isOverDue'];
+        $customer_current->isOverPlafoned = $validated_data['isOverPlafoned'];
         $customer_current->status = $validated_data['status'];
 
         //process image

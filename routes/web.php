@@ -54,7 +54,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('/edit_sales_order/{id}', [SalesOrderController::class, 'editSo']);
     Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
-    Route::get('/sales_orders/verificate/{id}', [SalesOrderController::class, 'verificate']);
+    Route::get('/sales_orders/verify/{id}', [SalesOrderController::class, 'verify']);
     Route::get('/need_approval', [SalesOrderController::class, 'soNeedApproval']);
     Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
     Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);

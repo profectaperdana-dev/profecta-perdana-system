@@ -230,6 +230,38 @@
           </div>
         @enderror
       </div>
+      <div class="form-group col-md-3" {{ request()->is('customers/create') ? 'hidden' : '' }}>
+        <label>Overdue Status</label>
+        <select name="isOverDue"
+          class="form-control @error('isOverDue') invalid-feedback
+                        {{ $message }} @enderror"
+          required>
+          <option value="" selected>Choose Customer Overdue Status</option>
+          <option value="1" @if ($customer->isOverDue == 1) selected @endif>Yes</option>
+          <option value="0" @if ($customer->isOverDue == 0) selected @endif>No</option>
+        </select>
+        @error('isOverDue')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="form-group col-md-3" {{ request()->is('customers/create') ? 'hidden' : '' }}>
+        <label>Overplafond Status</label>
+        <select name="isOverPlafoned"
+          class="form-control @error('isOverPlafoned') invalid-feedback
+                        {{ $message }} @enderror"
+          required>
+          <option value="" selected>Choose Customer Overplafond Status</option>
+          <option value="1" @if ($customer->isOverPlafoned == 1) selected @endif>Yes</option>
+          <option value="0" @if ($customer->isOverPlafoned == 0) selected @endif>No</option>
+        </select>
+        @error('isOverPlafoned')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
       <div class="form-group col-md-6"
         {{ request()->is('customers/' . $customer->code_cust . '/edit') ? 'hidden' : '' }}>
         <label>Customer Coordinate Location</label>
@@ -245,7 +277,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-md-4 offset-md-4 text-center">
+      <div class="form-group col-md-4  text-center">
         <label id="previewLabel" hidden>Preview Image</label>
         <img src="#" id="previewimg" class="img-fluid shadow-lg" style="width:350px;" hidden />
       </div>

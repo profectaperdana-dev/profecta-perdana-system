@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\NotificationsModel;
+use App\View\Composers\NotificationComposer as ComposersNotificationComposer;
 use Carbon\Carbon;
 use App\Views\Composers\NotificationComposer;
 use Illuminate\Support\Facades\Auth;
@@ -31,6 +33,18 @@ class AppServiceProvider extends ServiceProvider
     {
         Blade::directive('currency', function ($expression) {
             return "Rp. <?php echo number_format($expression,0,',','.'); ?>";
+        });
+
+        //notification
+
+        view()->composer('*', function ($view) {
+            $notif = NotificationsModel::where('status', '0')
+                ->where('role_id', @auth()->user()->role_id)
+                ->latest()
+                ->limit(4)
+                ->get();
+
+            View::share('notif', $notif);
         });
     }
 }

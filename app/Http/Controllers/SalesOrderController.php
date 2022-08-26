@@ -303,7 +303,7 @@ class SalesOrderController extends Controller
     public function editProduct($id)
     {
         $title = 'Edit Data Product in Sales Order :';
-        $value = SalesOrderModel::find($id);
+        $value = SalesOrderModel::with(['salesOrderDetailsBy.productSales.sub_types', 'salesOrderDetailsBy.productSales.sub_materials'])->find($id);
         $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
             ->select('products.*', 'stocks.warehouses_id')
             ->where('stocks.warehouses_id', Auth::user()->warehouse_id)
@@ -531,6 +531,7 @@ class SalesOrderController extends Controller
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
         $getCredential = CustomerModel::where('id', $selected_so->customers_id)->firstOrFail();
         $selected_so->isverified = 1;
+        $selected_so->verifiedBy = Auth::user()->id;
         if ($selected_so->payment_method != 3) {
             $selected_so->isapprove = 1;
             $so_number = $selected_so->order_number;
@@ -586,7 +587,7 @@ class SalesOrderController extends Controller
 
         $selected_so->save();
 
-        return redirect('/recent_sales_order')->with('Success', "Sales Order Verification Success");
+        return redirect('/recent_sales_order')->with('success', "Sales Order Verification Success");
     }
 
     // getInvoiceData() : Tampilkan data invoice dengan yajra
