@@ -91,10 +91,43 @@
                           @else
                             <td>CBD</td>
                           @endif
-                          <td class="text-center"><a class="btn btn-primary btn-sm"
-                              href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify</a>
+                          <td class="text-center"><a class="btn btn-primary btn-sm" href="javascript:void(0)"
+                              data-bs-toggle="modal" data-bs-target="#verifyData{{ $value->id }}">Verify</a>
                           </td>
 
+                          <!-- Verify Product Modal Start -->
+                          <div class="modal fade" id="verifyData{{ $value->id }}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">
+                                    Verify Data:
+                                    {{ $value->order_number }}</h5>
+                                  <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="form-group row">
+                                      <div class="col-md-12">
+                                        <h5>Are you sure verify this data ?</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                                  <a href="{{ url('/sales_orders/verify/' . $value->id) }}"><button
+                                      class="btn btn-primary" type="submit">Yes, verify
+                                    </button></a>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Verify Product Modal End -->
 
                           <!-- Delete Product Modal Start -->
                           <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
@@ -122,7 +155,8 @@
                                     </div>
                                   </div>
                                   <div class="modal-footer">
-                                    <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                                    <button class="btn btn-danger" type="button"
+                                      data-bs-dismiss="modal">Close</button>
                                     <button class="btn btn-primary" type="submit">Yes, delete
                                     </button>
                                   </div>
@@ -328,10 +362,44 @@
                           <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
                           <td>{{ date('d-M-Y', strtotime($value->duedate)) }}</td>
                           <td>{{ $value->customerBy->name_cust }}</td>
-                          <td class="text-center"><a class="btn btn-primary btn-sm"
-                              href="{{ url('/sales_orders/verify/' . $value->id) }}">Verify
+                          <td class="text-center"><a class="btn btn-primary btn-sm" href="javascript:void(0)"
+                              data-bs-toggle="modal" data-bs-target="#verifyData{{ $value->id }}">Verify</a>
                           </td>
-                          </a>
+
+
+                          <!-- Verify Product Modal Start -->
+                          <div class="modal fade" id="verifyData{{ $value->id }}" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">
+                                    Verify Data:
+                                    {{ $value->order_number }}</h5>
+                                  <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="form-group row">
+                                      <div class="col-md-12">
+                                        <h5>Are you sure verify this data ?</h5>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                                  <a href="{{ url('/sales_orders/verify/' . $value->id) }}"><button
+                                      class="btn btn-primary" type="submit">Yes, verify
+                                    </button></a>
+                                </div>
+
+                              </div>
+                            </div>
+                          </div>
+                          <!-- Verify Product Modal End -->
 
                           <!-- Delete Product Modal Start -->
                           <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"

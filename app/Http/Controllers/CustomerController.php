@@ -64,7 +64,6 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        // try {
         $validated_data = $request->validate([
             'name_cust' => 'required',
             'phone_cust' => 'required',
@@ -100,7 +99,6 @@ class CustomerController extends Controller
 
         //Get Province, City, District, Village
         $province_name = $this->getNameProvince($validated_data['province']);
-        // dd($province_name);
         $validated_data['province'] = ucwords(strtolower($province_name));
         $city_name = $this->getNameCity($validated_data['city']);
         $validated_data['city'] = ucwords(strtolower($city_name));
@@ -121,8 +119,6 @@ class CustomerController extends Controller
         CustomerModel::create($validated_data);
 
         return redirect('/customers')->with('success', 'Customer Add Success');
-        // } catch (\Throwable $th) {
-        // return redirect('/customers/create')->with('error', $th->getMessage());
     }
 
     /**
@@ -263,13 +259,14 @@ class CustomerController extends Controller
     {
         $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/province/' . $id . '.json');
         $getProvinces = $getAPI->json();
+        // dd($getProvinces['name']);
         return $getProvinces['name'];
         // dd($getProvinces['name']);
     }
 
     public function getCity($province_id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regencies/' . $province_id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regencies/' . $province_id . '.json');
         $getCities = $getAPI->json();
         return response()->json($getCities);
     }
@@ -297,14 +294,14 @@ class CustomerController extends Controller
 
     public function getVillage($district_id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/villages/' . $district_id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/villages/' . $district_id . '.json');
         $getVillages = $getAPI->json();
         return response()->json($getVillages);
     }
 
     public function getNameVillage($id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/village/' . $id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/village/' . $id . '.json');
         $getVillages = $getAPI->json();
         return $getVillages['name'];
     }
