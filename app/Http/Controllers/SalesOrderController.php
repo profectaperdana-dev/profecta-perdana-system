@@ -555,6 +555,7 @@ class SalesOrderController extends Controller
         $selected_so->verifiedBy = Auth::user()->id;
         if ($selected_so->payment_method != 3) {
             $selected_so->isapprove = 1;
+            $selected_so->isPaid = 1;
             $so_number = $selected_so->order_number;
             $so_number = str_replace('SOPP', 'IVPP', $so_number);
             $selected_so->order_number = $so_number;
@@ -573,6 +574,11 @@ class SalesOrderController extends Controller
                     $getStock->save();
                 }
             }
+
+            //Update Last Transaction Customer
+            $selected_customer = CustomerModel::where('id', $selected_so->customers_id)->first();
+            $selected_customer->last_transaction = $selected_so->order_date;
+            $selected_customer->save();
         } else {
             checkOverPlafone($selected_so->customers_id);
             if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1 && $getCredential->label != 'Bad Customer') {
@@ -595,6 +601,11 @@ class SalesOrderController extends Controller
                         $getStock->save();
                     }
                 }
+
+                //Update Last Transaction Customer
+                $selected_customer = CustomerModel::where('id', $selected_so->customers_id)->first();
+                $selected_customer->last_transaction = $selected_so->order_date;
+                $selected_customer->save();
             } else {
                 $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
                 event(new ApprovalMessage('From:' . Auth::user()->name, $message));
@@ -680,14 +691,28 @@ class SalesOrderController extends Controller
             }
         }
 
+        //Update Last Transaction Customer
+        $selected_customer = CustomerModel::where('id', $selected_so->customers_id)->first();
+        $selected_customer->last_transaction = $selected_so->order_date;
+        $selected_customer->save();
+
         $so_number = $selected_so->order_number;
         $so_number = str_replace('SOPP', 'IVPP', $so_number);
         $selected_so->order_number = $so_number;
         $selected_so->isapprove = 1;
         $selected_so->approvedBy = Auth::user()->id;
-        dd($selected_so->all());
         $selected_so->save();
 
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
+    }
+
+    public function updatePaid($id)
+    {
+        $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
+
+        $selected_so->isPaid = 1;
+        $selected_so->save();
+
+        return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
     }
 }

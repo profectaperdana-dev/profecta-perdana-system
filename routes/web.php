@@ -67,6 +67,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/invoice/{id}/invoice_with_ppn', [SalesOrderController::class, 'printInoiceWithPpn']);
     Route::get('/invoice/{id}/invoice_without_ppn', [SalesOrderController::class, 'printInoiceWithoutPpn']);
     Route::get('/invoice/{id}/delivery_order', [SalesOrderController::class, 'deliveryOrder']);
+    Route::get('/invoice/{id}/mark_as_paid', [SalesOrderController::class, 'updatePaid']);
     route::post('/update_product/{id}/add_product', [SalesOrderController::class, 'addProduct']);
     Route::get('/sales_orders/approve/{id}', [SalesOrderController::class, 'approve']);
 

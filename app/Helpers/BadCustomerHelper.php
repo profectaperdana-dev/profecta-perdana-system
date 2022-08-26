@@ -5,6 +5,9 @@ namespace App\Helpers;
 use App\Models\CustomerModel;
 use App\Models\SalesOrderModel;
 use Carbon\Carbon;
+use DateTimeImmutable;
+use DateTimeZone;
+use Doctrine\DBAL\Types\DateImmutableType;
 
 function checkOverDue()
 {
@@ -40,5 +43,17 @@ function checkOverPlafone($customer_id)
         $selected_customer->isOverPlafoned = 1;
         $selected_customer->label = 'Bad Customer';
         $selected_customer->save();
+    }
+}
+
+function checkLastTransaction()
+{
+    $all_customers = CustomerModel::select('last_transaction', 'status')->get();
+    foreach ($all_customers as $customer) {
+        $dt = new DateTimeImmutable($customer->last_transaction, new DateTimeZone('Asia/Jakarta'));
+        $dt = $dt->modify("+6 months");
+        if ($customer->last_transaction == $dt) {
+            $customer->status = 0;
+        }
     }
 }
