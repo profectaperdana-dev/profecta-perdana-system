@@ -142,62 +142,25 @@
                                                                                         readonly>
                                                                                 </div>
 
-                                                                                <div class="col-4 form-group">
-                                                                                    <label>Due Date</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ date('d-M-Y', strtotime($value->duedate)) }}"
-                                                                                        readonly>
-                                                                                </div>
 
-                                                                            </div>
-                                                                            <div class="form-group row">
-                                                                                <div class="form-group col-lg-3">
-                                                                                    <label>PPN</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ 'Rp. ' . $value->ppn }}"
-                                                                                        id="" readonly>
-                                                                                </div>
-
-                                                                                <div class="col-lg-3 form-group">
-                                                                                    <label>Total (Before PPN)</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ 'Rp. ' . $value->total }}"
-                                                                                        readonly>
-                                                                                </div>
-
-                                                                                <div class="col-lg-3 form-group">
-                                                                                    <label>Total (After PPN)</label>
-                                                                                    <input class="form-control"
-                                                                                        value="{{ 'Rp. ' . $value->total_after_ppn }}"
-                                                                                        readonly>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn btn-danger" type="button"
-                                                                                data-bs-dismiss="modal">Close</button>
-                                                                        </div>
-                                                                    </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
-                                                    <!-- Detail Product Modal End -->
-
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $value->order_number }}</td>
-                                                    <td>{{ $value->order_date }}</td>
-                                                    <td>{{ $value->customerBy->name_cust }}</td>
-                                                    <td class="text-center"><a class="btn btn-primary btn-sm"
-                                                            href="#" data-bs-toggle="modal"
-                                                            data-original-title="test"
-                                                            data-bs-target="#detailData{{ $value->id }}">Approval
-                                                    </td>
-                                                    </a>
+                                                                                <td>{{ $loop->iteration }}</td>
+                                                                                <td>{{ $value->order_number }}</td>
+                                                                                <td>{{ $value->order_date }}</td>
+                                                                                <td>{{ $value->customerBy->name_cust }}
+                                                                                </td>
+                                                                                <td class="text-center"><a
+                                                                                        class="btn btn-primary btn-sm"
+                                                                                        href="#"
+                                                                                        data-bs-toggle="modal"
+                                                                                        data-original-title="test"
+                                                                                        data-bs-target="#detailData{{ $value->id }}">Approval
+                                                                                </td>
+                                                                                </a>
                                                 </tr>
 
                                                 <!-- Detail Product Modal Start -->
-                                                <div class="modal fade" id="detailData{{ $value->id }}"
-                                                    tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+                                                <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
+                                                    role="dialog" aria-labelledby="exampleModalLabel"
                                                     aria-hidden="true">
                                                     <div class="modal-dialog " role="document">
                                                         <form>
@@ -223,8 +186,11 @@
                                                                 <div class="modal-footer">
                                                                     <button class="btn btn-danger" type="button"
                                                                         data-bs-dismiss="modal">Close</button>
-                                                                    <button class="btn btn-primary" type="submit">Yes,
-                                                                        Approve</button>
+                                                                    <a
+                                                                        href="{{ url('/sales_orders/approve/' . $value->id) }}"><button
+                                                                            class="btn btn-primary" type="submit">Yes,
+                                                                            approve
+                                                                        </button></a>
                                                                 </div>
                                                         </form>
                                                     </div>

@@ -673,4 +673,33 @@ class SalesOrderController extends Controller
 
         return view('invoice.index', $data);
     }
+
+    public function approve($id)
+    {
+        $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
+
+        //Potong Stock
+        $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
+        foreach ($selected_sod as $value) {
+            $getStock = StockModel::where('products_id', $value->products_id)
+                ->where('warehouses_id', Auth::user()->warehouse_id)
+                ->first();
+            $old_stock = $getStock->stock;
+            $getStock->stock = $old_stock - $value->qty;
+            if ($getStock->stock < 0) {
+                return Redirect::back()->with('error', 'Approval Fail! Not enough stock. Please re-confirm to the customer.');
+            } else {
+                $getStock->save();
+            }
+        }
+
+        $so_number = $selected_so->order_number;
+        $so_number = str_replace('SOPP', 'IVPP', $so_number);
+        $selected_so->order_number = $so_number;
+        $selected_so->isapprove = 1;
+        $selected_so->approveBy = Auth::user()->id;
+        $selected_so->save();
+
+        return redirect('/invoice')->with('success', "Sales Order Approval Success");
+    }
 }
