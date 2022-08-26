@@ -68,6 +68,7 @@
                                         <th>Total</th>
                                         <th>Total After PPN</th>
                                         <th>Payment Method</th>
+                                        <th>Paid Status</th>
 
                                     </tr>
                                 </thead>
@@ -167,6 +168,10 @@
                         {
                             data: 'payment_method',
                             name: 'payment_method',
+                        },
+                        {
+                            data: 'isPaid',
+                            name: 'isPaid',
                         },
                     ],
                     order: [

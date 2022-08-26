@@ -18,6 +18,7 @@ use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
 use App\Models\WarehouseModel;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Illuminate\Support\Facades\Gate;
 // use Barryvdh\DomPDF\PDF;
 use PDF;
 use Illuminate\Support\Facades\Redirect;
@@ -314,8 +315,13 @@ class SalesOrderController extends Controller
             $model->duedate = NULL;
         }
         $model->save();
+
         if ($model->save()) {
-            return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+            if (Gate::allows('isAdmin')) {
+                return redirect('/need_approval')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+            } else {
+                return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+            }
         }
     }
 
@@ -637,6 +643,13 @@ class SalesOrderController extends Controller
                         return 'CBD';
                     } else {
                         return 'Credit';
+                    }
+                })
+                ->editColumn('isPaid', function ($data) {
+                    if ($data->isPaid == 0) {
+                        return 'Unpaid';
+                    } else {
+                        return 'Paid';
                     }
                 })
 
