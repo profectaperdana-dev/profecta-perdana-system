@@ -64,65 +64,61 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            $validated_data = $request->validate([
-                'name_cust' => 'required',
-                'phone_cust' => 'required',
-                'id_card_number' => 'required',
-                'province' => 'required',
-                'city' => 'required',
-                'district' => 'required',
-                'village' => 'required',
-                'address_cust' => 'required',
-                'npwp' => 'required',
-                'email_cust' => 'required',
-                'category_cust_id' => 'required|numeric',
-                'area_cust_id' => 'required|numeric',
-                'credit_limit' => 'required|numeric',
-                'label' => 'required',
-                'due_date' => 'required|numeric',
-                'coordinate' => 'required',
-                'status' => 'required|numeric',
-                'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
-            ], [
-                'coordinate.required' => 'Generate Location Button must be clicked'
-            ]);
+        $validated_data = $request->validate([
+            'name_cust' => 'required',
+            'phone_cust' => 'required',
+            'id_card_number' => 'required',
+            'province' => 'required',
+            'city' => 'required',
+            'district' => 'required',
+            'village' => 'required',
+            'address_cust' => 'required',
+            'npwp' => 'required',
+            'email_cust' => 'required',
+            'category_cust_id' => 'required|numeric',
+            'area_cust_id' => 'required|numeric',
+            'credit_limit' => 'required|numeric',
+            'label' => 'required',
+            'due_date' => 'required|numeric',
+            'coordinate' => 'required',
+            'status' => 'required|numeric',
+            'reference_image' => 'image|mimes:jpg,png,jpeg|max:2048'
+        ], [
+            'coordinate.required' => 'Generate Location Button must be clicked'
+        ]);
 
-            //create create by
-            $validated_data['created_by'] = Auth::user()->id;
+        //create create by
+        $validated_data['created_by'] = Auth::user()->id;
 
-            //Create Customer Code
-            $area_code = CustomerAreaModel::where('id', $validated_data['area_cust_id'])->firstOrFail()->area_code;
-            $length = 4;
-            $id = intval(CustomerModel::where('code_cust', 'LIKE', "%$area_code%")->max('id')) + 1;
-            $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
-            $validated_data['code_cust'] = $area_code . $cust_number_id;
+        //Create Customer Code
+        $area_code = CustomerAreaModel::where('id', $validated_data['area_cust_id'])->firstOrFail()->area_code;
+        $length = 4;
+        $id = intval(CustomerModel::where('code_cust', 'LIKE', "%$area_code%")->max('id')) + 1;
+        $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
+        $validated_data['code_cust'] = $area_code . $cust_number_id;
 
-            //Get Province, City, District, Village
-            $province_name = $this->getNameProvince($validated_data['province']);
-            $validated_data['province'] = ucwords(strtolower($province_name));
-            $city_name = $this->getNameCity($validated_data['city']);
-            $validated_data['city'] = ucwords(strtolower($city_name));
-            $district_name = $this->getNameDistrict($validated_data['district']);
-            $validated_data['district'] = ucwords(strtolower($district_name));
-            $village_name = $this->getNameVillage($validated_data['village']);
-            $validated_data['village'] = ucwords(strtolower($village_name));
+        //Get Province, City, District, Village
+        $province_name = $this->getNameProvince($validated_data['province']);
+        $validated_data['province'] = ucwords(strtolower($province_name));
+        $city_name = $this->getNameCity($validated_data['city']);
+        $validated_data['city'] = ucwords(strtolower($city_name));
+        $district_name = $this->getNameDistrict($validated_data['district']);
+        $validated_data['district'] = ucwords(strtolower($district_name));
+        $village_name = $this->getNameVillage($validated_data['village']);
+        $validated_data['village'] = ucwords(strtolower($village_name));
 
-            //Process Image
-            $file = $request->file('reference_image');
-            if ($file) {
-                $name_file = time() . '_' . $file->getClientOriginalName();
-                $file->move(public_path('images/customers'), $name_file);
-            } else {
-                $name_file = "blank";
-            }
-            $validated_data['reference_image'] = $name_file;
-            CustomerModel::create($validated_data);
-
-            return redirect('/customers')->with('success', 'Customer Add Success');
-        } catch (\Throwable $th) {
-            return redirect('/customers/create')->with('error', $th->getMessage());
+        //Process Image
+        $file = $request->file('reference_image');
+        if ($file) {
+            $name_file = time() . '_' . $file->getClientOriginalName();
+            $file->move(public_path('images/customers'), $name_file);
+        } else {
+            $name_file = "blank";
         }
+        $validated_data['reference_image'] = $name_file;
+        CustomerModel::create($validated_data);
+
+        return redirect('/customers')->with('success', 'Customer Add Success');
     }
 
     /**
@@ -263,47 +259,48 @@ class CustomerController extends Controller
     {
         $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/province/' . $id . '.json');
         $getProvinces = $getAPI->json();
+        // dd($getProvinces['name']);
         return $getProvinces['name'];
     }
 
     public function getCity($province_id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regencies/' . $province_id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regencies/' . $province_id . '.json');
         $getCities = $getAPI->json();
         return response()->json($getCities);
     }
 
     public function getNameCity($id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regency/' . $id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regency/' . $id . '.json');
         $getCities = $getAPI->json();
         return $getCities['name'];
     }
 
     public function getDistrict($city_id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/districts/' . $city_id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/districts/' . $city_id . '.json');
         $getDistricts = $getAPI->json();
         return response()->json($getDistricts);
     }
 
     public function getNameDistrict($id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/district/' . $id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/district/' . $id . '.json');
         $getDistricts = $getAPI->json();
         return $getDistricts['name'];
     }
 
     public function getVillage($district_id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/villages/' . $district_id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/villages/' . $district_id . '.json');
         $getVillages = $getAPI->json();
         return response()->json($getVillages);
     }
 
     public function getNameVillage($id)
     {
-        $getAPI = Http::get('http://preposterous-cat.github.io/api-wilayah-indonesia/static/api/village/' . $id . '.json');
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/village/' . $id . '.json');
         $getVillages = $getAPI->json();
         return $getVillages['name'];
     }
