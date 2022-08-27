@@ -53,7 +53,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-7">
                       <label>Product</label>
                       <select name="discountFields[0][product_id]"
                         class="form-control @error('discountFields[0][product_id]') is-invalid @enderror product-append-discount"
@@ -66,7 +66,7 @@
                         </div>
                       @enderror
                     </div>
-                    <div class="form-group col-md-5">
+                    <div class="form-group col-md-3">
                       <label>Discount</label>
                       <input type="number" name="discountFields[0][discount]" id="discount"
                         class="form-control @error('discountFields[0][discount]') is-invalid @enderror"
@@ -288,11 +288,11 @@
         $("#addfields").on("click", function() {
           ++i;
           let form =
-            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="discountFields[' +
+            '<div class="form-group row"> <div class="form-group col-7" > <label> Product </label> <select name="discountFields[' +
             i +
             '][product_id]"' +
             'class="form-control product-append-discount" required> <option value=""> Choose Product </option> </select>' +
-            '</div> <div class="form-group col-5">' +
+            '</div> <div class="form-group col-3">' +
             '<label> Discount </label> <input type="number" name="discountFields[' +
             i +
             '][discount]" id="discount"' +

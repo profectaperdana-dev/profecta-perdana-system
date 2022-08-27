@@ -83,9 +83,50 @@
                       </div>
                       <div class="col-md-1 col-2 form-group">
                         <label>&nbsp;</label>
-                        <a href="{{ url('delete_product/' . $value->id . '/' . $detail->id) }}"
-                          class="btn btn-danger">X</a>
+                        <a href="javascript:void(0)" data-bs-toggle="modal"
+                          data-bs-target="#deleteData{{ $detail->id }}" class="btn btn-danger">X</a>
                       </div>
+                    </div>
+
+                    <div>
+                      <!-- Delete Product Modal Start -->
+                      <div class="modal fade" id="deleteData{{ $detail->id }}" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+
+                          <div class="modal-content">
+                            <div class="modal-header">
+                              <h5 class="modal-title" id="exampleModalLabel">
+                                Delete Data:
+                                {{ $detail->productSales->nama_barang .
+                                    ' (' .
+                                    $detail->productSales->sub_types->type_name .
+                                    ', ' .
+                                    $detail->productSales->sub_materials->nama_sub_material .
+                                    ')' }}
+                              </h5>
+                              <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                              <div class="container-fluid">
+                                <div class="form-group row">
+                                  <div class="col-md-12">
+                                    <h5>Are you sure delete this data ?</h5>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="modal-footer">
+                              <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                              <a href="{{ url('delete_product/' . $value->id . '/' . $detail->id) }}"
+                                class="btn btn-primary" type="submit">Yes, delete
+                              </a>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- Delete Product Modal End -->
                     </div>
                   @endforeach
                   <div class="form-group">
@@ -144,7 +185,8 @@
                     </div>
                     <div class="col-2 col-md-1 form-group">
                       <label for="">&nbsp;</label>
-                      <a id="addSo-edit" href="javascript:void(0)" class="btn btn-success form-control text-white">+</a>
+                      <a id="addSo-edit" href="javascript:void(0)"
+                        class="btn btn-success form-control text-white">+</a>
                     </div>
                   </div>
                 </div>

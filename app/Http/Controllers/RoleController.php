@@ -86,6 +86,6 @@ class RoleController extends Controller
     {
         RoleModel::where('id', $id)->delete();
 
-        return redirect('/roles')->with('success', 'Role Delete Success');
+        return redirect('/roles')->with('error', 'Role Delete Success');
     }
 }

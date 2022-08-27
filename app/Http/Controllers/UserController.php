@@ -94,6 +94,6 @@ class UserController extends Controller
     {
         User::where('id', $id)->delete();
 
-        return redirect('/users')->with('success', 'User Account Delete Success');
+        return redirect('/users')->with('error', 'User Account Delete Success');
     }
 }

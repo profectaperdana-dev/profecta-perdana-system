@@ -230,7 +230,7 @@ class SalesOrderController extends Controller
         $model->total_after_ppn = $total + $ppn;
         $saved = $model->save();
 
-        if (isEmpty($message_duplicate) && $saved) {
+        if (empty($message_duplicate) && $saved) {
             $message = $model->order_number . ' Sales Order has been created! Please check';
             event(new SOMessage('From: ' . Auth::user()->name,  $message));
             $notif = new NotificationsModel();
@@ -247,7 +247,7 @@ class SalesOrderController extends Controller
             $notif->status = 0;
             $notif->role_id = 5;
             $notif->save();
-            return redirect('/sales_order')->with('success', 'Some of SO add maybe Success! ' . $message_duplicate);
+            return redirect('/sales_order')->with('info', 'Some of SO add maybe Success! ' . $message_duplicate);
         } else {
             return redirect('/sales_order')->with('error', 'Add Sales Order Fail! Please make sure you have filled all the input');
         }
@@ -314,11 +314,11 @@ class SalesOrderController extends Controller
             $model->top = NULL;
             $model->duedate = NULL;
         }
-        $model->save();
+        $saved = $model->save();
 
-        if ($model->save()) {
+        if ($saved) {
             if (Gate::allows('isAdmin')) {
-                return redirect('/need_approval')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+                return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
             } else {
                 return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
             }
@@ -454,11 +454,11 @@ class SalesOrderController extends Controller
         $saved = $model->save();
 
         if ($saved && $isduplicate == false) {
-            return Redirect::back()->with('success', 'Update product in sales orders ' . $model->order_number . 'success');
+            return Redirect::back()->with('success', 'Update product in sales orders ' . $model->order_number . ' success');
         } elseif ($saved && $isduplicate == true) {
-            return Redirect::back()->with('info', 'Some of update product in sales orders ' . $model->order_number . 'maybe success, but you enter existing products. Please check again!');
+            return Redirect::back()->with('info', 'Some of update product in sales orders ' . $model->order_number . ' maybe success, but you enter existing products. Please check again!');
         } else {
-            return Redirect::back()->with('error', 'Update product in sales orders ' . $model->order_number . 'fail');
+            return Redirect::back()->with('error', 'Update product in sales orders ' . $model->order_number . ' fail');
         }
     }
     // deleteProduct() : HAPUS DATA PRODUCT PADA SO DAN UPDATE JUMLAH HARGA SERTA TOTAL
@@ -543,7 +543,7 @@ class SalesOrderController extends Controller
         $modelSalesOrder = SalesOrderModel::where('id', $id)->first();
         $modelSalesOrder->salesOrderDetailsBy()->delete();
         $modelSalesOrder->delete();
-        return redirect('/recent_sales_order')->with('success', 'Delete Data Sales Order Success');
+        return redirect('/recent_sales_order')->with('error', 'Delete Data Sales Order Success');
     }
     public function soNeedApproval()
     {

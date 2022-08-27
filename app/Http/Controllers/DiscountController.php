@@ -144,6 +144,6 @@ class DiscountController extends Controller
     {
         DiscountModel::where('id', $id)->delete();
 
-        return redirect('/discounts')->with('success', 'Discount Delete Success');
+        return redirect('/discounts')->with('error', 'Discount Delete Success');
     }
 }

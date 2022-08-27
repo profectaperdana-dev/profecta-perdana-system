@@ -72,6 +72,6 @@ class CustomerCategoriesController extends Controller
     {
         CustomerCategoriesModel::where('id', $id)->delete();
 
-        return redirect('/customer_categories')->with('success', 'Customer Categories Delete Success');
+        return redirect('/customer_categories')->with('error', 'Customer Categories Delete Success');
     }
 }
