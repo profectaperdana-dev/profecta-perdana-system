@@ -74,6 +74,6 @@ class CustomerAreasController extends Controller
     {
         CustomerAreaModel::where('id', $id)->delete();
 
-        return redirect('/customer_areas')->with('success', 'Customer Areas Delete Success');
+        return redirect('/customer_areas')->with('error', 'Customer Areas Delete Success');
     }
 }

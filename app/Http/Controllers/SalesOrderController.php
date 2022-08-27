@@ -639,8 +639,7 @@ class SalesOrderController extends Controller
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
             if (!empty($request->from_date)) {
-                $invoice = SalesOrderModel::with('customerBy')
-                    ->with('createdSalesOrder')
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 1)
                     ->where('isverified', 1)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
@@ -648,8 +647,7 @@ class SalesOrderController extends Controller
                     ->latest()
                     ->get();
             } else {
-                $invoice = SalesOrderModel::with('customerBy')
-                    ->with('createdSalesOrder')
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 1)
                     ->where('isverified', 1)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
@@ -674,10 +672,10 @@ class SalesOrderController extends Controller
                     }
                 })
 
-                ->addColumn('customerBy', function (SalesOrderModel $SalesOrderModel) {
+                ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->customerBy->name_cust;
                 })
-                ->addColumn('createdSalesOrder', function (SalesOrderModel $SalesOrderModel) {
+                ->editColumn('created_by', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->createdSalesOrder->name;
                 })
                 ->addIndexColumn() //memberikan penomoran
