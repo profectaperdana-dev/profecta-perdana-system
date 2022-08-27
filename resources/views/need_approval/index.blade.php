@@ -108,7 +108,7 @@
                             <!-- Detail Product Modal Start -->
                             <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
                               aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                 <form>
                                   <div class="modal-content">
                                     <div class="modal-header">
