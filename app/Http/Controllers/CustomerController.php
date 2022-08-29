@@ -245,7 +245,7 @@ class CustomerController extends Controller
             File::delete($path);
         }
         $customer_current->delete();
-        return redirect('/customers')->with('success', 'Customer Delete Success');
+        return redirect('/customers')->with('error', 'Customer Delete Success');
     }
 
     public function getProvince()

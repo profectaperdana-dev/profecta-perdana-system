@@ -58,6 +58,8 @@
                                 data-feather="settings"></i></a>
                             <div class="dropdown-menu" aria-labelledby="">
                               <h5 class="dropdown-header">Actions</h5>
+                              <a class="dropdown-item" href="{{ url('trace_fouls/' . $value->customers_id) }}">Trace
+                                Fouls</a>
                               <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
                                 data-bs-target="#detailData{{ $value->id }}">Products
                                 Detail</a>
@@ -108,7 +110,7 @@
                             <!-- Detail Product Modal Start -->
                             <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
                               aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg" role="document">
+                              <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                 <form>
                                   <div class="modal-content">
                                     <div class="modal-header">

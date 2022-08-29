@@ -43,7 +43,9 @@ function checkOverPlafone($customer_id)
         $selected_customer->isOverPlafoned = 1;
         $selected_customer->label = 'Bad Customer';
         $selected_customer->save();
+        return true;
     }
+    return false;
 }
 
 function checkLastTransaction()

@@ -277,7 +277,7 @@
       </div>
     </div>
     <div class="row">
-      <div class="form-group col-md-4  text-center">
+      <div class="form-group col-md-4 offset-md-4 text-center">
         <label id="previewLabel" hidden>Preview Image</label>
         <img src="#" id="previewimg" class="img-fluid shadow-lg" style="width:350px;" hidden />
       </div>

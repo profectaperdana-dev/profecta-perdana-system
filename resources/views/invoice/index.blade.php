@@ -135,6 +135,7 @@
                                 name: 'DT_Row_Index',
                                 "className": "text-center",
                                 orderable: false,
+                                searchable: false
                             },
                             {
                                 data: 'order_number',
@@ -152,16 +153,16 @@
 
                             },
                             {
-                                data: 'customerBy',
-                                name: 'customerBy.name_cust',
+                                data: 'customers_id',
+                                name: 'customers_id',
                             },
                             {
                                 data: 'remark',
                                 name: 'remark',
                             },
                             {
-                                data: 'createdSalesOrder',
-                                name: 'createdSalesOrder.name',
+                                data: 'created_by',
+                                name: 'created_by',
                             },
                             {
                                 data: 'top',

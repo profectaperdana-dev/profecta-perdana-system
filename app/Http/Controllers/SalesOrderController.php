@@ -230,7 +230,7 @@ class SalesOrderController extends Controller
         $model->total_after_ppn = $total + $ppn;
         $saved = $model->save();
 
-        if (isEmpty($message_duplicate) && $saved) {
+        if (empty($message_duplicate) && $saved) {
             $message = $model->order_number . ' Sales Order has been created! Please check';
             event(new SOMessage('From: ' . Auth::user()->name,  $message));
             $notif = new NotificationsModel();
@@ -247,7 +247,7 @@ class SalesOrderController extends Controller
             $notif->status = 0;
             $notif->role_id = 5;
             $notif->save();
-            return redirect('/sales_order')->with('success', 'Some of SO add maybe Success! ' . $message_duplicate);
+            return redirect('/sales_order')->with('info', 'Some of SO add maybe Success! ' . $message_duplicate);
         } else {
             return redirect('/sales_order')->with('error', 'Add Sales Order Fail! Please make sure you have filled all the input');
         }
@@ -314,11 +314,11 @@ class SalesOrderController extends Controller
             $model->top = NULL;
             $model->duedate = NULL;
         }
-        $model->save();
+        $saved = $model->save();
 
-        if ($model->save()) {
+        if ($saved) {
             if (Gate::allows('isAdmin')) {
-                return redirect('/need_approval')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+                return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
             } else {
                 return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
             }
@@ -454,11 +454,11 @@ class SalesOrderController extends Controller
         $saved = $model->save();
 
         if ($saved && $isduplicate == false) {
-            return Redirect::back()->with('success', 'Update product in sales orders ' . $model->order_number . 'success');
+            return Redirect::back()->with('success', 'Update product in sales orders ' . $model->order_number . ' success');
         } elseif ($saved && $isduplicate == true) {
-            return Redirect::back()->with('info', 'Some of update product in sales orders ' . $model->order_number . 'maybe success, but you enter existing products. Please check again!');
+            return Redirect::back()->with('info', 'Some of update product in sales orders ' . $model->order_number . ' maybe success, but you enter existing products. Please check again!');
         } else {
-            return Redirect::back()->with('error', 'Update product in sales orders ' . $model->order_number . 'fail');
+            return Redirect::back()->with('error', 'Update product in sales orders ' . $model->order_number . ' fail');
         }
     }
     // deleteProduct() : HAPUS DATA PRODUCT PADA SO DAN UPDATE JUMLAH HARGA SERTA TOTAL
@@ -543,7 +543,7 @@ class SalesOrderController extends Controller
         $modelSalesOrder = SalesOrderModel::where('id', $id)->first();
         $modelSalesOrder->salesOrderDetailsBy()->delete();
         $modelSalesOrder->delete();
-        return redirect('/recent_sales_order')->with('success', 'Delete Data Sales Order Success');
+        return redirect('/recent_sales_order')->with('error', 'Delete Data Sales Order Success');
     }
     public function soNeedApproval()
     {
@@ -586,8 +586,8 @@ class SalesOrderController extends Controller
             $selected_customer->last_transaction = $selected_so->order_date;
             $selected_customer->save();
         } else {
-            checkOverPlafone($selected_so->customers_id);
-            if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1 && $getCredential->label != 'Bad Customer') {
+            $checkoverplafone = checkOverPlafone($selected_so->customers_id);
+            if ($getCredential->isOverDue != 1 & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
                 $selected_so->isapprove = 1;
                 $so_number = $selected_so->order_number;
                 $so_number = str_replace('SOPP', 'IVPP', $so_number);
@@ -639,8 +639,7 @@ class SalesOrderController extends Controller
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
             if (!empty($request->from_date)) {
-                $invoice = SalesOrderModel::with('customerBy')
-                    ->with('createdSalesOrder')
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 1)
                     ->where('isverified', 1)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
@@ -648,8 +647,7 @@ class SalesOrderController extends Controller
                     ->latest()
                     ->get();
             } else {
-                $invoice = SalesOrderModel::with('customerBy')
-                    ->with('createdSalesOrder')
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 1)
                     ->where('isverified', 1)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
@@ -660,7 +658,7 @@ class SalesOrderController extends Controller
                 ->editColumn('payment_method', function ($data) {
                     if ($data->payment_method == 1) {
                         return 'COD';
-                    } elseif ($data->payment_method == 1) {
+                    } elseif ($data->payment_method == 2) {
                         return 'CBD';
                     } else {
                         return 'Credit';
@@ -674,10 +672,10 @@ class SalesOrderController extends Controller
                     }
                 })
 
-                ->addColumn('customerBy', function (SalesOrderModel $SalesOrderModel) {
+                ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->customerBy->name_cust;
                 })
-                ->addColumn('createdSalesOrder', function (SalesOrderModel $SalesOrderModel) {
+                ->editColumn('created_by', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->createdSalesOrder->name;
                 })
                 ->addIndexColumn() //memberikan penomoran
@@ -736,5 +734,29 @@ class SalesOrderController extends Controller
         $selected_so->save();
 
         return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
+    }
+
+    public function traceFouls($id)
+    {
+        $selected_customer = CustomerModel::where('id', $id)->firstOrFail();
+        $selected_inv = SalesOrderModel::where('customers_id', $id)
+            ->where('isPaid', 0)
+            ->where('isverified', 1)
+            ->latest()
+            ->get();
+
+        $total_credit = 0;
+        foreach ($selected_inv as $invoice) {
+            $total_credit = $total_credit + $invoice->total_after_ppn;
+        }
+
+        $data = [
+            'title' => 'Tracing Fouls for ' . $selected_customer->name_cust,
+            'all_inv' => $selected_inv,
+            'selected_customer' => $selected_customer,
+            'total_credit' => $total_credit
+        ];
+
+        return view('need_approval.trace_fouls', $data);
     }
 }
