@@ -67,7 +67,7 @@
                       @enderror
                     </div>
                     <div class="form-group col-md-3">
-                      <label>Discount</label>
+                      <label>Disc(%)</label>
                       <input type="number" name="discountFields[0][discount]" id="discount"
                         class="form-control @error('discountFields[0][discount]') is-invalid @enderror"
                         placeholder="Enter Discount" required>
@@ -293,7 +293,7 @@
             '][product_id]"' +
             'class="form-control product-append-discount" required> <option value=""> Choose Product </option> </select>' +
             '</div> <div class="form-group col-3">' +
-            '<label> Discount </label> <input type="number" name="discountFields[' +
+            '<label>Disc(%)</label> <input type="number" name="discountFields[' +
             i +
             '][discount]" id="discount"' +
             'class="form-control" placeholder="Enter Discount" required>' +

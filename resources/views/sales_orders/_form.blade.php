@@ -76,7 +76,7 @@
         </div>
 
         <div class="col-3 col-md-3 form-group">
-          <label>Discount%</label>
+          <label>Disc(%)</label>
           <input class="form-control discount-append" name="soFields[0][discount]" id="" readonly>
         </div>
         <div class="col-2 col-md-1 form-group">

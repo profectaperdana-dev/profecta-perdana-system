@@ -51,7 +51,7 @@
         @enderror
       </div>
       <div class="form-group col-md-3">
-        <label>City</label>
+        <label>District</label>
         <select name="city" class="form-control city @error('city') is-invalid @enderror" required>
           @if ($customer->city != null)
             <option selected value="{{ $customer->city }}">{{ $customer->city }}
@@ -65,7 +65,7 @@
         @enderror
       </div>
       <div class="form-group col-md-3">
-        <label>District</label>
+        <label>Sub-district</label>
         <select name="district" class="form-control district @error('district') is-invalid @enderror" required>
           @if ($customer->district != null)
             <option selected value="{{ $customer->district }}">{{ $customer->district }}
@@ -79,13 +79,9 @@
         @enderror
       </div>
       <div class="form-group col-md-3">
-        <label>Village</label>
-        <select name="village" class="form-control village @error('village') is-invalid @enderror" required>
-          @if ($customer->village != null)
-            <option selected value="{{ $customer->village }}">{{ $customer->village }}
-            </option>
-          @endif
-        </select>
+        <label>City</label>
+        <input class="form-control" type="text" name="village" value="{{ old('village', $customer->village) }}"
+          class="form-control @error('village') is-invalid @enderror" placeholder="Customer City" required>
         @error('village')
           <div class="invalid-feedback">
             {{ $message }}
