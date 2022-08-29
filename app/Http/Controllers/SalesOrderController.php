@@ -733,6 +733,8 @@ class SalesOrderController extends Controller
         $selected_so->isPaid = 1;
         $selected_so->save();
 
+        $checkoverplafone = checkOverPlafone($selected_so->customers_id);
+
         return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
     }
 
