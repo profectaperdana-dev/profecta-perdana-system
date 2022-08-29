@@ -25,6 +25,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
 use function App\Helpers\checkOverDue;
+use function App\Helpers\checkOverDueByCustomer;
 use function App\Helpers\checkOverPlafone;
 use function App\Helpers\setOverDue;
 use function App\Helpers\setOverPlafone;
@@ -587,7 +588,8 @@ class SalesOrderController extends Controller
             $selected_customer->save();
         } else {
             $checkoverplafone = checkOverPlafone($selected_so->customers_id);
-            if ($getCredential->isOverDue != 1 & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
+            $checkoverdue = checkOverDueByCustomer($selected_so->customers_id);
+            if ($checkoverdue == false & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
                 $selected_so->isapprove = 1;
                 $so_number = $selected_so->order_number;
                 $so_number = str_replace('SOPP', 'IVPP', $so_number);
@@ -734,6 +736,7 @@ class SalesOrderController extends Controller
         $selected_so->save();
 
         $checkoverplafone = checkOverPlafone($selected_so->customers_id);
+        checkOverDueByCustomer($selected_so->customers_id);
 
         return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
     }
