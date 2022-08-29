@@ -1,13 +1,14 @@
-@can('isVerificator')
+@can('isAdmin')
     <script>
-        Echo.channel('realtimeNotif').listen('SOMessage', (e) => {
-            let sound = new Audio("{{ asset('sounds/so-created.wav') }}");
-            sound.play();
+        Echo.channel('approval_notif').listen('ApprovalMessage', (e) => {
+            let sound_approv = new Audio("{{ asset('sounds/sounds.wav') }}");
+
+            sound_approv.play();
             $.notify({
                 title: e.title,
                 message: e.message
             }, {
-                type: 'primary',
+                type: 'warning',
                 allow_dismiss: true,
                 newest_on_top: true,
                 mouse_over: true,
@@ -31,17 +32,16 @@
             })
         });
     </script>
-@endcan
-@can('isAdmin')
+@elsecan('isVerificator')
     <script>
-        Echo.channel('approval_notify').listen('ApprovalMessage', (e) => {
+        Echo.channel('realtimeNotif').listen('SOMessage', (e) => {
             let sound = new Audio("{{ asset('sounds/so-created.wav') }}");
             sound.play();
             $.notify({
                 title: e.title,
                 message: e.message
             }, {
-                type: 'danger',
+                type: 'primary',
                 allow_dismiss: true,
                 newest_on_top: true,
                 mouse_over: true,

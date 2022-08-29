@@ -618,7 +618,7 @@ class SalesOrderController extends Controller
                 $notif = new NotificationsModel();
                 $notif->message = $message;
                 $notif->status = 0;
-                $notif->role_id = 1;
+                $notif->role_id = 2;
                 $notif->save();
             }
         }
