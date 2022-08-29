@@ -586,8 +586,8 @@ class SalesOrderController extends Controller
             $selected_customer->last_transaction = $selected_so->order_date;
             $selected_customer->save();
         } else {
-            checkOverPlafone($selected_so->customers_id);
-            if ($getCredential->isOverDue != 1 && $getCredential->isOverPlafoned != 1 && $getCredential->label != 'Bad Customer') {
+            $checkoverplafone = checkOverPlafone($selected_so->customers_id);
+            if ($getCredential->isOverDue != 1 & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
                 $selected_so->isapprove = 1;
                 $so_number = $selected_so->order_number;
                 $so_number = str_replace('SOPP', 'IVPP', $so_number);
@@ -658,7 +658,7 @@ class SalesOrderController extends Controller
                 ->editColumn('payment_method', function ($data) {
                     if ($data->payment_method == 1) {
                         return 'COD';
-                    } elseif ($data->payment_method == 1) {
+                    } elseif ($data->payment_method == 2) {
                         return 'CBD';
                     } else {
                         return 'Credit';
@@ -734,5 +734,29 @@ class SalesOrderController extends Controller
         $selected_so->save();
 
         return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
+    }
+
+    public function traceFouls($id)
+    {
+        $selected_customer = CustomerModel::where('id', $id)->firstOrFail();
+        $selected_inv = SalesOrderModel::where('customers_id', $id)
+            ->where('isPaid', 0)
+            ->where('isverified', 1)
+            ->latest()
+            ->get();
+
+        $total_credit = 0;
+        foreach ($selected_inv as $invoice) {
+            $total_credit = $total_credit + $invoice->total_after_ppn;
+        }
+
+        $data = [
+            'title' => 'Tracing Fouls for ' . $selected_customer->name_cust,
+            'all_inv' => $selected_inv,
+            'selected_customer' => $selected_customer,
+            'total_credit' => $total_credit
+        ];
+
+        return view('need_approval.trace_fouls', $data);
     }
 }

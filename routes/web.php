@@ -20,6 +20,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
+use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,6 +71,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/invoice/{id}/mark_as_paid', [SalesOrderController::class, 'updatePaid']);
     route::post('/update_product/{id}/add_product', [SalesOrderController::class, 'addProduct']);
     Route::get('/sales_orders/approve/{id}', [SalesOrderController::class, 'approve']);
+    Route::get('/trace_fouls/{id}', [SalesOrderController::class, 'traceFouls']);
 
 
 

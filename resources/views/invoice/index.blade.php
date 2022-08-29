@@ -235,7 +235,7 @@
         $('#refresh').click(function() {
           $('#from_date').val('');
           $('#to_date').val('');
-          $('#order_table').DataTable().destroy();
+          $('#example1').DataTable().destroy();
           load_data();
         });
 
