@@ -66,8 +66,9 @@ class CustomerController extends Controller
     {
         $validated_data = $request->validate([
             'name_cust' => 'required',
-            'phone_cust' => 'required',
             'id_card_number' => 'required',
+            'phone_cust' => 'required',
+            'office_number' => 'required',
             'province' => 'required',
             'city' => 'required',
             'district' => 'required',
@@ -164,8 +165,9 @@ class CustomerController extends Controller
         }
         $validated_data = $request->validate([
             'name_cust' => 'required',
-            'phone_cust' => 'required',
             'id_card_number' => 'required',
+            'phone_cust' => 'required',
+            'office_number' => 'required',
             'province' => 'required',
             'city' => 'required',
             'district' => 'required',
@@ -187,6 +189,7 @@ class CustomerController extends Controller
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
         $customer_current->name_cust = $validated_data['name_cust'];
         $customer_current->phone_cust = $validated_data['phone_cust'];
+        $customer_current->office_number = $validated_data['office_number'];
         $customer_current->id_card_number = $validated_data['id_card_number'];
         if ($customer_current->province != $validated_data['province']) {
             $province_name = $this->getNameProvince($validated_data['province']);

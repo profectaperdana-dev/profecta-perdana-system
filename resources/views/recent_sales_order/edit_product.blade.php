@@ -51,7 +51,7 @@
                             </option>
                           @endif
                         </select>
-                        @error('editProduct[' . $loop->index . '][products_id]s')
+                        @error('editProduct[' . $loop->index . '][products_id]')
                           <div class="invalid-feedback">
                             {{ $message }}
                           </div>

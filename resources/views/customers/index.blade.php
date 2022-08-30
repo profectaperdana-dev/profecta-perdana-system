@@ -138,12 +138,20 @@
                                     </div>
 
                                     <div class="form-group row font-weight-bold">
-                                      <div class="form-group col-md-4">
+                                      <div class="form-group col-md-6">
+                                        <label>
+                                          Office Phone Customer</label>
+                                        <input type="text" class="form-control" placeholder="Serial Number" readonly
+                                          value="{{ $value->office_number }}">
+                                      </div>
+                                      <div class="form-group col-md-6">
                                         <label>
                                           Phone Customer</label>
                                         <input type="text" class="form-control" placeholder="Serial Number" readonly
                                           value="{{ $value->phone_cust }}">
                                       </div>
+                                    </div>
+                                    <div class="form-group row font-weight-bold">
                                       <div class="form-group col-md-4">
                                         <label>
                                           Customer Email</label>
@@ -156,22 +164,21 @@
                                         <input type="text" class="form-control" placeholder="Serial Number" readonly
                                           value="{{ $value->category_name }}">
                                       </div>
-                                    </div>
-
-                                    <div class="form-group row font-weight-bold">
-
                                       <div class="form-group col-md-4">
                                         <label>Customer Area
                                         </label>
                                         <input type="text" readonly class="form-control"
                                           value="{{ $value->area_name }}">
                                       </div>
-                                      <div class="form-group col-md-4">
+                                    </div>
+
+                                    <div class="form-group row font-weight-bold">
+                                      <div class="form-group col-md-6">
                                         <label>Coordinate</label>
                                         <input type="text" class="form-control" readonly
                                           value="{{ $value->coordinate }}">
                                       </div>
-                                      <div class="form-group col-md-4">
+                                      <div class="form-group col-md-6">
                                         <label>Credit Limit</label>
                                         <input type="text" class="form-control" readonly
                                           value="{{ $value->credit_limit }}">

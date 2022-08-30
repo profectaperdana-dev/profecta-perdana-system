@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label>Name</label>
         <input type="text" name="name_cust" value="{{ old('name_cust', $customer->name_cust) }}"
           class="form-control
@@ -13,22 +13,35 @@
           </div>
         @enderror
       </div>
-      <div class="form-group col-md-4">
-        <label>Phone Number</label>
-        <input type="text" name="phone_cust" value="{{ old('phone_cust', $customer->phone_cust) }}"
-          class="form-control @error('phone_cust') is-invalid @enderror" placeholder="Customer Phone Number" required>
-        @error('phone_cust')
-          <div class="invalid-feedback">
-            {{ $message }}
-          </div>
-        @enderror
-      </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label>ID Card Number</label>
         <input type="text" name="id_card_number" value="{{ old('id_card_number', $customer->id_card_number) }}"
           class="form-control @error('id_card_number') is-invalid @enderror" placeholder="Customer ID Card Number"
           required>
         @error('id_card_number')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Office Phone Number</label>
+        <input type="text" name="office_number" value="{{ old('office_number', $customer->office_number) }}"
+          class="form-control @error('office_number') is-invalid @enderror" placeholder="Customer Office Phone Number"
+          required>
+        @error('office_number')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="form-group col-md-6">
+        <label>Person Phone Number</label>
+        <input type="text" name="phone_cust" value="{{ old('phone_cust', $customer->phone_cust) }}"
+          class="form-control @error('phone_cust') is-invalid @enderror" placeholder="Customer Phone Number" required>
+        @error('phone_cust')
           <div class="invalid-feedback">
             {{ $message }}
           </div>

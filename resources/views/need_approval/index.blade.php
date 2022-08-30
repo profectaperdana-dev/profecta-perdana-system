@@ -45,7 +45,10 @@
                         <th>#</th>
                         <th>SO Number</th>
                         <th>Order Date</th>
+                        <th>Due Date</th>
                         <th>Customer</th>
+                        <th>Overdue Status</th>
+                        <th>Overplafond Status</th>
                         <th>Approve</th>
                       </tr>
                     </thead>
@@ -78,7 +81,7 @@
                           <!-- Approval Product Modal Start -->
                           <div class="modal fade" id="approveData{{ $value->id }}" tabindex="-1" role="dialog"
                             aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog " role="document">
+                            <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                               <div class="modal-content">
                                 <div class="modal-header">
                                   <h5 class="modal-title" id="exampleModalLabel">Sales
@@ -91,7 +94,94 @@
                                 <div class="modal-body">
                                   <div class="container-fluid">
                                     <div class="form-group row">
-                                      <h5> Are you sure to approval this SO ?</h5>
+                                      @foreach ($value->salesOrderDetailsBy as $detail)
+                                        <div class="form-group col-4">
+                                          <label>Product</label>
+                                          <select name="editProduct[{{ $loop->index }}][products_id]" id=""
+                                            required
+                                            class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
+                                            @if ($detail->products_id != null)
+                                              <option value="{{ $detail->products_id }}" selected>
+                                                {{ $detail->productSales->nama_barang .
+                                                    ' (' .
+                                                    $detail->productSales->sub_types->type_name .
+                                                    ', ' .
+                                                    $detail->productSales->sub_materials->nama_sub_material .
+                                                    ')' }}
+                                              </option>
+                                            @endif
+                                          </select>
+                                          @error('editProduct[' . $loop->index . '][products_id]')
+                                            <div class="invalid-feedback">
+                                              {{ $message }}
+                                            </div>
+                                          @enderror
+                                        </div>
+
+                                        <div class="col-3 col-md-3 form-group">
+                                          <label>Qty</label>
+                                          <input type="text" class="form-control cekQty-edit"
+                                            name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}">
+                                          <small class="text-danger qty-warning" hidden>The number of items exceeds the
+                                            stock</small>
+                                          @error('top')
+                                            <div class="invalid-feedback">
+                                              {{ $message }}
+                                            </div>
+                                          @enderror
+                                        </div>
+
+                                        <div class="col-3 col-md-3 form-group">
+                                          <label>Discount%</label>
+                                          <input type="text" class="form-control" placeholder="Product Name"
+                                            name="editProduct[{{ $loop->index }}][discount]"
+                                            value="{{ $detail->discount }}">
+                                          @error('top')
+                                            <div class="invalid-feedback">
+                                              {{ $message }}
+                                            </div>
+                                          @enderror
+                                        </div>
+
+                                        @if ($loop->index == 0)
+                                          <div class="col-2 form-group">
+                                            <label for="">&nbsp;</label>
+                                            <a id="addSo-edit" href="javascript:void(0)"
+                                              class="btn btn-success form-control text-white">+</a>
+                                          </div>
+                                        @else
+                                          <div class="col-2 form-group">
+                                            <label for="">&nbsp;</label>
+                                            <a id="addSo-edit" href="javascript:void(0)"
+                                              class="btn btn-danger form-control text-white">-</a>
+                                          </div>
+                                        @endif
+                                      @endforeach
+                                    </div>
+                                    <hr>
+                                    <div class="form-group row">
+                                      <div class="col-12 form-group">
+                                        <label>Remarks</label>
+                                        <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
+                                      </div>
+                                    </div>
+                                    <div class="form-group row">
+                                      <div class="form-group col-lg-4">
+                                        <label>PPN</label>
+                                        <input class="form-control" value="{{ 'Rp. ' . $value->ppn }}" id=""
+                                          readonly>
+                                      </div>
+
+                                      <div class="col-lg-4 form-group">
+                                        <label>Total (Before PPN)</label>
+                                        <input class="form-control" value="{{ 'Rp. ' . $value->total }}" readonly>
+                                      </div>
+
+                                      <div class="col-lg-4 form-group">
+                                        <label>Total (After PPN)</label>
+                                        <input class="form-control" value="{{ 'Rp. ' . $value->total_after_ppn }}"
+                                          readonly>
+                                      </div>
                                     </div>
 
                                   </div>
@@ -99,7 +189,8 @@
                                 </div>
                                 <div class="modal-footer">
                                   <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                                  <a class="btn btn-primary" href="{{ url('/sales_orders/approve/' . $value->id) }}">Yes,
+                                  <a class="btn btn-primary"
+                                    href="{{ url('/sales_orders/approve/' . $value->id) }}">Yes,
                                     approve
                                   </a>
                                 </div>
@@ -107,84 +198,20 @@
                             </div>
                             <!-- Approval Product Modal End -->
                             <td>{{ $loop->iteration }}</td>
-                            <!-- Detail Product Modal Start -->
-                            <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
-                              aria-labelledby="exampleModalLabel" aria-hidden="true">
-                              <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
-                                <form>
-                                  <div class="modal-content">
-                                    <div class="modal-header">
-                                      <h5 class="modal-title" id="exampleModalLabel">
-                                        Product Detail:
-                                        {{ $value->order_number }}</h5>
-                                      <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                      <div class="container-fluid">
-                                        <div class="form-group row">
-                                          @foreach ($value->salesOrderDetailsBy as $detail)
-                                            <div class="form-group col-4">
-                                              <label>Product</label>
-                                              <input class="form-control"
-                                                value="{{ $detail->productSales->nama_barang .
-                                                    ' (' .
-                                                    $detail->productSales->sub_types->type_name .
-                                                    ', ' .
-                                                    $detail->productSales->sub_materials->nama_sub_material .
-                                                    ')' }}"
-                                                id="" readonly>
-                                            </div>
-
-                                            <div class="col-3 col-md-3 form-group">
-                                              <label>Qty</label>
-                                              <input class="form-control" value="{{ $detail->qty }}" readonly>
-                                            </div>
-
-                                            <div class="col-3 col-md-3 form-group">
-                                              <label>Discount%</label>
-                                              <input class="form-control" value="{{ $detail->discount }}" readonly>
-                                            </div>
-                                          @endforeach
-                                        </div>
-                                        <hr>
-                                        <div class="form-group row">
-                                          <div class="col-12 form-group">
-                                            <label>Remarks</label>
-                                            <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
-                                          </div>
-                                        </div>
-                                        <div class="form-group row">
-                                          <div class="form-group col-lg-4">
-                                            <label>PPN</label>
-                                            <input class="form-control" value="{{ 'Rp. ' . $value->ppn }}"
-                                              id="" readonly>
-                                          </div>
-
-                                          <div class="col-lg-4 form-group">
-                                            <label>Total (Before PPN)</label>
-                                            <input class="form-control" value="{{ 'Rp. ' . $value->total }}" readonly>
-                                          </div>
-
-                                          <div class="col-lg-4 form-group">
-                                            <label>Total (After PPN)</label>
-                                            <input class="form-control" value="{{ 'Rp. ' . $value->total_after_ppn }}"
-                                              readonly>
-                                          </div>
-                                        </div>
-                                      </div>
-                                      <div class="modal-footer">
-                                        <button class="btn btn-danger" type="button"
-                                          data-bs-dismiss="modal">Close</button>
-                                      </div>
-                                    </div>
-                                </form>
-                              </div>
-                            </div>
-                            <!-- Detail Product Modal End -->
                             <td>{{ $value->order_number }}</td>
-                            <td>{{ $value->order_date }}</td>
+                            <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
+                            <td>{{ date('d-M-Y', strtotime($value->duedate)) }}</td>
                             <td>{{ $value->customerBy->name_cust }}</td>
+                            @if ($value->customerBy->isOverDue == 1)
+                              <td><span class="badge badge-pill badge-danger text-white">Yes</span></td>
+                            @else
+                              <td><span class="badge badge-pill badge-success text-white">No</span></td>
+                            @endif
+                            @if ($value->customerBy->isOverPlafoned == 1)
+                              <td><span class="badge badge-pill badge-danger text-white">Yes</span></td>
+                            @else
+                              <td><span class="badge badge-pill badge-success text-white">No</span></td>
+                            @endif
                             <td class="text-center"><a class="btn btn-primary btn-sm" href="#"
                                 data-bs-toggle="modal" data-original-title="test"
                                 data-bs-target="#approveData{{ $value->id }}">Approval
@@ -227,6 +254,86 @@
                               </div>
                             </div>
                             <!-- Delete Product Modal End -->
+
+                            <div>
+                              <!-- Detail Product Modal Start -->
+                              <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
+                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+                                  <form>
+                                    <div class="modal-content">
+                                      <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">
+                                          Product Detail:
+                                          {{ $value->order_number }}</h5>
+                                        <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                          aria-label="Close"></button>
+                                      </div>
+                                      <div class="modal-body">
+                                        <div class="container-fluid">
+                                          <div class="form-group row">
+                                            @foreach ($value->salesOrderDetailsBy as $detail)
+                                              <div class="form-group col-4">
+                                                <label>Product</label>
+                                                <input class="form-control"
+                                                  value="{{ $detail->productSales->nama_barang .
+                                                      ' (' .
+                                                      $detail->productSales->sub_types->type_name .
+                                                      ', ' .
+                                                      $detail->productSales->sub_materials->nama_sub_material .
+                                                      ')' }}"
+                                                  id="" readonly>
+                                              </div>
+
+                                              <div class="col-3 col-md-3 form-group">
+                                                <label>Qty</label>
+                                                <input class="form-control" value="{{ $detail->qty }}" readonly>
+                                              </div>
+
+                                              <div class="col-3 col-md-3 form-group">
+                                                <label>Discount%</label>
+                                                <input class="form-control" value="{{ $detail->discount }}" readonly>
+                                              </div>
+                                            @endforeach
+                                          </div>
+                                          <hr>
+                                          <div class="form-group row">
+                                            <div class="col-12 form-group">
+                                              <label>Remarks</label>
+                                              <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
+                                            </div>
+                                          </div>
+                                          <div class="form-group row">
+                                            <div class="form-group col-lg-4">
+                                              <label>PPN</label>
+                                              <input class="form-control" value="{{ 'Rp. ' . $value->ppn }}"
+                                                id="" readonly>
+                                            </div>
+
+                                            <div class="col-lg-4 form-group">
+                                              <label>Total (Before PPN)</label>
+                                              <input class="form-control" value="{{ 'Rp. ' . $value->total }}"
+                                                readonly>
+                                            </div>
+
+                                            <div class="col-lg-4 form-group">
+                                              <label>Total (After PPN)</label>
+                                              <input class="form-control"
+                                                value="{{ 'Rp. ' . $value->total_after_ppn }}" readonly>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button class="btn btn-danger" type="button"
+                                            data-bs-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                  </form>
+                                </div>
+                              </div>
+                              <!-- Detail Product Modal End -->
+                            </div>
+
 
 
                         </tr>
