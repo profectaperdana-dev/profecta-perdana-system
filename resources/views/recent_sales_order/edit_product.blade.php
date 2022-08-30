@@ -153,43 +153,7 @@
               enctype="multipart/form-data" id="">
               @csrf
               <div class="col-md-12">
-                <div class="row font-weight-bold " id="formSo-edit">
-                  <div class="form-group row">
-                    <input type="hidden" id="customer_selected" value="{{ $value->customers_id }}">
-                    <div class="form-group col-md-7 col-4">
-                      <label>Product</label>
-                      <select name="soFields[0][product_id]" class="form-control productSo-edit" required>
-                        <option value="">Choose Product</option>
-                      </select>
-                      @error('soFields[0][product_id]')
-                        <div class="invalid-feedback">
-                          {{ $message }}
-                        </div>
-                      @enderror
-                    </div>
-                    <div class="col-3 col-md-2 form-group">
-                      <label>Qty</label>
-                      <input class="form-control cekQty-edit" required name="soFields[0][qty]" id="">
-                      <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
-                      @error('soFields[0][qty]')
-                        <div class="invalid-feedback">
-                          {{ $message }}
-                        </div>
-                      @enderror
-                    </div>
 
-                    <div class="col-3 col-md-2 form-group">
-                      <label>Discount%</label>
-                      <input class="form-control discount-append-edit" name="soFields[0][discount]" id=""
-                        readonly>
-                    </div>
-                    <div class="col-2 col-md-1 form-group">
-                      <label for="">&nbsp;</label>
-                      <a id="addSo-edit" href="javascript:void(0)"
-                        class="btn btn-success form-control text-white">+</a>
-                    </div>
-                  </div>
-                </div>
                 <div class="form-group">
                   <button type="reset" class="btn btn-warning">Reset</button>
                   <button type="submit" class="btn btn-primary">Add</button>
@@ -266,7 +230,8 @@
         });
         $(document).on("input", ".cekQty-edit", function() {
           let qtyValue = $(this).val();
-          let product_id = $(this).parents('.form-group').siblings('.form-group').find('.productSo-edit').val();
+          let product_id = $(this).parents('.form-group').siblings('.form-group').find(
+            '.productSo-edit').val();
 
           $.ajax({
             context: this,

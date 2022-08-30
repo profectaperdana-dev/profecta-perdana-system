@@ -112,8 +112,10 @@ class SalesOrderController extends Controller
             ->get();
 
         checkOverDue();
+        $customer = CustomerModel::where('status', 1)->latest()->get();
 
-        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt'));
+
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'customer'));
     }
 
     /**
@@ -265,65 +267,6 @@ class SalesOrderController extends Controller
     // updateSo() : PROSES UPDATE SALES ORDER TANPA PRODUCT
     public function updateSo(Request $request, $id)
     {
-        $request->validate([
-            "customer_id" => "required|numeric",
-            "payment_method" => "required|numeric",
-        ]);
-        $model = SalesOrderModel::find($id);
-        // if ($request->get('customer_id') != $model->customers_id) {
-
-        $sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
-
-        $customer_id = $request->get('customer_id');
-        $total = 0;
-
-        foreach ($sod as $key => $item) {
-            $discount = DiscountModel::where('customer_id', $customer_id)
-                ->where('product_id', $item->products_id)->first();
-            $discountValue = 0;
-            if (!isset($discount)) {
-                $discountValue = 0;
-            } else {
-                $discountValue = $discount->discount;
-            }
-            $produkDiscount = SalesOrderDetailModel::where('products_id', $item->products_id)->where('sales_orders_id', $id)->first();
-            $produkDiscount->discount = $discountValue;
-            $dataHarga = ProductModel::select('harga_jual_nonretail')->where('id', $item->products_id)->first();
-            $diskon =   $produkDiscount->discount / 100;
-            $hargaDiskon = $dataHarga->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = $dataHarga->harga_jual_nonretail -  $hargaDiskon;
-            $total = $total + ($hargaAfterDiskon * $produkDiscount->qty);
-            $produkDiscount->save();
-        }
-
-        $ppn = 0.11 * $total;
-        $model->ppn = $ppn;
-        $model->total = $total;
-        $model->total_after_ppn = $total + $ppn;
-        // dd($arrayDiscount);
-        // }
-        $model->customers_id = $request->get('customer_id');
-        $model->remark = $request->get('remark');
-        $model->payment_method = $request->get('payment_method');
-        if ($request->get('payment_method') == 3) {
-            $top = CustomerModel::where('id', $model->customers_id)->first();
-            $model->top = $top->due_date;
-            $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
-            $dt = $dt->modify("+" . $model->top . " days");
-            $model->duedate = $dt;
-        } else {
-            $model->top = NULL;
-            $model->duedate = NULL;
-        }
-        $saved = $model->save();
-
-        if ($saved) {
-            if (Gate::allows('isAdmin')) {
-                return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
-            } else {
-                return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
-            }
-        }
     }
 
 
@@ -554,8 +497,64 @@ class SalesOrderController extends Controller
 
         return view('need_approval.index', compact('title', 'dataInvoice'));
     }
-    public function verify($id)
+    public function verify(Request $request, $id)
     {
+        // EDIT SO
+        $request->validate([
+            "customer_id" => "required|numeric",
+            "payment_method" => "required|numeric",
+        ]);
+        // dd($request->all());
+
+        $model = SalesOrderModel::find($id);
+        $sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
+        $customer_id = $request->get('customer_id');
+        $total = 0;
+        foreach ($sod as $key => $item) {
+            $discount = DiscountModel::where('customer_id', $customer_id)
+                ->where('product_id', $item->products_id)->first();
+            $discountValue = 0;
+            if (!isset($discount)) {
+                $discountValue = 0;
+            } else {
+                $discountValue = $discount->discount;
+            }
+            $produkDiscount = SalesOrderDetailModel::where('products_id', $item->products_id)->where('sales_orders_id', $id)->first();
+            $produkDiscount->discount = $discountValue;
+            $dataHarga = ProductModel::select('harga_jual_nonretail')->where('id', $item->products_id)->first();
+            $diskon =   $produkDiscount->discount / 100;
+            $hargaDiskon = $dataHarga->harga_jual_nonretail * $diskon;
+            $hargaAfterDiskon = $dataHarga->harga_jual_nonretail -  $hargaDiskon;
+            $total = $total + ($hargaAfterDiskon * $produkDiscount->qty);
+            $produkDiscount->save();
+        }
+        $ppn = 0.11 * $total;
+        $model->ppn = $ppn;
+        $model->total = $total;
+        $model->total_after_ppn = $total + $ppn;
+        $model->customers_id = $request->get('customer_id');
+        $model->remark = $request->get('remark');
+        $model->payment_method = $request->get('payment_method');
+        if ($request->get('payment_method') == 3) {
+            $top = CustomerModel::where('id', $model->customers_id)->first();
+            $model->top = $top->due_date;
+            $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
+            $dt = $dt->modify("+" . $model->top . " days");
+            $model->duedate = $dt;
+        } else {
+            $model->top = NULL;
+            $model->duedate = NULL;
+        }
+        $model->save();
+        // if ($saved) {
+        //     if (Gate::allows('isAdmin')) {
+        //         return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+        //     } else {
+        //         return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
+        //     }
+        // }
+        // END EDIT SO
+
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
         $getCredential = CustomerModel::where('id', $selected_so->customers_id)->firstOrFail();
         $selected_so->isverified = 1;
@@ -620,7 +619,7 @@ class SalesOrderController extends Controller
                 $notif = new NotificationsModel();
                 $notif->message = $message;
                 $notif->status = 0;
-                $notif->role_id = 1;
+                $notif->role_id = 2;
                 $notif->save();
             }
         }
