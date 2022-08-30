@@ -46,5 +46,8 @@ class AppServiceProvider extends ServiceProvider
 
             View::share('notif', $notif);
         });
+
+        // DB::connection()
+
     }
 }
