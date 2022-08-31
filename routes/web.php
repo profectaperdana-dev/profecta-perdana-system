@@ -55,7 +55,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/logout', [LoginController::class, 'logout']);
     Route::get('/edit_sales_order/{id}', [SalesOrderController::class, 'editSo']);
     Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
-    Route::put('/sales_orders/verify/{id}', [SalesOrderController::class, 'verify']);
+    Route::post('/sales_orders/{id}/verify', [SalesOrderController::class, 'verify']);
     Route::get('/need_approval', [SalesOrderController::class, 'soNeedApproval']);
     Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
     Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
@@ -72,6 +72,7 @@ Route::group(['middleware' => 'auth'], function () {
     route::post('/update_product/{id}/add_product', [SalesOrderController::class, 'addProduct']);
     Route::get('/sales_orders/approve/{id}', [SalesOrderController::class, 'approve']);
     Route::get('/trace_fouls/{id}', [SalesOrderController::class, 'traceFouls']);
+    Route::get('/products/selectCost/{id}', [ProductController::class, 'selectCost']);
 
 
 

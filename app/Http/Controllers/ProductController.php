@@ -79,6 +79,18 @@ class ProductController extends Controller
         }
     }
 
+    public function selectCost($product_id)
+    {
+        try {
+            $product = ProductModel::select('id', 'harga_jual_nonretail')
+                ->where('id', $product_id)
+                ->first();
+
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
 
     /**
      * Show the form for creating a new resource.
