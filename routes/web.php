@@ -73,6 +73,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales_orders/approve/{id}', [SalesOrderController::class, 'approve']);
     Route::get('/trace_fouls/{id}', [SalesOrderController::class, 'traceFouls']);
     Route::get('/products/selectCost/{id}', [ProductController::class, 'selectCost']);
+    Route::get('/invoice/manage_payment', [SalesOrderController::class, 'paidManagement']);
+
 
 
 

@@ -55,6 +55,11 @@
               </span></a>
           </li>
           <li>
+            <a class="nav-link menu-title link-nav {{ request()->is('invoice/manage_payment') ? 'active' : '' }}"
+              href="{{ url('/invoice/manage_payment') }}"><i data-feather="toggle-right"></i><span>Manage Payments
+              </span></a>
+          </li>
+          <li>
             <a class="nav-link menu-title link-nav {{ request()->is('invoice') ? 'active' : '' }}"
               href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Data Invoice
               </span></a>

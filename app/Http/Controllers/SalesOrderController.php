@@ -695,7 +695,21 @@ class SalesOrderController extends Controller
                         return 'Paid';
                     }
                 })
-
+                ->editColumn('total_after_ppn', function ($data) {
+                    return number_format($data->total_after_ppn);
+                })
+                ->editColumn('total', function ($data) {
+                    return number_format($data->total);
+                })
+                ->editColumn('ppn', function ($data) {
+                    return number_format($data->ppn);
+                })
+                ->editColumn('order_date', function ($data) {
+                    return date('d-M-Y', strtotime($data->order_date));
+                })
+                ->editColumn('duedate', function ($data) {
+                    return date('d-M-Y', strtotime($data->duedate));
+                })
                 ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->customerBy->name_cust;
                 })
@@ -785,5 +799,87 @@ class SalesOrderController extends Controller
         ];
 
         return view('need_approval.trace_fouls', $data);
+    }
+
+    public function paidManagement(Request $request)
+    {
+        if ($request->ajax()) {
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', Auth::user()->warehouse_id)
+                ->first();
+            if (!empty($request->from_date)) {
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('isPaid', 0)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->whereBetween('order_date', array($request->from_date, $request->to_date))
+                    ->latest()
+                    ->get();
+            } else {
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('isPaid', 0)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->latest()
+                    ->get();
+            }
+            return datatables()->of($invoice)
+                ->editColumn('payment_method', function ($data) {
+                    if ($data->payment_method == 1) {
+                        return 'COD';
+                    } elseif ($data->payment_method == 2) {
+                        return 'CBD';
+                    } else {
+                        return 'Credit';
+                    }
+                })
+                ->editColumn('isPaid', function ($data) {
+                    if ($data->isPaid == 0) {
+                        return 'Unpaid';
+                    } else {
+                        return 'Paid';
+                    }
+                })
+                ->editColumn('total_after_ppn', function ($data) {
+                    return number_format($data->total_after_ppn);
+                })
+                ->editColumn('total', function ($data) {
+                    return number_format($data->total);
+                })
+                ->editColumn('ppn', function ($data) {
+                    return number_format($data->ppn);
+                })
+                ->editColumn('order_date', function ($data) {
+                    return date('d-M-Y', strtotime($data->order_date));
+                })
+                ->editColumn('duedate', function ($data) {
+                    return date('d-M-Y', strtotime($data->duedate));
+                })
+                ->editColumn('order_date', function ($data) {
+                    return date('d-M-Y', strtotime($data));
+                })
+                ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
+                    return $SalesOrderModel->customerBy->name_cust;
+                })
+                ->editColumn('created_by', function (SalesOrderModel $SalesOrderModel) {
+                    return $SalesOrderModel->createdSalesOrder->name;
+                })
+                ->addIndexColumn() //memberikan penomoran
+                ->addColumn('action', function () use ($invoice) {
+                    return view('invoice._option', compact('invoice'));
+                })
+                ->rawColumns(['action'], ['customerBy'])
+                // ->rawColumns()
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "All data unpaid invoice in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+            // 'order_number' =>
+        ];
+        return view('invoice.paid_management', $data);
     }
 }
