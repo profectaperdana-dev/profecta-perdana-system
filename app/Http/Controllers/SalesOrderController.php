@@ -27,6 +27,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
 use function App\Helpers\checkOverDue;
+use function App\Helpers\checkOverDueByCustomer;
 use function App\Helpers\checkOverPlafone;
 use function App\Helpers\setOverDue;
 use function App\Helpers\setOverPlafone;
@@ -502,42 +503,22 @@ class SalesOrderController extends Controller
     }
     public function verify(Request $request, $id)
     {
-        // EDIT SO
+        // Validate Input
         $request->validate([
             "customer_id" => "required|numeric",
             "payment_method" => "required|numeric",
+            "editProduct.*.products_id" => "required|numeric",
+            "editProduct.*.qty" => "required|numeric",
+            "editProduct.*.discount" => "required|numeric",
+            "remark" => "required"
         ]);
-        // dd($request->all());
 
-        $model = SalesOrderModel::find($id);
-        $sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
+        //Assign Object Model and Save SO Input
+        $model = SalesOrderModel::where('id', $id)->firstOrFail();
         $customer_id = $request->get('customer_id');
-        $total = 0;
-        foreach ($sod as $key => $item) {
-            $discount = DiscountModel::where('customer_id', $customer_id)
-                ->where('product_id', $item->products_id)->first();
-            $discountValue = 0;
-            if (!isset($discount)) {
-                $discountValue = 0;
-            } else {
-                $discountValue = $discount->discount;
-            }
-            $produkDiscount = SalesOrderDetailModel::where('products_id', $item->products_id)->where('sales_orders_id', $id)->first();
-            $produkDiscount->discount = $discountValue;
-            $dataHarga = ProductModel::select('harga_jual_nonretail')->where('id', $item->products_id)->first();
-            $diskon =   $produkDiscount->discount / 100;
-            $hargaDiskon = $dataHarga->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = $dataHarga->harga_jual_nonretail -  $hargaDiskon;
-            $total = $total + ($hargaAfterDiskon * $produkDiscount->qty);
-            $produkDiscount->save();
-        }
-        $ppn = 0.11 * $total;
-        $model->ppn = $ppn;
-        $model->total = $total;
-        $model->total_after_ppn = $total + $ppn;
-        $model->customers_id = $request->get('customer_id');
-        $model->remark = $request->get('remark');
+        $model->customers_id = $customer_id;
         $model->payment_method = $request->get('payment_method');
+        $model->remark = $request->get('remark');
         if ($request->get('payment_method') == 3) {
             $top = CustomerModel::where('id', $model->customers_id)->first();
             $model->top = $top->due_date;
@@ -548,29 +529,68 @@ class SalesOrderController extends Controller
             $model->top = NULL;
             $model->duedate = NULL;
         }
-        $model->save();
-        // if ($saved) {
-        //     if (Gate::allows('isAdmin')) {
-        //         return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
-        //     } else {
-        //         return redirect('/recent_sales_order')->with('info', 'Edit sales orders ' . $model->order_number . ' success');
-        //     }
-        // }
-        // END EDIT SO
+        $saved_temp = $model->save();
 
-        $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
-        $getCredential = CustomerModel::where('id', $selected_so->customers_id)->firstOrFail();
-        $selected_so->isverified = 1;
-        $selected_so->verifiedBy = Auth::user()->id;
-        if ($selected_so->payment_method != 3) {
-            $selected_so->isapprove = 1;
-            $selected_so->isPaid = 1;
-            $so_number = $selected_so->order_number;
+        //Check Duplicate
+        $products_arr = [];
+        foreach ($request->get('editProduct') as $check) {
+            array_push($products_arr, $check['products_id']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return redirect('/recent_sales_order')->with('error', "You enter duplicate products! Please check again!");
+        }
+
+        //Save SOD Input and Count total
+        $total = 0;
+
+        foreach ($request->editProduct as $product) {
+            $product_exist = SalesOrderDetailModel::where('sales_orders_id', $id)
+                ->where('products_id', $product['products_id'])->first();
+            if ($product_exist != null) {
+                $product_exist->qty = $product['qty'];
+                $product_exist->discount = $product['discount'];
+                $product_exist->save();
+            } else {
+                $new_product = new SalesOrderDetailModel();
+                $new_product->sales_orders_id = $id;
+                $new_product->products_id = $product['products_id'];
+                $new_product->qty = $product['qty'];
+                $new_product->discount = $product['discount'];
+                $new_product->created_by = Auth::user()->id;
+                $new_product->save();
+            }
+            $harga = ProductModel::where('id', $product['products_id'])->first();
+            $diskon =  $product['discount'] / 100;
+            $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
+            $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+            $total = $total + ($hargaAfterDiskon * $product['qty']);
+        }
+
+        //Delete product that not in SOD Input
+        $del = SalesOrderDetailModel::where('sales_orders_id', $id)
+            ->whereNotIn('products_id', $products_arr)->delete();
+
+        //Count PPN and Total
+        $ppn = 0.11 * $total;
+        $model->ppn = $ppn;
+        $model->total = $total;
+        $model->total_after_ppn = $total + $ppn;
+
+        //Verify
+        $getCredential = CustomerModel::where('id', $model->customers_id)->firstOrFail();
+        $model->isverified = 1;
+        $model->verifiedBy = Auth::user()->id;
+        if ($model->payment_method != 3) {
+            $model->isapprove = 1;
+            $model->isPaid = 1;
+            $so_number = $model->order_number;
             $so_number = str_replace('SOPP', 'IVPP', $so_number);
-            $selected_so->order_number = $so_number;
+            $model->order_number = $so_number;
 
             //Potong Stock
-            $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
+            $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
             foreach ($selected_sod as $value) {
                 $getStock = StockModel::where('products_id', $value->products_id)
                     ->where('warehouses_id', Auth::user()->warehouse_id)
@@ -585,19 +605,21 @@ class SalesOrderController extends Controller
             }
 
             //Update Last Transaction Customer
-            $selected_customer = CustomerModel::where('id', $selected_so->customers_id)->first();
-            $selected_customer->last_transaction = $selected_so->order_date;
+            $selected_customer = CustomerModel::where('id', $model->customers_id)->first();
+            $selected_customer->last_transaction = $model->order_date;
             $selected_customer->save();
         } else {
-            $checkoverplafone = checkOverPlafone($selected_so->customers_id);
-            if ($getCredential->isOverDue != 1 & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
-                $selected_so->isapprove = 1;
-                $so_number = $selected_so->order_number;
+            $checkoverplafone = checkOverPlafone($model->customers_id);
+            $checkoverdue = checkOverDueByCustomer($model->customers_id);
+            // dd("Overdue: " . $checkoverdue . ", " . "Overplafone: " . $checkoverplafone);
+            if ($checkoverdue == false & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
+                $model->isapprove = 1;
+                $so_number = $model->order_number;
                 $so_number = str_replace('SOPP', 'IVPP', $so_number);
-                $selected_so->order_number = $so_number;
+                $model->order_number = $so_number;
 
                 //Potong Stock
-                $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
+                $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
                 foreach ($selected_sod as $value) {
                     $getStock = StockModel::where('products_id', $value->products_id)
                         ->where('warehouses_id', Auth::user()->warehouse_id)
@@ -612,8 +634,8 @@ class SalesOrderController extends Controller
                 }
 
                 //Update Last Transaction Customer
-                $selected_customer = CustomerModel::where('id', $selected_so->customers_id)->first();
-                $selected_customer->last_transaction = $selected_so->order_date;
+                $selected_customer = CustomerModel::where('id', $model->customers_id)->first();
+                $selected_customer->last_transaction = $model->order_date;
                 $selected_customer->save();
             } else {
                 $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
@@ -626,9 +648,12 @@ class SalesOrderController extends Controller
             }
         }
 
-        $selected_so->save();
-
-        return redirect('/recent_sales_order')->with('success', "Sales Order Verification Success");
+        $saved_model = $model->save();
+        if ($saved_model == true) {
+            return redirect('/recent_sales_order')->with('success', "Sales Order Verification Success");
+        } else {
+            return redirect('/recent_sales_order')->with('error', "Sales Order Verification Fail! Please check again!");
+        }
     }
 
     // getInvoiceData() : Tampilkan data invoice dengan yajra
@@ -683,7 +708,21 @@ class SalesOrderController extends Controller
                         return 'Paid';
                     }
                 })
-
+                ->editColumn('total_after_ppn', function ($data) {
+                    return number_format($data->total_after_ppn);
+                })
+                ->editColumn('total', function ($data) {
+                    return number_format($data->total);
+                })
+                ->editColumn('ppn', function ($data) {
+                    return number_format($data->ppn);
+                })
+                ->editColumn('order_date', function ($data) {
+                    return date('d-M-Y', strtotime($data->order_date));
+                })
+                ->editColumn('duedate', function ($data) {
+                    return date('d-M-Y', strtotime($data->duedate));
+                })
                 ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->customerBy->name_cust;
                 })
@@ -746,6 +785,7 @@ class SalesOrderController extends Controller
         $selected_so->save();
 
         $checkoverplafone = checkOverPlafone($selected_so->customers_id);
+        checkOverDueByCustomer($selected_so->customers_id);
 
         return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
     }
@@ -772,5 +812,87 @@ class SalesOrderController extends Controller
         ];
 
         return view('need_approval.trace_fouls', $data);
+    }
+
+    public function paidManagement(Request $request)
+    {
+        if ($request->ajax()) {
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', Auth::user()->warehouse_id)
+                ->first();
+            if (!empty($request->from_date)) {
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('isPaid', 0)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->whereBetween('order_date', array($request->from_date, $request->to_date))
+                    ->latest()
+                    ->get();
+            } else {
+                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                    ->where('isapprove', 1)
+                    ->where('isverified', 1)
+                    ->where('isPaid', 0)
+                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    ->latest()
+                    ->get();
+            }
+            return datatables()->of($invoice)
+                ->editColumn('payment_method', function ($data) {
+                    if ($data->payment_method == 1) {
+                        return 'COD';
+                    } elseif ($data->payment_method == 2) {
+                        return 'CBD';
+                    } else {
+                        return 'Credit';
+                    }
+                })
+                ->editColumn('isPaid', function ($data) {
+                    if ($data->isPaid == 0) {
+                        return 'Unpaid';
+                    } else {
+                        return 'Paid';
+                    }
+                })
+                ->editColumn('total_after_ppn', function ($data) {
+                    return number_format($data->total_after_ppn);
+                })
+                ->editColumn('total', function ($data) {
+                    return number_format($data->total);
+                })
+                ->editColumn('ppn', function ($data) {
+                    return number_format($data->ppn);
+                })
+                ->editColumn('order_date', function ($data) {
+                    return date('d-M-Y', strtotime($data->order_date));
+                })
+                ->editColumn('duedate', function ($data) {
+                    return date('d-M-Y', strtotime($data->duedate));
+                })
+                ->editColumn('order_date', function ($data) {
+                    return date('d-M-Y', strtotime($data));
+                })
+                ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
+                    return $SalesOrderModel->customerBy->name_cust;
+                })
+                ->editColumn('created_by', function (SalesOrderModel $SalesOrderModel) {
+                    return $SalesOrderModel->createdSalesOrder->name;
+                })
+                ->addIndexColumn() //memberikan penomoran
+                ->addColumn('action', function () use ($invoice) {
+                    return view('invoice._option', compact('invoice'));
+                })
+                ->rawColumns(['action'], ['customerBy'])
+                // ->rawColumns()
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "All data unpaid invoice in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+            // 'order_number' =>
+        ];
+        return view('invoice.paid_management', $data);
     }
 }
