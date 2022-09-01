@@ -62,15 +62,6 @@ class SalesOrderController extends Controller
         $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf_invoice/' . $data->order_number . '.pdf');
         return $pdf->download($data->order_number . '.pdf');
     }
-    // print invoice tanpa PPN
-    public function printInoiceWithoutPpn($id)
-    {
-        $data = SalesOrderModel::find($id);
-        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = PDF::loadView('invoice.invoice_without_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
-        return $pdf->download($data->order_number . '.pdf');
-    }
-
     //print delivery order
     public function deliveryOrder($id)
     {
@@ -80,7 +71,6 @@ class SalesOrderController extends Controller
         $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
         return $pdf->download($data->order_number . '.pdf');
     }
-
 
     // getRecentData() : READ DATA RECENT SALES ORDERS ADMIN & SALES ADMIN
     public function getRecentData()
@@ -117,8 +107,6 @@ class SalesOrderController extends Controller
 
         checkOverDue();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-
-
         return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'customer'));
     }
 
@@ -260,192 +248,6 @@ class SalesOrderController extends Controller
         }
     }
 
-    // editSo() :TAMPILAN EDIT SALES ORDER TANPA PRODUCT
-    public function editSo($id)
-    {
-        $title = 'Edit Data Sales Order';
-        $value = SalesOrderModel::find($id);
-        $customer = CustomerModel::where('status', 1)->latest()->get();
-        return view('recent_sales_order.edit', compact('title', 'value', 'customer'));
-    }
-    // updateSo() : PROSES UPDATE SALES ORDER TANPA PRODUCT
-    public function updateSo(Request $request, $id)
-    {
-    }
-
-
-    // editProduuctP() :TAMPILAN EDIT PRODUCT
-    public function editProduct($id)
-    {
-        $title = 'Edit Data Product in Sales Order :';
-        $value = SalesOrderModel::with(['salesOrderDetailsBy.productSales.sub_types', 'salesOrderDetailsBy.productSales.sub_materials'])->find($id);
-        $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
-            ->select('products.*', 'stocks.warehouses_id')
-            ->where('stocks.warehouses_id', Auth::user()->warehouse_id)
-            ->get();
-        $customer = CustomerModel::where('status', 1)->latest()->get();
-        return view('recent_sales_order.edit_product', compact('title', 'value', 'customer', 'product'));
-    }
-
-    public function addProduct(Request $request, $id)
-    {
-        $request->validate([
-            "soFields.*.product_id" => "required|numeric",
-            "soFields.*.qty" => "required|numeric"
-        ]);
-
-        //Check Stock
-        foreach ($request->soFields as $qty) {
-            $getStock = StockModel::where('products_id', $qty['product_id'])
-                ->where('warehouses_id', Auth::user()->warehouse_id)
-                ->first();
-            if ($qty['qty'] > $getStock->stock) {
-                return Redirect::back()->with('error', 'Add Sales Order Fail! The number of items exceeds the stock');
-            }
-        }
-
-        $model = SalesOrderModel::where('id', $id)->first();
-        $total = 0;
-        $message_duplicate = "";
-        foreach ($request->soFields as $value) {
-            $data = new SalesOrderDetailModel();
-            $data->products_id = $value['product_id'];
-            $data->qty = $value['qty'];
-            if ($value['discount'] == NULL) {
-                $data->discount = 0;
-            } else {
-                $data->discount = $value['discount'];
-            }
-            $data->sales_orders_id = $model->id;
-            $data->created_by = Auth::user()->id;
-            $check_duplicate = SalesOrderDetailModel::where('sales_orders_id', $data->sales_orders_id)
-                ->where('products_id', $data->products_id)
-                ->count();
-            if ($check_duplicate > 0) {
-                $message_duplicate = "You enter duplication of products. Please recheck the Detail Product you set.";
-                continue;
-            } else {
-                $data->save();
-                $harga = ProductModel::where('id', $data->products_id)->first();
-                $diskon =  $data->discount / 100;
-                $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
-                $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
-                $total = $total + ($hargaAfterDiskon * $data->qty);
-            }
-        }
-        $old_ppn = $model->ppn;
-        $old_total = $model->total;
-        $old_total_after_ppn = $model->total_after_ppn;
-
-        $ppn = 0.11 * $total;
-        $model->ppn = $ppn + $old_ppn;
-        $model->total = $total + $old_total;
-        $model->total_after_ppn = ($total + $ppn) + $old_total_after_ppn;
-        $saved = $model->save();
-        if (empty($message_duplicate) && $saved) {
-            return Redirect::back()->with('success', 'Add Products to Sales Order ' . $model->order_number . ' success');
-        } elseif (!empty($message_duplicate) && $saved) {
-            return Redirect::back()->with('info', 'Some of Products add maybe Success! ' . $message_duplicate);
-        } else {
-            return Redirect::back()->with('error', 'Add Products Fail! Please make sure you have filled all the input');
-        }
-    }
-
-    // updateProduct()
-    public function updateProduct(Request $request, $id)
-    {
-        // dd($request->all());
-        $model = SalesOrderModel::find($id);
-        // dd($model);
-
-        //Check Stock
-        foreach ($request->editProduct as $qty) {
-            $getStock = StockModel::where('products_id', $qty['products_id'])
-                ->where('warehouses_id', Auth::user()->warehouse_id)
-                ->first();
-            if ($qty['qty'] > $getStock->stock) {
-                return Redirect::back()->with('error', 'Add Sales Order Fail! The number of items exceeds the stock');
-            }
-        }
-        $total = 0;
-        $isduplicate = false;
-        foreach ($request->editProduct as $key => $value) {
-            $sod = SalesOrderDetailModel::where('id', $value['id_sod'])->first();
-            $temp_product = $sod->products_id;
-            $temp_discount = $sod->discount;
-            $temp_qty = $sod->qty;
-            $sod->products_id = $value['products_id'];
-            $sod->qty = $value['qty'];
-            $sod->discount = $value['discount'];
-            $sod->save();
-            $check_duplicate = SalesOrderDetailModel::where('sales_orders_id', $sod->sales_orders_id)
-                ->where('products_id', $sod->products_id)
-                ->count();
-            if ($check_duplicate > 1) {
-                $sod->products_id = $temp_product;
-                $sod->discount = $temp_discount;
-                $sod->qty = $temp_qty;
-                $sod->save();
-                $isduplicate = true;
-            }
-            $dataHarga = ProductModel::select('harga_jual_nonretail')->where('id', $sod->products_id)->first();
-            $diskon =   $sod->discount / 100;
-            $hargaDiskon = $dataHarga->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = $dataHarga->harga_jual_nonretail -  $hargaDiskon;
-            $total = $total + ($hargaAfterDiskon * $sod->qty);
-        }
-
-        $ppn = 0.11 * $total;
-        $model->ppn = $ppn;
-        $model->total = $total;
-        $model->total_after_ppn = $total + $ppn;
-        $saved = $model->save();
-
-        if ($saved && $isduplicate == false) {
-            return Redirect::back()->with('success', 'Update product in sales orders ' . $model->order_number . ' success');
-        } elseif ($saved && $isduplicate == true) {
-            return Redirect::back()->with('info', 'Some of update product in sales orders ' . $model->order_number . ' maybe success, but you enter existing products. Please check again!');
-        } else {
-            return Redirect::back()->with('error', 'Update product in sales orders ' . $model->order_number . ' fail');
-        }
-    }
-    // deleteProduct() : HAPUS DATA PRODUCT PADA SO DAN UPDATE JUMLAH HARGA SERTA TOTAL
-    public function deleteProduct($id_so, $id_sod)
-    {
-        $cekDetail = SalesOrderDetailModel::where('sales_orders_id', $id_so)->count();
-
-        if ($cekDetail > 1) {
-            // dd($model);
-            $cekProduct = SalesOrderDetailModel::find($id_sod);
-            $hapus =  $cekProduct->delete();
-            $total = 0;
-            if ($hapus) {
-                $productDetail = SalesOrderDetailModel::where('sales_orders_id', $id_so)->get();
-                // dd($productDetail);
-
-                foreach ($productDetail as $produk) {
-                    $harga = ProductModel::where('id', $produk->products_id)->first();
-                    $diskon =  $produk['discount'] / 100;
-                    $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
-                    $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
-                    $total = $total + ($hargaAfterDiskon * $produk->qty);
-                    // dd($produk);
-                }
-            }
-            $model = SalesOrderModel::find($id_so);
-            $ppn = 0.11 * $total;
-            $model->ppn = $ppn;
-            $model->total = $total;
-            $model->total_after_ppn = $total + $ppn;
-            $model->save();
-            return Redirect::back()->with('error', 'Delete product in sales orders success');
-        } else {
-            return Redirect::back()->with('error', 'Delete product in sales orders fail because the product in the sales order cannot be empty');
-        }
-    }
-
-
-
     /**
      * Display the specified resource.
      *
@@ -497,7 +299,7 @@ class SalesOrderController extends Controller
     {
         $title = 'Sales Order Need Approval By Admin';
 
-        $dataInvoice = SalesOrderModel::where('isapprove', 0)->where('isverified', 1)->latest('created_at')->get();
+        $dataInvoice = SalesOrderModel::where('isapprove', 'progress')->where('isverified', 1)->latest('created_at')->get();
 
         return view('need_approval.index', compact('title', 'dataInvoice'));
     }

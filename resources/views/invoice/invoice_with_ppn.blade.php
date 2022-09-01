@@ -61,10 +61,36 @@
         body .pagenum:before {
             content: counter(page);
         }
+
+        #watermark {
+            position: fixed;
+
+            /**
+                    Set a position in the page for your image
+                    This should center it vertically
+                **/
+            bottom: 1cm;
+            left: 6cm;
+            opacity: 0.5;
+
+            /** Change image dimensions**/
+            width: 7cm;
+            height: 6cm;
+
+            /** Your watermark should be behind every content**/
+            z-index: -1000;
+        }
     </style>
 </head>
 
 <body>
+    <div id="watermark">
+        @if ($data->isPaid == 0)
+            <img src="{{ public_path('images/unpaid.png') }}" height="100%" width="100%" />
+        @else
+            <img src="{{ public_path('images/paid.png') }}" height="100%" width="100%" />
+        @endif
+    </div>
     {{-- HEADER --}}
     <header>
         <table style="width: 100%">
