@@ -294,7 +294,7 @@ $(document).ready(function () {
             '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
             "</div>" +
             '<div class="col-3 col-md-4 form-group">' +
-            "<label>Discount %</label>" +
+            "<label>Disc(%)</label>" +
             '<input class="form-control discount-append" name="soFields[' +
             x +
             '][discount]" id="" readonly>' +

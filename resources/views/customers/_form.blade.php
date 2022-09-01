@@ -1,7 +1,7 @@
 <div class="row">
   <div class="col-md-12">
     <div class="row">
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label>Name</label>
         <input type="text" name="name_cust" value="{{ old('name_cust', $customer->name_cust) }}"
           class="form-control
@@ -13,22 +13,35 @@
           </div>
         @enderror
       </div>
-      <div class="form-group col-md-4">
-        <label>Phone Number</label>
-        <input type="text" name="phone_cust" value="{{ old('phone_cust', $customer->phone_cust) }}"
-          class="form-control @error('phone_cust') is-invalid @enderror" placeholder="Customer Phone Number" required>
-        @error('phone_cust')
-          <div class="invalid-feedback">
-            {{ $message }}
-          </div>
-        @enderror
-      </div>
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label>ID Card Number</label>
         <input type="text" name="id_card_number" value="{{ old('id_card_number', $customer->id_card_number) }}"
           class="form-control @error('id_card_number') is-invalid @enderror" placeholder="Customer ID Card Number"
           required>
         @error('id_card_number')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-md-6">
+        <label>Office Phone Number</label>
+        <input type="text" name="office_number" value="{{ old('office_number', $customer->office_number) }}"
+          class="form-control @error('office_number') is-invalid @enderror" placeholder="Customer Office Phone Number"
+          required>
+        @error('office_number')
+          <div class="invalid-feedback">
+            {{ $message }}
+          </div>
+        @enderror
+      </div>
+      <div class="form-group col-md-6">
+        <label>Person Phone Number</label>
+        <input type="text" name="phone_cust" value="{{ old('phone_cust', $customer->phone_cust) }}"
+          class="form-control @error('phone_cust') is-invalid @enderror" placeholder="Customer Phone Number" required>
+        @error('phone_cust')
           <div class="invalid-feedback">
             {{ $message }}
           </div>
@@ -51,7 +64,7 @@
         @enderror
       </div>
       <div class="form-group col-md-3">
-        <label>City</label>
+        <label>District</label>
         <select name="city" class="form-control city @error('city') is-invalid @enderror" required>
           @if ($customer->city != null)
             <option selected value="{{ $customer->city }}">{{ $customer->city }}
@@ -65,7 +78,7 @@
         @enderror
       </div>
       <div class="form-group col-md-3">
-        <label>District</label>
+        <label>Sub-district</label>
         <select name="district" class="form-control district @error('district') is-invalid @enderror" required>
           @if ($customer->district != null)
             <option selected value="{{ $customer->district }}">{{ $customer->district }}
@@ -79,13 +92,9 @@
         @enderror
       </div>
       <div class="form-group col-md-3">
-        <label>Village</label>
-        <select name="village" class="form-control village @error('village') is-invalid @enderror" required>
-          @if ($customer->village != null)
-            <option selected value="{{ $customer->village }}">{{ $customer->village }}
-            </option>
-          @endif
-        </select>
+        <label>City</label>
+        <input class="form-control" type="text" name="village" value="{{ old('village', $customer->village) }}"
+          class="form-control @error('village') is-invalid @enderror" placeholder="Customer City" required>
         @error('village')
           <div class="invalid-feedback">
             {{ $message }}

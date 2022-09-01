@@ -66,8 +66,9 @@ class CustomerController extends Controller
     {
         $validated_data = $request->validate([
             'name_cust' => 'required',
-            'phone_cust' => 'required',
             'id_card_number' => 'required',
+            'phone_cust' => 'required',
+            'office_number' => 'required',
             'province' => 'required',
             'city' => 'required',
             'district' => 'required',
@@ -104,8 +105,6 @@ class CustomerController extends Controller
         $validated_data['city'] = ucwords(strtolower($city_name));
         $district_name = $this->getNameDistrict($validated_data['district']);
         $validated_data['district'] = ucwords(strtolower($district_name));
-        $village_name = $this->getNameVillage($validated_data['village']);
-        $validated_data['village'] = ucwords(strtolower($village_name));
 
         //Process Image
         $file = $request->file('reference_image');
@@ -166,8 +165,9 @@ class CustomerController extends Controller
         }
         $validated_data = $request->validate([
             'name_cust' => 'required',
-            'phone_cust' => 'required',
             'id_card_number' => 'required',
+            'phone_cust' => 'required',
+            'office_number' => 'required',
             'province' => 'required',
             'city' => 'required',
             'district' => 'required',
@@ -189,6 +189,7 @@ class CustomerController extends Controller
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
         $customer_current->name_cust = $validated_data['name_cust'];
         $customer_current->phone_cust = $validated_data['phone_cust'];
+        $customer_current->office_number = $validated_data['office_number'];
         $customer_current->id_card_number = $validated_data['id_card_number'];
         if ($customer_current->province != $validated_data['province']) {
             $province_name = $this->getNameProvince($validated_data['province']);
@@ -197,9 +198,8 @@ class CustomerController extends Controller
             $customer_current->city = ucwords(strtolower($city_name));
             $district_name = $this->getNameDistrict($validated_data['district']);
             $customer_current->district = ucwords(strtolower($district_name));
-            $village_name = $this->getNameVillage($validated_data['village']);
-            $customer_current->village = ucwords(strtolower($village_name));
         }
+        $customer_current->village = $validated_data['village'];
         $customer_current->address_cust = $validated_data['address_cust'];
         $customer_current->npwp = $validated_data['npwp'];
         $customer_current->email_cust = $validated_data['email_cust'];
@@ -290,19 +290,5 @@ class CustomerController extends Controller
         $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/district/' . $id . '.json');
         $getDistricts = $getAPI->json();
         return $getDistricts['name'];
-    }
-
-    public function getVillage($district_id)
-    {
-        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/villages/' . $district_id . '.json');
-        $getVillages = $getAPI->json();
-        return response()->json($getVillages);
-    }
-
-    public function getNameVillage($id)
-    {
-        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/village/' . $id . '.json');
-        $getVillages = $getAPI->json();
-        return $getVillages['name'];
     }
 }

@@ -52,6 +52,36 @@ function checkOverPlafone($customer_id)
     }
 }
 
+function checkOverDueByCustomer($customer_id)
+{
+    //update overdue
+    $SODebts = SalesOrderModel::where('customers_id', $customer_id)
+        ->where('payment_method', 3)
+        ->where('isPaid', 0)
+        ->get();
+
+    $isoverdue = false;
+    foreach ($SODebts as $SODebt) {
+        if (Carbon::now()->format('Y-m-d') >= $SODebt->duedate) {
+            $isoverdue = true;
+        }
+    }
+
+    if ($isoverdue == true) {
+        $selected_customer = CustomerModel::where('id', $customer_id)->first();
+        $selected_customer->isOverDue = 1;
+        $selected_customer->label = 'Bad Customer';
+        $selected_customer->save();
+        return true;
+    } else {
+        $selected_customer = CustomerModel::where('id', $customer_id)->first();
+        $selected_customer->isOverDue = 0;
+        $selected_customer->label = 'Customer';
+        $selected_customer->save();
+        return false;
+    }
+}
+
 function checkLastTransaction()
 {
     $all_customers = CustomerModel::select('last_transaction', 'status')->get();
