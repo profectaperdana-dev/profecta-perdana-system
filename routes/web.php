@@ -11,6 +11,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalesOrderController;
+use App\Http\Controllers\SecondProductController;
+use App\Http\Controllers\SendEmailController;
 use App\Http\Controllers\StockController;
 use App\Http\Controllers\SubMaterialController;
 use App\Http\Controllers\SubTypeController;
@@ -72,7 +74,7 @@ Route::group(['middleware' => 'auth'], function () {
     route::post('/update_product/{id}/add_product', [SalesOrderController::class, 'addProduct']);
     Route::get('/sales_orders/approve/{id}', [SalesOrderController::class, 'approve']);
     Route::get('/trace_fouls/{id}', [SalesOrderController::class, 'traceFouls']);
-
+    Route::get('/send_email/{id}', [SendEmailController::class, 'index']);
 
 
 
@@ -96,6 +98,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/discounts', DiscountController::class);
     Route::resource('/sales_order', SalesOrderController::class);
     Route::resource('/check_stock', CheckStockController::class);
+    Route::resource('/second_product', SecondProductController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

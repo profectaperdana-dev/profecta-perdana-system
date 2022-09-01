@@ -18,6 +18,8 @@ use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
 use App\Models\WarehouseModel;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
+use Dompdf\Options;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Gate;
 // use Barryvdh\DomPDF\PDF;
 use PDF;
@@ -55,7 +57,8 @@ class SalesOrderController extends Controller
     {
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
+
+        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf_invoice/' . $data->order_number . '.pdf');
         return $pdf->download($data->order_number . '.pdf');
     }
     // print invoice tanpa PPN
@@ -72,6 +75,7 @@ class SalesOrderController extends Controller
     {
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = new Options();
         $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
         return $pdf->download($data->order_number . '.pdf');
     }
@@ -639,7 +643,7 @@ class SalesOrderController extends Controller
                 ->first();
             if (!empty($request->from_date)) {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
-                    ->where('isapprove', 1)
+                    ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->whereBetween('order_date', array($request->from_date, $request->to_date))
@@ -647,7 +651,7 @@ class SalesOrderController extends Controller
                     ->get();
             } else {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
-                    ->where('isapprove', 1)
+                    ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->latest()
@@ -662,6 +666,15 @@ class SalesOrderController extends Controller
                     } else {
                         return 'Credit';
                     }
+                })
+                ->editColumn('ppn', function ($data) {
+                    return number_format($data->ppn);
+                })
+                ->editColumn('total_after_ppn', function ($data) {
+                    return number_format($data->total_after_ppn);
+                })
+                ->editColumn('total', function ($data) {
+                    return number_format($data->total);
                 })
                 ->editColumn('isPaid', function ($data) {
                     if ($data->isPaid == 0) {

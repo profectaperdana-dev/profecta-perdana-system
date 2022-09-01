@@ -3,7 +3,6 @@
 <head>
     <style>
         /* @import url(//db.onlinewebfonts.com/c/4145587a822071d1d66f5201f5233f42?family=Merchant+Copy); */
-
         /**
                 Set the margins of the page to 0, so the footer and the header
                 can be of the full height and width !
@@ -15,12 +14,16 @@
 
         /** Define now the real margins of every page in the PDF **/
         body {
-            margin-top: 4.6cm;
+            margin-top: 5cm;
             margin-left: 0cm;
             margin-right: 0cm;
             margin-bottom: 1cm;
             font-size: 9.5pt;
             font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+
+        .page-break {
+            page-break-before: always;
         }
 
         /** Define the header rules **/
@@ -29,7 +32,7 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 4.6cm;
+            height: 5cm;
             /** Extra personal styles **/
             background-color: #ffffff;
             color: rgb(0, 0, 0);
@@ -62,9 +65,8 @@
 </head>
 
 <body>
-    <!-- Define header and footer blocks before your content -->
+    {{-- HEADER --}}
     <header>
-
         <table style="width: 100%">
             <tr>
                 <td style="width: 20%"><img style="width: 100px;margin-top:15px;"
@@ -78,13 +80,10 @@
                 <td style="width: 5%;text-align:left">
                     Invoice <br>
                     Revision <br>
-                    Customer
-
                 </td>
                 <td style="width: 20%">
                     : {{ $data->order_number }}<br>
                     : 0<br>
-                    : {{ $data->customerBy->code_cust }}
                 </td>
             </tr>
             <tr>
@@ -99,63 +98,74 @@
             </tr>
             <tr>
                 <td colspan="3" style="width: 90%;text-align:left">Invoice To : <br>
-                    {{ $data->customerBy->name_cust }} <br>
+                    {{ $data->customerBy->name_cust }} - {{ $data->customerBy->code_cust }} <br>
                     {{ $data->customerBy->address_cust }} <br>
                     Remarks : {{ $data->remark }}
                 </td>
-                <td>Date <br>
+                <td style="width: 10%">Date <br>
                     Due Date
                 </td>
                 <td style="text-align:left">
                     : {{ $data->order_date }} <br>
                     : {{ $data->duedate }}
                 </td>
-
             </tr>
         </table>
     </header>
+    {{-- END HEADER --}}
 
+    {{-- FOOTER --}}
     <footer>
-        <b>Page -<span class="pagenum"></span>-</b>
-
     </footer>
+    {{-- END FOOTER --}}
 
-    <!-- Wrap the content of your PDF inside a main tag -->
+    {{-- CONTENT --}}
     <main>
-
         <table style="width:100%;">
             <thead style="border:1px solid black">
                 <tr style="">
-                    <td style="text-align:center;padding:2px">No</td>
-                    <td style="text-align:center;padding:2px">Item Description</td>
-                    <td style="text-align:center;padding:2px">Price</td>
-                    <td style="text-align:center;padding:2px">Qty</td>
-                    <td style="text-align:center;padding:2px">Total</td>
+                    <th style="text-align:center;padding:5px">No</th>
+                    <th style="text-align:left;padding:5px">Item Description</th>
+                    <th style="text-align:right;padding:5px">Price</th>
+                    <th style="text-align:center;padding:5px">Qty</th>
+                    <th style="text-align:right;padding:5px;margin-right:30px";>Total</th>
                 </tr>
             </thead>
             <tbody>
                 @php
                     $total = 0;
+                    $y = 0;
                 @endphp
                 @foreach ($data->salesOrderDetailsBy as $key => $value)
-                    {{-- @for ($i = 0; $i < 1; $i++) --}}
-                    <tr>
-                        <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
-                        <td style="text-align:left;padding:2px">{{ $value->productSales->nama_barang }}</td>
-                        <td style="text-align:right;padding:2px">@currency($value->productSales->harga_jual_nonretail)</td>
-                        <td style="text-align:right;padding:2px">{{ $value->qty }}</td>
-                        @php
-                            $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
-                            $total = $total + $sub_total;
-                        @endphp
-                        <td style="text-align:right">@currency($sub_total)</td>
-                    </tr>
-                    {{-- @endfor --}}
+                    @for ($i = 0; $i < 6; $i++)
+                        <?php
+                        $y++;
+                        ?>
+                        <tr>
+                            <td style="text-align:center;padding:5px">{{ $key + 1 }}.
+                            </td>
+                            <td style="text-align:left;padding:5px">{{ $value->productSales->nama_barang }}
+                            </td>
+                            <td style="text-align:right;padding:5px">@currency($value->productSales->harga_jual_nonretail)</td>
+                            <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
+                            @php
+                                $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
+                                $total = $total + $sub_total;
+                            @endphp
+                            <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>
+                        </tr>
+                        @if ($y % 5 == 0)
+                            <div class="page-break"></div>
+                        @endif
+                    @endfor
                 @endforeach
+                <tr>
+                    <td colspan="6" style="text-align: right">
+                        <hr>
+                    </td>
+
+                </tr>
             </tbody>
-
-
-
         </table>
         <table style="width: 100%">
             <thead>
@@ -169,12 +179,6 @@
             </thead>
             <tbody>
                 <tr>
-                    <td colspan="6" style="text-align: right">
-                        <hr>
-                    </td>
-
-                </tr>
-                <tr>
                     <td colspan="4" style="text-align: right">Total net value excl. tax</td>
                     <td style="text-align: right">@currency($total)</td>
                 </tr>
@@ -182,17 +186,10 @@
                     <td colspan="4" style="text-align: right">PPN 11%</td>
                     <td style="text-align: right">@currency($data->ppn)</td>
                 </tr>
-                <tr>
-                    <td colspan="4" style="text-align: right">
-
-                    </td>
-                    <td style="text-align: right">
-                        <hr>
-                    </td>
                 </tr>
                 <tr>
                     <th colspan="4" style="text-align: right">Total Due</th>
-                    <th style="text-align: right">@currency($data->total_after_ppn)</th>
+                    <th style="text-align: right;border:1px solid black">@currency($data->total_after_ppn)</th>
                 </tr>
                 <tr>
                     <th colspan="4">&nbsp;</th>
@@ -212,12 +209,39 @@
                         Thank You ! <br>
                         We're looking fordward to working with you again
                     </td>
-
                     <th colspan="2" style="text-align: left"><i>Sincerely Yours,</i></th>
                 </tr>
             </tbody>
         </table>
     </main>
+    {{-- END CONTENT --}}
+
+    {{-- PAGE NUMBER --}}
+    <script type="text/php">
+        if (isset($pdf)) {
+            $pdf->page_script('
+                $text = sprintf(_("Page -%d/%d-"),  $PAGE_NUM, $PAGE_COUNT);
+                // Uncomment the following line if you use a Laravel-based i18n
+                //$text = __("Page :pageNum/:pageCount", ["pageNum" => $PAGE_NUM, "pageCount" => $PAGE_COUNT]);
+                $font = null;
+                $size = 9;
+                $color = array(0,0,0);
+                $word_space = 0.0;  //  default
+                $char_space = 0.0;  //  default
+                $angle = 0.0;   //  default
+
+                // Compute text width to center correctly
+                $textWidth = $fontMetrics->getTextWidth($text, $font, $size);
+
+                $x = ($pdf->get_width() - $textWidth) / 2;
+                $y = $pdf->get_height() - 30;
+
+                $pdf->text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+            ');
+        }
+    </script>
+    {{-- END PAGE NUMBER --}}
+
 </body>
 
 </html>
