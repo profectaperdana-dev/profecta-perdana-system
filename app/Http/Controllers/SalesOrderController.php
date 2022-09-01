@@ -183,7 +183,7 @@ class SalesOrderController extends Controller
             $model->top = NULL;
             $model->duedate = NULL;
         }
-        $model->isapprove = 0;
+        $model->isapprove = 'progress';
         $model->isverified = 0;
 
         $saved = $model->save();
@@ -385,7 +385,7 @@ class SalesOrderController extends Controller
         $model->isverified = 1;
         $model->verifiedBy = Auth::user()->id;
         if ($model->payment_method != 3) {
-            $model->isapprove = 1;
+            $model->isapprove = 'approve';
             $model->isPaid = 1;
             $so_number = $model->order_number;
             $so_number = str_replace('SOPP', 'IVPP', $so_number);
@@ -415,7 +415,7 @@ class SalesOrderController extends Controller
             $checkoverdue = checkOverDueByCustomer($model->customers_id);
             // dd("Overdue: " . $checkoverdue . ", " . "Overplafone: " . $checkoverplafone);
             if ($checkoverdue == false & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
-                $model->isapprove = 1;
+                $model->isapprove = 'approve';
                 $so_number = $model->order_number;
                 $so_number = str_replace('SOPP', 'IVPP', $so_number);
                 $model->order_number = $so_number;
@@ -573,7 +573,7 @@ class SalesOrderController extends Controller
         $so_number = $selected_so->order_number;
         $so_number = str_replace('SOPP', 'IVPP', $so_number);
         $selected_so->order_number = $so_number;
-        $selected_so->isapprove = 1;
+        $selected_so->isapprove = 'approve';
         $selected_so->approvedBy = Auth::user()->id;
         $selected_so->save();
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
@@ -586,34 +586,11 @@ class SalesOrderController extends Controller
         $selected_so->isPaid = 1;
         $selected_so->save();
 
+        //update overplafone and overdue
         $checkoverplafone = checkOverPlafone($selected_so->customers_id);
-        checkOverDueByCustomer($selected_so->customers_id);
+        $checkoverdue = checkOverDueByCustomer($selected_so->customers_id);
 
         return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
-    }
-
-    public function traceFouls($id)
-    {
-        $selected_customer = CustomerModel::where('id', $id)->firstOrFail();
-        $selected_inv = SalesOrderModel::where('customers_id', $id)
-            ->where('isPaid', 0)
-            ->where('isverified', 1)
-            ->latest()
-            ->get();
-
-        $total_credit = 0;
-        foreach ($selected_inv as $invoice) {
-            $total_credit = $total_credit + $invoice->total_after_ppn;
-        }
-
-        $data = [
-            'title' => 'Tracing Fouls for ' . $selected_customer->name_cust,
-            'all_inv' => $selected_inv,
-            'selected_customer' => $selected_customer,
-            'total_credit' => $total_credit
-        ];
-
-        return view('need_approval.trace_fouls', $data);
     }
 
     public function paidManagement(Request $request)
@@ -626,7 +603,7 @@ class SalesOrderController extends Controller
             $halo = 'Hallo';
             if (!empty($request->from_date)) {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
-                    ->where('isapprove', 1)
+                    ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
@@ -635,7 +612,7 @@ class SalesOrderController extends Controller
                     ->get();
             } else {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
-                    ->where('isapprove', 1)
+                    ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
                     ->where('order_number', 'like', "%$kode_area->area_code%")
@@ -674,9 +651,6 @@ class SalesOrderController extends Controller
                 ->editColumn('duedate', function ($data) {
                     return date('d-M-Y', strtotime($data->duedate));
                 })
-                ->editColumn('order_date', function ($data) {
-                    return date('d-M-Y', strtotime($data));
-                })
                 ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->customerBy->name_cust;
                 })
@@ -684,8 +658,8 @@ class SalesOrderController extends Controller
                     return $SalesOrderModel->createdSalesOrder->name;
                 })
                 ->addIndexColumn() //memberikan penomoran
-                ->addColumn('action', function () use ($invoice) {
-                    return view('invoice._option_paid_management')->with($invoice);
+                ->addColumn('action', function ($invoice) {
+                    return view('invoice._option_paid_management', compact('invoice'))->render();
                 })
                 ->rawColumns(['action'], ['customerBy'])
                 // ->rawColumns()
