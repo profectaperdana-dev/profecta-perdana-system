@@ -808,6 +808,7 @@ class SalesOrderController extends Controller
                 ->select('customer_areas.area_code', 'warehouses.id')
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
+            $halo = 'Hallo';
             if (!empty($request->from_date)) {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 1)
@@ -869,7 +870,7 @@ class SalesOrderController extends Controller
                 })
                 ->addIndexColumn() //memberikan penomoran
                 ->addColumn('action', function () use ($invoice) {
-                    return view('invoice._option', compact('invoice'));
+                    return view('invoice._option_paid_management')->with($invoice);
                 })
                 ->rawColumns(['action'], ['customerBy'])
                 // ->rawColumns()
