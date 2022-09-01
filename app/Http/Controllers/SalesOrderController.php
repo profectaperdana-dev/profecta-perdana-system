@@ -89,6 +89,7 @@ class SalesOrderController extends Controller
         ])
             ->whereIn('payment_method', [1, 2])
             ->where('isverified', 0)
+            ->whereIn('isapprove', ['reject', 'progress'])
             ->where('order_number', 'like', "%$kode_area->area_code%")
             ->latest()
             ->get();
@@ -101,6 +102,7 @@ class SalesOrderController extends Controller
         ])
             ->where('payment_method', 3)
             ->where('isverified', 0)
+            ->whereIn('isapprove', ['reject', 'progress'])
             ->where('order_number', 'like', "%$kode_area->area_code%")
             ->latest()
             ->get();
@@ -545,11 +547,18 @@ class SalesOrderController extends Controller
 
         return view('invoice.index', $data);
     }
-
+    public function reject($id)
+    {
+        $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
+        $selected_so->isapprove = 'reject';
+        $selected_so->isverified = 0;
+        $selected_so->isPaid = 0;
+        $selected_so->save();
+        return redirect('/recent_sales_order')->with('info', "Sales Order " . $selected_so->order_number . " Reject ");
+    }
     public function approve($id)
     {
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
-
         //Potong Stock
         $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
         foreach ($selected_sod as $value) {
@@ -573,8 +582,9 @@ class SalesOrderController extends Controller
         $so_number = $selected_so->order_number;
         $so_number = str_replace('SOPP', 'IVPP', $so_number);
         $selected_so->order_number = $so_number;
-        $selected_so->isapprove = 1;
+        $selected_so->isapprove = 'approve';
         $selected_so->approvedBy = Auth::user()->id;
+        $selected_so->isPaid = 0;
         $selected_so->save();
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
     }

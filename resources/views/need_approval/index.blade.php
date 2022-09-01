@@ -42,7 +42,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                <th style="width: 5%">Action</th>
+                                                {{-- <th style="width: 5%">Action</th> --}}
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
@@ -57,32 +57,33 @@
                                             @foreach ($dataInvoice as $value)
                                                 <tr>
 
-                                                    <td style="width: 5%">
-                                                        <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false"><i data-feather="settings"></i></a>
-                                                        <div class="dropdown-menu" aria-labelledby="">
-                                                            <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item"
-                                                                href="{{ url('trace_fouls/' . $value->customers_id) }}">Trace
-                                                                Fouls</a>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
-                                                                data-bs-target="#detailData{{ $value->id }}">Products
-                                                                Detail</a>
-                                                            <a class="dropdown-item editPayment_method"
-                                                                href="{{ url('/edit_sales_order/' . $value->id) }}">Edit
-                                                                Sales
-                                                                Order</a>
-                                                            <a class="dropdown-item editPayment_method"
-                                                                href="{{ url('/edit_product/' . $value->id) }}">Edit
-                                                                Product</a>
-                                                            <a class="dropdown-item" href="javascript:void(0)"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#deleteData{{ $value->id }}">Delete
-                                                                Sales Order</a>
-                                                        </div>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $value->order_number }}</td>
+                                                    <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
+                                                    <td>{{ date('d-M-Y', strtotime($value->duedate)) }}</td>
+                                                    <td>{{ $value->customerBy->name_cust }}</td>
+                                                    @if ($value->customerBy->isOverDue == 1)
+                                                        <td><span
+                                                                class="badge badge-pill badge-danger text-white">Yes</span>
+                                                        </td>
+                                                    @else
+                                                        <td><span
+                                                                class="badge badge-pill badge-success text-white">No</span>
+                                                        </td>
+                                                    @endif
+                                                    @if ($value->customerBy->isOverPlafoned == 1)
+                                                        <td><span
+                                                                class="badge badge-pill badge-danger text-white">Yes</span>
+                                                        </td>
+                                                    @else
+                                                        <td><span
+                                                                class="badge badge-pill badge-success text-white">No</span>
+                                                        </td>
+                                                    @endif
+                                                    <td class="text-center"><a class="btn btn-primary btn-sm" href="#"
+                                                            data-bs-toggle="modal" data-original-title="test"
+                                                            data-bs-target="#approveData{{ $value->id }}">Approval
                                                     </td>
-                                                    <!-- Approval Product Modal Start -->
                                                     <div class="modal fade" id="approveData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
@@ -90,128 +91,134 @@
                                                             role="document">
                                                             <div class="modal-content">
                                                                 <div class="modal-header">
-                                                                    <h5 class="modal-title" id="exampleModalLabel">Sales
-                                                                        Order
-                                                                        :
-                                                                        {{ $value->order_number }}</h5>
+                                                                    <h5 class="modal-title" id="exampleModalLabel">
+                                                                        Order Number
+                                                                        #{{ $value->order_number }}</h5>
                                                                     <button class="btn-close" type="button"
                                                                         data-bs-dismiss="modal" aria-label="Close"></button>
                                                                 </div>
                                                                 <div class="modal-body">
                                                                     <div class="container-fluid">
                                                                         <div class="form-group row">
+                                                                            <div class="col-6 col-md-6 form-group">
+                                                                                <label>Over Due</label>
+                                                                                <input type="text" readonly
+                                                                                    @if ($value->customerBy->isOverDue == 1) class="form-control bg-warning text-white"
+                                                                                value="YES"
+                                                                                @else
+                                                                                class="form-control bg-primary text-white"
+                                                                                value="NO" @endif>
+                                                                            </div>
+                                                                            <div class="col-6 col-md-6 form-group">
+                                                                                <label>Over Plafond</label>
+                                                                                <input type="text" readonly
+                                                                                    @if ($value->customerBy->isOverPlafoned == 1) class="form-control bg-warning text-white"
+                                                                                value="YES"
+                                                                                @else
+                                                                                class="form-control bg-primary text-white"
+                                                                                value="NO" @endif>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-6 col-md-6 form-group">
+                                                                                <label>Order Date</label>
+                                                                                <input type="text" readonly
+                                                                                    class="form-control "
+                                                                                    value="{{ $value->order_date }}">
+                                                                            </div>
+                                                                            <div class="col-6 col-md-6 form-group">
+                                                                                <label>Due Date</label>
+                                                                                <input type="text" readonly
+                                                                                    class="form-control"
+                                                                                    value="{{ $value->duedate }}">
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-6 col-md-6 form-group">
+                                                                                <label>Customer</label>
+                                                                                <input type="text" readonly
+                                                                                    class="form-control "
+                                                                                    value="{{ $value->customerBy->name_cust }}">
+                                                                            </div>
+                                                                            <div class="col-6 col-md-6 form-group">
+                                                                                <label>Payment Method</label>
+                                                                                <input type="text" readonly
+                                                                                    class="form-control"
+                                                                                    @if ($value->payment_method == 1) value="Cash On Delivery"
+                                                                                    @elseif($value->payment_method == 2)
+                                                                                    value="Cash On Delivery"
+                                                                                    @else
+                                                                                    value="Cash On Delivery" @endif>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-12 form-group">
+                                                                                <label>Remarks</label>
+                                                                                <textarea readonly class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
+                                                                            </div>
+                                                                        </div>
+
+                                                                        <div class="form-group row">
                                                                             @foreach ($value->salesOrderDetailsBy as $detail)
-                                                                                <div class="form-group col-4">
+                                                                                <div class="form-group col-6">
                                                                                     <label>Product</label>
-                                                                                    <select
-                                                                                        name="editProduct[{{ $loop->index }}][products_id]"
-                                                                                        id="" required
-                                                                                        class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
-                                                                                        @if ($detail->products_id != null)
-                                                                                            <option
-                                                                                                value="{{ $detail->products_id }}"
-                                                                                                selected>
-                                                                                                {{ $detail->productSales->nama_barang .
-                                                                                                    ' (' .
-                                                                                                    $detail->productSales->sub_types->type_name .
-                                                                                                    ', ' .
-                                                                                                    $detail->productSales->sub_materials->nama_sub_material .
-                                                                                                    ')' }}
-                                                                                            </option>
-                                                                                        @endif
-                                                                                    </select>
-                                                                                    @error('editProduct[' . $loop->index .
-                                                                                        '][products_id]')
-                                                                                        <div class="invalid-feedback">
-                                                                                            {{ $message }}
-                                                                                        </div>
-                                                                                    @enderror
+                                                                                    <input type="text" readonly
+                                                                                        class="form-control "
+                                                                                        value="{{ $detail->productSales->nama_barang }}/
+                                                                                        {{ $detail->productSales->sub_types->type_name }}/
+                                                                                        {{ $detail->productSales->sub_materials->nama_sub_material }}">
+
                                                                                 </div>
 
                                                                                 <div class="col-3 col-md-3 form-group">
                                                                                     <label>Qty</label>
-                                                                                    <input type="text"
+                                                                                    <input type="text" readonly
                                                                                         class="form-control cekQty-edit"
-                                                                                        name="editProduct[{{ $loop->index }}][qty]"
                                                                                         value="{{ $detail->qty }}">
-                                                                                    <small class="text-danger qty-warning"
-                                                                                        hidden>The number of items exceeds
-                                                                                        the
-                                                                                        stock</small>
-                                                                                    @error('top')
-                                                                                        <div class="invalid-feedback">
-                                                                                            {{ $message }}
-                                                                                        </div>
-                                                                                    @enderror
+
                                                                                 </div>
 
                                                                                 <div class="col-3 col-md-3 form-group">
-                                                                                    <label>Discount%</label>
-                                                                                    <input type="text"
+                                                                                    <label>Disc%</label>
+                                                                                    <input type="text" readonly
                                                                                         class="form-control"
                                                                                         placeholder="Product Name"
-                                                                                        name="editProduct[{{ $loop->index }}][discount]"
                                                                                         value="{{ $detail->discount }}">
-                                                                                    @error('top')
-                                                                                        <div class="invalid-feedback">
-                                                                                            {{ $message }}
-                                                                                        </div>
-                                                                                    @enderror
-                                                                                </div>
 
-                                                                                @if ($loop->index == 0)
-                                                                                    <div class="col-2 form-group">
-                                                                                        <label for="">&nbsp;</label>
-                                                                                        <a id="addSo-edit"
-                                                                                            href="javascript:void(0)"
-                                                                                            class="btn btn-success form-control text-white">+</a>
-                                                                                    </div>
-                                                                                @else
-                                                                                    <div class="col-2 form-group">
-                                                                                        <label for="">&nbsp;</label>
-                                                                                        <a id="addSo-edit"
-                                                                                            href="javascript:void(0)"
-                                                                                            class="btn btn-danger form-control text-white">-</a>
-                                                                                    </div>
-                                                                                @endif
+                                                                                </div>
                                                                             @endforeach
                                                                         </div>
                                                                         <hr>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-12 form-group">
-                                                                                <label>Remarks</label>
-                                                                                <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
-                                                                            </div>
-                                                                        </div>
+
                                                                         <div class="form-group row">
                                                                             <div class="form-group col-lg-4">
                                                                                 <label>PPN</label>
                                                                                 <input class="form-control"
-                                                                                    value="{{ 'Rp. ' . $value->ppn }}"
+                                                                                    value="{{ 'Rp. ' . number_format($value->ppn) }}"
                                                                                     id="" readonly>
                                                                             </div>
-
                                                                             <div class="col-lg-4 form-group">
                                                                                 <label>Total (Before PPN)</label>
                                                                                 <input class="form-control"
-                                                                                    value="{{ 'Rp. ' . $value->total }}"
+                                                                                    value="{{ 'Rp. ' . number_format($value->total) }}"
                                                                                     readonly>
                                                                             </div>
-
                                                                             <div class="col-lg-4 form-group">
                                                                                 <label>Total (After PPN)</label>
                                                                                 <input class="form-control"
-                                                                                    value="{{ 'Rp. ' . $value->total_after_ppn }}"
+                                                                                    value="{{ 'Rp. ' . number_format($value->total_after_ppn) }}"
                                                                                     readonly>
                                                                             </div>
                                                                         </div>
-
                                                                     </div>
-
                                                                 </div>
                                                                 <div class="modal-footer">
                                                                     <button class="btn btn-danger" type="button"
                                                                         data-bs-dismiss="modal">Close</button>
+                                                                    <a class="btn btn-warning"
+                                                                        href="{{ url('/sales_orders/reject/' . $value->id) }}">No,
+                                                                        Reject
+                                                                    </a>
                                                                     <a class="btn btn-primary"
                                                                         href="{{ url('/sales_orders/approve/' . $value->id) }}">Yes,
                                                                         approve
@@ -219,177 +226,7 @@
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                        <!-- Approval Product Modal End -->
-                                                        <td>{{ $loop->iteration }}</td>
-                                                        <td>{{ $value->order_number }}</td>
-                                                        <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
-                                                        <td>{{ date('d-M-Y', strtotime($value->duedate)) }}</td>
-                                                        <td>{{ $value->customerBy->name_cust }}</td>
-                                                        @if ($value->customerBy->isOverDue == 1)
-                                                            <td><span
-                                                                    class="badge badge-pill badge-danger text-white">Yes</span>
-                                                            </td>
-                                                        @else
-                                                            <td><span
-                                                                    class="badge badge-pill badge-success text-white">No</span>
-                                                            </td>
-                                                        @endif
-                                                        @if ($value->customerBy->isOverPlafoned == 1)
-                                                            <td><span
-                                                                    class="badge badge-pill badge-danger text-white">Yes</span>
-                                                            </td>
-                                                        @else
-                                                            <td><span
-                                                                    class="badge badge-pill badge-success text-white">No</span>
-                                                            </td>
-                                                        @endif
-                                                        <td class="text-center"><a class="btn btn-primary btn-sm"
-                                                                href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
-                                                                data-bs-target="#approveData{{ $value->id }}">Approval
-                                                        </td>
-                                                        </a>
-
-                                                        <!-- Delete Product Modal Start -->
-                                                        <div class="modal fade" id="deleteData{{ $value->id }}"
-                                                            tabindex="-1" role="dialog"
-                                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                            <div class="modal-dialog" role="document">
-                                                                <form method="post"
-                                                                    action="{{ url('sales_order/' . $value->id) }}"
-                                                                    enctype="multipart/form-data">
-                                                                    @csrf
-                                                                    @method('delete')
-                                                                    <div class="modal-content">
-                                                                        <div class="modal-header">
-                                                                            <h5 class="modal-title"
-                                                                                id="exampleModalLabel">
-                                                                                Delete Data:
-                                                                                {{ $value->order_number }}</h5>
-                                                                            <button class="btn-close" type="button"
-                                                                                data-bs-dismiss="modal"
-                                                                                aria-label="Close"></button>
-                                                                        </div>
-                                                                        <div class="modal-body">
-                                                                            <div class="container-fluid">
-                                                                                <div class="form-group row">
-                                                                                    <div class="col-md-12">
-                                                                                        <h5>Are you sure delete this data ?
-                                                                                        </h5>
-                                                                                    </div>
-                                                                                </div>
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="modal-footer">
-                                                                            <button class="btn btn-danger" type="button"
-                                                                                data-bs-dismiss="modal">Close</button>
-                                                                            <button class="btn btn-primary"
-                                                                                type="submit">Yes, delete
-                                                                            </button>
-                                                                        </div>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                        <!-- Delete Product Modal End -->
-
-                                                        <div>
-                                                            <!-- Detail Product Modal Start -->
-                                                            <div class="modal fade" id="detailData{{ $value->id }}"
-                                                                tabindex="-1" role="dialog"
-                                                                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                                <div class="modal-dialog modal-lg modal-dialog-scrollable"
-                                                                    role="document">
-                                                                    <form>
-                                                                        <div class="modal-content">
-                                                                            <div class="modal-header">
-                                                                                <h5 class="modal-title"
-                                                                                    id="exampleModalLabel">
-                                                                                    Product Detail:
-                                                                                    {{ $value->order_number }}</h5>
-                                                                                <button class="btn-close" type="button"
-                                                                                    data-bs-dismiss="modal"
-                                                                                    aria-label="Close"></button>
-                                                                            </div>
-                                                                            <div class="modal-body">
-                                                                                <div class="container-fluid">
-                                                                                    <div class="form-group row">
-                                                                                        @foreach ($value->salesOrderDetailsBy as $detail)
-                                                                                            <div class="form-group col-4">
-                                                                                                <label>Product</label>
-                                                                                                <input class="form-control"
-                                                                                                    value="{{ $detail->productSales->nama_barang .
-                                                                                                        ' (' .
-                                                                                                        $detail->productSales->sub_types->type_name .
-                                                                                                        ', ' .
-                                                                                                        $detail->productSales->sub_materials->nama_sub_material .
-                                                                                                        ')' }}"
-                                                                                                    id=""
-                                                                                                    readonly>
-                                                                                            </div>
-
-                                                                                            <div
-                                                                                                class="col-3 col-md-3 form-group">
-                                                                                                <label>Qty</label>
-                                                                                                <input class="form-control"
-                                                                                                    value="{{ $detail->qty }}"
-                                                                                                    readonly>
-                                                                                            </div>
-
-                                                                                            <div
-                                                                                                class="col-3 col-md-3 form-group">
-                                                                                                <label>Discount%</label>
-                                                                                                <input class="form-control"
-                                                                                                    value="{{ $detail->discount }}"
-                                                                                                    readonly>
-                                                                                            </div>
-                                                                                        @endforeach
-                                                                                    </div>
-                                                                                    <hr>
-                                                                                    <div class="form-group row">
-                                                                                        <div class="col-12 form-group">
-                                                                                            <label>Remarks</label>
-                                                                                            <textarea class="form-control" cols="30" rows="5" readonly>{{ $value->remark }}</textarea>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                    <div class="form-group row">
-                                                                                        <div class="form-group col-lg-4">
-                                                                                            <label>PPN</label>
-                                                                                            <input class="form-control"
-                                                                                                value="{{ 'Rp. ' . $value->ppn }}"
-                                                                                                id="" readonly>
-                                                                                        </div>
-
-                                                                                        <div class="col-lg-4 form-group">
-                                                                                            <label>Total (Before
-                                                                                                PPN)</label>
-                                                                                            <input class="form-control"
-                                                                                                value="{{ 'Rp. ' . $value->total }}"
-                                                                                                readonly>
-                                                                                        </div>
-
-                                                                                        <div class="col-lg-4 form-group">
-                                                                                            <label>Total (After PPN)</label>
-                                                                                            <input class="form-control"
-                                                                                                value="{{ 'Rp. ' . $value->total_after_ppn }}"
-                                                                                                readonly>
-                                                                                        </div>
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div class="modal-footer">
-                                                                                    <button class="btn btn-danger"
-                                                                                        type="button"
-                                                                                        data-bs-dismiss="modal">Close</button>
-                                                                                </div>
-                                                                            </div>
-                                                                    </form>
-                                                                </div>
-                                                            </div>
-                                                            <!-- Detail Product Modal End -->
-                                                        </div>
-
-
-
+                                                    </div>
                                                 </tr>
                                             @endforeach
                                         </tbody>
