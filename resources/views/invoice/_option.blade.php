@@ -2,12 +2,12 @@
   INV</a>
 <div class="dropdown-menu" aria-labelledby="">
   <h5 class="dropdown-header">Actions</h5>
-  <a class="dropdown-item" href="#">Send Invoice by Email</a>
+  <a class="dropdown-item" href="{{ url('send_email/' . $id) }}">Send Invoice by Email</a>
   <a class="dropdown-item" href="javascript:void(0)" data-bs-toggle="modal"
     data-bs-target="#markData{{ $id }}">Mark as paid</a>
   <h5 class="dropdown-header">Prints</h5>
   <a class="dropdown-item" href="{{ url('invoice/' . $id . '/invoice_with_ppn') }}">Print Invoice with PPN</a>
-  <a class="dropdown-item" href="{{ url('invoice/' . $id . '/invoice_without_ppn') }}">Print Invoice without PPN</a>
+  {{-- <a class="dropdown-item" href="{{ url('invoice/' . $id . '/invoice_without_ppn') }}">Print Invoice without PPN</a> --}}
   <a class="dropdown-item" href="{{ url('invoice/' . $id . '/delivery_order') }}">Print Delivary Order</a>
 </div>
 

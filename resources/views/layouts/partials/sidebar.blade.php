@@ -39,6 +39,7 @@
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('product_materials') ||
                         request()->is('products') ||
+                        request()->is('second_product') ||
                         request()->is('stocks') ||
                         request()->is('product_sub_materials') ||
                         request()->is('product_sub_types') ||
@@ -47,17 +48,14 @@
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('product_materials') ||
                                 request()->is('products') ||
+                                request()->is('second_product') ||
                                 request()->is('stocks') ||
                                 request()->is('product_sub_materials') ||
                                 request()->is('product_sub_types') ||
                                 request()->is('product_uoms')) block @else none @endif ">
                             <li>
-                                <a href="{{ url('/products') }}"
-                                    class="{{ request()->is('products') ? 'active' : '' }}">Products</a>
-                            </li>
-                            <li>
-                                <a href="{{ url('/stocks') }}"
-                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Products Stocks</a>
+                                <a href="{{ url('/product_uoms') }}"
+                                    class="{{ request()->is('product_uoms') ? 'active' : '' }}">Products Uoms</a>
                             </li>
                             <li>
                                 <a href="{{ url('/product_materials') }}"
@@ -75,9 +73,19 @@
                                     Materials</a>
                             </li>
                             <li>
-                                <a href="{{ url('/product_uoms') }}"
-                                    class="{{ request()->is('product_uoms') ? 'active' : '' }}">Products Uoms</a>
+                                <a href="{{ url('/products') }}"
+                                    class="{{ request()->is('products') ? 'active' : '' }}">Products</a>
                             </li>
+                            <li>
+                                <a href="{{ url('/stocks') }}"
+                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Products Stocks</a>
+                            </li>
+                            <li>
+                                <a href="{{ url('/second_product') }}"
+                                    class="{{ request()->is('second_product') ? 'active' : '' }}">Second Products</a>
+                            </li>
+
+
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('customers') || request()->is('customer_categories') || request()->is('customer_areas')) active @endif"

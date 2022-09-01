@@ -78,13 +78,13 @@
                 <td style="width: 5%;text-align:left">
                     Invoice <br>
                     Revision <br>
-                    Customer
+                    &nbsp;
 
                 </td>
                 <td style="width: 20%">
                     : {{ $data->order_number }}<br>
                     : 0<br>
-                    : {{ $data->customerBy->code_cust }}
+                    &nbsp;
                 </td>
             </tr>
             <tr>
@@ -99,11 +99,11 @@
             </tr>
             <tr>
                 <td colspan="3" style="width: 90%;text-align:left">Invoice To : <br>
-                    {{ $data->customerBy->name_cust }} <br>
+                    {{ $data->customerBy->name_cust }} - {{ $data->customerBy->code_cust }} <br>
                     {{ $data->customerBy->address_cust }} <br>
                     Remarks : {{ $data->remark }}
                 </td>
-                <td>Date <br>
+                <td style="width: 10%">Date <br>
                     Due Date
                 </td>
                 <td style="text-align:left">
@@ -116,7 +116,7 @@
     </header>
 
     <footer>
-        <b>Page-<span class="pagenum"></span>-</b>
+        {{-- <b>Page-<span class="pagenum"></span>-</b> --}}
 
     </footer>
 
@@ -143,14 +143,22 @@
                         <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
                         <td style="text-align:left;padding:2px">{{ $value->productSales->nama_barang }}</td>
                         @php
-                            $hargaAfterPpn = $value->productSales->harga_jual_nonretail * 0.11;
-                            $dataHarga = $value->productSales->harga_jual_nonretail + $hargaAfterPpn;
+                            $diskon = $value->discount / 100;
+                            $hargaDiskon = $value->productSales->harga_jual_nonretail * $diskon;
+                            $hargaAfterDiskon = $value->productSales->harga_jual_nonretail - $hargaDiskon;
+
+                            $hargaAfterPpn = $hargaAfterDiskon * 0.11;
+                            $hargaReal = $hargaAfterDiskon + $hargaAfterPpn;
+                            // $dataHarga = $value->productSales->harga_jual_nonretail + $hargaAfterPpn;
                         @endphp
-                        <td style="text-align:right;padding:2px">@currency($dataHarga)</td>
+                        <td style="text-align:right;padding:2px">@currency($hargaReal)</td>
                         <td style="text-align:right;padding:2px">{{ $value->qty }}</td>
                         @php
-                            $sub_total = $dataHarga * $value->qty;
+                            $sub_total = $hargaReal * $value->qty;
                             $total = $total + $sub_total;
+                            $exppn = $total * 0.11;
+                            $total_ = $total - $exppn;
+
                         @endphp
                         <td style="text-align:right">@currency($sub_total)</td>
                     </tr>
@@ -161,6 +169,10 @@
 
 
         </table>
+        @php
+            $dpp = $data->total_after_ppn / 1.11;
+            $hargaDpp = $data->total_after_ppn - $dpp;
+        @endphp
         <table style="width: 100%">
             <thead>
                 <tr>
@@ -179,13 +191,13 @@
 
                 </tr>
                 <tr>
-                    <td colspan="4" style="text-align: right">Sub Total</td>
-                    <td style="text-align: right">@currency($total)</td>
+                    <td colspan="4" style="text-align: right">Total Excl. PPN</td>
+                    <td style="text-align: right">@currency($dpp)</td>
                 </tr>
-                {{-- <tr>
+                <tr>
                     <td colspan="4" style="text-align: right">PPN 11%</td>
-                    <td style="text-align: right">@currency($data->ppn)</td>
-                </tr> --}}
+                    <td style="text-align: right">@currency($hargaDpp)</td>
+                </tr>
                 <tr>
                     <td colspan="4" style="text-align: right">
 
@@ -196,7 +208,7 @@
                 </tr>
                 <tr>
                     <th colspan="4" style="text-align: right">Total Due</th>
-                    <th style="text-align: right">@currency($data->total_after_ppn)</th>
+                    <th style="text-align: right;border:1px solid black">@currency($data->total_after_ppn)</th>
                 </tr>
                 <tr>
                     <th colspan="4">&nbsp;</th>
@@ -222,6 +234,29 @@
             </tbody>
         </table>
     </main>
+    <script type="text/php">
+        if (isset($pdf)) {
+            $pdf->page_script('
+                $text = sprintf(_("Page -%d/%d-"),  $PAGE_NUM, $PAGE_COUNT);
+                // Uncomment the following line if you use a Laravel-based i18n
+                //$text = __("Page :pageNum/:pageCount", ["pageNum" => $PAGE_NUM, "pageCount" => $PAGE_COUNT]);
+                $font = null;
+                $size = 9;
+                $color = array(0,0,0);
+                $word_space = 0.0;  //  default
+                $char_space = 0.0;  //  default
+                $angle = 0.0;   //  default
+
+                // Compute text width to center correctly
+                $textWidth = $fontMetrics->getTextWidth($text, $font, $size);
+
+                $x = ($pdf->get_width() - $textWidth) / 2;
+                $y = $pdf->get_height() - 30;
+
+                $pdf->text($x, $y, $text, $font, $size, $color, $word_space, $char_space, $angle);
+            '); // End of page_script
+        }
+    </script>
 </body>
 
 </html>

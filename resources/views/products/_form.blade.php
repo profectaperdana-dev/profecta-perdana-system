@@ -125,9 +125,9 @@
             </div>
             <div class="col-md-3 form-group">
                 <label>Purchase Price</label>
-                <input type="number" class="form-control {{ $errors->first('harga_beli') ? ' is-invalid' : '' }}"
+                <input type="text" class="form-control {{ $errors->first('harga_beli') ? ' is-invalid' : '' }}"
                     required placeholder="Purchase Price" name="harga_beli"
-                    value="{{ old('harga_beli', $data->harga_beli) }}">
+                    value="{{ old('harga_beli', number_format($data->harga_beli)) }}">
                 @error('harga_beli')
                     <div class="invalid-feedback">
                         {{ $message }}
