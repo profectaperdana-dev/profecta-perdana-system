@@ -59,7 +59,7 @@ class SalesOrderController extends Controller
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
 
-        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf_invoice/' . $data->order_number . '.pdf');
+        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
         return $pdf->download($data->order_number . '.pdf');
     }
     //print delivery order
@@ -610,7 +610,6 @@ class SalesOrderController extends Controller
                 ->select('customer_areas.area_code', 'warehouses.id')
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
-            $halo = 'Hallo';
             if (!empty($request->from_date)) {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 'approve')
