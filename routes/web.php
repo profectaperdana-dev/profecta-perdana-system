@@ -77,6 +77,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/products/selectCost/{id}', [ProductController::class, 'selectCost']);
     Route::get('/invoice/manage_payment', [SalesOrderController::class, 'paidManagement']);
     Route::get('/send_email/{id}', [SendEmailController::class, 'index']);
+    Route::get('/sales_orders/reject/{id}', [SalesOrderController::class, 'reject']);
     Route::get('/customers/getTotalCredit/{id}', [CustomerController::class, 'getTotalCredit']);
 
 
