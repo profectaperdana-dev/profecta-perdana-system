@@ -52,8 +52,8 @@
                             data-feather="settings"></i></a>
                         <div class="dropdown-menu" aria-labelledby="">
                           <h5 class="dropdown-header">Actions</h5>
-                          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                            data-bs-target="#detailData{{ $value->id }}">Detail</a>
+                          <a class="dropdown-item modal-btn" href="#" data-bs-toggle="modal"
+                            data-original-title="test" data-bs-target="#detailData{{ $value->id }}">Detail</a>
                           @if (Gate::check('isSuperAdmin') || Gate::check('isAdmin') || Gate::check('isVerificator'))
                             <a class="dropdown-item"
                               href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
@@ -65,7 +65,7 @@
                       {{-- Modul Detail --}}
                       <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-xl" role="document">
+                        <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
                           <div class="modal-content">
                             <div class="modal-header">
                               <h5 class="modal-title" id="exampleModalLabel">Detail Data
@@ -82,6 +82,7 @@
                                       src="{{ asset('images/customers/' . $value->reference_image) }}"
                                       alt="Preview Image">
                                   </div>
+                                  <input class="id" type="hidden" value="{{ $value->id }}" readonly>
                                   <div class="col-md-8">
                                     <div class="form-group row font-weight-bold">
                                       <div class="form-group col-md-4">
@@ -173,15 +174,20 @@
                                     </div>
 
                                     <div class="form-group row font-weight-bold">
-                                      <div class="form-group col-md-6">
+                                      <div class="form-group col-md-4">
                                         <label>Coordinate</label>
                                         <input type="text" class="form-control" readonly
                                           value="{{ $value->coordinate }}">
                                       </div>
-                                      <div class="form-group col-md-6">
+                                      <div class="form-group col-md-4">
                                         <label>Credit Limit</label>
-                                        <input type="text" class="form-control" readonly
-                                          value="{{ $value->credit_limit }}">
+                                        <input type="text" class="form-control credit-limit" readonly
+                                          value="{{ number_format($value->credit_limit) }}">
+                                      </div>
+                                      <div class="form-group col-md-4">
+                                        <label>Total Credit</label>
+                                        <input type="text" class="form-control total-credit" readonly
+                                          value="">
                                       </div>
                                     </div>
 
@@ -189,7 +195,7 @@
                                       <div class="form-group col-md-3">
                                         <label>Last Transaction</label>
                                         <input type="text" class="form-control" readonly
-                                          value="@if ($value->last_transaction == null) No Transaction @else {{ $value->last_transaction }} @endif">
+                                          value="@if ($value->last_transaction == null) No Transaction @else {{ date('d-M-Y', strtotime($value->last_transaction)) }} @endif">
                                       </div>
                                       <div class="form-group col-md-3">
                                         <label>Due Date</label>
@@ -320,5 +326,30 @@
   @push('scripts')
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+    <script>
+      $(document).ready(function() {
+        let csrf = $('meta[name="csrf-token"]').attr("content");
+
+        $(document).on('click', '.modal-btn', function() {
+          let modal_id = $(this).attr('data-bs-target');
+          let customer_id = $(modal_id).find('.modal-body').find('.id').val();
+          let node_form = $(modal_id).find('.modal-body').find('.total-credit');
+
+          $.ajax({
+            context: this,
+            type: "GET",
+            url: "/customers/getTotalCredit/" + customer_id,
+            dataType: "json",
+            success: function(data) {
+              node_form.val(data.toLocaleString('us', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+              }));
+            },
+          });
+
+        });
+      });
+    </script>
   @endpush
 @endsection

@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
 
 use function App\Helpers\checkOverDue;
-use function App\Helpers\setOverDue;
 
 class CustomerController extends Controller
 {
@@ -290,5 +289,19 @@ class CustomerController extends Controller
         $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/district/' . $id . '.json');
         $getDistricts = $getAPI->json();
         return $getDistricts['name'];
+    }
+
+    public function getTotalCredit($id)
+    {
+        $SODebts = SalesOrderModel::where('customers_id', $id)
+            ->where('payment_method', 3)
+            ->where('isPaid', 0)
+            ->get();
+
+        $total_credit = 0;
+        foreach ($SODebts as $SODebt) {
+            $total_credit = $total_credit + $SODebt->total_after_ppn;
+        }
+        return response()->json($total_credit);
     }
 }
