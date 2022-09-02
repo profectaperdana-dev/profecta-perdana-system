@@ -1,0 +1,175 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\ProductModel;
+use App\Models\PurchaseOrderDetailModel;
+use App\Models\PurchaseOrderModel;
+use App\Models\SuppliersModel;
+use App\Models\WarehouseModel;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+
+class PurchaseOrderController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $all_purchases = PurchaseOrderModel::latest()->get();
+
+        $data = [
+            "title" => "Purchase Orders",
+            "purchases" => $all_purchases
+        ];
+
+        return view('purchase_orders.index', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $all_suppliers = SuppliersModel::latest()->get();
+        $all_warehouses = WarehouseModel::latest()->get();
+        $all_products = ProductModel::with(['sub_types', 'sub_materials'])->latest()->get();
+
+        $data = [
+            "title" => "Create Purchase Orders",
+            "suppliers" => $all_suppliers,
+            "warehouses" => $all_warehouses,
+            "products" => $all_products
+        ];
+
+        return view('purchase_orders.create', $data);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // validator
+        $request->validate([
+            "supplier_id" => "required|numeric",
+            "warehouse_id" => "required|numeric",
+            "due_date" => "required",
+            "remark" => "required",
+            "poFields.*.product_id" => "required|numeric",
+            "poFields.*.qty" => "required|numeric"
+        ]);
+
+        //Create Order Number
+        $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+            ->select('customer_areas.area_code', 'warehouses.id')
+            ->where('warehouses.id', $request->get('warehouse_id'))
+            ->first();
+        $length = 3;
+        $id = intval(PurchaseOrderModel::where('order_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
+        $po_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
+        $year = Carbon::now()->format('Y'); // 2022
+        $month = Carbon::now()->format('m'); // 2022
+        $tahun = substr($year, -2);
+        $order_number = 'POPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $po_number_id;
+
+        // save purchase orders
+        $model = new PurchaseOrderModel();
+        $model->order_number = $order_number;
+        $model->order_date = Carbon::now()->format('Y-m-d');
+        $model->due_date = $request->get('due_date');
+        $model->supplier_id = $request->get('supplier_id');
+        $model->warehouse_id = $request->get('warehouse_id');
+        $model->remark = $request->get('remark');
+        $model->created_by = Auth::user()->id;
+        $model->isvalidated = 0;
+        $saved = $model->save();
+
+        // save purchase order details
+        $total = 0;
+        $message_duplicate = '';
+        if ($saved) {
+            foreach ($request->poFields as $value) {
+                $data = new PurchaseOrderDetailModel();
+                $data->product_id = $value['product_id'];
+                $data->qty = $value['qty'];
+                $data->purchase_order_id = $model->id;
+                $check_duplicate = PurchaseOrderDetailModel::where('purchase_order_id', $data->purchase_order_id)
+                    ->where('product_id', $data->product_id)
+                    ->count();
+                if ($check_duplicate > 0) {
+                    $message_duplicate = "You enter duplication of products. Please recheck the PO you set.";
+                    continue;
+                } else {
+                    $harga = ProductModel::where('id', $data->product_id)->first();
+                    $total = $total + ($harga->harga_beli * $data->qty);
+                    $data->save();
+                }
+            }
+        }
+        $model->total = $total;
+        $saved = $model->save();
+
+        if (empty($message_duplicate) && $saved) {
+            return redirect('/purchase_orders')->with('success', 'Create purchase order ' . $model->order_number . ' success');
+        } elseif (!empty($message_duplicate) && $saved) {
+            return redirect('/purchase_orders')->with('info', 'Purchase Order add Success! ' . $message_duplicate);
+        } else {
+            return redirect('/purchase_orders')->with('error', 'Add Purchase Order Fail! Please make sure you have filled all the input');
+        }
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        //
+    }
+}

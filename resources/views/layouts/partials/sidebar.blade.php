@@ -141,6 +141,11 @@
               href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
               </span></a>
           </li>
+          <li>
+            <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders') ? 'active' : '' }}"
+              href="{{ url('/purchase_orders') }}"><i data-feather="folder"></i></i><span>Purchase Order
+              </span></a>
+          </li>
         </ul>
       </div>
       <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

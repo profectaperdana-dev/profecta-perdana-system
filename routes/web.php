@@ -9,6 +9,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\SecondProductController;
@@ -103,6 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/sales_order', SalesOrderController::class);
     Route::resource('/check_stock', CheckStockController::class);
     Route::resource('/second_product', SecondProductController::class);
+    Route::resource('/purchase_orders', PurchaseOrderController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {
