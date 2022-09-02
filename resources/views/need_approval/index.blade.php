@@ -42,7 +42,7 @@
                                         style="width:100%">
                                         <thead>
                                             <tr>
-                                                {{-- <th style="width: 5%">Action</th> --}}
+                                                <th style="width: 5%">Action</th>
                                                 <th>#</th>
                                                 <th>SO Number</th>
                                                 <th>Order Date</th>
@@ -50,13 +50,16 @@
                                                 <th>Customer</th>
                                                 <th>Overdue Status</th>
                                                 <th>Overplafond Status</th>
-                                                <th>Approve</th>
+                                                {{-- <th>Approve</th> --}}
                                             </tr>
                                         </thead>
                                         <tbody>
                                             @foreach ($dataInvoice as $value)
                                                 <tr>
-
+                                                    <td class="text-center"><a class="btn btn-primary btn-sm" href="#"
+                                                            data-bs-toggle="modal" data-original-title="test"
+                                                            data-bs-target="#approveData{{ $value->id }}">Approval
+                                                    </td>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $value->order_number }}</td>
                                                     <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
@@ -80,10 +83,7 @@
                                                                 class="badge badge-pill badge-success text-white">No</span>
                                                         </td>
                                                     @endif
-                                                    <td class="text-center"><a class="btn btn-primary btn-sm" href="#"
-                                                            data-bs-toggle="modal" data-original-title="test"
-                                                            data-bs-target="#approveData{{ $value->id }}">Approval
-                                                    </td>
+
                                                     <div class="modal fade" id="approveData{{ $value->id }}"
                                                         tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
