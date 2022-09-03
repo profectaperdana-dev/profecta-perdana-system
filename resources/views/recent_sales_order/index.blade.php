@@ -226,7 +226,7 @@
 
   </div>
 
-  @foreach ($dataSalesOrder as $item)
+  @foreach ($dataSalesOrder as $value)
     <!-- Verify Product Modal Start -->
     <div class="modal fade" id="verifyData{{ $value->id }}" tabindex="-1" data-bs-keyboard="false"
       aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -821,7 +821,6 @@
               },
             });
           });
-
           $(modal_id).on("click", ".addSo-edit", function() {
             ++x;
             var form =
