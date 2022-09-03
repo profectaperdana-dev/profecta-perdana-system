@@ -82,6 +82,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales_orders/reject/{id}', [SalesOrderController::class, 'reject']);
     Route::get('/customers/getTotalCredit/{id}', [CustomerController::class, 'getTotalCredit']);
     Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
+    Route::get('/all_purchase_orders/', [PurchaseOrderController::class, 'getPO']);
+    Route::get('/file_do', [FilesController::class, 'getDO']);
+    Route::get('po/{id}/print', [PurchaseOrderController::class, 'printPO']);
 
 
 
@@ -108,7 +111,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/second_product', SecondProductController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
-    Route::get('/file_do', [FilesController::class, 'getDO']);
 });
 
 Route::group(['middleware' => 'guest'], function () {
