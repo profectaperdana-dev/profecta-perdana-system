@@ -131,14 +131,31 @@
                             href="{{ url('/supliers') }}"><i data-feather="battery"></i><span>Master
                                 Suppliers</span></a>
                     </li>
-                    {{-- <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('supliers') ? 'active' : '' }}"
-                            href="{{ url('/print-invoice') }}"><i data-feather="battery"></i><span>Master
-                                Suppliers</span></a>
-                    </li> --}}
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Transaction</h6>
+                            <h6>Transaction Purchase</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/create') ? 'active' : '' }}"
+                            href="{{ url('/purchase_orders/create') }}"><i data-feather="folder"></i></i><span>Create
+                                Purchase Order
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders') ? 'active' : '' }}"
+                            href="{{ url('/purchase_orders') }}"><i data-feather="folder"></i></i><span>PO Need Approve
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('all_purchase_orders') ? 'active' : '' }}"
+                            href="{{ url('/all_purchase_orders') }}"><i data-feather="folder"></i></i><span>All
+                                Purchase Order
+                            </span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Transaction Sales</h6>
                         </div>
                     </li>
                     <li>
@@ -160,7 +177,8 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('invoice/manage_payment') ? 'active' : '' }}"
-                            href="{{ url('/invoice/manage_payment') }}"><i data-feather="credit-card"></i><span>Manage
+                            href="{{ url('/invoice/manage_payment') }}"><i
+                                data-feather="credit-card"></i><span>Manage
                                 Payments
                             </span></a>
                     </li>
@@ -169,11 +187,7 @@
                             href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
                             </span></a>
                     </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders') ? 'active' : '' }}"
-                            href="{{ url('/purchase_orders') }}"><i data-feather="folder"></i></i><span>Purchase Order
-                            </span></a>
-                    </li>
+
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Reports & Files</h6>

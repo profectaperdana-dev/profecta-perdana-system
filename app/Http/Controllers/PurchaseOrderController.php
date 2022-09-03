@@ -11,6 +11,7 @@ use App\Models\WarehouseModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use PDF;
 
 class PurchaseOrderController extends Controller
 {
@@ -21,7 +22,7 @@ class PurchaseOrderController extends Controller
      */
     public function index()
     {
-        $all_purchases = PurchaseOrderModel::latest()->get();
+        $all_purchases = PurchaseOrderModel::where('isapprove', 0)->latest()->get();
         $all_suppliers = SuppliersModel::latest()->get();
         $all_warehouses = WarehouseModel::latest()->get();
 
@@ -33,6 +34,29 @@ class PurchaseOrderController extends Controller
         ];
 
         return view('purchase_orders.index', $data);
+    }
+    public function getPO()
+    {
+        $all_purchases = PurchaseOrderModel::where('isapprove', 1)->latest()->get();
+        $all_suppliers = SuppliersModel::latest()->get();
+        $all_warehouses = WarehouseModel::latest()->get();
+
+        $data = [
+            "title" => "All Data Purchase Orders",
+            "purchases" => $all_purchases,
+            "suppliers" => $all_suppliers,
+            "warehouses" => $all_warehouses
+        ];
+
+        return view('purchase_orders.po', $data);
+    }
+    public function printPO($id)
+    {
+        $data = PurchaseOrderModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+
+        $pdf = PDF::loadView('purchase_orders.print_po', compact('data', 'warehouse'))->setPaper('A5', 'landscape');
+        return $pdf->download($data->order_number . '.pdf');
     }
 
     /**
@@ -72,22 +96,11 @@ class PurchaseOrderController extends Controller
             "poFields.*.qty" => "required|numeric"
         ]);
 
-        //Create Order Number
-        $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
-            ->select('customer_areas.area_code', 'warehouses.id')
-            ->where('warehouses.id', $request->get('warehouse_id'))
-            ->first();
-        $length = 3;
-        $id = intval(PurchaseOrderModel::where('order_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
-        $po_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
-        $year = Carbon::now()->format('Y'); // 2022
-        $month = Carbon::now()->format('m'); // 2022
-        $tahun = substr($year, -2);
-        $order_number = 'POPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $po_number_id;
+
 
         // save purchase orders
         $model = new PurchaseOrderModel();
-        $model->order_number = $order_number;
+        $model->order_number = '-';
         $model->order_date = Carbon::now()->format('Y-m-d');
         $model->due_date = $request->get('due_date');
         $model->supplier_id = $request->get('supplier_id');
@@ -95,6 +108,8 @@ class PurchaseOrderController extends Controller
         $model->remark = $request->get('remark');
         $model->created_by = Auth::user()->id;
         $model->isvalidated = 0;
+        $model->isapprove = 0;
+
         $saved = $model->save();
 
         // save purchase order details
@@ -142,16 +157,6 @@ class PurchaseOrderController extends Controller
             "poFields.*.product_id" => "required|numeric",
             "poFields.*.qty" => "required|numeric"
         ]);
-
-        //assign object
-        $model = PurchaseOrderModel::where('id', $id)->first();
-        $model->due_date = $request->get('due_date');
-        $model->supplier_id = $request->get('supplier_id');
-        $model->warehouse_id = $request->get('warehouse_id');
-        $model->remark = $request->get('remark');
-        $model->created_by = Auth::user()->id;
-        $saved = $model->save();
-
         //Check Duplicate
         $products_arr = [];
         foreach ($request->get('poFields') as $check) {
@@ -162,6 +167,31 @@ class PurchaseOrderController extends Controller
         if (!empty($duplicates)) {
             return redirect('/purchase_orders')->with('error', "You enter duplicate products! Please check again!");
         }
+        //assign object
+        $model = PurchaseOrderModel::where('id', $id)->first();
+        $model->due_date = $request->get('due_date');
+        $model->supplier_id = $request->get('supplier_id');
+        $model->warehouse_id = $request->get('warehouse_id');
+        $model->remark = $request->get('remark');
+        $model->isapprove = 1;
+        $model->created_by = Auth::user()->id;
+
+        //Create Order Number
+        $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+            ->select('customer_areas.area_code', 'warehouses.id')
+            ->where('warehouses.id', $request->get('warehouse_id'))
+            ->first();
+        $length = 3;
+        $id = intval(PurchaseOrderModel::where('order_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
+        $po_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
+        $year = Carbon::now()->format('Y'); // 2022
+        $month = Carbon::now()->format('m'); // 2022
+        $tahun = substr($year, -2);
+        $order_number = 'POPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $po_number_id;
+        $model->order_number = $order_number;
+        $saved = $model->save();
+
+
 
         //Save POD Input and Total
         $total = 0;
@@ -186,7 +216,7 @@ class PurchaseOrderController extends Controller
         $del = PurchaseOrderDetailModel::where('purchase_order_id', $id)
             ->whereNotIn('product_id', $products_arr)->delete();
 
-        //Save total    
+        //Save total
         $model->total = $total;
 
         $saved_model = $model->save();

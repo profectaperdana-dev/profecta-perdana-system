@@ -9,4 +9,9 @@ class SuppliersModel extends Model
 {
     use HasFactory;
     protected $table = 'suppliers';
+
+    public function subMaterialBy()
+    {
+        return $this->hasOne(SubMaterialModel::class, 'id', 'sub_materials_id');
+    }
 }
