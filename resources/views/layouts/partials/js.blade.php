@@ -50,7 +50,6 @@
  @endif
  <script src="{{ asset('assets') }}/js/notify/bootstrap-notify.min.js"></script>
  <script src="{{ asset('assets') }}/js/notify/notify-script.js"></script>
- <script src="{{ asset('js/custom.js') }}"></script>
  <script src="{{ asset('js/app.js') }}"></script>
  <!-- login js-->
  <!-- Plugin used-->

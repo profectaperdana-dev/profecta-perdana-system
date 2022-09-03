@@ -55,6 +55,17 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="col-md-12">
+                                                <label class="font-weight-bold">Email</label>
+                                                <input type="text" value="{{ old('email') }}"
+                                                    class="form-control text-capitalize {{ $errors->first('email') ? ' is-invalid' : '' }}"
+                                                    name="email" placeholder="Email Supplier" required>
+                                                @error('email')
+                                                    <small class="text-danger">{{ $message }}.</small>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12">
                                                 <label class="font-weight-bold">Phone Number</label>
                                                 <input type="text" value="{{ old('no_telepon_supplier') }}"
                                                     class="form-control text-capitalize {{ $errors->first('no_telepon_supplier') ? ' is-invalid' : '' }}"
@@ -116,6 +127,7 @@
                                         <th>#</th>
                                         <th>Name Supplier</th>
                                         <th>Addres</th>
+                                        <th>Email</th>
                                         <th>Phone Number</th>
                                         <th>NPWP</th>
                                         <th>PIC</th>
@@ -170,7 +182,6 @@
                                                                                         class="text-danger">{{ $message }}.</small>
                                                                                 @enderror
                                                                             </div>
-
                                                                             <div class="col-md-6">
                                                                                 <label
                                                                                     class="font-weight-bold">Address</label>
@@ -196,8 +207,22 @@
                                                                                         class="text-danger">{{ $message }}.</small>
                                                                                 @enderror
                                                                             </div>
-
                                                                             <div class="col-md-6">
+                                                                                <label class="font-weight-bold">Email
+                                                                                </label>
+                                                                                <input type="text"
+                                                                                    value="{{ old('email_', $value->email) }}"
+                                                                                    class="form-control text-capitalize {{ $errors->first('email_') ? ' is-invalid' : '' }}"
+                                                                                    name="email_"
+                                                                                    placeholder="Phone Number" required>
+                                                                                @error('email_')
+                                                                                    <small
+                                                                                        class="text-danger">{{ $message }}.</small>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-md-4">
                                                                                 <label class="font-weight-bold">NPWP
                                                                                     Supplier</label>
                                                                                 <input type="text"
@@ -210,9 +235,7 @@
                                                                                         class="text-danger">{{ $message }}.</small>
                                                                                 @enderror
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-4">
                                                                                 <label class="font-weight-bold">PIC
                                                                                     Supplier</label>
                                                                                 <input type="text"
@@ -225,7 +248,7 @@
                                                                                         class="text-danger">{{ $message }}.</small>
                                                                                 @enderror
                                                                             </div>
-                                                                            <div class="col-md-6">
+                                                                            <div class="col-md-4">
                                                                                 <label>
                                                                                     Status</label>
                                                                                 <select id="" required
@@ -309,6 +332,7 @@
                                             <td>
                                                 <address>{{ $value->alamat_supplier }}</address>
                                             </td>
+                                            <td>{{ $value->email }}</td>
                                             <td>{{ $value->no_telepon_supplier }}</td>
                                             <td>{{ $value->npwp_supplier }}</td>
                                             <td>{{ $value->pic_supplier }}</td>
@@ -319,7 +343,6 @@
                                                     <div><span class="badge badge-success"> Active</span></div>
                                                 @endif
                                             </td>
-
                                         </tr>
                                     @endforeach
                                 </tbody>

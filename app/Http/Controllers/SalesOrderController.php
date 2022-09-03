@@ -58,17 +58,20 @@ class SalesOrderController extends Controller
     {
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-
-        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
+        $data->pdf_invoice = $data->order_number . '.pdf';
+        $data->save();
+        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
         return $pdf->download($data->order_number . '.pdf');
     }
     //print delivery order
     public function deliveryOrder($id)
     {
         $data = SalesOrderModel::find($id);
+        $so_number = str_replace('IVPP', 'DOPP', $data->order_number);
+        $data->pdf_do = $so_number . '.pdf';
+        $data->save();
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = new Options();
-        $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape');
+        $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $so_number . '.pdf');
         return $pdf->download($data->order_number . '.pdf');
     }
 
@@ -421,7 +424,6 @@ class SalesOrderController extends Controller
                 $so_number = $model->order_number;
                 $so_number = str_replace('SOPP', 'IVPP', $so_number);
                 $model->order_number = $so_number;
-
                 //Potong Stock
                 $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
                 foreach ($selected_sod as $value) {
@@ -451,9 +453,16 @@ class SalesOrderController extends Controller
                 $notif->save();
             }
         }
-
+        $do = str_replace('IVPP', 'DOPP', $so_number);
+        // dd($do);
+        $model->pdf_do = $do . '.pdf';
+        $model->pdf_invoice = $model->order_number . '.pdf';
         $saved_model = $model->save();
         if ($saved_model == true) {
+            $data = SalesOrderModel::where('order_number', $model->order_number)->first();
+            $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+            $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
+            $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
             return redirect('/recent_sales_order')->with('success', "Sales Order Verification Success");
         } else {
             return redirect('/recent_sales_order')->with('error', "Sales Order Verification Fail! Please check again!");

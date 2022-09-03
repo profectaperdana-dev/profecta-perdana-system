@@ -9,7 +9,7 @@
                     id="sidebar-toggle"></i></div>
         </div>
         <div class="left-menu-header col">
-            <ul>
+            {{-- <ul>
                 <li>
                     <form class="form-inline search-form">
                         <div class="search-bg"><i class="fa fa-search"></i>
@@ -17,7 +17,7 @@
                         </div>
                     </form><span class="d-sm-none mobile-search search-bg"><i class="fa fa-search"></i></span>
                 </li>
-            </ul>
+            </ul> --}}
         </div>
         <div class="nav-right col pull-right right-menu p-0">
             <ul class="nav-menus">

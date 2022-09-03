@@ -137,13 +137,57 @@
                         <div>
                             <h6>Transaction</h6>
                         </div>
-
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('sales_order') ? 'active' : '' }}"
+                            href="{{ url('/sales_order') }}"><i data-feather="shopping-cart"></i><span>Create Sales
+                                Order
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
+                            href="{{ url('/recent_sales_order') }}"><i data-feather="star"></i><span>SO Need Verify
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('need_approval') ? 'active' : '' }}"
+                            href="{{ url('/need_approval') }}"><i data-feather="toggle-right"></i><span>SO
+                                Need Approve
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('invoice/manage_payment') ? 'active' : '' }}"
+                            href="{{ url('/invoice/manage_payment') }}"><i data-feather="credit-card"></i><span>Manage
+                                Payments
+                            </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('invoice') ? 'active' : '' }}"
                             href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
                             </span></a>
                     </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Reports & Files</h6>
+                        </div>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
+                            href="javascript:void(0)"><i data-feather="archive"></i><span>Files Arsip</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) block @else none @endif ">
+                            <li><a href="{{ url('/file_invoice') }}"
+                                    class="{{ request()->is('file_invoice') ? 'active' : '' }}">File Invoice</a></li>
+                            <li><a href="{{ url('/file_do') }}"
+                                    class="{{ request()->is('file_do') ? 'active' : '' }}">File Delivery
+                                    Order
+                                </a></li>
+                            <li><a href="{{ url('/file_po') }}"
+                                    class="{{ request()->is('file_po') ? 'active' : '' }}">File Purchase
+                                    Order</a>
+                            </li>
+                        </ul>
+                    </li>
+
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>
