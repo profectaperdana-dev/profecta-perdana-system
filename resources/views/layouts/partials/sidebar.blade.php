@@ -21,7 +21,8 @@
                 <ul class="nav-menu custom-scrollbar">
                     <li class="back-btn">
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
-                                aria-hidden="true"></i></div>
+                                aria-hidden="true"></i>
+                        </div>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -78,7 +79,8 @@
                             </li>
                             <li>
                                 <a href="{{ url('/stocks') }}"
-                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Products Stocks</a>
+                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Products
+                                    Stocks</a>
                             </li>
                             <li>
                                 <a href="{{ url('/second_product') }}"
@@ -92,24 +94,25 @@
                             href="javascript:void(0)"><i data-feather="user-check"></i><span>Master Customers</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('customers') || request()->is('customer_categories') || request()->is('customer_areas')) block @else none @endif ">
-                            <li><a href="{{ url('/customers') }}"
-                                    class="{{ request()->is('customers') ? 'active' : '' }}">Customers</a></li>
                             <li><a href="{{ url('/customer_categories') }}"
                                     class="{{ request()->is('customer_categories') ? 'active' : '' }}">Customer
                                     Categories</a></li>
                             <li><a href="{{ url('/customer_areas') }}"
                                     class="{{ request()->is('customer_areas') ? 'active' : '' }}">Customer Areas</a>
                             </li>
+                            <li><a href="{{ url('/customers') }}"
+                                    class="{{ request()->is('customers') ? 'active' : '' }}">Customers</a></li>
                         </ul>
                     </li>
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('users') || request()->is('roles')) active @endif"
                             href="javascript:void(0)"><i data-feather="users"></i><span>Master Accounts</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('users') || request()->is('roles')) block @else none @endif ">
+                            <li><a href="{{ url('/roles') }}"
+                                    class="{{ request()->is('roles') ? 'active' : '' }}">Accounts Role</a>
+                            </li>
                             <li><a href="{{ url('/users') }}"
                                     class="{{ request()->is('users') ? 'active' : '' }}">Accounts</a></li>
-                            <li><a href="{{ url('/roles') }}"
-                                    class="{{ request()->is('roles') ? 'active' : '' }}">Accounts Role</a></li>
 
                         </ul>
                     </li>
@@ -166,12 +169,18 @@
                             href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
                             </span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders') ? 'active' : '' }}"
+                            href="{{ url('/purchase_orders') }}"><i data-feather="folder"></i></i><span>Purchase Order
+                            </span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Reports & Files</h6>
                         </div>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
+                    <li class="dropdown"><a
+                            class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
                             href="javascript:void(0)"><i data-feather="archive"></i><span>Files Arsip</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) block @else none @endif ">

@@ -10,6 +10,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\SecondProductController;
@@ -80,6 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/send_email/{id}', [SendEmailController::class, 'index']);
     Route::get('/sales_orders/reject/{id}', [SalesOrderController::class, 'reject']);
     Route::get('/customers/getTotalCredit/{id}', [CustomerController::class, 'getTotalCredit']);
+    Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
 
 
 
@@ -104,6 +106,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/sales_order', SalesOrderController::class);
     Route::resource('/check_stock', CheckStockController::class);
     Route::resource('/second_product', SecondProductController::class);
+    Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
     Route::get('/file_do', [FilesController::class, 'getDO']);
 });

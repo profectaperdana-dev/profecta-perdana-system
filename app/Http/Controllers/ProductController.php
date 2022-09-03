@@ -32,17 +32,24 @@ class ProductController extends Controller
         // dd($data);
         return view('products.index', compact('data', 'title'));
     }
-    public function selectAll(Request $request)
+    public function selectAll()
     {
         try {
             $product = [];
-            if ($request->has('q')) {
-                $search = $request->q;
-                $product = ProductModel::select("id", "nama_barang")
-                    ->where('nama_barang', 'LIKE', "%$search%")
+            if (request()->has('q')) {
+                $search = request()->q;
+                $product = ProductModel::join('product_sub_materials', 'product_sub_materials.id', '=', 'products.id_sub_material')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->select('products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                    ->where('products.nama_barang', 'LIKE', "%$search%")
+                    ->orWhere('product_sub_types.type_name', 'LIKE', "%$search%")
+                    ->orWhere('product_sub_materials.nama_sub_material', 'LIKE', "%$search%")
                     ->get();
             } else {
-                $product = ProductModel::latest()->get();
+                $product = ProductModel::join('product_sub_materials', 'product_sub_materials.id', '=', 'products.id_sub_material')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->select('products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                    ->get();
             }
             return response()->json($product);
         } catch (\Throwable $th) {
@@ -82,7 +89,7 @@ class ProductController extends Controller
     public function selectCost($product_id)
     {
         try {
-            $product = ProductModel::select('id', 'harga_jual_nonretail')
+            $product = ProductModel::select('id', 'harga_jual_nonretail', 'harga_beli')
                 ->where('id', $product_id)
                 ->first();
 
