@@ -1,5 +1,5 @@
     $(document).ready(function() {
-        $('#myTable').DataTable()
+    //     $('#myTable').DataTable()
 
     const imgInput = document.getElementById('inputreference');
     const imgEl = document.getElementById('previewimg');

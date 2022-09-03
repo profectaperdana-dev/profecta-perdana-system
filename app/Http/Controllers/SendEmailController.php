@@ -18,7 +18,6 @@ class SendEmailController extends Controller
     {
 
         $data = SalesOrderModel::find($id);
-
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf_invoice/' . $data->order_number . '.pdf');
 
@@ -27,7 +26,7 @@ class SendEmailController extends Controller
         if (Mail::failures()) {
             return redirect('/invoice')->with('error', 'Send Invoice By Email Failed !');
         } else {
-            return redirect('/invoice')->with('success', 'Send Invoice ' . $data->order_number . ' to ' . $data->customerBy->name_cust . '  Email Success !');
+            return redirect('/invoice')->with('success', 'Send Invoice ' . $data->order_number . ' to ' . $data->customerBy->name_cust . ' by Email Success !');
         }
     }
 }

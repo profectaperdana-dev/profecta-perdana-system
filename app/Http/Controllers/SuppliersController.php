@@ -40,27 +40,26 @@ class SuppliersController extends Controller
      */
     public function store(Request $request)
     {
-
         $request->validate([
             'nama_supplier' => 'required',
             'alamat_supplier' => 'required',
             'no_telepon_supplier' => 'required|numeric',
             'npwp_supplier' => 'required',
             'pic_supplier' => 'required',
+            'email' => 'required',
 
         ]);
-
         $model = new SuppliersModel();
         $model->nama_supplier = $request->get('nama_supplier');
         $model->alamat_supplier = $request->get('alamat_supplier');
         $model->no_telepon_supplier = $request->get('no_telepon_supplier');
         $model->npwp_supplier = $request->get('npwp_supplier');
         $model->pic_supplier = $request->get('pic_supplier');
+        $model->email = $request->get('email');
         $model->status_supplier = 1;
         $model->created_by = Auth::user()->id;
         $model->save();
-
-        return redirect('/supliers')->with('success', 'Add Data Suppliers Success');
+        return redirect('/supliers')->with('success', 'Add Data Suppliers ' . $model->nama_supplier . ' Success');
     }
 
     /**
@@ -100,6 +99,7 @@ class SuppliersController extends Controller
             'no_telepon_supplier_' => 'required|numeric',
             'npwp_supplier_' => 'required',
             'pic_supplier_' => 'required',
+            'email_' => 'required',
 
         ]);
 
@@ -110,10 +110,12 @@ class SuppliersController extends Controller
         $model->npwp_supplier = $request->get('npwp_supplier_');
         $model->pic_supplier = $request->get('pic_supplier_');
         $model->status_supplier = $request->get('status_supplier');
+        $model->email = $request->get('email_');
+
         $model->created_by = Auth::user()->id;
         $model->save();
 
-        return redirect('/supliers')->with('info', 'Changes Data Suppliers Success');
+        return redirect('/supliers')->with('info', 'Edit Data Suppliers ' . $model->nama_supplier . ' Success');
     }
 
     /**
@@ -126,6 +128,6 @@ class SuppliersController extends Controller
     {
         $model = SuppliersModel::find($id);
         $model->delete();
-        return redirect('/supliers')->with('error', 'Delete Data Suppliers Success');
+        return redirect('/supliers')->with('error', 'Delete Data Suppliers ' . $model->nama_supplier . ' Success');
     }
 }

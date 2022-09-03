@@ -5,6 +5,7 @@ use App\Http\Controllers\CustomerAreasController;
 use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DiscountController;
+use App\Http\Controllers\FilesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
@@ -106,6 +107,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/check_stock', CheckStockController::class);
     Route::resource('/second_product', SecondProductController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
+    Route::resource('/file_invoice', FilesController::class);
+    Route::get('/file_do', [FilesController::class, 'getDO']);
 });
 
 Route::group(['middleware' => 'guest'], function () {

@@ -41,6 +41,24 @@
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-        <script src="{{ asset('js/custom.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+
+                const imgInput = document.getElementById('inputreference');
+                const imgEl = document.getElementById('previewimg');
+                const previewLabel = document.getElementById('previewLabel');
+                imgInput.addEventListener('change', () => {
+                    if (imgInput.files && imgInput.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            imgEl.src = e.target.result;
+                            imgEl.removeAttribute('hidden');
+                            previewLabel.removeAttribute('hidden');
+                        }
+                        reader.readAsDataURL(imgInput.files[0]);
+                    }
+                });
+            });
+        </script>
     @endpush
 @endsection
