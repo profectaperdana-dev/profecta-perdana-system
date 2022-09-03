@@ -196,6 +196,11 @@ class PurchaseOrderController extends Controller
         }
     }
 
+    public function validation(Request $request, $id)
+    {
+        # code...
+    }
+
     /**
      * Display the specified resource.
      *
