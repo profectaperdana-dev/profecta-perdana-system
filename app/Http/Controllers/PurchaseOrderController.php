@@ -21,10 +21,14 @@ class PurchaseOrderController extends Controller
     public function index()
     {
         $all_purchases = PurchaseOrderModel::latest()->get();
+        $all_suppliers = SuppliersModel::latest()->get();
+        $all_warehouses = WarehouseModel::latest()->get();
 
         $data = [
             "title" => "Purchase Orders",
-            "purchases" => $all_purchases
+            "purchases" => $all_purchases,
+            "suppliers" => $all_suppliers,
+            "warehouses" => $all_warehouses
         ];
 
         return view('purchase_orders.index', $data);
@@ -39,13 +43,11 @@ class PurchaseOrderController extends Controller
     {
         $all_suppliers = SuppliersModel::latest()->get();
         $all_warehouses = WarehouseModel::latest()->get();
-        $all_products = ProductModel::with(['sub_types', 'sub_materials'])->latest()->get();
 
         $data = [
             "title" => "Create Purchase Orders",
             "suppliers" => $all_suppliers,
             "warehouses" => $all_warehouses,
-            "products" => $all_products
         ];
 
         return view('purchase_orders.create', $data);
@@ -128,6 +130,72 @@ class PurchaseOrderController extends Controller
         }
     }
 
+    public function manage(Request $request, $id)
+    {
+        // validator
+        $request->validate([
+            "supplier_id" => "required|numeric",
+            "warehouse_id" => "required|numeric",
+            "due_date" => "required",
+            "remark" => "required",
+            "poFields.*.product_id" => "required|numeric",
+            "poFields.*.qty" => "required|numeric"
+        ]);
+
+        //assign object
+        $model = PurchaseOrderModel::where('id', $id)->first();
+        $model->due_date = $request->get('due_date');
+        $model->supplier_id = $request->get('supplier_id');
+        $model->warehouse_id = $request->get('warehouse_id');
+        $model->remark = $request->get('remark');
+        $model->created_by = Auth::user()->id;
+        $saved = $model->save();
+
+        //Check Duplicate
+        $products_arr = [];
+        foreach ($request->get('poFields') as $check) {
+            array_push($products_arr, $check['product_id']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return redirect('/purchase_orders')->with('error', "You enter duplicate products! Please check again!");
+        }
+
+        //Save POD Input and Total
+        $total = 0;
+        foreach ($request->poFields as $product) {
+            $product_exist = PurchaseOrderDetailModel::where('purchase_order_id', $id)
+                ->where('product_id', $product['product_id'])->first();
+            if ($product_exist != null) {
+                $product_exist->qty = $product['qty'];
+                $product_exist->save();
+            } else {
+                $new_product = new PurchaseOrderDetailModel();
+                $new_product->purchase_order_id = $id;
+                $new_product->product_id = $product['product_id'];
+                $new_product->qty = $product['qty'];
+                $new_product->save();
+            }
+            $harga = ProductModel::where('id', $product['product_id'])->first();
+            $total = $total + ($harga->harga_beli * $product['qty']);
+        }
+
+        //Delete product that not in POD Input
+        $del = PurchaseOrderDetailModel::where('purchase_order_id', $id)
+            ->whereNotIn('product_id', $products_arr)->delete();
+
+        //Save total    
+        $model->total = $total;
+
+        $saved_model = $model->save();
+        if ($saved_model == true) {
+            return redirect('/purchase_orders')->with('success', "Purchase Order Update Success");
+        } else {
+            return redirect('/purchase_orders')->with('error', "Purchase Order Update Fail! Please check again!");
+        }
+    }
+
     /**
      * Display the specified resource.
      *
@@ -170,6 +238,9 @@ class PurchaseOrderController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $modelPurchaseOrder = PurchaseOrderModel::where('id', $id)->first();
+        $modelPurchaseOrder->purchaseOrderDetailsBy()->delete();
+        $modelPurchaseOrder->delete();
+        return redirect('/purchase_orders')->with('error', 'Delete Data Purchase Order Success');
     }
 }

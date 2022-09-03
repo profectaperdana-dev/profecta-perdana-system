@@ -822,8 +822,6 @@
             });
           });
 
-          console.log("Before: " + $(modal_id).html());
-
           $(modal_id).on("click", ".addSo-edit", function() {
             ++x;
             var form =
@@ -857,7 +855,6 @@
               "</div>" +
               " </div>";
             $(modal_id).find(".formSo-edit").append(form);
-            console.log("After: " + $(modal_id).html());
 
             $(modal_id).find(".productSo-edit").select2({
               width: "100%",

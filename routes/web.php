@@ -80,6 +80,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/send_email/{id}', [SendEmailController::class, 'index']);
     Route::get('/sales_orders/reject/{id}', [SalesOrderController::class, 'reject']);
     Route::get('/customers/getTotalCredit/{id}', [CustomerController::class, 'getTotalCredit']);
+    Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
 
 
 

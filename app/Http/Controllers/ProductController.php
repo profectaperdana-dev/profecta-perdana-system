@@ -89,7 +89,7 @@ class ProductController extends Controller
     public function selectCost($product_id)
     {
         try {
-            $product = ProductModel::select('id', 'harga_jual_nonretail')
+            $product = ProductModel::select('id', 'harga_jual_nonretail', 'harga_beli')
                 ->where('id', $product_id)
                 ->first();
 
