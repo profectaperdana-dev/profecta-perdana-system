@@ -88,7 +88,7 @@
             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="{{ url('purchase_orders/' . $value->id . '/manage') }}" method="POST"
+            <form action="{{ url('purchase_orders/' . $item->id . '/manage') }}" method="POST"
               enctype="multipart/form-data">
               @csrf
               <div class="container-fluid">
