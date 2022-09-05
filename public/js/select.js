@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $(
-        ".editPayments,.uoms,.materials,.submaterials, .category-cust, .area-cust, .role-acc, .warehouse-acc, .sub_type, .discount"
+        ".editPayments,.uoms,.materials,.submaterials, .category-cust, .area-cust, .role-acc, .warehouse-acc, .sub_type, .discount, .job-acc"
     ).select2({
         width: "100%",
     });

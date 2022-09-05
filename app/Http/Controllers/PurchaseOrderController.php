@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderDetailModel;
 use App\Models\PurchaseOrderModel;
+use App\Models\StockModel;
 use App\Models\SuppliersModel;
 use App\Models\WarehouseModel;
 use Carbon\Carbon;
@@ -58,6 +59,17 @@ class PurchaseOrderController extends Controller
         return $pdf->download($data->order_number . '.pdf');
     }
 
+    public function receivingPO()
+    {
+        $all_purchases = PurchaseOrderModel::where('isapprove', 1)->where('isvalidated', 0)->latest()->get();
+
+        $data = [
+            "title" => "Receiving Purchase Order",
+            "purchases" => $all_purchases,
+        ];
+
+        return view('purchase_orders.receiving', $data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -228,6 +240,83 @@ class PurchaseOrderController extends Controller
             return redirect('/purchase_orders')->with('success', "Purchase Order Update Success");
         } else {
             return redirect('/purchase_orders')->with('error', "Purchase Order Update Fail! Please check again!");
+        }
+    }
+
+    public function validation(Request $request, $id)
+    {
+        // validator
+        $request->validate([
+            "remark" => "required",
+            "poFields.*.product_id" => "required|numeric",
+            "poFields.*.qty" => "required|numeric"
+        ]);
+
+        //Check Duplicate
+        $products_arr = [];
+        foreach ($request->get('poFields') as $check) {
+            array_push($products_arr, $check['product_id']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return redirect('/purchase_orders')->with('error', "You enter duplicate products! Please check again!");
+        }
+
+        //assign object
+        $model = PurchaseOrderModel::where('id', $id)->first();
+        $model->remark = $request->get('remark');
+        $saved = $model->save();
+
+        //Save POD Input and Total
+        $total = 0;
+        foreach ($request->poFields as $product) {
+            $product_exist = PurchaseOrderDetailModel::where('purchase_order_id', $id)
+                ->where('product_id', $product['product_id'])->first();
+            if ($product_exist != null) {
+                $product_exist->qty = $product['qty'];
+                $product_exist->save();
+            } else {
+                $new_product = new PurchaseOrderDetailModel();
+                $new_product->purchase_order_id = $id;
+                $new_product->product_id = $product['product_id'];
+                $new_product->qty = $product['qty'];
+                $new_product->save();
+            }
+            $harga = ProductModel::where('id', $product['product_id'])->first();
+            $total = $total + ($harga->harga_beli * $product['qty']);
+        }
+
+        //Delete product that not in POD Input
+        $del = PurchaseOrderDetailModel::where('purchase_order_id', $id)
+            ->whereNotIn('product_id', $products_arr)->delete();
+
+        //Change Stock
+        $selected_pod = PurchaseOrderDetailModel::where('purchase_order_id', $id)->get();
+        foreach ($selected_pod as $pod) {
+            $stock = StockModel::where('warehouses_id', $model->warehouse_id)
+                ->where('products_id', $pod->product_id)->first();
+            if ($stock == null) {
+                $new_stock = new StockModel();
+                $new_stock->products_id = $pod->product_id;
+                $new_stock->warehouses_id = $model->warehouse_id;
+                $new_stock->stock = $pod->qty;
+                $new_stock->save();
+            } else {
+                $stock->stock = $stock->stock + $pod->qty;
+                $stock->save();
+            }
+        }
+
+        //Save total
+        $model->isvalidated = 1;
+        $model->total = $total;
+
+        $saved_model = $model->save();
+        if ($saved_model == true) {
+            return redirect('/purchase_orders/receiving')->with('success', "Purchase Order Validation Success");
+        } else {
+            return redirect('/purchase_orders/receiving')->with('error', "Purchase Order Validation Fail! Please check again!");
         }
     }
 

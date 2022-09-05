@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FilesController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\NotificationController;
@@ -83,13 +84,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales_orders/reject/{id}', [SalesOrderController::class, 'reject']);
     Route::get('/customers/getTotalCredit/{id}', [CustomerController::class, 'getTotalCredit']);
     Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
-    Route::get('/all_purchase_orders/', [PurchaseOrderController::class, 'getPO']);
+    Route::get('/all_purchase_orders', [PurchaseOrderController::class, 'getPO']);
     Route::get('/file_do', [FilesController::class, 'getDO']);
     Route::get('/po/{id}/print', [PurchaseOrderController::class, 'printPO']);
     Route::get('/send_email_po/{id}', [SendEmailController::class, 'sendPo']);
     Route::get('/file_po/', [FilesController::class, 'getFilePo']);
     Route::get('/notification/getAll/', [NotificationController::class, 'getAll']);
     Route::get('/read_notif/{id}/', [NotificationController::class, 'readMessage']);
+    Route::post('/purchase_orders/{id}/validate', [PurchaseOrderController::class, 'validation']);
+    Route::get('/purchase_orders/receiving', [PurchaseOrderController::class, 'receivingPO']);
 
 
 
@@ -116,6 +119,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/second_product', SecondProductController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
+    Route::resource('/jobs', JobController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

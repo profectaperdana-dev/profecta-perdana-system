@@ -26,7 +26,7 @@
             <hr class="bg-primary">
           </div>
           <div class="card-body">
-            <form class="form-label-left input_mask" method="post" action="{{ url('/roles') }}"
+            <form class="form-label-left input_mask" method="post" action="{{ url('/jobs') }}"
               enctype="multipart/form-data">
               @csrf
               <div class="row">
@@ -34,10 +34,10 @@
                 <div class="col-md-12">
                   <div class="form-group row">
                     <div class="form-group col-md-12">
-                      <label>Role Name</label>
-                      <input type="text" name="name" class="form-control @error('name') is-invalid @enderror"
-                        placeholder="Enter Role Name" required>
-                      @error('name')
+                      <label>Job Name</label>
+                      <input type="text" name="job_name" class="form-control @error('job_name') is-invalid @enderror"
+                        placeholder="Enter Job Name" required>
+                      @error('job_name')
                         <small class="text-danger">{{ $message }}</small>
                       @enderror
                     </div>
@@ -73,7 +73,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($roles as $key => $value)
+                  @foreach ($jobs as $key => $value)
                     <tr>
                       <td style="width: 10%">
                         <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
@@ -90,13 +90,13 @@
                       <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                          <form method="post" action="{{ url('roles/' . $value->id) }}" enctype="multipart/form-data">
+                          <form method="post" action="{{ url('jobs/' . $value->id) }}" enctype="multipart/form-data">
                             @csrf
                             <input name="_method" type="hidden" value="PATCH">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                  {{ $value->name }}</h5>
+                                  {{ $value->job_name }}</h5>
                                 <button class="btn-close" type="button" data-bs-dismiss="modal"
                                   aria-label="Close"></button>
                               </div>
@@ -108,9 +108,10 @@
                                         <div class="form-group col-md-12">
                                           <label>Name</label>
                                           <input type="text"
-                                            class="form-control @error('name_edit') is-invalid @enderror" name="name_edit"
-                                            value="{{ $value->name }}" placeholder="Customer Category Name" required>
-                                          @error('name_edit')
+                                            class="form-control @error('job_name_edit') is-invalid @enderror"
+                                            name="job_name_edit" value="{{ $value->job_name }}"
+                                            placeholder="Enter Job Name" required>
+                                          @error('job_name_edit')
                                             {{ $message }}
                                           @enderror
                                         </div>
@@ -134,14 +135,13 @@
                       <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
                         aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog" role="document">
-                          <form method="post" action="{{ url('roles/' . $value->id) }}"
-                            enctype="multipart/form-data">
+                          <form method="post" action="{{ url('jobs/' . $value->id) }}" enctype="multipart/form-data">
                             @csrf
                             <input name="_method" type="hidden" value="DELETE">
                             <div class="modal-content">
                               <div class="modal-header">
                                 <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                  {{ $value->name }}</h5>
+                                  {{ $value->job_name }}</h5>
                                 <button class="btn-close" type="button" data-bs-dismiss="modal"
                                   aria-label="Close"></button>
                               </div>
@@ -165,7 +165,7 @@
                       </div>
                       {{-- End Modal Delete UOM --}}
                       <td>{{ $key + 1 }}</td>
-                      <td>{{ $value->name }}</td>
+                      <td>{{ $value->job_name }}</td>
                     </tr>
                   @endforeach
                 </tbody>
