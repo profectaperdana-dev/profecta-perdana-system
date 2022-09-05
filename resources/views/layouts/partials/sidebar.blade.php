@@ -135,18 +135,18 @@
           </li>
           <li>
             <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/create') ? 'active' : '' }}"
-              href="{{ url('/purchase_orders/create') }}"><i data-feather="folder"></i></i><span>Create
+              href="{{ url('/purchase_orders/create') }}"><i data-feather="shopping-bag"></i><span>Create
                 Purchase Order
               </span></a>
           </li>
           <li>
             <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders') ? 'active' : '' }}"
-              href="{{ url('/purchase_orders') }}"><i data-feather="folder"></i></i><span>PO Need Approve
+              href="{{ url('/purchase_orders') }}"><i data-feather="bookmark"></i><span>PO Need Approve
               </span></a>
           </li>
           <li>
             <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/receiving') ? 'active' : '' }}"
-              href="{{ url('/purchase_orders/receiving') }}"><i data-feather="folder"></i></i><span>Receiving PO
+              href="{{ url('/purchase_orders/receiving') }}"><i data-feather="folder-plus"></i><span>Receiving PO
               </span></a>
           </li>
           <li>

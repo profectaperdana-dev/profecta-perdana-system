@@ -22,12 +22,19 @@
                     <div class="card">
                         <div class="card-header">
                             <div class="media col-12">
-                                <form class="form-inline" action="#" method="get">
+                                <form class="form-inline" action="{{ url('/file_po') }}" method="get">
+                                    @csrf
+                                    @method('GET')
                                     <div class="form-group d-flex mb-0"> <i class="fa fa-search"></i>
-                                        <input class="form-control-plaintext" type="text" placeholder="Search...">
+                                        <input class="form-control-plaintext" name="search" value="{{ @$keyword }}"
+                                            type="text" placeholder="Search...">
                                     </div>
                                 </form>
-
+                                <div class="media-body mt-1">
+                                    <a class="btn btn-primary ms-2" href="{{ url('/file_po') }}"><i
+                                            data-feather="refresh-cw"> </i>Refresh
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body file-manager">
@@ -38,7 +45,7 @@
                                     @if ($value->pdf_po != '')
                                         <li class="file-box ">
                                             <a href="#" data-bs-toggle="modal" data-original-title="test"
-                                                data-bs-target="#do{{ substr($value->pdf_po, -3) }}">
+                                                data-bs-target="#po{{ $value->id }}">
                                                 <div class="file-top"> <i class="fa fa-file-pdf-o txt-primary"></i>
                                                 </div>
                                             </a>
@@ -53,8 +60,8 @@
                                                 </p>
                                             </div>
                                         </li>
-                                        <div class="modal fade" id="do{{ substr($value->pdf_po, -3) }}" tabindex="-1"
-                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                        <div class="modal fade" id="po{{ $value->id }}" tabindex="-1" role="dialog"
+                                            aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">

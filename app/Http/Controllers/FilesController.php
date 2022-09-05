@@ -35,18 +35,26 @@ class FilesController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function getDO()
+    public function getDO(Request $request)
     {
         $title = 'All Delivery Order File PDF';
-        // $data = DataTables::of(SalesOrderModel::query())->make(true);
-        $data = SalesOrderModel::latest()->get();
+        $keyword = $request->get('search');
+        if ($keyword == NULL) {
+            $data = SalesOrderModel::latest()->get();
+        } else {
+            $data = SalesOrderModel::where('pdf_invoice', 'LIKE', '%' . $keyword . '%')->latest()->get();
+        }
         return view('files.do', compact('title', 'data'));
     }
-    public function getFilePo()
+    public function getFilePo(Request $request)
     {
         $title = 'All Purchase Order File PDF';
-        // $data = DataTables::of(SalesOrderModel::query())->make(true);
-        $data = PurchaseOrderModel::latest()->get();
+        $keyword = $request->get('search');
+        if ($keyword == NULL) {
+            $data = PurchaseOrderModel::latest()->get();
+        } else {
+            $data = PurchaseOrderModel::where('pdf_invoice', 'LIKE', '%' . $keyword . '%')->latest()->get();
+        }
         return view('files.po', compact('title', 'data'));
     }
     public function create()
