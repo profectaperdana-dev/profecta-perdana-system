@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerAreaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CustomerAreasController extends Controller
 {
@@ -53,6 +54,9 @@ class CustomerAreasController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         $validateData = $request->validate([
             'area_name_edit' => 'required',
         ]);
@@ -72,6 +76,9 @@ class CustomerAreasController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         CustomerAreaModel::where('id', $id)->delete();
 
         return redirect('/customer_areas')->with('error', 'Customer Areas Delete Success');
