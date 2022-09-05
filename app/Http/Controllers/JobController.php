@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\RoleModel;
+use App\Models\JobModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class RoleController extends Controller
+class JobController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,13 +15,24 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $all_roles = RoleModel::latest()->get();
+        $all_jobs = JobModel::latest()->get();
+
         $data = [
-            'title' => "Data Accounts Role",
-            'roles' => $all_roles
+            'title' => "Data Account Jobs",
+            'jobs' => $all_jobs
         ];
 
-        return view('roles.index', $data);
+        return view('jobs.index', $data);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        //
     }
 
     /**
@@ -33,14 +44,24 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $validated_data = $request->validate([
-            'name' => 'required',
+            'job_name' => 'required',
         ]);
         $validated_data['created_by'] = Auth::user()->id;
-        $validated_data['guard_name'] = 'web';
 
-        RoleModel::create($validated_data);
+        JobModel::create($validated_data);
 
-        return redirect('/roles')->with('success', 'Role Add Success');
+        return redirect('/jobs')->with('success', 'Job Add Success');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
     }
 
     /**
@@ -64,14 +85,14 @@ class RoleController extends Controller
     public function update(Request $request, $id)
     {
         $validated_data = $request->validate([
-            'name_edit' => 'required',
+            'job_name_edit' => 'required',
         ]);
 
-        $role = RoleModel::where('id', $id)->firstOrFail();
-        $role->name = $validated_data['name_edit'];
-        $role->save();
+        $job = JobModel::where('id', $id)->firstOrFail();
+        $job->job_name = $validated_data['job_name_edit'];
+        $job->save();
 
-        return redirect('/roles')->with('success', 'Role Edit Success');
+        return redirect('/jobs')->with('success', 'Job Edit Success');
     }
 
     /**
@@ -82,8 +103,8 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
-        RoleModel::where('id', $id)->delete();
+        JobModel::where('id', $id)->delete();
 
-        return redirect('/roles')->with('error', 'Role Delete Success');
+        return redirect('/jobs')->with('error', 'Job Delete Success');
     }
 }

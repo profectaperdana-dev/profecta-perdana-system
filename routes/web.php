@@ -6,6 +6,7 @@ use App\Http\Controllers\CustomerCategoriesController;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FilesController;
+use App\Http\Controllers\JobController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
 use App\Http\Controllers\ProductController;
@@ -113,6 +114,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/second_product', SecondProductController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
+    Route::resource('/jobs', JobController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

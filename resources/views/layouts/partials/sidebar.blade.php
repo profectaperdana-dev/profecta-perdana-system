@@ -100,11 +100,13 @@
                   class="{{ request()->is('customers') ? 'active' : '' }}">Customers</a></li>
             </ul>
           </li>
-          <li class="dropdown"><a class="nav-link menu-title @if (request()->is('users') || request()->is('roles')) active @endif"
+          <li class="dropdown"><a class="nav-link menu-title @if (request()->is('users') || request()->is('roles') || request()->is('jobs')) active @endif"
               href="javascript:void(0)"><i data-feather="users"></i><span>Master Accounts</span></a>
             <ul class="nav-submenu menu-content"
-              style="display: @if (request()->is('users') || request()->is('roles')) block @else none @endif ">
+              style="display: @if (request()->is('users') || request()->is('roles') || request()->is('jobs')) block @else none @endif ">
               <li><a href="{{ url('/roles') }}" class="{{ request()->is('roles') ? 'active' : '' }}">Accounts Role</a>
+              </li>
+              <li><a href="{{ url('/jobs') }}" class="{{ request()->is('jobs') ? 'active' : '' }}">Accounts Job</a>
               </li>
               <li><a href="{{ url('/users') }}" class="{{ request()->is('users') ? 'active' : '' }}">Accounts</a></li>
 
