@@ -53,7 +53,7 @@
                                 <i class="fa-2x far fa-bell fa-shake"></i>
                                 <span class="dot-animated"></span>
                             @else
-                                <i class="bell fa-2x far fa-bell"></i>
+                                <i class="bell far fa-bell"></i>
                             @endif
                         @else
                             <i class="bell fa-2x far fa-bell"></i>

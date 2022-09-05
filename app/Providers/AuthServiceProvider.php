@@ -27,23 +27,29 @@ class AuthServiceProvider extends ServiceProvider
         $this->registerPolicies();
 
         //
-        Gate::define('isAdmin', function (User $user) {
-            return $user->role_id === 2;
-        });
-        Gate::define('isSuperAdmin', function (User $user) {
+        Gate::define('level1', function (User $user) {
             return $user->role_id === 1;
         });
-        Gate::define('isSalesMan', function (User $user) {
+        Gate::define('level2', function (User $user) {
+            return $user->role_id === 2;
+        });
+        Gate::define('level3', function (User $user) {
             return $user->role_id === 3;
         });
-        Gate::define('isTeknisi', function (User $user) {
-            return $user->role_id === 4;
-        });
         Gate::define('isVerificator', function (User $user) {
-            return $user->role_id === 5;
+            return $user->job_id === 1;
+        });
+        Gate::define('isFinance', function (User $user) {
+            return $user->job_id === 2;
+        });
+        Gate::define('isSuperAdmin', function (User $user) {
+            return $user->job_id === 3;
+        });
+        Gate::define('isSales', function (User $user) {
+            return $user->job_id === 4;
         });
         Gate::define('isWarehouseKeeper', function (User $user) {
-            return $user->role_id === 6;
+            return $user->job_id === 5;
         });
 
         Gate::define('customerAuthorization', function ($user, $customer) {

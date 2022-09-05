@@ -29,9 +29,12 @@
                                         <input class="form-control-plaintext" name="search" value="{{ @$keyword }}"
                                             type="text" placeholder="Search...">
                                     </div>
-
                                 </form>
-
+                                <div class="media-body mt-1">
+                                    <a class="btn btn-primary ms-2" href="{{ url('/file_invoice') }}"><i
+                                            data-feather="refresh-cw"> </i>Refresh
+                                    </a>
+                                </div>
                             </div>
                         </div>
                         <div class="card-body file-manager">
@@ -42,7 +45,7 @@
                                     @if ($value->pdf_invoice != '')
                                         <li class="file-box">
                                             <a href="#" data-bs-toggle="modal" data-original-title="test"
-                                                data-bs-target="#changeData{{ substr($value->pdf_invoice, -3) }}">
+                                                data-bs-target="#changeData{{ $value->id }}">
                                                 <div class="file-top"> <i class="fa fa-file-pdf-o txt-primary"></i>
                                                 </div>
                                             </a>
@@ -58,9 +61,8 @@
                                                 </p>
                                             </div>
                                         </li>
-                                        <div class="modal fade" id="changeData{{ substr($value->pdf_invoice, -3) }}"
-                                            tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1"
+                                            role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-lg" role="document">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
