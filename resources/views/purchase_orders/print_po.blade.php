@@ -152,29 +152,29 @@
                     $y = 0;
                 @endphp
                 @foreach ($data->purchaseOrderDetailsBy as $key => $value)
-                    @for ($i = 0; $i < 2; $i++)
-                        <?php
-                        $y++;
-                        ?>
-                        <tr>
-                            <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
-                            <td style="text-align:center;padding:2px">&nbsp;</td>
-                            <td style="text-align:left;padding:2px">{{ $value->productBy->nama_barang }}</td>
+                    {{-- @for ($i = 0; $i < 2; $i++) --}}
+                    <?php
+                    $y++;
+                    ?>
+                    <tr>
+                        <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
+                        <td style="text-align:center;padding:2px">&nbsp;</td>
+                        <td style="text-align:left;padding:2px">{{ $value->productBy->nama_barang }}</td>
 
-                            <td style="text-align:center">&nbsp; </td>
-                            <td style="text-align:center">&nbsp; </td>
-                            <td style="text-align:center;padding:2px">{{ $value->qty }}</td>
+                        <td style="text-align:center">&nbsp; </td>
+                        <td style="text-align:center">&nbsp; </td>
+                        <td style="text-align:center;padding:2px">{{ $value->qty }}</td>
 
-                            @php
-                                $total = $total + $value->qty;
-                            @endphp
+                        @php
+                            $total = $total + $value->qty;
+                        @endphp
 
-                        </tr>
+                    </tr>
 
-                        @if ($y % 5 == 0)
-                            <div class="page-break"></div>
-                        @endif
-                    @endfor
+                    @if ($y % 5 == 0)
+                        <div class="page-break"></div>
+                    @endif
+                    {{-- @endfor --}}
                 @endforeach
                 <tr>
                     <td colspan="6" style="text-align: right">

@@ -49,37 +49,37 @@
                 <li class="onhover-dropdown">
                     <div class="notification-box">
                         @can('isVerificator')
-
                             @if (count($notif) > 0)
                                 <i class="fa-2x far fa-bell fa-shake"></i>
                                 <span class="dot-animated"></span>
                             @else
-                                <i class="fa-2x far fa-bell"></i>
-                                {{-- <span class="dot-animated"></span> --}}
+                                <i class="bell fa-2x far fa-bell"></i>
                             @endif
                         @else
-                            <i class="fa-2x far fa-bell"></i>
-                            {{-- <span class="dot-animated"></span> --}}
+                            <i class="bell fa-2x far fa-bell"></i>
                         @endcan
                     </div>
                     <ul class="notification-dropdown onhover-show-div">
                         <li>
-                            <p class="f-w-700 mb-0">You have {{ count($notif) }} Notifications<span
-                                    class="pull-right badge badge-primary badge-pill">4</span></p>
+                            <p class="f-w-700 mb-0">You have
+                                Notifications<span class="notifCount pull-right badge badge-primary badge-pill">
+                                    {{ count($notif) }}
+                                </span></p>
                         </li>
-                        @foreach ($notif as $notifData)
-                            <li class="noti-primary">
-                                <div class="media"><span class="notification-bg bg-light-primary"><i
-                                            data-feather="activity"> </i></span>
-                                    <div class="media-body">
-                                        <a href="{{ url('recent_sales_order') }}">
-                                            <p>{{ $notifData->message }}</p><span>10 minutes ago</span>
-                                        </a>
+                        <div class="notifContainer">
+                            @foreach ($notif as $notifData)
+                                <li class="notif-primary">
+                                    <div class="media"><span class="notification-bg bg-light-primary"><i
+                                                class="fa fa-envelope"> </i></span>
+                                        <div class="media-body">
+                                            <a href="{{ url('read_notif/' . $notifData->id) }}">
+                                                <p>{{ $notifData->message }}</p><span>10 minutes ago</span>
+                                            </a>
+                                        </div>
                                     </div>
-                                </div>
-                            </li>
-                        @endforeach
-
+                                </li>
+                            @endforeach
+                        </div>
 
                     </ul>
                 </li>

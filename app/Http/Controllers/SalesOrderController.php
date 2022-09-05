@@ -393,9 +393,12 @@ class SalesOrderController extends Controller
             $model->isapprove = 'approve';
             $model->isPaid = 1;
             $so_number = $model->order_number;
-            $so_number = str_replace('SOPP', 'IVPP', $so_number);
-            $model->order_number = $so_number;
-
+            $iv_number = str_replace('SOPP', 'IVPP', $so_number);
+            $do = str_replace('SOPP', 'DOPP', $so_number);
+            // dd($do);
+            $model->pdf_do = $do . '.pdf';
+            $model->pdf_invoice = $iv_number . '.pdf';
+            $model->order_number = $iv_number;
             //Potong Stock
             $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
             foreach ($selected_sod as $value) {
@@ -410,7 +413,6 @@ class SalesOrderController extends Controller
                     $getStock->save();
                 }
             }
-
             //Update Last Transaction Customer
             $selected_customer = CustomerModel::where('id', $model->customers_id)->first();
             $selected_customer->last_transaction = $model->order_date;
@@ -453,16 +455,16 @@ class SalesOrderController extends Controller
                 $notif->save();
             }
         }
-        $do = str_replace('IVPP', 'DOPP', $so_number);
-        // dd($do);
-        $model->pdf_do = $do . '.pdf';
-        $model->pdf_invoice = $model->order_number . '.pdf';
         $saved_model = $model->save();
         if ($saved_model == true) {
             $data = SalesOrderModel::where('order_number', $model->order_number)->first();
             $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-            $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
-            $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
+            if ($model->pdf_do != '') {
+                $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
+            }
+            if ($model->pdf_invoice != '') {
+                $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
+            }
             return redirect('/recent_sales_order')->with('success', "Sales Order Verification Success");
         } else {
             return redirect('/recent_sales_order')->with('error', "Sales Order Verification Fail! Please check again!");
@@ -590,11 +592,22 @@ class SalesOrderController extends Controller
 
         $so_number = $selected_so->order_number;
         $so_number = str_replace('SOPP', 'IVPP', $so_number);
+        $do = str_replace('SOPP', 'DOPP', $selected_so->order_number);
+        $selected_so->pdf_invoice = $so_number . '.pdf';
+        $selected_so->pdf_do = $do . '.pdf';
         $selected_so->order_number = $so_number;
         $selected_so->isapprove = 'approve';
         $selected_so->approvedBy = Auth::user()->id;
         $selected_so->isPaid = 0;
         $selected_so->save();
+        $data = SalesOrderModel::where('order_number', $selected_so->order_number)->first();
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        if ($selected_so->pdf_do != '') {
+            $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $selected_so->pdf_do);
+        }
+        if ($selected_so->pdf_invoice != '') {
+            $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $selected_so->pdf_invoice);
+        }
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
     }
 

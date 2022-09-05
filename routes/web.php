@@ -8,6 +8,7 @@ use App\Http\Controllers\DiscountController;
 use App\Http\Controllers\FilesController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\MaterialController;
+use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseOrderController;
@@ -84,7 +85,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
     Route::get('/all_purchase_orders/', [PurchaseOrderController::class, 'getPO']);
     Route::get('/file_do', [FilesController::class, 'getDO']);
-    Route::get('po/{id}/print', [PurchaseOrderController::class, 'printPO']);
+    Route::get('/po/{id}/print', [PurchaseOrderController::class, 'printPO']);
+    Route::get('/send_email_po/{id}', [SendEmailController::class, 'sendPo']);
+    Route::get('/file_po/', [FilesController::class, 'getFilePo']);
+    Route::get('/notification/getAll/', [NotificationController::class, 'getAll']);
+    Route::get('/read_notif/{id}/', [NotificationController::class, 'readMessage']);
 
 
 

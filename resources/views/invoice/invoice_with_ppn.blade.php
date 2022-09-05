@@ -163,27 +163,27 @@
                     $y = 0;
                 @endphp
                 @foreach ($data->salesOrderDetailsBy as $key => $value)
-                    @for ($i = 0; $i < 6; $i++)
-                        <?php
-                        $y++;
-                        ?>
-                        <tr>
-                            <td style="text-align:center;padding:5px">{{ $key + 1 }}.
-                            </td>
-                            <td style="text-align:left;padding:5px">{{ $value->productSales->nama_barang }}
-                            </td>
-                            <td style="text-align:right;padding:5px">@currency($value->productSales->harga_jual_nonretail)</td>
-                            <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
-                            @php
-                                $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
-                                $total = $total + $sub_total;
-                            @endphp
-                            <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>
-                        </tr>
-                        @if ($y % 5 == 0)
-                            <div class="page-break"></div>
-                        @endif
-                    @endfor
+                    {{-- @for ($i = 0; $i < 6; $i++) --}}
+                    <?php
+                    $y++;
+                    ?>
+                    <tr>
+                        <td style="text-align:center;padding:5px">{{ $key + 1 }}.
+                        </td>
+                        <td style="text-align:left;padding:5px">{{ $value->productSales->nama_barang }}
+                        </td>
+                        <td style="text-align:right;padding:5px">@currency($value->productSales->harga_jual_nonretail)</td>
+                        <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
+                        @php
+                            $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
+                            $total = $total + $sub_total;
+                        @endphp
+                        <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>
+                    </tr>
+                    @if ($y % 5 == 0)
+                        <div class="page-break"></div>
+                    @endif
+                    {{-- @endfor --}}
                 @endforeach
                 <tr>
                     <td colspan="6" style="text-align: right">

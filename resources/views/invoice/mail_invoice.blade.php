@@ -291,7 +291,7 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            IVPP-PLG-2208001
+                                                                                                            {{ $data->order_number }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -332,10 +332,9 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Amaron
-                                                                                                            Pitstop
-                                                                                                            Celentang -
-                                                                                                            PLG0001
+                                                                                                            #{{ $data->customerBy->code_cust }}
+                                                                                                            -
+                                                                                                            {{ $data->customerBy->name_cust }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -377,10 +376,8 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Jl Brigjen
-                                                                                                            Hasan Kasim
-                                                                                                            Ruko Jaya
-                                                                                                            Raya No 12
+                                                                                                            {{ $data->customerBy->address_cust }}
+
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -420,7 +417,7 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            22-08-2022
+                                                                                                            {{ $data->order_date }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -497,8 +494,8 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Please Help
-                                                                                                            Me!</div>
+                                                                                                            {{ $data->remark }}
+                                                                                                        </div>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
@@ -538,7 +535,7 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            22-08-2022
+                                                                                                            {{ $data->duedate }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -579,8 +576,16 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Cash On
-                                                                                                            Delivary
+                                                                                                            @if ($data->payment_method == 1)
+                                                                                                                Cash On
+                                                                                                                Delivery
+                                                                                                            @elseif($data->payment_method == 2)
+                                                                                                                Cash
+                                                                                                                Before
+                                                                                                                Delivery
+                                                                                                            @else
+                                                                                                                Credit
+                                                                                                            @endif
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -639,39 +644,39 @@
                                                                                                 $y = 0;
                                                                                             @endphp
                                                                                             @foreach ($data->salesOrderDetailsBy as $key => $value)
-                                                                                                @for ($i = 0; $i < 6; $i++)
-                                                                                                    <tr>
-                                                                                                        <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                            align="left"
-                                                                                                            valign="top">
-                                                                                                            {{ $key + 1 }}.
-                                                                                                        </td>
-                                                                                                        <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                            align="left"
-                                                                                                            valign="top">
-                                                                                                            {{ $value->productSales->nama_barang }}
-                                                                                                        </td>
-                                                                                                        <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                            align="right"
-                                                                                                            valign="top">
-                                                                                                            {{ number_format($value->productSales->harga_jual_nonretail) }}
-                                                                                                        </td>
-                                                                                                        <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                            align="center"
-                                                                                                            valign="top">
-                                                                                                            {{ $value->qty }}
-                                                                                                        </td>
-                                                                                                        @php
-                                                                                                            $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
-                                                                                                            $total = $total + $sub_total;
-                                                                                                        @endphp
-                                                                                                        <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                            align="right"
-                                                                                                            valign="top">
-                                                                                                            {{ number_format($sub_total) }}
-                                                                                                        </td>
-                                                                                                    </tr>
-                                                                                                @endfor
+                                                                                                {{-- @for ($i = 0; $i < 6; $i++) --}}
+                                                                                                <tr>
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="left"
+                                                                                                        valign="top">
+                                                                                                        {{ $key + 1 }}.
+                                                                                                    </td>
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="left"
+                                                                                                        valign="top">
+                                                                                                        {{ $value->productSales->nama_barang }}
+                                                                                                    </td>
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="right"
+                                                                                                        valign="top">
+                                                                                                        {{ number_format($value->productSales->harga_jual_nonretail) }}
+                                                                                                    </td>
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="center"
+                                                                                                        valign="top">
+                                                                                                        {{ $value->qty }}
+                                                                                                    </td>
+                                                                                                    @php
+                                                                                                        $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
+                                                                                                        $total = $total + $sub_total;
+                                                                                                    @endphp
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="right"
+                                                                                                        valign="top">
+                                                                                                        {{ number_format($sub_total) }}
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                                {{-- @endfor --}}
                                                                                             @endforeach
                                                                                         </tbody>
                                                                                         <tfoot>
@@ -686,7 +691,7 @@
                                                                                                 <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
-                                                                                                    {{ number_format($total) }}
+                                                                                                    {{ number_format($data->total) }}
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>

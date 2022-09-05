@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PurchaseOrderModel;
 use App\Models\SalesOrderModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -40,6 +41,13 @@ class FilesController extends Controller
         // $data = DataTables::of(SalesOrderModel::query())->make(true);
         $data = SalesOrderModel::latest()->get();
         return view('files.do', compact('title', 'data'));
+    }
+    public function getFilePo()
+    {
+        $title = 'All Purchase Order File PDF';
+        // $data = DataTables::of(SalesOrderModel::query())->make(true);
+        $data = PurchaseOrderModel::latest()->get();
+        return view('files.po', compact('title', 'data'));
     }
     public function create()
     {

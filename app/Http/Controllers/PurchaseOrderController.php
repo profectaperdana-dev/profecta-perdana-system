@@ -188,6 +188,7 @@ class PurchaseOrderController extends Controller
         $tahun = substr($year, -2);
         $order_number = 'POPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $po_number_id;
         $model->order_number = $order_number;
+        $model->pdf_po = $model->order_number . '.pdf';
         $saved = $model->save();
 
 
@@ -220,6 +221,10 @@ class PurchaseOrderController extends Controller
 
         $saved_model = $model->save();
         if ($saved_model == true) {
+            $data = PurchaseOrderModel::where('order_number', $model->order_number)->first();
+            $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+            $pdf = PDF::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->order_number . '.pdf');
+
             return redirect('/purchase_orders')->with('success', "Purchase Order Update Success");
         } else {
             return redirect('/purchase_orders')->with('error', "Purchase Order Update Fail! Please check again!");

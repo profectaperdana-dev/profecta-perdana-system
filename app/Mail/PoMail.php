@@ -7,7 +7,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
 
-class InvoiceMail extends Mailable
+class PoMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -31,9 +31,9 @@ class InvoiceMail extends Mailable
      */
     public function build()
     {
-        return $this->view('invoice.mail_invoice')
+        return $this->view('purchase_orders.mail_po')
             ->from('notification@profectaperdana.com', 'PROFECTA PERDANA')
-            ->subject('INVOICE ' . $this->data->order_number)
+            ->subject('PURCHASE ORDER ' . $this->data->order_number)
             ->with(['data' => $this->data, 'warehouse' => $this->warehouse])
             ->attach(public_path('pdf/' . $this->data->order_number . '.pdf'));
     }
