@@ -59,6 +59,17 @@ class PurchaseOrderController extends Controller
         return $pdf->download($data->order_number . '.pdf');
     }
 
+    public function receivingPO()
+    {
+        $all_purchases = PurchaseOrderModel::where('isapprove', 1)->where('isvalidated', 0)->latest()->get();
+
+        $data = [
+            "title" => "Receiving Purchase Order",
+            "purchases" => $all_purchases,
+        ];
+
+        return view('purchase_orders.receiving', $data);
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -285,20 +296,22 @@ class PurchaseOrderController extends Controller
                 $new_stock->products_id = $pod->product_id;
                 $new_stock->warehouses_id = $model->warehouse_id;
                 $new_stock->stock = $pod->qty;
+                $new_stock->save();
             } else {
                 $stock->stock = $stock->stock + $pod->qty;
+                $stock->save();
             }
         }
 
         //Save total
-        $model->isvalidate = 1;
+        $model->isvalidated = 1;
         $model->total = $total;
 
         $saved_model = $model->save();
         if ($saved_model == true) {
-            return redirect('/purchase_orders')->with('success', "Purchase Order Validation Success");
+            return redirect('/purchase_orders/receiving')->with('success', "Purchase Order Validation Success");
         } else {
-            return redirect('/purchase_orders')->with('error', "Purchase Order Validation Fail! Please check again!");
+            return redirect('/purchase_orders/receiving')->with('error', "Purchase Order Validation Fail! Please check again!");
         }
     }
 
