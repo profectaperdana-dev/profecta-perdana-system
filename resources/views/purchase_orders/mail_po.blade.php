@@ -665,7 +665,7 @@
                                                                                                     valign="top">
                                                                                                     Total Qty</th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                    align="right"
+                                                                                                    align="center"
                                                                                                     valign="top">
                                                                                                     {{ number_format($total) }}
                                                                                                 </th>
