@@ -20,14 +20,14 @@ class User extends Authenticatable
 
     public function roleBy()
     {
-        return $this->hasOne(RoleModel::class, 'id', 'role_id');
+        return $this->hasOne(RoleModel::class, 'id', 'role_id')->withTrashed();
     }
     public function warehouseBy()
     {
-        return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id');
+        return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id')->withTrashed();
     }
     public function jobBy()
     {
-        return $this->hasOne(JobModel::class, 'id', 'job_id');
+        return $this->hasOne(JobModel::class, 'id', 'job_id')->withTrashed();
     }
 }

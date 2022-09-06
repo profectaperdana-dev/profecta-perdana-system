@@ -311,6 +311,7 @@ class ProductController extends Controller
         $model = ProductModel::find($id);
         unlink("foto_produk/" . $model->foto_barang);
 
+        $stock = StockModel::where('products_id', $model->id)->delete();
         $model->delete();
         return redirect('/products')->with('error', 'Delete data product  ' . $model->nama_barang . ' is success');
     }

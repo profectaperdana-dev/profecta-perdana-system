@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerAreaModel;
 use App\Models\CustomerCategoriesModel;
 use App\Models\CustomerModel;
+use App\Models\DiscountModel;
 use App\Models\SalesOrderModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -239,6 +240,7 @@ class CustomerController extends Controller
             abort(403);
         }
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
+        $discount_current = DiscountModel::where('customer_id', $customer_current->id)->delete();
         $path = public_path('images/customers/') . $customer_current->reference_image;
         if (File::exists($path)) {
             File::delete($path);
