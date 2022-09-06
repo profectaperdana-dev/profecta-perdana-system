@@ -20,7 +20,7 @@ class StockController extends Controller
     public function index()
     {
 
-        if (Gate::allows('isWarehouseKeeper')) {
+        if (Gate::allows('warehouse_keeper')) {
             $id = Auth::user()->warehouseBy->id;
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
             $data = StockModel::where('warehouses_id', $id)->get();
@@ -130,7 +130,7 @@ class StockController extends Controller
     }
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**

@@ -102,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/product_uoms', UomController::class);
         Route::resource('/product_sub_types', SubTypeController::class);
         Route::resource('/products', ProductController::class);
+        Route::resource('/second_product', SecondProductController::class);
     });
 
 
@@ -113,7 +114,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/discounts', DiscountController::class);
     Route::resource('/sales_order', SalesOrderController::class);
     Route::resource('/check_stock', CheckStockController::class);
-    Route::resource('/second_product', SecondProductController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
 });
