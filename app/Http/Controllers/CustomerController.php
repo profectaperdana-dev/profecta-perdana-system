@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerAreaModel;
 use App\Models\CustomerCategoriesModel;
 use App\Models\CustomerModel;
+use App\Models\DiscountModel;
 use App\Models\SalesOrderModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -133,9 +134,6 @@ class CustomerController extends Controller
     }
     public function edit(CustomerModel $customer)
     {
-        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
-            abort(403);
-        }
         $all_customer_categories = CustomerCategoriesModel::all();
         $all_customer_areas = CustomerAreaModel::all();
         $choosed_customer = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
@@ -159,9 +157,6 @@ class CustomerController extends Controller
      */
     public function update(Request $request, CustomerModel $customer)
     {
-        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
-            abort(403);
-        }
         $validated_data = $request->validate([
             'name_cust' => 'required',
             'id_card_number' => 'required',
@@ -235,10 +230,8 @@ class CustomerController extends Controller
      */
     public function destroy(CustomerModel $customer)
     {
-        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
-            abort(403);
-        }
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();
+        $discount_current = DiscountModel::where('customer_id', $customer_current->id)->delete();
         $path = public_path('images/customers/') . $customer_current->reference_image;
         if (File::exists($path)) {
             File::delete($path);

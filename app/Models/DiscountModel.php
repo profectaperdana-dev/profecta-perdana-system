@@ -13,7 +13,7 @@ class DiscountModel extends Model
 
     public function customerBy()
     {
-        return $this->hasOne(CustomerModel::class, 'id', 'customer_id');
+        return $this->hasOne(CustomerModel::class, 'id', 'customer_id')->withTrashed();
     }
 
     public function productBy()

@@ -54,12 +54,9 @@
                           <h5 class="dropdown-header">Actions</h5>
                           <a class="dropdown-item modal-btn" href="#" data-bs-toggle="modal"
                             data-original-title="test" data-bs-target="#detailData{{ $value->id }}">Detail</a>
-                          @if (Gate::check('isSuperAdmin') || Gate::check('isAdmin') || Gate::check('isVerificator'))
-                            <a class="dropdown-item"
-                              href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
-                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                              data-bs-target="#deleteData{{ $value->id }}">Delete</a>
-                          @endif
+                          <a class="dropdown-item" href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
+                          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
+                            data-bs-target="#deleteData{{ $value->id }}">Delete</a>
                         </div>
                       </td>
                       {{-- Modul Detail --}}
