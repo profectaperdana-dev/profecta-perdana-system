@@ -12,7 +12,7 @@ class PurchaseOrderModel extends Model
 
     public function supplierBy()
     {
-        return $this->hasOne(SuppliersModel::class, 'id', 'supplier_id');
+        return $this->hasOne(SuppliersModel::class, 'id', 'supplier_id')->withTrashed();
     }
 
     public function purchaseOrderDetailsBy()
@@ -22,11 +22,11 @@ class PurchaseOrderModel extends Model
 
     public function createdPurchaseOrder()
     {
-        return $this->hasOne(User::class, 'id', 'created_by');
+        return $this->hasOne(User::class, 'id', 'created_by')->withTrashed();
     }
 
     public function warehouseBy()
     {
-        return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id');
+        return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id')->withTrashed();
     }
 }

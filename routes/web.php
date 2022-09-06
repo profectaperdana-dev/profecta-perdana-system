@@ -106,7 +106,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/product_materials', MaterialController::class);
     Route::resource('/product_sub_materials', SubMaterialController::class);
     Route::resource('/warehouses', WarehouseController::class);
-    Route::resource('/users', UserController::class)->middleware('can:isSuperAdmin');
+    Route::resource('/users', UserController::class);
     Route::resource('/profiles', ProfileController::class);
     Route::patch('/profiles/{id}/photo', [ProfileController::class, 'changePhoto']);
     Route::patch('/profiles/{id}/password', [ProfileController::class, 'changePassword']);

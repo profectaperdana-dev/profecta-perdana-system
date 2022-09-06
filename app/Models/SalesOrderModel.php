@@ -13,7 +13,7 @@ class SalesOrderModel extends Model
 
     public function customerBy()
     {
-        return $this->hasOne(CustomerModel::class, 'id', 'customers_id');
+        return $this->hasOne(CustomerModel::class, 'id', 'customers_id')->withTrashed();
     }
 
     public function salesOrderDetailsBy()
@@ -23,6 +23,6 @@ class SalesOrderModel extends Model
 
     public function createdSalesOrder()
     {
-        return $this->hasOne(User::class, 'id', 'created_by');
+        return $this->hasOne(User::class, 'id', 'created_by')->withTrashed();
     }
 }
