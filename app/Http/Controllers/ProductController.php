@@ -10,6 +10,7 @@ use App\Models\SubTypeModel;
 use App\Models\UomModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Products;
 
 class ProductController extends Controller
@@ -193,7 +194,7 @@ class ProductController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -204,6 +205,9 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $title = 'Data Products';
         $uom = UomModel::latest()->get();
         $material = MaterialModel::latest()->get();
@@ -224,6 +228,9 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $request->validate(
             [
                 'nama_barang' => 'required',
@@ -298,6 +305,9 @@ class ProductController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         $model = ProductModel::find($id);
         unlink("foto_produk/" . $model->foto_barang);
 

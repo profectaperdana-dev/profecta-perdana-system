@@ -6,6 +6,7 @@ use App\Models\MaterialModel;
 use App\Models\SubMaterialModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class SubMaterialController extends Controller
 {
@@ -75,7 +76,7 @@ class SubMaterialController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -86,7 +87,7 @@ class SubMaterialController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -98,6 +99,9 @@ class SubMaterialController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $request->validate([
             'editnama_submaterial' => 'required',
             'material_id_edit' => 'required|numeric'
@@ -120,6 +124,9 @@ class SubMaterialController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         $model = SubMaterialModel::find($id);
         $model->delete();
         return redirect('/product_sub_materials')->with('error', 'Delete data sub product material ' . $model->nama_sub_material . ' is success');

@@ -6,6 +6,7 @@ use App\Models\CustomerAreaModel;
 use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class WarehouseController extends Controller
 {
@@ -71,7 +72,7 @@ class WarehouseController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -82,7 +83,7 @@ class WarehouseController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -94,6 +95,9 @@ class WarehouseController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $request->validate([
             'warehouses_' => 'required',
             'alamat_' => 'required',
@@ -122,7 +126,9 @@ class WarehouseController extends Controller
      */
     public function destroy($id)
     {
-
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         $model =  WarehouseModel::find($id);
         $model->delete();
         return redirect('/warehouses')->with('error', 'Delete Data Warehouses Success');

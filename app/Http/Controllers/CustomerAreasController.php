@@ -54,7 +54,7 @@ class CustomerAreasController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!Gate::allows('level1')) {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
             abort(403);
         }
         $validateData = $request->validate([

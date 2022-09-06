@@ -67,51 +67,48 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
     Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
     Route::get('/customers/getVillage/{district_id}', [CustomerController::class, 'getVillage']);
-    Route::get('/edit_product/{id}', [SalesOrderController::class, 'editProduct']);
-    route::get('/delete_product/{id_so}/{id_sod}', [SalesOrderController::class, 'deleteProduct']);
-    route::put('/update_product/{id}/edit_product', [SalesOrderController::class, 'updateProduct']);
     Route::get('/invoice', [SalesOrderController::class, 'getInvoiceData']);
     Route::get('/invoice/{id}/invoice_with_ppn', [SalesOrderController::class, 'printInoiceWithPpn']);
-    Route::get('/invoice/{id}/invoice_without_ppn', [SalesOrderController::class, 'printInoiceWithoutPpn']);
     Route::get('/invoice/{id}/delivery_order', [SalesOrderController::class, 'deliveryOrder']);
     Route::get('/invoice/{id}/mark_as_paid', [SalesOrderController::class, 'updatePaid']);
-    route::post('/update_product/{id}/add_product', [SalesOrderController::class, 'addProduct']);
     Route::get('/sales_orders/approve/{id}', [SalesOrderController::class, 'approve']);
-    Route::get('/trace_fouls/{id}', [SalesOrderController::class, 'traceFouls']);
     Route::get('/products/selectCost/{id}', [ProductController::class, 'selectCost']);
     Route::get('/invoice/manage_payment', [SalesOrderController::class, 'paidManagement']);
     Route::get('/send_email/{id}', [SendEmailController::class, 'index']);
     Route::get('/sales_orders/reject/{id}', [SalesOrderController::class, 'reject']);
     Route::get('/customers/getTotalCredit/{id}', [CustomerController::class, 'getTotalCredit']);
-    Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
     Route::get('/all_purchase_orders', [PurchaseOrderController::class, 'getPO']);
     Route::get('/file_do', [FilesController::class, 'getDO']);
     Route::get('/po/{id}/print', [PurchaseOrderController::class, 'printPO']);
     Route::get('/send_email_po/{id}', [SendEmailController::class, 'sendPo']);
-    Route::get('/file_po/', [FilesController::class, 'getFilePo']);
+    Route::get('/file_po', [FilesController::class, 'getFilePo']);
     Route::get('/notification/getAll/', [NotificationController::class, 'getAll']);
     Route::get('/read_notif/{id}/', [NotificationController::class, 'readMessage']);
     Route::post('/purchase_orders/{id}/validate', [PurchaseOrderController::class, 'validation']);
     Route::get('/purchase_orders/receiving', [PurchaseOrderController::class, 'receivingPO']);
 
+    Route::group(['middleware' => 'can:superadmin'], function () {
+        Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
+
+        Route::resource('/customer_categories', CustomerCategoriesController::class);
+        Route::resource('/customer_areas', CustomerAreasController::class);
+        Route::resource('/warehouses', WarehouseController::class);
+        Route::resource('/supliers', SuppliersController::class);
+        Route::resource('/jobs', JobController::class);
+        Route::resource('/roles', RoleController::class);
+        Route::resource('/users', UserController::class);
+        Route::resource('/product_materials', MaterialController::class);
+        Route::resource('/product_sub_materials', SubMaterialController::class);
+        Route::resource('/product_uoms', UomController::class);
+        Route::resource('/product_sub_types', SubTypeController::class);
+        Route::resource('/products', ProductController::class);
+    });
 
 
-
-    Route::resource('/roles', RoleController::class);
-    Route::resource('/products', ProductController::class);
     Route::resource('/customers', CustomerController::class);
-    Route::resource('/customer_categories', CustomerCategoriesController::class);
-    Route::resource('/customer_areas', CustomerAreasController::class);
-    Route::resource('/product_uoms', UomController::class);
-    Route::resource('/product_materials', MaterialController::class);
-    Route::resource('/product_sub_materials', SubMaterialController::class);
-    Route::resource('/warehouses', WarehouseController::class);
-    Route::resource('/users', UserController::class)->middleware('can:isSuperAdmin');
     Route::resource('/profiles', ProfileController::class);
     Route::patch('/profiles/{id}/photo', [ProfileController::class, 'changePhoto']);
     Route::patch('/profiles/{id}/password', [ProfileController::class, 'changePassword']);
-    Route::resource('/product_sub_types', SubTypeController::class);
-    Route::resource('/supliers', SuppliersController::class);
     Route::resource('/stocks', StockController::class);
     Route::resource('/discounts', DiscountController::class);
     Route::resource('/sales_order', SalesOrderController::class);
@@ -119,7 +116,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/second_product', SecondProductController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
-    Route::resource('/jobs', JobController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

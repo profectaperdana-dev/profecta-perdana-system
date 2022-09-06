@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UomModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class UomController extends Controller
@@ -29,7 +30,7 @@ class UomController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -61,7 +62,7 @@ class UomController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -72,7 +73,7 @@ class UomController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -84,6 +85,9 @@ class UomController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $request->validate([
             'editSatuan' => 'required',
 
@@ -104,6 +108,9 @@ class UomController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         $model = UomModel::find($id);
         $model->delete();
         return redirect('/product_uoms')->with('error', 'Delete Data Unit of Measurement Success');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\RoleModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class RoleController extends Controller
 {
@@ -51,7 +52,7 @@ class RoleController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -63,6 +64,9 @@ class RoleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $validated_data = $request->validate([
             'name_edit' => 'required',
         ]);
@@ -82,6 +86,9 @@ class RoleController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         RoleModel::where('id', $id)->delete();
 
         return redirect('/roles')->with('error', 'Role Delete Success');

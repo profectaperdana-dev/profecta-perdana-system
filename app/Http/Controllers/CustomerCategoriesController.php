@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerCategoriesModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CustomerCategoriesController extends Controller
 {
@@ -51,6 +52,9 @@ class CustomerCategoriesController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $validateData = $request->validate([
             'category_name_edit' => 'required'
         ]);
@@ -70,6 +74,9 @@ class CustomerCategoriesController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         CustomerCategoriesModel::where('id', $id)->delete();
 
         return redirect('/customer_categories')->with('error', 'Customer Categories Delete Success');

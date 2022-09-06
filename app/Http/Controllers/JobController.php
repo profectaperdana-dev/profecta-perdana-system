@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\JobModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class JobController extends Controller
 {
@@ -32,7 +33,7 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -61,7 +62,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -72,7 +73,7 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -84,6 +85,9 @@ class JobController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $validated_data = $request->validate([
             'job_name_edit' => 'required',
         ]);
@@ -103,6 +107,9 @@ class JobController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         JobModel::where('id', $id)->delete();
 
         return redirect('/jobs')->with('error', 'Job Delete Success');

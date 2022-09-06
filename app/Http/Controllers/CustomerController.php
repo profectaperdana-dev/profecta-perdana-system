@@ -24,8 +24,8 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $all_customer = CustomerModel::join('customer_categories', 'customers.category_cust_id', '=', 'customer_categories.id')
-            ->join('customer_areas', 'customers.area_cust_id', '=', 'customer_areas.id')
+        $all_customer = CustomerModel::leftJoin('customer_categories', 'customers.category_cust_id', '=', 'customer_categories.id')
+            ->leftJoin('customer_areas', 'customers.area_cust_id', '=', 'customer_areas.id')
             ->select('customers.*', 'customer_areas.area_name', 'customer_categories.category_name')
             ->latest()
             ->get();
@@ -133,7 +133,7 @@ class CustomerController extends Controller
     }
     public function edit(CustomerModel $customer)
     {
-        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
+        if (!Gate::allows('level1') && !Gate::allows('level2') || !Gate::allows('superadmin')) {
             abort(403);
         }
         $all_customer_categories = CustomerCategoriesModel::all();
@@ -159,7 +159,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, CustomerModel $customer)
     {
-        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
+        if (!Gate::allows('level1') && !Gate::allows('level2') || !Gate::allows('superadmin')) {
             abort(403);
         }
         $validated_data = $request->validate([
@@ -235,7 +235,7 @@ class CustomerController extends Controller
      */
     public function destroy(CustomerModel $customer)
     {
-        if (!Gate::allows('isAdmin') && !Gate::allows('isSuperAdmin')) {
+        if (!Gate::allows('level1') || !Gate::allows('superadmin')) {
             abort(403);
         }
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();

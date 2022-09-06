@@ -7,8 +7,10 @@ use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\ProductModel;
 use App\Models\SubTypeModel;
+use Illuminate\Contracts\Auth\Access\Gate as AccessGate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 use function PHPUnit\Framework\isEmpty;
 
@@ -55,7 +57,7 @@ class DiscountController extends Controller
     }
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -110,6 +112,9 @@ class DiscountController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $validate_data = $request->validate([
             "product_id_edit" => "required|numeric",
             "discount_edit" => "required|numeric"
@@ -142,6 +147,9 @@ class DiscountController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         DiscountModel::where('id', $id)->delete();
 
         return redirect('/discounts')->with('error', 'Discount Delete Success');

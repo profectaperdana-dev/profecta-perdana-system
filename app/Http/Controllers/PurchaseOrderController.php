@@ -11,6 +11,7 @@ use App\Models\WarehouseModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use PDF;
 
 class PurchaseOrderController extends Controller
@@ -328,7 +329,7 @@ class PurchaseOrderController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -339,7 +340,7 @@ class PurchaseOrderController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -351,7 +352,7 @@ class PurchaseOrderController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -362,6 +363,9 @@ class PurchaseOrderController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         $modelPurchaseOrder = PurchaseOrderModel::where('id', $id)->first();
         $modelPurchaseOrder->purchaseOrderDetailsBy()->delete();
         $modelPurchaseOrder->delete();

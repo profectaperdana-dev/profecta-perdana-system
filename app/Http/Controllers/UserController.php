@@ -74,6 +74,9 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $validated_data = $request->validate([
             'name_edit' => 'required',
             'role_id_edit' => 'required|numeric',
@@ -99,6 +102,9 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         User::where('id', $id)->delete();
 
         return redirect('/users')->with('error', 'User Account Delete Success');

@@ -61,7 +61,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -141,7 +141,7 @@ class StockController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -153,6 +153,9 @@ class StockController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         $validate_data = $request->validate([
             "stock_" => "required|numeric",
 
@@ -172,6 +175,9 @@ class StockController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         $model = StockModel::find($id);
         $model->delete();
         return redirect('/stocks')->with('error', 'Delete Data Stocks Success');
