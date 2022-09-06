@@ -26,4 +26,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id');
     }
+    public function jobBy()
+    {
+        return $this->hasOne(JobModel::class, 'id', 'job_id');
+    }
 }
