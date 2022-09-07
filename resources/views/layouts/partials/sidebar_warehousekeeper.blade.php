@@ -11,7 +11,8 @@
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>
         </a>
         <p class="mb-0 font-roboto text-capitalize">
-            {{ Auth::user()->roleBy->name }} | {{ Auth::user()->warehouseBy->warehouses }}
+            {{ Auth::user()->roleBy->name }} <br> {{ Auth::user()->jobBy->job_name }} at
+            {{ Auth::user()->warehouseBy->warehouses }}
         </p>
 
     </div>

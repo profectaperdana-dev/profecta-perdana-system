@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\PoMessage;
+use App\Models\NotificationsModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderDetailModel;
 use App\Models\PurchaseOrderModel;
@@ -149,8 +151,22 @@ class PurchaseOrderController extends Controller
         $saved = $model->save();
 
         if (empty($message_duplicate) && $saved) {
+            $message = 'hey there is a purchase that must be checked  ';
+            event(new PoMessage('From:' . Auth::user()->name, $message));
+            $notif = new NotificationsModel();
+            $notif->message = $message;
+            $notif->status = 0;
+            $notif->job_id = 3;
+            $notif->save();
             return redirect('/purchase_orders')->with('success', 'Create purchase order ' . $model->order_number . ' success');
         } elseif (!empty($message_duplicate) && $saved) {
+            $message = 'hey there is a purchase that must be checked ';
+            event(new PoMessage('From:' . Auth::user()->name, $message));
+            $notif = new NotificationsModel();
+            $notif->message = $message;
+            $notif->status = 0;
+            $notif->job_id = 3;
+            $notif->save();
             return redirect('/purchase_orders')->with('info', 'Purchase Order add Success! ' . $message_duplicate);
         } else {
             return redirect('/purchase_orders')->with('error', 'Add Purchase Order Fail! Please make sure you have filled all the input');

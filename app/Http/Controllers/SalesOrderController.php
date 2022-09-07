@@ -236,7 +236,7 @@ class SalesOrderController extends Controller
             $notif = new NotificationsModel();
             $notif->message = $message;
             $notif->status = 0;
-            $notif->role_id = 5;
+            $notif->job_id = 1;
             $notif->save();
             return redirect('/sales_order')->with('success', 'Create sales orders ' . $model->order_number . ' success');
         } elseif (!empty($message_duplicate) && $saved) {
@@ -245,7 +245,7 @@ class SalesOrderController extends Controller
             $notif = new NotificationsModel();
             $notif->message = $message;
             $notif->status = 0;
-            $notif->role_id = 5;
+            $notif->job_id = 1;
             $notif->save();
             return redirect('/sales_order')->with('info', 'Some of SO add maybe Success! ' . $message_duplicate);
         } else {
@@ -451,7 +451,7 @@ class SalesOrderController extends Controller
                 $notif = new NotificationsModel();
                 $notif->message = $message;
                 $notif->status = 0;
-                $notif->role_id = 2;
+                $notif->job_id = 2;
                 $notif->save();
             }
         }
