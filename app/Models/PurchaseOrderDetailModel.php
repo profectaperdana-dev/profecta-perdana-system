@@ -12,7 +12,7 @@ class PurchaseOrderDetailModel extends Model
 
     public function productBy()
     {
-        return $this->hasOne(ProductModel::class, 'id', 'product_id');
+        return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
     }
 
     public function purchaseOrderBy()

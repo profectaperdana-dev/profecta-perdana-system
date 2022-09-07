@@ -13,11 +13,11 @@ class SalesOrderDetailModel extends Model
 
     public function productSales()
     {
-        return $this->hasOne(ProductModel::class, 'id', 'products_id');
+        return $this->hasOne(ProductModel::class, 'id', 'products_id')->withTrashed();
     }
     public function soBy()
     {
-        return $this->hasOne(CustomerModel::class, 'id', 'customers_id');
+        return $this->hasOne(CustomerModel::class, 'id', 'customers_id')->withTrashed();
     }
     public function salesorders()
     {
