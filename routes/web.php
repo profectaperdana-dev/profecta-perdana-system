@@ -87,7 +87,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/purchase_orders/{id}/validate', [PurchaseOrderController::class, 'validation']);
     Route::get('/purchase_orders/receiving', [PurchaseOrderController::class, 'receivingPO']);
 
-    Route::group(['middleware' => 'can:superadmin'], function () {
+    Route::group(['middleware' => 'can:isSuperAdmin'], function () {
         Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
 
         Route::resource('/customer_categories', CustomerCategoriesController::class);

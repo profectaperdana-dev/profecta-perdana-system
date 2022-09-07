@@ -34,6 +34,7 @@ function checkOverPlafone($customer_id)
         ->get();
     $selected_customer = CustomerModel::where('id', $customer_id)->first();
 
+    //dd($selected_customer);
     $total_credit = 0;
     foreach ($SODebts as $SODebt) {
         $total_credit = $total_credit + $SODebt->total_after_ppn;

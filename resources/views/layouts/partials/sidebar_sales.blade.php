@@ -10,7 +10,7 @@
       <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>
     </a>
     <p class="mb-0 font-roboto text-capitalize">
-      {{ Auth::user()->roleBy->name }} | {{ Auth::user()->jobBy->job_name }} at
+      {{ Auth::user()->roleBy->name }} <br> {{ Auth::user()->jobBy->job_name }} at
       {{ Auth::user()->warehouseBy->warehouses }}
     </p>
 
@@ -33,17 +33,20 @@
             <a class="nav-link menu-title link-nav {{ request()->is('home') ? 'active' : '' }}"
               href="{{ url('/home') }}"><i data-feather="home"></i><span>Dashboard</span></a>
           </li>
+          <li>
+            <a class="nav-link menu-title link-nav {{ request()->is('customers/create') ? 'active' : '' }}"
+              href="{{ url('/customers/create') }}"><i data-feather="user-check"></i><span>Create Customers
+              </span></a>
+          </li>
+          <li>
+            <a class="nav-link menu-title link-nav {{ request()->is('customers') ? 'active' : '' }}"
+              href="{{ url('/customers') }}"><i data-feather="user-check"></i><span>All Customers
+              </span></a>
+          </li>
           <li class="sidebar-main-title">
             <div>
               <h6>Transaction Sales</h6>
             </div>
-          </li>
-
-
-          <li>
-            <a class="nav-link menu-title link-nav {{ request()->is('customers') ? 'active' : '' }}"
-              href="{{ url('/customers') }}"><i data-feather="user-check"></i><span>Create Customers
-              </span></a>
           </li>
 
           <li>

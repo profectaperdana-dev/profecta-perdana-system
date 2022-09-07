@@ -17,7 +17,7 @@ class StockModel extends Model
         return $this->hasOne(ProductModel::class, 'id', 'products_id')->withTrashed();
     }
 
-    public function warehouseStockBy()
+    public function warehouseBy()
     {
         return $this->hasOne(WarehouseModel::class, 'id', 'warehouses_id')->withTrashed();
     }

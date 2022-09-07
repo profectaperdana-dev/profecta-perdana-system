@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\StockModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class CheckStockController extends Controller
 {
@@ -15,8 +16,13 @@ class CheckStockController extends Controller
      */
     public function index()
     {
-        $title = 'Data Stocks Product at ' . Auth::user()->warehouseBy->warehouses;
-        $data = StockModel::with(['productBy.sub_types', 'productBy.sub_materials', 'productBy.uoms'])->where('warehouses_id', Auth::user()->warehouse_id)->get();
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+            $title = 'All Data Stocks Product';
+            $data = StockModel::with(['productBy.sub_types', 'productBy.sub_materials', 'productBy.uoms', 'warehouseBy'])->latest('warehouses_id')->get();
+        } else {
+            $title = 'Data Stocks Product at ' . Auth::user()->warehouseBy->warehouses;
+            $data = StockModel::with(['productBy.sub_types', 'productBy.sub_materials', 'productBy.uoms'])->where('warehouses_id', Auth::user()->warehouse_id)->get();
+        }
         return view('cek_stok.index', compact('data', 'title'));
     }
 

@@ -10,7 +10,7 @@
       <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>
     </a>
     <p class="mb-0 font-roboto text-capitalize">
-      {{ Auth::user()->roleBy->name }} | {{ Auth::user()->jobBy->job_name }} at
+      {{ Auth::user()->roleBy->name }} <br> {{ Auth::user()->jobBy->job_name }} at
       {{ Auth::user()->warehouseBy->warehouses }}
     </p>
 
@@ -39,30 +39,20 @@
             </div>
           </li>
           <li>
-            <a class="nav-link menu-title link-nav {{ request()->is('sales_order') ? 'active' : '' }}"
-              href="{{ url('/sales_order') }}"><i data-feather="shopping-cart"></i><span>Create Sales
-                Order
+            <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/create') ? 'active' : '' }}"
+              href="{{ url('/purchase_orders/create') }}"><i data-feather="shopping-bag"></i><span>Create
+                Purchase Order
               </span></a>
           </li>
           <li>
-            <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
-              href="{{ url('/recent_sales_order') }}"><i data-feather="star"></i><span>SO Need
-                Verify
+            <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/receiving') ? 'active' : '' }}"
+              href="{{ url('/purchase_orders/receiving') }}"><i data-feather="folder-plus"></i><span>Receiving PO
               </span></a>
           </li>
           <li>
-            <a class="nav-link menu-title link-nav {{ request()->is('invoice') ? 'active' : '' }}"
-              href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
-              </span></a>
-          </li>
-          <li>
-            <a class="nav-link menu-title link-nav {{ request()->is('customers/create') ? 'active' : '' }}"
-              href="{{ url('/customers/create') }}"><i data-feather="user-check"></i><span>Create Customers
-              </span></a>
-          </li>
-          <li>
-            <a class="nav-link menu-title link-nav {{ request()->is('customers') ? 'active' : '' }}"
-              href="{{ url('/customers') }}"><i data-feather="user-check"></i><span>All Customers
+            <a class="nav-link menu-title link-nav {{ request()->is('all_purchase_orders') ? 'active' : '' }}"
+              href="{{ url('/all_purchase_orders') }}"><i data-feather="folder"></i></i><span>All
+                Purchase Order
               </span></a>
           </li>
           <li class="sidebar-main-title">

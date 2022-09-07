@@ -20,8 +20,8 @@ class SendEmailController extends Controller
     public function index($id)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
-            && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -39,7 +39,7 @@ class SendEmailController extends Controller
     }
     public function sendPo($id)
     {
-        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')) {
             abort(403);
         }
         $data = PurchaseOrderModel::find($id);

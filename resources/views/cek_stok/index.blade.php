@@ -41,6 +41,9 @@
                   <tr>
                     <th>#</th>
                     <th>Products</th>
+                    @canany(['isSuperadmin', 'isFinance', 'isVerificator'])
+                      <th>Warehouse</th>
+                    @endcanany
                     <th>Stocks</th>
 
                   </tr>
@@ -59,6 +62,9 @@
                             $value->productBy->sub_materials->nama_sub_material .
                             ')' }}
                       </td>
+                      @canany(['isSuperadmin', 'isFinance', 'isVerificator'])
+                        <td>{{ $value->warehouseBy->warehouses }}</td>
+                      @endcanany
                       <td>{{ $value->stock . ' ' . $value->productBy->uoms->satuan }}</td>
 
 

@@ -23,11 +23,17 @@
           <label>Warehouse</label>
           <select name="warehouse_id" required
             class="form-control warehouse-select {{ $errors->first('warehouse_id') ? ' is-invalid' : '' }}">
-            <option value="" selected>-Choose Payment-</option>
-            @foreach ($warehouses as $warehouse)
-              <option value="{{ $warehouse->id }}">{{ $warehouse->warehouses }}
+            @can('isSuperAdmin')
+              <option value="" selected>-Choose Payment-</option>
+              @foreach ($warehouses as $warehouse)
+                <option value="{{ $warehouse->id }}">{{ $warehouse->warehouses }}
+                </option>
+              @endforeach
+            @elsecan('isWarehouseKeeper')
+              <option value="{{ Auth::user()->warehouse_id }}" selected>{{ Auth::user()->warehouseBy->warehouses }}
               </option>
-            @endforeach
+            @endcan
+
           </select>
           @error('warehouse_id')
             <div class="invalid-feedback">

@@ -18,6 +18,11 @@ class CustomerModel extends Model
         return $this->belongsTo(DiscountModel::class, 'customer_id', 'id')->withTrashed();
     }
 
+    public function warehouseBy()
+    {
+        return $this->belongsTo(WarehouseModel::class, 'id_area', 'area_cust_id')->withTrashed();
+    }
+
     public function getRouteKeyName()
     {
         return 'code_cust';

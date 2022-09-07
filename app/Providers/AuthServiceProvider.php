@@ -37,20 +37,20 @@ class AuthServiceProvider extends ServiceProvider
             return $user->role_id === 3;
         });
 
-        Gate::define('superadmin', function (User $user) {
-            return $user->job_id === 4;
-        });
-        Gate::define('finance', function (User $user) {
-            return $user->job_id === 3;
-        });
-        Gate::define('verificator', function (User $user) {
+        Gate::define('isVerificator', function (User $user) {
             return $user->job_id === 1;
         });
-        Gate::define('sales', function (User $user) {
-            return $user->job_id === 5;
+        Gate::define('isFinance', function (User $user) {
+            return $user->job_id === 2;
         });
-        Gate::define('warehouse_keeper', function (User $user) {
-            return $user->job_id === 6;
+        Gate::define('isSuperAdmin', function (User $user) {
+            return $user->job_id === 3;
+        });
+        Gate::define('isSales', function (User $user) {
+            return $user->job_id === 4;
+        });
+        Gate::define('isWarehouseKeeper', function (User $user) {
+            return $user->job_id === 5;
         });
     }
 }

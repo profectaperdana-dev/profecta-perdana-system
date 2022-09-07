@@ -12,4 +12,9 @@ class WarehouseModel extends Model
     use SoftDeletes;
     protected $table = 'warehouses';
     protected $guarded = ['id'];
+
+    public function customerBy()
+    {
+        return $this->hasMany(CustomerModel::class, 'area_cust_id', 'id_area');
+    }
 }

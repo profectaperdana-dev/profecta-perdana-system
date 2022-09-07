@@ -41,8 +41,8 @@ class SalesOrderController extends Controller
     public function index()
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
-            && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -58,8 +58,8 @@ class SalesOrderController extends Controller
     public function printInoiceWithPpn($id)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
-            && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -74,8 +74,8 @@ class SalesOrderController extends Controller
     public function deliveryOrder($id)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
-            && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -91,7 +91,7 @@ class SalesOrderController extends Controller
     // getRecentData() : READ DATA RECENT SALES ORDERS ADMIN & SALES ADMIN
     public function getRecentData()
     {
-        if (!Gate::allows('superadmin') && !Gate::allows('verificator')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isVerificator')) {
             abort(403);
         }
         $title = 'Recent Sales Order';
@@ -162,8 +162,8 @@ class SalesOrderController extends Controller
     public function store(Request $request)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
-            && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -327,7 +327,7 @@ class SalesOrderController extends Controller
      */
     public function destroy($id)
     {
-        if (!Gate::allows('superadmin') && !Gate::allows('finance') || !Gate::allows('level1')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance') || !Gate::allows('level1')) {
             abort(403);
         }
         $modelSalesOrder = SalesOrderModel::where('id', $id)->first();
@@ -338,7 +338,7 @@ class SalesOrderController extends Controller
     public function soNeedApproval()
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -351,7 +351,7 @@ class SalesOrderController extends Controller
     public function verify(Request $request, $id)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('verificator')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isVerificator')
         ) {
             abort(403);
         }
@@ -523,8 +523,8 @@ class SalesOrderController extends Controller
     public function getInvoiceData(Request $request)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
-            && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -616,7 +616,7 @@ class SalesOrderController extends Controller
     public function reject($id)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -630,7 +630,7 @@ class SalesOrderController extends Controller
     public function approve($id)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -679,7 +679,7 @@ class SalesOrderController extends Controller
     public function updatePaid($id)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
@@ -698,7 +698,7 @@ class SalesOrderController extends Controller
     public function paidManagement(Request $request)
     {
         if (
-            !Gate::allows('superadmin') && !Gate::allows('finance')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
