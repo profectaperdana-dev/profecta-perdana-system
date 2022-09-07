@@ -32,7 +32,7 @@ class PoMail extends Mailable
     public function build()
     {
         return $this->view('purchase_orders.mail_po')
-            ->from('notification@profectaperdana.com', 'PROFECTA PERDANA')
+            ->from('noreply@profectaperdana.com', 'PROFECTA PERDANA')
             ->subject('PURCHASE ORDER ' . $this->data->order_number)
             ->with(['data' => $this->data, 'warehouse' => $this->warehouse])
             ->attach(public_path('pdf/' . $this->data->order_number . '.pdf'));

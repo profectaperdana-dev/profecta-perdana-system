@@ -45,14 +45,16 @@
     <!-- Page Body Start-->
     <div class="page-body-wrapper horizontal-menu">
       <!-- Page Sidebar Start-->
-      @can('sales')
-        @include('layouts.partials.sidebar_salesman')
-      @elsecan('verificator')
-        @include('layouts.partials.sidebar_sales_admin')
-      @elsecan('finance')
-        @include('layouts.partials.sidebar_admin')
+      @can('isSales')
+        @include('layouts.partials.sidebar_sales')
+      @elsecan('isVerificator')
+        @include('layouts.partials.sidebar_verificator')
+      @elsecan('isFinance')
+        @include('layouts.partials.sidebar_finance')
+      @elsecan('isSuperAdmin')
+        @include('layouts.partials.sidebar_superadmin')
       @else
-        @include('layouts.partials.sidebar')
+        @include('layouts.partials.sidebar_warehousekeeper')
       @endcan
       <!-- Page Sidebar Ends-->
       <div class="page-body">

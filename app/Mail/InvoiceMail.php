@@ -32,7 +32,7 @@ class InvoiceMail extends Mailable
     public function build()
     {
         return $this->view('invoice.mail_invoice')
-            ->from('notification@profectaperdana.com', 'PROFECTA PERDANA')
+            ->from('noreply@profectaperdana.com', 'PROFECTA PERDANA')
             ->subject('INVOICE ' . $this->data->order_number)
             ->with(['data' => $this->data, 'warehouse' => $this->warehouse])
             ->attach(public_path('pdf/' . $this->data->order_number . '.pdf'));
