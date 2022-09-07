@@ -24,14 +24,10 @@ use Illuminate\Support\Facades\Gate;
 // use Barryvdh\DomPDF\PDF;
 use PDF;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Request as FacadesRequest;
 
 use function App\Helpers\checkOverDue;
 use function App\Helpers\checkOverDueByCustomer;
 use function App\Helpers\checkOverPlafone;
-use function App\Helpers\setOverDue;
-use function App\Helpers\setOverPlafone;
-use function PHPUnit\Framework\isEmpty;
 
 class SalesOrderController extends Controller
 {
@@ -43,8 +39,13 @@ class SalesOrderController extends Controller
      */
     // index() : CREATE SALES ORDERS
     public function index()
-
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
+            && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $title = 'Create Sales Order';
         $product = ProductModel::latest()->get();
         $customer = CustomerModel::where('status', 1)->latest()->get();
@@ -56,6 +57,12 @@ class SalesOrderController extends Controller
     // print invoice dengan PPN
     public function printInoiceWithPpn($id)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
+            && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data->pdf_invoice = $data->order_number . '.pdf';
@@ -66,6 +73,12 @@ class SalesOrderController extends Controller
     //print delivery order
     public function deliveryOrder($id)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
+            && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $data = SalesOrderModel::find($id);
         $so_number = str_replace('IVPP', 'DOPP', $data->order_number);
         $data->pdf_do = $so_number . '.pdf';
@@ -78,6 +91,9 @@ class SalesOrderController extends Controller
     // getRecentData() : READ DATA RECENT SALES ORDERS ADMIN & SALES ADMIN
     public function getRecentData()
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('verificator')) {
+            abort(403);
+        }
         $title = 'Recent Sales Order';
         // get kode area
         $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
@@ -92,7 +108,7 @@ class SalesOrderController extends Controller
         ])
             ->whereIn('payment_method', [1, 2])
             ->where('isverified', 0)
-            ->whereIn('isapprove', ['reject', 'progress'])
+            ->where('isapprove', 'progress')
             ->where('order_number', 'like', "%$kode_area->area_code%")
             ->latest()
             ->get();
@@ -105,14 +121,24 @@ class SalesOrderController extends Controller
         ])
             ->where('payment_method', 3)
             ->where('isverified', 0)
-            ->whereIn('isapprove', ['reject', 'progress'])
+            ->where('isapprove', 'progress')
+            ->where('order_number', 'like', "%$kode_area->area_code%")
+            ->latest()
+            ->get();
+
+        $dataSalesOrderReject = SalesOrderModel::with([
+            'customerBy',
+            'salesOrderDetailsBy.productSales.sub_types',
+            'salesOrderDetailsBy.productSales.sub_materials'
+        ])
+            ->where('isapprove', 'reject')
             ->where('order_number', 'like', "%$kode_area->area_code%")
             ->latest()
             ->get();
 
         checkOverDue();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'customer'));
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'customer', 'dataSalesOrderReject'));
     }
 
     /**
@@ -135,6 +161,12 @@ class SalesOrderController extends Controller
     //  store() : SIMPAN DATA CREATE SALES ORDERS
     public function store(Request $request)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
+            && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         // validasi sebelum save
         $request->validate([
             "customer_id" => "required|numeric",
@@ -295,6 +327,9 @@ class SalesOrderController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('finance') || !Gate::allows('level1')) {
+            abort(403);
+        }
         $modelSalesOrder = SalesOrderModel::where('id', $id)->first();
         $modelSalesOrder->salesOrderDetailsBy()->delete();
         $modelSalesOrder->delete();
@@ -302,6 +337,11 @@ class SalesOrderController extends Controller
     }
     public function soNeedApproval()
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $title = 'Sales Order Need Approval By Admin';
 
         $dataInvoice = SalesOrderModel::where('isapprove', 'progress')->where('isverified', 1)->latest('created_at')->get();
@@ -310,6 +350,11 @@ class SalesOrderController extends Controller
     }
     public function verify(Request $request, $id)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('verificator')
+        ) {
+            abort(403);
+        }
         // Validate Input
         $request->validate([
             "customer_id" => "required|numeric",
@@ -335,6 +380,9 @@ class SalesOrderController extends Controller
         } else {
             $model->top = NULL;
             $model->duedate = NULL;
+        }
+        if ($model->isapprove == 'reject') {
+            $model->isapprove = 'progress';
         }
         $saved_temp = $model->save();
 
@@ -474,6 +522,13 @@ class SalesOrderController extends Controller
     // getInvoiceData() : Tampilkan data invoice dengan yajra
     public function getInvoiceData(Request $request)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
+            && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
+
         // get kode area
         // dd($request->all());
         if ($request->ajax()) {
@@ -560,15 +615,25 @@ class SalesOrderController extends Controller
     }
     public function reject($id)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
         $selected_so->isapprove = 'reject';
         $selected_so->isverified = 0;
         $selected_so->isPaid = 0;
         $selected_so->save();
-        return redirect('/recent_sales_order')->with('info', "Sales Order " . $selected_so->order_number . " Reject ");
+        return redirect('/need_approval')->with('info', "Sales Order " . $selected_so->order_number . " Reject ");
     }
     public function approve($id)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
         //Potong Stock
         $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
@@ -613,6 +678,11 @@ class SalesOrderController extends Controller
 
     public function updatePaid($id)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
 
         $selected_so->isPaid = 1;
@@ -627,6 +697,11 @@ class SalesOrderController extends Controller
 
     public function paidManagement(Request $request)
     {
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         if ($request->ajax()) {
             $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
                 ->select('customer_areas.area_code', 'warehouses.id')

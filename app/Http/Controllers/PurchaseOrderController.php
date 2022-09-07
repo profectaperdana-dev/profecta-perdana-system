@@ -23,6 +23,9 @@ class PurchaseOrderController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('superadmin')) {
+            abort(403);
+        }
         $all_purchases = PurchaseOrderModel::where('isapprove', 0)->latest()->get();
         $all_suppliers = SuppliersModel::latest()->get();
         $all_warehouses = WarehouseModel::latest()->get();
@@ -38,6 +41,9 @@ class PurchaseOrderController extends Controller
     }
     public function getPO()
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         $all_purchases = PurchaseOrderModel::where('isapprove', 1)->latest()->get();
         $all_suppliers = SuppliersModel::latest()->get();
         $all_warehouses = WarehouseModel::latest()->get();
@@ -53,6 +59,9 @@ class PurchaseOrderController extends Controller
     }
     public function printPO($id)
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         $data = PurchaseOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
 
@@ -62,6 +71,9 @@ class PurchaseOrderController extends Controller
 
     public function receivingPO()
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         $all_purchases = PurchaseOrderModel::where('isapprove', 1)->where('isvalidated', 0)->latest()->get();
 
         $data = [
@@ -78,6 +90,9 @@ class PurchaseOrderController extends Controller
      */
     public function create()
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         $all_suppliers = SuppliersModel::latest()->get();
         $all_warehouses = WarehouseModel::latest()->get();
 
@@ -98,6 +113,9 @@ class PurchaseOrderController extends Controller
      */
     public function store(Request $request)
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         // validator
         $request->validate([
             "supplier_id" => "required|numeric",
@@ -160,6 +178,9 @@ class PurchaseOrderController extends Controller
 
     public function manage(Request $request, $id)
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         // validator
         $request->validate([
             "supplier_id" => "required|numeric",
@@ -246,6 +267,9 @@ class PurchaseOrderController extends Controller
 
     public function validation(Request $request, $id)
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         // validator
         $request->validate([
             "remark" => "required",
@@ -363,7 +387,8 @@ class PurchaseOrderController extends Controller
      */
     public function destroy($id)
     {
-        if (!Gate::allows('level1')) {
+
+        if (!Gate::allows('level1') || !Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
             abort(403);
         }
         $modelPurchaseOrder = PurchaseOrderModel::where('id', $id)->first();

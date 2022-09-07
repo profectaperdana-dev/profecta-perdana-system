@@ -10,7 +10,8 @@
       <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>
     </a>
     <p class="mb-0 font-roboto text-capitalize">
-      {{ Auth::user()->roleBy->name }} | {{ Auth::user()->warehouseBy->warehouses }}
+      {{ Auth::user()->roleBy->name }} | {{ Auth::user()->jobBy->job_name }} at
+      {{ Auth::user()->warehouseBy->warehouses }}
     </p>
 
   </div>
@@ -34,7 +35,7 @@
           </li>
           <li class="sidebar-main-title">
             <div>
-              <h6>Admin Feature </h6>
+              <h6>Finance Feature </h6>
             </div>
           </li>
           <li>
@@ -43,11 +44,11 @@
                 Order
               </span></a>
           </li>
-          <li>
+          {{-- <li>
             <a class="nav-link menu-title link-nav {{ request()->is('recent_sales_order') ? 'active' : '' }}"
               href="{{ url('/recent_sales_order') }}"><i data-feather="star"></i><span>SO Need Verify
               </span></a>
-          </li>
+          </li> --}}
           <li>
             <a class="nav-link menu-title link-nav {{ request()->is('need_approval') ? 'active' : '' }}"
               href="{{ url('/need_approval') }}"><i data-feather="toggle-right"></i><span>SO

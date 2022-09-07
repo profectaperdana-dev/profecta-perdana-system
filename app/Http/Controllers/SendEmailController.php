@@ -11,6 +11,7 @@ use App\Models\WarehouseModel;
 // use Barryvdh\DomPDF\PDF;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Mail;
 use PDF;
 
@@ -18,7 +19,12 @@ class SendEmailController extends Controller
 {
     public function index($id)
     {
-
+        if (
+            !Gate::allows('superadmin') && !Gate::allows('sales') && !Gate::allows('verificator')
+            && !Gate::allows('finance')
+        ) {
+            abort(403);
+        }
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
@@ -33,6 +39,9 @@ class SendEmailController extends Controller
     }
     public function sendPo($id)
     {
+        if (!Gate::allows('superadmin') && !Gate::allows('warehouse_keeper')) {
+            abort(403);
+        }
         $data = PurchaseOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = PDF::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');

@@ -54,9 +54,13 @@
                           <h5 class="dropdown-header">Actions</h5>
                           <a class="dropdown-item modal-btn" href="#" data-bs-toggle="modal"
                             data-original-title="test" data-bs-target="#detailData{{ $value->id }}">Detail</a>
-                          <a class="dropdown-item" href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
-                          <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-                            data-bs-target="#deleteData{{ $value->id }}">Delete</a>
+                          @canany(['level1', 'level2'])
+                            <a class="dropdown-item" href="{{ url('/customers/' . $value->code_cust . '/edit') }}">Edit</a>
+                          @endcanany
+                          @can('level1')
+                            <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
+                              data-bs-target="#deleteData{{ $value->id }}">Delete</a>
+                          @endcan
                         </div>
                       </td>
                       {{-- Modul Detail --}}
@@ -257,40 +261,44 @@
                         </div>
                       </div>
                       {{-- End Modal Detail --}}
-                      {{-- Modul Delete UOM --}}
-                      <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
-                        aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog" role="document">
-                          <form method="post" action="{{ url('customers/' . $value->code_cust) }}"
-                            enctype="multipart/form-data">
-                            @csrf
-                            @method('delete')
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                  {{ $value->code_cust }}</h5>
-                                <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                  aria-label="Close"></button>
-                              </div>
-                              <div class="modal-body">
-                                <div class="container-fluid">
-                                  <div class="form-group row">
-                                    <div class="col-md-12">
-                                      <h5>Are you sure delete this data ?</h5>
+
+                      @can('level1')
+                        {{-- Modul Delete UOM --}}
+                        <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <form method="post" action="{{ url('customers/' . $value->code_cust) }}"
+                              enctype="multipart/form-data">
+                              @csrf
+                              @method('delete')
+                              <div class="modal-content">
+                                <div class="modal-header">
+                                  <h5 class="modal-title" id="exampleModalLabel">Delete Data
+                                    {{ $value->code_cust }}</h5>
+                                  <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                  <div class="container-fluid">
+                                    <div class="form-group row">
+                                      <div class="col-md-12">
+                                        <h5>Are you sure delete this data ?</h5>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
+                                <div class="modal-footer">
+                                  <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                                  <button class="btn btn-primary" type="submit">Yes, delete
+                                  </button>
+                                </div>
                               </div>
-                              <div class="modal-footer">
-                                <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" type="submit">Yes, delete
-                                </button>
-                              </div>
-                            </div>
-                          </form>
+                            </form>
+                          </div>
                         </div>
-                      </div>
-                      {{-- End Modal Delete UOM --}}
+                        {{-- End Modal Delete UOM --}}
+                      @endcan
+
                       <td>{{ $key + 1 }}</td>
                       <td>{{ $value->code_cust }}</td>
                       <td>{{ $value->name_cust }}</td>

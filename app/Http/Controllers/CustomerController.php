@@ -134,7 +134,7 @@ class CustomerController extends Controller
     }
     public function edit(CustomerModel $customer)
     {
-        if (!Gate::allows('level1') && !Gate::allows('level2') || !Gate::allows('superadmin')) {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
             abort(403);
         }
         $all_customer_categories = CustomerCategoriesModel::all();
@@ -160,7 +160,7 @@ class CustomerController extends Controller
      */
     public function update(Request $request, CustomerModel $customer)
     {
-        if (!Gate::allows('level1') && !Gate::allows('level2') || !Gate::allows('superadmin')) {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
             abort(403);
         }
         $validated_data = $request->validate([
@@ -236,7 +236,7 @@ class CustomerController extends Controller
      */
     public function destroy(CustomerModel $customer)
     {
-        if (!Gate::allows('level1') || !Gate::allows('superadmin')) {
+        if (!Gate::allows('level1')) {
             abort(403);
         }
         $customer_current = CustomerModel::where('code_cust', $customer->code_cust)->firstOrFail();

@@ -1,4 +1,4 @@
-@can('isAdmin')
+@can('finance')
   <script>
     Echo.channel('approval_notif').listen('ApprovalMessage', (e) => {
       let sound_approv = new Audio("{{ asset('sounds/sounds.wav') }}");
@@ -32,7 +32,7 @@
       })
     });
   </script>
-@elsecan('isVerificator')
+@elsecan('verificator')
   <script>
     Echo.channel('realtimeNotif').listen('SOMessage', (e) => {
       let sound = new Audio("{{ asset('sounds/so-created.wav') }}");
