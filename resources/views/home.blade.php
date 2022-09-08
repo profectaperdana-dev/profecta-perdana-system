@@ -1,91 +1,141 @@
 @extends('layouts.master')
 @section('content')
     @push('css')
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/date-picker.css">
     @endpush
-
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3>Sample Page</h3>
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-                        <li class="breadcrumb-item">Pages</li>
-                        <li class="breadcrumb-item active">Sample Page</li>
-                    </ol>
+                    <h3 class="font-weight-bold">{{ $title }}</h3>
+
                 </div>
-                <div class="col-sm-6">
-                    <!-- Bookmark Start-->
-                    <div class="bookmark">
-                        <ul>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                    data-placement="top" title="" data-original-title="Tables"><i
-                                        data-feather="inbox"></i></a></li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                    data-placement="top" title="" data-original-title="Chat"><i
-                                        data-feather="message-square"></i></a>
-                            </li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                    data-placement="top" title="" data-original-title="Icons"><i
-                                        data-feather="command"></i></a></li>
-                            <li><a href="javascript:void(0)" data-container="body" data-bs-toggle="popover"
-                                    data-placement="top" title="" data-original-title="Learning"><i
-                                        data-feather="layers"></i></a></li>
-                            <li><a href="javascript:void(0)"><i class="bookmark-search" data-feather="star"></i></a>
-                                <form class="form-inline search-form">
-                                    <div class="form-group form-control-search">
-                                        <input type="text" placeholder="Search..">
-                                    </div>
-                                </form>
-                            </li>
-                        </ul>
-                    </div>
-                    <!-- Bookmark Ends-->
-                </div>
+
             </div>
         </div>
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        @php
-                            $date = Auth::user()->created_at->format('Y-m-d');
-                            $now = date('Y-m-d');
-                            $reminder = date('Y-m-d', strtotime('+30 days', strtotime($date))); //kurang tanggal sebanyak 6 bulan
-                        @endphp
-                        @if ($now < $reminder)
-                            <a href="{{ url('/profiles') }}" class="text-white">
-                                <div class="alert alert-primary dark alert-dismissible fade show" role="alert">
-                                    <strong>Hallo,
-                                        {{ Auth::user()->name }} !
-                                    </strong> Don't forget to change your account password regularly.
-                                    Click This ! {{ $reminder }}
+        <div class="col-xl-12 xl-100 box-col-12">
 
-                                    <button class="btn-close" type="button" data-bs-dismiss="alert"
-                                        aria-label="Close"></button>
+            <div class="row">
+
+                <div class="col-xl-12 col-md-12 box-col-12 des-xl-50">
+                    <div class="card profile-greeting">
+                        <div class="card-header">
+                            <div class="header-top">
+                                <div class="setting-list bg-primary position-unset">
+
                                 </div>
-                            </a>
-                        @endif
+                            </div>
+                        </div>
+                        <div class="card-body text-center p-t-0">
+                            <h3 class="font-light">Wellcome Back, {{ Auth::user()->name }} !!</h3>
+                            <p>Welcome to the viho Family! we are glad that you are visite this dashboard. we will
+                                be happy
+                                to help you grow your business.</p>
+                        </div>
+                        <div class="confetti">
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
+                            <div class="confetti-piece"></div>
 
-                        <h5>Sample Card</h5><span>lorem ipsum dolor sit amet, consectetur adipisicing
-                            elit</span>
+                        </div>
                     </div>
-                    <div class="card-body">
-                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis
-                            nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                            Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu
-                            fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum."</p>
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            @can('isSales')
+                <div class="col-sm-12 col-xl-6 col-lg-6">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="award"></i></div>
+                                <div class="media-body"><span class="m-0">Sales Goals</span>
+                                    <h4 class="mb-0 counter">{{ $so_by }}</h4><i class="icon-bg"
+                                        data-feather="award"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6 col-lg-6">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
+                                <div class="media-body"><span class="m-0">Sales (IDR)</span>
+                                    <h4 class="mb-0 counter">{{ number_format($so_total) }}</h4><i class="icon-bg"
+                                        data-feather="credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            <div class="col-xl-12 xl-100 box-col-12">
+                <div class="card">
+                    <div class="cal-date-widget card-body">
+                        <div class="row">
+
+                            <div class="col-xl-12 col-xs-12 col-md-12 col-sm-12">
+                                <div class="cal-datepicker">
+                                    <div class="datepicker-here " data-language="en"> </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <!-- Container-fluid Ends-->
-    @push('script')
+    @push('scripts')
+        <script src="{{ asset('assets') }}/js/counter/jquery.counterup.min.js"></script>
+        <script src="{{ asset('assets') }}/js/counter/counter-custom.js"></script>
+        <script src="{{ asset('assets') }}/js/custom-card/custom-card.js"></script>
+        <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.js"></script>
+        <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.en.js"></script>
+        <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.custom.js"></script>
+        <script src="{{ asset('assets') }}/js/counter/jquery.counterup.min.js"></script>
+
+        <script src="{{ asset('assets') }}/js/chart/chartist/chartist.js"></script>
+        <script src="{{ asset('assets') }}/js/chart/chartist/chartist-plugin-tooltip.js"></script>
+        <script src="{{ asset('assets') }}/js/chart/knob/knob.min.js"></script>
+        <script src="{{ asset('assets') }}/js/chart/knob/knob-chart.js"></script>
+        <script src="{{ asset('assets') }}/js/chart/apex-chart/apex-chart.js"></script>
+        <script src="{{ asset('assets') }}/js/chart/apex-chart/stock-prices.js"></script>
+        <script src="{{ asset('assets') }}/js/prism/prism.min.js"></script>
+        <script src="{{ asset('assets') }}/js/clipboard/clipboard.min.js"></script>
+        <script src="{{ asset('assets') }}/js/counter/jquery.waypoints.min.js"></script>
+        <script src="{{ asset('assets') }}/js/counter/jquery.counterup.min.js"></script>
+        <script src="{{ asset('assets') }}/js/counter/counter-custom.js"></script>
+        <script src="{{ asset('assets') }}/js/custom-card/custom-card.js"></script>
+        <script src="{{ asset('assets') }}/js/notify/bootstrap-notify.min.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/jquery-jvectormap-2.0.2.min.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-world-mill-en.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-us-aea-en.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-uk-mill-en.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-au-mill.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-in-mill.js"></script>
+        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-asia-mill.js"></script>
+        <script src="{{ asset('assets') }}/js/dashboard/default.js"></script>
+        <script src="{{ asset('assets') }}/js/notify/index.js"></script>
+        <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.js"></script>
+        <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.en.js"></script>
+        <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.custom.js"></script>
     @endpush
 @endsection
