@@ -31,9 +31,10 @@
                         </div>
                         <div class="card-body text-center p-t-0">
                             <h3 class="font-light">Wellcome Back, {{ Auth::user()->name }} !!</h3>
-                            <p>Welcome to the viho Family! we are glad that you are visite this dashboard. we will
+                            <p>Welcome to the profecta perdana system! we are glad that you are visite this dashboard. we
+                                will
                                 be happy
-                                to help you grow your business.</p>
+                                to help you grow your work.</p>
                         </div>
                         <div class="confetti">
                             <div class="confetti-piece"></div>
@@ -78,6 +79,182 @@
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
                                 <div class="media-body"><span class="m-0">Sales (IDR)</span>
                                     <h4 class="mb-0 counter">{{ number_format($so_total) }}</h4><i class="icon-bg"
+                                        data-feather="credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            @can('isVerificator')
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="award"></i></div>
+                                <div class="media-body"><span class="m-0">Verify Order Today</span>
+                                    <h4 class="mb-0 counter">{{ $so_verify }}</h4><i class="icon-bg"
+                                        data-feather="award"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="bookmark"></i></div>
+                                <div class="media-body"><span class="m-0">Unverified orders
+                                        Today</span>
+                                    <h4 class="mb-0 counter">{{ $so_no_verif }}</h4><i class="icon-bg"
+                                        data-feather="bookmark"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
+                                <div class="media-body"><span class="m-0">Income Sales (IDR)</span>
+                                    <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
+                                        data-feather="credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            @can('isFinance')
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="award"></i></div>
+                                <div class="media-body"><span class="m-0">Approve Today</span>
+                                    <h4 class="mb-0 counter">{{ $approve_today }}</h4><i class="icon-bg"
+                                        data-feather="award"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
+                                <div class="media-body"><span class="m-0">Income Sales Today (IDR)</span>
+                                    <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
+                                        data-feather="credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="user"></i></div>
+                                <div class="media-body"><span class="m-0">Customer Over Due Today</span>
+                                    <h4 class="mb-0 counter">{{ $over_due }}</h4><i class="icon-bg"
+                                        data-feather="user"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
+            @can('isSuperAdmin')
+                <div class="col-sm-12 col-xl-3 col-lg-3">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="battery"></i></div>
+                                <div class="media-body"><span class="m-0">Total supplier</span>
+                                    <h4 class="mb-0 counter">{{ $supplier }}</h4><i class="icon-bg"
+                                        data-feather="battery"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-3 col-lg-3">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="user-plus"></i></div>
+                                <div class="media-body"><span class="m-0">Total Customer </span>
+                                    <h4 class="mb-0 counter">{{ $customer }}</h4><i class="icon-bg"
+                                        data-feather="user-plus"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-3 col-lg-3">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="user"></i></div>
+                                <div class="media-body"><span class="m-0">Total User</span>
+                                    <h4 class="mb-0 counter">{{ $user }}</h4><i class="icon-bg"
+                                        data-feather="user"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-3 col-lg-3">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
+                                <div class="media-body"><span class="m-0">Total Type Product</span>
+                                    <h4 class="mb-0 counter">{{ $produk }}</h4><i class="icon-bg"
+                                        data-feather="box"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
+                                <div class="media-body"><span class="m-0">Income Today (IDR) </span>
+                                    <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
+                                        data-feather="credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
+                                <div class="media-body"><span class="m-0">Income This Month (IDR)</span>
+                                    <h4 class="mb-0 counter">{{ number_format($month) }}</h4><i class="icon-bg"
+                                        data-feather="credit-card"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
+                                <div class="media-body"><span class="m-0">Total This Year (IDR)</span>
+                                    <h4 class="mb-0 counter">{{ number_format($year) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
                             </div>
