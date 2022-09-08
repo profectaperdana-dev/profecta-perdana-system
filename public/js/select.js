@@ -191,6 +191,13 @@ $(document).ready(function () {
     //select2 product
 
     // sales order //
+
+    //Get Customer ID
+    let customer_id = "";
+    $(".customer-append").change(function () {
+        customer_id = $(".customer-append").val();
+    });
+
     $(".productSo").select2({
         width: "100%",
         ajax: {
@@ -200,6 +207,7 @@ $(document).ready(function () {
                 return {
                     _token: csrf,
                     q: params.term, // search term
+                    c: customer_id,
                 };
             },
             dataType: "json",
@@ -223,12 +231,6 @@ $(document).ready(function () {
                 };
             },
         },
-    });
-
-    //Get Customer ID
-    let customer_id = "";
-    $(".customer-append").change(function () {
-        customer_id = $(".customer-append").val();
     });
 
     let x = 0;
@@ -316,6 +318,7 @@ $(document).ready(function () {
                     return {
                         _token: csrf,
                         q: params.term, // search term
+                        c: customer_id,
                     };
                 },
                 dataType: "json",

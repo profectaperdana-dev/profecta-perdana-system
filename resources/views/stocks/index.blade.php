@@ -230,7 +230,7 @@
                                             </div>
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->warehouseStockBy->warehouses }}</td>
+                                            <td>{{ $value->warehouseBy->warehouses }}</td>
                                             <td>{{ $value->productBy->nama_barang }}</td>
                                             <td>{{ $value->stock }}</td>
 
