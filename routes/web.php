@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/read_notif/{id}/', [NotificationController::class, 'readMessage']);
     Route::post('/purchase_orders/{id}/validate', [PurchaseOrderController::class, 'validation']);
     Route::get('/purchase_orders/receiving', [PurchaseOrderController::class, 'receivingPO']);
+    Route::get('/read_all_notif/{id}', [NotificationController::class, 'readAll']);
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
         Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);

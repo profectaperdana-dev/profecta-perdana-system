@@ -20,4 +20,16 @@ class NotificationController extends Controller
         $model->save();
         return redirect()->back();
     }
+    public function readAll($id)
+    {
+        // dd($id);
+        $model = NotificationsModel::where('job_id', $id)->get();
+
+        foreach ($model as $value) {
+            $value->status = 1;
+            $value->save();
+        }
+
+        return redirect()->back();
+    }
 }
