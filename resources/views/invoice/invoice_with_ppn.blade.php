@@ -159,7 +159,6 @@
             </thead>
             <tbody>
                 @php
-                    $total = 0;
                     $y = 0;
                 @endphp
                 @foreach ($data->salesOrderDetailsBy as $key => $value)
@@ -176,7 +175,6 @@
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
                         @php
                             $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
-                            $total = $total + $sub_total;
                         @endphp
                         <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>
                     </tr>
@@ -206,7 +204,7 @@
             <tbody>
                 <tr>
                     <td colspan="4" style="text-align: right">Total net value excl. tax</td>
-                    <td style="text-align: right">@currency($total)</td>
+                    <td style="text-align: right">@currency($data->total)</td>
                 </tr>
                 <tr>
                     <td colspan="4" style="text-align: right">PPN 11%</td>

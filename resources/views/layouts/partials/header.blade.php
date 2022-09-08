@@ -18,11 +18,11 @@
                             date = new Date;
                             year = date.getFullYear();
                             month = date.getMonth();
-                            months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep',
-                                'Oct', 'Nov', 'Des');
+                            // months = new Array('Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Aug', 'Sep',
+                            //     'Oct', 'Nov', 'Des');
                             d = date.getDate();
                             day = date.getDay();
-                            days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
+                            // days = new Array('Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu');
                             h = date.getHours();
                             if (h < 10) {
                                 h = "0" + h;

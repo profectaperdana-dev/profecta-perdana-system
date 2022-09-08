@@ -163,7 +163,6 @@
                 let sounds = new Audio("{{ asset('sounds/so.wav') }}");
                 let csrf = $('meta[name="csrf-token"]').attr("content");
                 sounds.play();
-                let csrf = $('meta[name="csrf-token"]').attr("content");
                 $.notify({
                     title: e.title,
                     message: e.message

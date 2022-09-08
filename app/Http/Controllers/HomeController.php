@@ -33,17 +33,18 @@ class HomeController extends Controller
         $title = 'Dashboard';
 
         // SALES
+        $so_day = SalesOrderModel::where('order_number', 'like', '%IVPP%')->whereDay('order_date', date('d'))->where('created_by', Auth::user()->id)->sum('total_after_ppn');
         $so_total = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('created_by', Auth::user()->id)->sum('total_after_ppn');
         $so_by = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('created_by', Auth::user()->id)->count();
 
         // VERIFICATOR
-        $so_verify = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('isverified', 1)->whereBetween('created_at', array(date('Y-m-d 00:00:00'), date('Y-m-d 23:59:59')))->count();
-        $so_no_verif = SalesOrderModel::where('order_number', 'like', '%SOPP%')->where('isverified', 0)->whereBetween('created_at', array(date('Y-m-d 00:00:00'), date('Y-m-d 23:59:59')))->count();
-        $so_today = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('isapprove', 'approve')->where('isverified', 1)->whereBetween('created_at', array(date('Y-m-d 00:00:00'), date('Y-m-d 23:59:59')))->sum('total_after_ppn');
+        $so_verify = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('isverified', 1)->whereDay('order_date', date('d'))->count();
+        $so_no_verif = SalesOrderModel::where('order_number', 'like', '%SOPP%')->where('isverified', 0)->whereDay('order_date', date('d'))->count();
+        $so_today = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('isapprove', 'approve')->where('isverified', 1)->whereDay('order_date', date('d'))->sum('total_after_ppn');
         // dd($so_today);
 
         // finance
-        $approve_today = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('isapprove', 'approve')->where('isverified', 1)->whereBetween('created_at', array(date('Y-m-d 00:00:00'), date('Y-m-d 23:59:59')))->count();
+        $approve_today = SalesOrderModel::where('order_number', 'like', '%IVPP%')->where('isapprove', 'approve')->where('isverified', 1)->whereDay('order_date', date('d'))->count();
         $over_due = CustomerModel::where('isOverDue', 1)->count();
 
         // superadmin
@@ -60,6 +61,6 @@ class HomeController extends Controller
             ->whereYear('order_date', date('Y'))
             ->sum('total_after_ppn');
 
-        return view('home', compact('supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
+        return view('home', compact('so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
     }
 }
