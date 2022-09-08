@@ -109,7 +109,6 @@ class SalesOrderController extends Controller
             ->whereIn('payment_method', [1, 2])
             ->where('isverified', 0)
             ->where('isapprove', 'progress')
-            ->where('order_number', 'like', "%$kode_area->area_code%")
             ->latest()
             ->get();
 
@@ -122,7 +121,6 @@ class SalesOrderController extends Controller
             ->where('payment_method', 3)
             ->where('isverified', 0)
             ->where('isapprove', 'progress')
-            ->where('order_number', 'like', "%$kode_area->area_code%")
             ->latest()
             ->get();
 
@@ -132,7 +130,6 @@ class SalesOrderController extends Controller
             'salesOrderDetailsBy.productSales.sub_materials'
         ])
             ->where('isapprove', 'reject')
-            ->where('order_number', 'like', "%$kode_area->area_code%")
             ->latest()
             ->get();
 
@@ -177,20 +174,36 @@ class SalesOrderController extends Controller
         ]);
 
         //Check Stock
+        $customer = CustomerModel::where('id', $request->get('customer_id'))->first();
         foreach ($request->soFields as $qty) {
-            $getStock = StockModel::where('products_id', $qty['product_id'])
-                ->where('warehouses_id', Auth::user()->warehouse_id)
-                ->first();
+            if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                $getStock = StockModel::where('products_id', $qty['product_id'])
+                    ->where('warehouses_id', $customer->warehouseBy->id)
+                    ->first();
+            } else {
+                $getStock = StockModel::where('products_id', $qty['product_id'])
+                    ->where('warehouses_id', Auth::user()->warehouse_id)
+                    ->first();
+            }
+
             if ($qty['qty'] > $getStock->stock) {
                 return redirect('/sales_order')->with('error', 'Add Sales Order Fail! The number of items exceeds the stock');
             }
         }
 
         // query cek kode warehouse/area sales orders
-        $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
-            ->select('customer_areas.area_code', 'warehouses.id')
-            ->where('warehouses.id', Auth::user()->warehouse_id)
-            ->first();
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', $customer->warehouseBy->id)
+                ->first();
+        } else {
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', Auth::user()->warehouse_id)
+                ->first();
+        }
+
         $length = 3;
         $id = intval(SalesOrderModel::where('order_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
         $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
@@ -342,7 +355,7 @@ class SalesOrderController extends Controller
         ) {
             abort(403);
         }
-        $title = 'Sales Order Need Approval By Admin';
+        $title = 'Sales Order Need Approval By Finance';
 
         $dataInvoice = SalesOrderModel::where('isapprove', 'progress')->where('isverified', 1)->latest('created_at')->get();
 
@@ -380,9 +393,6 @@ class SalesOrderController extends Controller
         } else {
             $model->top = NULL;
             $model->duedate = NULL;
-        }
-        if ($model->isapprove == 'reject') {
-            $model->isapprove = 'progress';
         }
         $saved_temp = $model->save();
 
@@ -437,49 +447,38 @@ class SalesOrderController extends Controller
         $getCredential = CustomerModel::where('id', $model->customers_id)->firstOrFail();
         $model->isverified = 1;
         $model->verifiedBy = Auth::user()->id;
-        if ($model->payment_method != 3) {
-            $model->isapprove = 'approve';
-            $model->isPaid = 1;
-            $so_number = $model->order_number;
-            $iv_number = str_replace('SOPP', 'IVPP', $so_number);
-            $do = str_replace('SOPP', 'DOPP', $so_number);
-            // dd($do);
-            $model->pdf_do = $do . '.pdf';
-            $model->pdf_invoice = $iv_number . '.pdf';
-            $model->order_number = $iv_number;
-            //Potong Stock
-            $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
-            foreach ($selected_sod as $value) {
-                $getStock = StockModel::where('products_id', $value->products_id)
-                    ->where('warehouses_id', Auth::user()->warehouse_id)
-                    ->first();
-                $old_stock = $getStock->stock;
-                $getStock->stock = $old_stock - $value->qty;
-                if ($getStock->stock < 0) {
-                    return Redirect::back()->with('error', 'Verification Fail! Not enough stock. Please re-confirm to the customer.');
-                } else {
-                    $getStock->save();
-                }
-            }
-            //Update Last Transaction Customer
-            $selected_customer = CustomerModel::where('id', $model->customers_id)->first();
-            $selected_customer->last_transaction = $model->order_date;
-            $selected_customer->save();
+        if ($model->isapprove == 'reject') {
+            $model->isapprove = 'progress';
+            $message = 'Sales Order ' . $model->order_number . ' has revised. Please check immediately!';
+            event(new ApprovalMessage('From:' . Auth::user()->name, $message));
+            $notif = new NotificationsModel();
+            $notif->message = $message;
+            $notif->status = 0;
+            $notif->job_id = 2;
+            $notif->save();
         } else {
-            $checkoverplafone = checkOverPlafone($model->customers_id);
-            $checkoverdue = checkOverDueByCustomer($model->customers_id);
-            // dd("Overdue: " . $checkoverdue . ", " . "Overplafone: " . $checkoverplafone);
-            if ($checkoverdue == false & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
+            if ($model->payment_method != 3) {
                 $model->isapprove = 'approve';
+                $model->isPaid = 1;
                 $so_number = $model->order_number;
-                $so_number = str_replace('SOPP', 'IVPP', $so_number);
-                $model->order_number = $so_number;
+                $iv_number = str_replace('SOPP', 'IVPP', $so_number);
+                $do = str_replace('SOPP', 'DOPP', $so_number);
+                // dd($do);
+                $model->pdf_do = $do . '.pdf';
+                $model->pdf_invoice = $iv_number . '.pdf';
+                $model->order_number = $iv_number;
                 //Potong Stock
                 $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
                 foreach ($selected_sod as $value) {
-                    $getStock = StockModel::where('products_id', $value->products_id)
-                        ->where('warehouses_id', Auth::user()->warehouse_id)
-                        ->first();
+                    if (Gate::allows('isSuperAdmin') || Gate::allows('isVerificator') || Gate::allows('isFinance')) {
+                        $getStock = StockModel::where('products_id', $value->products_id)
+                            ->where('warehouses_id', $model->customerBy->warehouseBy->id)
+                            ->first();
+                    } else {
+                        $getStock = StockModel::where('products_id', $value->products_id)
+                            ->where('warehouses_id', Auth::user()->warehouse_id)
+                            ->first();
+                    }
                     $old_stock = $getStock->stock;
                     $getStock->stock = $old_stock - $value->qty;
                     if ($getStock->stock < 0) {
@@ -488,21 +487,57 @@ class SalesOrderController extends Controller
                         $getStock->save();
                     }
                 }
-
                 //Update Last Transaction Customer
                 $selected_customer = CustomerModel::where('id', $model->customers_id)->first();
                 $selected_customer->last_transaction = $model->order_date;
                 $selected_customer->save();
             } else {
-                $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
-                event(new ApprovalMessage('From:' . Auth::user()->name, $message));
-                $notif = new NotificationsModel();
-                $notif->message = $message;
-                $notif->status = 0;
-                $notif->job_id = 2;
-                $notif->save();
+                $checkoverplafone = checkOverPlafone($model->customers_id);
+                $checkoverdue = checkOverDueByCustomer($model->customers_id);
+                // dd("Overdue: " . $checkoverdue . ", " . "Overplafone: " . $checkoverplafone);
+                if ($checkoverdue == false & $checkoverplafone == false & $getCredential->label != 'Bad Customer') {
+                    $model->isapprove = 'approve';
+                    $so_number = $model->order_number;
+                    $so_number = str_replace('SOPP', 'IVPP', $so_number);
+                    $model->order_number = $so_number;
+                    //Potong Stock
+                    $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
+                    foreach ($selected_sod as $value) {
+                        if (Gate::allows('isSuperAdmin') || Gate::allows('isVerificator') || Gate::allows('isFinance')) {
+                            $getStock = StockModel::where('products_id', $value->products_id)
+                                ->where('warehouses_id', $model->customerBy->warehouseBy->id)
+                                ->first();
+                        } else {
+                            $getStock = StockModel::where('products_id', $value->products_id)
+                                ->where('warehouses_id', Auth::user()->warehouse_id)
+                                ->first();
+                        }
+
+                        $old_stock = $getStock->stock;
+                        $getStock->stock = $old_stock - $value->qty;
+                        if ($getStock->stock < 0) {
+                            return Redirect::back()->with('error', 'Verification Fail! Not enough stock. Please re-confirm to the customer.');
+                        } else {
+                            $getStock->save();
+                        }
+                    }
+
+                    //Update Last Transaction Customer
+                    $selected_customer = CustomerModel::where('id', $model->customers_id)->first();
+                    $selected_customer->last_transaction = $model->order_date;
+                    $selected_customer->save();
+                } else {
+                    $message = 'Sales Order indicated overdue or overceiling. Please check immediately!';
+                    event(new ApprovalMessage('From:' . Auth::user()->name, $message));
+                    $notif = new NotificationsModel();
+                    $notif->message = $message;
+                    $notif->status = 0;
+                    $notif->job_id = 2;
+                    $notif->save();
+                }
             }
         }
+
         $saved_model = $model->save();
         if ($saved_model == true) {
             $data = SalesOrderModel::where('order_number', $model->order_number)->first();
@@ -537,20 +572,37 @@ class SalesOrderController extends Controller
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
             if (!empty($request->from_date)) {
-                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
-                    ->where('isapprove', 'approve')
-                    ->where('isverified', 1)
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
-                    ->whereBetween('order_date', array($request->from_date, $request->to_date))
-                    ->latest()
-                    ->get();
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                        ->where('isapprove', 'approve')
+                        ->where('isverified', 1)
+                        ->whereBetween('order_date', array($request->from_date, $request->to_date))
+                        ->latest()
+                        ->get();
+                } else {
+                    $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                        ->where('isapprove', 'approve')
+                        ->where('isverified', 1)
+                        ->where('order_number', 'like', "%$kode_area->area_code%")
+                        ->whereBetween('order_date', array($request->from_date, $request->to_date))
+                        ->latest()
+                        ->get();
+                }
             } else {
-                $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
-                    ->where('isapprove', 'approve')
-                    ->where('isverified', 1)
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
-                    ->latest()
-                    ->get();
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                        ->where('isapprove', 'approve')
+                        ->where('isverified', 1)
+                        ->latest()
+                        ->get();
+                } else {
+                    $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                        ->where('isapprove', 'approve')
+                        ->where('isverified', 1)
+                        ->where('order_number', 'like', "%$kode_area->area_code%")
+                        ->latest()
+                        ->get();
+                }
             }
             return datatables()->of($invoice)
                 ->editColumn('payment_method', function ($data) {
@@ -591,7 +643,11 @@ class SalesOrderController extends Controller
                     return date('d-M-Y', strtotime($data->order_date));
                 })
                 ->editColumn('duedate', function ($data) {
-                    return date('d-M-Y', strtotime($data->duedate));
+                    if ($data->duedate != null) {
+                        return date('d-M-Y', strtotime($data->duedate));
+                    } else {
+                        return "-";
+                    }
                 })
                 ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
                     return $SalesOrderModel->customerBy->name_cust;
@@ -638,9 +694,15 @@ class SalesOrderController extends Controller
         //Potong Stock
         $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $selected_so->id)->get();
         foreach ($selected_sod as $value) {
-            $getStock = StockModel::where('products_id', $value->products_id)
-                ->where('warehouses_id', Auth::user()->warehouse_id)
-                ->first();
+            if (Gate::allows('isSuperAdmin') || Gate::allows('isVerificator') || Gate::allows('isFinance')) {
+                $getStock = StockModel::where('products_id', $value->products_id)
+                    ->where('warehouses_id', $selected_so->customerBy->warehouseBy->id)
+                    ->first();
+            } else {
+                $getStock = StockModel::where('products_id', $value->products_id)
+                    ->where('warehouses_id', Auth::user()->warehouse_id)
+                    ->first();
+            }
             $old_stock = $getStock->stock;
             $getStock->stock = $old_stock - $value->qty;
             if ($getStock->stock < 0) {

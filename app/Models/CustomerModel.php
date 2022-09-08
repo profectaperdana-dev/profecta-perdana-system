@@ -20,7 +20,7 @@ class CustomerModel extends Model
 
     public function warehouseBy()
     {
-        return $this->belongsTo(WarehouseModel::class, 'id_area', 'area_cust_id')->withTrashed();
+        return $this->hasOne(WarehouseModel::class, 'id_area', 'area_cust_id')->withTrashed();
     }
 
     public function getRouteKeyName()

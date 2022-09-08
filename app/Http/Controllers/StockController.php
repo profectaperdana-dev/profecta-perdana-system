@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerModel;
 use App\Models\ProductModel;
 use App\Models\StockModel;
 use App\Models\WarehouseModel;
@@ -30,7 +31,7 @@ class StockController extends Controller
             return view('stocks.index', compact('title', 'data', 'product', 'warehouse'));
         } else {
             $title = 'Data Stocks Product All Warehouse';
-            $data = StockModel::with('warehouseStockBy', 'productBy')->latest()->get();
+            $data = StockModel::with('warehouseBy', 'productBy')->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::latest()->get();
 
@@ -117,16 +118,23 @@ class StockController extends Controller
 
     public function cekQty($product_id)
     {
-        try {
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+            $customer_id = request()->c;
+            $customer = CustomerModel::where('id', $customer_id)->first();
+            $qty = StockModel::select("id", "stock")
+                ->where('warehouses_id', $customer->warehouseBy->id)
+                ->where('products_id', $product_id)
+                ->first();
+        } else {
+            $customer_id = request()->c;
+            $customer = CustomerModel::where('id', $customer_id)->first();
             $qty = StockModel::select("id", "stock")
                 ->where('warehouses_id', Auth::user()->warehouseBy->id)
                 ->where('products_id', $product_id)
                 ->first();
-
-            return response()->json($qty);
-        } catch (\Throwable $th) {
-            dd($th);
         }
+
+        return response()->json($qty);
     }
     public function show($id)
     {

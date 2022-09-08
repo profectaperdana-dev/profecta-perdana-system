@@ -1034,6 +1034,7 @@
 
           let modal_id = $(this).attr('data-bs-target');
           //Get Customer ID
+          let customer_id = $(modal_id).find('.customer-append').val();
           $(modal_id).find(".productSo-edit").select2({
             width: "100%",
             ajax: {
@@ -1044,6 +1045,7 @@
                 return {
                   _token: csrf,
                   q: params.term, // search term
+                  c: customer_id
                 };
               },
               dataType: "json",
@@ -1066,7 +1068,6 @@
             },
           });
 
-          let customer_id = $(modal_id).find('.customer-append').val();
           //Get Customer ID
           $(modal_id).find(".customer-append").change(function() {
             customer_id = $(modal_id).find(".customer-append").val();
@@ -1101,12 +1102,18 @@
             let qtyValue = $(this).val();
             let product_id = $(this).parent('.form-group').siblings('.form-group').find(
               '.productSo-edit').val();
+            let id = customer_id;
 
             $.ajax({
               context: this,
               type: "GET",
               url: "/stocks/cekQty/" + product_id,
+              data: {
+                _token: csrf,
+                c: id,
+              },
               dataType: "json",
+              delay: 250,
               success: function(data) {
                 if (parseInt(qtyValue) > parseInt(data.stock)) {
                   $(this).parent().find(".qty-warning").removeAttr(
@@ -1119,6 +1126,10 @@
                     .attr("hidden", "true");
                   $(this).removeClass("is-invalid");
                 }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
               },
             });
           });
@@ -1165,6 +1176,7 @@
                   return {
                     _token: csrf,
                     q: params.term, // search term
+                    c: customer_id
                   };
                 },
                 dataType: "json",

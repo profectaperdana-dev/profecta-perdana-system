@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\ProductModel;
 use App\Models\StockModel;
@@ -64,22 +65,47 @@ class ProductController extends Controller
             $product = [];
             if (request()->has('q')) {
                 $search = request()->q;
-                $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
-                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
-                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
-                    ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
-                    ->where('product_sub_types.type_name', 'LIKE', "%$search%")
-                    ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
-                    ->orWhere('products.nama_barang', 'LIKE', "%$search%")
-                    ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
-                    ->get();
+                $customer_id = request()->c;
+                $customer = CustomerModel::where('id', $customer_id)->first();
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
+                        ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                        ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                        ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                        ->where('product_sub_types.type_name', 'LIKE', "%$search%")
+                        ->where('stocks.warehouses_id', $customer->warehouseBy->id)
+                        ->orWhere('products.nama_barang', 'LIKE', "%$search%")
+                        ->where('stocks.warehouses_id', $customer->warehouseBy->id)
+                        ->get();
+                } else {
+                    $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
+                        ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                        ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                        ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                        ->where('product_sub_types.type_name', 'LIKE', "%$search%")
+                        ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                        ->orWhere('products.nama_barang', 'LIKE', "%$search%")
+                        ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                        ->get();
+                }
             } else {
-                $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
-                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
-                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
-                    ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
-                    ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
-                    ->latest()->get();
+                $customer_id = request()->c;
+                $customer = CustomerModel::where('id', $customer_id)->first();
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
+                        ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                        ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                        ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                        ->where('stocks.warehouses_id', $customer->warehouseBy->id)
+                        ->latest()->get();
+                } else {
+                    $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
+                        ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                        ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
+                        ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                        ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                        ->latest()->get();
+                }
             }
             return response()->json($product);
         } catch (\Throwable $th) {
