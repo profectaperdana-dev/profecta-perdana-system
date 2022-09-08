@@ -130,12 +130,13 @@
                     },
                 });
                 // const iconPath = '{{ asset('images/new1.png') }}'
-                // Push.create("Hay, {{ Auth::user()->name }}", {
-                //     body: "please check there is an order that must be verified.",
-                //     requireInteraction: true,
-                //     icon: iconPath,
-                //     vibrate: [200, 100],
+                Push.create("Hay, {{ Auth::user()->name }}", {
+                    body: "please check there is an order that must be verified.",
+                    requireInteraction: true,
+                    // icon: iconPath,
+                    vibrate: [200, 100],
 
+                });
             });
 
         });
