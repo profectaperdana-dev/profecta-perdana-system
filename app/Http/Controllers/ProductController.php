@@ -112,7 +112,6 @@ class ProductController extends Controller
             dd($th);
         }
     }
-
     public function selectCost($product_id)
     {
         try {
@@ -125,7 +124,6 @@ class ProductController extends Controller
             dd($th);
         }
     }
-
     /**
      * Show the form for creating a new resource.
      *
