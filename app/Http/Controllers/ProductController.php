@@ -62,11 +62,12 @@ class ProductController extends Controller
     public function select()
     {
         try {
+            $customer_id = request()->c;
+            $customer = CustomerModel::with('warehouseBy')->where('id', $customer_id)->first();
             $product = [];
             if (request()->has('q')) {
                 $search = request()->q;
-                $customer_id = request()->c;
-                $customer = CustomerModel::where('id', $customer_id)->first();
+
                 if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
                     $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
                         ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
@@ -89,8 +90,7 @@ class ProductController extends Controller
                         ->get();
                 }
             } else {
-                $customer_id = request()->c;
-                $customer = CustomerModel::where('id', $customer_id)->first();
+
                 if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
                     $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
                         ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
@@ -109,7 +109,7 @@ class ProductController extends Controller
             }
             return response()->json($product);
         } catch (\Throwable $th) {
-            dd($th);
+            return response()->json($th);
         }
     }
 
