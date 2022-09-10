@@ -175,6 +175,8 @@ class SalesOrderController extends Controller
 
         //Check Stock
         $customer = CustomerModel::where('id', $request->get('customer_id'))->first();
+
+        // dd($customer->name_cust);
         foreach ($request->soFields as $qty) {
             if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
                 $getStock = StockModel::where('products_id', $qty['product_id'])
@@ -217,7 +219,7 @@ class SalesOrderController extends Controller
         $model = new SalesOrderModel();
         $model->order_number = $order_number;
         $model->order_date = Carbon::now()->format('Y-m-d');
-        $model->customers_id = $request->get('customer_id');
+        $model->customers_id = $customer->id;
         $model->remark = $request->get('remark');
         $model->created_by = Auth::user()->id;
         $model->payment_method = $request->get('payment_method');

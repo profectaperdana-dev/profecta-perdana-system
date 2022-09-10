@@ -12,6 +12,8 @@
  <script src="{{ asset('assets') }}/js/bootstrap/popper.min.js"></script>
  <script src="{{ asset('assets') }}/js/bootstrap/bootstrap.min.js"></script>
  {{-- <script src="{{ asset('assets') }}/js/notify/index.js"></script> --}}
+ <script src="https://js.pusher.com/7.2.0/pusher.min.js"></script>
+
  <script src="https://cdnjs.cloudflare.com/ajax/libs/push.js/1.0.12/push.js"
    integrity="sha512-lYYzkh4X04OJKecFNDnkk1ddO2Oo6BNVkysVAKZTQJC/xC7hsrqM8U24FbW8z2F0oxqJgXvodOziCdKj5gBjCw=="
    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
