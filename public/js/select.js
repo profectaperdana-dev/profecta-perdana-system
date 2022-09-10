@@ -260,6 +260,10 @@ $(document).ready(function () {
             context: this,
             type: "GET",
             url: "/stocks/cekQty/" + product_id,
+            data: {
+                _token: csrf,
+                c: customer_id,
+            },
             dataType: "json",
             success: function (data) {
                 if (parseInt(qtyValue) > parseInt(data.stock)) {

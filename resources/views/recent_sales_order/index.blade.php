@@ -87,7 +87,7 @@
                               data-bs-toggle="modal" data-bs-target="#verifyData{{ $value->id }}">Verify</a>
                           </td>
                           <!-- Detail Product Modal Start -->
-                          {{-- <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
+                          {{-- <div class="modal fade" id="detailData{{ $value->id }}" role="dialog"
                               aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                 <form>
@@ -290,7 +290,7 @@
 
   @foreach ($dataSalesOrder as $value)
     <!-- Verify Product Modal Start -->
-    <div class="modal fade" id="verifyData{{ $value->id }}" tabindex="-1" data-bs-keyboard="false"
+    <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
       aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -351,9 +351,9 @@
                 <hr>
                 <div class="form-group row formSo-edit">
                   @foreach ($value->salesOrderDetailsBy as $detail)
-                    <div class="form-group row">
+                    <div class="mx-auto py-2 form-group row bg-primary">
                       <input type="hidden" class="loop" value="{{ $loop->index }}">
-                      <div class="form-group col-6">
+                      <div class="form-group col-12 col-lg-6">
                         <label>Product</label>
                         <select name="editProduct[{{ $loop->index }}][products_id]" required
                           class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
@@ -375,7 +375,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-2 col-md-2 form-group">
+                      <div class="col-4 col-lg-2 form-group">
                         <label>Qty</label>
                         <input type="number" class="form-control cekQty-edit"
                           name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}" />
@@ -389,7 +389,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-2 col-md-2 form-group">
+                      <div class="col-4 col-lg-2 form-group">
                         <label>Disc(%)</label>
                         <input type="number" class="form-control discount-append-edit" placeholder="Disc"
                           name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
@@ -464,8 +464,8 @@
     <!-- Verify Product Modal End -->
 
     <!-- Delete Product Modal Start -->
-    <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog modal-lg" role="document">
         <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
           @csrf
@@ -501,7 +501,7 @@
 
   @foreach ($dataSalesOrderDebt as $value)
     <!-- Verify Product Modal Start -->
-    <div class="modal fade" id="verifyData{{ $value->id }}" tabindex="-1" data-bs-keyboard="false"
+    <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
       aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -562,9 +562,9 @@
                 <hr>
                 <div class="form-group row formSo-edit">
                   @foreach ($value->salesOrderDetailsBy as $detail)
-                    <div class="form-group row">
+                    <div class="mx-auto py-2 form-group row bg-primary">
                       <input type="hidden" class="loop" value="{{ $loop->index }}">
-                      <div class="form-group col-6">
+                      <div class="form-group col-12 col-lg-6">
                         <label>Product</label>
                         <select name="editProduct[{{ $loop->index }}][products_id]" required
                           class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
@@ -586,7 +586,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-2 col-md-2 form-group">
+                      <div class="col-4 col-lg-2 form-group">
                         <label>Qty</label>
                         <input type="number" class="form-control cekQty-edit"
                           name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}" />
@@ -600,7 +600,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-2 col-md-2 form-group">
+                      <div class="col-4 col-lg-2 form-group">
                         <label>Disc(%)</label>
                         <input type="number" class="form-control discount-append-edit" placeholder="Disc"
                           name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
@@ -675,8 +675,8 @@
     <!-- Verify Product Modal End -->
 
     <!-- Delete Product Modal Start -->
-    <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog" role="document">
         <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
           @csrf
@@ -711,7 +711,7 @@
 
   @foreach ($dataSalesOrderReject as $value)
     <!-- Verify Product Modal Start -->
-    <div class="modal fade" id="verifyData{{ $value->id }}" tabindex="-1" data-bs-keyboard="false"
+    <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
       aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -772,9 +772,9 @@
                 <hr>
                 <div class="form-group row formSo-edit">
                   @foreach ($value->salesOrderDetailsBy as $detail)
-                    <div class="form-group row">
+                    <div class="mx-auto py-2 form-group row bg-primary">
                       <input type="hidden" class="loop" value="{{ $loop->index }}">
-                      <div class="form-group col-6">
+                      <div class="form-group col-12 col-lg-6">
                         <label>Product</label>
                         <select name="editProduct[{{ $loop->index }}][products_id]" required
                           class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
@@ -796,7 +796,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-2 col-md-2 form-group">
+                      <div class="col-4 col-lg-2 form-group">
                         <label>Qty</label>
                         <input type="number" class="form-control cekQty-edit"
                           name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}" />
@@ -810,7 +810,7 @@
                         @enderror
                       </div>
 
-                      <div class="col-2 col-md-2 form-group">
+                      <div class="col-4 col-lg-2 form-group">
                         <label>Disc(%)</label>
                         <input type="number" class="form-control discount-append-edit" placeholder="Disc"
                           name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
@@ -885,8 +885,8 @@
     <!-- Verify Product Modal End -->
 
     <!-- Delete Product Modal Start -->
-    <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
       <div class="modal-dialog" role="document">
         <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
           @csrf
@@ -1037,6 +1037,7 @@
           let customer_id = $(modal_id).find('.customer-append').val();
           $(modal_id).find(".productSo-edit").select2({
             width: "100%",
+            dropdownParent: modal_id,
             ajax: {
               context: this,
               type: "GET",
@@ -1136,9 +1137,9 @@
           $(modal_id).on("click", ".addSo-edit", function() {
             ++x;
             var form =
-              '<div class="form-group row">' +
+              '<div class="mx-auto py-2 form-group row bg-primary">' +
               '<input type="hidden" class="loop" value="' + x + '">' +
-              '<div class="form-group col-6">' +
+              '<div class="form-group col-12 col-lg-6">' +
               "<label>Product</label>" +
               '<select name="editProduct[' +
               x +
@@ -1146,14 +1147,14 @@
               '<option value="">Choose Product</option> ' +
               "</select>" +
               "</div>" +
-              '<div class="col-2 col-md-2 form-group">' +
+              '<div class="col-4 col-lg-2 form-group">' +
               "<label> Qty </label> " +
               '<input type="number" class="form-control cekQty-edit" required name="editProduct[' +
               x +
               '][qty]">' +
               '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
               "</div> " +
-              '<div class="col-2 col-md-2 form-group">' +
+              '<div class="col-4 col-lg-2 form-group">' +
               "<label>Disc(%)</label>" +
               '<input type="number" class="form-control discount-append-edit" name="editProduct[' +
               x +
@@ -1169,6 +1170,7 @@
 
             $(modal_id).find(".productSo-edit").select2({
               width: "100%",
+              dropdownParent: modal_id,
               ajax: {
                 type: "GET",
                 url: "/products/select",
