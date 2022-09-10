@@ -33,4 +33,4 @@ window.Echo = new Echo({
     wsPort: 6001,
 });
 
-require("bootstrap/dist/js/bootstrap.bundle");
+// require("bootstrap/dist/js/bootstrap.bundle");

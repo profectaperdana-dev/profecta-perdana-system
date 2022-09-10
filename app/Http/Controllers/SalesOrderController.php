@@ -219,9 +219,9 @@ class SalesOrderController extends Controller
         $model = new SalesOrderModel();
         $model->order_number = $order_number;
         $model->order_date = Carbon::now()->format('Y-m-d');
-        $model->customers_id = $customer->name_cust;
+        $model->customers_id = $customer->id;
         $model->remark = $request->get('remark');
-        $model->created_by = Auth::user()->name;
+        $model->created_by = Auth::user()->id;
         $model->payment_method = $request->get('payment_method');
 
         // metode bayar
