@@ -76,6 +76,7 @@
                                                         </div>
                                                     </td>
 
+<<<<<<< HEAD
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $value->order_number }}</td>
                                                     <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
@@ -92,6 +93,23 @@
                                                     </td>
                                                     <!-- Detail Product Modal Start -->
                                                     {{-- <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1" role="dialog"
+=======
+                          <td>{{ $loop->iteration }}</td>
+                          <td>{{ $value->order_number }}</td>
+                          <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
+                          <td>{{ $value->customerBy->name_cust . ' (' . $value->customerBy->code_cust . ')' }}
+                          </td>
+                          @if ($value->payment_method == 1)
+                            <td>COD</td>
+                          @else
+                            <td>CBD</td>
+                          @endif
+                          <td class="text-center"><a class="btn btn-primary btn-sm modal-btn" href="javascript:void(0)"
+                              data-bs-toggle="modal" data-bs-target="#verifyData{{ $value->id }}">Verify</a>
+                          </td>
+                          <!-- Detail Product Modal Start -->
+                          {{-- <div class="modal fade" id="detailData{{ $value->id }}" role="dialog"
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
                               aria-labelledby="exampleModalLabel" aria-hidden="true">
                               <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
                                 <form>
@@ -298,6 +316,7 @@
 
     </div>
 
+<<<<<<< HEAD
     @foreach ($dataSalesOrder as $value)
         <!-- Verify Product Modal Start -->
         <div class="modal fade" id="verifyData{{ $value->id }}" tabindex="-1" data-bs-keyboard="false"
@@ -400,6 +419,121 @@
                                                     </div>
                                                 @enderror
                                             </div>
+=======
+  </div>
+
+  @foreach ($dataSalesOrder as $value)
+    <!-- Verify Product Modal Start -->
+    <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sales
+              Order
+              :
+              {{ $value->order_number }}</h5>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url('sales_orders/' . $value->id . '/verify') }}" method="POST"
+              enctype="multipart/form-data">
+              @csrf
+              <div class="container-fluid">
+                <div class="form-group row">
+                  <div class="col-md-6 form-group">
+                    <label>
+                      Customers</label>
+                    <select name="customer_id" id="" required
+                      class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
+                      <option value="" selected>-Choose Customers-</option>
+                      @foreach ($customer as $cust)
+                        <option value="{{ $cust->id }}" @if ($cust->id == $value->customers_id) selected @endif>
+                          {{ $cust->code_cust }} |
+                          {{ $cust->name_cust }}
+                        </option>
+                      @endforeach
+                    </select>
+                    @error('customer_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                  <div class="col-md-6 form-group mr-5">
+                    <label>Payment Method</label>
+                    <select name="payment_method" required
+                      class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
+                      <option value="" selected>-Choose Payment-</option>
+                      <option value="1" @if ($value->payment_method == 1) selected @endif>
+                        Cash On Delivery
+                      </option>
+                      <option value="2" @if ($value->payment_method == 2) selected @endif>
+                        Cash Before Delivery
+                      </option>
+                      <option value="3" @if ($value->payment_method == 3) selected @endif>
+                        Credit
+                      </option>
+                    </select>
+                    @error('payment_method')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group row formSo-edit">
+                  @foreach ($value->salesOrderDetailsBy as $detail)
+                    <div class="mx-auto py-2 form-group row bg-primary">
+                      <input type="hidden" class="loop" value="{{ $loop->index }}">
+                      <div class="form-group col-12 col-lg-6">
+                        <label>Product</label>
+                        <select name="editProduct[{{ $loop->index }}][products_id]" required
+                          class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
+                          @if ($detail->products_id != null)
+                            <option value="{{ $detail->products_id }}" selected>
+                              {{ $detail->productSales->nama_barang .
+                                  ' (' .
+                                  $detail->productSales->sub_types->type_name .
+                                  ', ' .
+                                  $detail->productSales->sub_materials->nama_sub_material .
+                                  ')' }}
+                            </option>
+                          @endif
+                        </select>
+                        @error('editProduct[' . $loop->index . '][products_id]')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+
+                      <div class="col-4 col-lg-2 form-group">
+                        <label>Qty</label>
+                        <input type="number" class="form-control cekQty-edit"
+                          name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}" />
+                        <small class="text-danger qty-warning" hidden>The number of items exceeds
+                          the
+                          stock</small>
+                        @error('top')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+
+                      <div class="col-4 col-lg-2 form-group">
+                        <label>Disc(%)</label>
+                        <input type="number" class="form-control discount-append-edit" placeholder="Disc"
+                          name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
+                        @error('editProduct[{{ $loop->index }}][discount]')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
 
                                             <div class="col-2 col-md-2 form-group">
                                                 <label>Disc(%)</label>
@@ -466,6 +600,7 @@
 
                             </div>
 
+<<<<<<< HEAD
                     </div>
                     <div class="modal-footer">
                         <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
@@ -474,10 +609,154 @@
                         </button>
                     </div>
                     </form>
+=======
+    <!-- Delete Product Modal Start -->
+    <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
+          @csrf
+          @method('delete')
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Delete Data:
+                {{ $value->order_number }}</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <h5>Are you sure delete this data ?
+                    </h5>
+                  </div>
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
                 </div>
             </div>
+<<<<<<< HEAD
         </div>
         <!-- Verify Product Modal End -->
+=======
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Delete Product Modal End -->
+  @endforeach
+
+  @foreach ($dataSalesOrderDebt as $value)
+    <!-- Verify Product Modal Start -->
+    <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sales
+              Order
+              :
+              {{ $value->order_number }}</h5>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url('sales_orders/' . $value->id . '/verify') }}" method="POST"
+              enctype="multipart/form-data">
+              @csrf
+              <div class="container-fluid">
+                <div class="form-group row">
+                  <div class="col-md-6 form-group">
+                    <label>
+                      Customers</label>
+                    <select name="customer_id" id="" required
+                      class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
+                      <option value="" selected>-Choose Customers-</option>
+                      @foreach ($customer as $cust)
+                        <option value="{{ $cust->id }}" @if ($cust->id == $value->customers_id) selected @endif>
+                          {{ $cust->code_cust }} |
+                          {{ $cust->name_cust }}
+                        </option>
+                      @endforeach
+                    </select>
+                    @error('customer_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                  <div class="col-md-6 form-group mr-5">
+                    <label>Payment Method</label>
+                    <select name="payment_method" required
+                      class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
+                      <option value="" selected>-Choose Payment-</option>
+                      <option value="1" @if ($value->payment_method == 1) selected @endif>
+                        Cash On Delivery
+                      </option>
+                      <option value="2" @if ($value->payment_method == 2) selected @endif>
+                        Cash Before Delivery
+                      </option>
+                      <option value="3" @if ($value->payment_method == 3) selected @endif>
+                        Credit
+                      </option>
+                    </select>
+                    @error('payment_method')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group row formSo-edit">
+                  @foreach ($value->salesOrderDetailsBy as $detail)
+                    <div class="mx-auto py-2 form-group row bg-primary">
+                      <input type="hidden" class="loop" value="{{ $loop->index }}">
+                      <div class="form-group col-12 col-lg-6">
+                        <label>Product</label>
+                        <select name="editProduct[{{ $loop->index }}][products_id]" required
+                          class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
+                          @if ($detail->products_id != null)
+                            <option value="{{ $detail->products_id }}" selected>
+                              {{ $detail->productSales->nama_barang .
+                                  ' (' .
+                                  $detail->productSales->sub_types->type_name .
+                                  ', ' .
+                                  $detail->productSales->sub_materials->nama_sub_material .
+                                  ')' }}
+                            </option>
+                          @endif
+                        </select>
+                        @error('editProduct[' . $loop->index . '][products_id]')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+
+                      <div class="col-4 col-lg-2 form-group">
+                        <label>Qty</label>
+                        <input type="number" class="form-control cekQty-edit"
+                          name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}" />
+                        <small class="text-danger qty-warning" hidden>The number of items exceeds
+                          the
+                          stock</small>
+                        @error('top')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+
+                      <div class="col-4 col-lg-2 form-group">
+                        <label>Disc(%)</label>
+                        <input type="number" class="form-control discount-append-edit" placeholder="Disc"
+                          name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
+                        @error('editProduct[{{ $loop->index }}][discount]')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
 
         <!-- Delete Product Modal Start -->
         <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
@@ -669,6 +948,7 @@
                                             id="" readonly>
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="col-lg-4 form-group">
                                         <label>Total (Before PPN)</label>
                                         <input class="form-control total"
@@ -696,6 +976,154 @@
             </div>
         </div>
         <!-- Verify Product Modal End -->
+=======
+    <!-- Delete Product Modal Start -->
+    <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
+          @csrf
+          @method('delete')
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Delete Data:
+                {{ $value->order_number }}</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <h5>Are you sure delete this data ?</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+              <button class="btn btn-primary" type="submit">Yes, delete
+              </button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+    <!-- Delete Product Modal End -->
+  @endforeach
+
+  @foreach ($dataSalesOrderReject as $value)
+    <!-- Verify Product Modal Start -->
+    <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
+      aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Sales
+              Order
+              :
+              {{ $value->order_number }}</h5>
+            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form action="{{ url('sales_orders/' . $value->id . '/verify') }}" method="POST"
+              enctype="multipart/form-data">
+              @csrf
+              <div class="container-fluid">
+                <div class="form-group row">
+                  <div class="col-md-6 form-group">
+                    <label>
+                      Customers</label>
+                    <select name="customer_id" id="" required
+                      class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
+                      <option value="" selected>-Choose Customers-</option>
+                      @foreach ($customer as $cust)
+                        <option value="{{ $cust->id }}" @if ($cust->id == $value->customers_id) selected @endif>
+                          {{ $cust->code_cust }} |
+                          {{ $cust->name_cust }}
+                        </option>
+                      @endforeach
+                    </select>
+                    @error('customer_id')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                  <div class="col-md-6 form-group mr-5">
+                    <label>Payment Method</label>
+                    <select name="payment_method" required
+                      class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
+                      <option value="" selected>-Choose Payment-</option>
+                      <option value="1" @if ($value->payment_method == 1) selected @endif>
+                        Cash On Delivery
+                      </option>
+                      <option value="2" @if ($value->payment_method == 2) selected @endif>
+                        Cash Before Delivery
+                      </option>
+                      <option value="3" @if ($value->payment_method == 3) selected @endif>
+                        Credit
+                      </option>
+                    </select>
+                    @error('payment_method')
+                      <div class="invalid-feedback">
+                        {{ $message }}
+                      </div>
+                    @enderror
+                  </div>
+                </div>
+                <hr>
+                <div class="form-group row formSo-edit">
+                  @foreach ($value->salesOrderDetailsBy as $detail)
+                    <div class="mx-auto py-2 form-group row bg-primary">
+                      <input type="hidden" class="loop" value="{{ $loop->index }}">
+                      <div class="form-group col-12 col-lg-6">
+                        <label>Product</label>
+                        <select name="editProduct[{{ $loop->index }}][products_id]" required
+                          class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
+                          @if ($detail->products_id != null)
+                            <option value="{{ $detail->products_id }}" selected>
+                              {{ $detail->productSales->nama_barang .
+                                  ' (' .
+                                  $detail->productSales->sub_types->type_name .
+                                  ', ' .
+                                  $detail->productSales->sub_materials->nama_sub_material .
+                                  ')' }}
+                            </option>
+                          @endif
+                        </select>
+                        @error('editProduct[' . $loop->index . '][products_id]')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+
+                      <div class="col-4 col-lg-2 form-group">
+                        <label>Qty</label>
+                        <input type="number" class="form-control cekQty-edit"
+                          name="editProduct[{{ $loop->index }}][qty]" value="{{ $detail->qty }}" />
+                        <small class="text-danger qty-warning" hidden>The number of items exceeds
+                          the
+                          stock</small>
+                        @error('top')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+
+                      <div class="col-4 col-lg-2 form-group">
+                        <label>Disc(%)</label>
+                        <input type="number" class="form-control discount-append-edit" placeholder="Disc"
+                          name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
+                        @error('editProduct[{{ $loop->index }}][discount]')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
 
         <!-- Delete Product Modal Start -->
         <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
@@ -892,6 +1320,7 @@
                                             value="{{ 'Rp. ' . number_format($value->total) }}" readonly>
                                     </div>
 
+<<<<<<< HEAD
                                     <div class="col-lg-4 form-group">
                                         <label>Total (After PPN)</label>
                                         <input class="form-control total-after-ppn"
@@ -909,6 +1338,28 @@
                         </button>
                     </div>
                     </form>
+=======
+    <!-- Delete Product Modal Start -->
+    <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
+          @csrf
+          @method('delete')
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">
+                Delete Data:
+                {{ $value->order_number }}</h5>
+              <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="container-fluid">
+                <div class="form-group row">
+                  <div class="col-md-12">
+                    <h5>Are you sure delete this data ?</h5>
+                  </div>
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
                 </div>
             </div>
         </div>
@@ -1135,6 +1586,7 @@
                             '.productSo-edit').val();
                         let id = customer_id;
 
+<<<<<<< HEAD
                         $.ajax({
                             context: this,
                             type: "GET",
@@ -1197,6 +1649,44 @@
                             "</div>" +
                             " </div>";
                         $(modal_id).find(".formSo-edit").append(form);
+=======
+          let modal_id = $(this).attr('data-bs-target');
+          //Get Customer ID
+          let customer_id = $(modal_id).find('.customer-append').val();
+          $(modal_id).find(".productSo-edit").select2({
+            width: "100%",
+            dropdownParent: modal_id,
+            ajax: {
+              context: this,
+              type: "GET",
+              url: "/products/select",
+              data: function(params) {
+                return {
+                  _token: csrf,
+                  q: params.term, // search term
+                  c: customer_id
+                };
+              },
+              dataType: "json",
+              delay: 250,
+              processResults: function(data) {
+                return {
+                  results: $.map(data, function(item) {
+                    return [{
+                      text: item.nama_barang +
+                        " (" +
+                        item.type_name +
+                        ", " +
+                        item.nama_sub_material +
+                        ")",
+                      id: item.id,
+                    }, ];
+                  }),
+                };
+              },
+            },
+          });
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
 
                         $(modal_id).find(".productSo-edit").select2({
                             width: "100%",
@@ -1231,6 +1721,7 @@
                         });
                     });
 
+<<<<<<< HEAD
                     //remove Sales Order fields
                     $(modal_id).on("click", ".remSo-edit", function() {
                         $(this).closest(".row").remove();
@@ -1257,6 +1748,104 @@
                                 });
                                 return temp;
                             }();
+=======
+            $.ajax({
+              context: this,
+              type: "GET",
+              url: "/stocks/cekQty/" + product_id,
+              data: {
+                _token: csrf,
+                c: id,
+              },
+              dataType: "json",
+              delay: 250,
+              success: function(data) {
+                if (parseInt(qtyValue) > parseInt(data.stock)) {
+                  $(this).parent().find(".qty-warning").removeAttr(
+                    "hidden");
+                  $(this).addClass("is-invalid");
+                } else {
+                  $(this)
+                    .parent()
+                    .find(".qty-warning")
+                    .attr("hidden", "true");
+                  $(this).removeClass("is-invalid");
+                }
+              },
+              error: function(XMLHttpRequest, textStatus, errorThrown) {
+                alert("Status: " + textStatus);
+                alert("Error: " + errorThrown);
+              },
+            });
+          });
+          $(modal_id).on("click", ".addSo-edit", function() {
+            ++x;
+            var form =
+              '<div class="mx-auto py-2 form-group row bg-primary">' +
+              '<input type="hidden" class="loop" value="' + x + '">' +
+              '<div class="form-group col-12 col-lg-6">' +
+              "<label>Product</label>" +
+              '<select name="editProduct[' +
+              x +
+              '][products_id]" class="form-control productSo-edit" required>' +
+              '<option value="">Choose Product</option> ' +
+              "</select>" +
+              "</div>" +
+              '<div class="col-4 col-lg-2 form-group">' +
+              "<label> Qty </label> " +
+              '<input type="number" class="form-control cekQty-edit" required name="editProduct[' +
+              x +
+              '][qty]">' +
+              '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
+              "</div> " +
+              '<div class="col-4 col-lg-2 form-group">' +
+              "<label>Disc(%)</label>" +
+              '<input type="number" class="form-control discount-append-edit" name="editProduct[' +
+              x +
+              '][discount]" id="">' +
+              "</div>" +
+              '<div class="col-1 col-md-2 form-group">' +
+              '<label for=""> &nbsp; </label>' +
+              '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
+              "- </a> " +
+              "</div>" +
+              " </div>";
+            $(modal_id).find(".formSo-edit").append(form);
+
+            $(modal_id).find(".productSo-edit").select2({
+              width: "100%",
+              dropdownParent: modal_id,
+              ajax: {
+                type: "GET",
+                url: "/products/select",
+                data: function(params) {
+                  return {
+                    _token: csrf,
+                    q: params.term, // search term
+                    c: customer_id
+                  };
+                },
+                dataType: "json",
+                delay: 250,
+                processResults: function(data) {
+                  return {
+                    results: $.map(data, function(item) {
+                      return [{
+                        text: item.nama_barang +
+                          " (" +
+                          item.type_name +
+                          ", " +
+                          item.nama_sub_material +
+                          ")",
+                        id: item.id,
+                      }, ];
+                    }),
+                  };
+                },
+              },
+            });
+          });
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
 
                             let qty = $(this).parent().siblings().find('.cekQty-edit').val();
                             let disc = $(this).parent().siblings().find('.discount-append-edit')

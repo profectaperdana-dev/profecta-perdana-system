@@ -19,7 +19,7 @@ window.axios.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest";
  * for events that are broadcast by Laravel. Echo and event broadcasting
  * allows your team to easily build robust real-time web applications.
  */
-require( "/assets/js/bootstrap/bootstrap.min.js");
+require("/assets/js/bootstrap/bootstrap.min.js");
 import Echo from "laravel-echo";
 
 window.Pusher = require("pusher-js");
@@ -32,5 +32,8 @@ window.Echo = new Echo({
     wsHost: window.location.hostname,
     wsPort: 6001,
 });
+<<<<<<< HEAD
 
 // require("bootstrap/dist/js/bootstrap.bundle");
+=======
+>>>>>>> 931015d97e61211119b8c72ac2aec4ccca8a9dc3
