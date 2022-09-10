@@ -91,6 +91,11 @@
                                 </div>
                                 <div class="modal-body">
                                   <div class="container-fluid">
+                                    <div class="row justify-content-center">
+                                      <div class="col-4 col-lg-3">
+                                        <h5>Revision: {{ $value->revision }}</h5>
+                                      </div>
+                                    </div>
                                     <div class="form-group row">
                                       <div class="col-6 col-md-6 form-group">
                                         <label>Over Due</label>
@@ -115,12 +120,14 @@
                                       <div class="col-6 col-md-6 form-group">
                                         <label>Order Date</label>
                                         <input type="text" readonly class="form-control "
-                                          value="{{ $value->order_date }}">
+                                          value="{{ date('d-M-Y', strtotime($value->order_date)) }}">
                                       </div>
                                       <div class="col-6 col-md-6 form-group">
                                         <label>Due Date</label>
                                         <input type="text" readonly class="form-control"
-                                          value="{{ $value->duedate }}">
+                                          @if ($value->duedate == null) value="-"
+                                        @else
+                                        value="{{ date('d-M-Y', strtotime($value->duedate)) }}" @endif>
                                       </div>
                                     </div>
                                     <div class="form-group row">
@@ -237,24 +244,34 @@
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
     <script>
       $(document).ready(function() {
+        let date = new Date();
+        let date_now = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         $('#example').DataTable({
           dom: 'Bfrtip',
           buttons: [{
-              title: 'RAB',
+              title: 'Unapprove Sales Orders (' + date_now + ')',
               extend: 'pdf',
               pageSize: 'A4',
+              alignment: 'left',
               exportOptions: {
                 columns: ':visible'
               },
+              customize: function(doc) {
+                doc.styles.tableHeader.alignment = 'left';
+                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
+                  '');
+              }
+
             },
             {
-              title: 'Data Stock Profecta ',
+              title: 'Unapprove Sales Orders (' + date_now + ')',
               extend: 'print',
               exportOptions: {
                 columns: ':visible'
               },
             },
             {
+              title: 'Unapprove Sales Orders (' + date_now + ')',
               extend: 'excel',
               exportOptions: {
                 columns: ':visible'
@@ -264,32 +281,7 @@
           ]
 
         });
-        $('#example1').DataTable({
-          dom: 'Bfrtip',
-          buttons: [{
-              title: 'RAB',
-              extend: 'pdf',
-              pageSize: 'A4',
-              exportOptions: {
-                columns: ':visible'
-              },
-            },
-            {
-              title: 'Data Stock Profecta ',
-              extend: 'print',
-              exportOptions: {
-                columns: ':visible'
-              },
-            },
-            {
-              extend: 'excel',
-              exportOptions: {
-                columns: ':visible'
-              }
-            },
-            'colvis'
-          ]
-        });
+
 
         $('#example tbody').on('click', 'tr.group', function() {
           var currentOrder = table.order()[0];

@@ -168,24 +168,34 @@
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
     <script>
       $(document).ready(function() {
+        let date = new Date();
+        let date_now = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         $('#example').DataTable({
           dom: 'Bfrtip',
           buttons: [{
-              title: 'RAB',
+              title: 'All Purchase Orders (' + date_now + ')',
               extend: 'pdf',
               pageSize: 'A4',
               exportOptions: {
                 columns: ':visible'
               },
+              orientation: 'landscape',
+              customize: function(doc) {
+                doc.styles.tableHeader.alignment = 'left';
+                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
+                  '');
+              },
             },
             {
-              title: 'Data Stock Profecta ',
+              title: 'All Purchase Orders (' + date_now + ')',
               extend: 'print',
+              orientation: 'landscape',
               exportOptions: {
                 columns: ':visible'
               },
             },
             {
+              title: 'All Purchase Orders (' + date_now + ')',
               extend: 'excel',
               exportOptions: {
                 columns: ':visible'

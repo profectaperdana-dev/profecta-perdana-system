@@ -448,6 +448,8 @@ class SalesOrderController extends Controller
         $model->isverified = 1;
         $model->verifiedBy = Auth::user()->id;
         if ($model->isapprove == 'reject') {
+            $old_revision = $model->revision;
+            $model->revision = $old_revision + 1;
             $model->isapprove = 'progress';
             $message = 'Sales Order ' . $model->order_number . ' has revised. Please check immediately!';
             event(new ApprovalMessage('From:' . Auth::user()->name, $message));

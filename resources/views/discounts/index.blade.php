@@ -53,7 +53,7 @@
                     </div>
                   </div>
                   <div class="form-group row">
-                    <div class="form-group col-md-7">
+                    <div class="form-group col-7">
                       <label>Product</label>
                       <select name="discountFields[0][product_id]"
                         class="form-control @error('discountFields[0][product_id]') is-invalid @enderror product-append-discount"
@@ -66,7 +66,7 @@
                         </div>
                       @enderror
                     </div>
-                    <div class="form-group col-md-3">
+                    <div class="form-group col-3">
                       <label>Disc(%)</label>
                       <input type="number" name="discountFields[0][discount]" id="discount"
                         class="form-control @error('discountFields[0][discount]') is-invalid @enderror"

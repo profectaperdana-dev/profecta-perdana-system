@@ -932,25 +932,32 @@
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
     <script>
       $(document).ready(function() {
-
+        let date = new Date();
+        let date_now = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
         $('#example').DataTable({
           dom: 'Bfrtip',
           buttons: [{
-              title: 'RAB',
+              title: 'Unverified Sales Orders Non-credit (' + date_now + ')',
               extend: 'pdf',
               pageSize: 'A4',
               exportOptions: {
                 columns: ':visible'
               },
+              customize: function(doc) {
+                doc.styles.tableHeader.alignment = 'left';
+                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
+                  '');
+              },
             },
             {
-              title: 'Data Stock Profecta ',
+              title: 'Unverified Sales Orders Non-credit (' + date_now + ')',
               extend: 'print',
               exportOptions: {
                 columns: ':visible'
               },
             },
             {
+              title: 'Unverified Sales Orders Non-credit (' + date_now + ')',
               extend: 'excel',
               exportOptions: {
                 columns: ':visible'
@@ -963,21 +970,27 @@
         $('#example1').DataTable({
           dom: 'Bfrtip',
           buttons: [{
-              title: 'RAB',
+              title: 'Unverified Sales Orders Credit (' + date_now + ')',
               extend: 'pdf',
               pageSize: 'A4',
               exportOptions: {
                 columns: ':visible'
               },
+              customize: function(doc) {
+                doc.styles.tableHeader.alignment = 'left';
+                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
+                  '');
+              },
             },
             {
-              title: 'Data Stock Profecta ',
+              title: 'Unverified Sales Orders Credit (' + date_now + ')',
               extend: 'print',
               exportOptions: {
                 columns: ':visible'
               },
             },
             {
+              title: 'Unverified Sales Orders Credit (' + date_now + ')',
               extend: 'excel',
               exportOptions: {
                 columns: ':visible'
@@ -990,21 +1003,27 @@
         $('#example2').DataTable({
           dom: 'Bfrtip',
           buttons: [{
-              title: 'RAB',
+              title: 'Rejected Sales Orders (' + date_now + ')',
               extend: 'pdf',
               pageSize: 'A4',
               exportOptions: {
                 columns: ':visible'
               },
+              customize: function(doc) {
+                doc.styles.tableHeader.alignment = 'left';
+                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
+                  '');
+              },
             },
             {
-              title: 'Data Stock Profecta ',
+              title: 'Rejected Sales Orders (' + date_now + ')',
               extend: 'print',
               exportOptions: {
                 columns: ':visible'
               },
             },
             {
+              title: 'Rejected Sales Orders (' + date_now + ')',
               extend: 'excel',
               exportOptions: {
                 columns: ':visible'
