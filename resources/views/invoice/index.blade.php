@@ -4,6 +4,12 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">
+        <style>
+            .table {
+                background-color: rgba(211, 225, 222, 255);
+                -webkit-print-color-adjust: exact;
+            }
+        </style>
     @endpush
     <div class="container-fluid">
         <div class="page-header">
@@ -56,9 +62,7 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table id="example1"
-                                class="display table-bordered expandable-table text-capitalize table-hover"
-                                style="width:100%">
+                            <table id="example1" class="table text-capitalize" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="2%">action</th>
@@ -200,14 +204,30 @@
                         ],
                         buttons: ['pageLength',
                             {
-                                title: ' Data Invoice Profecta Perdana in {{ Auth::user()->warehouseBy->warehouses }}',
+                                title: 'Data Invoice',
+                                messageTop: '<h5>{{ $title }} ({{ date('l H:i A, d F Y ') }})</h5><br>',
+                                messageBottom: '<strong style="color:red;">*Please select only the type of column needed when printing so that the print is neater</strong>',
                                 extend: 'print',
                                 customize: function(win) {
-                                    $(win.document.body).find('table')
-                                        .addClass('compact')
-                                        .css('font-size', 'inherit');
+                                    $(win.document.body)
+                                        .css('font-size', '10pt')
+                                        .prepend(
+                                            '<img src="{{ asset('images/logo.png') }}" style="position:absolute; top:300; left:150; bottom:; opacity: 0.2;"/>'
+                                        );
+                                    $(win.document.body)
+                                        .find('thead')
+                                        .css('background-color', 'rgba(211,225,222,255)')
+                                        .css('font-size', '8pt')
+                                    $(win.document.body)
+                                        .find('tbody')
+                                        .css('background-color', 'rgba(211,225,222,255)')
+                                        .css('font-size', '8pt')
+                                    $(win.document.body)
+                                        .find('table')
+                                        .css('width', '100%')
                                 },
                                 orientation: 'landscape',
+                                pageSize: 'legal',
                                 exportOptions: {
                                     columns: ':visible'
                                 },

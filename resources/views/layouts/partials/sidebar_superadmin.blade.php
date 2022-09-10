@@ -138,6 +138,17 @@
                     </li>
                     <li class="sidebar-main-title">
                         <div>
+                            <h6>Information</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('check_stock') ? 'active' : '' }}"
+                            href="{{ url('/check_stock') }}"><i data-feather="inbox"></i><span>Check
+                                Stock
+                            </span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
                             <h6>Transaction Purchase</h6>
                         </div>
                     </li>

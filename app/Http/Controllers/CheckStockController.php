@@ -17,7 +17,7 @@ class CheckStockController extends Controller
     public function index()
     {
         if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
-            $title = 'All Data Stocks Product';
+            $title = 'All Warehouse Data Stocks Product ';
             $data = StockModel::with(['productBy.sub_types', 'productBy.sub_materials', 'productBy.uoms', 'warehouseBy'])->latest('warehouses_id')->get();
         } else {
             $title = 'Data Stocks Product at ' . Auth::user()->warehouseBy->warehouses;
