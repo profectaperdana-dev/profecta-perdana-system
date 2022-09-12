@@ -14,7 +14,7 @@
             </div>
         </div>
     </div>
-    <!-- Container-fluid starts-->
+
     <div class="container-fluid">
         <div class="col-xl-12 xl-100 box-col-12">
 
@@ -56,8 +56,86 @@
                 </div>
 
             </div>
+
         </div>
         <div class="row">
+
+
+            <div class="col-xl-12 box-col-6 des-xl-100">
+                <div class="row">
+                    <div class="col-xl-12 box-col-12 des-xl-100">
+                        <div class="card trasaction-sec">
+                            <div class="card-header">
+                                <div class="header-top d-sm-flex align-items-center">
+                                    <h5>Income for the last 7 days</h5>
+                                    <div class="center-content">
+                                        <p>5878 Suceessfull Transaction</p>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div class="transaction-totalbal">
+                                <h2> $2,09,352k </h2>
+                            </div>
+                            <div class="card-body chart-block p-0">
+                                <div id="chart-dash-2-line"></div>
+
+                            </div>
+                        </div>
+                    </div>
+                    {{-- <div class="col-sm-6 col-xl-6 col-lg-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <div class="pie-chart-container">
+                                        <canvas id="pie-chart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> --}}
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            @can('isWarehouseKeeper')
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
+                                <div class="media-body"><span class="m-0">Total Type Product</span>
+                                    <h4 class="mb-0 counter">{{ $produk }}</h4><i class="icon-bg" data-feather="box"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
+                                <div class="media-body"><span class="m-0">PO Need Validation</span>
+                                    <h4 class="mb-0 counter">{{ $po_val }}</h4><i class="icon-bg" data-feather="box"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-4 col-lg-4">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
+                                <div class="media-body"><span class="m-0">Total PO</span>
+                                    <h4 class="mb-0 counter">{{ $po }}</h4><i class="icon-bg" data-feather="box"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
             @can('isSales')
                 <div class="col-sm-12 col-xl-4 col-lg-4">
                     <div class="card o-hidden border-0">
@@ -294,6 +372,8 @@
     </div>
     <!-- Container-fluid Ends-->
     @push('scripts')
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
+
         <script src="{{ asset('assets') }}/js/counter/jquery.counterup.min.js"></script>
         <script src="{{ asset('assets') }}/js/counter/counter-custom.js"></script>
         <script src="{{ asset('assets') }}/js/custom-card/custom-card.js"></script>
@@ -323,10 +403,214 @@
         <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js"></script>
         <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-in-mill.js"></script>
         <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-asia-mill.js"></script>
-        <script src="{{ asset('assets') }}/js/dashboard/default.js"></script>
+        {{-- <script src="{{ asset('assets') }}/js/dashboard/default.js"></script> --}}
         <script src="{{ asset('assets') }}/js/notify/index.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.en.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.custom.js"></script>
+        <script>
+            $(function() {
+                var ctx = $("#pie-chart");
+                var cData = JSON.parse(`<?php echo $data['chart_data']; ?>`);
+                var num = cData.data;
+                var text = cData.label;
+
+                var options = {
+                    series: [{
+                        name: 'Income',
+                        type: 'area',
+                        data: num,
+                    }],
+                    chart: {
+                        height: 470,
+                        type: 'line',
+                        toolbar: {
+                            show: false,
+                        },
+
+                    },
+                    stroke: {
+                        curve: 'smooth',
+                        width: [5, 2],
+                        dashArray: [0, 8]
+
+                    },
+                    fill: {
+                        type: 'solid',
+                        opacity: [0.35, 1],
+                    },
+                    labels: text,
+                    markers: {
+                        size: 5
+                    },
+                    responsive: [{
+                            breakpoint: 991,
+                            options: {
+                                chart: {
+                                    height: 300
+                                }
+                            }
+                        },
+                        {
+                            breakpoint: 1500,
+                            options: {
+                                chart: {
+                                    height: 325
+                                }
+                            }
+                        }
+                    ],
+                    yaxis: [{
+                        min: 0,
+
+                        labels: {
+                            formatter: function(value) {
+                                return value.toLocaleString(
+                                    'us', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
+                            },
+                        },
+                    }, ],
+                    tooltip: {
+                        shared: true,
+                        intersect: false,
+                        y: {
+                            formatter: function(y) {
+                                if (typeof y !== "undefined") {
+                                    return "Rp " + y.toLocaleString(
+                                        'us', {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0
+                                        });
+                                }
+                                return y;
+                            }
+                        }
+                    },
+                    legend: {
+                        show: true,
+                    },
+                    colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary]
+                };
+                var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
+                chart.render();
+
+                var options21 = {
+                    series: [{
+                        name: 'series1',
+                        data: num,
+                    }],
+                    labels: text,
+
+                    chart: {
+                        height: 500,
+                        type: 'area',
+                        toolbar: {
+                            show: false
+                        }
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        curve: 'smooth'
+                    },
+
+                    yaxis: {
+                        show: false,
+                    },
+                    xaxis: {
+                        show: false,
+                        labels: {
+                            show: false,
+                        },
+                        axisTicks: {
+                            show: false,
+                        },
+                    },
+
+                    colors: [vihoAdminConfig.secondary],
+                    responsive: [{
+                            breakpoint: 1365,
+                            options: {
+                                chart: {
+                                    height: 220
+                                }
+                            },
+                        },
+                        {
+                            breakpoint: 575,
+                            options: {
+                                chart: {
+                                    height: 180
+                                }
+                            },
+                        },
+                        {
+                            breakpoint: 992,
+                            options: {
+                                chart: {
+                                    height: 250
+                                }
+                            },
+                        }
+                    ],
+                };
+                var chart21 = new ApexCharts(document.querySelector("#chart-3dash"), options21);
+                chart21.render();
+
+
+
+                var data = {
+                    labels: cData.label,
+                    datasets: [{
+                        label: "Income",
+                        data: num,
+
+                        borderColor: [
+                            "#CDA776",
+                            "#989898",
+                            "#CB252B",
+                            "#E39371",
+                            "#1D7A46",
+                            "#F4A460",
+                            "#CDA776",
+                        ],
+                        borderWidth: [1, 1, 1, 1, 1, 1, 1]
+                    }]
+                };
+
+                //options
+                var options = {
+                    responsive: true,
+                    title: {
+                        display: true,
+                        position: "top",
+                        text: "Last Week Total Sales",
+                        fontSize: 18,
+                        fontColor: "#111"
+                    },
+                    legend: {
+                        display: false,
+                        position: "bottom",
+                        labels: {
+                            fontColor: "#333",
+                            fontSize: 16
+                        }
+                    }
+
+                };
+                //create Pie Chart class object
+                var chart1 = new Chart(ctx, {
+                    type: "line",
+                    data: data,
+                    height: 425,
+                    options: options
+                });
+
+            });
+        </script>
     @endpush
 @endsection
