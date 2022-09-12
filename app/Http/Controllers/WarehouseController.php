@@ -48,15 +48,14 @@ class WarehouseController extends Controller
             'warehouses' => 'required',
             'alamat' => 'required',
             'id_area' => 'required',
-            'latitude' => 'required',
-            'longitude' => 'required',
+
         ]);
         $model = new WarehouseModel();
         $model->warehouses = $request->get('warehouses');
         $model->alamat = $request->get('alamat');
         $model->id_area = $request->get('id_area');
-        $model->latitude = $request->get('latitude');
-        $model->longitude = $request->get('longitude');
+        $model->latitude = '-';
+        $model->longitude = '-';
         $model->status = 1;
         $model->created_by = Auth::user()->id;
         $model->save();
@@ -102,15 +101,13 @@ class WarehouseController extends Controller
             'warehouses_' => 'required',
             'alamat_' => 'required',
             'id_area_' => 'required',
-            'latitude_' => 'required',
-            'longitude_' => 'required',
+
         ]);
         $model =  WarehouseModel::find($id);
         $model->warehouses = $request->get('warehouses_');
         $model->alamat = $request->get('alamat_');
         $model->id_area = $request->get('id_area_');
-        $model->latitude = $request->get('latitude_');
-        $model->longitude = $request->get('longitude_');
+
         $model->status = $request->get('status');
         $model->created_by = Auth::user()->id;
         $model->save();

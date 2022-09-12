@@ -4,12 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
+use App\Models\PurchaseOrderModel;
 use App\Models\SalesOrderModel;
 use App\Models\SuppliersModel;
 use App\Models\User;
 use Cron\MonthField;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class HomeController extends Controller
 {
@@ -18,6 +20,7 @@ class HomeController extends Controller
      *
      * @return void
      */
+
     public function __construct()
     {
         $this->middleware('auth');
@@ -28,6 +31,11 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
+
+
+    //broadcast message with api whatsapp
+
+
     public function index()
     {
         $title = 'Dashboard';
@@ -61,6 +69,30 @@ class HomeController extends Controller
             ->whereYear('order_date', date('Y'))
             ->sum('total_after_ppn');
 
-        return view('home', compact('so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
+        // gudang
+        $po_val = PurchaseOrderModel::where('isvalidated', 0)->count();
+        $po = PurchaseOrderModel::where('isvalidated', 1)->count();
+
+        // chart
+        $record = SalesOrderModel::select(DB::raw('SUM(total_after_ppn) as total'), DB::raw('DAYNAME(order_date) as day_name'), DB::raw("DAY(order_date) as day"))
+            ->where('order_number', 'like', '%IVPP%')
+            ->where('isapprove', 'approve')->where('isverified', 1)
+            ->groupBy('day', 'order_date')
+            ->get();
+        $record = SalesOrderModel::select(DB::raw('SUM(total_after_ppn) as total'), DB::raw('DAYNAME(order_date) as day_name'), DB::raw("DAY(order_date) as day"))
+            ->where('order_number', 'like', '%IVPP%')
+            ->where('isapprove', 'approve')->where('isverified', 1)
+            ->groupBy('day', 'order_date')
+            ->get();
+        $data = [];
+
+        foreach ($record as $row) {
+            $data['label'][] = $row->day_name;
+            $data['data'][] = $row->total;
+        }
+
+        $data['chart_data'] = json_encode($data);
+
+        return view('home', compact('data', 'po_val', 'po', 'so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
     }
 }
