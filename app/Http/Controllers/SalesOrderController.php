@@ -769,16 +769,11 @@ class SalesOrderController extends Controller
             abort(403);
         }
         if ($request->ajax()) {
-            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
-                ->select('customer_areas.area_code', 'warehouses.id')
-                ->where('warehouses.id', Auth::user()->warehouse_id)
-                ->first();
             if (!empty($request->from_date)) {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->whereBetween('order_date', array($request->from_date, $request->to_date))
                     ->latest()
                     ->get();
@@ -787,7 +782,6 @@ class SalesOrderController extends Controller
                     ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->latest()
                     ->get();
             }

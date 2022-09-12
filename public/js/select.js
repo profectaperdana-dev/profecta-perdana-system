@@ -1,4 +1,8 @@
 $(document).ready(function () {
+    $("form").submit(function () {
+        $(this).find('button[type="submit"]').prop("disabled", true);
+    });
+
     $(
         ".editPayments,.uoms,.materials,.submaterials, .category-cust, .area-cust, .role-acc, .warehouse-acc, .sub_type, .discount, .job-acc"
     ).select2({

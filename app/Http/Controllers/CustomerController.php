@@ -297,6 +297,7 @@ class CustomerController extends Controller
     {
         $SODebts = SalesOrderModel::where('customers_id', $id)
             ->where('payment_method', 3)
+            ->where('isverified', 1)
             ->where('isPaid', 0)
             ->get();
 

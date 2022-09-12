@@ -44,6 +44,10 @@
       let csrf = $('meta[name="csrf-token"]').attr("content");
 
       $(document).ready(function() {
+        $('form').submit(function() {
+          $(this).find('button[type="submit"]').prop('disabled', true);
+        });
+
         $(".supplier-select, .warehouse-select").select2({
           width: "100%",
         });
