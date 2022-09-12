@@ -72,7 +72,7 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group row">
+                                    {{-- <div class="form-group row">
                                         <div class="col-md-12">
                                             <label class="font-weight-bold">Latitude</label>
                                             <input type="text"
@@ -82,8 +82,8 @@
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>
-                                    </div>
-                                    <div class="form-group row">
+                                    </div> --}}
+                                    {{-- <div class="form-group row">
                                         <div class="col-md-12">
                                             <label class="font-weight-bold">Longitude</label>
                                             <input type="text"
@@ -93,7 +93,7 @@
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>
-                                    </div>
+                                    </div> --}}
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <button type="reset" class="btn btn-warning"
@@ -125,7 +125,7 @@
                                         <th>Warehouese</th>
                                         <th>Address</th>
                                         <th>Sales Area</th>
-                                        <th>Coordinate Point</th>
+                                        {{-- <th>Coordinate Point</th> --}}
                                         <th>Status</th>
 
                                     </tr>
@@ -212,7 +212,7 @@
                                                                                 @enderror
                                                                             </div>
                                                                         </div>
-                                                                        <div class="form-group row">
+                                                                        {{-- <div class="form-group row">
                                                                             <div class="col-md-4">
                                                                                 <label
                                                                                     class="font-weight-bold">Latitude</label>
@@ -267,7 +267,7 @@
                                                                                     </div>
                                                                                 @enderror
                                                                             </div>
-                                                                        </div>
+                                                                        </div> --}}
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -325,7 +325,7 @@
                                                 <address>{{ $value->alamat }}</address>
                                             </td>
                                             <td>{{ $value->area_name }}</td>
-                                            <td>{{ $value->latitude }},{{ $value->longitude }} </td>
+                                            {{-- <td>{{ $value->latitude }},{{ $value->longitude }} </td> --}}
                                             <td>
                                                 @if ($value->status == 0)
                                                     <div><span class="badge badge-danger">Non Active</span></div>

@@ -29,7 +29,12 @@ class SendEmailController extends Controller
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
 
-        Mail::to($data->customerBy->email_cust)->queue(new InvoiceMail($warehouse, $data));
+        $name = $data->customerBy->email_cust;
+        if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
+            return redirect('invoice')->with('error', ' Invalid email format');
+        } else {
+            Mail::to($data->customerBy->email_cust)->queue(new InvoiceMail($warehouse, $data));
+        }
 
         if (Mail::failures()) {
             return redirect('/invoice')->with('error', 'Send Invoice By Email Failed !');
