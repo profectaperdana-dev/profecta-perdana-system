@@ -84,15 +84,30 @@ class HomeController extends Controller
             ->where('isapprove', 'approve')->where('isverified', 1)
             ->groupBy('day', 'order_date')
             ->get();
+
+        //Purchase Order Record
+        $po_record = PurchaseOrderModel::select(DB::raw('SUM(total) as total'), DB::raw('MONTHNAME(order_date) as month_name'), DB::raw("MONTH(order_date) as month"))
+            ->where('order_number', 'like', '%POPP%')
+            ->where('isapprove', 1)
+            ->where('isvalidated', 1)
+            ->where(DB::raw('YEAR(order_date)'), date('Y'))
+            ->groupBy('month', 'order_date')
+            ->get();
         $data = [];
+        $data_po = [];
 
         foreach ($record as $row) {
             $data['label'][] = $row->day_name;
             $data['data'][] = $row->total;
         }
-
         $data['chart_data'] = json_encode($data);
 
-        return view('home', compact('data', 'po_val', 'po', 'so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
+        foreach ($po_record as $row) {
+            $data_po['label_po'][] = $row->month_name;
+            $data_po['data_po'][] = $row->total;
+        }
+        $data_po['chart_po'] = json_encode($data_po);
+
+        return view('home', compact('data', 'data_po', 'po_val', 'po', 'so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
     }
 }
