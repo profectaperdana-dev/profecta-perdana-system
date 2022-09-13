@@ -84,13 +84,11 @@
 </head>
 
 <body>
-    <div id="watermark">
-        @if ($data->isPaid == 0)
-            <img src="{{ public_path('images/unpaid.png') }}" height="100%" width="100%" />
-        @else
-            <img src="{{ public_path('images/paid.png') }}" height="100%" width="100%" />
+    {{-- <div id="watermark">
+        @if ($data->isPaid == 1)
+            <img src="{{ public_path('images/paid.png') }}" height="100%" width="100%" /> jabdjhasbd
         @endif
-    </div>
+    </div> --}}
     {{-- HEADER --}}
     <header>
         <table style="width: 100%">
@@ -148,7 +146,7 @@
     {{-- CONTENT --}}
     <main>
         <table style="width:100%;">
-            <thead style="border:1px solid black">
+            <thead style="border-bottom:1px solid black">
                 <tr style="">
                     <th style="text-align:center;padding:5px">No</th>
                     <th style="text-align:left;padding:5px">Item Description</th>
@@ -169,7 +167,10 @@
                     <tr>
                         <td style="text-align:center;padding:5px">{{ $key + 1 }}.
                         </td>
-                        <td style="text-align:left;padding:5px">{{ $value->productSales->nama_barang }}
+                        <td style="text-align:left;padding:5px">
+                            {{ $value->productSales->sub_materials->nama_sub_material }}&nbsp;
+                            {{ $value->productSales->sub_types->type_name }}&nbsp;
+                            {{ $value->productSales->nama_barang }}
                         </td>
                         <td style="text-align:right;padding:5px">@currency($value->productSales->harga_jual_nonretail)</td>
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
@@ -231,7 +232,7 @@
                         Bank Mandiri 113-00-7779777-1 : an. CV Profecta Perdana <br>
                         Bank BCA 853-085-3099 : an. CV Profecta Perdana <br>
                         Thank You ! <br>
-                        We're looking fordward to working with you again
+                        We're looking forward to working with you again
                     </td>
                     <th colspan="2" style="text-align: left"><i>Sincerely Yours,</i></th>
                 </tr>
@@ -265,6 +266,21 @@
         }
     </script>
     {{-- END PAGE NUMBER --}}
+    @if ($data->isPaid == 1)
+        <script type="text/php">
+        if (isset($pdf)) {
+            $pdf->page_script('
+            $height = $pdf->get_height();
+            $width = $pdf->get_width();
+            $text = "PAID "."{{ $data->order_date }}";
+            $pdf->set_opacity(.2, "Multiply");
+            $pdf->set_opacity(.2);
+            $pdf->page_text($width / 5, $height / 1.5, $text , null, 50, array(216, 0, 0), 2, 2, -15);
+            ');
+        }
+    </script>
+    @endif
+
 
 </body>
 

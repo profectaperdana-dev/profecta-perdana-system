@@ -17,9 +17,7 @@
 
     <div class="container-fluid">
         <div class="col-xl-12 xl-100 box-col-12">
-
             <div class="row">
-
                 <div class="col-xl-12 col-md-12 box-col-12 des-xl-50">
                     <div class="card profile-greeting">
                         <div class="card-header">
@@ -58,45 +56,7 @@
             </div>
 
         </div>
-        <div class="row">
 
-
-            <div class="col-xl-12 box-col-6 des-xl-100">
-                <div class="row">
-                    <div class="col-xl-12 box-col-12 des-xl-100">
-                        <div class="card trasaction-sec">
-                            <div class="card-header">
-                                <div class="header-top d-sm-flex align-items-center">
-                                    <h5>Income for the last 7 days</h5>
-                                    <div class="center-content">
-                                        <p>5878 Suceessfull Transaction</p>
-                                    </div>
-
-                                </div>
-                            </div>
-                            <div class="transaction-totalbal">
-                                <h2> $2,09,352k </h2>
-                            </div>
-                            <div class="card-body chart-block p-0">
-                                <div id="chart-dash-2-line"></div>
-
-                            </div>
-                        </div>
-                    </div>
-                    {{-- <div class="col-sm-6 col-xl-6 col-lg-6">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="chart-container">
-                                    <div class="pie-chart-container">
-                                        <canvas id="pie-chart"></canvas>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> --}}
-                </div>
-            </div>
-        </div>
         <div class="row">
             @can('isWarehouseKeeper')
                 <div class="col-sm-12 col-xl-4 col-lg-4">
@@ -211,7 +171,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Income Sales (IDR)</span>
+                                <div class="media-body"><span class="m-0">Sales (IDR)</span>
                                     <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -239,7 +199,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Income Sales Today (IDR)</span>
+                                <div class="media-body"><span class="m-0"> Sales Today (IDR)</span>
                                     <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -319,7 +279,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Income Today (IDR) </span>
+                                <div class="media-body"><span class="m-0">Sale Today (IDR) </span>
                                     <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -332,7 +292,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Income This Month (IDR)</span>
+                                <div class="media-body"><span class="m-0">Sale This Month (IDR)</span>
                                     <h4 class="mb-0 counter">{{ number_format($month) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -345,7 +305,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Total This Year (IDR)</span>
+                                <div class="media-body"><span class="m-0">Sale This Year (IDR)</span>
                                     <h4 class="mb-0 counter">{{ number_format($year) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -354,20 +314,54 @@
                     </div>
                 </div>
             @endcan
-            <div class="col-xl-12 xl-100 box-col-12">
-                <div class="card">
-                    <div class="cal-date-widget card-body">
-                        <div class="row">
 
-                            <div class="col-xl-12 col-xs-12 col-md-12 col-sm-12">
-                                <div class="cal-datepicker">
-                                    <div class="datepicker-here " data-language="en"> </div>
+
+            <div class="col-xl-12 box-col-12 des-xl-100">
+                <div class="row">
+
+                    <div class="col-xl-8 box-col-12">
+                        <div class="card">
+                            <div class="card-header">
+                                <div class="header-top d-sm-flex justify-content-between align-items-center">
+                                    <h5>last 7 days sale</h5><br>
+                                    <h6>(IDR) {{ number_format($total_income) }}</h6>
+                                    {{-- <div class="center-content">
+                                        <ul class="week-date">
+                                            <li class="font-primary">Today</li>
+                                            <li>Month </li>
+                                        </ul>
+                                    </div> --}}
+                                </div>
+                            </div>
+
+                            <div class="card-body chart-block p-0">
+                                {{-- <div id="chart-dash-2-line"></div> --}}
+                                <div class="chart-container">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div id="chart-dash-2-line"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-4 box-col-12">
+                        <div class="card">
+                            <div class="cal-date-widget card-body">
+                                <div class="row">
+                                    <div class="col-xl-12 col-xs-12 col-md-12 col-sm-12">
+                                        <div class="cal-datepicker">
+                                            <div class="datepicker-here" data-language="en"> </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
     <!-- Container-fluid Ends-->
@@ -410,36 +404,65 @@
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.custom.js"></script>
         <script>
             $(function() {
-                var ctx = $("#pie-chart");
                 var cData = JSON.parse(`<?php echo $data['chart_data']; ?>`);
                 var num = cData.data;
                 var text = cData.label;
-
                 var options = {
                     series: [{
-                        name: 'Income',
-                        type: 'area',
-                        data: num,
-                    }],
+                            name: '<span class="badge badge-warning">Income</span>',
+                            type: 'area',
+                            data: num,
+                        },
+                        {
+                            name: '<span class="badge badge-success">Profit</span>',
+                            type: 'area',
+                            data: [44000000, 55000000, 31000000, 47000000, 31000000, 0, 43000000]
+                        }
+                    ],
+
                     chart: {
-                        height: 470,
+                        animations: {
+                            enabled: true,
+                            easing: 'linear',
+                            speed: 800,
+                            animateGradually: {
+                                enabled: true,
+                                delay: 150
+                            },
+                            dynamicAnimation: {
+                                enabled: true,
+                                speed: 350
+                            }
+                        },
+                        height: 400,
                         type: 'line',
+                        background: '',
                         toolbar: {
-                            show: false,
+                            show: true,
                         },
 
                     },
+                    labels: text,
                     stroke: {
                         curve: 'smooth',
-                        width: [5, 2],
-                        dashArray: [0, 8]
+                        width: [5, 5],
+                        dashArray: [0, 0]
 
                     },
                     fill: {
-                        type: 'solid',
-                        opacity: [0.35, 1],
+                        colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary],
+                        type: 'gradient',
+                        gradient: {
+                            shade: 'light',
+                            type: 'vertical',
+                            shadeIntensity: 0.4,
+                            inverseColors: false,
+                            opacityFrom: 0.9,
+                            opacityTo: 0.8,
+                            stops: [0, 100]
+                        }
                     },
-                    labels: text,
+
                     markers: {
                         size: 5
                     },
@@ -466,7 +489,7 @@
                         labels: {
                             formatter: function(value) {
                                 return value.toLocaleString(
-                                    'us', {
+                                    'id', {
                                         minimumFractionDigits: 0,
                                         maximumFractionDigits: 0
                                     });
@@ -480,7 +503,7 @@
                             formatter: function(y) {
                                 if (typeof y !== "undefined") {
                                     return "Rp " + y.toLocaleString(
-                                        'us', {
+                                        'id', {
                                             minimumFractionDigits: 0,
                                             maximumFractionDigits: 0
                                         });
@@ -496,120 +519,6 @@
                 };
                 var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
                 chart.render();
-
-                var options21 = {
-                    series: [{
-                        name: 'series1',
-                        data: num,
-                    }],
-                    labels: text,
-
-                    chart: {
-                        height: 500,
-                        type: 'area',
-                        toolbar: {
-                            show: false
-                        }
-                    },
-                    dataLabels: {
-                        enabled: false
-                    },
-                    stroke: {
-                        curve: 'smooth'
-                    },
-
-                    yaxis: {
-                        show: false,
-                    },
-                    xaxis: {
-                        show: false,
-                        labels: {
-                            show: false,
-                        },
-                        axisTicks: {
-                            show: false,
-                        },
-                    },
-
-                    colors: [vihoAdminConfig.secondary],
-                    responsive: [{
-                            breakpoint: 1365,
-                            options: {
-                                chart: {
-                                    height: 220
-                                }
-                            },
-                        },
-                        {
-                            breakpoint: 575,
-                            options: {
-                                chart: {
-                                    height: 180
-                                }
-                            },
-                        },
-                        {
-                            breakpoint: 992,
-                            options: {
-                                chart: {
-                                    height: 250
-                                }
-                            },
-                        }
-                    ],
-                };
-                var chart21 = new ApexCharts(document.querySelector("#chart-3dash"), options21);
-                chart21.render();
-
-
-
-                var data = {
-                    labels: cData.label,
-                    datasets: [{
-                        label: "Income",
-                        data: num,
-
-                        borderColor: [
-                            "#CDA776",
-                            "#989898",
-                            "#CB252B",
-                            "#E39371",
-                            "#1D7A46",
-                            "#F4A460",
-                            "#CDA776",
-                        ],
-                        borderWidth: [1, 1, 1, 1, 1, 1, 1]
-                    }]
-                };
-
-                //options
-                var options = {
-                    responsive: true,
-                    title: {
-                        display: true,
-                        position: "top",
-                        text: "Last Week Total Sales",
-                        fontSize: 18,
-                        fontColor: "#111"
-                    },
-                    legend: {
-                        display: false,
-                        position: "bottom",
-                        labels: {
-                            fontColor: "#333",
-                            fontSize: 16
-                        }
-                    }
-
-                };
-                //create Pie Chart class object
-                var chart1 = new Chart(ctx, {
-                    type: "line",
-                    data: data,
-                    height: 425,
-                    options: options
-                });
-
             });
         </script>
     @endpush

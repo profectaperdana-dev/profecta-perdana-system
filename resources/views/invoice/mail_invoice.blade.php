@@ -234,7 +234,8 @@
                                                                                                         style="line-height: 24px; font-size: 20px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 100%; padding-top: 0; padding-bottom: 0; margin: 0;"
                                                                                                         align="center"
                                                                                                         valign="top">
-                                                                                                        <strong>INVOICE</strong>
+                                                                                                        <strong>REVIEW
+                                                                                                            INVOICE</strong>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
@@ -795,7 +796,8 @@
                                                                                                             113-00-7779777-1
                                                                                                             : an. CV
                                                                                                             Profecta
-                                                                                                            Perdan</div>
+                                                                                                            Perdana
+                                                                                                        </div>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
@@ -872,7 +874,7 @@
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
                                                                                                             We're
                                                                                                             looking
-                                                                                                            fordward to
+                                                                                                            forward to
                                                                                                             working with
                                                                                                             you again
                                                                                                         </div>
@@ -917,6 +919,39 @@
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
                                                                                                             <strong>Sincerely
                                                                                                                 Yours,</strong>
+                                                                                                        </div>
+                                                                                                    </td>
+                                                                                                </tr>
+                                                                                            </tbody>
+                                                                                        </table>
+                                                                                    </div>
+                                                                                    <br>
+                                                                                    <br>
+                                                                                    <div class="row  fw-700"
+                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
+                                                                                        <table class=""
+                                                                                            role="presentation"
+                                                                                            border="0"
+                                                                                            cellpadding="0"
+                                                                                            cellspacing="0"
+                                                                                            style="table-layout: fixed; width: 100%;"
+                                                                                            width="100%">
+                                                                                            <tbody>
+                                                                                                <tr>
+                                                                                                    <td class="col-12 text-center text-sm"
+                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 100%; margin: 0;"
+                                                                                                        align="left"
+                                                                                                        valign="top">
+                                                                                                        <div class="text-sm"
+                                                                                                            style="font-size: 14px; line-height: 16.8px;color:red">
+                                                                                                            <strong>*Please
+                                                                                                                check
+                                                                                                                your
+                                                                                                                order
+                                                                                                                invoice
+                                                                                                                in the
+                                                                                                                attached
+                                                                                                                file</strong>
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>

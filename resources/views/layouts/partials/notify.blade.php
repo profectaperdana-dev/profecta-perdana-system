@@ -1,4 +1,4 @@
-@can('isAdmin')
+@can('isFinance')
     <script>
         $(document).ready(function() {
 
@@ -50,7 +50,7 @@
 
                         $('.notifCount').text(count + 1);
                         let animation =
-                            ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+                            ' <i class="text-danger fa-2x fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
                         $('.notification-box').html(animation);
                         // $('.bell').remove();
                         let notif =
@@ -127,7 +127,7 @@
 
                         $('.notifCount').text(count + 1);
                         let animation =
-                            ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+                            ' <i class="fa-2x fa text-danger fa-bell fa-shake"></i><span class="dot-animated"></span>';
                         $('.notification-box').html(animation);
                         // $('.bell').remove();
                         let notif =
@@ -206,7 +206,7 @@
 
                         $('.notifCount').text(count + 1);
                         let animation =
-                            ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+                            ' <i class="text-danger fa-2x fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
                         $('.notification-box').html(animation);
                         // $('.bell').remove();
                         let notif =

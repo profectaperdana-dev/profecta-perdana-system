@@ -52,21 +52,21 @@
                     <div class="notification-box">
                         @can('isVerificator')
                             @if (count($notif) > 0)
-                                <i class="fa-2x far fa-bell fa-shake"></i>
+                                <i class="text-danger fa-2x fa fa-bell fa-shake"></i>
                                 <span class="dot-animated"></span>
                             @else
                                 <i class="bell fa-2x far fa-bell"></i>
                             @endif
                         @elsecan('isFinance')
                             @if (count($notif) > 0)
-                                <i class="fa-2x far fa-bell fa-shake"></i>
+                                <i class="text-danger fa-2x fa fa-bell fa-shake"></i>
                                 <span class="dot-animated"></span>
                             @else
                                 <i class="bell fa-2x far fa-bell"></i>
                             @endif
                         @elsecan('isSuperAdmin')
                             @if (count($notif) > 0)
-                                <i class="fa-2x far fa-bell fa-shake"></i>
+                                <i class="text-danger fa-2x fa fa-bell fa-shake"></i>
                                 <span class="dot-animated"></span>
                             @else
                                 <i class="bell fa-2x far fa-bell"></i>

@@ -67,8 +67,12 @@ class SalesOrderController extends Controller
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data->pdf_invoice = $data->order_number . '.pdf';
         $data->save();
+
         $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
-        return $pdf->download($data->order_number . '.pdf');
+
+
+
+        return $pdf->download($data->pdf_invoice);
     }
     //print delivery order
     public function deliveryOrder($id)
@@ -85,7 +89,7 @@ class SalesOrderController extends Controller
         $data->save();
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $so_number . '.pdf');
-        return $pdf->download($data->order_number . '.pdf');
+        return $pdf->download($data->pdf_do);
     }
 
     // getRecentData() : READ DATA RECENT SALES ORDERS ADMIN & SALES ADMIN
@@ -778,7 +782,7 @@ class SalesOrderController extends Controller
                     ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    // ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->whereBetween('order_date', array($request->from_date, $request->to_date))
                     ->latest()
                     ->get();
@@ -787,7 +791,7 @@ class SalesOrderController extends Controller
                     ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
+                    // ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->latest()
                     ->get();
             }
