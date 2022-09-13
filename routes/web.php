@@ -70,7 +70,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/invoice', [SalesOrderController::class, 'getInvoiceData']);
     Route::get('/invoice/{id}/invoice_with_ppn', [SalesOrderController::class, 'printInoiceWithPpn']);
     Route::get('/invoice/{id}/delivery_order', [SalesOrderController::class, 'deliveryOrder']);
-    Route::get('/invoice/{id}/mark_as_paid', [SalesOrderController::class, 'updatePaid']);
+    Route::post('/invoice/{id}/update_payment', [SalesOrderController::class, 'updatePaid']);
     Route::get('/sales_orders/approve/{id}', [SalesOrderController::class, 'approve']);
     Route::get('/products/selectCost/{id}', [ProductController::class, 'selectCost']);
     Route::get('/invoice/manage_payment', [SalesOrderController::class, 'paidManagement']);
@@ -87,6 +87,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/purchase_orders/{id}/validate', [PurchaseOrderController::class, 'validation']);
     Route::get('/purchase_orders/receiving', [PurchaseOrderController::class, 'receivingPO']);
     Route::get('/read_all_notif/{id}', [NotificationController::class, 'readAll']);
+    Route::get('/invoice/getTotalInstalment/{id}', [SalesOrderController::class, 'getTotalInstalment']);
+
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
         Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);

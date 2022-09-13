@@ -12,6 +12,7 @@ use App\Events\SOMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\NotificationsModel;
+use App\Models\SalesOrderCreditModel;
 use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
@@ -746,23 +747,46 @@ class SalesOrderController extends Controller
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
     }
 
-    public function updatePaid($id)
+    public function updatePaid(Request $request, $id)
     {
         if (
             !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
         ) {
             abort(403);
         }
+
+        $request->validate([
+            "amount" => "required|numeric",
+        ]);
+
         $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
 
-        $selected_so->isPaid = 1;
-        $selected_so->save();
+        //Save Sales Order Credit
+        $soc = new SalesOrderCreditModel();
+        $soc->sales_order_id = $selected_so->id;
+        $soc->payment_date = Carbon::now()->format('Y-m-d H:i:s');
+        $soc->amount = $request->get('amount');
+        $soc->updated_by = Auth::user()->id;
+        $soc->save();
 
-        //update overplafone and overdue
-        $checkoverplafone = checkOverPlafone($selected_so->customers_id);
-        $checkoverdue = checkOverDueByCustomer($selected_so->customers_id);
+        //Count total amount instalment
+        $all_soc = SalesOrderCreditModel::where('sales_order_id', $id)->get();
+        $total_amount = 0;
+        foreach ($all_soc as $value) {
+            $total_amount = $total_amount + $value->amount;
+        }
+        if ($total_amount >= $selected_so->total_after_ppn) {
+            $selected_so->isPaid = 1;
+            $selected_so->paid_date = Carbon::now()->format('Y-m-d H:i:s');
+            $selected_so->save();
 
-        return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
+            //update overplafone and overdue
+            $checkoverplafone = checkOverPlafone($selected_so->customers_id);
+            $checkoverdue = checkOverDueByCustomer($selected_so->customers_id);
+            return redirect('/invoice')->with('success', "Order number " . $selected_so->order_number . " already paid!");
+        } else {
+            return redirect('/invoice/manage_payment')->with('success', "Update Payment of Order number " . $selected_so->order_number . " Success!");
+        }
     }
 
     public function paidManagement(Request $request)
@@ -773,16 +797,11 @@ class SalesOrderController extends Controller
             abort(403);
         }
         if ($request->ajax()) {
-            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
-                ->select('customer_areas.area_code', 'warehouses.id')
-                ->where('warehouses.id', Auth::user()->warehouse_id)
-                ->first();
             if (!empty($request->from_date)) {
                 $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
                     ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
-                    // ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->whereBetween('order_date', array($request->from_date, $request->to_date))
                     ->latest()
                     ->get();
@@ -791,7 +810,6 @@ class SalesOrderController extends Controller
                     ->where('isapprove', 'approve')
                     ->where('isverified', 1)
                     ->where('isPaid', 0)
-                    // ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->latest()
                     ->get();
             }
@@ -847,5 +865,16 @@ class SalesOrderController extends Controller
             // 'order_number' =>
         ];
         return view('invoice.paid_management', $data);
+    }
+
+    public function getTotalInstalment($id)
+    {
+        $soc = SalesOrderCreditModel::where('sales_order_id', $id)->get();
+
+        $total_amount = 0;
+        foreach ($soc as $value) {
+            $total_amount = $total_amount + $value->amount;
+        }
+        return response()->json($total_amount);
     }
 }

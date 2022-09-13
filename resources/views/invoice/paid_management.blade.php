@@ -68,7 +68,7 @@
                     <th>TOP</th>
                     <th>PPN</th>
                     <th>Total</th>
-                    <th>Total After PPN</th>
+                    <th>Total Include PPN</th>
                     <th>Payment Method</th>
                     <th>Paid Status</th>
 
@@ -101,6 +101,37 @@
     <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
     <script>
       $(document).ready(function() {
+
+        let csrf = $('meta[name="csrf-token"]').attr("content");
+
+        $(document).on('click', '.update-btn', function() {
+          let modal_id = $(this).attr('data-bs-target');
+          let so_id = $(modal_id).find('.modal-body').find('.id').val();
+          let total_instalment = $(modal_id).find('.modal-body').find('.total-instalment');
+          let total = $(modal_id).find('.modal-body').find('.totalraw').val();
+          let remaining_instalment = $(modal_id).find('.modal-body').find('.remaining-instalment');
+
+          $.ajax({
+            context: this,
+            type: "GET",
+            url: "/invoice/getTotalInstalment/" + so_id,
+            dataType: "json",
+            success: function(data) {
+              total_instalment.val('Rp. ' + data.toLocaleString('id', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+              }));
+              let remain = parseInt(total) - parseInt(data);
+              remaining_instalment.val('Rp. ' + remain.toLocaleString('id', {
+                minimumFractionDigits: 0,
+                maximumFractionDigits: 0
+              }));
+
+            },
+          });
+
+        });
+
         $.ajaxSetup({
           headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

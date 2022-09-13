@@ -21,6 +21,11 @@ class SalesOrderModel extends Model
         return $this->hasMany(SalesOrderDetailModel::class, 'sales_orders_id');
     }
 
+    public function salesOrderCreditsBy()
+    {
+        return $this->hasMany(SalesOrderCreditModel::class, 'sales_order_id');
+    }
+
     public function createdSalesOrder()
     {
         return $this->hasOne(User::class, 'id', 'created_by')->withTrashed();

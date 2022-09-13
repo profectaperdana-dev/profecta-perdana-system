@@ -6,7 +6,8 @@
             <div class="dark-logo-wrapper"><a href="index.html"><img class="img-fluid"
                         src="{{ asset('assets') }}/images/logo/dark-logo.png" alt=""></a></div>
             <div class="toggle-sidebar"><i class="status_toggle middle" data-feather="align-center"
-                    id="sidebar-toggle"></i></div>
+                    id="sidebar-toggle"></i>
+            </div>
         </div>
         <div class="left-menu-header col">
         </div>
@@ -106,10 +107,29 @@
                             @foreach ($notif as $notifData)
                                 <li class="notif-primary">
                                     <div class="media"><span class="notification-bg bg-light-primary"><i
-                                                class="fa fa-envelope"> </i></span>
+                                                class="fa fa-envelope">
+                                            </i></span>
                                         <div class="media-body">
                                             <a href="{{ url('read_notif/' . $notifData->id) }}">
-                                                <p>{{ $notifData->message }}</p><span>10 minutes ago</span>
+                                                <p>{{ $notifData->message }}</p>
+                                                <span>
+                                                    <?php
+                                                    $diff = date_diff(new DateTime(), new DateTime($notifData->created_at));
+                                                    ?>
+                                                    @if ($diff->format('%s') > 0 && $diff->format('%i') <= 0)
+                                                        {{ $diff->format('%s seconds ago') }}
+                                                    @elseif($diff->format('%i') > 0 && $diff->format('%h') <= 0)
+                                                        {{ $diff->format('%i minutes ago') }}
+                                                    @elseif($diff->format('%h') > 0 && $diff->format('%a') <= 0)
+                                                        {{ $diff->format('%h hours ago') }}
+                                                    @elseif($diff->format('%a') > 0 && $diff->format('%m') <= 0)
+                                                        {{ $diff->format('%a days ago') }}
+                                                    @elseif($diff->format('%m') > 0 && $diff->format('%y') <= 0)
+                                                        {{ $diff->format('%m months ago') }}
+                                                    @else
+                                                        {{ $diff->format('%y years ago') }}
+                                                    @endif
+                                                </span>
                                             </a>
                                         </div>
                                     </div>

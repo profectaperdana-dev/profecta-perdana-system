@@ -254,6 +254,9 @@
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
     <script>
       $(document).ready(function() {
+        $('form').submit(function() {
+          $(this).find('button[type="submit"]').prop('disabled', true);
+        });
         let csrf = $('meta[name="csrf-token"]').attr("content");
 
         $(".product-append-discount").select2({
