@@ -77,14 +77,11 @@
                 <td></td>
                 <td style="width: 5%;text-align:left">
                     Invoice <br>
-                    Revision <br>
-                    &nbsp;
 
                 </td>
                 <td style="width: 20%">
-                    : {{ $data->order_number }}<br>
-                    : 0<br>
-                    &nbsp;
+                    : {{ $sales_order->order_number }}<br>
+
                 </td>
             </tr>
             <tr>
@@ -93,22 +90,21 @@
                 </th>
             </tr>
             <tr>
-                <th colspan="6" style="text-align: center">INVOICE
+                <th colspan="6" style="text-align: center">HISTORY PAYMENT
 
                 </th>
             </tr>
             <tr>
-                <td colspan="3" style="width: 90%;text-align:left">Invoice To : <br>
-                    {{ $data->customerBy->name_cust }} - {{ $data->customerBy->code_cust }} <br>
-                    {{ $data->customerBy->address_cust }} <br>
-                    Remarks : {{ $data->remark }}
+                <td colspan="3" style="width: 90%;text-align:left">Customer : <br>
+                    {{ $sales_order->customerBy->name_cust }} - {{ $sales_order->customerBy->code_cust }} <br>
+                    {{ $sales_order->customerBy->address_cust }} <br>
                 </td>
-                <td style="width: 10%">Date <br>
+                <td style="width: 10%">Order Date <br>
                     Due Date
                 </td>
                 <td style="text-align:left">
-                    : {{ $data->order_date }} <br>
-                    : {{ $data->duedate }}
+                    : {{ $sales_order->order_date }} <br>
+                    : {{ $sales_order->duedate }}
                 </td>
 
             </tr>
@@ -126,53 +122,65 @@
         <table style="width:100%;">
             <thead style="border:1px solid black">
                 <tr>
-                    <td style="text-align:center;padding:2px">No</td>
-                    <td style="text-align:center;padding:2px">Item Description</td>
-                    <td style="text-align:center;padding:2px">Price</td>
-                    <td style="text-align:center;padding:2px">Qty</td>
-                    <td style="text-align:center;padding:2px">Total</td>
+                    <td style="text-align:center;padding:2px;width:10%">No</td>
+                    <td style="text-align:left;padding:2px">Payment</td>
+                    <td style="text-align:left;padding:2px">Payment Date</td>
+                    <td style="text-align:center;padding:2px;width:16%">Amount</td>
                 </tr>
             </thead>
             <tbody>
                 @php
                     $total = 0;
                 @endphp
-                @foreach ($data->salesOrderDetailsBy as $key => $value)
-                    {{-- @for ($i = 0; $i < 1; $i++) --}}
+                @foreach ($sales_order->salesOrderCreditsBy as $key => $value)
                     <tr>
                         <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
-                        <td style="text-align:left;padding:2px">{{ $value->productSales->nama_barang }}</td>
-                        @php
-                            $diskon = $value->discount / 100;
-                            $hargaDiskon = $value->productSales->harga_jual_nonretail * $diskon;
-                            $hargaAfterDiskon = $value->productSales->harga_jual_nonretail - $hargaDiskon;
+                        <td style="text-align:left;padding:2px">Payment -{{ $key + 1 }}</td>
+                        <td style="text-align:left;padding:2px">{{ $value->payment_date }}</td>
 
-                            $hargaAfterPpn = $hargaAfterDiskon * 0.11;
-                            $hargaReal = $hargaAfterDiskon + $hargaAfterPpn;
-                            // $dataHarga = $value->productSales->harga_jual_nonretail + $hargaAfterPpn;
-                        @endphp
-                        <td style="text-align:right;padding:2px">@currency($hargaReal)</td>
-                        <td style="text-align:right;padding:2px">{{ $value->qty }}</td>
+                        <td style="text-align:right;padding:2px">@currency($value->amount)</td>
                         @php
-                            $sub_total = $hargaReal * $value->qty;
-                            $total = $total + $sub_total;
-                            $exppn = $total * 0.11;
-                            $total_ = $total - $exppn;
-
+                            $total += $value->amount;
                         @endphp
-                        <td style="text-align:right">@currency($sub_total)</td>
                     </tr>
-                    {{-- @endfor --}}
                 @endforeach
             </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4" style="text-align: right">
+                        <hr>
+                    </td>
 
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right">Total Payment</td>
+                    <td style="text-align: right"> @currency($sales_order->total_after_ppn) </td>
+                </tr>
+                <tr>
+                    <td colspan="3" style="text-align: right">Total Instalment</td>
+                    <td style="text-align: right"> @currency($total) </td>
+                    @php
+                        $sisa = $sales_order->total_after_ppn - $total;
+                    @endphp
+
+                </tr>
+                <tr>
+                    <td colspan="3">
+
+                    </td>
+                    <td style="text-align: right">
+                        <hr>
+                    </td>
+                </tr>
+                <tr>
+                    <th colspan="3" style="text-align: right">Remaining Instalment</th>
+                    <th style="text-align: right;border:1px solid black">@currency($sisa)</th>
+                </tr>
+            </tfoot>
 
 
         </table>
-        @php
-            $dpp = $data->total_after_ppn / 1.11;
-            $hargaDpp = $data->total_after_ppn - $dpp;
-        @endphp
+
         <table style="width: 100%">
             <thead>
                 <tr>
@@ -184,53 +192,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td colspan="6" style="text-align: right">
-                        <hr>
-                    </td>
 
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: right">Total Excl. PPN</td>
-                    <td style="text-align: right">@currency($dpp)</td>
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: right">PPN 11%</td>
-                    <td style="text-align: right">@currency($hargaDpp)</td>
-                </tr>
-                <tr>
-                    <td colspan="4" style="text-align: right">
 
-                    </td>
-                    <td style="text-align: right">
-                        <hr>
-                    </td>
-                </tr>
-                <tr>
-                    <th colspan="4" style="text-align: right">Total Due</th>
-                    <th style="text-align: right;border:1px solid black">@currency($data->total_after_ppn)</th>
-                </tr>
-                <tr>
-                    <th colspan="4">&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <tr>
-                    <td colspan="3" style="text-align: left">Payment Method :
-                        @if ($data->payment_method == 1)
-                            Cash On Delivery <br>
-                        @elseif ($data->payment_method == 2)
-                            Cash Before Delivery <br>
-                        @else
-                            Credit with Terms of Payment <br>
-                        @endif
-                        Bank Mandiri 113-00-7779777-1 : an. CV Profecta Perdana <br>
-                        Bank BCA 853-085-3099 : an. CV Profecta Perdana <br>
-                        Thank You ! <br>
-                        We're looking fordward to working with you again
-                    </td>
 
-                    <th colspan="2" style="text-align: left"><i>Sincerely Yours,</i></th>
-                </tr>
+
+
+
             </tbody>
         </table>
     </main>

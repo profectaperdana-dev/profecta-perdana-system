@@ -136,15 +136,15 @@
     <!-- Wrap the content of your PDF inside a main tag -->
     <main>
         <table style="width:100%;">
-            <thead style="border:1px solid black">
+            <thead style="border-bottom:1px solid black">
                 <tr style="">
-                    <th style="text-align:center;padding:2px">No</th>
-
-                    <th style="text-align:center;padding:2px">&nbsp;</th>
-                    <th style="text-align:left;padding:2px">Item Description</th>
-                    <th style="text-align:center;padding:2px">&nbsp;</th>
+                    <th style="text-align:center;padding:2px;width:15%">No</th>
+                    <th style="text-align:left;padding:2px;width:30%">Item Description</th>
                     <th style="text-align:center;padding:2px">&nbsp;</th>
                     <th style="text-align:center;padding:2px">Qty</th>
+
+                    <th style="text-align:center;padding:2px">&nbsp;</th>
+                    <th style="text-align:center;padding:2px">&nbsp;</th>
 
                 </tr>
             </thead>
@@ -152,6 +152,7 @@
                 @php
                     $total = 0;
                     $y = 0;
+                    $total_qty = 0;
                 @endphp
                 @foreach ($data->salesOrderDetailsBy as $key => $value)
                     {{-- @for ($i = 0; $i < 2; $i++) --}}
@@ -160,14 +161,20 @@
                     ?>
                     <tr>
                         <td style="text-align:center;padding:2px">{{ $key + 1 }}</td>
-                        <td style="text-align:center;padding:2px">&nbsp;</td>
-                        <td style="text-align:left;padding:2px">{{ $value->productSales->nama_barang }}</td>
-
-                        <td style="text-align:center">&nbsp; </td>
-                        <td style="text-align:center">&nbsp; </td>
+                        <td style="text-align:left;padding:2px">
+                            {{ $value->productSales->sub_materials->nama_sub_material }}&nbsp;
+                            {{ $value->productSales->sub_types->type_name }}&nbsp;
+                            {{ $value->productSales->nama_barang }}
+                        </td>
+                        <td style="text-align:left;padding:2px">&nbsp;</td>
                         <td style="text-align:center;padding:2px">{{ $value->qty }}</td>
 
+                        <td style="text-align:center">&nbsp; </td>
+                        <td style="text-align:center">&nbsp; </td>
+
+
                         @php
+                            $total_qty += $value->qty;
                             $sub_total = ($value->productSales->berat / 1000) * $value->qty;
                             $total = $total + $sub_total;
                         @endphp
@@ -184,17 +191,30 @@
                         <hr>
                     </td>
                 </tr>
+
             </tbody>
             <tfoot>
-
                 <tr>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
+
+                    <th style="text-align: left">Qty Total</th>
+                    <th style="text-align: center;border:1px solid black"> {{ $total_qty }} PCS</th>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
-                    <th style="text-align: center">Weight Total</th>
-                    <th style="text-align: center;border:1px solid black">{{ $total }} Kg</th>
+
                 </tr>
+                <tr>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+
+                    <th style="text-align: left">Weight Total</th>
+                    <th style="text-align: center;border:1px solid black"> {{ $total }} Kg</th>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+
+                </tr>
+
             </tfoot>
 
 
@@ -208,7 +228,7 @@
                 </tr>
                 <tr>
                     <th style="text-align: center;width: 33%"><i>Customer,</i> </th>
-                    <th style="text-align: center;width: 33%"><i>Warehoues,</i> </th>
+                    <th style="text-align: center;width: 33%"><i>Warehouse,</i> </th>
                     <th style="text-align: center;width: 33%"><i>Driver,</i></th>
 
 

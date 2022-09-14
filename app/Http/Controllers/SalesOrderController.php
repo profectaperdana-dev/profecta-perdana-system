@@ -54,6 +54,16 @@ class SalesOrderController extends Controller
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
 
+    // print history payment
+    public function printHistoryPayment($id)
+    {
+        $sales_order = SalesOrderModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+
+        $sales_order_credit = SalesOrderCreditModel::where('sales_order_id', $sales_order)->get();
+        $pdf = PDF::loadView('invoice.print_history_payment', compact('warehouse', 'sales_order', 'sales_order_credit'))->setPaper('A5', 'landscape');
+        return $pdf->stream('history_payment.pdf');
+    }
 
     // print invoice dengan PPN
     public function printInoiceWithPpn($id)
@@ -68,8 +78,12 @@ class SalesOrderController extends Controller
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data->pdf_invoice = $data->order_number . '.pdf';
         $data->save();
+
         $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
-        return $pdf->download($data->order_number . '.pdf');
+
+
+
+        return $pdf->download($data->pdf_invoice);
     }
     //print delivery order
     public function deliveryOrder($id)
@@ -86,7 +100,7 @@ class SalesOrderController extends Controller
         $data->save();
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $so_number . '.pdf');
-        return $pdf->download($data->order_number . '.pdf');
+        return $pdf->download($data->pdf_do);
     }
 
     // getRecentData() : READ DATA RECENT SALES ORDERS ADMIN & SALES ADMIN

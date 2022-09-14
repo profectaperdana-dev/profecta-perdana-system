@@ -51,8 +51,11 @@
                                             </a>
 
                                             <div class="file-bottom">
-                                                <p class="text-dark mt-1"><strong>{{ $value->pdf_invoice }}</strong>
+                                                <p class="text-dark mt-1"><strong>{{ $value->pdf_invoice }}</strong><br>
+                                                    <strong
+                                                        class="text-success">{{ $value->customerBy->code_cust }}-{{ $value->customerBy->name_cust }}</strong>
                                                 </p>
+
                                                 <p class="text-primary">
                                                     @php
                                                         $fileSize = File::size(public_path('pdf/' . $value->order_number . '.pdf'));

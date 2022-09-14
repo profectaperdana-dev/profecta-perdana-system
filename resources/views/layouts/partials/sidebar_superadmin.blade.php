@@ -203,8 +203,13 @@
 
           <li class="sidebar-main-title">
             <div>
-              <h6>Reports & Files</h6>
+              <h6>Analysis Report & Files</h6>
             </div>
+          </li>
+          <li>
+            <a class="nav-link menu-title link-nav {{ request()->is('analytics') ? 'active' : '' }}"
+              href="{{ url('/analytics') }}"><i data-feather="activity"></i></i><span>Analysis
+              </span></a>
           </li>
           <li class="dropdown"><a class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
               href="javascript:void(0)"><i data-feather="archive"></i><span>Files Arsip</span></a>
@@ -220,7 +225,9 @@
                   Purchase
                   Order</a>
               </li>
+
             </ul>
+
           </li>
 
         </ul>

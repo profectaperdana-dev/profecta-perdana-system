@@ -23,7 +23,13 @@ class FilesController extends Controller
         if ($keyword == NULL) {
             $data = SalesOrderModel::latest()->get();
         } else {
-            $data = SalesOrderModel::where('pdf_invoice', 'LIKE', '%' . $keyword . '%')->latest()->get();
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->where('sales_orders.pdf_invoice', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('customers.name_cust', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('customers.code_cust', 'LIKE', '%' . $keyword . '%')
+                ->latest()
+                ->get();
         }
         // $data = DataTables::of(SalesOrderModel::query())->make(true);
         return view('files.index', compact('title', 'data'));
