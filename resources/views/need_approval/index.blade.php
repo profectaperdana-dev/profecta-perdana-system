@@ -175,7 +175,7 @@
                                         </div>
 
                                         <div class="col-3 col-md-3 form-group">
-                                          <label>Disc%</label>
+                                          <label>Disc (%)</label>
                                           <input type="text" readonly class="form-control" placeholder="Product Name"
                                             value="{{ $detail->discount }}">
 

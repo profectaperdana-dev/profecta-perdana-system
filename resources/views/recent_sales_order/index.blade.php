@@ -390,7 +390,7 @@
                       </div>
 
                       <div class="col-4 col-lg-2 form-group">
-                        <label>Disc(%)</label>
+                        <label>Disc (%)</label>
                         <input type="number" class="form-control discount-append-edit" placeholder="Disc"
                           name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
                         @error('editProduct[{{ $loop->index }}][discount]')
@@ -601,7 +601,7 @@
                       </div>
 
                       <div class="col-4 col-lg-2 form-group">
-                        <label>Disc(%)</label>
+                        <label>Disc (%)</label>
                         <input type="number" class="form-control discount-append-edit" placeholder="Disc"
                           name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
                         @error('editProduct[{{ $loop->index }}][discount]')
@@ -811,7 +811,7 @@
                       </div>
 
                       <div class="col-4 col-lg-2 form-group">
-                        <label>Disc(%)</label>
+                        <label>Disc (%)</label>
                         <input type="number" class="form-control discount-append-edit" placeholder="Disc"
                           name="editProduct[{{ $loop->index }}][discount]" value="{{ $detail->discount }}" />
                         @error('editProduct[{{ $loop->index }}][discount]')
@@ -1174,7 +1174,7 @@
               '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
               "</div> " +
               '<div class="col-4 col-lg-2 form-group">' +
-              "<label>Disc(%)</label>" +
+              "<label>Disc (%)</label>" +
               '<input type="number" class="form-control discount-append-edit" name="editProduct[' +
               x +
               '][discount]" id="">' +

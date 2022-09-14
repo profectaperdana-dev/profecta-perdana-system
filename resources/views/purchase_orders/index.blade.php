@@ -94,7 +94,7 @@
                 <div class="col-md-12">
                   <div class="row font-weight-bold">
                     <div class="form-group row">
-                      <div class="col-md-4 form-group">
+                      <div class="col-md-6 form-group">
                         <label>
                           Supplier</label>
                         <select name="supplier_id" id="" required
@@ -112,7 +112,7 @@
                           </div>
                         @enderror
                       </div>
-                      <div class="col-md-4 form-group mr-5">
+                      <div class="col-md-6 form-group mr-5">
                         <label>Warehouse</label>
                         <select name="warehouse_id" required
                           class="form-control warehouse-select {{ $errors->first('warehouse_id') ? ' is-invalid' : '' }}">
@@ -129,11 +129,24 @@
                           </div>
                         @enderror
                       </div>
-                      <div class="col-md-4 form-group mr-5">
-                        <label>Due Date <strong>(mm/dd/yyyy)</strong></label>
-                        <input class="form-control" type="date" data-language="en" name="due_date"
-                          value="{{ $item->due_date }}" required>
+
+                    </div>
+                    <div class="form-group row">
+                      <div class="col-md-6 form-group mr-5">
+                        <label>Order Date <strong>(mm/dd/yyyy)</strong></label>
+                        <input class="form-control" type="date" name="order_date" value="{{ $item->order_date }}"
+                          required>
                         @error('due_date')
+                          <div class="invalid-feedback">
+                            {{ $message }}
+                          </div>
+                        @enderror
+                      </div>
+                      <div class="col-md-6 form-group">
+                        <label>TOP</label>
+                        <input type="number" class="form-control" required name="top" id=""
+                          value="{{ $item->top }}">
+                        @error('top')
                           <div class="invalid-feedback">
                             {{ $message }}
                           </div>
