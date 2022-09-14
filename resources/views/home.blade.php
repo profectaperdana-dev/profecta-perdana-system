@@ -413,11 +413,11 @@
                             type: 'area',
                             data: num,
                         },
-                        {
-                            name: '<span class="badge badge-success">Profit</span>',
-                            type: 'area',
-                            data: [44000000, 55000000, 31000000, 47000000, 31000000, 0, 43000000]
-                        }
+                        // {
+                        //     name: '<span class="badge badge-success">Profit</span>',
+                        //     type: 'area',
+                        //     data: [44000000, 55000000, 31000000, 47000000, 31000000, 0, 43000000]
+                        // }
                     ],
 
                     chart: {
@@ -485,7 +485,7 @@
                     ],
                     yaxis: [{
                         min: 0,
-
+                        tickAmount: 10,
                         labels: {
                             formatter: function(value) {
                                 return value.toLocaleString(
