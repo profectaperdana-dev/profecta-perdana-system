@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\CheckStockController;
 use App\Http\Controllers\CustomerAreasController;
 use App\Http\Controllers\CustomerCategoriesController;
@@ -88,6 +89,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/purchase_orders/receiving', [PurchaseOrderController::class, 'receivingPO']);
     Route::get('/read_all_notif/{id}', [NotificationController::class, 'readAll']);
     Route::get('/invoice/getTotalInstalment/{id}', [SalesOrderController::class, 'getTotalInstalment']);
+    Route::get('/print_history_payment/{id}', [SalesOrderController::class, 'printHistoryPayment']);
+    Route::get('/analytics', [AnalysisController::class, 'index']);
+    Route::get('/salesman_chart/', [AnalysisController::class, 'salesmanChart']);
 
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
