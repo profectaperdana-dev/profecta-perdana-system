@@ -238,26 +238,22 @@ class PurchaseOrderController extends Controller
         $model->isapprove = 1;
         $model->created_by = Auth::user()->id;
 
-        if ($old_isapprove == 0) {
-            //Create Order Number
-            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
-                ->select('customer_areas.area_code', 'warehouses.id')
-                ->where('warehouses.id', $request->get('warehouse_id'))
-                ->first();
-            $length = 3;
-            $id = intval(PurchaseOrderModel::where('order_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
-            $po_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
-            $year = Carbon::now()->format('Y'); // 2022
-            $month = Carbon::now()->format('m'); // 2022
-            $tahun = substr($year, -2);
-            $order_number = 'POPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $po_number_id;
-            $model->order_number = $order_number;
-            $model->pdf_po = $model->order_number . '.pdf';
-        }
+        //Create Order Number
+        $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+            ->select('customer_areas.area_code', 'warehouses.id')
+            ->where('warehouses.id', $request->get('warehouse_id'))
+            ->first();
+        $length = 3;
+        $id = intval(PurchaseOrderModel::where('order_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
+        $po_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
+        $year = Carbon::now()->format('Y'); // 2022
+        $month = Carbon::now()->format('m'); // 2022
+        $tahun = substr($year, -2);
+        $order_number = 'POPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $po_number_id;
+        $model->order_number = $order_number;
+        $model->pdf_po = $model->order_number . '.pdf';
 
         $saved = $model->save();
-
-
 
         //Save POD Input and Total
         $total = 0;
@@ -410,6 +406,117 @@ class PurchaseOrderController extends Controller
     public function update(Request $request, $id)
     {
         abort(404);
+    }
+
+    public function updatePO(Request $request, $id)
+    {
+
+        if (!Gate::allows('isSuperAdmin')) {
+            abort(403);
+        }
+        // validator
+        $request->validate([
+            "supplier_id" => "required|numeric",
+            "warehouse_id" => "required|numeric",
+            "order_date" => "required",
+            "remark" => "required",
+            "poFields.*.product_id" => "required|numeric",
+            "poFields.*.qty" => "required|numeric"
+        ]);
+        //Check Duplicate
+        $products_arr = [];
+        foreach ($request->poFields as $check) {
+            array_push($products_arr, $check['product_id']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return redirect('/purchase_orders')->with('error', "You enter duplicate products! Please check again!");
+        }
+        //assign object
+        $model = PurchaseOrderModel::where('id', $id)->first();
+        $model->order_date = $request->get('order_date');
+        $model->top = $request->get('top');
+        $dt = new DateTimeImmutable(date('Y-m-d', strtotime($model->order_date)), new DateTimeZone('Asia/Jakarta'));
+        $dt = $dt->modify("+" . $model->top . " days");
+        $model->due_date = $dt;
+        $model->supplier_id = $request->get('supplier_id');
+        $model->warehouse_id = $request->get('warehouse_id');
+        $model->remark = $request->get('remark');
+        $model->created_by = Auth::user()->id;
+
+        $saved = $model->save();
+
+        if ($model->isvalidated == 1) {
+            //Restore data to before changed
+            $po_restore = PurchaseOrderDetailModel::where('purchase_order_id', $id)->get();
+            foreach ($po_restore as $restore) {
+                $stock = StockModel::where('warehouses_id', $model->warehouse_id)
+                    ->where('products_id', $restore->product_id)->first();
+                $stock->stock = $stock->stock - $restore->qty;
+                $stock->save();
+            }
+        }
+
+
+        //Save POD Input and Total and Change Stock
+        $total = 0;
+        foreach ($request->poFields as $product) {
+            $product_exist = PurchaseOrderDetailModel::where('purchase_order_id', $id)
+                ->where('product_id', $product['product_id'])->first();
+
+            if ($product_exist != null) {
+                $old_qty = $product_exist->qty;
+                $product_exist->qty = $product['qty'];
+                $product_exist->save();
+            } else {
+                $new_product = new PurchaseOrderDetailModel();
+                $new_product->purchase_order_id = $id;
+                $new_product->product_id = $product['product_id'];
+                $new_product->qty = $product['qty'];
+                $new_product->save();
+            }
+            $harga = ProductModel::where('id', $product['product_id'])->first();
+            $total = $total + ($harga->harga_beli * $product['qty']);
+        }
+
+        //Delete product that not in POD Input
+        $del = PurchaseOrderDetailModel::where('purchase_order_id', $id)
+            ->whereNotIn('product_id', $products_arr)->delete();
+
+        if ($model->isvalidated == 1) {
+            //Change Stock
+            $selected_pod = PurchaseOrderDetailModel::where('purchase_order_id', $id)->get();
+            foreach ($selected_pod as $pod) {
+                $stock = StockModel::where('warehouses_id', $model->warehouse_id)
+                    ->where('products_id', $pod->product_id)->first();
+                if ($stock == null) {
+                    $new_stock = new StockModel();
+                    $new_stock->products_id = $pod->product_id;
+                    $new_stock->warehouses_id = $model->warehouse_id;
+                    $new_stock->stock = $pod->qty;
+                    $new_stock->save();
+                } else {
+                    $stock->stock = $stock->stock + $pod->qty;
+                    $stock->save();
+                }
+            }
+        }
+
+
+        //Save total
+        $model->total = $total;
+
+        $saved_model = $model->save();
+        if ($saved_model == true) {
+            $data = PurchaseOrderModel::where('order_number', $model->order_number)->first();
+            $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+            $pdf = PDF::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->order_number . '_edited.pdf');
+
+            return redirect('/all_purchase_orders')->with('success', "Purchase Order Update Success");
+        } else {
+            return redirect('/purchase_orders')->with('error', "Purchase Order Update Fail! Please check again!");
+        }
     }
 
     /**

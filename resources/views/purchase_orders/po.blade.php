@@ -24,10 +24,6 @@
         <div class="card">
           <div class="card-header pb-0">
             <h5>All Data Purchase Order</h5>
-            {{-- <hr class="bg-primary">
-                        <a class="btn btn-primary" href="{{ url('/purchase_orders/create') }}">
-                            + Create Purchase Order
-                        </a> --}}
           </div>
           <div class="card-body">
             <div class="table-responsive">
@@ -59,10 +55,8 @@
                             Purchase Order</a>
 
                           @can('isSuperAdmin')
-                            @if ($value->isvalidated == 0)
-                              <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal"
-                                data-original-title="test" data-bs-target="#manageData{{ $value->id }}">Edit</a>
-                            @endif
+                            <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal"
+                              data-original-title="test" data-bs-target="#manageData{{ $value->id }}">Edit</a>
                           @endcan
 
                         </div>
@@ -102,7 +96,7 @@
             <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form action="{{ url('purchase_orders/' . $item->id . '/manage') }}" method="POST"
+            <form action="{{ url('purchase_orders/' . $item->id . '/update_po') }}" method="POST"
               enctype="multipart/form-data">
               @csrf
               <div class="container-fluid">
@@ -239,8 +233,8 @@
                     <div class="form-group row">
                       <div class="form-group col-lg-4">
                         <label>Total</label>
-                        <input class="form-control total" value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}"
-                          id="" readonly>
+                        <input class="form-control total"
+                          value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}" id="" readonly>
                       </div>
                     </div>
                   </div>

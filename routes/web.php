@@ -86,6 +86,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/notification/getAll/', [NotificationController::class, 'getAll']);
     Route::get('/read_notif/{id}/', [NotificationController::class, 'readMessage']);
     Route::post('/purchase_orders/{id}/validate', [PurchaseOrderController::class, 'validation']);
+    Route::post('/purchase_orders/{id}/update_po', [PurchaseOrderController::class, 'updatePO']);
     Route::get('/purchase_orders/receiving', [PurchaseOrderController::class, 'receivingPO']);
     Route::get('/read_all_notif/{id}', [NotificationController::class, 'readAll']);
     Route::get('/invoice/getTotalInstalment/{id}', [SalesOrderController::class, 'getTotalInstalment']);
