@@ -105,9 +105,9 @@
                         <input type="text" class="form-control" readonly value="{{ $item->warehouseBy->warehouses }}">
                       </div>
                       <div class="col-md-4 form-group mr-5">
-                        <label>Due Date <strong>(mm/dd/yyyy)</strong></label>
-                        <input class="form-control" type="date" data-language="en" readonly name="due_date"
-                          value="{{ $item->due_date }}" required>
+                        <label>Order Date </label>
+                        <input class="form-control" type="text" readonly name="due_date"
+                          value="{{ date('d-M-Y', strtotime($item->order_date)) }}" required>
                         @error('due_date')
                           <div class="invalid-feedback">
                             {{ $message }}
