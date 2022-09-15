@@ -287,8 +287,8 @@ $(document).ready(function () {
     $("#addSo").on("click", function () {
         ++x;
         let form =
-            '<div class="form-group row">' +
-            '<div class="form-group col-4">' +
+            '<div class="mx-auto py-2 form-group row bg-primary">' +
+            '<div class="form-group col-12 col-lg-6">' +
             "<label>Product</label>" +
             '<select name="soFields[' +
             x +
@@ -296,20 +296,20 @@ $(document).ready(function () {
             '<option value=""> Choose Product </option> ' +
             "</select>" +
             "</div>" +
-            '<div class="col-3 col-md-3 form-group">' +
+            '<div class="col-4 col-lg-2 form-group">' +
             "<label> Qty </label> " +
             '<input class="form-control cekQty" required name="soFields[' +
             x +
             '][qty]">' +
             '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
             "</div>" +
-            '<div class="col-3 col-md-4 form-group">' +
+            '<div class="col-4 col-lg-2 form-group">' +
             "<label>Disc(%)</label>" +
             '<input class="form-control discount-append" name="soFields[' +
             x +
             '][discount]" id="" readonly>' +
             "</div>" +
-            '<div class="col-2 col-md-1 form-group">' +
+            '<div class="col-3 col-md-2 form-group">' +
             '<label for=""> &nbsp; </label>' +
             '<a class="form-control text-white remSo text-center" style="border:none; background-color:red">' +
             "- </a> " +

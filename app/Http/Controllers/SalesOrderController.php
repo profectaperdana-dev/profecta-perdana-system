@@ -634,13 +634,13 @@ class SalesOrderController extends Controller
                     }
                 })
                 ->editColumn('ppn', function ($data) {
-                    return number_format($data->ppn);
+                    return number_format($data->ppn, 0, ',', '.');
                 })
                 ->editColumn('total_after_ppn', function ($data) {
-                    return number_format($data->total_after_ppn);
+                    return number_format($data->total_after_ppn, 0, ',', '.');
                 })
                 ->editColumn('total', function ($data) {
-                    return number_format($data->total);
+                    return number_format($data->total, 0, ',', '.');
                 })
                 ->editColumn('isPaid', function ($data) {
                     if ($data->isPaid == 0) {
@@ -648,15 +648,6 @@ class SalesOrderController extends Controller
                     } else {
                         return 'Paid';
                     }
-                })
-                ->editColumn('total_after_ppn', function ($data) {
-                    return number_format($data->total_after_ppn);
-                })
-                ->editColumn('total', function ($data) {
-                    return number_format($data->total);
-                })
-                ->editColumn('ppn', function ($data) {
-                    return number_format($data->ppn);
                 })
                 ->editColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->order_date));
@@ -841,13 +832,13 @@ class SalesOrderController extends Controller
                     }
                 })
                 ->editColumn('total_after_ppn', function ($data) {
-                    return number_format($data->total_after_ppn);
+                    return number_format($data->total_after_ppn, 0, ',', '.');
                 })
                 ->editColumn('total', function ($data) {
-                    return number_format($data->total);
+                    return number_format($data->total, 0, ',', '.');
                 })
                 ->editColumn('ppn', function ($data) {
-                    return number_format($data->ppn);
+                    return number_format($data->ppn, 0, ',', '.');
                 })
                 ->editColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->order_date));

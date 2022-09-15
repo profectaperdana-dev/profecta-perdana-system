@@ -2,7 +2,7 @@
   <div class="col-md-12">
     <div class="row font-weight-bold " id="formPo">
       <div class="form-group row">
-        <div class="col-md-4 form-group">
+        <div class="col-md-6 form-group">
           <label>
             Supplier</label>
           <select name="supplier_id" id="" required
@@ -19,7 +19,7 @@
             </div>
           @enderror
         </div>
-        <div class="col-md-4 form-group mr-5">
+        <div class="col-md-6 form-group mr-5">
           <label>Warehouse</label>
           <select name="warehouse_id" required
             class="form-control warehouse-select {{ $errors->first('warehouse_id') ? ' is-invalid' : '' }}">
@@ -41,22 +41,8 @@
             </div>
           @enderror
         </div>
-        <div class="col-md-4 form-group mr-5">
-          <label>Due Date</label>
-          <input class="form-control" type="date" data-language="en" name="due_date" required>
-          @error('due_date')
-            <div class="invalid-feedback">
-              {{ $message }}
-            </div>
-          @enderror
-        </div>
       </div>
-      <div class="form-group row">
-        <div class="col-md-12 form-group mr-5">
-          <label>Remarks</label>
-          <textarea class="form-control" name="remark" id="" cols="30" rows="5" required></textarea>
-        </div>
-      </div>
+
       <div class="form-group row">
         <div class="form-group col-7">
           <label>Product</label>
