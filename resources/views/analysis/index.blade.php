@@ -197,7 +197,6 @@
                                 if (num == null) {
                                     $('#chart-dash-2-line').html(
                                         '<h3 class="text-center">No Data Found</h3>');
-
                                 } else {
 
                                     var text = cData.label;
@@ -210,7 +209,7 @@
                                         chart: {
                                             type: 'bar',
                                             height: 350,
-                                            id: 'Salesman',
+                                            id: 'sales',
                                         },
                                         plotOptions: {
                                             bar: {
@@ -223,10 +222,17 @@
                                         dataLabels: {
                                             enabled: false
                                         },
-
+                                        labels: text,
                                         xaxis: {
-                                            title: 'Sales Man',
-                                            categories: text,
+                                            labels: {
+                                                formatter: function(value) {
+                                                    return value.toLocaleString(
+                                                        'id', {
+                                                            minimumFractionDigits: 0,
+                                                            maximumFractionDigits: 0
+                                                        });
+                                                },
+                                            },
                                         },
 
                                         fill: {
@@ -238,12 +244,20 @@
 
                                         },
                                         tooltip: {
+
                                             y: {
-                                                formatter: function(val) {
-                                                    return "$ " + val + " thousands"
+                                                formatter: function(y) {
+                                                    if (typeof y !== "undefined") {
+                                                        return "Rp " + y.toLocaleString(
+                                                            'id', {
+                                                                minimumFractionDigits: 0,
+                                                                maximumFractionDigits: 0
+                                                            });
+                                                    }
+                                                    return y;
                                                 }
                                             }
-                                        }
+                                        },
                                     };
 
                                     var chart = new ApexCharts(document.querySelector(
@@ -274,7 +288,8 @@
 
                     chart: {
                         type: 'bar',
-                        height: 350
+                        height: 350,
+                        id: 'sales2',
                     },
                     plotOptions: {
                         bar: {
@@ -288,11 +303,18 @@
                         enabled: false
                     },
 
+                    labels: text,
                     xaxis: {
-                        title: 'Sales Man',
-                        categories: text,
+                        labels: {
+                            formatter: function(value) {
+                                return value.toLocaleString(
+                                    'id', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
+                            },
+                        },
                     },
-
                     fill: {
                         opacity: 1
                     },
@@ -303,11 +325,18 @@
                     },
                     tooltip: {
                         y: {
-                            formatter: function(val) {
-                                return "$ " + val + " thousands"
+                            formatter: function(y) {
+                                if (typeof y !== "undefined") {
+                                    return "Rp " + y.toLocaleString(
+                                        'id', {
+                                            minimumFractionDigits: 0,
+                                            maximumFractionDigits: 0
+                                        });
+                                }
+                                return y;
                             }
                         }
-                    }
+                    },
                 };
 
                 var chart = new ApexCharts(document.querySelector(
