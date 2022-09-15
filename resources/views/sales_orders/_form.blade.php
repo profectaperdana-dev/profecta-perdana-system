@@ -52,8 +52,8 @@
           <textarea class="form-control" name="remark" id="" cols="30" rows="5" required></textarea>
         </div>
       </div>
-      <div class="form-group row">
-        <div class="form-group col-4">
+      <div class="mx-auto py-2 form-group row bg-primary">
+        <div class="form-group col-12 col-lg-6">
           <label>Product</label>
           <select name="soFields[0][product_id]" class="form-control productSo" required>
             <option value="">Choose Product</option>
@@ -64,7 +64,7 @@
             </div>
           @enderror
         </div>
-        <div class="col-3 col-md-3 form-group">
+        <div class="col-4 col-lg-2 form-group">
           <label>Qty</label>
           <input class="form-control cekQty" required name="soFields[0][qty]" id="">
           <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
@@ -75,11 +75,11 @@
           @enderror
         </div>
 
-        <div class="col-3 col-md-3 form-group">
+        <div class="col-4 col-lg-2 form-group">
           <label>Disc (%)</label>
           <input class="form-control discount-append" name="soFields[0][discount]" id="" readonly>
         </div>
-        <div class="col-2 col-md-1 form-group">
+        <div class="col-3 col-md-2 form-group">
           <label for="">&nbsp;</label>
           <a id="addSo" href="javascript:void(0)" class="form-control text-white  text-center"
             style="border:none; background-color:green">+</a>

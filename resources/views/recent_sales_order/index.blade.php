@@ -432,19 +432,20 @@
                 <div class="form-group row">
                   <div class="form-group col-lg-4">
                     <label>PPN</label>
-                    <input class="form-control ppn" value="{{ 'Rp. ' . number_format($value->ppn) }}" id=""
-                      readonly>
+                    <input class="form-control ppn" value="{{ 'Rp. ' . number_format($value->ppn, 0, ',', '.') }}"
+                      id="" readonly>
                   </div>
 
                   <div class="col-lg-4 form-group">
                     <label>Total (Before PPN)</label>
-                    <input class="form-control total" value="{{ 'Rp. ' . number_format($value->total) }}" readonly>
+                    <input class="form-control total" value="{{ 'Rp. ' . number_format($value->total, 0, ',', '.') }}"
+                      readonly>
                   </div>
 
                   <div class="col-lg-4 form-group">
                     <label>Total (After PPN)</label>
                     <input class="form-control total-after-ppn"
-                      value="{{ 'Rp. ' . number_format($value->total_after_ppn) }}" readonly>
+                      value="{{ 'Rp. ' . number_format($value->total_after_ppn, 0, ',', '.') }}" readonly>
                   </div>
                 </div>
 
@@ -643,19 +644,20 @@
                 <div class="form-group row">
                   <div class="form-group col-lg-4">
                     <label>PPN</label>
-                    <input class="form-control ppn" value="{{ 'Rp. ' . number_format($value->ppn) }}" id=""
-                      readonly>
+                    <input class="form-control ppn" value="{{ 'Rp. ' . number_format($value->ppn, 0, ',', '.') }}"
+                      id="" readonly>
                   </div>
 
                   <div class="col-lg-4 form-group">
                     <label>Total (Before PPN)</label>
-                    <input class="form-control total" value="{{ 'Rp. ' . number_format($value->total) }}" readonly>
+                    <input class="form-control total" value="{{ 'Rp. ' . number_format($value->total, 0, ',', '.') }}"
+                      readonly>
                   </div>
 
                   <div class="col-lg-4 form-group">
                     <label>Total (After PPN)</label>
                     <input class="form-control total-after-ppn"
-                      value="{{ 'Rp. ' . number_format($value->total_after_ppn) }}" readonly>
+                      value="{{ 'Rp. ' . number_format($value->total_after_ppn, 0, ',', '.') }}" readonly>
                   </div>
                 </div>
 
@@ -853,19 +855,20 @@
                 <div class="form-group row">
                   <div class="form-group col-lg-4">
                     <label>PPN</label>
-                    <input class="form-control ppn" value="{{ 'Rp. ' . number_format($value->ppn) }}" id=""
-                      readonly>
+                    <input class="form-control ppn" value="{{ 'Rp. ' . number_format($value->ppn, 0, ',', '.') }}"
+                      id="" readonly>
                   </div>
 
                   <div class="col-lg-4 form-group">
                     <label>Total (Before PPN)</label>
-                    <input class="form-control total" value="{{ 'Rp. ' . number_format($value->total) }}" readonly>
+                    <input class="form-control total" value="{{ 'Rp. ' . number_format($value->total, 0, ',', '.') }}"
+                      readonly>
                   </div>
 
                   <div class="col-lg-4 form-group">
                     <label>Total (After PPN)</label>
                     <input class="form-control total-after-ppn"
-                      value="{{ 'Rp. ' . number_format($value->total_after_ppn) }}" readonly>
+                      value="{{ 'Rp. ' . number_format($value->total_after_ppn, 0, ',', '.') }}" readonly>
                   </div>
                 </div>
 

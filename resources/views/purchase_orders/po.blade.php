@@ -239,7 +239,7 @@
                     <div class="form-group row">
                       <div class="form-group col-lg-4">
                         <label>Total</label>
-                        <input class="form-control total" value="{{ 'Rp. ' . number_format($item->total) }}"
+                        <input class="form-control total" value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}"
                           id="" readonly>
                       </div>
                     </div>
