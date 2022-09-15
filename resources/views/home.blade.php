@@ -279,7 +279,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sale Today (IDR) </span>
+                                <div class="media-body"><span class="m-0">Sales Today (IDR) </span>
                                     <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -292,7 +292,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sale This Month (IDR)</span>
+                                <div class="media-body"><span class="m-0">Sales This Month (IDR)</span>
                                     <h4 class="mb-0 counter">{{ number_format($month) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -305,7 +305,7 @@
                         <div class="bg-primary b-r-4 card-body">
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sale This Year (IDR)</span>
+                                <div class="media-body"><span class="m-0">Sales YTD (IDR)</span>
                                     <h4 class="mb-0 counter">{{ number_format($year) }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
@@ -324,7 +324,6 @@
                             <div class="card-header">
                                 <div class="header-top d-sm-flex justify-content-between align-items-center">
                                     <h5>last 7 days sale</h5><br>
-                                    <h6>(IDR) {{ number_format($total_income) }}</h6>
                                     {{-- <div class="center-content">
                                         <ul class="week-date">
                                             <li class="font-primary">Today</li>
@@ -405,6 +404,7 @@
         <script>
             $(function() {
                 var cData = JSON.parse(`<?php echo $data['chart_data']; ?>`);
+                var bData = JSON.parse(`<?php echo $data_profit['chart_profit']; ?>`);
                 var num = cData.data;
                 var text = cData.label;
                 var options = {
@@ -416,7 +416,7 @@
                         {
                             name: '<span class="badge badge-success">Profit</span>',
                             type: 'area',
-                            data: [44000000, 55000000, 31000000, 47000000, 31000000, 0, 43000000]
+                            data: bData.data,
                         }
                     ],
 
@@ -442,7 +442,7 @@
                         },
 
                     },
-                    labels: text,
+                    labels: bData.label,
                     stroke: {
                         curve: 'smooth',
                         width: [5, 5],

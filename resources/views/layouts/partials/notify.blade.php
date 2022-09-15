@@ -50,7 +50,7 @@
 
                         $('.notifCount').text(count + 1);
                         let animation =
-                            ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+                            ' <i class="fa-2x  text-danger  fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
                         $('.notification-box').html(animation);
                         // $('.bell').remove();
                         let notif =
@@ -124,27 +124,10 @@
                             '<a href="/read_all_notif/{{ Auth::user()->job_id }}">Mark as readall</a></span></p>';
                         $('.mark-read').html(mark);
 
-                        <<
-                        << << < HEAD
-                        $('.notifCount').text(count + 1);
-                        let animation =
-                            ' <i class="fa-2x fa text-danger fa-bell fa-shake"></i><span class="dot-animated"></span>';
-                        $('.notification-box').html(animation);
-                        // $('.bell').remove();
-                        let notif =
-                            ' <li class="notif-primary"><div class="media"> <span class="notification-bg bg-light-primary"> <i class="fa fa-envelope">' +
-                            ' </i></span> <div class="media-body"> <a href="/read_notif/' + data
-                            .id +
-                            '"><p> ' +
-                            data.message +
-                            ' </p><span>10 minutes ago</span> ' +
-                            ' </a> </div> </div> </li> '; ===
-                        === = >>>
-                        >>> > fd1a879fba0d4c4065a7039968792ded373b7e4a
 
                         $('.notifCount').text(count + 1);
                         let animation =
-                            ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+                            ' <i class="fa-2x text-danger fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
                         $('.notification-box').html(animation);
                         // $('.bell').remove();
                         let notif =
@@ -223,7 +206,7 @@
 
                         $('.notifCount').text(count + 1);
                         let animation =
-                            ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+                            ' <i class="fa-2x  text-danger  fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
                         $('.notification-box').html(animation);
                         // $('.bell').remove();
                         let notif =

@@ -25,6 +25,7 @@ class AnalysisController extends Controller
                 DB::raw("sales_orders.created_by as day"),
                 DB::raw("users.name as name")
             )
+            ->where('users.job_id', '=', 4)
             ->where('order_number', 'like', '%IVPP%')
             ->whereMonth('order_date', date('m'))
             ->where('isapprove', 'approve')->where('isverified', 1)
@@ -72,6 +73,8 @@ class AnalysisController extends Controller
                     DB::raw("sales_orders.created_by as day"),
                     DB::raw("users.name as name")
                 )
+                ->where('users.job_id', '=', 4)
+
                 ->where('order_number', 'like', '%IVPP%')
                 ->whereBetween('order_date', array($request->from_date, $request->to_date))
                 ->where('isapprove', 'approve')->where('isverified', 1)

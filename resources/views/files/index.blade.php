@@ -14,28 +14,57 @@
     </div>
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-xl-12 col-md-12 box-col-12">
-
-
                 <div class="file-content">
                     <div class="card">
                         <div class="card-header">
-                            <div class="media col-12">
-                                <form class="form-inline" action="{{ url('/file_invoice') }}" method="get">
-                                    @csrf
-                                    @method('GET')
-                                    <div class="form-group d-flex mb-0"> <i class="fa fa-search"></i>
-                                        <input class="form-control-plaintext" name="search" value="{{ @$keyword }}"
-                                            type="text" placeholder="Search...">
+                            <form class="" action="{{ url('/file_invoice') }}" method="get">
+                                @csrf
+                                @method('GET')
+                                <div class="row">
+                                    <div class="col-3">
+                                        <select name="" id="filterBy" class="form-control uoms">
+                                            <option value="" selected>-Choose Filter-</option>
+                                            <option value="1">Customer</option>
+                                            <option value="2">Interval Date</option>
+                                            <option value="3">Interval Date & Customer</option>
+                                        </select>
                                     </div>
-                                </form>
-                                <div class="media-body mt-1">
-                                    <a class="btn btn-primary ms-2" href="{{ url('/file_invoice') }}"><i
-                                            data-feather="refresh-cw"> </i>Refresh
-                                    </a>
+                                    <div class="col-3" id="customer">
+                                        <select name="val_cus" class="form-control uoms">
+                                            <option value="" selected>-Choose Customer-</option>
+                                            @foreach ($customer as $val)
+                                                <option value="{{ $val->id }}">{{ $val->code_cust }} -
+                                                    {{ $val->name_cust }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="col-2" id="date">
+                                        <input type="date" class="form-control" name="date">
+                                    </div>
+                                    <div class="col-2" id="date2">
+                                        <input type="date" class="form-control" name="date2">
+                                    </div>
+                                    <div class="col-4" id="search">
+                                        <div class="form-inline form-group d-flex mb-0"> <i class="fa fa-search"></i>
+                                            <input class="form-control-plaintext" name="search" value="{{ @$keyword }}"
+                                                type="text" placeholder="Search...">
+                                        </div>
+                                    </div>
+                                    <div class="col-1  mt-1">
+                                        <a class="btn btn-primary ms-2" href="{{ url('/file_invoice') }}"><i
+                                                data-feather="refresh-cw"> </i>
+                                        </a>
+                                    </div>
+                                    <div class="col-1  mt-1">
+                                        <button class="btn btn-primary ms-2" type="submit"><i data-feather="arrow-right">
+                                            </i>
+                                        </button>
+                                    </div>
+
                                 </div>
-                            </div>
+                            </form>
+
                         </div>
                         <div class="card-body file-manager">
                             <hr>
@@ -101,5 +130,39 @@
         </div>
     </div>
     @push('scripts')
+        <script>
+            $(document).ready(function() {
+                $('#customer').hide();
+                $('#date').hide();
+                $('#date2').hide();
+                $('#filterBy').change(function() {
+                    let filterBy = $(this).val();
+                    if (filterBy == 1) {
+                        $('#customer').show();
+                        $('#search').hide();
+                        $('#date').hide();
+                        $('#date2').hide();
+
+                    } else if (filterBy == 2) {
+                        $('#date').show();
+                        $('#date2').show();
+                        $('#customer').hide();
+                        $('#search').hide();
+
+                    } else if (filterBy == 3) {
+                        $('#date').show();
+                        $('#date2').show();
+                        $('#customer').show();
+                        $('#search').hide();
+
+                    } else {
+                        $('#customer').hide();
+                        $('#search').show();
+                        $('#date').hide();
+                        $('#date2').hide();
+                    }
+                });
+            });
+        </script>
     @endpush
 @endsection
