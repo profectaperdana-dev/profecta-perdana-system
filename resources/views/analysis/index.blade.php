@@ -273,7 +273,7 @@
         });
 
 
-
+        /* Start Chart Salesman */
         var cData_sales = JSON.parse(`<?php echo $data['chart_data']; ?>`);
         var num_sales = cData_sales.data;
         var text_sales = cData_sales.label;
@@ -345,14 +345,17 @@
           chart_sales.render();
         }, 2000);
 
-        var cData = JSON.parse(`<?php echo $data_product['chart_data']; ?>`);
-        var num = cData.data;
-        var text = cData.label;
+        /* End Chart Salesman */
 
-        var options = {
+        /* Start Chart Product */
+        var cData_product = JSON.parse(`<?php echo $data_product['chart_data']; ?>`);
+        var num_product = cData_product.data;
+        var text_product = cData_product.label;
+
+        var options_product = {
           series: [{
             name: 'Net Profit',
-            data: num
+            data: num_product
           }, ],
           chart: {
             type: 'bar',
@@ -374,7 +377,7 @@
             colors: ['transparent']
           },
           xaxis: {
-            categories: text,
+            categories: text_product,
           },
           yaxis: {
             title: {
@@ -393,9 +396,12 @@
           }
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart-dash-1-line"), options);
-        chart.render();
+        setTimeout(() => {
+          var chart_product = new ApexCharts(document.querySelector("#chart-dash-1-line"), options_product);
+          chart_product.render();
+        }, 2000);
 
+        /* End Chart Product */
 
 
 
