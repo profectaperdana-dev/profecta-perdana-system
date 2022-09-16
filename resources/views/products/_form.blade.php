@@ -1,27 +1,6 @@
 <div class="row">
     <div class="col-md-12">
         <div class="form-group row font-weight-bold">
-            {{-- <div class="col-md-3 form-group">
-                <label>Product Code</label>
-                <input type="text" class="form-control {{ $errors->first('kode_barang') ? ' is-invalid' : '' }}"
-                    placeholder="Product Code" name="kode_barang" value="{{ old('kode_barang', $data->kode_barang) }}"
-                    required>
-                @error('kode_barang')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div> --}}
-            {{-- <div class="col-md-3 form-group">
-                <label>Date of Production</label>
-                <input type="date" class="form-control {{ $errors->first('tgl_produksi') ? ' is-invalid' : '' }}"
-                    placeholder="" name="tgl_produksi" value="{{ old('tgl_produksi', $data->tgl_produksi) }}" required>
-                @error('tgl_produksi')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div> --}}
             <div class="col-md-3 form-group">
                 <label>Product Name</label>
                 <input type="text" class="form-control {{ $errors->first('nama_barang') ? ' is-invalid' : '' }}"

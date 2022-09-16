@@ -41,26 +41,8 @@ class AnalysisController extends Controller
         }
         $data['chart_data'] = json_encode($data);
 
-        // ALL PRODUCT
-        $record_product = SalesOrderModel::Join('sales_order_details', 'sales_order_details.sales_orders_id', '=', 'sales_orders.id')
-            ->Join('products', 'products.id', '=', 'sales_order_details.products_id')
-            ->select(
-                DB::raw('SUM(sales_order_details.qty) as total'),
-                DB::raw('products.nama_barang as name')
-            )
-            ->where('order_number', 'like', '%IVPP%')
-            ->whereMonth('order_date', date('m'))
-            ->where('isapprove', 'approve')->where('isverified', 1)
-            ->groupBy('products.nama_barang')
-            ->orderBy('total', 'DESC')
-            ->get();
-        $data_product = [];
-        foreach ($record_product as $val) {
-            $data_product['label'][] = $val->name;
-            $data_product['data'][] = $val->total;
-        }
-        $data_product['chart_data'] = json_encode($data_product);
-        return view('analysis.index', compact('total_income', 'data', 'title', 'data_product'));
+        $sales = User::where('job_id', '=', 4)->get();
+        return view('analysis.index', compact('total_income', 'data', 'title', 'sales'));
     }
 
     public function salesmanChart(Request $request)
