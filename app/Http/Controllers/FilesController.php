@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerModel;
 use App\Models\PurchaseOrderModel;
 use App\Models\SalesOrderModel;
+use App\Models\SuppliersModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Yajra\DataTables\Facades\DataTables;
@@ -20,9 +22,8 @@ class FilesController extends Controller
         $keyword = $request->get('search');
 
         $title = 'All Invoice Order File PDF';
-        if ($keyword == NULL) {
-            $data = SalesOrderModel::latest()->get();
-        } else {
+
+        if ($request->get('val_cus') == '' && $request->get('search') != '' && $request->get('date') == '' && $request->get('date2') == '') {
             $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
                 ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
                 ->where('sales_orders.pdf_invoice', 'LIKE', '%' . $keyword . '%')
@@ -30,9 +31,33 @@ class FilesController extends Controller
                 ->orWhere('customers.code_cust', 'LIKE', '%' . $keyword . '%')
                 ->latest()
                 ->get();
+        } else if ($request->get('val_cus') != '' && $request->get('search') == '' && $request->get('date') == '' && $request->get('date2') == '') {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.id', 'customers.code_cust')
+                ->where('sales_orders.customers_id', $request->get('val_cus'))
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') == '' && $request->get('search') == '' && $request->get('date') != '' && $request->get('date2') != '') {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->whereBetween('order_date', array($request->date, $request->date2))
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') != '' && $request->get('search') == '' && $request->get('date') != '' && $request->get('date2') != '') {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->whereBetween('order_date', array($request->date, $request->date2))
+                ->Where('sales_orders.customers_id', $request->get('val_cus'))
+                ->latest()
+                ->get();
+        } else {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->latest()
+                ->get();
         }
-        // $data = DataTables::of(SalesOrderModel::query())->make(true);
-        return view('files.index', compact('title', 'data'));
+        $customer = CustomerModel::latest()->get();
+        return view('files.index', compact('title', 'data', 'customer'));
     }
 
     /**
@@ -45,23 +70,83 @@ class FilesController extends Controller
     {
         $title = 'All Delivery Order File PDF';
         $keyword = $request->get('search');
-        if ($keyword == NULL) {
-            $data = SalesOrderModel::latest()->get();
+        if ($request->get('val_cus') == '' && $request->get('search') != '' && $request->get('date') == '' && $request->get('date2') == '') {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->where('sales_orders.pdf_do', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('customers.name_cust', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('customers.code_cust', 'LIKE', '%' . $keyword . '%')
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') != '' && $request->get('search') == '' && $request->get('date') == '' && $request->get('date2') == '') {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.id', 'customers.code_cust')
+                ->where('sales_orders.customers_id', $request->get('val_cus'))
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') == '' && $request->get('search') == '' && $request->get('date') != '' && $request->get('date2') != '') {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->whereBetween('order_date', array($request->date, $request->date2))
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') != '' && $request->get('search') == '' && $request->get('date') != '' && $request->get('date2') != '') {
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->whereBetween('order_date', array($request->date, $request->date2))
+                ->Where('sales_orders.customers_id', $request->get('val_cus'))
+                ->latest()
+                ->get();
         } else {
-            $data = SalesOrderModel::where('pdf_invoice', 'LIKE', '%' . $keyword . '%')->latest()->get();
+            $data = SalesOrderModel::leftJoin('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                ->select('sales_orders.*', 'customers.name_cust', 'customers.code_cust')
+                ->latest()
+                ->get();
         }
-        return view('files.do', compact('title', 'data'));
+        $customer = CustomerModel::latest()->get();
+
+        return view('files.do', compact('title', 'data', 'customer'));
     }
     public function getFilePo(Request $request)
     {
         $title = 'All Purchase Order File PDF';
         $keyword = $request->get('search');
-        if ($keyword == NULL) {
-            $data = PurchaseOrderModel::latest()->get();
+
+        if ($request->get('val_cus') == '' && $request->get('search') != '' && $request->get('date') == '' && $request->get('date2') == '') {
+            $data = PurchaseOrderModel::leftJoin('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
+                ->select('purchase_orders.*', 'suppliers.nama_supplier')
+                ->where('purchase_orders.pdf_po', 'LIKE', '%' . $keyword . '%')
+                ->orWhere('suppliers.nama_supplier', 'LIKE', '%' . $keyword . '%')
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') != '' && $request->get('search') == '' && $request->get('date') == '' && $request->get('date2') == '') {
+            $data = PurchaseOrderModel::leftJoin('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
+                ->select('purchase_orders.*', 'suppliers.id')
+                ->where('purchase_orders.supplier_id', $request->get('val_cus'))
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') == '' && $request->get('search') == '' && $request->get('date') != '' && $request->get('date2') != '') {
+            $data = PurchaseOrderModel::leftJoin('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
+                ->select('purchase_orders.*', 'suppliers.nama_supplier')
+                ->whereBetween('order_date', array($request->date, $request->date2))
+                ->latest()
+                ->get();
+        } else if ($request->get('val_cus') != '' && $request->get('search') == '' && $request->get('date') != '' && $request->get('date2') != '') {
+            $data = PurchaseOrderModel::leftJoin('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
+                ->select('purchase_orders.*', 'suppliers.nama_supplier')
+                ->whereBetween('order_date', array($request->date, $request->date2))
+                ->Where('purchase_orders.supplier_id', $request->get('val_cus'))
+                ->latest()
+                ->get();
         } else {
-            $data = PurchaseOrderModel::where('pdf_invoice', 'LIKE', '%' . $keyword . '%')->latest()->get();
+            $data = PurchaseOrderModel::leftJoin('suppliers', 'suppliers.id', '=', 'purchase_orders.supplier_id')
+                ->select('purchase_orders.*', 'suppliers.nama_supplier')
+                ->latest()
+                ->get();
         }
-        return view('files.po', compact('title', 'data'));
+        $customer = SuppliersModel::latest()->get();
+
+        return view('files.po', compact('title', 'data', 'customer'));
     }
     public function create()
     {

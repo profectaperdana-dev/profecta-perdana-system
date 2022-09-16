@@ -448,6 +448,8 @@ class SalesOrderController extends Controller
             $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
             $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
             $total = $total + ($hargaAfterDiskon * $product['qty']);
+
+            $harga_awal = $harga->harga_beli * $product['qty'];
         }
 
         //Delete product that not in SOD Input
@@ -459,6 +461,7 @@ class SalesOrderController extends Controller
         $model->ppn = $ppn;
         $model->total = $total;
         $model->total_after_ppn = $total + $ppn;
+        $model->profit = $model->total_after_ppn - $harga_awal;
 
         //Verify
         $getCredential = CustomerModel::where('id', $model->customers_id)->firstOrFail();
@@ -486,6 +489,8 @@ class SalesOrderController extends Controller
                 $model->pdf_do = $do . '.pdf';
                 $model->pdf_invoice = $iv_number . '.pdf';
                 $model->order_number = $iv_number;
+                // profit
+
                 //Potong Stock
                 $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
                 foreach ($selected_sod as $value) {

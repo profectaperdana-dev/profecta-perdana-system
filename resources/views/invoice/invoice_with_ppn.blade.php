@@ -130,8 +130,8 @@
                     Due Date
                 </td>
                 <td style="text-align:left">
-                    : {{ $data->order_date }} <br>
-                    : {{ $data->duedate }}
+                    : {{ date('d-m-Y', strtotime($data->order_date)) }} <br>
+                    : {{ date('d-m-Y', strtotime($data->duedate)) }}
                 </td>
             </tr>
         </table>
@@ -272,7 +272,7 @@
             $pdf->page_script('
             $height = $pdf->get_height();
             $width = $pdf->get_width();
-            $text = "PAID "."{{ $data->order_date }}";
+            $text = "PAID "."{{ date('d-m-Y', strtotime($data->paid_date)) }}";
             $pdf->set_opacity(.2, "Multiply");
             $pdf->set_opacity(.2);
             $pdf->page_text($width / 5, $height / 1.5, $text , null, 50, array(216, 0, 0), 2, 2, -15);

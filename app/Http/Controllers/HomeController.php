@@ -81,9 +81,10 @@ class HomeController extends Controller
             ->limit(7)
             ->orderBy('order_date', 'ASC')
             ->get();
-        $record = SalesOrderModel::select(DB::raw('SUM(total_after_ppn) as total'), DB::raw('DAYNAME(order_date) as day_name'), DB::raw("DAY(order_date) as day"))
+        $record_profit = SalesOrderModel::select(DB::raw('SUM(profit) as total'), DB::raw('DAYNAME(order_date) as day_name'), DB::raw("DAY(order_date) as day"))
             ->where('order_number', 'like', '%IVPP%')
             ->where('isapprove', 'approve')->where('isverified', 1)
+            ->where('isPaid', 1)
             ->groupBy('day', 'order_date')
             ->get();
 
@@ -96,15 +97,20 @@ class HomeController extends Controller
             ->groupBy('month', 'order_date')
             ->get();
         $data = [];
+        $data_profit = [];
         $data_po = [];
 
-        $total_income = 0;
         foreach ($record as $row) {
             $data['label'][] = $row->day_name;
             $data['data'][] = $row->total;
-            $total_income += $row->total;
         }
         $data['chart_data'] = json_encode($data);
+
+        foreach ($record_profit as $row) {
+            $data_profit['label'][] = $row->day_name;
+            $data_profit['data'][] = $row->total;
+        }
+        $data_profit['chart_profit'] = json_encode($data_profit);
 
         foreach ($po_record as $row) {
             $data_po['label_po'][] = $row->month_name;
@@ -112,6 +118,6 @@ class HomeController extends Controller
         }
         $data_po['chart_po'] = json_encode($data_po);
 
-        return view('home', compact('total_income', 'data', 'data_po', 'po_val', 'po', 'so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
+        return view('home', compact('data_profit', 'data', 'data_po', 'po_val', 'po', 'so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
     }
 }

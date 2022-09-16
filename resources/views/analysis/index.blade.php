@@ -18,6 +18,8 @@
     <div class="container-fluid">
         <div class="col-xl-12 xl-100 box-col-12">
             <div class="row">
+
+                {{-- CHART SALESMAN --}}
                 <div class="col-xl-12 box-col-12 des-xl-100">
                     <div class="row">
                         <div class="col-xl-6 box-col-12">
@@ -51,8 +53,8 @@
                                         <div class="col-2">
                                             <label class="col-form-label">&nbsp;</label>
                                             <div class="input-group">
-                                                <button class="btn btn-warning" name="refresh" id="refresh"><i
-                                                        class="fa fa-refresh"></i></button>
+                                                <a class="btn btn-warning" href="{{ url('/analytics') }}"><i
+                                                        class="fa fa-refresh"></i></a>
                                             </div>
                                         </div>
                                     </div>
@@ -74,10 +76,11 @@
 
                     </div>
                 </div>
+                {{-- END CHART SALESMAN --}}
                 <div class="col-xl-12 box-col-12 des-xl-100">
                     <div class="row">
 
-                        <div class="col-xl-12 box-col-12">
+                        <div class="col-xl-6 box-col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="form-group row col-12">
@@ -105,8 +108,7 @@
                                         <div class="col-2">
                                             <label class="col-form-label text-end">&nbsp;</label>
                                             <div class="input-group">
-                                                <button class="btn btn-warning" name="refresh"
-                                                    id="refresh">Refresh</button>
+                                                <a class="btn btn-warning" href="{{ url('/analytics') }}">Refresh</a>
                                             </div>
                                         </div>
                                     </div>
@@ -203,7 +205,7 @@
                                     var name = cData.name;
                                     var options = {
                                         series: [{
-                                            name: 'ada',
+                                            name: '<div class="text-center badge badge-success">Sale</div>',
                                             data: num
                                         }],
                                         chart: {
@@ -215,7 +217,7 @@
                                             bar: {
                                                 horizontal: true,
                                                 columnWidth: '10%',
-                                                endingShape: 'rounded',
+                                                endingShape: 'flat',
                                                 distributed: true
                                             },
                                         },
@@ -282,7 +284,7 @@
 
                 var options = {
                     series: [{
-                        name: 'ada',
+                        name: '<div class="text-center badge badge-success">Sale</div>',
                         data: num
                     }, ],
 
@@ -295,7 +297,7 @@
                         bar: {
                             horizontal: true,
                             columnWidth: '10%',
-                            endingShape: 'rounded',
+                            endingShape: 'flat',
                             distributed: true
                         },
                     },
@@ -362,7 +364,7 @@
                         bar: {
                             horizontal: false,
                             columnWidth: '10%',
-                            endingShape: 'rounded'
+                            endingShape: 'flat',
                         },
                     },
                     dataLabels: {

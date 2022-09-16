@@ -50,7 +50,7 @@
 
             $('.notifCount').text(count + 1);
             let animation =
-              ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+              ' <i class="fa-2x  text-danger  fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
             $('.notification-box').html(animation);
             // $('.bell').remove();
             let notif =
@@ -124,9 +124,10 @@
               '<a href="/read_all_notif/{{ Auth::user()->job_id }}">Mark as readall</a></span></p>';
             $('.mark-read').html(mark);
 
+
             $('.notifCount').text(count + 1);
             let animation =
-              ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+              ' <i class="fa-2x text-danger fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
             $('.notification-box').html(animation);
             // $('.bell').remove();
             let notif =
@@ -205,7 +206,7 @@
 
             $('.notifCount').text(count + 1);
             let animation =
-              ' <i class="fa-2x far fa-bell fa-shake"></i><span class="dot-animated"></span>';
+              ' <i class="fa-2x  text-danger  fa fa-bell fa-shake"></i><span class="dot-animated"></span>';
             $('.notification-box').html(animation);
             // $('.bell').remove();
             let notif =
