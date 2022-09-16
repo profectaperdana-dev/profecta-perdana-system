@@ -23,7 +23,7 @@
                                 @method('GET')
                                 <div class="row">
                                     <div class="col-3">
-                                        <select name="" id="filterBy" class="form-control uoms">
+                                        <select name="filter" id="filterBy" class="form-control uoms">
                                             <option value="" selected>-Choose Filter-</option>
                                             <option value="1">Customer</option>
                                             <option value="2">Interval Date</option>
@@ -51,15 +51,16 @@
                                                 type="text" placeholder="Search...">
                                         </div>
                                     </div>
-                                    <div class="col-1  mt-1">
-                                        <a class="btn btn-primary ms-2" href="{{ url('/file_invoice') }}"><i
-                                                data-feather="refresh-cw"> </i>
-                                        </a>
-                                    </div>
+
                                     <div class="col-1  mt-1">
                                         <button class="btn btn-primary ms-2" type="submit"><i data-feather="arrow-right">
                                             </i>
                                         </button>
+                                    </div>
+                                    <div class="col-1  mt-1">
+                                        <a class="btn btn-primary ms-2" href="{{ url('/file_invoice') }}"><i
+                                                data-feather="refresh-cw"> </i>
+                                        </a>
                                     </div>
 
                                 </div>
@@ -82,14 +83,18 @@
                                             <div class="file-bottom">
                                                 <p class="text-dark mt-1"><strong>{{ $value->pdf_invoice }}</strong><br>
                                                     <strong
-                                                        class="text-success">{{ $value->customerBy->code_cust }}-{{ $value->customerBy->name_cust }}</strong>
+                                                        class="text-success">{{ $value->customerBy->code_cust }}-{{ $value->customerBy->name_cust }}
+                                                        <br>
+                                                        <span
+                                                            class="text-warning">{{ date('d-m-Y', strtotime($value->order_date)) }}</span>
+                                                    </strong>
                                                 </p>
 
                                                 <p class="text-primary">
                                                     @php
                                                         $fileSize = File::size(public_path('pdf/' . $value->order_number . '.pdf'));
                                                     @endphp
-                                                    {{ $fileSize / 1000 }} Kb
+                                                    <span class="text-dark">Size : </span> {{ $fileSize / 1000 }} Kb
                                                 </p>
                                             </div>
                                         </li>

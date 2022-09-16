@@ -54,15 +54,16 @@
                                                 type="text" placeholder="Search...">
                                         </div>
                                     </div>
-                                    <div class="col-1  mt-1">
-                                        <a class="btn btn-primary ms-2" href="{{ url('/file_po') }}"><i
-                                                data-feather="refresh-cw"> </i>
-                                        </a>
-                                    </div>
+
                                     <div class="col-1  mt-1">
                                         <button class="btn btn-primary ms-2" type="submit"><i data-feather="arrow-right">
                                             </i>
                                         </button>
+                                    </div>
+                                    <div class="col-1  mt-1">
+                                        <a class="btn btn-primary ms-2" href="{{ url('/file_po') }}"><i
+                                                data-feather="refresh-cw"> </i>
+                                        </a>
                                     </div>
 
                                 </div>

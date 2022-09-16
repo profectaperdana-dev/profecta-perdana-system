@@ -403,11 +403,13 @@
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.custom.js"></script>
         <script>
             $(function() {
-                var cData = JSON.parse(`<?php echo $data['chart_data']; ?>`);
+                var cData = JSON.parse(`<?= $data['chart_data'] ?>`);
                 var bData = JSON.parse(`<?php echo $data_profit['chart_profit']; ?>`);
                 var num = cData.data;
                 var text = cData.label;
                 var options = {
+
+
                     series: [{
                             name: '<span class="badge badge-warning">Income</span>',
                             type: 'area',
