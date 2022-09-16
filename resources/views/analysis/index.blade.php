@@ -22,59 +22,13 @@
                 {{-- CHART SALESMAN --}}
                 <div class="col-xl-12 box-col-12 des-xl-100">
                     <div class="row">
-                        <div class="col-xl-12 box-col-12">
+                        <div class="col-xl-6 box-col-12">
                             <div class="card">
                                 <div class="card-header">
                                     <div class="header-top d-sm-flex justify-content-between align-items-center">
-                                        <h5>sales charts made by salesmen</h5><br>
+                                        <h5>sales chart by salesman</h5><br>
                                     </div>
-                                    <hr>
-                                    <form class="" action="{{ url('/file_invoice') }}" method="get">
-                                        @csrf
-                                        @method('GET')
-                                        <div class="row">
-                                            <div class="col-3">
-                                                <select name="filter" id="filterBy" class="form-control uoms">
-                                                    <option value="" selected>-Choose Filter-</option>
-                                                    <option value="1">Customer</option>
-                                                    <option value="2">Interval Date</option>
-                                                    <option value="3">Interval Date & Customer</option>
-                                                </select>
-                                            </div>
-                                            <div class="col-3" id="customer">
-                                                <select name="val_cus" class="form-control uoms">
-                                                    <option value="" selected>-Choose Customer-</option>
-                                                    @foreach ($sales as $val)
-                                                        <option value="{{ $val->id }}">
-                                                            {{ $val->name }}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-                                            <div class="col-2" id="date">
-                                                <input class="form-control digits" type="date" data-language="en"
-                                                    placeholder="Start" name="from_date" id="from_date">
-                                            </div>
-                                            <div class="col-2" id="date2">
-                                                <input class="form-control digits" type="date" data-language="en"
-                                                    placeholder="Start" name="to_date" id="to_date">
-                                            </div>
-
-
-                                            <div class="col-1  mt-1">
-                                                <button class="btn btn-primary btn-sm ms-2" type="submit"><i
-                                                        data-feather="arrow-right">
-                                                    </i>
-                                                </button>
-                                            </div>
-                                            <div class="col-1  mt-1">
-                                                <a class="btn btn-primary btn-sm ms-2" href="{{ url('/file_invoice') }}"><i
-                                                        data-feather="refresh-cw"> </i>
-                                                </a>
-                                            </div>
-
-                                        </div>
-                                    </form>
-                                    {{-- <div class="form-group row col-12">
+                                    <div class="form-group row col-12">
                                         <div class="col-3">
                                             <label class="col-form-label">Start Date</label>
                                             <div class="input-group">
@@ -103,7 +57,7 @@
                                                         class="fa fa-refresh"></i></a>
                                             </div>
                                         </div>
-                                    </div> --}}
+                                    </div>
 
                                 </div>
 
@@ -123,7 +77,62 @@
                     </div>
                 </div>
                 {{-- END CHART SALESMAN --}}
+                <div class="col-xl-12 box-col-12 des-xl-100">
+                    <div class="row">
 
+                        <div class="col-xl-6 box-col-12">
+                            <div class="card">
+                                <div class="card-header">
+                                    <div class="form-group row col-12">
+                                        <div class="col-4">
+                                            <label class="col-form-label text-end">Start Date</label>
+                                            <div class="input-group">
+                                                <input class="form-control digits" type="date" data-language="en"
+                                                    placeholder="Start" name="from_date" id="from_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label class="col-form-label text-end">End Date</label>
+                                            <div class="input-group">
+                                                <input class="form-control digits" type="date" data-language="en"
+                                                    placeholder="Start" name="to_date" id="to_date">
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <label class="col-form-label text-end">&nbsp;</label>
+                                            <div class="input-group">
+                                                <button class="btn btn-primary" name="filter"
+                                                    id="filter">Filter</button>
+                                            </div>
+                                        </div>
+                                        <div class="col-2">
+                                            <label class="col-form-label text-end">&nbsp;</label>
+                                            <div class="input-group">
+                                                <a class="btn btn-warning" href="{{ url('/analytics') }}">Refresh</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="header-top d-sm-flex justify-content-between align-items-center">
+                                        <h5>sales chart by Product</h5><br>
+
+                                    </div>
+                                </div>
+
+                                <div class="card-body chart-block p-0">
+                                    {{-- <div id="chart-dash-2-line"></div> --}}
+                                    <div class="chart-container">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="chart-dash-1-line"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
 
             </div>
 
@@ -267,80 +276,128 @@
 
 
 
-                var cData = JSON.parse(`<?php echo $data['chart_data']; ?>`);
-                var num = cData.data;
-                if (num == null) {
-                    $('#chart-dash-2-line').html(
-                        '<h3 class="text-center">No Data Found</h3>');
-                } else {
-                    var text = cData.label;
-                    var name = cData.name;
+                var cData_sales = JSON.parse(`<?php echo $data['chart_data']; ?>`);
+                var num_sales = cData_sales.data;
+                var text_sales = cData_sales.label;
+                var name_sales = cData_sales.name;
 
 
-                    var options = {
-                        series: [{
-                            name: '<div class="text-center badge badge-success">Sale</div>',
-                            data: num
-                        }, ],
+                var options_sales = {
+                    series: [{
+                        name: '<div class="text-center badge badge-success">Sale</div>',
+                        data: num_sales
+                    }, ],
 
-                        chart: {
-                            type: 'bar',
-                            height: 350,
-                            id: 'sales2',
+                    chart: {
+                        type: 'bar',
+                        height: 350,
+                        id: 'sales2',
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: true,
+                            columnWidth: '10%',
+                            endingShape: 'flat',
+                            distributed: true
                         },
-                        plotOptions: {
-                            bar: {
-                                horizontal: true,
-                                columnWidth: '10%',
-                                endingShape: 'flat',
-                                distributed: true
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+
+                    labels: text_sales,
+                    xaxis: {
+                        labels: {
+                            formatter: function(value) {
+                                return value.toLocaleString(
+                                    'id', {
+                                        minimumFractionDigits: 0,
+                                        maximumFractionDigits: 0
+                                    });
                             },
                         },
-                        dataLabels: {
-                            enabled: false
-                        },
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    theme: {
 
-                        labels: text,
-                        xaxis: {
-                            labels: {
-                                formatter: function(value) {
-                                    return value.toLocaleString(
+                        palette: 'palette1',
+
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function(y) {
+                                if (typeof y !== "undefined") {
+                                    return "Rp " + y.toLocaleString(
                                         'id', {
                                             minimumFractionDigits: 0,
                                             maximumFractionDigits: 0
                                         });
-                                },
-                            },
-                        },
-                        fill: {
-                            opacity: 1
-                        },
-                        theme: {
-
-                            palette: 'palette1',
-
-                        },
-                        tooltip: {
-                            y: {
-                                formatter: function(y) {
-                                    if (typeof y !== "undefined") {
-                                        return "Rp " + y.toLocaleString(
-                                            'id', {
-                                                minimumFractionDigits: 0,
-                                                maximumFractionDigits: 0
-                                            });
-                                    }
-                                    return y;
                                 }
+                                return y;
                             }
+                        }
+                    },
+                };
+
+                setTimeout(() => {
+                    var chart_sales = new ApexCharts(document.querySelector(
+                        "#chart-dash-2-line"), options_sales);
+                    chart_sales.render();
+                }, 2000);
+
+                var cData = JSON.parse(`<?php echo $data_product['chart_data']; ?>`);
+                var num = cData.data;
+                var text = cData.label;
+
+                var options = {
+                    series: [{
+                        name: 'Net Profit',
+                        data: num
+                    }, ],
+                    chart: {
+                        type: 'bar',
+                        height: 350
+                    },
+                    plotOptions: {
+                        bar: {
+                            horizontal: false,
+                            columnWidth: '10%',
+                            endingShape: 'flat',
                         },
-                    };
+                    },
+                    dataLabels: {
+                        enabled: false
+                    },
+                    stroke: {
+                        show: true,
+                        width: 2,
+                        colors: ['transparent']
+                    },
+                    xaxis: {
+                        categories: text,
+                    },
+                    yaxis: {
+                        title: {
+                            text: '$ (thousands)'
+                        }
+                    },
+                    fill: {
+                        opacity: 1
+                    },
+                    tooltip: {
+                        y: {
+                            formatter: function(val) {
+                                return "$ " + val + " thousands"
+                            }
+                        }
+                    }
+                };
 
-                    var chart = new ApexCharts(document.querySelector(
-                        "#chart-dash-2-line"), options);
-                    chart.render();
+                var chart = new ApexCharts(document.querySelector("#chart-dash-1-line"), options);
+                chart.render();
 
-                }
 
 
 
