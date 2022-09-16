@@ -93,6 +93,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/print_history_payment/{id}', [SalesOrderController::class, 'printHistoryPayment']);
     Route::get('/analytics', [AnalysisController::class, 'index']);
     Route::get('/salesman_chart/', [AnalysisController::class, 'salesmanChart']);
+    Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
 
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {

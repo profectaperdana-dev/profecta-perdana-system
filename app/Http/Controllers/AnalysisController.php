@@ -41,6 +41,8 @@ class AnalysisController extends Controller
         }
         $data['chart_data'] = json_encode($data);
 
+
+
         // ALL PRODUCT
         $record_product = SalesOrderModel::Join('sales_order_details', 'sales_order_details.sales_orders_id', '=', 'sales_orders.id')
             ->Join('products', 'products.id', '=', 'sales_order_details.products_id')
@@ -60,9 +62,48 @@ class AnalysisController extends Controller
             $data_product['data'][] = $val->total;
         }
         $data_product['chart_data'] = json_encode($data_product);
-        return view('analysis.index', compact('total_income', 'data', 'title', 'data_product'));
+
+        $sales = User::where('job_id', '=', 4)->get();
+        return view('analysis.index', compact('total_income', 'data', 'title', 'data_product', 'sales'));
     }
 
+    public function dataBySales(Request $request)
+    {
+        if (request()->ajax()) {
+
+            // BY SALES
+            $recordBySales = SalesOrderModel::Join('users', 'users.id', '=', 'sales_orders.created_by')
+                ->select(
+                    DB::raw('SUM(sales_orders.total_after_ppn) as total'),
+                    DB::raw('order_date as day_name'),
+                    DB::raw("DAY(order_date) as day"),
+                    DB::raw("users.name as name")
+                )
+                ->where('users.job_id', '=', 4)
+                ->when($request->sales, function ($query) use ($request) {
+                    return $query->where('created_by', $request->sales);
+                })
+                ->when(!empty($request->fd) && !empty($request->td), function ($query) use ($request) {
+                    return $query->whereBetween('order_date', array($request->fd, $request->td));
+                })
+                // ->where('created_by', '=', $request->sales)
+                ->where('order_number', 'like', '%IVPP%')
+                ->whereMonth('order_date', date('m'))
+                ->where('isapprove', 'approve')->where('isverified', 1)
+                ->groupBy('day', 'order_date')
+                ->orderBy('order_date', 'ASC')
+                ->get();
+            $dataBySales = [];
+            foreach ($recordBySales as $row) {
+                $dataBySales['label'][] = date('d, M', strtotime($row->day_name));
+                $dataBySales['data'][] = $row->total;
+                $dataBySales['nama'] = $row->name;
+            }
+            $dataBySales['chart_dataBySales'] = $dataBySales;
+            // dd($dataBySales);
+            return response()->json($dataBySales['chart_dataBySales']);
+        }
+    }
     public function salesmanChart(Request $request)
     {
         if (request()->ajax()) {
@@ -74,7 +115,6 @@ class AnalysisController extends Controller
                     DB::raw("users.name as name")
                 )
                 ->where('users.job_id', '=', 4)
-
                 ->where('order_number', 'like', '%IVPP%')
                 ->whereBetween('order_date', array($request->from_date, $request->to_date))
                 ->where('isapprove', 'approve')->where('isverified', 1)

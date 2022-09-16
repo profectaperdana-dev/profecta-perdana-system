@@ -22,58 +22,113 @@
                 {{-- CHART SALESMAN --}}
                 <div class="col-xl-12 box-col-12 des-xl-100">
                     <div class="row">
-                        <div class="col-xl-6 box-col-12">
+                        <div class="col-xl-12 box-col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="header-top d-sm-flex justify-content-between align-items-center">
-                                        <h5>sales chart by salesman</h5><br>
-                                    </div>
+
                                     <div class="form-group row col-12">
-                                        <div class="col-3">
-                                            <label class="col-form-label">Start Date</label>
-                                            <div class="input-group">
-                                                <input class="form-control digits" type="date" data-language="en"
-                                                    placeholder="Start" name="from_date" id="from_date">
-                                            </div>
+                                        <div class="col-4">
+                                            <input class="form-control digits" type="date" data-language="en"
+                                                placeholder="Start" name="from_date" id="from_date">
                                         </div>
-                                        <div class="col-3">
-                                            <label class="col-form-label">End Date</label>
-                                            <div class="input-group">
-                                                <input class="form-control digits" type="date" data-language="en"
-                                                    placeholder="Start" name="to_date" id="to_date">
-                                            </div>
+                                        <div class="col-4">
+                                            <input class="form-control digits" type="date" data-language="en"
+                                                placeholder="Start" name="to_date" id="to_date">
                                         </div>
                                         <div class="col-2">
-                                            <label class="col-form-label">&nbsp;</label>
-                                            <div class="input-group">
-                                                <button class="btn btn-primary" name="filter" id="filter"><i
-                                                        class="fa fa-search"></i></button>
-                                            </div>
+                                            <button class="form-control text-white btn btn-primary btn-sm" name="filter"
+                                                id="filter"><i class="fa fa-arrow-right"></i></button>
                                         </div>
                                         <div class="col-2">
-                                            <label class="col-form-label">&nbsp;</label>
-                                            <div class="input-group">
-                                                <a class="btn btn-warning" href="{{ url('/analytics') }}"><i
-                                                        class="fa fa-refresh"></i></a>
-                                            </div>
+                                            <a class="form-control text-white btn btn-warning btn-sm"
+                                                href="{{ url('/analytics') }}"><i class="fa fa-refresh"></i></a>
                                         </div>
                                     </div>
 
                                 </div>
 
                                 <div class="card-body chart-block p-0">
-                                    {{-- <div id="chart-dash-2-line"></div> --}}
                                     <div class="chart-container">
-                                        <div class="row">
-                                            <div class="col-12">
-                                                <div id="chart-dash-2-line"></div>
+                                        <div class="row justify-content-center">
+                                            <div class="col-11">
+                                                <div class="card shadow">
+                                                    <div class="card-body">
+                                                        <p class="card-text">
+                                                        <div id="chart-dash-2-line"></div>
+
+                                                        </p>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-xl-12 box-col-12">
+                            <div class="card">
+                                <div class="card-header">
 
+                                    <div class="form-group row col-12">
+                                        <select class="uoms form-control" name="sales" id="sales">
+                                            <option value="" selected>-Choose Salesman-</option>
+                                            @foreach ($sales as $val)
+                                                <option value="{{ $val->id }}">{{ $val->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                    <div class="form-group row col-12">
+                                        <div class="col-4">
+                                            <input class="form-control digits" type="date" data-language="en"
+                                                placeholder="Start" name="from_date" id="from_dateSales">
+                                        </div>
+                                        <div class="col-4">
+                                            <input class="form-control digits" type="date" data-language="en"
+                                                placeholder="Start" name="to_date" id="to_dateSales">
+                                        </div>
+                                        <div class="col-2">
+                                            <button class="form-control text-center btn btn-primary btn-sm text-white"
+                                                name="filter" id="filterBySales"><i class="fa fa-arrow-right"></i></button>
+                                        </div>
+                                        <div class="col-2">
+                                            <a class="form-control text-center btn btn-warning btn-sm text-white"
+                                                href="{{ url('/analytics') }}"><i class="fa fa-refresh"></i></a>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <div class="card-body chart-block p-0">
+                                    <div class="chart-container">
+                                        <div class="row justify-content-center">
+
+                                            <div class="col-11">
+                                                <div id="cardShadow" class="card shadow">
+                                                    <div class="card-body">
+                                                        <p class="card-text">
+                                                        <div id="chartBySales"></div>
+
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                                <div id="infoFilter">
+                                                    <div class="card shadow">
+                                                        <div class="card-body">
+                                                            <p class="card-text">
+                                                            <h5 class="text-center text-sm">Please filter first to display
+                                                                the graph
+                                                            </h5>
+                                                            </p>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 {{-- END CHART SALESMAN --}}
@@ -124,6 +179,7 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div id="chart-dash-1-line"></div>
+
                                             </div>
                                         </div>
                                     </div>
