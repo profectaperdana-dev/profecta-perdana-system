@@ -4,10 +4,10 @@
         $('#filter').click(function() {
             var from_date = $('#from_date').val();
             var to_date = $('#to_date').val();
-            let date_first = new Date(from_date);
-            let date_second = new Date(to_date);
-            let date_star = date_first.toLocaleDateString("id-ID");
-            let date_end = date_second.toLocaleDateString("id-ID");
+            var date_first = new Date(from_date);
+            var date_second = new Date(to_date);
+            var date_star = date_first.toLocaleDateString("id-ID");
+            var date_end = date_second.toLocaleDateString("id-ID");
             if (from_date != '' && to_date != '') {
                 $.ajax({
                     url: "/salesman_chart/",
@@ -28,7 +28,7 @@
                             var options = {
                                 series: [{
                                     name: '<div class="text-center badge badge-primary">Omset</div>',
-                                    data: num_sales
+                                    data: num
                                 }, ],
                                 title: {
                                     text: 'Omset Salesman (IDR)',
@@ -116,6 +116,8 @@
 
 
                             };
+                            $('#chart-dash-2-line').html('');
+
                             var chart = new ApexCharts(document.querySelector(
                                 "#chart-dash-2-line"), options);
                             chart.render();
@@ -263,7 +265,7 @@
                             data: dataBySales.data
                         }],
                         chart: {
-                            type: 'area',
+                            type: 'bar',
                             height: 350,
                             zoom: {
                                 enabled: false
