@@ -28,6 +28,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,6 +45,10 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth.login');
+});
+
+Route::get('/artisan', function () {
+    Artisan::call('route:clear');
 });
 
 Route::group(['middleware' => 'auth'], function () {
