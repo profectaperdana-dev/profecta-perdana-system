@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\CustomerModel;
+use App\Models\MaterialModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderModel;
 use App\Models\SalesOrderModel;
+use App\Models\SubMaterialModel;
+use App\Models\SubTypeModel;
 use App\Models\SuppliersModel;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -63,8 +66,11 @@ class AnalysisController extends Controller
         }
         $data_product['chart_data'] = json_encode($data_product);
 
-        $sales = User::where('job_id', '=', 4)->get();
-        return view('analysis.index', compact('total_income', 'data', 'title', 'data_product', 'sales'));
+        $materials = MaterialModel::all();
+        $sub_materials = SubMaterialModel::all();
+        $sub_types = SubTypeModel::all();
+        //END PRODUCT
+        return view('analysis.index', compact('materials', 'sub_materials', 'sub_types', 'total_income', 'data', 'title', 'data_product'));
     }
 
     public function dataBySales(Request $request)
@@ -130,6 +136,48 @@ class AnalysisController extends Controller
             }
             $data['chart_data'] = $data;
             return response()->json($data['chart_data']);
+        }
+    }
+
+    public function productChart()
+    {
+        if (request()->ajax()) {
+            $from_date = request()->fd;
+            $to_date = request()->td;
+            $material = request()->m;
+            $sub_material = request()->sm;
+            $sub_type = request()->st;
+
+            $record_product = SalesOrderModel::Join('sales_order_details', 'sales_order_details.sales_orders_id', '=', 'sales_orders.id')
+                ->Join('products', 'products.id', '=', 'sales_order_details.products_id')
+                ->select(
+                    DB::raw('SUM(sales_order_details.qty) as total'),
+                    DB::raw('products.nama_barang as name')
+                )
+                ->where('order_number', 'like', '%IVPP%')
+                ->when(!empty($from_date) && !empty($to_date), function ($query) use ($from_date, $to_date) {
+                    return $query->whereBetween('order_date', array($from_date, $to_date));
+                })
+                ->when(!empty($material), function ($query) use ($material) {
+                    return $query->where('products.id_material', $material);
+                })
+                ->when(!empty($sub_material), function ($query) use ($sub_material) {
+                    return $query->where('products.id_sub_material', $sub_material);
+                })
+                ->when(!empty($sub_type), function ($query) use ($sub_type) {
+                    return $query->where('products.id_sub_type', $sub_type);
+                })
+                ->where('isapprove', 'approve')->where('isverified', 1)
+                ->groupBy('products.nama_barang')
+                ->orderBy('total', 'DESC')
+                ->get();
+            $data_product = [];
+            foreach ($record_product as $val) {
+                $data_product['label'][] = $val->name;
+                $data_product['data'][] = $val->total;
+            }
+            $data_product['chart_data'] = $data_product;
+            return response()->json($data_product['chart_data']);
         }
     }
 }

@@ -99,78 +99,109 @@
                                 </div>
 
                                 <div class="card-body chart-block p-0">
+                                    {{-- <div id="chart-dash-2-line"></div> --}}
                                     <div class="chart-container">
-                                        <div class="row justify-content-center">
-
-                                            <div class="col-11">
-                                                <div id="cardShadow" class="card shadow">
-                                                    <div class="card-body">
-                                                        <p class="card-text">
-                                                        <div id="chartBySales"></div>
-
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                                <div id="infoFilter">
-                                                    <div class="card shadow">
-                                                        <div class="card-body">
-                                                            <p class="card-text">
-                                                            <h5 class="text-center text-sm">Please filter first to display
-                                                                the graph
-                                                            </h5>
-                                                            </p>
-                                                        </div>
-                                                    </div>
-
-                                                </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="chart-dash-2-line"></div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
                 {{-- END CHART SALESMAN --}}
+
+                {{-- START CHART Product --}}
+
                 <div class="col-xl-12 box-col-12 des-xl-100">
                     <div class="row">
 
-                        <div class="col-xl-6 box-col-12">
+                        <div class="col-12 box-col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <div class="form-group row col-12">
+                                    <div
+                                        class="form-group row header-top d-sm-flex justify-content-between align-items-center">
+                                        <h5 id="title-chart-product">Sales Chart By Product (This Month)</h5><br>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col fw-bold">
+                                            Filter By:
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="form-group col col-lg-4">
+                                            <label>
+                                                Material Source</label>
+                                            <select id="material_id" class="form-control materials">
+                                                <option value="" selected>-Choose Material Source-</option>
+                                                @foreach ($materials as $material)
+                                                    <option value="{{ $material->id }}">
+                                                        {{ $material->nama_material }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col col-lg-4">
+                                            <label>
+                                                Sub-Material Source</label>
+                                            <select id="sub_material_id" class="form-control materials">
+                                                <option value="" selected>-Choose Sub-Material Source-</option>
+                                                @foreach ($sub_materials as $sub_material)
+                                                    <option value="{{ $sub_material->id }}">
+                                                        {{ $sub_material->nama_sub_material }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group col col-lg-4">
+                                            <label>
+                                                Sub-Type Source</label>
+                                            <select id="sub_type_id" class="form-control materials">
+                                                <option value="" selected>-Choose Sub-Types Source-</option>
+                                                @foreach ($sub_types as $sub_type)
+                                                    <option value="{{ $sub_type->id }}">
+                                                        {{ $sub_type->type_name }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row mt-2">
                                         <div class="col-4">
                                             <label class="col-form-label text-end">Start Date</label>
                                             <div class="input-group">
                                                 <input class="form-control digits" type="date" data-language="en"
-                                                    placeholder="Start" name="from_date" id="from_date">
+                                                    placeholder="Start" name="from_date_product" id="from_date_product">
                                             </div>
                                         </div>
                                         <div class="col-4">
                                             <label class="col-form-label text-end">End Date</label>
                                             <div class="input-group">
                                                 <input class="form-control digits" type="date" data-language="en"
-                                                    placeholder="Start" name="to_date" id="to_date">
+                                                    placeholder="Start" name="to_date_product" id="to_date_product">
                                             </div>
                                         </div>
                                         <div class="col-2">
                                             <label class="col-form-label text-end">&nbsp;</label>
                                             <div class="input-group">
-                                                <button class="btn btn-primary" name="filter"
-                                                    id="filter">Filter</button>
+                                                <button class="btn btn-primary btn-sm" name="filter"
+                                                    id="filter-product"><i class="fa fa-filter"></i></button>
                                             </div>
                                         </div>
                                         <div class="col-2">
                                             <label class="col-form-label text-end">&nbsp;</label>
                                             <div class="input-group">
-                                                <a class="btn btn-warning" href="{{ url('/analytics') }}">Refresh</a>
+                                                <a class="btn btn-warning btn-sm" href="{{ url('/analytics') }}"><i
+                                                        class="fa fa-refresh" aria-hidden="true"></i>
+                                                </a>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="header-top d-sm-flex justify-content-between align-items-center">
-                                        <h5>sales chart by Product</h5><br>
 
-                                    </div>
                                 </div>
 
                                 <div class="card-body chart-block p-0">
@@ -179,7 +210,6 @@
                                         <div class="row">
                                             <div class="col-12">
                                                 <div id="chart-dash-1-line"></div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -189,6 +219,7 @@
 
                     </div>
                 </div>
+                {{-- END CHART Product --}}
 
             </div>
 
