@@ -92,7 +92,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/invoice/getTotalInstalment/{id}', [SalesOrderController::class, 'getTotalInstalment']);
     Route::get('/print_history_payment/{id}', [SalesOrderController::class, 'printHistoryPayment']);
     Route::get('/analytics', [AnalysisController::class, 'index']);
-    Route::get('/salesman_chart/', [AnalysisController::class, 'salesmanChart']);
+    Route::get('/salesman_chart', [AnalysisController::class, 'salesmanChart']);
+    Route::get('/product_chart', [AnalysisController::class, 'productChart']);
+
 
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
