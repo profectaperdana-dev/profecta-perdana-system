@@ -69,8 +69,9 @@ class AnalysisController extends Controller
         $materials = MaterialModel::all();
         $sub_materials = SubMaterialModel::all();
         $sub_types = SubTypeModel::all();
+        $sales = User::where('job_id', 4)->get();
         //END PRODUCT
-        return view('analysis.index', compact('materials', 'sub_materials', 'sub_types', 'total_income', 'data', 'title', 'data_product'));
+        return view('analysis.index', compact('sales', 'materials', 'sub_materials', 'sub_types', 'total_income', 'data', 'title', 'data_product'));
     }
 
     public function dataBySales(Request $request)
