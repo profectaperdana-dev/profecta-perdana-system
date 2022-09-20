@@ -36,44 +36,17 @@
                     <th>Warehouse</th>
                     <th>Supplier</th>
                     <th>Order Date</th>
+                    <th>TOP (days)</th>
                     <th>Due Date</th>
+                    <th>Remark</th>
+                    <th>total</th>
+                    <th>Created By</th>
                     <th>Receiving Status</th>
                     {{-- <th>Total</th> --}}
                   </tr>
                 </thead>
                 <tbody>
-                  @foreach ($purchases as $value)
-                    <tr>
-                      <td style="width: 10%">
-                        <a href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i
-                            data-feather="settings"></i></a>
-                        <div class="dropdown-menu" aria-labelledby="">
-                          <h5 class="dropdown-header">Actions</h5>
-                          <a class="dropdown-item" href="{{ url('send_email_po/' . $value->id) }}">Send
-                            Purchase Order by Email</a>
-                          <a class="dropdown-item" href="{{ url('po/' . $value->id . '/print') }}">Print
-                            Purchase Order</a>
 
-                          @can('isSuperAdmin')
-                            <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal"
-                              data-original-title="test" data-bs-target="#manageData{{ $value->id }}">Edit</a>
-                          @endcan
-
-                        </div>
-                      </td>
-                      <td>{{ $loop->iteration }}</td>
-                      <td>{{ $value->order_number }}</td>
-                      <td>{{ $value->warehouseBy->warehouses }}</td>
-                      <td>{{ $value->supplierBy->nama_supplier }}</td>
-                      <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
-                      <td>{{ date('d-M-Y', strtotime($value->due_date)) }}</td>
-                      @if ($value->isvalidated == 1)
-                        <td><span class="badge badge-pill badge-success text-white">Received</span></td>
-                      @else
-                        <td><span class="badge badge-pill badge-danger text-white">Not Received</span></td>
-                      @endif
-                    </tr>
-                  @endforeach
                 </tbody>
               </table>
             </div>
@@ -83,174 +56,6 @@
     </div>
   </div>
 
-  {{-- Modal PO --}}
-  @foreach ($purchases as $item)
-    {{-- PO Manage --}}
-    <div class="modal fade" id="manageData{{ $item->id }}" tabindex="-1" role="dialog" data-bs-keyboard="false"
-      aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Edit Data Purchase Order:
-              {{ $item->order_number }}</h5>
-            <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form action="{{ url('purchase_orders/' . $item->id . '/update_po') }}" method="POST"
-              enctype="multipart/form-data">
-              @csrf
-              <div class="container-fluid">
-                <div class="col-md-12">
-                  <div class="row font-weight-bold">
-                    <div class="form-group row">
-                      <div class="col-md-6 form-group">
-                        <label>
-                          Supplier</label>
-                        <select name="supplier_id" id="" required
-                          class="form-control supplier-select {{ $errors->first('supplier_id') ? ' is-invalid' : '' }}">
-                          <option value="" selected>-Choose Supplier-</option>
-                          @foreach ($suppliers as $supplier)
-                            <option value="{{ $supplier->id }}" @if ($item->supplier_id == $supplier->id) selected @endif>
-                              {{ $supplier->nama_supplier }}
-                            </option>
-                          @endforeach
-                        </select>
-                        @error('supplier_id')
-                          <div class="invalid-feedback">
-                            {{ $message }}
-                          </div>
-                        @enderror
-                      </div>
-                      <div class="col-md-6 form-group mr-5">
-                        <label>Warehouse</label>
-                        <select name="warehouse_id" required
-                          class="form-control warehouse-select {{ $errors->first('warehouse_id') ? ' is-invalid' : '' }}">
-                          <option value="" selected>-Choose Payment-</option>
-                          @foreach ($warehouses as $warehouse)
-                            <option value="{{ $warehouse->id }}" @if ($item->warehouse_id == $warehouse->id) selected @endif>
-                              {{ $warehouse->warehouses }}
-                            </option>
-                          @endforeach
-                        </select>
-                        @error('warehouse_id')
-                          <div class="invalid-feedback">
-                            {{ $message }}
-                          </div>
-                        @enderror
-                      </div>
-
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-md-6 form-group mr-5">
-                        <label>Order Date <strong>(mm/dd/yyyy)</strong></label>
-                        <input class="form-control" type="date" name="order_date" value="{{ $item->order_date }}"
-                          required>
-                        @error('due_date')
-                          <div class="invalid-feedback">
-                            {{ $message }}
-                          </div>
-                        @enderror
-                      </div>
-                      <div class="col-md-6 form-group">
-                        <label>TOP</label>
-                        <input type="number" class="form-control" required name="top" id=""
-                          value="{{ $item->top }}">
-                        @error('top')
-                          <div class="invalid-feedback">
-                            {{ $message }}
-                          </div>
-                        @enderror
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="col-md-12 form-group mr-5">
-                        <label>Remarks</label>
-                        <textarea class="form-control" name="remark" id="" cols="30" rows="5" required>{{ $item->remark }}</textarea>
-                      </div>
-                    </div>
-                    <div class="form-group row formPo">
-                      @foreach ($item->purchaseOrderDetailsBy as $detail)
-                        <div class="form-group row">
-                          <input type="hidden" class="loop" value="{{ $loop->index }}">
-                          <div class="form-group col-7">
-                            <label>Product</label>
-                            <select name="poFields[{{ $loop->index }}][product_id]" class="form-control productPo"
-                              required>
-                              <option value="">Choose Product</option>
-                              @if ($detail->product_id != null)
-                                <option value="{{ $detail->product_id }}" selected>
-                                  {{ $detail->productBy->nama_barang .
-                                      ' (' .
-                                      $detail->productBy->sub_types->type_name .
-                                      ', ' .
-                                      $detail->productBy->sub_materials->nama_sub_material .
-                                      ')' }}
-                                </option>
-                              @endif
-                            </select>
-                            @error('poFields[{{ $loop->index }}][product_id]')
-                              <div class="invalid-feedback">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-                          <div class="col-3 col-md-3 form-group">
-                            <label>Qty</label>
-                            <input type="number" class="form-control qtyPo" required
-                              name="poFields[{{ $loop->index }}][qty]" id="" value="{{ $detail->qty }}">
-                            @error('poFields[{{ $loop->index }}][qty]')
-                              <div class="invalid-feedback">
-                                {{ $message }}
-                              </div>
-                            @enderror
-                          </div>
-
-                          @if ($loop->index == 0)
-                            <div class="col-2 col-md-2 form-group">
-                              <label for="">&nbsp;</label>
-                              <a href="javascript:void(0)" class="form-control text-white text-center addPo"
-                                style="border:none; background-color:green">+</a>
-                            </div>
-                          @else
-                            <div class="col-2 col-md-2 form-group">
-                              <label for="">&nbsp;</label>
-                              <a href="javascript:void(0)" class="form-control text-white text-center remPo"
-                                style="border:none; background-color:red">-</a>
-                            </div>
-                          @endif
-
-                        </div>
-                      @endforeach
-                    </div>
-                    <div class="form-group row">
-                      <div class="form-group col-12">
-                        <button type="button" class="col-12 btn btn-outline-success btn-reload">--
-                          Click this to
-                          reload total
-                          --</button>
-                      </div>
-                    </div>
-                    <div class="form-group row">
-                      <div class="form-group col-lg-4">
-                        <label>Total</label>
-                        <input class="form-control total"
-                          value="{{ 'Rp. ' . number_format($item->total, 0, ',', '.') }}" id="" readonly>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-          </div>
-          <div class="modal-footer">
-            <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary">Save</button>
-          </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    {{-- PO Manage End --}}
-  @endforeach
   <!-- Container-fluid Ends-->
   @push('scripts')
     <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
@@ -264,42 +69,187 @@
     <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
     <script>
       $(document).ready(function() {
-        let date = new Date();
-        let date_now = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-        $('#example').DataTable({
-          dom: 'Bfrtip',
-          buttons: [{
-              title: 'All Purchase Orders (' + date_now + ')',
-              extend: 'pdf',
-              pageSize: 'A4',
-              exportOptions: {
-                columns: ':visible'
-              },
-              orientation: 'landscape',
-              customize: function(doc) {
-                doc.styles.tableHeader.alignment = 'left';
-                doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
-                  '');
-              },
-            },
-            {
-              title: 'All Purchase Orders (' + date_now + ')',
-              extend: 'print',
-              orientation: 'landscape',
-              exportOptions: {
-                columns: ':visible'
-              },
-            },
-            {
-              title: 'All Purchase Orders (' + date_now + ')',
-              extend: 'excel',
-              exportOptions: {
-                columns: ':visible'
+        $.ajaxSetup({
+          headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+          }
+        });
+
+        load_data();
+
+        function load_data(from_date = '', to_date = '') {
+          $('#example').DataTable({
+            processing: true,
+            serverSide: true,
+            ajax: {
+              url: "{{ url('/all_purchase_orders') }}",
+              data: {
+                from_date: from_date,
+                to_date: to_date
               }
             },
-            'colvis'
-          ]
+            columns: [{
+                width: '5%',
+                data: 'action',
+                name: 'action',
+                orderable: false,
+              }, {
+                width: '5%',
+                data: 'DT_RowIndex',
+                name: 'DT_Row_Index',
+                "className": "text-center",
+                orderable: false,
+                searchable: false
+              },
+              {
+                data: 'order_number',
+                name: 'order_number'
+
+              },
+              {
+                data: 'warehouse_id',
+                name: 'warehouse_id'
+
+              },
+              {
+                data: 'supplier_id',
+                name: 'supplier_id'
+
+              },
+              {
+                data: 'order_date',
+                name: 'order_date',
+              },
+              {
+                data: 'top',
+                name: 'top',
+
+              },
+              {
+                data: 'due_date',
+                name: 'due_date',
+              },
+              {
+                data: 'remark',
+                name: 'remark',
+              },
+              {
+                data: 'total',
+                name: 'total',
+              },
+              {
+                data: 'created_by',
+                name: 'created_by',
+              },
+              {
+                data: 'isvalidated',
+                name: 'isvalidated',
+              }
+            ],
+            order: [
+              [0, 'desc']
+            ],
+            dom: 'Bfrtip',
+            lengthMenu: [
+              [10, 25, 50, -1],
+              ['10 rows', '25 rows', '50 rows', 'Show All']
+            ],
+            buttons: ['pageLength',
+              {
+                title: 'Data Purchase Order',
+                messageTop: '<h5>{{ $title }} ({{ date('l H:i A, d F Y ') }})</h5><br>',
+                messageBottom: '<strong style="color:red;">*Please select only the type of column needed when printing so that the print is neater</strong>',
+                extend: 'print',
+                customize: function(win) {
+                  $(win.document.body)
+                    .css('font-size', '10pt')
+                    .prepend(
+                      '<img src="{{ asset('images/logo.png') }}" style="position:absolute; top:300; left:150; bottom:; opacity: 0.2;"/>'
+                    );
+                  $(win.document.body)
+                    .find('thead')
+                    .css('background-color', 'rgba(211,225,222,255)')
+                    .css('font-size', '8pt')
+                  $(win.document.body)
+                    .find('tbody')
+                    .css('background-color', 'rgba(211,225,222,255)')
+                    .css('font-size', '8pt')
+                  $(win.document.body)
+                    .find('table')
+                    .css('width', '100%')
+                },
+                orientation: 'landscape',
+                pageSize: 'legal',
+                exportOptions: {
+                  columns: ':visible'
+                },
+              },
+              {
+                extend: 'excel',
+                exportOptions: {
+                  columns: ':visible'
+                }
+              },
+              'colvis'
+            ],
+
+          });
+        }
+        $('#filter').click(function() {
+          var from_date = $('#from_date').val();
+          var to_date = $('#to_date').val();
+          if (from_date != '' && to_date != '') {
+            $('#example').DataTable().destroy();
+            load_data(from_date, to_date);
+          } else {
+            alert('Both Date is required');
+          }
         });
+
+        $('#refresh').click(function() {
+          $('#from_date').val('');
+          $('#to_date').val('');
+          $('#example').DataTable().destroy();
+          load_data();
+        });
+
+
+        let date = new Date();
+        let date_now = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
+        // $('#example').DataTable({
+        //   dom: 'Bfrtip',
+        //   buttons: [{
+        //       title: 'All Purchase Orders (' + date_now + ')',
+        //       extend: 'pdf',
+        //       pageSize: 'A4',
+        //       exportOptions: {
+        //         columns: ':visible'
+        //       },
+        //       orientation: 'landscape',
+        //       customize: function(doc) {
+        //         doc.styles.tableHeader.alignment = 'left';
+        //         doc.content[1].table.widths = Array(doc.content[1].table.body[0].length + 1).join('*').split(
+        //           '');
+        //       },
+        //     },
+        //     {
+        //       title: 'All Purchase Orders (' + date_now + ')',
+        //       extend: 'print',
+        //       orientation: 'landscape',
+        //       exportOptions: {
+        //         columns: ':visible'
+        //       },
+        //     },
+        //     {
+        //       title: 'All Purchase Orders (' + date_now + ')',
+        //       extend: 'excel',
+        //       exportOptions: {
+        //         columns: ':visible'
+        //       }
+        //     },
+        //     'colvis'
+        //   ]
+        // });
 
         $(document).on("click", ".modal-btn2", function(event) {
           let csrf = $('meta[name="csrf-token"]').attr("content");
