@@ -14,6 +14,7 @@ use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseOrderController;
+use App\Http\Controllers\ReportController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\SecondProductController;
@@ -99,7 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/analytics', [AnalysisController::class, 'index']);
     Route::get('/salesman_chart', [AnalysisController::class, 'salesmanChart']);
     Route::get('/product_chart', [AnalysisController::class, 'productChart']);
-
+    Route::get('/report_sales/', [ReportController::class, 'index']);
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
 
 

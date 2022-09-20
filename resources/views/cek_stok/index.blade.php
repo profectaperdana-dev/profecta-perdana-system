@@ -40,11 +40,12 @@
                                 <thead>
                                     <tr>
                                         {{-- <th>#</th> --}}
-                                        <th>Products</th>
+                                        <th class="text-center">Products</th>
                                         @canany(['isSuperAdmin', 'isFinance', 'isVerificator'])
-                                            <th>Warehouse</th>
+                                            <th class="text-center">Warehouse</th>
                                         @endcanany
-                                        <th>Stocks</th>
+                                        <th class="text-center">Stock</th>
+                                        <th class="text-center">Uom</th>
 
                                     </tr>
                                 </thead>
@@ -65,7 +66,8 @@
                                             @canany(['isSuperAdmin', 'isFinance', 'isVerificator'])
                                                 <td>{{ $value->warehouseBy->warehouses }}</td>
                                             @endcanany
-                                            <td>{{ $value->stock . ' ' . $value->productBy->uoms->satuan }}</td>
+                                            <td class="text-center">{{ $value->stock }}</td>
+                                            <td class="text-center">{{ $value->productBy->uoms->satuan }}</td>
 
 
                                         </tr>
