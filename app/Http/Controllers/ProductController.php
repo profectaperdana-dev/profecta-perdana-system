@@ -298,6 +298,7 @@ class ProductController extends Controller
         $model->id_uom = $request->get('uom');
         $model->id_material = $request->get('material_grup');
         $model->id_sub_material = $request->get('sub_material');
+        $model->id_sub_type = $request->get('sub_type');
         $model->berat = $request->get('berat');
         $model->harga_beli = $request->get('harga_beli');
         $model->harga_jual = $request->get('harga_jual');

@@ -679,7 +679,6 @@ class SalesOrderController extends Controller
         }
         $data = [
             'title' => "All data invoice in profecta perdana : " . Auth::user()->warehouseBy->warehouses,
-            // 'order_number' =>
         ];
 
         return view('invoice.index', $data);
