@@ -240,13 +240,13 @@
             let from_dateSales = $('#from_dateSales').val();
             let to_dateSales = $('#to_dateSales').val();
 
-            if (from_dateSales != '' && to_dateSales != '') {
-                var sub = 'Data taken ' + from_dateSales + ' to ' + to_dateSales;
+            // if (from_dateSales != '' && to_dateSales != '') {
+            //     var sub = 'Data taken ' + from_dateSales + ' to ' + to_dateSales;
 
-            } else {
-                var sub = 'Data taken this month'
+            // } else {
+            //     var sub = 'Data taken this month'
 
-            }
+            // }
             $.ajax({
                 url: "/data_by_sales/",
                 method: "GET",
@@ -265,8 +265,9 @@
                             data: dataBySales.data
                         }],
                         chart: {
-                            type: 'bar',
+                            type: 'area',
                             height: 350,
+                            id: 'sales1',
                             zoom: {
                                 enabled: false
                             }
@@ -293,7 +294,7 @@
                             },
                         },
                         subtitle: {
-                            text: sub,
+                            text: 'sub',
                             align: 'center',
                             margin: 10,
                             offsetX: 0,

@@ -103,7 +103,7 @@
                                     <div class="chart-container">
                                         <div class="row">
                                             <div class="col-12">
-                                                <div id="chart-dash-2-line"></div>
+                                                <div id="chartBySales"></div>
                                             </div>
                                         </div>
                                     </div>
