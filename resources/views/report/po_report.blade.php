@@ -138,7 +138,7 @@
                         processing: true,
                         serverSide: true,
                         ajax: {
-                            url: "{{ url('/report_purchase') }}",
+                            url: "{{ url('/report_sales') }}",
                             data: {
                                 from_date: from_date,
                                 to_date: to_date
