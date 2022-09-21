@@ -111,6 +111,7 @@
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/ashl1/datatables-rowsgroup@fbd569b8768155c7a9a62568e66a64115887d7d0/dataTables.rowsGroup.js"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
@@ -126,28 +127,10 @@
 
                 function load_data(from_date = '', to_date = '') {
 
-                    var table = $('#example1').DataTable({
+                     $('#example1').DataTable({
 
-                        "drawCallback": function(settings) {
-                            var api = this.api();
-                            var rows = api.rows({
-                                page: 'current'
-                            }).nodes();
-                            var last = null;
+                        rowsGroup: [0],
 
-                            api.column(0, {
-                                page: 'current'
-                            }).data().each(function(group, i) {
-                                if (last !== group) {
-                                    $(rows).eq(i).before(
-                                        '<tr class="group"><td colspan="14">' + group +
-                                        '</td></tr>'
-                                    );
-
-                                    last = group;
-                                }
-                            });
-                        },
                         processing: true,
                         serverSide: true,
                         ajax: {
@@ -199,6 +182,7 @@
                             },
 
                         ],
+
                         order: [
                             [0, 'desc']
                         ],
@@ -233,8 +217,10 @@
                                         .css('width', '100%')
                                 },
                                 orientation: 'landscape',
-                                pageSize: 'legal',
+                                pageSize: 'legal',rowsGroup: [0],
                                 exportOptions: {
+
+
                                     columns: ':visible'
                                 },
                             },
@@ -248,14 +234,7 @@
                         ],
 
                     });
-                    $('#example1 tbody').on('click', 'tr.group', function() {
-                        var currentOrder = table.order()[0];
-                        if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                            table.order([0, 'desc']).draw();
-                        } else {
-                            table.order([0, 'asc']).draw();
-                        }
-                    });
+
                 }
                 $('#filter').click(function() {
                     var from_date = $('#from_date').val();
