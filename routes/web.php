@@ -100,7 +100,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/analytics', [AnalysisController::class, 'index']);
     Route::get('/salesman_chart', [AnalysisController::class, 'salesmanChart']);
     Route::get('/product_chart', [AnalysisController::class, 'productChart']);
-    Route::get('/report_sales/', [ReportController::class, 'index']);
+    Route::get('/report_purchase', [ReportController::class, 'report_po']);
     Route::get('/report_sales/', [ReportController::class, 'index']);
 
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);

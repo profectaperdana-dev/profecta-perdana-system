@@ -10,9 +10,11 @@
                 -webkit-print-color-adjust: exact;
             }
 
-            tr.group,
-            tr.group:hover {
-                background-color: rgb(148, 0, 0) !important;
+            .table.dataTable table,
+            th,
+            td {
+                border-bottom: 1px solid black !important;
+                vertical-align: middle !important;
             }
         </style>
     @endpush
@@ -70,23 +72,20 @@
                             <table style="font-size: 10pt" id="example1" class="table text-capitalize" style="width:100%">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="2%">action</th> --}}
-                                        {{-- <th>No</th> --}}
-                                        <th>#Invoice</th>
-                                        <th>sales_orders</th>
-                                        <th>Product</th>
+                                        <th>Order Number</th>
+                                        <th>Warehouse</th>
+                                        <th>Supplier</th>
                                         <th>Order Date</th>
+                                        <th>TOP (Days)</th>
                                         <th>Due Date</th>
-                                        {{-- <th>Customer</th>
                                         <th>Remark</th>
-                                        <th>By</th>
-                                        <th>TOP</th>
-                                        <th>PPN</th>
                                         <th>Total</th>
-                                        <th>Total After PPN</th>
-                                        <th>Payment Method</th>
-                                        <th>Paid Status</th> --}}
-
+                                        <th>Created By</th>
+                                        <th>Receiving Status</th>
+                                        <th>Sub Material</th>
+                                        <th>Sub Type</th>
+                                        <th>Product</th>
+                                        <th>Qty</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,8 +93,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button onclick="exportData()">
-                            Download list</button>
                     </div>
                 </div>
             </div>
@@ -133,50 +130,80 @@
 
                     $('#example1').DataTable({
 
-                        rowsGroup: [0],
+                        rowsGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 
                         processing: true,
                         serverSide: true,
                         ajax: {
-                            url: "{{ url('/report_sales') }}",
+                            url: "{{ url('/report_purchase') }}",
                             data: {
                                 from_date: from_date,
                                 to_date: to_date
                             }
                         },
-                        columns: [
-                            // {
-                            //     width: '5%',
-                            //     data: 'action',
-                            //     name: 'action',
-                            //     orderable: false,
-                            // },
-                            // {
-                            //     width: '5%',
-                            //     data: 'DT_RowIndex',
-                            //     name: 'DT_Row_Index',
-                            //     "className": "text-center",
-                            //     orderable: false,
-                            //     searchable: false
-                            // },
-                            {
+                        columns: [{
                                 data: 'order_number',
                                 name: 'order_number'
 
                             },
                             {
-                                data: 'sales_orders_id',
-                                name: 'sales_orders_id'
+                                data: 'warehouse_id',
+                                name: 'warehouse_id'
 
                             },
                             {
-                                data: 'nama_barang',
-                                name: 'nama_barang'
+                                data: 'supplier_id',
+                                name: 'supplier_id'
 
                             },
                             {
-                                data: 'discount',
-                                name: 'discount'
+                                data: 'order_date',
+                                name: 'order_date'
+
+                            },
+                            {
+                                data: 'top',
+                                name: 'top'
+
+                            },
+                            {
+                                data: 'due_date',
+                                name: 'due_date'
+
+                            },
+                            {
+                                data: 'remark',
+                                name: 'remark'
+
+                            },
+                            {
+                                data: 'total',
+                                name: 'total'
+
+                            },
+                            {
+                                data: 'created_by',
+                                name: 'created_by'
+
+                            },
+                            {
+                                data: 'isvalidated',
+                                name: 'isvalidated'
+
+                            },
+                            {
+                                data: 'sub_material',
+                                name: 'sub_material'
+
+                            },
+                            {
+                                data: 'sub_type',
+                                name: 'sub_type'
+
+                            },
+                            {
+                                data: 'product',
+                                name: 'product'
 
                             },
                             {
@@ -184,7 +211,6 @@
                                 name: 'qty'
 
                             },
-
                         ],
 
                         order: [
@@ -198,7 +224,7 @@
 
                         buttons: ['pageLength',
                             {
-                                title: 'Data Invoice',
+                                title: 'Data Purchase Order',
                                 messageTop: '<h5>{{ $title }} ({{ date('l H:i A, d F Y ') }})</h5><br>',
                                 messageBottom: '<strong style="color:red;">*Please select only the type of column needed when printing so that the print is neater</strong>',
                                 extend: 'print',
@@ -219,102 +245,15 @@
                                     $(win.document.body)
                                         .find('table')
                                         .css('width', '100%');
-                                    var lastColX = null;
-                                    var lastColY = null;
-                                    var bod = [];
-                                    win.content[1].table.body.forEach(function(line, i) {
-                                        //Group based on first column (ignore empty cells)
-                                        if (lastColX != line[0].text && line[0].text != '') {
-                                            //Add line with group header
-                                            bod.push([{
-                                                text: line[0].text,
-                                                style: 'tableHeader'
-                                            }, '', '', '', '']);
-                                            //Update last
-                                            lastColX = line[0].text;
-                                        }
-                                        //Group based on second column (ignore empty cells) with different styling
-                                        if (lastColY != line[1].text && line[1].text != '') {
-                                            //Add line with group header
-                                            bod.push(['', {
-                                                text: line[1].text,
-                                                style: 'subheader'
-                                            }, '', '', '']);
-                                            //Update last
-                                            lastColY = line[1].text;
-                                        }
-                                        //Add line with data except grouped data
-                                        if (i < win.content[1].table.body.length - 1) {
-                                            bod.push(['', '', {
-                                                    text: line[2].text,
-                                                    style: 'defaultStyle'
-                                                },
-                                                {
-                                                    text: line[3].text,
-                                                    style: 'defaultStyle'
-                                                },
-                                                {
-                                                    text: line[4].text,
-                                                    style: 'defaultStyle'
-                                                }
-                                            ]);
-                                        }
-                                        //Make last line bold, blue and a bit larger
-                                        else {
-                                            bod.push(['', '', {
-                                                    text: line[2].text,
-                                                    style: 'lastLine'
-                                                },
-                                                {
-                                                    text: line[3].text,
-                                                    style: 'lastLine'
-                                                },
-                                                {
-                                                    text: line[4].text,
-                                                    style: 'lastLine'
-                                                }
-                                            ]);
-                                        }
-
-                                    });
-                                    //Overwrite the old table body with the new one.
-                                    win.content[1].table.headerRows = 3;
-                                    win.content[1].table.widths = [50, 50, 150, 100, 100];
-                                    win.content[1].table.body = bod;
-                                    win.content[1].layout = 'lightHorizontalLines';
-
-                                    win.styles = {
-                                        subheader: {
-                                            fontSize: 10,
-                                            bold: true,
-                                            color: 'black'
-                                        },
-                                        tableHeader: {
-                                            bold: true,
-                                            fontSize: 10.5,
-                                            color: 'black'
-                                        },
-                                        lastLine: {
-                                            bold: true,
-                                            fontSize: 11,
-                                            color: 'blue'
-                                        },
-                                        defaultStyle: {
-                                            fontSize: 10,
-                                            color: 'black'
-                                        }
-                                    }
-
                                 },
                                 orientation: 'landscape',
                                 pageSize: 'legal',
                                 exportOptions: {
-                                    rowsGroup: [0],
                                     columns: ':visible'
                                 },
                             },
                             {
-                                extend: 'excelHtml5',
+                                extend: 'excel',
                                 exportOptions: {
                                     columns: ':visible'
                                 }
@@ -342,54 +281,6 @@
                     $('#example1').DataTable().destroy();
                     load_data();
                 });
-
-                function exportData() {
-                    /* Get the HTML data using Element by Id */
-                    var table = document.getElementById("example1");
-
-                    /* Declaring array variable */
-                    var rows = [];
-
-                    //iterate through rows of table
-                    for (var i = 0, row; row = table.rows[i]; i++) {
-                        //rows would be accessed using the "row" variable assigned in the for loop
-                        //Get each cell value/column from the row
-                        column1 = row.cells[0].innerText;
-                        column2 = row.cells[1].innerText;
-                        column3 = row.cells[2].innerText;
-                        column4 = row.cells[3].innerText;
-                        column5 = row.cells[4].innerText;
-
-                        /* add a new records in the array */
-                        rows.push(
-                            [
-                                column1,
-                                column2,
-                                column3,
-                                column4,
-                                column5
-                            ]
-                        );
-
-                    }
-                    csvContent = "data:text/csv;charset=utf-8,";
-                    /* add the column delimiter as comma(,) and each row splitted by new line character (\n) */
-                    rows.forEach(function(rowArray) {
-                        row = rowArray.join(",");
-                        csvContent += row + "\r\n";
-                    });
-
-                    /* create a hidden <a> DOM node and set its download attribute */
-                    var encodedUri = encodeURI(csvContent);
-                    var link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "Stock_Price_Report.csv");
-                    document.body.appendChild(link);
-                    /* download the data file named "Stock_Price_Report.csv" */
-                    link.click();
-                }
-
-
             });
         </script>
     @endpush

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\PurchaseOrderDetailModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
 use App\Models\WarehouseModel;
@@ -134,5 +135,127 @@ class ReportController extends Controller
         ];
 
         return view('report.index', $data);
+    }
+
+    public function report_po(Request $request)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+
+        // get kode area
+        // dd($request->all());
+        if ($request->ajax()) {
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', Auth::user()->warehouse_id)
+                ->first();
+            if (!empty($request->from_date)) {
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $purchase = PurchaseOrderDetailModel::with('purchaseOrderBy', 'productBy')
+                        ->whereHas('purchaseOrderBy', function ($query) {
+                            $query->where('isvalidated', 1);
+                        })
+                        ->whereBetween('order_date', array($request->from_date, $request->to_date))
+                        ->latest()
+                        ->get();
+                } else {
+                    $purchase = PurchaseOrderDetailModel::with('purchaseOrderBy', 'productBy')
+                        ->whereHas('purchaseOrderBy', function ($query) {
+                            $query->where('isvalidated', 1);
+                        })
+                        ->whereHas('purchaseOrderBy', function ($query) use ($kode_area) {
+                            $query->where('order_number', 'like', "%$kode_area->area_code%");
+                        })
+                        ->whereHas('purchaseOrderBy', function ($query) use ($request) {
+                            $query->whereBetween('order_date', array($request->from_date, $request->to_date));
+                        })
+                        ->latest()
+                        ->get();
+                }
+            } else {
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $purchase = PurchaseOrderDetailModel::with('purchaseOrderBy', 'productBy')
+                        ->whereHas('purchaseOrderBy', function ($query) {
+                            $query->where('isvalidated', 1);
+                        })
+                        ->latest()
+                        ->get();
+                } else {
+                    $purchase = PurchaseOrderDetailModel::with('purchaseOrderBy', 'productBy')
+                        ->whereHas('purchaseOrderBy', function ($query) {
+                            $query->where('isvalidated', 1);
+                        })
+                        ->whereHas('purchaseOrderBy', function ($query) use ($kode_area) {
+                            $query->where('order_number', 'like', "%$kode_area->area_code%");
+                        })
+                        ->latest()
+                        ->get();
+                }
+            }
+
+            return datatables()->of($purchase)
+                ->editColumn('isvalidated', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    if ($purchaseOrderDetailModel->purchaseOrderBy->isvalidated == 0) {
+                        return 'Not Received';
+                    } else {
+                        return 'Received';
+                    }
+                })
+                ->editColumn('order_number', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return $purchaseOrderDetailModel->purchaseOrderBy->order_number;
+                })
+                ->editColumn('order_date', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return date('d-M-Y', strtotime($purchaseOrderDetailModel->purchaseOrderBy->order_date));
+                })
+                ->editColumn('top', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        return $purchaseOrderDetailModel->purchaseOrderBy->top;
+                    } else return 'Restricted';
+                })
+                ->editColumn('due_date', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        return date('d-M-Y', strtotime($purchaseOrderDetailModel->purchaseOrderBy->due_date));
+                    } else return 'Restricted';
+                })
+                ->editColumn('remark', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        return $purchaseOrderDetailModel->purchaseOrderBy->remark;
+                    } else return 'Restricted';
+                })
+                ->editColumn('total', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        return number_format($purchaseOrderDetailModel->purchaseOrderBy->total, 0, ',', '.');
+                    } else return 'Restricted';
+                })
+                ->editColumn('supplier_id', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return $purchaseOrderDetailModel->purchaseOrderBy->supplierBy->nama_supplier;
+                })
+                ->editColumn('created_by', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return $purchaseOrderDetailModel->purchaseOrderBy->createdPurchaseOrder->name;
+                })
+                ->editColumn('warehouse_id', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return $purchaseOrderDetailModel->purchaseOrderBy->warehouseBy->warehouses;
+                })
+                ->editColumn('product', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return $purchaseOrderDetailModel->productBy->nama_barang;
+                })
+                ->editColumn('sub_material', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return $purchaseOrderDetailModel->productBy->sub_materials->nama_sub_material;
+                })
+                ->editColumn('sub_type', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    return $purchaseOrderDetailModel->productBy->sub_types->type_name;
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "All Data Purchase Orders in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+        ];
+
+        return view('report.po_report', $data);
     }
 }
