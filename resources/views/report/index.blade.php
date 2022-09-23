@@ -94,8 +94,6 @@
                                 </tbody>
                             </table>
                         </div>
-                        <button onclick="exportData()">
-                            Download list</button>
                     </div>
                 </div>
             </div>
@@ -138,7 +136,7 @@
                         processing: true,
                         serverSide: true,
                         ajax: {
-                            url: "{{ url('/report_purchase') }}",
+                            url: "{{ url('/report_sales') }}",
                             data: {
                                 from_date: from_date,
                                 to_date: to_date
@@ -210,18 +208,13 @@
 
                             },
                             {
-                                data: 'due_date',
-                                name: 'due_date'
+                                data: 'nama_barang',
+                                name: 'nama_barang'
 
                             },
                             {
                                 data: 'qty',
                                 name: 'qty'
-
-                            },
-                            {
-                                data: 'discount',
-                                name: 'discount'
 
                             },
                             {
@@ -256,111 +249,26 @@
                                     $(win.document.body)
                                         .find('thead')
                                         .css('background-color', 'rgba(211,225,222,255)')
-                                        .css('font-size', '8pt');
+                                        .css('font-size', '8pt')
                                     $(win.document.body)
                                         .find('tbody')
                                         .css('background-color', 'rgba(211,225,222,255)')
-                                        .css('font-size', '8pt');
+                                        .css('font-size', '8pt')
                                     $(win.document.body)
                                         .find('table')
-                                        .css('width', '100%');
-                                    var lastColX = null;
-                                    var lastColY = null;
-                                    var bod = [];
-                                    win.content[1].table.body.forEach(function(line, i) {
-                                        //Group based on first column (ignore empty cells)
-                                        if (lastColX != line[0].text && line[0].text != '') {
-                                            //Add line with group header
-                                            bod.push([{
-                                                text: line[0].text,
-                                                style: 'tableHeader'
-                                            }, '', '', '', '']);
-                                            //Update last
-                                            lastColX = line[0].text;
-                                        }
-                                        //Group based on second column (ignore empty cells) with different styling
-                                        if (lastColY != line[1].text && line[1].text != '') {
-                                            //Add line with group header
-                                            bod.push(['', {
-                                                text: line[1].text,
-                                                style: 'subheader'
-                                            }, '', '', '']);
-                                            //Update last
-                                            lastColY = line[1].text;
-                                        }
-                                        //Add line with data except grouped data
-                                        if (i < win.content[1].table.body.length - 1) {
-                                            bod.push(['', '', {
-                                                    text: line[2].text,
-                                                    style: 'defaultStyle'
-                                                },
-                                                {
-                                                    text: line[3].text,
-                                                    style: 'defaultStyle'
-                                                },
-                                                {
-                                                    text: line[4].text,
-                                                    style: 'defaultStyle'
-                                                }
-                                            ]);
-                                        }
-                                        //Make last line bold, blue and a bit larger
-                                        else {
-                                            bod.push(['', '', {
-                                                    text: line[2].text,
-                                                    style: 'lastLine'
-                                                },
-                                                {
-                                                    text: line[3].text,
-                                                    style: 'lastLine'
-                                                },
-                                                {
-                                                    text: line[4].text,
-                                                    style: 'lastLine'
-                                                }
-                                            ]);
-                                        }
-
-                                    });
-                                    //Overwrite the old table body with the new one.
-                                    win.content[1].table.headerRows = 3;
-                                    win.content[1].table.widths = [50, 50, 150, 100, 100];
-                                    win.content[1].table.body = bod;
-                                    win.content[1].layout = 'lightHorizontalLines';
-
-                                    win.styles = {
-                                        subheader: {
-                                            fontSize: 10,
-                                            bold: true,
-                                            color: 'black'
-                                        },
-                                        tableHeader: {
-                                            bold: true,
-                                            fontSize: 10.5,
-                                            color: 'black'
-                                        },
-                                        lastLine: {
-                                            bold: true,
-                                            fontSize: 11,
-                                            color: 'blue'
-                                        },
-                                        defaultStyle: {
-                                            fontSize: 10,
-                                            color: 'black'
-                                        }
-                                    }
-
+                                        .css('width', '100%')
                                 },
                                 orientation: 'landscape',
                                 pageSize: 'legal',
                                 rowsGroup: [0],
                                 exportOptions: {
-                                    rowsGroup: [0],
+
+
                                     columns: ':visible'
                                 },
                             },
                             {
-                                extend: 'excelHtml5',
+                                extend: 'excel',
                                 exportOptions: {
                                     columns: ':visible'
                                 }
@@ -388,52 +296,6 @@
                     $('#dataTable').DataTable().destroy();
                     load_data();
                 });
-
-                function exportData() {
-                    /* Get the HTML data using Element by Id */
-                    var table = document.getElementById("example1");
-
-                    /* Declaring array variable */
-                    var rows = [];
-
-                    //iterate through rows of table
-                    for (var i = 0, row; row = table.rows[i]; i++) {
-                        //rows would be accessed using the "row" variable assigned in the for loop
-                        //Get each cell value/column from the row
-                        column1 = row.cells[0].innerText;
-                        column2 = row.cells[1].innerText;
-                        column3 = row.cells[2].innerText;
-                        column4 = row.cells[3].innerText;
-                        column5 = row.cells[4].innerText;
-
-                        /* add a new records in the array */
-                        rows.push(
-                            [
-                                column1,
-                                column2,
-                                column3,
-                                column4,
-                                column5
-                            ]
-                        );
-
-                    }
-                    csvContent = "data:text/csv;charset=utf-8,";
-                    /* add the column delimiter as comma(,) and each row splitted by new line character (\n) */
-                    rows.forEach(function(rowArray) {
-                        row = rowArray.join(",");
-                        csvContent += row + "\r\n";
-                    });
-
-                    /* create a hidden <a> DOM node and set its download attribute */
-                    var encodedUri = encodeURI(csvContent);
-                    var link = document.createElement("a");
-                    link.setAttribute("href", encodedUri);
-                    link.setAttribute("download", "Stock_Price_Report.csv");
-                    document.body.appendChild(link);
-                    /* download the data file named "Stock_Price_Report.csv" */
-                    link.click();
-                }
 
 
             });
