@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/report_sales/', [ReportController::class, 'index']);
 
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
+    Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
 
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {

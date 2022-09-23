@@ -10,9 +10,12 @@
                 -webkit-print-color-adjust: exact;
             }
 
-            tr.group,
-            tr.group:hover {
-                background-color: rgb(148, 0, 0) !important;
+            .table.dataTable table,
+            th,
+            td {
+
+                border-bottom: 1px solid black !important;
+                vertical-align: middle !important;
             }
         </style>
     @endpush
@@ -21,9 +24,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    {{-- <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        {{ $title }}
-                    </h6> --}}
+
                 </div>
             </div>
         </div>
@@ -67,26 +68,25 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table style="font-size: 10pt" id="example1" class="table text-capitalize" style="width:100%">
+                            <table style="font-size: 10pt" id="dataTable" class="table text-capitalize table-sm"
+                                style="width:100%">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="2%">action</th> --}}
                                         {{-- <th>No</th> --}}
-                                        <th>#Invoice</th>
-                                        <th>sales_orders</th>
-                                        <th>Product</th>
+                                        <th>Invoice</th>
                                         <th>Order Date</th>
                                         <th>Due Date</th>
-                                        {{-- <th>Customer</th>
+                                        <th>Customer</th>
                                         <th>Remark</th>
-                                        <th>By</th>
+                                        <th>Created By</th>
                                         <th>TOP</th>
-                                        <th>PPN</th>
                                         <th>Total</th>
-                                        <th>Total After PPN</th>
-                                        <th>Payment Method</th>
-                                        <th>Paid Status</th> --}}
-
+                                        <th>Paid Date</th>
+                                        <th>Material</th>
+                                        <th>Type</th>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                        <th>Discount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -131,9 +131,9 @@
 
                 function load_data(from_date = '', to_date = '') {
 
-                    $('#example1').DataTable({
+                    $('#dataTable').DataTable({
 
-                        rowsGroup: [0],
+                        rowsGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8],
 
                         processing: true,
                         serverSide: true,
@@ -145,12 +145,7 @@
                             }
                         },
                         columns: [
-                            // {
-                            //     width: '5%',
-                            //     data: 'action',
-                            //     name: 'action',
-                            //     orderable: false,
-                            // },
+
                             // {
                             //     width: '5%',
                             //     data: 'DT_RowIndex',
@@ -165,13 +160,63 @@
 
                             },
                             {
-                                data: 'sales_orders_id',
-                                name: 'sales_orders_id'
+                                data: 'order_date',
+                                name: 'order_date'
 
                             },
                             {
-                                data: 'nama_barang',
-                                name: 'nama_barang'
+                                data: 'due_date',
+                                name: 'due_date'
+
+                            },
+                            {
+                                data: 'name_cust',
+                                name: 'name_cust'
+
+                            },
+                            {
+                                data: 'remark',
+                                name: 'remark'
+
+                            },
+                            {
+                                data: 'name',
+                                name: 'name'
+
+                            },
+                            {
+                                data: 'top',
+                                name: 'top'
+
+                            },
+                            {
+                                data: 'total_after_ppn',
+                                name: 'total_after_ppn'
+
+                            },
+                            {
+                                data: 'paid_date',
+                                name: 'paid_date'
+
+                            },
+                            {
+                                data: 'material',
+                                name: 'material'
+
+                            },
+                            {
+                                data: 'sub_type',
+                                name: 'sub_type'
+
+                            },
+                            {
+                                data: 'due_date',
+                                name: 'due_date'
+
+                            },
+                            {
+                                data: 'qty',
+                                name: 'qty'
 
                             },
                             {
@@ -180,8 +225,8 @@
 
                             },
                             {
-                                data: 'qty',
-                                name: 'qty'
+                                data: 'discount',
+                                name: 'discount'
 
                             },
 
@@ -308,6 +353,7 @@
                                 },
                                 orientation: 'landscape',
                                 pageSize: 'legal',
+                                rowsGroup: [0],
                                 exportOptions: {
                                     rowsGroup: [0],
                                     columns: ':visible'
@@ -329,7 +375,7 @@
                     var from_date = $('#from_date').val();
                     var to_date = $('#to_date').val();
                     if (from_date != '' && to_date != '') {
-                        $('#example1').DataTable().destroy();
+                        $('#dataTable').DataTable().destroy();
                         load_data(from_date, to_date);
                     } else {
                         alert('Both Date is required');
@@ -339,7 +385,7 @@
                 $('#refresh').click(function() {
                     $('#from_date').val('');
                     $('#to_date').val('');
-                    $('#example1').DataTable().destroy();
+                    $('#dataTable').DataTable().destroy();
                     load_data();
                 });
 
