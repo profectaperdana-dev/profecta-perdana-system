@@ -142,6 +142,7 @@
                 }
               }
             };
+            $('#chart-dash-1-line').html('');
             let chart_product = new ApexCharts(document.querySelector("#chart-dash-1-line"),
               options_product);
             chart_product.render();

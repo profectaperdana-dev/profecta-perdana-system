@@ -52,5 +52,8 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('isWarehouseKeeper', function (User $user) {
             return $user->job_id === 5;
         });
+        Gate::define('isTeknisi', function (User $user) {
+            return $user->job_id === 6;
+        });
     }
 }

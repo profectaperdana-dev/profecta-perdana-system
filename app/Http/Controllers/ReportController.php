@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ProductModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
 use App\Models\WarehouseModel;
@@ -78,21 +79,21 @@ class ReportController extends Controller
                 //     }
                 // })
 
-                ->editColumn('order_number', function ($data) use ($temp_1, $temp_2) {
-                    // $temp_1 = $data->order_number;
-                    // if ($temp_1 != $temp_2) {
-                    //     $temp_2 = $temp_1;
-                    //     return $temp_1 . ',' . $temp_2;
-                    // } else {
-                    //     return '';
-                    // }
+                // ->editColumn('order_number', function ($data) use ($temp_1, $temp_2) {
+                // $temp_1 = $data->order_number;
+                // if ($temp_1 != $temp_2) {
+                //     $temp_2 = $temp_1;
+                //     return $temp_1 . ',' . $temp_2;
+                // } else {
+                //     return '';
+                // }
 
-                    return $data->order_number;
-                })
-
-                // ->editColumn('ppn', function ($data) {
-                //     return number_format($data->ppn, 0, ',', '.');
+                // return $data->order_number;
                 // })
+
+                ->editColumn('total_after_ppn', function ($data) {
+                    return number_format($data->total_after_ppn, 0, ',', '.');
+                })
                 // ->editColumn('total_after_ppn', function ($data) {
                 //     return number_format($data->total_after_ppn, 0, ',', '.');
                 // })
@@ -106,26 +107,13 @@ class ReportController extends Controller
                 //         return 'Paid';
                 //     }
                 // })
-                // ->editColumn('order_date', function ($data) {
-                //     return date('d-M-Y', strtotime($data->order_date));
-                // })
-                // ->editColumn('duedate', function ($data) {
-                //     if ($data->duedate != null) {
-                //         return date('d-M-Y', strtotime($data->duedate));
-                //     } else {
-                //         return "-";
-                //     }
-                // })
-                // ->editColumn('customers_id', function (SalesOrderModel $SalesOrderModel) {
-                //     return $SalesOrderModel->customerBy->name_cust;
-                // })
-                // ->editColumn('created_by', function (SalesOrderModel $SalesOrderModel) {
-                //     return $SalesOrderModel->createdSalesOrder->name;
-                // })
-                // ->addIndexColumn() //memberikan penomoran
-                // ->addColumn('product')
-                // ->rawColumns(['product'])
-                // ->rawColumns()
+                ->editColumn('material', function (SalesOrderDetailModel $SalesOrderDetailModel) {
+                    return $SalesOrderDetailModel->productSales->sub_materials->nama_sub_material;
+                })
+                ->editColumn('sub_type', function (SalesOrderDetailModel $SalesOrderDetailModel) {
+                    return '<a href=""> ' . $SalesOrderDetailModel->productSales->sub_types->type_name . '</a>';
+                })
+                ->rawColumns(['sub_type'])
                 ->addIndexColumn()
                 ->make(true);
         }

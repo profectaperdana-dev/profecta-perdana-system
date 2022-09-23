@@ -29,6 +29,7 @@ use App\Http\Controllers\WarehouseController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,6 +46,10 @@ use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth.login');
+});
+
+Route::get('/artisan', function () {
+    Artisan::call('route:clear');
 });
 
 Route::group(['middleware' => 'auth'], function () {
@@ -97,6 +102,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/product_chart', [AnalysisController::class, 'productChart']);
     Route::get('/report_sales/', [ReportController::class, 'index']);
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
+    Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
 
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {

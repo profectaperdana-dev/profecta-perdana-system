@@ -53,7 +53,145 @@ class SalesOrderController extends Controller
 
         return view('sales_orders.index', compact('title', 'product', 'customer'));
     }
+    public function editSuperadmin(Request $request, $id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin')
+        ) {
+            abort(403);
+        }
+        // Validate Input
+        $request->validate([
+            "customer_id" => "required|numeric",
+            "payment_method" => "required|numeric",
+            "editProduct.*.products_id" => "required|numeric",
+            "editProduct.*.qty" => "required|numeric",
+            "editProduct.*.discount" => "required|numeric",
+            "remark" => "required"
+        ]);
 
+        //Assign Object Model and Save SO Input
+        $model = SalesOrderModel::where('id', $id)->firstOrFail();
+        $customer_id = $request->get('customer_id');
+        $model->customers_id = $customer_id;
+        $model->payment_method = $request->get('payment_method');
+        $model->remark = $request->get('remark');
+        if ($request->get('payment_method') == 3) {
+            $top = CustomerModel::where('id', $model->customers_id)->first();
+            $model->top = $top->due_date;
+            $dt = new DateTimeImmutable($model->order_date, new DateTimeZone('Asia/Jakarta'));
+            $dt = $dt->modify("+" . $model->top . " days");
+            $model->duedate = $dt;
+        } else {
+            $model->top = NULL;
+            $model->duedate = NULL;
+        }
+        $saved_temp = $model->save();
+
+        //Check Duplicate
+        $products_arr = [];
+        foreach ($request->get('editProduct') as $check) {
+            array_push($products_arr, $check['products_id']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return redirect('/invoice')->with('error', "You enter duplicate products! Please check again!");
+        }
+
+        if ($model->isapprove == 'approve') {
+            //Restore data to before changed
+            $po_restore = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
+            foreach ($po_restore as $restore) {
+                $stock = StockModel::where('warehouses_id', $model->customerBy->warehouseBy->id)
+                    ->where('products_id', $restore->products_id)->first();
+                $stock->stock = $stock->stock + $restore->qty;
+                $stock->save();
+            }
+        }
+        //Save SOD Input and Count total
+        $total = 0;
+
+        foreach ($request->editProduct as $product) {
+            $product_exist = SalesOrderDetailModel::where('sales_orders_id', $id)
+                ->where('products_id', $product['products_id'])->first();
+            if ($product_exist != null) {
+                $product_exist->qty = $product['qty'];
+                $product_exist->discount = $product['discount'];
+                $product_exist->save();
+            } else {
+                $new_product = new SalesOrderDetailModel();
+                $new_product->sales_orders_id = $id;
+                $new_product->products_id = $product['products_id'];
+                $new_product->qty = $product['qty'];
+                $new_product->discount = $product['discount'];
+                $new_product->created_by = Auth::user()->id;
+                $new_product->save();
+            }
+            $harga = ProductModel::where('id', $product['products_id'])->first();
+            $diskon =  $product['discount'] / 100;
+            $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
+            $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+            $total = $total + ($hargaAfterDiskon * $product['qty']);
+
+            $harga_awal = $harga->harga_beli * $product['qty'];
+        }
+
+        //Delete product that not in SOD Input
+        $del = SalesOrderDetailModel::where('sales_orders_id', $id)
+            ->whereNotIn('products_id', $products_arr)->delete();
+
+        //Count PPN and Total
+        $ppn = 0.11 * $total;
+        $model->ppn = $ppn;
+        $model->total = $total;
+        $model->total_after_ppn = $total + $ppn;
+        $model->profit = $model->total_after_ppn - $harga_awal;
+
+        //Verify
+
+
+        //Potong Stock
+        $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
+        foreach ($selected_sod as $value) {
+            if (Gate::allows('isSuperAdmin') || Gate::allows('isVerificator') || Gate::allows('isFinance')) {
+                $getStock = StockModel::where('products_id', $value->products_id)
+                    ->where('warehouses_id', $model->customerBy->warehouseBy->id)
+                    ->first();
+            } else {
+                $getStock = StockModel::where('products_id', $value->products_id)
+                    ->where('warehouses_id', Auth::user()->warehouse_id)
+                    ->first();
+            }
+            $old_stock = $getStock->stock;
+            $getStock->stock = $old_stock - $value->qty;
+            if ($getStock->stock < 0) {
+                return Redirect::back()->with('error', 'Verification Fail! Not enough stock. Please re-confirm to the customer.');
+            } else {
+                $getStock->save();
+            }
+
+
+
+            $checkoverplafone = checkOverPlafone($model->customers_id);
+            $checkoverdue = checkOverDueByCustomer($model->customers_id);
+        }
+
+        $saved_model = $model->save();
+        if ($saved_model == true) {
+            $data = SalesOrderModel::where('order_number', $model->order_number)->first();
+            $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+            if ($model->pdf_do != '') {
+                $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
+            }
+            if ($model->pdf_invoice != '') {
+                $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
+            }
+            return redirect('/invoice')->with('Info', "Invoice success update !");
+        } else {
+            return redirect('/invoice')->with('error', "Invoice update Fail! Please check again!");
+        }
+    }
     // print history payment
     public function printHistoryPayment($id)
     {
@@ -671,7 +809,11 @@ class SalesOrderController extends Controller
                     return $SalesOrderModel->createdSalesOrder->name;
                 })
                 ->addIndexColumn() //memberikan penomoran
-                ->addColumn('action', 'invoice._option')
+                ->addColumn('action', function ($invoice) {
+                    $customer = CustomerModel::latest()->get();
+                    $warehouses = WarehouseModel::latest()->get();
+                    return view('invoice._option', compact('invoice', 'customer', 'warehouses'))->render();
+                })
                 ->rawColumns(['action'], ['customerBy'])
                 // ->rawColumns()
                 ->addIndexColumn()

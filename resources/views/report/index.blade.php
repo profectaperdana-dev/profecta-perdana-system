@@ -10,9 +10,12 @@
                 -webkit-print-color-adjust: exact;
             }
 
-            tr.group,
-            tr.group:hover {
-                background-color: rgb(148, 0, 0) !important;
+            .table.dataTable table,
+            th,
+            td {
+
+                border-bottom: 1px solid black !important;
+                vertical-align: middle !important;
             }
         </style>
     @endpush
@@ -21,9 +24,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    {{-- <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        {{ $title }}
-                    </h6> --}}
+
                 </div>
             </div>
         </div>
@@ -67,26 +68,25 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table style="font-size: 10pt" id="example1" class="table text-capitalize" style="width:100%">
+                            <table style="font-size: 10pt" id="dataTable" class="table text-capitalize table-sm"
+                                style="width:100%">
                                 <thead>
                                     <tr>
-                                        {{-- <th style="2%">action</th> --}}
                                         {{-- <th>No</th> --}}
-                                        <th>#Invoice</th>
-                                        <th>sales_orders</th>
-                                        <th>Product</th>
+                                        <th>Invoice</th>
                                         <th>Order Date</th>
                                         <th>Due Date</th>
-                                        {{-- <th>Customer</th>
+                                        <th>Customer</th>
                                         <th>Remark</th>
-                                        <th>By</th>
+                                        <th>Created By</th>
                                         <th>TOP</th>
-                                        <th>PPN</th>
                                         <th>Total</th>
-                                        <th>Total After PPN</th>
-                                        <th>Payment Method</th>
-                                        <th>Paid Status</th> --}}
-
+                                        <th>Paid Date</th>
+                                        <th>Material</th>
+                                        <th>Type</th>
+                                        <th>Product</th>
+                                        <th>Qty</th>
+                                        <th>Discount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -111,6 +111,9 @@
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+        <script
+            src="https://cdn.jsdelivr.net/gh/ashl1/datatables-rowsgroup@fbd569b8768155c7a9a62568e66a64115887d7d0/dataTables.rowsGroup.js">
+        </script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
@@ -126,28 +129,10 @@
 
                 function load_data(from_date = '', to_date = '') {
 
-                    var table = $('#example1').DataTable({
+                    $('#dataTable').DataTable({
 
-                        // "drawCallback": function(settings) {
-                        //     var api = this.api();
-                        //     var rows = api.rows({
-                        //         page: 'current'
-                        //     }).nodes();
-                        //     var last = null;
+                        rowsGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8],
 
-                        //     api.column(0, {
-                        //         page: 'current'
-                        //     }).data().each(function(group, i) {
-                        //         if (last !== group) {
-                        //             $(rows).eq(i).before(
-                        //                 '<tr class="group"><td colspan="14">' + group +
-                        //                 '</td></tr>'
-                        //             );
-
-                        //             last = group;
-                        //         }
-                        //     });
-                        // },
                         processing: true,
                         serverSide: true,
                         ajax: {
@@ -158,12 +143,7 @@
                             }
                         },
                         columns: [
-                            // {
-                            //     width: '5%',
-                            //     data: 'action',
-                            //     name: 'action',
-                            //     orderable: false,
-                            // },
+
                             // {
                             //     width: '5%',
                             //     data: 'DT_RowIndex',
@@ -178,8 +158,53 @@
 
                             },
                             {
-                                data: 'sales_orders_id',
-                                name: 'sales_orders_id'
+                                data: 'order_date',
+                                name: 'order_date'
+
+                            },
+                            {
+                                data: 'due_date',
+                                name: 'due_date'
+
+                            },
+                            {
+                                data: 'name_cust',
+                                name: 'name_cust'
+
+                            },
+                            {
+                                data: 'remark',
+                                name: 'remark'
+
+                            },
+                            {
+                                data: 'name',
+                                name: 'name'
+
+                            },
+                            {
+                                data: 'top',
+                                name: 'top'
+
+                            },
+                            {
+                                data: 'total_after_ppn',
+                                name: 'total_after_ppn'
+
+                            },
+                            {
+                                data: 'paid_date',
+                                name: 'paid_date'
+
+                            },
+                            {
+                                data: 'material',
+                                name: 'material'
+
+                            },
+                            {
+                                data: 'sub_type',
+                                name: 'sub_type'
 
                             },
                             {
@@ -188,17 +213,18 @@
 
                             },
                             {
-                                data: 'discount',
-                                name: 'discount'
-
-                            },
-                            {
                                 data: 'qty',
                                 name: 'qty'
 
                             },
+                            {
+                                data: 'discount',
+                                name: 'discount'
+
+                            },
 
                         ],
+
                         order: [
                             [0, 'desc']
                         ],
@@ -234,7 +260,10 @@
                                 },
                                 orientation: 'landscape',
                                 pageSize: 'legal',
+                                rowsGroup: [0],
                                 exportOptions: {
+
+
                                     columns: ':visible'
                                 },
                             },
@@ -248,20 +277,13 @@
                         ],
 
                     });
-                    // $('#example1 tbody').on('click', 'tr.group', function() {
-                    //     var currentOrder = table.order()[0];
-                    //     if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                    //         table.order([0, 'desc']).draw();
-                    //     } else {
-                    //         table.order([0, 'asc']).draw();
-                    //     }
-                    // });
+
                 }
                 $('#filter').click(function() {
                     var from_date = $('#from_date').val();
                     var to_date = $('#to_date').val();
                     if (from_date != '' && to_date != '') {
-                        $('#example1').DataTable().destroy();
+                        $('#dataTable').DataTable().destroy();
                         load_data(from_date, to_date);
                     } else {
                         alert('Both Date is required');
@@ -271,7 +293,7 @@
                 $('#refresh').click(function() {
                     $('#from_date').val('');
                     $('#to_date').val('');
-                    $('#example1').DataTable().destroy();
+                    $('#dataTable').DataTable().destroy();
                     load_data();
                 });
 
