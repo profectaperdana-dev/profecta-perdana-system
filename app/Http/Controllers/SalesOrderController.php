@@ -1025,6 +1025,16 @@ class SalesOrderController extends Controller
         return response()->json($total_amount);
     }
 
+    public function getQtyDetail()
+    {
+        $so_id = request()->s;
+        $product_id = request()->p;
+
+        $getqty = SalesOrderDetailModel::where('sales_orders_id', $so_id)->where('products_id', $product_id)->first();
+        $_qty = $getqty->qty;
+        return response()->json($_qty);
+    }
+
     public function selectReturn()
     {
         try {

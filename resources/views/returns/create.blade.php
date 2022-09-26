@@ -101,6 +101,31 @@
                     },
                 });
 
+                $('.productReturn').change(() => {
+                    let product_id = $('.productReturn').val();
+
+                    $.ajax({
+                        context: this,
+                        type: "GET",
+                        url: "/sales_order/getQtyDetail",
+                        data: {
+                            _token: csrf,
+                            s: so_id,
+                            p: product_id
+                        },
+                        dataType: "json",
+                        success: function(data) {
+                            if (product_id == "") {
+                                $('.box-order-amount').attr('hidden', true);
+                            } else {
+                                $('.box-order-amount').attr('hidden', false);
+                                $('.order-amount').html(data);
+                            }
+
+                        },
+                    });
+                });
+
                 let x = 0;
                 $("#addReturn").on("click", function() {
                     ++x;
@@ -120,6 +145,7 @@
                         '<input class="form-control" required name="returnFields[' +
                         x +
                         '][qty]">' +
+                        '<small class="text-xs box-order-amount" hidden>Order Amount: <span class="order-amount">0</span></small>' +
                         '</div>' +
                         '<div class="col-2 col-md-2 form-group">' +
                         '<label for=""> &nbsp; </label>' +
@@ -159,6 +185,31 @@
                                 };
                             },
                         },
+                    });
+
+                    $('.productReturn').change(() => {
+                        let product_id = $('.productReturn').val();
+
+                        $.ajax({
+                            context: this,
+                            type: "GET",
+                            url: "/sales_order/getQtyDetail",
+                            data: {
+                                _token: csrf,
+                                s: so_id,
+                                p: product_id
+                            },
+                            dataType: "json",
+                            success: function(data) {
+                                if (product_id == "") {
+                                    $('.box-order-amount').attr('hidden', true);
+                                } else {
+                                    $('.box-order-amount').attr('hidden', false);
+                                    $('.order-amount').html(data);
+                                }
+
+                            },
+                        });
                     });
                 });
 

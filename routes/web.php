@@ -104,6 +104,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/report_purchase', [ReportController::class, 'report_po']);
     Route::get('/report_sales/', [ReportController::class, 'index']);
     Route::get('/sales_order/selectReturn', [SalesOrderController::class, 'selectReturn']);
+    Route::get('/sales_order/getQtyDetail', [SalesOrderController::class, 'getQtyDetail']);
+
 
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
     Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);

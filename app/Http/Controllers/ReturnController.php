@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Redirect;
+use PhpParser\Node\Stmt\Return_;
 
 class ReturnController extends Controller
 {
@@ -121,21 +122,37 @@ class ReturnController extends Controller
             $detail->return_id = $model->id;
             $detail->product_id = $item['product_id'];
             $detail->qty = $item['qty'];
-            $detail->save();
 
             //Check exceed order
             $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $model->sales_order_id)
                 ->where('products_id', $detail->product_id)->first();
-            if ($detail->qty > $selected_sod->qty) {
-                $previous_product = ReturnDetailModel::with('returnBy')
-                    ->whereHas('returnBy', function ($query) use ($model) {
-                        $query->where('sales_order_id', $model->sales_order_id);
-                    })->get();
-                if ($previous_product != null) {
-                    $previous_product->delete();
+
+            $selected_return = ReturnDetailModel::with('returnBy')
+                ->whereHas('returnBy', function ($query) use ($model) {
+                    $query->where('sales_order_id', $model->sales_order_id);
+                })->where('product_id', $item['product_id'])->get();
+            //Get Total Returned Qty 
+            $returned_qty = 0;
+            if ($selected_return == null) {
+                $returned_qty = 0;
+            } else {
+                foreach ($selected_return as $return) {
+                    $returned_qty = $returned_qty + $return->qty;
                 }
-                return redirect('/invoice')->with('error', 'Return Order Fail! The number of items exceeds the order');
             }
+            // dd('detail: ' . $detail->qty . ', ' . $selected_sod->qty . ', ' . $returned_qty);
+
+            if ($detail->qty > ($selected_sod->qty - $returned_qty)) {
+                $previous_product = ReturnDetailModel::where('return_id', $model->id)->get();
+                if ($previous_product != null) {
+                    $previous_product->each->delete();
+                    $model->delete();
+                }
+                return Redirect::back()->with('error', 'Return Order Fail! The number of items exceeds the order');
+            }
+
+            $detail->save();
+
 
             //Count Total
             $product = ProductModel::where('id', $detail->product_id)->first();

@@ -17,6 +17,8 @@
                 <div class="col-3 col-md-3 form-group">
                     <label>Qty</label>
                     <input type="number" class="form-control" required name="returnFields[0][qty]" id="">
+                    <small class="text-xs box-order-amount" hidden>Order Amount: <span
+                            class="order-amount">0</span></small>
                     @error('returnFields[0][qty]')
                         <div class="invalid-feedback">
                             {{ $message }}
