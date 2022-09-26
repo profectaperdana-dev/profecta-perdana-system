@@ -135,9 +135,6 @@ class ReturnController extends Controller
                     $previous_product->delete();
                 }
                 return redirect('/invoice')->with('error', 'Return Order Fail! The number of items exceeds the order');
-            } else {
-                $selected_sod->qty = $selected_sod->qty - $detail->qty;
-                $selected_sod->save();
             }
 
             //Count Total
