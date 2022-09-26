@@ -69,7 +69,8 @@
                             </div>
                         </div>
                         <div class="table-responsive">
-                            <table style="font-size: 10pt" id="example1" class="table text-capitalize" style="width:100%">
+                            <table style="font-size: 10pt" id="example1" class="table text-capitalize table-sm"
+                                style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>Order Number</th>

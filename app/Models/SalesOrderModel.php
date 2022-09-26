@@ -30,4 +30,9 @@ class SalesOrderModel extends Model
     {
         return $this->hasOne(User::class, 'id', 'created_by')->withTrashed();
     }
+
+    public function returnBy()
+    {
+        return $this->hasMany(ReturnModel::class, 'sales_order_id');
+    }
 }

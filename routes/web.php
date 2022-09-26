@@ -15,6 +15,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PurchaseOrderController;
 use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ReturnController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\SalesOrderController;
 use App\Http\Controllers\SecondProductController;
@@ -102,10 +103,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/product_chart', [AnalysisController::class, 'productChart']);
     Route::get('/report_purchase', [ReportController::class, 'report_po']);
     Route::get('/report_sales/', [ReportController::class, 'index']);
+    Route::get('/sales_order/selectReturn', [SalesOrderController::class, 'selectReturn']);
 
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
     Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
 
+    Route::prefix('return')->group(function () {
+        Route::get('/', [ReturnController::class, 'index']);
+        Route::get('/{id}', [ReturnController::class, 'create']);
+        Route::post('/store', [ReturnController::class, 'store']);
+    });
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
         Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
@@ -124,7 +131,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/products', ProductController::class);
         Route::resource('/second_product', SecondProductController::class);
     });
-
 
     Route::resource('/customers', CustomerController::class);
     Route::resource('/profiles', ProfileController::class);

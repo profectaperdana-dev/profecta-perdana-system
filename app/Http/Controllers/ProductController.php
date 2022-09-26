@@ -112,6 +112,7 @@ class ProductController extends Controller
             return response()->json($th);
         }
     }
+
     public function selectCost($product_id)
     {
         try {

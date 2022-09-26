@@ -209,6 +209,11 @@
                             href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
                             </span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('return') ? 'active' : '' }}"
+                            href="{{ url('/return') }}"><i data-feather="rotate-ccw"></i></i><span>Return
+                            </span></a>
+                    </li>
 
                     <li class="sidebar-main-title">
                         <div>

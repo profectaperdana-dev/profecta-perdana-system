@@ -1024,4 +1024,37 @@ class SalesOrderController extends Controller
         }
         return response()->json($total_amount);
     }
+
+    public function selectReturn()
+    {
+        try {
+            $so_id = request()->s;
+            $product = [];
+            if (request()->has('q')) {
+                $search = request()->q;
+
+                $product = SalesOrderDetailModel::join('products', 'products.id', '=', 'sales_order_details.products_id')
+                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'products.id_sub_material')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->select('products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                    ->where('products.nama_barang', 'LIKE', "%$search%")
+                    ->where('sales_orders_id', $so_id)
+                    ->orWhere('product_sub_types.type_name', 'LIKE', "%$search%")
+                    ->where('sales_orders_id', $so_id)
+                    ->orWhere('product_sub_materials.nama_sub_material', 'LIKE', "%$search%")
+                    ->where('sales_orders_id', $so_id)
+                    ->get();
+            } else {
+                $product = SalesOrderDetailModel::join('products', 'products.id', '=', 'sales_order_details.products_id')
+                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'products.id_sub_material')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->select('products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                    ->where('sales_orders_id', $so_id)
+                    ->get();
+            }
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            return response()->json($th);
+        }
+    }
 }

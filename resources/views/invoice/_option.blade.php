@@ -7,6 +7,7 @@
             data-bs-target="#manageData{{ $invoice->id }}">Edit Invoice</a>
     @endcan
     <a class="dropdown-item" href="{{ url('send_email/' . $invoice->id) }}">Send Invoice by Email</a>
+    <a class="dropdown-item" href="{{ url('return/' . $invoice->id) }}">Return</a>
     <h5 class="dropdown-header">Prints</h5>
     <a class="dropdown-item" href="{{ url('invoice/' . $invoice->id . '/invoice_with_ppn') }}">Print Invoice</a>
     <a class="dropdown-item" href="{{ url('invoice/' . $invoice->id . '/delivery_order') }}">Print Delivary Order</a>
