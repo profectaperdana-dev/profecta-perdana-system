@@ -27,6 +27,7 @@ use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\UomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\ClaimController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
@@ -142,6 +143,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/check_stock', CheckStockController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
+    Route::resource('/claim',ClaimController::class);
+
 });
 
 Route::group(['middleware' => 'guest'], function () {
