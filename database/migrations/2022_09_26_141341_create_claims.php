@@ -30,8 +30,8 @@ class CreateClaims extends Migration
             $table->string('e_starting');
             $table->string('e_charging');
             $table->string('diagnosa');
-            $table->string('e_submittedBy');
-            $table->string('e_receivedBy');
+            $table->string('e_submittedBy')->nullable();
+            $table->string('e_receivedBy')->nullable();
 
             // cek akhir
             $table->string('f_voltage')->nullable();

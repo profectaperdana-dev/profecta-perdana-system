@@ -3,16 +3,14 @@
     @push('css')
         <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
             rel="stylesheet">
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
-        <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+
         <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
 
         <style>
             .kbw-signature {
                 width: 100%;
-                height: 500px;
+                height: 300px;
             }
 
             #sig canvas {
@@ -39,10 +37,7 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Create Data</h5>
-                        <hr class="bg-primary">
-                    </div>
+
                     <div class="card-body">
                         <form method="post" action="{{ url('claim/') }}" enctype="multipart/form-data">
                             @csrf
@@ -55,18 +50,25 @@
     </div>
     <!-- Container-fluid Ends-->
     @push('scripts')
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
+        <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
         <script type="text/javascript">
-            < script >
-                CKEDITOR.replace('diagnosa');
+            CKEDITOR.replace('diagnosa');
         </script>
         <script>
             $(document).ready(function() {
+                $('form').submit(function() {
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                });
                 var sig = $('#sig').signature({
                     syncField: '#signature64',
-                    syncFormat: 'PNG'
+                    syncFormat: 'PNG',
+                    // distance: 0
+
                 });
                 $('#clear').click(function(e) {
                     e.preventDefault();
@@ -82,6 +84,22 @@
                     } else {
                         $('#otheCustomer').hide();
 
+                    }
+                });
+                $('#file_received').hide();
+                $('#ttd_received').hide();
+                $('#choose_received').change(function() {
+                    var val_cust = $('#choose_received').val();
+
+                    if (val_cust == 'file') {
+                        $('#file_received').show();
+                        $('#ttd_received').hide();
+                    } else if (val_cust == 'signature') {
+                        $('#file_received').hide();
+                        $('#ttd_received').show();
+                    } else {
+                        $('#file_received').hide();
+                        $('#ttd_received').hide();
                     }
                 });
             });

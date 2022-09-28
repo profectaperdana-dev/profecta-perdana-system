@@ -64,8 +64,8 @@
 
 
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('check_stock') ? 'active' : '' }}"
-                            href="{{ url('/check_stock') }}"><i data-feather="folder"></i><span>History Claims
+                        <a class="nav-link menu-title link-nav {{ request()->is('history_claim') ? 'active' : '' }}"
+                            href="{{ url('/history_claim') }}"><i data-feather="folder"></i><span>History Claims
 
                             </span></a>
                     </li>

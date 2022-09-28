@@ -37,52 +37,46 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header pb-0">
-                        {{-- <h5>All Data</h5> --}}
-                        <a class="btn btn-primary" href="{{ url('claim/create') }}">
-                            + Create Claim
-                        </a>
-                        <hr class="bg-primary">
 
-                    </div>
                     <div class="card-body">
                         <div class="table-responsive">
                             <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th></th>
                                         <th>#</th>
                                         <th>Claim Number</th>
+                                        <th>Claim Date</th>
                                         <th>Customer</th>
                                         <th>Accu Type</th>
-                                        <th>Finish Claim</th>
+                                        <th>Car Type</th>
+                                        <th>Plat Number</th>
+                                        <th>View Card Claim</th>
                                     </tr>
 
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $key => $value)
                                         <tr>
-                                            <td style="width: 10%">
-                                                <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i data-feather="settings"></i></a>
-                                                <div class="dropdown-menu" aria-labelledby="">
-                                                    <h5 class="dropdown-header">Actions</h5>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-original-title="test"
-                                                        data-bs-target="#detailData{{ $value->id }}">Early Check</a>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-original-title="test"
-                                                        data-bs-target="#deleteData{{ $value->id }}">Delete</a>
-                                                </div>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td class="text-uppercase">{{ $value->claim_number }}</td>
+                                            <td>{{ $value->claim_date }}</td>
+                                            <td>{{ $value->customer_id }}</td>
+                                            <td>{{ $value->productSales->sub_materials->nama_sub_material }}/{{ $value->productSales->sub_types->type_name }}/{{ $value->productSales->nama_barang }}
                                             </td>
-                                            {{-- early check --}}
+                                            <td>{{ $value->car_type }}</td>
+                                            <td>{{ $value->plate_number }}</td>
+                                            <td>
+                                                <a class="btn btn-sm btn-primary" href="#" data-bs-toggle="modal"
+                                                    data-original-title="test"
+                                                    data-bs-target="#detailData{{ $value->id }}">View Detail</a>
+                                            </td>
+                                            {{-- finish claim --}}
                                             <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl" role="document">
                                                     <div class="modal-content">
                                                         <div class="modal-header text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Detail Data Early
-                                                                Check
+                                                            <h5 class="modal-title" id="exampleModalLabel">Detail Data
                                                                 {{ $value->claim_number }}</h5>
                                                             </h5>
                                                             <button class="btn-close" type="button" data-bs-dismiss="modal"
@@ -135,18 +129,24 @@
                                                                                     placeholder="Serial Number" readonly
                                                                                     value="{{ $value->customer_id }}">
                                                                             </div>
-                                                                            <div class="form-group col-md-12">
+                                                                            <div class="form-group col-md-6">
                                                                                 <input type="text"
                                                                                     class="form-control bg-warning text-white text-center"
                                                                                     placeholder="Serial Number" readonly
                                                                                     value="Early Check">
                                                                             </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <input type="text"
+                                                                                    class="form-control bg-primary text-white text-center"
+                                                                                    placeholder="Serial Number" readonly
+                                                                                    value="Finish Check">
+                                                                            </div>
                                                                             <div class="form-group col-md-3">
                                                                                 <label>
                                                                                     Voltage
                                                                                 </label>
-                                                                                <input type="text" readonly
-                                                                                    class="form-control"
+                                                                                <input type="text" name=""
+                                                                                    readonly class="form-control"
                                                                                     value="{{ $value->e_voltage }}">
                                                                             </div>
                                                                             <div class="form-group col-md-3">
@@ -154,7 +154,25 @@
                                                                                 <input type="text" class="form-control"
                                                                                     readonly
                                                                                     placeholder="Retail Selling Price"
-                                                                                    value="{{ $value->e_cca }}">
+                                                                                    value="{{ $value->e_cca }}"
+                                                                                    name="f_cca">
+
+                                                                            </div>
+                                                                            <div class="form-group col-md-3">
+                                                                                <label>
+                                                                                    Voltage
+                                                                                </label>
+                                                                                <input type="text" name=""
+                                                                                    readonly class="form-control"
+                                                                                    value="{{ $value->f_voltage }}">
+                                                                            </div>
+                                                                            <div class="form-group col-md-3">
+                                                                                <label>CCA </label>
+                                                                                <input type="text" class="form-control"
+                                                                                    readonly
+                                                                                    placeholder="Retail Selling Price"
+                                                                                    value="{{ $value->f_cca }}"
+                                                                                    name="f_cca">
 
                                                                             </div>
                                                                             <div class="form-group col-md-3">
@@ -162,32 +180,52 @@
                                                                                 <input type="text" class="form-control"
                                                                                     readonly
                                                                                     placeholder="Non Retail Selling Price"
+                                                                                    name=""
                                                                                     value="{{ $value->e_starting }}">
                                                                             </div>
 
                                                                             <div class="form-group col-md-3">
                                                                                 <label>Charging</label>
                                                                                 <input type="text" class="form-control"
-                                                                                    readonly
+                                                                                    readonly name=""
                                                                                     value="{{ $value->e_charging }}">
                                                                             </div>
-                                                                            <div class="form-group col-md-12">
-                                                                                <label>Diagnosa</label>
-                                                                                <p>
-                                                                                    @php
-                                                                                        echo htmlspecialchars_decode(htmlspecialchars_decode($value->diagnosa));
-                                                                                    @endphp
-                                                                                </p>
+                                                                            <div class="form-group col-md-3">
+                                                                                <label>Starting</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    readonly
+                                                                                    placeholder="Non Retail Selling Price"
+                                                                                    name=""
+                                                                                    value="{{ $value->f_starting }}">
+                                                                            </div>
 
+                                                                            <div class="form-group col-md-3">
+                                                                                <label>Charging</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    readonly name=""
+                                                                                    value="{{ $value->f_charging }}">
+                                                                            </div>
+
+                                                                            <div class="form-group col-md-6">
+                                                                                <label>Diagnosa</label>
+                                                                                <p>@php
+                                                                                    echo htmlspecialchars_decode(htmlspecialchars_decode($value->diagnosa));
+                                                                                @endphp</p>
                                                                             </div>
                                                                             <div class="form-group col-md-6">
+                                                                                <label>Diagnosa</label>
+                                                                                <p>@php
+                                                                                    echo htmlspecialchars_decode(htmlspecialchars_decode($value->result));
+                                                                                @endphp</p>
+                                                                            </div>
+                                                                            <div class="form-group col-md-3">
                                                                                 <label>
                                                                                     Submitted By,</label>
                                                                                 <br>
                                                                                 <p><strong>{{ $value->createdBy->name }}</strong>
                                                                                 </p>
                                                                             </div>
-                                                                            <div class="form-group text-center col-md-6">
+                                                                            <div class="form-group text-center col-md-3">
                                                                                 <label>
                                                                                     Received By,</label>
                                                                                 <br>
@@ -195,6 +233,22 @@
                                                                                     src="{{ asset('receivedBy/' . $value->e_receivedBy) }}"
                                                                                     alt="">
                                                                             </div>
+                                                                            <div class="form-group col-md-3">
+                                                                                <label>
+                                                                                    Submitted By,</label>
+                                                                                <br>
+                                                                                <p><strong>{{ $value->createdBy->name }}</strong>
+                                                                                </p>
+                                                                            </div>
+                                                                            <div class="form-group text-center col-md-3">
+                                                                                <label>
+                                                                                    Received By,</label>
+                                                                                <br>
+                                                                                <img class="img-fluid"
+                                                                                    src="{{ asset('receivedBy/' . $value->f_receivedBy) }}"
+                                                                                    alt="">
+                                                                            </div>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -207,55 +261,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            {{-- End early check --}}
-                                            {{-- Modul Delete UOM --}}
-                                            <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('claim/' . $value->id) }}"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input name="_method" type="hidden" value="DELETE">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Delete
-                                                                    Data
-                                                                    {{ $value->claim_number }}</h5>
-                                                                <button class="btn-close" type="button"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="container-fluid">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <h5>Are you sure delete this data ?</h5>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-danger" type="button"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button class="btn btn-primary" type="submit">Yes,
-                                                                    delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            {{-- End Modal Delete UOM --}}
-                                            <td>{{ $key + 1 }}</td>
-                                            <td class="text-uppercase">{{ $value->claim_number }}</td>
-                                            <td>{{ $value->customer_id }}</td>
-                                            <td>{{ $value->productSales->sub_materials->nama_sub_material }}/{{ $value->productSales->sub_types->type_name }}/{{ $value->productSales->nama_barang }}
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-sm btn-primary"
-                                                    href="{{ url('/claim/' . $value->id . '/edit') }}">Finish
-                                                    Claim</a>
-                                            </td>
-
+                                            {{-- end finish claim --}}
                                         </tr>
                                     @endforeach
                                 </tbody>
