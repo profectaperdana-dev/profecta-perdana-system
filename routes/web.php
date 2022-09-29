@@ -27,6 +27,7 @@ use App\Http\Controllers\SuppliersController;
 use App\Http\Controllers\UomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\ClaimController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
@@ -104,10 +105,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/report_purchase', [ReportController::class, 'report_po']);
     Route::get('/report_sales/', [ReportController::class, 'index']);
     Route::get('/sales_order/selectReturn', [SalesOrderController::class, 'selectReturn']);
+    Route::get('/history_claim/', [ClaimController::class, 'historyClaim']);
 
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
     Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
-
     Route::prefix('return')->group(function () {
         Route::get('/', [ReturnController::class, 'index']);
         Route::get('/{id}', [ReturnController::class, 'create']);
@@ -142,6 +143,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/check_stock', CheckStockController::class);
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
+    Route::resource('/claim', ClaimController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {
