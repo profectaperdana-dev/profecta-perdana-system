@@ -74,24 +74,18 @@
                                 <thead>
                                     <tr>
                                         {{-- <th>No</th> --}}
-                                        <th>Invoice</th>
-                                        <th>Order Date</th>
-                                        <th>Due Date</th>
+                                        <th>Claim Number</th>
+                                        <th>Claim Date</th>
                                         <th>Customer</th>
-                                        <th>Remark</th>
-                                        <th>Created By</th>
-                                        <th>TOP</th>
-                                        <th>Total</th>
-                                        <th>Paid Date</th>
                                         <th>Material</th>
-                                        <th>Type</th>
-                                        <th>Product</th>
-                                        <th>Qty</th>
-                                        <th>Discount</th>
+                                        <th>Sub Type</th>
+                                        <th>Accu Type</th>
+                                        <th>Car Type</th>
+                                        <th>Plat Number</th>
+                                        <th>Cost</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                 </tbody>
                             </table>
                         </div>
@@ -131,13 +125,10 @@
                 function load_data(from_date = '', to_date = '') {
 
                     $('#dataTable').DataTable({
-
-                        // rowsGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8],
-
                         processing: true,
                         serverSide: true,
                         ajax: {
-                            url: "{{ url('/report_sales') }}",
+                            url: "{{ url('/report_claim') }}",
                             data: {
                                 from_date: from_date,
                                 to_date: to_date
@@ -145,57 +136,19 @@
                         },
                         columns: [
 
-                            // {
-                            //     width: '5%',
-                            //     data: 'DT_RowIndex',
-                            //     name: 'DT_Row_Index',
-                            //     "className": "text-center",
-                            //     orderable: false,
-                            //     searchable: false
-                            // },
                             {
-                                data: 'order_number',
-                                name: 'order_number'
+                                data: 'claim_number',
+                                name: 'claim_number'
 
                             },
                             {
-                                data: 'order_date',
-                                name: 'order_date'
+                                data: 'claim_date',
+                                name: 'claim_date'
 
                             },
                             {
-                                data: 'due_date',
-                                name: 'due_date'
-
-                            },
-                            {
-                                data: 'name_cust',
-                                name: 'name_cust'
-
-                            },
-                            {
-                                data: 'remark',
-                                name: 'remark'
-
-                            },
-                            {
-                                data: 'name',
-                                name: 'name'
-
-                            },
-                            {
-                                data: 'top',
-                                name: 'top'
-
-                            },
-                            {
-                                data: 'total_after_ppn',
-                                name: 'total_after_ppn'
-
-                            },
-                            {
-                                data: 'paid_date',
-                                name: 'paid_date'
+                                data: 'customer_id',
+                                name: 'customer_id'
 
                             },
                             {
@@ -208,21 +161,28 @@
                                 name: 'sub_type'
 
                             },
+
                             {
-                                data: 'nama_barang',
-                                name: 'nama_barang'
+                                data: 'product_id',
+                                name: 'product_id'
 
                             },
                             {
-                                data: 'qty',
-                                name: 'qty'
+                                data: 'car_type',
+                                name: 'car_type'
 
                             },
                             {
-                                data: 'discount',
-                                name: 'discount'
+                                data: 'plate_number',
+                                name: 'plate_number'
 
                             },
+                            {
+                                data: 'cost',
+                                name: 'cost'
+
+                            },
+
 
                         ],
 
@@ -234,6 +194,7 @@
                             [10, 25, 50, -1],
                             ['10 rows', '25 rows', '50 rows', 'Show All']
                         ],
+
                         buttons: ['pageLength',
                             {
                                 title: 'Data Invoice',
@@ -295,8 +256,6 @@
                     $('#dataTable').DataTable().destroy();
                     load_data();
                 });
-
-
             });
         </script>
     @endpush

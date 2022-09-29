@@ -18,7 +18,7 @@
             </div>
             <div class="form-group col-md-6">
                 <label>Car Type</label>
-                <input type="text" class="form-control" placeholder="Serial Number" readonly
+                <input type="text" class="form-control text-capitalize" placeholder="Serial Number" readonly
                     value="{{ $value->car_type }}">
 
             </div>
@@ -31,7 +31,7 @@
             <div class="form-group col-md-6">
                 <label>
                     Plat Number</label>
-                <input type="text" class="form-control" placeholder="Serial Number" readonly
+                <input type="text" class="form-control text-uppercase" placeholder="Serial Number" readonly
                     value="{{ $value->plate_number }}">
             </div>
             <div class="form-group col-md-6">

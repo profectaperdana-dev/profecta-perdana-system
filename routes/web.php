@@ -107,6 +107,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/report_sales/', [ReportController::class, 'index']);
     Route::get('/sales_order/selectReturn', [SalesOrderController::class, 'selectReturn']);
     Route::get('/history_claim/', [ClaimController::class, 'historyClaim']);
+    Route::get('/report_claim/', [ReportController::class, 'reportClaim']);
     Route::get('/sales_order/getQtyDetail', [SalesOrderController::class, 'getQtyDetail']);
     Route::get('/sales_order/getAllDetail', [SalesOrderController::class, 'getAllDetail']);
 

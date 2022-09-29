@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClaimModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderDetailModel;
 use App\Models\SalesOrderDetailModel;
@@ -32,11 +33,14 @@ class ReportController extends Controller
                 ->first();
             if (!empty($request->from_date)) {
                 if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
-                    $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
+                    $invoice = SalesOrderDetailModel::join('sales_orders', 'sales_orders.id', '=', 'sales_order_details.sales_orders_id')
+                        ->join('products', 'products.id', '=', 'sales_order_details.products_id')
+                        ->join('customers', 'customers.id', '=', 'sales_orders.customers_id')
+                        ->join('users', 'users.id', '=', 'sales_orders.created_by')
+                        ->select('sales_orders.*', 'sales_order_details.*', 'products.*', 'customers.*', 'users.*')
+                        ->whereBetween('order_date', array($request->from_date, $request->to_date))
                         ->where('isapprove', 'approve')
                         ->where('isverified', 1)
-                        ->whereBetween('order_date', array($request->from_date, $request->to_date))
-                        ->latest()
                         ->get();
                 } else {
                     $invoice = SalesOrderModel::with('customerBy', 'createdSalesOrder')
@@ -56,7 +60,6 @@ class ReportController extends Controller
                         ->select('sales_orders.*', 'sales_order_details.*', 'products.*', 'customers.*', 'users.*')
                         ->where('isapprove', 'approve')
                         ->where('isverified', 1)
-                        // ->groupBy('sales_orders.order_number')
                         ->get();
                 } else {
                     $invoice = SalesOrderDetailModel::with('customerBy', 'createdSalesOrder', 'salesOrderDetailsBy')
@@ -124,7 +127,6 @@ class ReportController extends Controller
 
         return view('report.index', $data);
     }
-
     public function report_po(Request $request)
     {
         if (
@@ -243,7 +245,72 @@ class ReportController extends Controller
         $data = [
             'title' => "All Data Purchase Orders in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
         ];
-
         return view('report.po_report', $data);
+    }
+    public function reportClaim(Request $request)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        if ($request->ajax()) {
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', Auth::user()->warehouse_id)
+                ->first();
+            if (!empty($request->from_date)) {
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $invoice = ClaimModel::with('productSales')
+                        ->where('status', 1)
+                        ->whereBetween('claim_date', array($request->from_date, $request->to_date))
+                        ->latest()
+                        ->get();
+                } else {
+                    $invoice = ClaimModel::with('productSales')
+                        ->where('status', 1)
+                        ->where('claim_number', 'like', "%$kode_area->area_code%")
+                        ->whereBetween('claim_date', array($request->from_date, $request->to_date))
+                        ->latest()
+                        ->get();
+                }
+            } else {
+                if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
+                    $invoice = ClaimModel::join('products', 'products.id', '=', 'claims.product_id')
+                        ->join('users', 'users.id', '=', 'claims.e_submittedBy')
+                        ->select('claims.*', 'products.*', 'users.*')
+                        ->where('claims.status', 1)
+                        ->get();
+                } else {
+                    $invoice = ClaimModel::with('productSales')
+                        ->where('status', 1)
+                        ->where('claim_number', 'like', "%$kode_area->area_code%")
+                        ->latest()
+                        ->get();
+                }
+            }
+            return datatables()->of($invoice)
+                ->editColumn('product_id', function (ClaimModel $ClaimModel) {
+                    return $ClaimModel->productSales->nama_barang;
+                })
+                ->editColumn('plate_number', function (ClaimModel $ClaimModel) {
+                    return '<div class="text-uppercase"> ' . $ClaimModel->plate_number . '</div>';
+                })
+                ->editColumn('material', function (ClaimModel $ClaimModel) {
+                    return $ClaimModel->productSales->sub_materials->nama_sub_material;
+                })
+                ->editColumn('sub_type', function (ClaimModel $ClaimModel) {
+                    return '<a href=""> ' . $ClaimModel->productSales->sub_types->type_name . '</a>';
+                })
+                ->rawColumns(['sub_type', 'product_id', 'plate_number'])
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "All data claim in profecta perdana : " . Auth::user()->warehouseBy->warehouses,
+        ];
+
+        return view('report.claim_report', $data);
     }
 }
