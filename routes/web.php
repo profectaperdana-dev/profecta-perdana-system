@@ -34,6 +34,7 @@ use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use PhpParser\Node\Stmt\Return_;
 
 /*
 |--------------------------------------------------------------------------
@@ -107,6 +108,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales_order/selectReturn', [SalesOrderController::class, 'selectReturn']);
     Route::get('/history_claim/', [ClaimController::class, 'historyClaim']);
     Route::get('/report_claim/', [ReportController::class, 'reportClaim']);
+    Route::get('/sales_order/getQtyDetail', [SalesOrderController::class, 'getQtyDetail']);
+    Route::get('/sales_order/getAllDetail', [SalesOrderController::class, 'getAllDetail']);
+
 
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
     Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
@@ -114,6 +118,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [ReturnController::class, 'index']);
         Route::get('/{id}', [ReturnController::class, 'create']);
         Route::post('/store', [ReturnController::class, 'store']);
+        Route::post('/{id}/update_return', [ReturnController::class, 'update_return']);
+        Route::get('/{id}/print', [ReturnController::class, 'print_return']);
     });
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {

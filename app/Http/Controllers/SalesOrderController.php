@@ -12,6 +12,8 @@ use App\Events\SOMessage;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
 use App\Models\NotificationsModel;
+use App\Models\ReturnDetailModel;
+use App\Models\ReturnModel;
 use App\Models\SalesOrderCreditModel;
 use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\Auth;
@@ -90,7 +92,7 @@ class SalesOrderController extends Controller
 
         //Check Duplicate
         $products_arr = [];
-        foreach ($request->get('editProduct') as $check) {
+        foreach ($request->editProduct as $check) {
             array_push($products_arr, $check['products_id']);
         }
         $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
@@ -553,7 +555,7 @@ class SalesOrderController extends Controller
 
         //Check Duplicate
         $products_arr = [];
-        foreach ($request->get('editProduct') as $check) {
+        foreach ($request->editProduct as $check) {
             array_push($products_arr, $check['products_id']);
         }
         $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
@@ -906,7 +908,7 @@ class SalesOrderController extends Controller
             "amount" => "required|numeric",
         ]);
 
-        $selected_so = SalesOrderModel::where('id', $id)->firstOrFail();
+        $selected_so = SalesOrderModel::where('id', $id)->first();
 
         //Save Sales Order Credit
         $soc = new SalesOrderCreditModel();
@@ -919,10 +921,12 @@ class SalesOrderController extends Controller
         //Count total amount instalment
         $all_soc = SalesOrderCreditModel::where('sales_order_id', $id)->get();
         $total_amount = 0;
+        $total_return = 0;
+        $total_return = ReturnModel::where('sales_order_id', $id)->sum('total');
         foreach ($all_soc as $value) {
             $total_amount = $total_amount + $value->amount;
         }
-        if ($total_amount >= $selected_so->total_after_ppn) {
+        if ($total_amount >= ($selected_so->total_after_ppn - $total_return)) {
             $selected_so->isPaid = 1;
             $selected_so->paid_date = Carbon::now()->format('Y-m-d H:i:s');
             $selected_so->save();
@@ -1000,7 +1004,8 @@ class SalesOrderController extends Controller
                 })
                 ->addIndexColumn() //memberikan penomoran
                 ->addColumn('action', function ($invoice) {
-                    return view('invoice._option_paid_management', compact('invoice'))->render();
+                    $total_return = ReturnModel::where('sales_order_id', $invoice->id)->sum('total');
+                    return view('invoice._option_paid_management', compact('invoice', 'total_return'))->render();
                 })
                 ->rawColumns(['action'], ['customerBy'])
                 // ->rawColumns()
@@ -1023,6 +1028,37 @@ class SalesOrderController extends Controller
             $total_amount = $total_amount + $value->amount;
         }
         return response()->json($total_amount);
+    }
+
+    public function getQtyDetail()
+    {
+        $so_id = request()->s;
+        $product_id = request()->p;
+
+        $getqty = SalesOrderDetailModel::where('sales_orders_id', $so_id)->where('products_id', $product_id)->first();
+        $_qty = $getqty->qty;
+        $selected_return = ReturnModel::with('returnDetailsBy')->where('sales_order_id', $so_id)->get();
+
+        $return = 0;
+        if ($selected_return != null) {
+            foreach ($selected_return as $value) {
+                $selected_detail = ReturnDetailModel::where('return_id', $value->id)->where('product_id', $product_id)->first();
+                $return = $return + $selected_detail->qty;
+            }
+        }
+        $data = [
+            'qty' => $_qty,
+            'return' => $return
+        ];
+        return response()->json($data);
+    }
+
+    public function getAllDetail()
+    {
+        $so_id = request()->s;
+
+        $getqty = SalesOrderDetailModel::where('sales_orders_id', $so_id)->get();
+        return response()->json($getqty);
     }
 
     public function selectReturn()

@@ -6,6 +6,7 @@ use App\Models\CustomerAreaModel;
 use App\Models\CustomerCategoriesModel;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
+use App\Models\ReturnModel;
 use App\Models\SalesOrderModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -302,9 +303,13 @@ class CustomerController extends Controller
             ->get();
 
         $total_credit = 0;
+        $total_return = 0;
         foreach ($SODebts as $SODebt) {
             $total_credit = $total_credit + $SODebt->total_after_ppn;
+            $selected_return = ReturnModel::where('sales_order_id', $SODebt->id)->sum('total');
+            $total_return += $selected_return;
         }
-        return response()->json($total_credit);
+        $final_total = $total_credit - $total_return;
+        return response()->json($final_total);
     }
 }

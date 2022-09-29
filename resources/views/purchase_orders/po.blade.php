@@ -262,6 +262,7 @@
                     //Get Customer ID
                     $(modal_id).find(".productPo").select2({
                         width: "100%",
+                        dropdownParent: modal_id,
                         ajax: {
                             type: "GET",
                             url: "/products/selectAll",
@@ -327,6 +328,7 @@
 
                         $(modal_id).find(".productPo").select2({
                             width: "100%",
+                            dropdownParent: modal_id,
                             ajax: {
                                 type: "GET",
                                 url: "/products/selectAll",

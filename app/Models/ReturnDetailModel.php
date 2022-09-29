@@ -13,6 +13,11 @@ class ReturnDetailModel extends Model
 
     public function returnBy()
     {
-        return $this->belongsTo(ReturnModel::class, 'id', 'return_id');
+        return $this->belongsTo(ReturnModel::class, 'return_id', 'id');
+    }
+
+    public function productBy()
+    {
+        return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
     }
 }

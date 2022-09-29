@@ -1,35 +1,47 @@
 <div class="row">
     <div class="col-md-12">
         <div class="row" id="formReturn">
-            <div class="row">
-                <input type="hidden" name="so_id" value="{{ $sales_order->id }}" id="so_id">
-                <div class="form-group col-7">
-                    <label>Product</label>
-                    <select name="returnFields[0][product_id]" class="form-control productReturn" required>
-                        <option value="">Choose Product</option>
-                    </select>
-                    @error('returnFields[0][product_id]')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col-3 col-md-3 form-group">
-                    <label>Qty</label>
-                    <input type="number" class="form-control" required name="returnFields[0][qty]" id="">
-                    @error('returnFields[0][qty]')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+            <input type="hidden" name="so_id" value="{{ $sales_order->id }}" id="so_id">
+            @foreach ($sales_order->salesOrderDetailsBy as $item)
+                <div class="row">
+                    <div class="form-group col-7">
+                        <label>Product</label>
+                        <select name="returnFields[{{ $loop->index }}][product_id]" class="form-control productReturn"
+                            required>
+                            <option value="">Choose Product</option>
+                            <option value="{{ $item->products_id }}" selected>
+                                {{ $item->productSales->nama_barang . ' (' . $item->productSales->sub_materials->nama_sub_material . ', ' . $item->productSales->sub_types->type_name . ')' }}
+                            </option>
+                        </select>
+                        @error('returnFields[{{ $loop->index }}][product_id]')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="col-3 col-md-3 form-group">
+                        <label>Qty</label>
+                        <input type="number" class="form-control" required
+                            name="returnFields[{{ $loop->index }}][qty]" id="">
+                        <small class="text-xs box-order-amount">Order Amount: <span
+                                class="order-amount">{{ $item->qty }}</span></small>
+                        <small class="text-xs box-return-amount "> | Returned: <span
+                                class="return-amount">{{ $return_amount[$loop->index] }}</span></small>
+                        @error('returnFields[{{ $loop->index }}][qty]')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
 
-                <div class="col-2 col-md-2 form-group">
-                    <label for="">&nbsp;</label>
-                    <a id="addReturn" href="javascript:void(0)" class="form-control text-white text-center"
-                        style="border:none; background-color:green">+</a>
+                    <div class="col-2 col-md-2 form-group">
+                        <label for="">&nbsp;</label>
+                        <a id="" href="javascript:void(0)"
+                            class="form-control remReturn text-white text-center"
+                            style="border:none; background-color:red">-</a>
+                    </div>
                 </div>
-            </div>
+            @endforeach
         </div>
         <div class="row mt-3">
             <div class="form-group col-6">
