@@ -42,8 +42,9 @@
             </div>
             <div class="col-lg-6 col-md-12 form-group">
                 <label>Car Type</label>
-                <input type="text" required
-                    class="form-control {{ $errors->first('car_type') ? ' is-invalid' : '' }}" name="car_type">
+                <input type="text" required placeholder="Enter Car Type"
+                    class="form-control text-capitalize {{ $errors->first('car_type') ? ' is-invalid' : '' }}"
+                    name="car_type">
                 @error('car_type')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -52,8 +53,9 @@
             </div>
             <div class="col-lg-6 col-md-12 form-group">
                 <label>Plat Number</label>
-                <input type="text" required
-                    class="form-control {{ $errors->first('plate_number') ? ' is-invalid' : '' }}" name="plate_number">
+                <input type="text" required placeholder="Enter Plat Number"
+                    class="form-control text-uppercase {{ $errors->first('plate_number') ? ' is-invalid' : '' }}"
+                    name="plate_number">
                 @error('plate_number')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -66,7 +68,7 @@
             </div>
             <div class="col-lg-3 col-md-12 form-group">
                 <label>Voltage</label>
-                <input type="text" required
+                <input type="text" required placeholder="Enter Voltage"
                     class="form-control {{ $errors->first('e_voltage') ? ' is-invalid' : '' }}" name="e_voltage">
                 @error('e_voltage')
                     <div class="invalid-feedback">
@@ -76,8 +78,8 @@
             </div>
             <div class="col-lg-3 col-md-12 form-group">
                 <label>CCA</label>
-                <input type="text" required class="form-control  {{ $errors->first('e_cca') ? ' is-invalid' : '' }}"
-                    name="e_cca">
+                <input type="text" required placeholder="Enter CCA"
+                    class="form-control  {{ $errors->first('e_cca') ? ' is-invalid' : '' }}" name="e_cca">
                 @error('e_cca')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -86,7 +88,7 @@
             </div>
             <div class="col-lg-3  col-md-12 form-group">
                 <label>Starting</label>
-                <input type="text" required
+                <input type="text" required placeholder="Enter Starting"
                     class="form-control {{ $errors->first('e_starting') ? ' is-invalid' : '' }}" name="e_starting">
                 @error('e_starting')
                     <div class="invalid-feedback">
@@ -96,7 +98,7 @@
             </div>
             <div class="col-lg-3 col-md-12 form-group">
                 <label>Charging</label>
-                <input type="text" required
+                <input type="text" required placeholder="Enter Charging"
                     class="form-control {{ $errors->first('e_charging') ? ' is-invalid' : '' }}" name="e_charging">
                 @error('e_charging')
                     <div class="invalid-feedback">

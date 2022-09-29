@@ -9,6 +9,8 @@ use App\Models\WarehouseModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+
 
 class ClaimController extends Controller
 {
@@ -195,7 +197,12 @@ class ClaimController extends Controller
     public function historyClaim()
     {
         $title = 'History Claim';
-        $data = ClaimModel::where('status', 1)->latest()->get();
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance')) {
+            $data = ClaimModel::where('status', 1)->latest()->get();
+        } else {
+            $data = ClaimModel::where('e_submittedBy', Auth::user()->id)->where('status', 1)->get();
+        }
+
 
         return view('claim.history_claim', compact('title', 'data'));
     }

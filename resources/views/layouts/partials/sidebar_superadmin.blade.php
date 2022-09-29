@@ -221,19 +221,18 @@
                         </div>
                     </li>
                     <li class="dropdown"><a
-                            class="nav-link menu-title @if (request()->is('report_sales') || request()->is('report_purchase') || request()->is('file_po')) active @endif"
+                            class="nav-link menu-title @if (request()->is('report_sales') || request()->is('report_purchase') || request()->is('report_claim')) active @endif"
                             href="javascript:void(0)"><i data-feather="book-open"></i><span>Report</span></a>
                         <ul class="nav-submenu menu-content"
-                            style="display: @if (request()->is('report_sales') || request()->is('report_purchase') || request()->is('file_po')) block @else none @endif ">
+                            style="display: @if (request()->is('report_sales') || request()->is('report_purchase') || request()->is('report_claim')) block @else none @endif ">
                             <li><a href="{{ url('/report_sales') }}"
                                     class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Sales</a></li>
                             <li><a href="{{ url('/report_purchase') }}"
                                     class="{{ request()->is('report_purchase') ? 'active' : '' }}">Report Purchase
                                 </a></li>
-                            <li><a href="{{ url('/file_po') }}"
-                                    class="{{ request()->is('file_po') ? 'active' : '' }}">Report Claim</a>
+                            <li><a href="{{ url('/report_claim') }}"
+                                    class="{{ request()->is('report_claim') ? 'active' : '' }}">Report Claim</a>
                             </li>
-
                         </ul>
 
                     </li>

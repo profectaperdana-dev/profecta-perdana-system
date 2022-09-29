@@ -102,7 +102,8 @@
                                                                             </div>
                                                                             <div class="form-group col-md-6">
                                                                                 <label>Car Type</label>
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="text"
+                                                                                    class="form-control text-capitalize"
                                                                                     placeholder="Serial Number" readonly
                                                                                     value="{{ $value->car_type }}">
 
@@ -118,7 +119,8 @@
                                                                             <div class="form-group col-md-6">
                                                                                 <label>
                                                                                     Plat Number</label>
-                                                                                <input type="text" class="form-control"
+                                                                                <input type="text"
+                                                                                    class="form-control text-uppercase"
                                                                                     placeholder="Serial Number" readonly
                                                                                     value="{{ $value->plate_number }}">
                                                                             </div>
@@ -208,15 +210,21 @@
 
                                                                             <div class="form-group col-md-6">
                                                                                 <label>Diagnosa</label>
-                                                                                <p>@php
-                                                                                    echo htmlspecialchars_decode(htmlspecialchars_decode($value->diagnosa));
-                                                                                @endphp</p>
+                                                                                <div class="card shadow">
+                                                                                    <p>@php
+                                                                                        echo htmlspecialchars_decode(htmlspecialchars_decode($value->diagnosa));
+                                                                                    @endphp</p>
+                                                                                </div>
+
                                                                             </div>
                                                                             <div class="form-group col-md-6">
-                                                                                <label>Diagnosa</label>
-                                                                                <p>@php
-                                                                                    echo htmlspecialchars_decode(htmlspecialchars_decode($value->result));
-                                                                                @endphp</p>
+                                                                                <label>Result</label>
+                                                                                <div class="card shadow">
+                                                                                    <p>@php
+                                                                                        echo htmlspecialchars_decode(htmlspecialchars_decode($value->result));
+                                                                                    @endphp</p>
+                                                                                </div>
+
                                                                             </div>
                                                                             <div class="form-group col-md-3">
                                                                                 <label>
@@ -279,10 +287,7 @@
         <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-        <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-        <script type="text/javascript">
-            CKEDITOR.replace('result');
-        </script>
+
         <script>
             $(document).ready(function() {
                 $('form').submit(function() {
