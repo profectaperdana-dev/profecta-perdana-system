@@ -67,6 +67,7 @@
                                     <tr>
                                         <th style="2%">action</th>
                                         <th>No</th>
+                                        <th>Return Number</th>
                                         <th>From Order Number</th>
                                         <th>Return Date</th>
                                         <th>Total (Rp)</th>
@@ -132,6 +133,11 @@
                                 "className": "text-center",
                                 orderable: false,
                                 searchable: false
+                            },
+                            {
+                                data: 'return_number',
+                                name: 'return_number'
+
                             },
                             {
                                 data: 'sales_order_id',
@@ -223,260 +229,260 @@
                     $('#example1').DataTable().destroy();
                     load_data();
                 });
-                $(document).on("click", ".modal-btn2", function(event) {
-                    let csrf = $('meta[name="csrf-token"]').attr("content");
+                // $(document).on("click", ".modal-btn2", function(event) {
+                //     let csrf = $('meta[name="csrf-token"]').attr("content");
 
-                    // $(document).on("click", ".modal-btn2", function() {
+                //     // $(document).on("click", ".modal-btn2", function() {
 
-                    let modal_id = $(this).attr('data-bs-target');
-                    //Get Customer ID
-                    $(modal_id).find(".customer-select, .warehouse-select").select2({
-                        width: "100%",
-                    });
-                    let customer_id = $(modal_id).find('.customer-append').val();
-                    $(modal_id).find(".productSo-edit").select2({
-                        width: "100%",
-                        dropdownParent: modal_id,
-                        ajax: {
-                            context: this,
-                            type: "GET",
-                            url: "/products/select",
-                            data: function(params) {
-                                return {
-                                    _token: csrf,
-                                    q: params.term, // search term
-                                    c: customer_id
-                                };
-                            },
-                            dataType: "json",
-                            delay: 250,
-                            processResults: function(data) {
-                                return {
-                                    results: $.map(data, function(item) {
-                                        return [{
-                                            text: item.nama_barang +
-                                                " (" +
-                                                item.type_name +
-                                                ", " +
-                                                item.nama_sub_material +
-                                                ")",
-                                            id: item.id,
-                                        }, ];
-                                    }),
-                                };
-                            },
-                        },
-                    });
+                //     let modal_id = $(this).attr('data-bs-target');
+                //     //Get Customer ID
+                //     $(modal_id).find(".customer-select, .warehouse-select").select2({
+                //         width: "100%",
+                //     });
+                //     let customer_id = $(modal_id).find('.customer-append').val();
+                //     $(modal_id).find(".productSo-edit").select2({
+                //         width: "100%",
+                //         dropdownParent: modal_id,
+                //         ajax: {
+                //             context: this,
+                //             type: "GET",
+                //             url: "/products/select",
+                //             data: function(params) {
+                //                 return {
+                //                     _token: csrf,
+                //                     q: params.term, // search term
+                //                     c: customer_id
+                //                 };
+                //             },
+                //             dataType: "json",
+                //             delay: 250,
+                //             processResults: function(data) {
+                //                 return {
+                //                     results: $.map(data, function(item) {
+                //                         return [{
+                //                             text: item.nama_barang +
+                //                                 " (" +
+                //                                 item.type_name +
+                //                                 ", " +
+                //                                 item.nama_sub_material +
+                //                                 ")",
+                //                             id: item.id,
+                //                         }, ];
+                //                     }),
+                //                 };
+                //             },
+                //         },
+                //     });
 
-                    //Get Customer ID
-                    $(modal_id).find(".customer-append").change(function() {
-                        customer_id = $(modal_id).find(".customer-append").val();
-                    });
-                    let x = $(modal_id)
-                        .find('.modal-body')
-                        .find('.formSo-edit')
-                        .children('.form-group')
-                        .last()
-                        .find('.loop')
-                        .val();
-                    //Get discount depent on product
-                    $(modal_id).on("change", ".productSo-edit", function() {
-                        let product_id = $(this).val();
-                        let parent_product = $(this).parent('.form-group').siblings(
-                            '.form-group').find(
-                            ".discount-append-edit");
-                        $.ajax({
-                            context: this,
-                            type: "GET",
-                            url: "/discounts/select" + "/" + customer_id + "/" +
-                                product_id,
-                            dataType: "json",
-                            success: function(data) {
-                                if (data.discount != null) {
-                                    parent_product.val(data.discount);
-                                } else {
-                                    parent_product.val(0);
-                                }
-                            },
-                        });
-                    });
-                    var stokNow = $('.cekQty-edit').val();
-                    $(modal_id).on("input", ".cekQty-edit", function() {
-                        const qtyValue = $(this).val();
-                        let product_id = $(this).parent('.form-group').siblings(
-                            '.form-group').find(
-                            '.productSo-edit').val();
-                        let id = customer_id;
-                        $.ajax({
-                            context: this,
-                            type: "GET",
-                            url: "/stocks/cekQty/" + product_id,
-                            data: {
-                                _token: csrf,
-                                c: id,
-                            },
-                            dataType: "json",
-                            delay: 250,
-                            success: function(data) {
-                                if (parseInt(qtyValue) > (parseInt(data.stock) +
-                                        parseInt(stokNow))) {
-                                    $(this).parent().find(".qty-warning")
-                                        .removeAttr(
-                                            "hidden");
-                                    $(this).addClass("is-invalid");
-                                } else {
-                                    $(this)
-                                        .parent()
-                                        .find(".qty-warning")
-                                        .attr("hidden", "true");
-                                    $(this).removeClass("is-invalid");
-                                }
-                            },
-                            error: function(XMLHttpRequest, textStatus,
-                                errorThrown) {
-                                alert("Status: " + textStatus);
-                                alert("Error: " + errorThrown);
-                            },
-                        });
-                    });
-                    $(modal_id).on("click", ".addSo-edit", function() {
-                        ++x;
-                        var form =
-                            '<div class="mx-auto py-2 form-group row bg-primary">' +
-                            '<input type="hidden" class="loop" value="' + x + '">' +
-                            '<div class="form-group col-12 col-lg-6">' +
-                            "<label>Product</label>" +
-                            '<select name="editProduct[' +
-                            x +
-                            '][products_id]" class="form-control productSo-edit" required>' +
-                            '<option value="">Choose Product</option> ' +
-                            "</select>" +
-                            "</div>" +
-                            '<div class="col-4 col-lg-2 form-group">' +
-                            "<label> Qty </label> " +
-                            '<input type="number" class="form-control cekQty-edit" required name="editProduct[' +
-                            x +
-                            '][qty]">' +
-                            '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
-                            "</div> " +
-                            '<div class="col-4 col-lg-2 form-group">' +
-                            "<label>Disc (%)</label>" +
-                            '<input type="number" class="form-control discount-append-edit" name="editProduct[' +
-                            x +
-                            '][discount]" id="">' +
-                            "</div>" +
-                            '<div class="col-1 col-md-2 form-group">' +
-                            '<label for=""> &nbsp; </label>' +
-                            '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
-                            "- </a> " +
-                            "</div>" +
-                            " </div>";
-                        $(modal_id).find(".formSo-edit").append(form);
+                //     //Get Customer ID
+                //     $(modal_id).find(".customer-append").change(function() {
+                //         customer_id = $(modal_id).find(".customer-append").val();
+                //     });
+                //     let x = $(modal_id)
+                //         .find('.modal-body')
+                //         .find('.formSo-edit')
+                //         .children('.form-group')
+                //         .last()
+                //         .find('.loop')
+                //         .val();
+                //     //Get discount depent on product
+                //     $(modal_id).on("change", ".productSo-edit", function() {
+                //         let product_id = $(this).val();
+                //         let parent_product = $(this).parent('.form-group').siblings(
+                //             '.form-group').find(
+                //             ".discount-append-edit");
+                //         $.ajax({
+                //             context: this,
+                //             type: "GET",
+                //             url: "/discounts/select" + "/" + customer_id + "/" +
+                //                 product_id,
+                //             dataType: "json",
+                //             success: function(data) {
+                //                 if (data.discount != null) {
+                //                     parent_product.val(data.discount);
+                //                 } else {
+                //                     parent_product.val(0);
+                //                 }
+                //             },
+                //         });
+                //     });
+                //     var stokNow = $('.cekQty-edit').val();
+                //     $(modal_id).on("input", ".cekQty-edit", function() {
+                //         const qtyValue = $(this).val();
+                //         let product_id = $(this).parent('.form-group').siblings(
+                //             '.form-group').find(
+                //             '.productSo-edit').val();
+                //         let id = customer_id;
+                //         $.ajax({
+                //             context: this,
+                //             type: "GET",
+                //             url: "/stocks/cekQty/" + product_id,
+                //             data: {
+                //                 _token: csrf,
+                //                 c: id,
+                //             },
+                //             dataType: "json",
+                //             delay: 250,
+                //             success: function(data) {
+                //                 if (parseInt(qtyValue) > (parseInt(data.stock) +
+                //                         parseInt(stokNow))) {
+                //                     $(this).parent().find(".qty-warning")
+                //                         .removeAttr(
+                //                             "hidden");
+                //                     $(this).addClass("is-invalid");
+                //                 } else {
+                //                     $(this)
+                //                         .parent()
+                //                         .find(".qty-warning")
+                //                         .attr("hidden", "true");
+                //                     $(this).removeClass("is-invalid");
+                //                 }
+                //             },
+                //             error: function(XMLHttpRequest, textStatus,
+                //                 errorThrown) {
+                //                 alert("Status: " + textStatus);
+                //                 alert("Error: " + errorThrown);
+                //             },
+                //         });
+                //     });
+                //     $(modal_id).on("click", ".addSo-edit", function() {
+                //         ++x;
+                //         var form =
+                //             '<div class="mx-auto py-2 form-group row bg-primary">' +
+                //             '<input type="hidden" class="loop" value="' + x + '">' +
+                //             '<div class="form-group col-12 col-lg-6">' +
+                //             "<label>Product</label>" +
+                //             '<select name="editProduct[' +
+                //             x +
+                //             '][products_id]" class="form-control productSo-edit" required>' +
+                //             '<option value="">Choose Product</option> ' +
+                //             "</select>" +
+                //             "</div>" +
+                //             '<div class="col-4 col-lg-2 form-group">' +
+                //             "<label> Qty </label> " +
+                //             '<input type="number" class="form-control cekQty-edit" required name="editProduct[' +
+                //             x +
+                //             '][qty]">' +
+                //             '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
+                //             "</div> " +
+                //             '<div class="col-4 col-lg-2 form-group">' +
+                //             "<label>Disc (%)</label>" +
+                //             '<input type="number" class="form-control discount-append-edit" name="editProduct[' +
+                //             x +
+                //             '][discount]" id="">' +
+                //             "</div>" +
+                //             '<div class="col-1 col-md-2 form-group">' +
+                //             '<label for=""> &nbsp; </label>' +
+                //             '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
+                //             "- </a> " +
+                //             "</div>" +
+                //             " </div>";
+                //         $(modal_id).find(".formSo-edit").append(form);
 
-                        $(modal_id).find(".productSo-edit").select2({
-                            width: "100%",
-                            dropdownParent: modal_id,
-                            ajax: {
-                                type: "GET",
-                                url: "/products/select",
-                                data: function(params) {
-                                    return {
-                                        _token: csrf,
-                                        q: params.term, // search term
-                                        c: customer_id
-                                    };
-                                },
-                                dataType: "json",
-                                delay: 250,
-                                processResults: function(data) {
-                                    return {
-                                        results: $.map(data, function(item) {
-                                            return [{
-                                                text: item
-                                                    .nama_barang +
-                                                    " (" +
-                                                    item
-                                                    .type_name +
-                                                    ", " +
-                                                    item
-                                                    .nama_sub_material +
-                                                    ")",
-                                                id: item.id,
-                                            }, ];
-                                        }),
-                                    };
-                                },
-                            },
-                        });
-                    });
+                //         $(modal_id).find(".productSo-edit").select2({
+                //             width: "100%",
+                //             dropdownParent: modal_id,
+                //             ajax: {
+                //                 type: "GET",
+                //                 url: "/products/select",
+                //                 data: function(params) {
+                //                     return {
+                //                         _token: csrf,
+                //                         q: params.term, // search term
+                //                         c: customer_id
+                //                     };
+                //                 },
+                //                 dataType: "json",
+                //                 delay: 250,
+                //                 processResults: function(data) {
+                //                     return {
+                //                         results: $.map(data, function(item) {
+                //                             return [{
+                //                                 text: item
+                //                                     .nama_barang +
+                //                                     " (" +
+                //                                     item
+                //                                     .type_name +
+                //                                     ", " +
+                //                                     item
+                //                                     .nama_sub_material +
+                //                                     ")",
+                //                                 id: item.id,
+                //                             }, ];
+                //                         }),
+                //                     };
+                //                 },
+                //             },
+                //         });
+                //     });
 
-                    //remove Sales Order fields
-                    $(modal_id).on("click", ".remSo-edit", function() {
-                        $(this).closest(".row").remove();
-                    });
+                //     //remove Sales Order fields
+                //     $(modal_id).on("click", ".remSo-edit", function() {
+                //         $(this).closest(".row").remove();
+                //     });
 
-                    //reload total
-                    $(modal_id).on('click', '.btn-reload', function() {
-                        let ppn = 0;
-                        let total = 0;
-                        let total_after_ppn = 0;
-                        $(modal_id).find('.productSo-edit').each(function() {
-                            let product_id = $(this).val();
-                            let cost = function() {
-                                let temp = 0;
-                                $.ajax({
-                                    async: false,
-                                    context: this,
-                                    type: "GET",
-                                    url: "/products/selectCost/" +
-                                        product_id,
-                                    dataType: "json",
-                                    success: function(data) {
-                                        temp = data
-                                            .harga_jual_nonretail
-                                    },
-                                });
-                                return temp;
-                            }();
+                //     //reload total
+                //     $(modal_id).on('click', '.btn-reload', function() {
+                //         let ppn = 0;
+                //         let total = 0;
+                //         let total_after_ppn = 0;
+                //         $(modal_id).find('.productSo-edit').each(function() {
+                //             let product_id = $(this).val();
+                //             let cost = function() {
+                //                 let temp = 0;
+                //                 $.ajax({
+                //                     async: false,
+                //                     context: this,
+                //                     type: "GET",
+                //                     url: "/products/selectCost/" +
+                //                         product_id,
+                //                     dataType: "json",
+                //                     success: function(data) {
+                //                         temp = data
+                //                             .harga_jual_nonretail
+                //                     },
+                //                 });
+                //                 return temp;
+                //             }();
 
-                            let qty = $(this).parent().siblings().find(
-                                '.cekQty-edit').val();
-                            let disc = $(this).parent().siblings().find(
-                                    '.discount-append-edit')
-                                .val() / 100;
-                            let disc_cost = cost * disc;
-                            let cost_after_disc = cost - disc_cost;
-                            total = total + (cost_after_disc * qty);
-                            //   alert($(this).parent().siblings().find('.cekQty-edit').val());
-                        });
+                //             let qty = $(this).parent().siblings().find(
+                //                 '.cekQty-edit').val();
+                //             let disc = $(this).parent().siblings().find(
+                //                     '.discount-append-edit')
+                //                 .val() / 100;
+                //             let disc_cost = cost * disc;
+                //             let cost_after_disc = cost - disc_cost;
+                //             total = total + (cost_after_disc * qty);
+                //             //   alert($(this).parent().siblings().find('.cekQty-edit').val());
+                //         });
 
-                        ppn = total * 0.11;
-                        total_after_ppn = total + ppn;
-                        $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math
-                            .round(ppn)
-                            .toLocaleString('us', {
-                                minimumFractionDigits: 0,
-                                maximumFractionDigits: 0
-                            }));
-                        $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
-                            .round(total)
-                            .toLocaleString(
-                                'us', {
-                                    minimumFractionDigits: 0,
-                                    maximumFractionDigits: 0
-                                }));
-                        $(this).closest('.row').siblings().find('.total-after-ppn').val(
-                            'Rp. ' + Math
-                            .round(
-                                total_after_ppn).toLocaleString('us', {
-                                minimumFractionDigits: 0,
-                                maximumFractionDigits: 0
-                            }));
-                    });
-                    $(modal_id).on('hidden.bs.modal', function() {
-                        $(modal_id).unbind();
-                    });
-                });
+                //         ppn = total * 0.11;
+                //         total_after_ppn = total + ppn;
+                //         $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math
+                //             .round(ppn)
+                //             .toLocaleString('us', {
+                //                 minimumFractionDigits: 0,
+                //                 maximumFractionDigits: 0
+                //             }));
+                //         $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
+                //             .round(total)
+                //             .toLocaleString(
+                //                 'us', {
+                //                     minimumFractionDigits: 0,
+                //                     maximumFractionDigits: 0
+                //                 }));
+                //         $(this).closest('.row').siblings().find('.total-after-ppn').val(
+                //             'Rp. ' + Math
+                //             .round(
+                //                 total_after_ppn).toLocaleString('us', {
+                //                 minimumFractionDigits: 0,
+                //                 maximumFractionDigits: 0
+                //             }));
+                //     });
+                //     $(modal_id).on('hidden.bs.modal', function() {
+                //         $(modal_id).unbind();
+                //     });
+                // });
                 // });
             });
         </script>

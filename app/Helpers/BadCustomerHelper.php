@@ -3,6 +3,7 @@
 namespace App\Helpers;
 
 use App\Models\CustomerModel;
+use App\Models\ReturnModel;
 use App\Models\SalesOrderModel;
 use Carbon\Carbon;
 use DateTimeImmutable;
@@ -36,11 +37,16 @@ function checkOverPlafone($customer_id)
 
     //dd($selected_customer);
     $total_credit = 0;
+    $total_return = 0;
     foreach ($SODebts as $SODebt) {
         $total_credit = $total_credit + $SODebt->total_after_ppn;
+        $selected_return = ReturnModel::where('sales_order_id', $SODebt->id)->sum('total');
+        $total_return += $selected_return;
     }
 
-    if ($total_credit > $selected_customer->credit_limit) {
+    $final_total = $total_credit - $total_return;
+
+    if ($final_total > $selected_customer->credit_limit) {
         $selected_customer->isOverPlafoned = 1;
         $selected_customer->label = 'Bad Customer';
         $selected_customer->save();

@@ -12,6 +12,7 @@
     <a class="dropdown-item" href="{{ url('invoice/' . $invoice->id . '/invoice_with_ppn') }}">Print Invoice</a>
     <a class="dropdown-item" href="{{ url('invoice/' . $invoice->id . '/delivery_order') }}">Print Delivary Order</a>
 </div>
+
 <div class="modal fade" id="manageData{{ $invoice->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">

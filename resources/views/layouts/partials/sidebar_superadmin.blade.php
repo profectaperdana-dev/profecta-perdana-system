@@ -211,7 +211,7 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('return') ? 'active' : '' }}"
-                            href="{{ url('/return') }}"><i data-feather="rotate-ccw"></i></i><span>Return
+                            href="{{ url('/return') }}"><i data-feather="rotate-ccw"></i></i><span>Return Sales
                             </span></a>
                     </li>
 

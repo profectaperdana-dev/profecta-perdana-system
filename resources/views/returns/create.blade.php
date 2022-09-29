@@ -25,6 +25,9 @@
                         <hr class="bg-primary">
                     </div>
                     <div class="card-body">
+                        <div class="mb-3 row box-select-all justify-content-end">
+                            <button class="col-1 me-3 btn btn-sm btn-primary" id="addReturn">+</button>
+                        </div>
                         <form method="post" action="{{ url('return/store') }}" enctype="multipart/form-data">
                             @csrf
                             @include('returns._form')
@@ -146,6 +149,7 @@
                         x +
                         '][qty]">' +
                         '<small class="text-xs box-order-amount" hidden>Order Amount: <span class="order-amount">0</span></small>' +
+                        '<small class="text-xs box-return-amount" hidden> | Returned: <span class="return-amount">0</span></small>' +
                         '</div>' +
                         '<div class="col-2 col-md-2 form-group">' +
                         '<label for=""> &nbsp; </label>' +
@@ -187,8 +191,8 @@
                         },
                     });
 
-                    $('.productReturn').change(() => {
-                        let product_id = $('.productReturn').val();
+                    $(document).on('change', '.productReturn', function() {
+                        let product_id = $(this).val();
 
                         $.ajax({
                             context: this,
@@ -202,10 +206,20 @@
                             dataType: "json",
                             success: function(data) {
                                 if (product_id == "") {
-                                    $('.box-order-amount').attr('hidden', true);
+                                    $(this).parent().siblings().find('.box-order-amount')
+                                        .attr('hidden',
+                                            true);
                                 } else {
-                                    $('.box-order-amount').attr('hidden', false);
-                                    $('.order-amount').html(data);
+                                    $(this).parent().siblings().find('.box-order-amount')
+                                        .attr('hidden',
+                                            false);
+                                    $(this).parent().siblings().find('.box-return-amount')
+                                        .attr('hidden',
+                                            false);
+                                    $(this).parent().siblings().find('.order-amount').html(
+                                        data.qty);
+                                    $(this).parent().siblings().find('.return-amount').html(
+                                        data.return);
                                 }
 
                             },
@@ -215,7 +229,7 @@
 
                 //remove Purchase Order fields
                 $(document).on("click", ".remReturn", function() {
-                    $(this).parents(".form-group").remove();
+                    $(this).closest(".row").remove();
                 });
 
             });
