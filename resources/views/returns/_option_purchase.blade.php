@@ -7,7 +7,7 @@
             data-bs-target="#editReturn{{ $return->id }}">Edit</a>
     @endcan
     <h5 class="dropdown-header">Prints</h5>
-    <a class="dropdown-item" href="{{ url('return/' . $return->id . '/print') }}">Print Return</a>
+    <a class="dropdown-item" href="{{ url('return_purchase/' . $return->id . '/print') }}">Print Return</a>
 
 </div>
 
@@ -25,13 +25,13 @@
                 <div class="mb-3 row box-select-all justify-content-end">
                     <button class="col-1 me-3 btn btn-sm btn-primary" id="addReturn">+</button>
                 </div>
-                <form action="{{ url('return/' . $return->id . '/update_return') }}" method="POST"
+                <form action="{{ url('return_purchase/' . $return->id . '/update_return_purchase') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="hidden" id="so_id" value="{{ $return->salesOrderBy->id }}">
+                                <input type="hidden" id="so_id" value="{{ $return->purchaseOrderBy->id }}">
                                 <div class="row" id="formReturn">
                                     @foreach ($return->returnDetailsBy as $item)
                                         <input type="hidden" class="loop" value="{{ $loop->index }}">

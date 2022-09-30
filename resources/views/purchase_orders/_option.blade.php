@@ -10,6 +10,7 @@
     @can('isSuperAdmin')
         <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal" data-original-title="test"
             data-bs-target="#manageData{{ $purchase->id }}">Edit</a>
+        <a class="dropdown-item" href="{{ url('return_purchase/' . $purchase->id) }}">Return</a>
     @endcan
 </div>
 

@@ -17,7 +17,7 @@
                 <div class="col-sm-12">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
                     <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        You can create Return in Invoice.
+                        You can create Return in Purchase.
                     </h6>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                                         <th style="2%">action</th>
                                         <th>No</th>
                                         <th>Return Number</th>
-                                        <th>From Order Number</th>
+                                        <th>From Purchase Number</th>
                                         <th>Return Date</th>
                                         <th>Total (Rp)</th>
                                         <th>Return Reason</th>
@@ -115,7 +115,7 @@
                         processing: true,
                         serverSide: true,
                         ajax: {
-                            url: "{{ url('/return') }}",
+                            url: "{{ url('/return_purchase') }}",
                             data: {
                                 from_date: from_date,
                                 to_date: to_date
@@ -140,8 +140,8 @@
 
                             },
                             {
-                                data: 'sales_order_id',
-                                name: 'sales_order_id'
+                                data: 'purchase_order_id',
+                                name: 'purchase_order_id'
 
                             },
                             {
@@ -173,7 +173,7 @@
                         ],
                         buttons: ['pageLength',
                             {
-                                title: 'Data Invoice',
+                                title: 'Data Return Purchase Order',
                                 messageTop: '<h5>{{ $title }} ({{ date('l H:i A, d F Y ') }})</h5><br>',
                                 messageBottom: '<strong style="color:red;">*Please select only the type of column needed when printing so that the print is neater</strong>',
                                 extend: 'print',

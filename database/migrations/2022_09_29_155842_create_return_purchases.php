@@ -16,10 +16,12 @@ class CreateReturnPurchases extends Migration
         Schema::create('return_purchases', function (Blueprint $table) {
             $table->id();
             $table->integer('purchase_order_id');
+            $table->string('return_number');
             $table->date('return_date');
             $table->integer('total');
             $table->string('return_reason');
             $table->integer('created_by');
+            $table->string('pdf_return')->nullable();
             $table->timestamps();
         });
     }

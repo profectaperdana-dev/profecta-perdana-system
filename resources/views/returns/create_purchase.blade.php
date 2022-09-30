@@ -28,9 +28,10 @@
                         <div class="mb-3 row box-select-all justify-content-end">
                             <button class="col-1 me-3 btn btn-sm btn-primary" id="addReturn">+</button>
                         </div>
-                        <form method="post" action="{{ url('return/store') }}" enctype="multipart/form-data">
+                        <form method="post" action="{{ url('return_purchase/store_purchase') }}"
+                            enctype="multipart/form-data">
                             @csrf
-                            @include('returns._form')
+                            @include('returns._form_purchase')
                         </form>
                     </div>
                 </div>
@@ -70,18 +71,18 @@
                     }
                 });
 
-                let so_id = $('#so_id').val();
+                let po_id = $('#po_id').val();
 
                 $(".productReturn").select2({
                     width: "100%",
                     ajax: {
                         type: "GET",
-                        url: "/sales_order/selectReturn",
+                        url: "/purchase_order/selectReturn",
                         data: function(params) {
                             return {
                                 _token: csrf,
                                 q: params.term, // search term
-                                s: so_id
+                                p: po_id
                             };
                         },
                         dataType: "json",
@@ -110,11 +111,11 @@
                     $.ajax({
                         context: this,
                         type: "GET",
-                        url: "/sales_order/getQtyDetail",
+                        url: "/purchase_order/getQtyDetail",
                         data: {
                             _token: csrf,
-                            s: so_id,
-                            p: product_id
+                            p: po_id,
+                            pr: product_id
                         },
                         dataType: "json",
                         success: function(data) {
@@ -173,12 +174,12 @@
                         width: "100%",
                         ajax: {
                             type: "GET",
-                            url: "/sales_order/selectReturn",
+                            url: "/purchase_order/selectReturn",
                             data: function(params) {
                                 return {
                                     _token: csrf,
                                     q: params.term, // search term
-                                    s: so_id
+                                    p: po_id
                                 };
                             },
                             dataType: "json",
@@ -207,11 +208,11 @@
                         $.ajax({
                             context: this,
                             type: "GET",
-                            url: "/sales_order/getQtyDetail",
+                            url: "/purchase_order/getQtyDetail",
                             data: {
                                 _token: csrf,
-                                s: so_id,
-                                p: product_id
+                                p: po_id,
+                                pr: product_id
                             },
                             dataType: "json",
                             success: function(data) {

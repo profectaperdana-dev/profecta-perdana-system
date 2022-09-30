@@ -110,7 +110,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/report_claim/', [ReportController::class, 'reportClaim']);
     Route::get('/sales_order/getQtyDetail', [SalesOrderController::class, 'getQtyDetail']);
     Route::get('/sales_order/getAllDetail', [SalesOrderController::class, 'getAllDetail']);
-
+    Route::get('/purchase_order/selectReturn', [PurchaseOrderController::class, 'selectReturn']);
+    Route::get('/purchase_order/getQtyDetail', [PurchaseOrderController::class, 'getQtyDetail']);
+    Route::get('/purchase_order/getAllDetail', [PurchaseOrderController::class, 'getAllDetail']);
 
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
     Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
@@ -120,6 +122,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [ReturnController::class, 'store']);
         Route::post('/{id}/update_return', [ReturnController::class, 'update_return']);
         Route::get('/{id}/print', [ReturnController::class, 'print_return']);
+    });
+    Route::prefix('return_purchase')->group(function () {
+        Route::get('/', [ReturnController::class, 'index_purchase']);
+        Route::get('/{id}', [ReturnController::class, 'create_purchase']);
+        Route::post('/store_purchase', [ReturnController::class, 'store_purchase']);
+        Route::post('/{id}/update_return_purchase', [ReturnController::class, 'update_return_purchase']);
+        Route::get('/{id}/print', [ReturnController::class, 'print_return_purchase']);
     });
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
