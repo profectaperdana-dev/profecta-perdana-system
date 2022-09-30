@@ -19,13 +19,13 @@
             <div class="form-group col-md-6">
                 <label>Car Type</label>
                 <input type="text" class="form-control text-capitalize" placeholder="Serial Number" readonly
-                    value="{{ $value->car_type }}">
+                    value="{{ $value->carBrandBy->car_brand }} / {{ $value->carTypeBy->car_type }}">
 
             </div>
             <div class="form-group col-md-6">
                 <label>Accu type</label>
                 <input type="text" class="form-control text-uppercase" placeholder="Product Code" readonly
-                    value="{{ $value->productSales->sub_materials->nama_sub_material }}/{{ $value->productSales->sub_types->type_name }}/{{ $value->productSales->nama_barang }}">
+                    value="@if ($value->material == null) {{ $value->product_id }}@else{{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }} @endif">
             </div>
 
             <div class="form-group col-md-6">
@@ -86,13 +86,13 @@
             </div>
             <div class="col-12 col-md-12 form-group">
                 <label>Result</label>
-                <textarea name="result" required id="" cols="30" rows="10"
-                    class="form-control {{ $errors->first('result') ? ' is-invalid' : '' }}"></textarea>
-                @error('result')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                <select name="result" id="" class="form-control uoms">
+                    <option value="" selected>-Choose Result-</option>
+                    <option value="CP01 - Good Condition">CP01 - Good Condition</option>
+                    <option value="CP02 - Waranty Rejected">CP02 - Waranty Rejected</option>
+                    <option value="CP03 - Waranty Accepted">CP03 - Waranty Accepted</option>
+                    <option value="CP04 - Good Will">CP04 - Good Will</option>
+                </select>
             </div>
             <div class="col-12 col-md-12 form-group">
                 <label>Receipt Method</label>

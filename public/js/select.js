@@ -36,7 +36,7 @@ $(document).ready(function () {
     });
 
     //  Event on change select material:start
-    $("#material").change(function () {
+    $("#material").change(function () { 
         //clear select
         $("#sub-material").empty();
         $("#sub-type").empty();

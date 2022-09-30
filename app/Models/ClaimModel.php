@@ -21,4 +21,12 @@ class ClaimModel extends Model
     {
         return $this->hasOne(User::class, 'id', 'e_submittedBy')->withTrashed();
     }
+    public function carBrandBy()
+    {
+        return $this->hasOne(CarBrandModel::class, 'id', 'car_brand_id');
+    }
+    public function carTypeBy()
+    {
+        return $this->hasOne(CarTypeModel::class, 'id', 'car_type_id');
+    }
 }

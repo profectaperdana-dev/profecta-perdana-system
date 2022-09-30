@@ -10,12 +10,14 @@
                 <select name="customer_id" id="cust" required
                     class="form-control uoms {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
                     <option value="" selected>-Choose Customer-</option>
-                    @foreach ($customer as $row)
-                        <option value="{{ $row->name_cust }}}">{{ $row->name_cust }}</option>
-                    @endforeach
                     <option value="other">Other Customer</option>
+                    @foreach ($customer as $row)
+                        <option value="{{ $row->code_cust }} - {{ $row->name_cust }}">
+                            {{ $row->code_cust }} - {{ $row->name_cust }}</option>
+                    @endforeach
+
                     <input id="otheCustomer" name="other" type="text" class="form-control"
-                        placeholder="other customer">
+                        placeholder="Enter Other Customer">
                 </select>
                 @error('customer_id')
                     <div class="invalid-feedback">
@@ -25,14 +27,23 @@
             </div>
             <div class="col-6 col-md-12 form-group">
                 <label>Accu Type</label>
-                <select name="product_id" id="" required
+                <select name="product_id" id="product_id" required
                     class="form-control uoms {{ $errors->first('product_id') ? ' is-invalid' : '' }}">
                     <option value="" selected>-Choose Accu Type-</option>
+                    <option value="other_accu">Other Accu Type</option>
                     @foreach ($product as $row)
-                        <option value="{{ $row->id }}">
+                        <option value="{{ $row->nama_barang }}"
+                            data-material="{{ $row->sub_materials->nama_sub_material }}"
+                            data-type_material="{{ $row->sub_types->type_name }}">
                             {{ $row->sub_materials->nama_sub_material }}/{{ $row->sub_types->type_name }}/{{ $row->nama_barang }}
                         </option>
                     @endforeach
+
+                    <input id="otherAccu" name="other_accu" type="text" class="form-control"
+                        placeholder="Enter Other Accu type">
+
+                    <input type="hidden" name="material" id="material">
+                    <input type="hidden" name="type_material" id="type_material">
                 </select>
                 @error('product_id')
                     <div class="invalid-feedback">
@@ -40,18 +51,7 @@
                     </div>
                 @enderror
             </div>
-            <div class="col-lg-6 col-md-12 form-group">
-                <label>Car Type</label>
-                <input type="text" required placeholder="Enter Car Type"
-                    class="form-control text-capitalize {{ $errors->first('car_type') ? ' is-invalid' : '' }}"
-                    name="car_type">
-                @error('car_type')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="col-lg-6 col-md-12 form-group">
+            <div class="col-lg-4 col-md-12 form-group">
                 <label>Plat Number</label>
                 <input type="text" required placeholder="Enter Plat Number"
                     class="form-control text-uppercase {{ $errors->first('plate_number') ? ' is-invalid' : '' }}"
@@ -61,6 +61,24 @@
                         {{ $message }}
                     </div>
                 @enderror
+            </div>
+            <div class="col-lg-4 col-md-12 form-group">
+                <label>Car Brands</label>
+
+                <select name="car_brand_id" id="brand" class="form-control uoms">
+                    <option value="" selected>-Choose Car Brands-</option>
+                    @foreach ($brand as $value)
+                        <option value="{{ $value->id }}">{{ $value->car_brand }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="col-lg-4 col-md-12 form-group">
+                <label>Car Type</label>
+                <select name="car_type_id" id="carType" class="form-control uoms">
+                    <option value="" selected>-Choose Car Brands-</option>
+
+                </select>
+
             </div>
             <div class="form-group col-md-12">
                 <input type="text" class="form-control bg-warning text-white text-center" placeholder="Serial Number"

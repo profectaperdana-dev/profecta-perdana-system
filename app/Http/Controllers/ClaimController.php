@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CarBrandModel;
+use App\Models\CarTypeModel;
 use App\Models\ClaimModel;
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
@@ -39,9 +41,25 @@ class ClaimController extends Controller
         $product = ProductModel::all();
         $customer = CustomerModel::all();
         $data = ClaimModel::latest()->get();
-        return view('claim.create', compact('title', 'product', 'customer', 'data'));
+        $brand = CarBrandModel::all();
+        return view('claim.create', compact('title', 'product', 'customer', 'data', 'brand'));
     }
+    public function select($id)
+    {
+        $sub_materials = [];
+        $material_id = $id;
 
+        if (request()->has('q')) {
+            $search = request()->q;
+            $sub_materials = CarTypeModel::select("id", "car_type", "id_car_brand")
+                ->where('car_type', 'LIKE', "%$search%")
+                ->where('id_car_brand', $material_id)
+                ->get();
+        } else {
+            $sub_materials = CarTypeModel::where('id_car_brand', $material_id)->get();
+        }
+        return response()->json($sub_materials);
+    }
     /**
      * Store a newly created resource in storage.
      *
@@ -53,7 +71,7 @@ class ClaimController extends Controller
         $request->validate([
             'customer_id' => 'required',
             'product_id' => 'required',
-            'car_type' => 'required',
+            'car_type_id' => 'required',
             'plate_number' => 'required',
             'e_voltage' => 'required',
             'e_cca' => 'required',
@@ -85,15 +103,22 @@ class ClaimController extends Controller
         } else {
             $model->customer_id = $request->customer_id;
         }
-        $model->product_id = $request->product_id;
-        $model->car_type = $request->car_type;
+
+        if ($request->product_id == 'other_accu') {
+            $model->product_id = $request->other_accu;
+        } else {
+            $model->product_id = $request->product_id;
+        }
+        $model->car_type_id = $request->car_type_id;
+        $model->car_brand_id = $request->car_brand_id;
         $model->plate_number = $request->plate_number;
         $model->e_voltage = $request->e_voltage;
         $model->e_cca = $request->e_cca;
         $model->e_starting = $request->e_starting;
         $model->e_charging = $request->e_charging;
         $model->diagnosa = $request->diagnosa;
-
+        $model->material = $request->material;
+        $model->type_material = $request->type_material;
         // submit and receive by
         $model->e_submittedBy = Auth::user()->id;
 

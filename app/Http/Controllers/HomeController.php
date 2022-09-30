@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ClaimModel;
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderModel;
@@ -118,6 +119,8 @@ class HomeController extends Controller
         }
         $data_po['chart_po'] = json_encode($data_po);
 
-        return view('home', compact('data_profit', 'data', 'data_po', 'po_val', 'po', 'so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
+        $complete_claim = ClaimModel::where('status', 1)->where('e_submittedBy', Auth::user()->id)->count();
+        $claim_progress = ClaimModel::where('status', 0)->where('e_submittedBy', Auth::user()->id)->count();
+        return view('home', compact('claim_progress', 'complete_claim', 'data_profit', 'data', 'data_po', 'po_val', 'po', 'so_day', 'supplier', 'produk', 'customer', 'year', 'user', 'month', 'title', 'so_total', 'so_by', 'so_verify', 'so_today', 'approve_today', 'so_no_verif', 'over_due'));
     }
 }
