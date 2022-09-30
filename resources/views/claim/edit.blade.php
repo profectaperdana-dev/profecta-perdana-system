@@ -56,20 +56,27 @@
         <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-        <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
+        {{-- <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
         <script type="text/javascript">
             CKEDITOR.replace('result');
-        </script>
+        </script> --}}
         <script>
             $(document).ready(function() {
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
                 });
+                // $('.result').select2({
+                //     placeholder: '-Select Result-',
+                //     allowClear: true
+                // });
+                // $('.receipt').select2({
+                //     placeholder: '-Select Method-',
+                //     allowClear: true
+                // });
                 var sig = $('#sig').signature({
                     syncField: '#signature64',
                     syncFormat: 'PNG',
                     // distance: 0
-
                 });
                 $('#clear').click(function(e) {
                     e.preventDefault();

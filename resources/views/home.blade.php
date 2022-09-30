@@ -58,6 +58,34 @@
         </div>
 
         <div class="row">
+            @can('isTeknisi')
+                <div class="col-sm-12 col-xl-6 col-lg-6">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="battery-charging"></i></div>
+                                <div class="media-body"><span class="m-0">Claim is complete</span>
+                                    <h4 class="mb-0 counter">{{ $complete_claim }}</h4><i class="icon-bg"
+                                        data-feather="battery-charging"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12 col-xl-6 col-lg-6">
+                    <div class="card o-hidden border-0">
+                        <div class="bg-primary b-r-4 card-body">
+                            <div class="media static-top-widget">
+                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
+                                <div class="media-body"><span class="m-0">Claim in progress</span>
+                                    <h4 class="mb-0 counter">{{ $claim_progress }}</h4><i class="icon-bg"
+                                        data-feather="box"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            @endcan
             @can('isWarehouseKeeper')
                 <div class="col-sm-12 col-xl-4 col-lg-4">
                     <div class="card o-hidden border-0">
@@ -519,8 +547,12 @@
                     },
                     colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary]
                 };
-                var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
-                chart.render();
+                // var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
+                // chart.render();
+                setTimeout(() => {
+                    var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
+                    chart.render();
+                }, 2100);
             });
         </script>
     @endpush

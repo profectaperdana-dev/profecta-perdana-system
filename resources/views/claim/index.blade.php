@@ -93,36 +93,43 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12">
                                                                         <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-lg-4 col-md-12">
                                                                                 <label>Claim number</label>
                                                                                 <input type="text" class="form-control "
                                                                                     placeholder="Product Name" readonly
                                                                                     value="{{ $value->claim_number }}">
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-lg-4 col-md-12">
                                                                                 <label>
                                                                                     Claim date</label>
                                                                                 <input type="date" class="form-control"
                                                                                     placeholder="Serial Number" readonly
                                                                                     value="{{ $value->claim_date }}">
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-lg-4 col-md-12">
+                                                                                <label>
+                                                                                    Customer/Phone Number</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    placeholder="Serial Number" readonly
+                                                                                    value="{{ $value->customer_id }}">
+                                                                            </div>
+                                                                            <div class="form-group col-lg-4 col-md-12">
                                                                                 <label>Car Type</label>
                                                                                 <input type="text"
                                                                                     class="form-control text-capitalize"
                                                                                     placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->car_type }}">
+                                                                                    value="{{ $value->carBrandBy->car_brand }} / {{ $value->carTypeBy->car_type }}">
 
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-lg-4 col-md-12">
                                                                                 <label>Accu type</label>
                                                                                 <input type="text"
                                                                                     class="form-control text-uppercase"
                                                                                     placeholder="Product Code" readonly
-                                                                                    value="{{ $value->productSales->sub_materials->nama_sub_material }}/{{ $value->productSales->sub_types->type_name }}/{{ $value->productSales->nama_barang }}">
+                                                                                    value="@if ($value->material == null) {{ $value->product_id }}@else{{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }} @endif">
                                                                             </div>
 
-                                                                            <div class="form-group col-md-6">
+                                                                            <div class="form-group col-lg-4 col-md-12">
                                                                                 <label>
                                                                                     Plat Number</label>
                                                                                 <input type="text"
@@ -130,13 +137,7 @@
                                                                                     placeholder="Serial Number" readonly
                                                                                     value="{{ $value->plate_number }}">
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>
-                                                                                    Customer/Phone Number</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->customer_id }}">
-                                                                            </div>
+
                                                                             <div class="form-group col-md-12">
                                                                                 <input type="text"
                                                                                     class="form-control bg-warning text-white text-center"
@@ -250,7 +251,14 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td class="text-uppercase">{{ $value->claim_number }}</td>
                                             <td>{{ $value->customer_id }}</td>
-                                            <td>{{ $value->productSales->sub_materials->nama_sub_material }}/{{ $value->productSales->sub_types->type_name }}/{{ $value->productSales->nama_barang }}
+                                            <td>
+                                                @if ($value->material == null)
+                                                    {{ $value->product_id }}
+                                                @else
+                                                    {{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }}
+                                                @endif
+
+
                                             </td>
                                             <td>
                                                 <a class="btn btn-sm btn-primary"
