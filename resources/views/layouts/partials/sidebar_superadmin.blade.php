@@ -175,6 +175,12 @@
                                 data-feather="folder-plus"></i><span>Receiving PO
                             </span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('return_purchase') ? 'active' : '' }}"
+                            href="{{ url('/return_purchase') }}"><i data-feather="rotate-cw"></i></i><span>Return
+                                Purchases
+                            </span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Transaction Sales</h6>
