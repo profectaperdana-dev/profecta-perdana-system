@@ -153,6 +153,7 @@
                     <th style="text-align:right;padding:5px">Price (Rp)</th>
                     <th style="text-align:center;padding:5px">Qty</th>
                     <th style="text-align:center;padding:5px">Disc (%)</th>
+                    <th style="text-align:center;padding:5px">Disc (Rp)</th>
                     <th style="text-align:right;padding:5px;margin-right:30px";>Total</th>
                 </tr>
             </thead>
@@ -191,16 +192,30 @@
                             @endphp
                             {{ $diskon }}
                         </td>
+                        <td style="text-align:center;padding:5px">
+                            @php
+                                $diskon = 0;
+                                $getdiskon = $value->returnBy->salesOrderBy->salesOrderDetailsBy;
+                                foreach ($getdiskon as $dis) {
+                                    if ($dis->products_id == $value->product_id) {
+                                        $diskon = $dis->discount_rp;
+                                    }
+                                }
+                            @endphp
+                            {{ number_format($diskon, 0, ',', '.') }}
+                        </td>
                         @php
                             $diskon = 0;
+                            $diskon_rp = 0;
                             $getdiskon = $value->returnBy->salesOrderBy->salesOrderDetailsBy;
                             foreach ($getdiskon as $dis) {
                                 if ($dis->products_id == $value->product_id) {
                                     $diskon = $dis->discount / 100;
+                                    $diskon_rp = $dis->discount_rp;
                                 }
                             }
                             $hargaDiskon = $value->productBy->harga_jual_nonretail * $diskon;
-                            $hargaAfterDiskon = $value->productBy->harga_jual_nonretail - $hargaDiskon;
+                            $hargaAfterDiskon = $value->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
                             $sub_total = $hargaAfterDiskon * $value->qty;
                             $ppn = 0.11 * $sub_total;
                             $total = $sub_total + $ppn;

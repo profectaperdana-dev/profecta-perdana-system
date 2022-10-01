@@ -573,6 +573,7 @@ class SalesOrderController extends Controller
             if ($product_exist != null) {
                 $product_exist->qty = $product['qty'];
                 $product_exist->discount = $product['discount'];
+                $product_exist->discount_rp = $product['discount_rp'];
                 $product_exist->save();
             } else {
                 $new_product = new SalesOrderDetailModel();
@@ -580,13 +581,14 @@ class SalesOrderController extends Controller
                 $new_product->products_id = $product['products_id'];
                 $new_product->qty = $product['qty'];
                 $new_product->discount = $product['discount'];
+                $new_product->discount_rp = $product['discount_rp'];
                 $new_product->created_by = Auth::user()->id;
                 $new_product->save();
             }
             $harga = ProductModel::where('id', $product['products_id'])->first();
             $diskon =  $product['discount'] / 100;
             $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+            $hargaAfterDiskon = ($harga->harga_jual_nonretail -  $hargaDiskon) - $product['discount_rp'];
             $total = $total + ($hargaAfterDiskon * $product['qty']);
 
             $harga_awal = $harga->harga_beli * $product['qty'];

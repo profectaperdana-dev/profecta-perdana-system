@@ -282,7 +282,7 @@ class ReturnController extends Controller
             $product = ProductModel::where('id', $detail->product_id)->first();
             $diskon =  $selected_sod->discount / 100;
             $hargaDiskon = $product->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = $product->harga_jual_nonretail -  $hargaDiskon;
+            $hargaAfterDiskon = ($product->harga_jual_nonretail -  $hargaDiskon) - $selected_sod->discount_rp;
             $total = $total + ($hargaAfterDiskon * $detail->qty);
         }
         $ppn = 0.11 * $total;
@@ -528,7 +528,7 @@ class ReturnController extends Controller
             $products = ProductModel::where('id', $product['product_id'])->first();
             $diskon =  $selected_sod->discount / 100;
             $hargaDiskon = $products->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = $products->harga_jual_nonretail -  $hargaDiskon;
+            $hargaAfterDiskon = ($products->harga_jual_nonretail -  $hargaDiskon)  - $selected_sod->discount_rp;
             $total = $total + ($hargaAfterDiskon * $product['qty']);
         }
         $ppn = 0.11 * $total;
