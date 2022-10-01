@@ -169,9 +169,27 @@ class PurchaseOrderController extends Controller
                 ->get();
         }
 
+        $return_arr = [];
+        foreach ($all_purchases as $value) {
+            foreach ($value->purchaseOrderDetailsBy as $detail) {
+                $return_amount = 0;
+                $selected_return = ReturnPurchaseDetailModel::whereHas('returnBy', function ($query) use ($value) {
+                    $query->where('purchase_order_id', $value->id);
+                })
+                    ->where('product_id', $detail->product_id)
+                    ->get();
+                foreach ($selected_return as $return) {
+                    $return_amount += $return->qty;
+                }
+                array_push($return_arr, $return_amount);
+            }
+        }
+
+
         $data = [
             "title" => "Receiving Purchase Order",
             "purchases" => $all_purchases,
+            "return_amount" => $return_arr
         ];
 
         return view('purchase_orders.receiving', $data);

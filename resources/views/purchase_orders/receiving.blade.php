@@ -154,7 +154,7 @@
                                                         <label>Qty</label>
                                                         <input type="number" class="form-control qtyPo" required
                                                             name="poFields[{{ $loop->index }}][qty]" id=""
-                                                            value="{{ $detail->qty }}">
+                                                            value="{{ $detail->qty - $return_amount[$loop->index] }}">
                                                         @error('poFields[{{ $loop->index }}][qty]')
                                                             <div class="invalid-feedback">
                                                                 {{ $message }}
