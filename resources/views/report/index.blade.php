@@ -40,31 +40,33 @@
                     </div>
                     <div class="card-body">
 
-                        <div class="form-group row col-12">
-                            <div class="col-4">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-6">
                                 <label class="col-form-label text-end">Start Date</label>
                                 <div class="input-group">
                                     <input class="form-control digits" type="date" data-language="en" placeholder="Start"
                                         name="from_date" id="from_date">
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4 col-6">
                                 <label class="col-form-label text-end">End Date</label>
                                 <div class="input-group">
                                     <input class="form-control digits" type="date" data-language="en" placeholder="Start"
                                         name="to_date" id="to_date">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-lg-2">
                                 <label class="col-form-label text-end">&nbsp;</label>
                                 <div class="input-group">
-                                    <button class="btn btn-primary" name="filter" id="filter">Filter</button>
+                                    <button class="btn btn-primary form-control text-white" name="filter"
+                                        id="filter">Filter</button>
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-lg-2">
                                 <label class="col-form-label text-end">&nbsp;</label>
                                 <div class="input-group">
-                                    <button class="btn btn-warning" name="refresh" id="refresh">Refresh</button>
+                                    <button class="btn btn-warning form-control text-white" name="refresh"
+                                        id="refresh">Refresh</button>
                                 </div>
                             </div>
                         </div>

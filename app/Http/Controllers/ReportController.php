@@ -266,14 +266,12 @@ class ReportController extends Controller
                 ->first();
             if (!empty($request->from_date)) {
                 if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
-                    $invoice = ClaimModel::with('productSales')
-                        ->where('status', 1)
+                    $invoice = ClaimModel::where('status', 1)
                         ->whereBetween('claim_date', array($request->from_date, $request->to_date))
                         ->latest()
                         ->get();
                 } else {
-                    $invoice = ClaimModel::with('productSales')
-                        ->where('status', 1)
+                    $invoice = ClaimModel::where('status', 1)
                         ->where('claim_number', 'like', "%$kode_area->area_code%")
                         ->whereBetween('claim_date', array($request->from_date, $request->to_date))
                         ->latest()
@@ -281,40 +279,44 @@ class ReportController extends Controller
                 }
             } else {
                 if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
-                    $invoice = ClaimModel::join('products', 'products.id', '=', 'claims.product_id')
-                        ->join('users', 'users.id', '=', 'claims.e_submittedBy')
-                        ->select('claims.*', 'products.*', 'users.*')
+                    $invoice = ClaimModel::join('users', 'users.id', '=', 'claims.e_submittedBy')
+                        ->select('claims.*', 'users.*')
                         ->where('claims.status', 1)
                         ->get();
                 } else {
-                    $invoice = ClaimModel::with('productSales')
-                        ->where('status', 1)
+                    $invoice = ClaimModel::where('status', 1)
                         ->where('claim_number', 'like', "%$kode_area->area_code%")
                         ->latest()
                         ->get();
                 }
             }
             return datatables()->of($invoice)
-                ->editColumn('product_id', function (ClaimModel $ClaimModel) {
-                    return $ClaimModel->productSales->nama_barang;
+                ->editColumn('car_brand_id', function (ClaimModel $claimModel) {
+                    return $claimModel->carBrandBy->car_brand;
+                })
+                ->editColumn('car_type_id', function (ClaimModel $claimModel) {
+                    return $claimModel->carTypeBy->car_type;
+                })
+                ->editColumn('diagnosa', function (ClaimModel $ClaimModel) {
+                    return
+                        htmlspecialchars_decode(htmlspecialchars_decode($ClaimModel->diagnosa));
                 })
                 ->editColumn('plate_number', function (ClaimModel $ClaimModel) {
                     return '<div class="text-uppercase"> ' . $ClaimModel->plate_number . '</div>';
                 })
-                ->editColumn('material', function (ClaimModel $ClaimModel) {
-                    return $ClaimModel->productSales->sub_materials->nama_sub_material;
+                ->editColumn('cost', function (ClaimModel $ClaimModel) {
+                    return number_format($ClaimModel->cost);
                 })
-                ->editColumn('sub_type', function (ClaimModel $ClaimModel) {
-                    return '<a href=""> ' . $ClaimModel->productSales->sub_types->type_name . '</a>';
+                ->editColumn('e_submittedBy', function (ClaimModel $ClaimModel) {
+                    return $ClaimModel->createdBy->name;
                 })
-                ->rawColumns(['sub_type', 'product_id', 'plate_number'])
+                ->rawColumns(['plate_number', 'diagnosa', 'cost', 'e_submittedBy'])
                 ->addIndexColumn()
                 ->make(true);
         }
         $data = [
             'title' => "All data claim in profecta perdana : " . Auth::user()->warehouseBy->warehouses,
         ];
-
         return view('report.claim_report', $data);
     }
 

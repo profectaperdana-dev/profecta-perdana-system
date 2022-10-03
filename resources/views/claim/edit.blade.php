@@ -35,18 +35,11 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-
-                    <div class="card-body">
-                        <form method="post" action="{{ url('claim/' . $value->id) }}" enctype="multipart/form-data">
-                            @csrf
-                            <input name="_method" type="hidden" value="PATCH">
-                            @include('claim._form_finish')
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <form method="post" action="{{ url('claim/' . $value->id) }}" enctype="multipart/form-data">
+                @csrf
+                <input name="_method" type="hidden" value="PATCH">
+                @include('claim._form_finish')
+            </form>
         </div>
     </div>
     <!-- Container-fluid Ends-->

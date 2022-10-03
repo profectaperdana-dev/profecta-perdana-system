@@ -40,31 +40,33 @@
                     </div>
                     <div class="card-body">
 
-                        <div class="form-group row col-12">
-                            <div class="col-4">
+                        <div class="form-group row">
+                            <div class="col-lg-4 col-6">
                                 <label class="col-form-label text-end">Start Date</label>
                                 <div class="input-group">
                                     <input class="form-control digits" type="date" data-language="en" placeholder="Start"
                                         name="from_date" id="from_date">
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4 col-6">
                                 <label class="col-form-label text-end">End Date</label>
                                 <div class="input-group">
                                     <input class="form-control digits" type="date" data-language="en" placeholder="Start"
                                         name="to_date" id="to_date">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-lg-2">
                                 <label class="col-form-label text-end">&nbsp;</label>
                                 <div class="input-group">
-                                    <button class="btn btn-primary" name="filter" id="filter">Filter</button>
+                                    <button class="btn btn-primary form-control text-white" name="filter"
+                                        id="filter">Filter</button>
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-lg-2">
                                 <label class="col-form-label text-end">&nbsp;</label>
                                 <div class="input-group">
-                                    <button class="btn btn-warning" name="refresh" id="refresh">Refresh</button>
+                                    <button class="btn btn-warning form-control text-white" name="refresh"
+                                        id="refresh">Refresh</button>
                                 </div>
                             </div>
                         </div>
@@ -73,15 +75,19 @@
                                 style="width:100%">
                                 <thead>
                                     <tr>
-                                        {{-- <th>No</th> --}}
+                                        <th>Technical</th>
                                         <th>Claim Number</th>
                                         <th>Claim Date</th>
                                         <th>Customer</th>
-                                        <th>Material</th>
-                                        <th>Sub Type</th>
-                                        <th>Accu Type</th>
+                                        <th>Mat. Group</th>
+                                        <th>Type Group</th>
+                                        <th>Type</th>
+                                        <th>Car Brand</th>
                                         <th>Car Type</th>
                                         <th>Plat Number</th>
+                                        <th>Ket/Note</th>
+                                        <th>Diagnose</th>
+                                        <th>Date Replace</th>
                                         <th>Cost</th>
                                     </tr>
                                 </thead>
@@ -134,8 +140,11 @@
                                 to_date: to_date
                             }
                         },
-                        columns: [
+                        columns: [{
+                                data: 'e_submittedBy',
+                                name: 'e_submittedBy'
 
+                            },
                             {
                                 data: 'claim_number',
                                 name: 'claim_number'
@@ -157,8 +166,8 @@
 
                             },
                             {
-                                data: 'sub_type',
-                                name: 'sub_type'
+                                data: 'type_material',
+                                name: 'type_material'
 
                             },
 
@@ -168,13 +177,33 @@
 
                             },
                             {
-                                data: 'car_type',
-                                name: 'car_type'
+                                data: 'car_brand_id',
+                                name: 'car_brand_id'
+
+                            },
+                            {
+                                data: 'car_type_id',
+                                name: 'car_type_id'
 
                             },
                             {
                                 data: 'plate_number',
                                 name: 'plate_number'
+
+                            },
+                            {
+                                data: 'result',
+                                name: 'result'
+
+                            },
+                            {
+                                data: 'diagnosa',
+                                name: 'diagnosa'
+
+                            },
+                            {
+                                data: 'date_replaced',
+                                name: 'date_replaced'
 
                             },
                             {

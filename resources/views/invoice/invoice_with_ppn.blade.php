@@ -131,7 +131,11 @@
                 </td>
                 <td style="text-align:left">
                     : {{ date('d-m-Y', strtotime($data->order_date)) }} <br>
-                    : {{ date('d-m-Y', strtotime($data->duedate)) }}
+                    : @if ($data->due_date != null)
+                        {{ date('d-m-Y', strtotime($data->due_date)) }}
+                    @else
+                        -
+                    @endif
                 </td>
             </tr>
         </table>
@@ -151,6 +155,7 @@
                     <th style="text-align:center;padding:5px">No</th>
                     <th style="text-align:left;padding:5px">Item Description</th>
                     <th style="text-align:right;padding:5px">Price</th>
+                    <th style="text-align:right;padding:5px">Disc (%)</th>
                     <th style="text-align:center;padding:5px">Qty</th>
                     <th style="text-align:right;padding:5px;margin-right:30px";>Total</th>
                 </tr>
@@ -173,6 +178,7 @@
                             {{ $value->productSales->nama_barang }}
                         </td>
                         <td style="text-align:right;padding:5px">@currency($value->productSales->harga_jual_nonretail)</td>
+                        <td style="text-align: center">{{ $value->discount }}</td>
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
                         @php
                             $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;

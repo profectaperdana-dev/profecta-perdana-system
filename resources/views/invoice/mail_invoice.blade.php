@@ -631,6 +631,11 @@
                                                                                                     Price</th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="center"
+                                                                                                    valign="top">Disc
+                                                                                                    (%)
+                                                                                                </th>
+                                                                                                <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                    align="center"
                                                                                                     valign="top">Qty
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
@@ -665,6 +670,11 @@
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
                                                                                                         valign="top">
+                                                                                                        {{ $value->discount }}
+                                                                                                    </td>
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="center"
+                                                                                                        valign="top">
                                                                                                         {{ $value->qty }}
                                                                                                     </td>
                                                                                                     @php
@@ -682,7 +692,7 @@
                                                                                         </tbody>
                                                                                         <tfoot>
                                                                                             <tr>
-                                                                                                <td colspan="4"
+                                                                                                <td colspan="5"
                                                                                                     class="text-right"
                                                                                                     style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
@@ -696,7 +706,7 @@
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
-                                                                                                <td colspan="4"
+                                                                                                <td colspan="5"
                                                                                                     class="text-right"
                                                                                                     style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
@@ -709,7 +719,7 @@
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
-                                                                                                <th colspan="4"
+                                                                                                <th colspan="5"
                                                                                                     class="text-right"
                                                                                                     style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
