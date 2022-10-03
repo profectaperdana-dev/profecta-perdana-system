@@ -25,8 +25,8 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold"> {{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
-                        {{ $title }}
+                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create Claim
+                        {{ $title }}</h6>
                 </div>
 
             </div>
@@ -35,17 +35,12 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
 
-                    <div class="card-body">
-                        <form method="post" action="{{ url('claim/') }}" enctype="multipart/form-data">
-                            @csrf
-                            @include('claim._form_early')
-                        </form>
-                    </div>
-                </div>
-            </div>
+            <form method="post" action="{{ url('claim/') }}" enctype="multipart/form-data">
+                @csrf
+                @include('claim._form_early')
+            </form>
+
         </div>
     </div>
     <!-- Container-fluid Ends-->

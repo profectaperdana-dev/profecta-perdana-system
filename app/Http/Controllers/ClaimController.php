@@ -191,6 +191,8 @@ class ClaimController extends Controller
         $model->f_starting = $request->f_starting;
         $model->f_charging = $request->f_charging;
         $model->result = $request->result;
+        $model->cost = $request->cost;
+        $model->date_replaced = Carbon::now();
 
         // submit and receive by
         $model->f_submittedBy = Auth::user()->id;

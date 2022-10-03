@@ -78,136 +78,146 @@
                                             {{-- early check --}}
                                             <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header text-center">
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    {{-- <div class="modal-content"> --}}
+                                                    {{-- <div class="modal-header text-center">
                                                             <h5 class="modal-title" id="exampleModalLabel">Detail Data Early
                                                                 Check
                                                                 {{ $value->claim_number }}</h5>
                                                             </h5>
                                                             <button class="btn-close" type="button" data-bs-dismiss="modal"
                                                                 aria-label="Close"></button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            <div class="container-fluid">
-                                                                <div class="row">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-lg-4 col-md-12">
-                                                                                <label>Claim number</label>
-                                                                                <input type="text" class="form-control "
-                                                                                    placeholder="Product Name" readonly
-                                                                                    value="{{ $value->claim_number }}">
-                                                                            </div>
-                                                                            <div class="form-group col-lg-4 col-md-12">
-                                                                                <label>
-                                                                                    Claim date</label>
-                                                                                <input type="date" class="form-control"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->claim_date }}">
-                                                                            </div>
-                                                                            <div class="form-group col-lg-4 col-md-12">
-                                                                                <label>
-                                                                                    Customer/Phone Number</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->customer_id }}">
-                                                                            </div>
-                                                                            <div class="form-group col-lg-4 col-md-12">
-                                                                                <label>Car Type</label>
-                                                                                <input type="text"
-                                                                                    class="form-control text-capitalize"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->carBrandBy->car_brand }} / {{ $value->carTypeBy->car_type }}">
+                                                        </div> --}}
+                                                    {{-- <div class="modal-body"> --}}
+                                                    <div class="container-fluid">
+                                                        <div class="row">
+                                                            <div class="col-sm-14 col-md-12 col-lg-12">
+                                                                <div class="ribbon-wrapper card">
+                                                                    <div class="card-body shadow">
+                                                                        <div class="ribbon ribbon-clip ribbon-warning">
+                                                                            Early Checking</div>
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group row font-weight-bold">
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label>Claim number</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control "
+                                                                                        placeholder="Product Name" readonly
+                                                                                        value="{{ $value->claim_number }}">
+                                                                                </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label>
+                                                                                        Claim date</label>
+                                                                                    <input type="date"
+                                                                                        class="form-control"
+                                                                                        placeholder="Serial Number" readonly
+                                                                                        value="{{ $value->claim_date }}">
+                                                                                </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label>
+                                                                                        Customer/Phone
+                                                                                        Number</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control"
+                                                                                        placeholder="Serial Number" readonly
+                                                                                        value="{{ $value->customer_id }}">
+                                                                                </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label>Car Type</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control text-capitalize"
+                                                                                        placeholder="Serial Number" readonly
+                                                                                        value="{{ $value->carBrandBy->car_brand }} / {{ $value->carTypeBy->car_type }}">
 
-                                                                            </div>
-                                                                            <div class="form-group col-lg-4 col-md-12">
-                                                                                <label>Accu type</label>
-                                                                                <input type="text"
-                                                                                    class="form-control text-uppercase"
-                                                                                    placeholder="Product Code" readonly
-                                                                                    value="@if ($value->material == null) {{ $value->product_id }}@else{{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }} @endif">
-                                                                            </div>
+                                                                                </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label>Accu type</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control text-uppercase"
+                                                                                        placeholder="Product Code" readonly
+                                                                                        value="@if ($value->material == null) {{ $value->product_id }}@else{{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }} @endif">
+                                                                                </div>
 
-                                                                            <div class="form-group col-lg-4 col-md-12">
-                                                                                <label>
-                                                                                    Plat Number</label>
-                                                                                <input type="text"
-                                                                                    class="form-control text-uppercase"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->plate_number }}">
-                                                                            </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label>
+                                                                                        Plat Number</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control text-uppercase"
+                                                                                        placeholder="Serial Number" readonly
+                                                                                        value="{{ $value->plate_number }}">
+                                                                                </div>
 
-                                                                            <div class="form-group col-md-12">
-                                                                                <input type="text"
-                                                                                    class="form-control bg-warning text-white text-center"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="Early Check">
-                                                                            </div>
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>
-                                                                                    Voltage
-                                                                                </label>
-                                                                                <input type="text" readonly
-                                                                                    class="form-control"
-                                                                                    value="{{ $value->e_voltage }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>CCA </label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    placeholder="Retail Selling Price"
-                                                                                    value="{{ $value->e_cca }}">
 
-                                                                            </div>
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>Starting</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    placeholder="Non Retail Selling Price"
-                                                                                    value="{{ $value->e_starting }}">
-                                                                            </div>
+                                                                                <div class="form-group col-md-3">
+                                                                                    <label>
+                                                                                        Voltage
+                                                                                    </label>
+                                                                                    <input type="text" readonly
+                                                                                        class="form-control"
+                                                                                        value="{{ $value->e_voltage }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-3">
+                                                                                    <label>CCA </label>
+                                                                                    <input type="text"
+                                                                                        class="form-control" readonly
+                                                                                        placeholder="Retail Selling Price"
+                                                                                        value="{{ $value->e_cca }}">
 
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>Charging</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ $value->e_charging }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-12">
-                                                                                <label>Diagnosa</label>
-                                                                                <p>
-                                                                                    @php
-                                                                                        echo htmlspecialchars_decode(htmlspecialchars_decode($value['diagnosa']));
-                                                                                    @endphp
-                                                                                </p>
+                                                                                </div>
+                                                                                <div class="form-group col-md-3">
+                                                                                    <label>Starting</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control" readonly
+                                                                                        placeholder="Non Retail Selling Price"
+                                                                                        value="{{ $value->e_starting }}">
+                                                                                </div>
 
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>
-                                                                                    Submitted By,</label>
-                                                                                <br>
-                                                                                <p><strong>{{ $value->createdBy->name }}</strong>
-                                                                                </p>
-                                                                            </div>
-                                                                            <div class="form-group text-center col-md-6">
-                                                                                <label>
-                                                                                    Received By,</label>
-                                                                                <br>
-                                                                                <img class="img-fluid"
-                                                                                    src="{{ asset('receivedBy/' . $value->e_receivedBy) }}"
-                                                                                    alt="">
+                                                                                <div class="form-group col-md-3">
+                                                                                    <label>Charging</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control" readonly
+                                                                                        value="{{ $value->e_charging }}">
+                                                                                </div>
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label>Diagnosa</label>
+                                                                                    <p>
+                                                                                        @php
+                                                                                            echo htmlspecialchars_decode(htmlspecialchars_decode($value['diagnosa']));
+                                                                                        @endphp
+                                                                                    </p>
+
+                                                                                </div>
+                                                                                <div class="form-group col-md-6">
+                                                                                    <label>
+                                                                                        Submitted By,</label>
+                                                                                    <br>
+                                                                                    <p><strong>{{ $value->createdBy->name }}</strong>
+                                                                                    </p>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="form-group text-center col-md-6">
+                                                                                    <label>
+                                                                                        Received By,</label>
+                                                                                    <br>
+                                                                                    <img class="img-fluid"
+                                                                                        src="{{ asset('receivedBy/' . $value->e_receivedBy) }}"
+                                                                                        alt="">
+                                                                                </div>
+                                                                                <hr>
+                                                                                <a class="btn btn-danger" href="#"
+                                                                                    data-bs-dismiss="modal">Close</a>
+
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button class="btn btn-danger" type="button"
-                                                                data-bs-dismiss="modal">Close</button>
+
                                                         </div>
                                                     </div>
+                                                    {{-- </div> --}}
+
+                                                    {{-- </div> --}}
                                                 </div>
                                             </div>
                                             {{-- End early check --}}
@@ -231,7 +241,8 @@
                                                                 <div class="container-fluid">
                                                                     <div class="form-group row">
                                                                         <div class="col-md-12">
-                                                                            <h5>Are you sure delete this data ?</h5>
+                                                                            <h5>Are you sure delete this data ?
+                                                                            </h5>
                                                                         </div>
                                                                     </div>
                                                                 </div>

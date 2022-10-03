@@ -374,6 +374,7 @@ class SalesOrderController extends Controller
         $model = new SalesOrderModel();
         $model->order_number = $order_number;
         $model->order_date = Carbon::now()->format('Y-m-d');
+
         $model->customers_id = $customer->id;
         $model->remark = $request->get('remark');
         $model->created_by = Auth::user()->id;
@@ -622,6 +623,7 @@ class SalesOrderController extends Controller
             if ($model->payment_method != 3) {
                 $model->isapprove = 'approve';
                 $model->isPaid = 1;
+                $model->paid_date = $model->order_date;
                 $so_number = $model->order_number;
                 $iv_number = str_replace('SOPP', 'IVPP', $so_number);
                 $do = str_replace('SOPP', 'DOPP', $so_number);
