@@ -239,6 +239,15 @@
                             <li><a href="{{ url('/report_claim') }}"
                                     class="{{ request()->is('report_claim') ? 'active' : '' }}">Report Claim</a>
                             </li>
+                            <li><a href="{{ url('/report_return_sales') }}"
+                                    class="{{ request()->is('report_return_sales') ? 'active' : '' }}">Report Return
+                                    Sales</a>
+                            </li>
+                            <li><a href="{{ url('/report_return_purchases') }}"
+                                    class="{{ request()->is('report_return_purchases') ? 'active' : '' }}">Report
+                                    Return
+                                    Purchases</a>
+                            </li>
                         </ul>
 
                     </li>

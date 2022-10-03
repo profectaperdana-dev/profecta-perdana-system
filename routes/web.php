@@ -108,6 +108,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales_order/selectReturn', [SalesOrderController::class, 'selectReturn']);
     Route::get('/history_claim/', [ClaimController::class, 'historyClaim']);
     Route::get('/report_claim/', [ReportController::class, 'reportClaim']);
+    Route::get('/report_return_sales/', [ReportController::class, 'report_return']);
+    Route::get('/report_return_purchases/', [ReportController::class, 'report_return_purchase']);
     Route::get('/sales_order/getQtyDetail', [SalesOrderController::class, 'getQtyDetail']);
     Route::get('/sales_order/getAllDetail', [SalesOrderController::class, 'getAllDetail']);
     Route::get('/car_brand/select/{id}', [ClaimController::class, 'select']);

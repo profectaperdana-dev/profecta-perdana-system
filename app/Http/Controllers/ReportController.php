@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\ClaimModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderDetailModel;
+use App\Models\ReturnDetailModel;
+use App\Models\ReturnPurchaseDetailModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
 use App\Models\WarehouseModel;
@@ -127,6 +129,7 @@ class ReportController extends Controller
 
         return view('report.index', $data);
     }
+
     public function report_po(Request $request)
     {
         if (
@@ -247,6 +250,7 @@ class ReportController extends Controller
         ];
         return view('report.po_report', $data);
     }
+
     public function reportClaim(Request $request)
     {
         if (
@@ -312,5 +316,135 @@ class ReportController extends Controller
         ];
 
         return view('report.claim_report', $data);
+    }
+
+    public function report_return(Request $request)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+
+
+        // get kode area
+        // dd($request->all());
+        if ($request->ajax()) {
+
+            if (!empty($request->from_date)) {
+
+                $return = ReturnDetailModel::with('returnBy', 'productBy')
+                    ->whereHas('returnBy', function ($query) use ($request) {
+                        $query->whereBetween('return_date', array($request->from_date, $request->to_date));
+                    })
+                    ->latest()
+                    ->get();
+            } else {
+                $return = ReturnDetailModel::with('returnBy', 'productBy')
+                    ->latest()
+                    ->get();
+            }
+
+            return datatables()->of($return)
+                ->editColumn('return_number', function (ReturnDetailModel $returnDetailModel) {
+                    return $returnDetailModel->returnBy->return_number;
+                })
+                ->editColumn('sales_order_id', function (ReturnDetailModel $returnDetailModel) {
+                    return $returnDetailModel->returnBy->salesOrderBy->order_number;
+                })
+                ->editColumn('return_date', function (ReturnDetailModel $returnDetailModel) {
+                    return date('d-M-Y', strtotime($returnDetailModel->returnBy->return_date));
+                })
+                ->editColumn('total', function (ReturnDetailModel $returnDetailModel) {
+
+                    return number_format($returnDetailModel->returnBy->total, 0, ',', '.');
+                })
+                ->editColumn('return_reason', function (ReturnDetailModel $returnDetailModel) {
+                    return $returnDetailModel->returnBy->return_reason;
+                })
+                ->editColumn('created_by', function (ReturnDetailModel $returnDetailModel) {
+                    return $returnDetailModel->returnBy->createdBy->name;
+                })
+                ->editColumn('product', function (ReturnDetailModel $returnDetailModel) {
+                    return $returnDetailModel->productBy->nama_barang;
+                })
+                ->editColumn('sub_material', function (ReturnDetailModel $returnDetailModel) {
+                    return $returnDetailModel->productBy->sub_materials->nama_sub_material;
+                })
+                ->editColumn('sub_type', function (ReturnDetailModel $returnDetailModel) {
+                    return $returnDetailModel->productBy->sub_types->type_name;
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "All Data Return Sales in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+        ];
+        return view('report.return', $data);
+    }
+
+    public function report_return_purchase(Request $request)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+
+
+        // get kode area
+        // dd($request->all());
+        if ($request->ajax()) {
+
+            if (!empty($request->from_date)) {
+
+                $return = ReturnPurchaseDetailModel::with('returnBy', 'productBy')
+                    ->whereHas('returnBy', function ($query) use ($request) {
+                        $query->whereBetween('return_date', array($request->from_date, $request->to_date));
+                    })
+                    ->latest()
+                    ->get();
+            } else {
+                $return = ReturnPurchaseDetailModel::with('returnBy', 'productBy')
+                    ->latest()
+                    ->get();
+            }
+
+            return datatables()->of($return)
+                ->editColumn('return_number', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return $returnPurchaseDetailModel->returnBy->return_number;
+                })
+                ->editColumn('purchase_order_id', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return $returnPurchaseDetailModel->returnBy->purchaseOrderBy->order_number;
+                })
+                ->editColumn('return_date', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return date('d-M-Y', strtotime($returnPurchaseDetailModel->returnBy->return_date));
+                })
+                ->editColumn('total', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+
+                    return number_format($returnPurchaseDetailModel->returnBy->total, 0, ',', '.');
+                })
+                ->editColumn('return_reason', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return $returnPurchaseDetailModel->returnBy->return_reason;
+                })
+                ->editColumn('created_by', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return $returnPurchaseDetailModel->returnBy->createdBy->name;
+                })
+                ->editColumn('product', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return $returnPurchaseDetailModel->productBy->nama_barang;
+                })
+                ->editColumn('sub_material', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return $returnPurchaseDetailModel->productBy->sub_materials->nama_sub_material;
+                })
+                ->editColumn('sub_type', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    return $returnPurchaseDetailModel->productBy->sub_types->type_name;
+                })
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "All Data Return Purchases in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+        ];
+        return view('report.return_purchase', $data);
     }
 }
