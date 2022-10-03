@@ -474,8 +474,12 @@ class ReturnController extends Controller
             if ($selected_detail == null) {
                 $returned_qty = 0;
             } else {
+                $last = count($selected_detail);
+                $i = 0;
                 foreach ($selected_detail as $detail) {
-                    $returned_qty = $returned_qty + $detail->qty;
+                    if (++$i != $last) {
+                        $returned_qty = $returned_qty + $detail->qty;
+                    }
                 }
             }
             // dd('detail: ' . $detail->qty . ', ' . $selected_sod->qty . ', ' . $returned_qty);
@@ -596,8 +600,12 @@ class ReturnController extends Controller
             if ($selected_detail == null) {
                 $returned_qty = 0;
             } else {
+                $last = count($selected_detail);
+                $i = 0;
                 foreach ($selected_detail as $detail) {
-                    $returned_qty = $returned_qty + $detail->qty;
+                    if (++$i != $last) {
+                        $returned_qty = $returned_qty + $detail->qty;
+                    }
                 }
             }
             // dd('detail: ' . $detail->qty . ', ' . $selected_sod->qty . ', ' . $returned_qty);
