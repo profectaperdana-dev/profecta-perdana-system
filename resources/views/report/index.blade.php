@@ -89,7 +89,8 @@
                                         <th>Type</th>
                                         <th>Product</th>
                                         <th>Qty</th>
-                                        <th>Discount</th>
+                                        <th>Discount (%)</th>
+                                        <th>Discount (Rp)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -225,6 +226,12 @@
                                 name: 'discount'
 
                             },
+                            {
+                                data: 'discount_rp',
+                                name: 'discount_rp'
+
+                            },
+
 
                         ],
 

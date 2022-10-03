@@ -100,6 +100,9 @@ class ReportController extends Controller
                 ->editColumn('total_after_ppn', function ($data) {
                     return number_format($data->total_after_ppn, 0, ',', '.');
                 })
+                ->editColumn('discount_rp', function ($data) {
+                    return number_format($data->discount_rp, 0, ',', '.');
+                })
                 // ->editColumn('total_after_ppn', function ($data) {
                 //     return number_format($data->total_after_ppn, 0, ',', '.');
                 // })
