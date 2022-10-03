@@ -77,13 +77,13 @@
                                         <th>Return Number</th>
                                         <th>From Purchase</th>
                                         <th>Return Date</th>
-                                        <th>Total</th>
                                         <th>Return Reason</th>
                                         <th>Created By</th>
                                         <th>Material</th>
                                         <th>Type</th>
                                         <th>Product</th>
                                         <th>Qty</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -165,11 +165,6 @@
 
                             },
                             {
-                                data: 'total',
-                                name: 'total'
-
-                            },
-                            {
                                 data: 'return_reason',
                                 name: 'return_reason'
 
@@ -197,6 +192,11 @@
                             {
                                 data: 'qty',
                                 name: 'qty'
+
+                            },
+                            {
+                                data: 'total',
+                                name: 'total'
 
                             },
 

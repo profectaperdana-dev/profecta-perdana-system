@@ -77,13 +77,15 @@
                                         <th>Return Number</th>
                                         <th>From Invoice</th>
                                         <th>Return Date</th>
-                                        <th>Total</th>
                                         <th>Return Reason</th>
                                         <th>Created By</th>
                                         <th>Material</th>
                                         <th>Type</th>
                                         <th>Product</th>
                                         <th>Qty</th>
+                                        <th>Discount (%)</th>
+                                        <th>Discount (Rp)</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -165,11 +167,6 @@
 
                             },
                             {
-                                data: 'total',
-                                name: 'total'
-
-                            },
-                            {
                                 data: 'return_reason',
                                 name: 'return_reason'
 
@@ -197,6 +194,21 @@
                             {
                                 data: 'qty',
                                 name: 'qty'
+
+                            },
+                            {
+                                data: 'discount',
+                                name: 'discount'
+
+                            },
+                            {
+                                data: 'discount_rp',
+                                name: 'discount_rp'
+
+                            },
+                            {
+                                data: 'total',
+                                name: 'total'
 
                             },
 

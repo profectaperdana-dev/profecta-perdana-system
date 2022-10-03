@@ -361,8 +361,21 @@ class ReportController extends Controller
                     return date('d-M-Y', strtotime($returnDetailModel->returnBy->return_date));
                 })
                 ->editColumn('total', function (ReturnDetailModel $returnDetailModel) {
-
-                    return number_format($returnDetailModel->returnBy->total, 0, ',', '.');
+                    $diskon = 0;
+                    $diskon_rp = 0;
+                    $getdiskon = $returnDetailModel->returnBy->salesOrderBy->salesOrderDetailsBy;
+                    foreach ($getdiskon as $dis) {
+                        if ($dis->products_id == $returnDetailModel->product_id) {
+                            $diskon = $dis->discount / 100;
+                            $diskon_rp = $dis->discount_rp;
+                        }
+                    }
+                    $hargaDiskon = $returnDetailModel->productBy->harga_jual_nonretail * $diskon;
+                    $hargaAfterDiskon = $returnDetailModel->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
+                    $sub_total = $hargaAfterDiskon * $returnDetailModel->qty;
+                    $ppn = 0.11 * $sub_total;
+                    $total = $sub_total + $ppn;
+                    return number_format($total, 0, ',', '.');
                 })
                 ->editColumn('return_reason', function (ReturnDetailModel $returnDetailModel) {
                     return $returnDetailModel->returnBy->return_reason;
@@ -379,11 +392,31 @@ class ReportController extends Controller
                 ->editColumn('sub_type', function (ReturnDetailModel $returnDetailModel) {
                     return $returnDetailModel->productBy->sub_types->type_name;
                 })
+                ->editColumn('discount', function (ReturnDetailModel $returnDetailModel) {
+                    $diskon = 0;
+                    $getdiskon = $returnDetailModel->returnBy->salesOrderBy->salesOrderDetailsBy;
+                    foreach ($getdiskon as $dis) {
+                        if ($dis->products_id == $returnDetailModel->product_id) {
+                            $diskon = $dis->discount;
+                        }
+                    }
+                    return $diskon;
+                })
+                ->editColumn('discount_rp', function (ReturnDetailModel $returnDetailModel) {
+                    $diskon = 0;
+                    $getdiskon = $returnDetailModel->returnBy->salesOrderBy->salesOrderDetailsBy;
+                    foreach ($getdiskon as $dis) {
+                        if ($dis->products_id == $returnDetailModel->product_id) {
+                            $diskon = $dis->discount_rp;
+                        }
+                    }
+                    return $diskon;
+                })
                 ->addIndexColumn()
                 ->make(true);
         }
         $data = [
-            'title' => "All Data Return Sales in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+            'title' => "All Report Return Sales in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
         ];
         return view('report.return', $data);
     }
@@ -426,8 +459,9 @@ class ReportController extends Controller
                     return date('d-M-Y', strtotime($returnPurchaseDetailModel->returnBy->return_date));
                 })
                 ->editColumn('total', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
+                    $total = $returnPurchaseDetailModel->productBy->harga_beli * $returnPurchaseDetailModel->qty;
 
-                    return number_format($returnPurchaseDetailModel->returnBy->total, 0, ',', '.');
+                    return number_format($total, 0, ',', '.');
                 })
                 ->editColumn('return_reason', function (ReturnPurchaseDetailModel $returnPurchaseDetailModel) {
                     return $returnPurchaseDetailModel->returnBy->return_reason;
@@ -448,7 +482,7 @@ class ReportController extends Controller
                 ->make(true);
         }
         $data = [
-            'title' => "All Data Return Purchases in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+            'title' => "All Report Return Purchases in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
         ];
         return view('report.return_purchase', $data);
     }
