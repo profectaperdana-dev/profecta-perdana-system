@@ -83,7 +83,6 @@
                                         <th>Remark</th>
                                         <th>Created By</th>
                                         <th>TOP</th>
-                                        <th>Total</th>
                                         <th>Paid Date</th>
                                         <th>Material</th>
                                         <th>Type</th>
@@ -91,6 +90,8 @@
                                         <th>Qty</th>
                                         <th>Discount (%)</th>
                                         <th>Discount (Rp)</th>
+                                        <th>Total</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -191,11 +192,7 @@
                                 name: 'top'
 
                             },
-                            {
-                                data: 'total_after_ppn',
-                                name: 'total_after_ppn'
 
-                            },
                             {
                                 data: 'paid_date',
                                 name: 'paid_date'
@@ -229,6 +226,11 @@
                             {
                                 data: 'discount_rp',
                                 name: 'discount_rp'
+
+                            },
+                            {
+                                data: 'total',
+                                name: 'total'
 
                             },
 

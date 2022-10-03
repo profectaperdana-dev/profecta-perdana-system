@@ -74,7 +74,23 @@ class ReportController extends Controller
             }
 
             return datatables()->of($invoice)
+                ->editColumn('total', function (SalesOrderDetailModel $SalesOrderDetailModel) {
 
+                    $diskon = $SalesOrderDetailModel->discount / 100;
+                    $diskon_rp = $SalesOrderDetailModel->discount_rp;
+                    // foreach ($getdiskon as $dis) {
+                    //     if ($dis->products_id == $SalesOrderDetailModel->product_id) {
+                    //         $diskon = $dis->discount / 100;
+                    //         $diskon_rp = $dis->discount_rp;
+                    //     }
+                    // }
+                    $hargaDiskon = $SalesOrderDetailModel->productSales->harga_jual_nonretail * $diskon;
+                    $hargaAfterDiskon = $SalesOrderDetailModel->productSales->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
+                    $sub_total = $hargaAfterDiskon * $SalesOrderDetailModel->qty;
+                    $ppn = 0.11 * $sub_total;
+                    $total = $sub_total + $ppn;
+                    return number_format($total, 0, ',', '.');
+                })
                 // ->editColumn('payment_method', function ($data) {
                 //     if ($data->payment_method == 1) {
                 //         return 'COD';
