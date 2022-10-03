@@ -1,6 +1,7 @@
-<a href="#" class="btn btn-sm btn-primary" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+<a href="#" class="btn btn-sm btn-primary" href="#" data-bs-toggle="modal" data-original-title="test"
+    data-bs-target="#detailReturn{{ $return->id }}">
     ACTION</a>
-<div class="dropdown-menu" aria-labelledby="">
+{{-- <div class="dropdown-menu" aria-labelledby="">
     <h5 class="dropdown-header">Actions</h5>
     @can('isSuperAdmin')
         <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal" data-original-title="test"
@@ -9,6 +10,63 @@
     <h5 class="dropdown-header">Prints</h5>
     <a class="dropdown-item" href="{{ url('return_purchase/' . $return->id . '/print') }}">Print Return</a>
 
+</div> --}}
+
+<div class="modal fade" id="detailReturn{{ $return->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detail Return
+                    :
+                    {{ $return->return_number }}</h5>
+                <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="row" id="formReturn">
+                                @foreach ($return->returnDetailsBy as $item)
+                                    <div class="row">
+                                        <div class="form-group col-7">
+                                            <label>Product</label>
+                                            <input readonly class="form-control"
+                                                value="{{ $item->productBy->nama_barang . ' (' . $item->productBy->sub_materials->nama_sub_material . ', ' . $item->productBy->sub_types->type_name . ')' }}">
+                                        </div>
+                                        <div class="col-3 col-md-3 form-group">
+                                            <label>Qty</label>
+                                            <input type="number" class="form-control" readonly
+                                                value="{{ $item->qty }}" id="">
+                                        </div>
+
+                                    </div>
+                                @endforeach
+                            </div>
+                            <div class="row mt-3">
+                                <div class="form-group col-6">
+                                    <label for="">Return Reason</label>
+                                    <input class="form-control" value="{{ $return->return_reason }}" readonly>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    @can('isSuperAdmin')
+                        <button class="btn btn-secondary modal-btn2" type="button" data-bs-toggle="modal"
+                            data-original-title="test" data-bs-target="#editReturn{{ $return->id }}"
+                            data-bs-dismiss="modal">Edit
+                        </button>
+                    @endcan
+
+                    <a class="btn btn-info" href="{{ url('return/' . $return->id . '/print') }}">Print</a>
+                    <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
 </div>
 
 <div class="modal fade" id="editReturn{{ $return->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
@@ -79,7 +137,8 @@
                                 <div class="row mt-3">
                                     <div class="form-group col-6">
                                         <label for="">Return Reason</label>
-                                        <select name="return_reason1" class="form-control uoms return_reason1" required>
+                                        <select name="return_reason1" class="form-control uoms return_reason1"
+                                            required>
                                             <option value="">-- Choose Return Reason -- </option>
                                             <option value="{{ $return->return_reason }}" selected>
                                                 {{ $return->return_reason }}</option>
@@ -111,6 +170,10 @@
 
                                     <button type="reset" class="btn btn-warning">Reset</button>
                                     <button type="submit" class="btn btn-primary">Create</button>
+                                    <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
+                                        data-original-title="test" data-bs-target="#detailReturn{{ $return->id }}"
+                                        data-bs-dismiss="modal">Detail
+                                    </button>
                                 </div>
                             </div>
                         </div>

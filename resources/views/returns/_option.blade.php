@@ -54,9 +54,13 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-bs-toggle="modal" data-original-title="test"
-                        data-bs-target="#editReturn{{ $return->id }}" data-bs-dismiss="modal">Edit
-                    </button>
+                    @can('isSuperAdmin')
+                        <button class="btn btn-secondary modal-btn2" type="button" data-bs-toggle="modal"
+                            data-original-title="test" data-bs-target="#editReturn{{ $return->id }}"
+                            data-bs-dismiss="modal">Edit
+                        </button>
+                    @endcan
+
                     <a class="btn btn-info" href="{{ url('return/' . $return->id . '/print') }}">Print</a>
                     <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
                 </div>
