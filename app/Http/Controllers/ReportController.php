@@ -96,7 +96,12 @@ class ReportController extends Controller
 
                 // return $data->order_number;
                 // })
-
+                ->editColumn('order_date', function ($data) {
+                    return date('d-M-Y', strtotime($data->order_date));
+                })
+                ->editColumn('paid_date', function ($data) {
+                    return date('d-M-Y', strtotime($data->paid_date));
+                })
                 ->editColumn('total_after_ppn', function ($data) {
                     return number_format($data->total_after_ppn, 0, ',', '.');
                 })
@@ -224,7 +229,9 @@ class ReportController extends Controller
                 })
                 ->editColumn('total', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
                     if (Gate::allows('isSuperAdmin')) {
-                        return number_format($purchaseOrderDetailModel->purchaseOrderBy->total, 0, ',', '.');
+                        $total = $purchaseOrderDetailModel->productBy->harga_beli * $purchaseOrderDetailModel->qty;
+
+                        return number_format($total, 0, ',', '.');
                     } else return 'Restricted';
                 })
                 ->editColumn('supplier_id', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
