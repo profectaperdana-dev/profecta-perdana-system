@@ -7,6 +7,8 @@ use App\Models\NotificationsModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderDetailModel;
 use App\Models\PurchaseOrderModel;
+use App\Models\ReturnPurchaseDetailModel;
+use App\Models\ReturnPurchaseModel;
 use App\Models\StockModel;
 use App\Models\SuppliersModel;
 use App\Models\WarehouseModel;
@@ -167,9 +169,27 @@ class PurchaseOrderController extends Controller
                 ->get();
         }
 
+        $return_arr = [];
+        foreach ($all_purchases as $value) {
+            foreach ($value->purchaseOrderDetailsBy as $detail) {
+                $return_amount = 0;
+                $selected_return = ReturnPurchaseDetailModel::whereHas('returnBy', function ($query) use ($value) {
+                    $query->where('purchase_order_id', $value->id);
+                })
+                    ->where('product_id', $detail->product_id)
+                    ->get();
+                foreach ($selected_return as $return) {
+                    $return_amount += $return->qty;
+                }
+                array_push($return_arr, $return_amount);
+            }
+        }
+
+
         $data = [
             "title" => "Receiving Purchase Order",
             "purchases" => $all_purchases,
+            "return_amount" => $return_arr
         ];
 
         return view('purchase_orders.receiving', $data);
@@ -614,5 +634,68 @@ class PurchaseOrderController extends Controller
         $modelPurchaseOrder->purchaseOrderDetailsBy()->delete();
         $modelPurchaseOrder->delete();
         return redirect('/purchase_orders')->with('error', 'Delete Data Purchase Order Success');
+    }
+
+    public function getAllDetail()
+    {
+        $po_id = request()->p;
+
+        $getqty = PurchaseOrderDetailModel::where('purchase_order_id', $po_id)->get();
+        return response()->json($getqty);
+    }
+    public function getQtyDetail()
+    {
+        $po_id = request()->p;
+        $product_id = request()->pr;
+
+        $getqty = PurchaseOrderDetailModel::where('purchase_order_id', $po_id)->where('product_id', $product_id)->first();
+        $_qty = $getqty->qty;
+        $selected_return = ReturnPurchaseModel::with('returnDetailsBy')->where('purchase_order_id', $po_id)->get();
+
+        $return = 0;
+        if ($selected_return != null) {
+            foreach ($selected_return as $value) {
+                $selected_detail = ReturnPurchaseDetailModel::where('return_id', $value->id)->where('product_id', $product_id)->first();
+                $return = $return + $selected_detail->qty;
+            }
+        }
+        $data = [
+            'qty' => $_qty,
+            'return' => $return
+        ];
+        return response()->json($data);
+    }
+
+    public function selectReturn()
+    {
+        try {
+            $po_id = request()->p;
+            $product = [];
+            if (request()->has('q')) {
+                $search = request()->q;
+
+                $product = PurchaseOrderDetailModel::join('products', 'products.id', '=', 'purchase_order_details.product_id')
+                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'products.id_sub_material')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->select('products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                    ->where('products.nama_barang', 'LIKE', "%$search%")
+                    ->where('purchase_order_id', $po_id)
+                    ->orWhere('product_sub_types.type_name', 'LIKE', "%$search%")
+                    ->where('purchase_order_id', $po_id)
+                    ->orWhere('product_sub_materials.nama_sub_material', 'LIKE', "%$search%")
+                    ->where('purchase_order_id', $po_id)
+                    ->get();
+            } else {
+                $product = PurchaseOrderDetailModel::join('products', 'products.id', '=', 'purchase_order_details.product_id')
+                    ->join('product_sub_materials', 'product_sub_materials.id', '=', 'products.id_sub_material')
+                    ->join('product_sub_types', 'product_sub_types.id', '=', 'products.id_sub_type')
+                    ->select('products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
+                    ->where('purchase_order_id', $po_id)
+                    ->get();
+            }
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            return response()->json($th);
+        }
     }
 }

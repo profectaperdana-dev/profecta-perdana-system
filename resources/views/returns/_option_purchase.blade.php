@@ -7,10 +7,9 @@
         <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal" data-original-title="test"
             data-bs-target="#editReturn{{ $return->id }}">Edit</a>
     @endcan
-    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-        data-bs-target="#detailReturn{{ $return->id }}">Detail</a>
     <h5 class="dropdown-header">Prints</h5>
-    <a class="dropdown-item" href="{{ url('return/' . $return->id . '/print') }}">Print Return</a>
+    <a class="dropdown-item" href="{{ url('return_purchase/' . $return->id . '/print') }}">Print Return</a>
+
 </div> --}}
 
 <div class="modal fade" id="detailReturn{{ $return->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
@@ -84,13 +83,13 @@
                 <div class="mb-3 row box-select-all justify-content-end">
                     <button class="col-1 me-3 btn btn-sm btn-primary" id="addReturn">+</button>
                 </div>
-                <form action="{{ url('return/' . $return->id . '/update_return') }}" method="POST"
+                <form action="{{ url('return_purchase/' . $return->id . '/update_return_purchase') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <div class="container-fluid">
                         <div class="row">
                             <div class="col-md-12">
-                                <input type="hidden" id="so_id" value="{{ $return->salesOrderBy->id }}">
+                                <input type="hidden" id="so_id" value="{{ $return->purchaseOrderBy->id }}">
                                 <div class="row" id="formReturn">
                                     @foreach ($return->returnDetailsBy as $item)
                                         <input type="hidden" class="loop" value="{{ $loop->index }}">

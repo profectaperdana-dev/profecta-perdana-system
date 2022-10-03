@@ -177,7 +177,7 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('return_purchase') ? 'active' : '' }}"
-                            href="{{ url('/return_purchase') }}"><i data-feather="rotate-cw"></i></i><span>Return
+                            href="{{ url('/return_purchase') }}"><i data-feather="rotate-cw"></i><span>Return
                                 Purchases
                             </span></a>
                     </li>
