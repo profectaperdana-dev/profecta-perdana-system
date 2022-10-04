@@ -82,13 +82,13 @@
                                         <th>TOP (Days)</th>
                                         <th>Due Date</th>
                                         <th>Remark</th>
-                                        <th>Total</th>
                                         <th>Created By</th>
                                         <th>Receiving Status</th>
                                         <th>Sub Material</th>
                                         <th>Sub Type</th>
                                         <th>Product</th>
                                         <th>Qty</th>
+                                        <th>Total</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -133,7 +133,7 @@
 
                     $('#example1').DataTable({
 
-                        rowsGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
+                        // rowsGroup: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
 
                         processing: true,
                         serverSide: true,
@@ -180,11 +180,6 @@
 
                             },
                             {
-                                data: 'total',
-                                name: 'total'
-
-                            },
-                            {
                                 data: 'created_by',
                                 name: 'created_by'
 
@@ -212,6 +207,11 @@
                             {
                                 data: 'qty',
                                 name: 'qty'
+
+                            },
+                            {
+                                data: 'total',
+                                name: 'total'
 
                             },
                         ],
