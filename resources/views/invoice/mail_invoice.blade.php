@@ -636,6 +636,11 @@
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="center"
+                                                                                                    valign="top">Disc
+                                                                                                    (Rp)
+                                                                                                </th>
+                                                                                                <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                    align="center"
                                                                                                     valign="top">Qty
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
@@ -671,6 +676,11 @@
                                                                                                         align="center"
                                                                                                         valign="top">
                                                                                                         {{ $value->discount }}
+                                                                                                    </td>
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="center"
+                                                                                                        valign="top">
+                                                                                                        {{ $value->discount_rp }}
                                                                                                     </td>
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
