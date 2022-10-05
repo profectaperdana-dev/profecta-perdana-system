@@ -193,7 +193,7 @@
                     {{-- @endfor --}}
                 @endforeach
                 <tr>
-                    <td colspan="6" style="text-align: right">
+                    <td colspan="7" style="text-align: right">
                         <hr>
                     </td>
 
