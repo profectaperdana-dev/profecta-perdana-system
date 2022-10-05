@@ -116,7 +116,9 @@ class ReportController extends Controller
                     return date('d-M-Y', strtotime($data->order_date));
                 })
                 ->editColumn('paid_date', function ($data) {
-                    return date('d-M-Y', strtotime($data->paid_date));
+                    if ($data->paid_date == null) {
+                        return "-";
+                    } else return date('d-M-Y', strtotime($data->paid_date));
                 })
                 ->editColumn('total_after_ppn', function ($data) {
                     return number_format($data->total_after_ppn, 0, ',', '.');

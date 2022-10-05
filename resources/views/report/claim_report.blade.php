@@ -226,7 +226,7 @@
 
                         buttons: ['pageLength',
                             {
-                                title: 'Data Invoice',
+                                title: 'Data Claim',
                                 messageTop: '<h5>{{ $title }} ({{ date('l H:i A, d F Y ') }})</h5><br>',
                                 messageBottom: '<strong style="color:red;">*Please select only the type of column needed when printing so that the print is neater</strong>',
                                 extend: 'print',

@@ -140,7 +140,11 @@ class ReturnController extends Controller
             if ($selected_return != null) {
                 foreach ($selected_return as $detail) {
                     $selected_detail = ReturnDetailModel::where('return_id', $detail->id)->where('product_id', $value->products_id)->first();
-                    $return += $selected_detail->qty;
+                    if ($selected_detail == null) {
+                        $return += 0;
+                    } else {
+                        $return += $selected_detail->qty;
+                    }
                 }
             }
             array_push($return_amount, $return);
@@ -165,7 +169,11 @@ class ReturnController extends Controller
             if ($selected_return != null) {
                 foreach ($selected_return as $detail) {
                     $selected_detail = ReturnPurchaseDetailModel::where('return_id', $detail->id)->where('product_id', $value->product_id)->first();
-                    $return += $selected_detail->qty;
+                    if ($selected_detail == null) {
+                        $return += 0;
+                    } else {
+                        $return += $selected_detail->qty;
+                    }
                 }
             }
             array_push($return_amount, $return);
