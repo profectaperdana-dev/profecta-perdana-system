@@ -273,7 +273,8 @@ class PurchaseOrderController extends Controller
                 }
             }
         }
-        $model->total = $total;
+        $ppn = 0.11 * $total;
+        $model->total = $total + $ppn;
         $saved = $model->save();
 
         if (empty($message_duplicate) && $saved) {
@@ -379,7 +380,8 @@ class PurchaseOrderController extends Controller
             ->whereNotIn('product_id', $products_arr)->delete();
 
         //Save total
-        $model->total = $total;
+        $ppn = 0.11 * $total;
+        $model->total = $total + $ppn;
 
         $saved_model = $model->save();
         if ($saved_model == true) {
@@ -463,7 +465,8 @@ class PurchaseOrderController extends Controller
 
         //Save total
         $model->isvalidated = 1;
-        $model->total = $total;
+        $ppn = 0.11 * $total;
+        $model->total = $total + $ppn;
 
         $saved_model = $model->save();
         if ($saved_model == true) {
@@ -604,7 +607,8 @@ class PurchaseOrderController extends Controller
 
 
         //Save total
-        $model->total = $total;
+        $ppn = 0.11 * $total;
+        $model->total = $total + $ppn;
 
         $saved_model = $model->save();
         if ($saved_model == true) {

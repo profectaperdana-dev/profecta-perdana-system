@@ -51,7 +51,6 @@
                     <option value="Wrong Discount">Wrong Discount</option>
                     <option value="Wrong Quantity">Wrong Quantity</option>
                     <option value="Wrong Product Type">Wrong Product Type</option>
-                    <option value="Bad Debt">Bad Debt</option>
                     <option value="Other">Other</option>
                 </select>
             </div>
@@ -63,8 +62,8 @@
                 <label for="">&nbsp;</label>
                 <select name="return_reason2" class="form-control uoms">
                     <option value="">-- Choose Who's Responsible -- </option>
-                    <option value="Admin">Admin</option>
-                    <option value="Warehouse Keeper">Warehouse Keeper</option>
+                    <option value="Admin">Principal</option>
+                    <option value="Warehouse Keeper">Us</option>
                 </select>
             </div>
             <div class="form-group col-6 other" hidden>

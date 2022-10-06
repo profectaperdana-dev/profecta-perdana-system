@@ -252,6 +252,22 @@ class ReportController extends Controller
                         return number_format($total, 0, ',', '.');
                     } else return 'Restricted';
                 })
+                ->editColumn('ppn', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        $total = $purchaseOrderDetailModel->productBy->harga_beli * $purchaseOrderDetailModel->qty;
+                        $ppn = 0.11 * $total;
+
+                        return number_format($ppn, 0, ',', '.');
+                    } else return 'Restricted';
+                })
+                ->editColumn('total_ppn', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        $total = $purchaseOrderDetailModel->productBy->harga_beli * $purchaseOrderDetailModel->qty;
+                        $ppn = 0.11 * $total;
+                        $total_ppn = $total + $ppn;
+                        return number_format($total_ppn, 0, ',', '.');
+                    } else return 'Restricted';
+                })
                 ->editColumn('supplier_id', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
                     return $purchaseOrderDetailModel->purchaseOrderBy->supplierBy->nama_supplier;
                 })
@@ -441,7 +457,7 @@ class ReportController extends Controller
                 ->make(true);
         }
         $data = [
-            'title' => "All Report Return Sales in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
+            'title' => "All Report Return Invoice in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
         ];
         return view('report.return', $data);
     }

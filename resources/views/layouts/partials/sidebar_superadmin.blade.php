@@ -217,7 +217,7 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('return') ? 'active' : '' }}"
-                            href="{{ url('/return') }}"><i data-feather="rotate-ccw"></i></i><span>Return Sales
+                            href="{{ url('/return') }}"><i data-feather="rotate-ccw"></i></i><span>Return Invoice
                             </span></a>
                     </li>
 
@@ -252,21 +252,26 @@
                         </div>
                     </li>
                     <li class="dropdown"><a
-                            class="nav-link menu-title @if (request()->is('report_sales') || request()->is('report_purchase') || request()->is('report_claim')) active @endif"
+                            class="nav-link menu-title @if (request()->is('report_sales') ||
+                                request()->is('report_purchase') ||
+                                request()->is('report_claim') ||
+                                request()->is('report_return_invoice') ||
+                                request()->is('report_return_purchases')) active @endif"
                             href="javascript:void(0)"><i data-feather="book-open"></i><span>Report</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('report_sales') || request()->is('report_purchase') || request()->is('report_claim')) block @else none @endif ">
                             <li><a href="{{ url('/report_sales') }}"
-                                    class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Sales</a></li>
+                                    class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Invoice</a>
+                            </li>
                             <li><a href="{{ url('/report_purchase') }}"
                                     class="{{ request()->is('report_purchase') ? 'active' : '' }}">Report Purchase
                                 </a></li>
                             <li><a href="{{ url('/report_claim') }}"
                                     class="{{ request()->is('report_claim') ? 'active' : '' }}">Report Claim</a>
                             </li>
-                            <li><a href="{{ url('/report_return_sales') }}"
-                                    class="{{ request()->is('report_return_sales') ? 'active' : '' }}">Report Return
-                                    Sales</a>
+                            <li><a href="{{ url('/report_return_invoice') }}"
+                                    class="{{ request()->is('report_return_invoice') ? 'active' : '' }}">Report Return
+                                    Invoice</a>
                             </li>
                             <li><a href="{{ url('/report_return_purchases') }}"
                                     class="{{ request()->is('report_return_purchases') ? 'active' : '' }}">Report

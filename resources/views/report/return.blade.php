@@ -135,7 +135,7 @@
                         processing: true,
                         serverSide: true,
                         ajax: {
-                            url: "{{ url('/report_return_sales') }}",
+                            url: "{{ url('/report_return_invoice') }}",
                             data: {
                                 from_date: from_date,
                                 to_date: to_date
@@ -224,7 +224,7 @@
                         ],
                         buttons: ['pageLength',
                             {
-                                title: 'Data Return Sales',
+                                title: 'Data Return Invoice',
                                 messageTop: '<h5>{{ $title }} ({{ date('l H:i A, d F Y ') }})</h5><br>',
                                 messageBottom: '<strong style="color:red;">*Please select only the type of column needed when printing so that the print is neater</strong>',
                                 extend: 'print',

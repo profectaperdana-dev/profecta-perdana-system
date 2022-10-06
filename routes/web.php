@@ -108,7 +108,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/sales_order/selectReturn', [SalesOrderController::class, 'selectReturn']);
     Route::get('/history_claim/', [ClaimController::class, 'historyClaim']);
     Route::get('/report_claim/', [ReportController::class, 'reportClaim']);
-    Route::get('/report_return_sales/', [ReportController::class, 'report_return']);
+    Route::get('/report_return_invoice/', [ReportController::class, 'report_return']);
     Route::get('/report_return_purchases/', [ReportController::class, 'report_return_purchase']);
     Route::get('/sales_order/getQtyDetail', [SalesOrderController::class, 'getQtyDetail']);
     Route::get('/sales_order/getAllDetail', [SalesOrderController::class, 'getAllDetail']);
@@ -125,6 +125,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [ReturnController::class, 'store']);
         Route::post('/{id}/update_return', [ReturnController::class, 'update_return']);
         Route::get('/{id}/print', [ReturnController::class, 'print_return']);
+        Route::get('/{id}/send_email', [SendEmailController::class, 'send_return']);
     });
     Route::prefix('return_purchase')->group(function () {
         Route::get('/', [ReturnController::class, 'index_purchase']);
