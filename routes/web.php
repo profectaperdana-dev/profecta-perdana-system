@@ -28,6 +28,7 @@ use App\Http\Controllers\UomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ClaimController;
+use App\Http\Controllers\StockMutationController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
@@ -116,9 +117,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/purchase_order/selectReturn', [PurchaseOrderController::class, 'selectReturn']);
     Route::get('/purchase_order/getQtyDetail', [PurchaseOrderController::class, 'getQtyDetail']);
     Route::get('/purchase_order/getAllDetail', [PurchaseOrderController::class, 'getAllDetail']);
-
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
     Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
+
     Route::prefix('return')->group(function () {
         Route::get('/', [ReturnController::class, 'index']);
         Route::get('/{id}', [ReturnController::class, 'create']);
@@ -133,6 +134,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store_purchase', [ReturnController::class, 'store_purchase']);
         Route::post('/{id}/update_return_purchase', [ReturnController::class, 'update_return_purchase']);
         Route::get('/{id}/print', [ReturnController::class, 'print_return_purchase']);
+    });
+    Route::prefix('stock_mutation')->group(function () {
+        Route::get('/', [StockMutationController::class, 'index']);
     });
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {

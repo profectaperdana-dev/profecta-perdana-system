@@ -223,6 +223,30 @@
 
                     <li class="sidebar-main-title">
                         <div>
+                            <h6>Stock Mutations</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutations/create') ? 'active' : '' }}"
+                            href="{{ url('/claim/create') }}"><i data-feather="edit"></i><span>Create Claim
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('claim') ? 'active' : '' }}"
+                            href="{{ url('/claim') }}"><i data-feather="clipboard"></i><span>Claim List
+                            </span></a>
+                    </li>
+
+
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('history_claim') ? 'active' : '' }}"
+                            href="{{ url('/history_claim') }}"><i data-feather="folder"></i><span>History Claims
+
+                            </span></a>
+                    </li>
+
+                    <li class="sidebar-main-title">
+                        <div>
                             <h6>Claims & Informations</h6>
                         </div>
                     </li>
@@ -244,7 +268,6 @@
 
                             </span></a>
                     </li>
-
 
                     <li class="sidebar-main-title">
                         <div>
