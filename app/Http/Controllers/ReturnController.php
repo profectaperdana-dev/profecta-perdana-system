@@ -74,7 +74,7 @@ class ReturnController extends Controller
         }
 
         $data = [
-            'title' => 'All Return Sales Orders in Profecta Perdana'
+            'title' => 'All Return Invoice in Profecta Perdana'
         ];
         return view('returns.index', $data);
     }

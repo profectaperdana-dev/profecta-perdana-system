@@ -152,8 +152,6 @@
                     <th style="text-align:left;padding:5px">Warehouse</th>
                     <th style="text-align:right;padding:5px">Price (Rp)</th>
                     <th style="text-align:center;padding:5px">Qty</th>
-                    <th style="text-align:center;padding:5px">Disc (%)</th>
-                    <th style="text-align:center;padding:5px">Disc (Rp)</th>
                     <th style="text-align:right;padding:5px;margin-right:30px";>Total</th>
                 </tr>
             </thead>
@@ -180,30 +178,6 @@
                         <td style="text-align:right;padding:5px">
                             {{ number_format($value->productBy->harga_jual_nonretail, 0, ',', '.') }}</td>
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
-                        <td style="text-align:center;padding:5px">
-                            @php
-                                $diskon = 0;
-                                $getdiskon = $value->returnBy->salesOrderBy->salesOrderDetailsBy;
-                                foreach ($getdiskon as $dis) {
-                                    if ($dis->products_id == $value->product_id) {
-                                        $diskon = $dis->discount;
-                                    }
-                                }
-                            @endphp
-                            {{ $diskon }}
-                        </td>
-                        <td style="text-align:center;padding:5px">
-                            @php
-                                $diskon = 0;
-                                $getdiskon = $value->returnBy->salesOrderBy->salesOrderDetailsBy;
-                                foreach ($getdiskon as $dis) {
-                                    if ($dis->products_id == $value->product_id) {
-                                        $diskon = $dis->discount_rp;
-                                    }
-                                }
-                            @endphp
-                            {{ number_format($diskon, 0, ',', '.') }}
-                        </td>
                         @php
                             $diskon = 0;
                             $diskon_rp = 0;
@@ -247,7 +221,7 @@
             <tbody>
 
                 <tr>
-                    <th colspan="4" style="text-align: right">Total Return</th>
+                    <th colspan="9" style="text-align: right">Total Return</th>
                     <th style="text-align: right;border:1px solid black">@currency($data->total)</th>
                 </tr>
                 <tr>
@@ -255,13 +229,11 @@
                     <th>&nbsp;</th>
                 </tr>
                 <tr>
-                    <td colspan="3" style="text-align: left">
-                        Bank Mandiri 113-00-7779777-1 : an. CV Profecta Perdana <br>
-                        Bank BCA 853-085-3099 : an. CV Profecta Perdana <br>
-                        Thank You ! <br>
-                        We're looking forward to working with you again
-                    </td>
-                    <th colspan="2" style="text-align: left"><i>Sincerely Yours,</i></th>
+                    <th colspan="2" style="text-align: center"><i>Created By,</i></th>
+                    <th colspan="2" style="text-align: left"><i>&nbsp;</i></th>
+                    <th colspan="2" style="text-align: center"><i>Proposed By,</i></th>
+                    <th colspan="2" style="text-align: right"><i>&nbsp;</i></th>
+                    <th colspan="2" style="text-align: center"><i>Acknowledge By,</i></th>
                 </tr>
             </tbody>
         </table>

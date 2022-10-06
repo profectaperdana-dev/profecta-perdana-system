@@ -88,7 +88,9 @@
                                         <th>Sub Type</th>
                                         <th>Product</th>
                                         <th>Qty</th>
-                                        <th>Total</th>
+                                        <th>Total (Exclude PPN)</th>
+                                        <th>PPN</th>
+                                        <th>Total (Include PPN)</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -212,6 +214,16 @@
                             {
                                 data: 'total',
                                 name: 'total'
+
+                            },
+                            {
+                                data: 'ppn',
+                                name: 'ppn'
+
+                            },
+                            {
+                                data: 'total_ppn',
+                                name: 'total_ppn'
 
                             },
                         ],

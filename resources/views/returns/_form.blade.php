@@ -65,6 +65,9 @@
                     <option value="">-- Choose Who's Responsible -- </option>
                     <option value="Admin">Admin</option>
                     <option value="Warehouse Keeper">Warehouse Keeper</option>
+                    <option value="Warehouse Keeper">Customer</option>
+                    <option value="Warehouse Keeper">Sales</option>
+                    <option value="Warehouse Keeper">Retail</option>
                 </select>
             </div>
             <div class="form-group col-6 other" hidden>
