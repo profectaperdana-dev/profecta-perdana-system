@@ -10,7 +10,7 @@
         <style>
             .kbw-signature {
                 width: 100%;
-                height: 300px;
+                height: 500px;
             }
 
             #sig canvas {
@@ -50,24 +50,29 @@
         <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-        <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-        <script type="text/javascript">
-            CKEDITOR.replace('diagnosa');
-        </script>
+
         <script>
             $(document).ready(function() {
 
+                // PRODUCT
+                $('#accu_claims').hide();
                 $(document).on('change', '#product_id', function() {
                     var material = $(this).find('option:selected').attr('data-material');
                     var type_material = $(this).find('option:selected').attr('data-type_material');
+                    var parent_material = $(this).find('option:selected').attr('data-parent_material');
 
                     $('#material').val(material);
                     $('#type_material').val(type_material);
-                    console.log(type_material);
+                    $('#parent_material').val(parent_material);
+
+                    if (parent_material == 'Battery') {
+                        $('#accu_claims').show();
+                    } else {
+                        $('#accu_claims').hide();
+                    }
                 });
 
-
-                //  Event on change select material:start
+                // CHOOSE CAR
                 $("#brand").change(function() {
                     //clear select
                     $("#carType").empty();
@@ -105,68 +110,62 @@
                         $("#carType").empty();
                     }
                 });
-                //  Event on change select material:end
 
 
-
+                // SUBMIT 1x
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
                 });
+
+                // SIGNATURE
                 var sig = $('#sig').signature({
                     syncField: '#signature64',
                     syncFormat: 'PNG',
-                    // distance: 0
-
                 });
+
+                // SELECT2
                 $('.receipt').select2({
                     placeholder: '-Select Method-',
                     allowClear: true
                 });
+
+                // CLEAR SIGNATURE
                 $('#clear').click(function(e) {
                     e.preventDefault();
                     sig.signature('clear');
                     $("#signature64").val('');
                 });
 
-                // Other Customer
-                $('#otheCustomer').hide();
+                // customer
+                $('#other_name').hide();
+                $('#other_phone').hide();
                 $('#cust').change(function() {
                     var val_cust = $('#cust').val();
-
-                    if (val_cust == 'other') {
-                        $('#otheCustomer').show();
+                    if (val_cust == 'Other Customer') {
+                        $('#other_name').show();
+                        $('#other_phone').show();
+                    } else if (val_cust != '') {
+                        $('#other_name').show();
+                        $('#other_phone').show();
                     } else {
-                        $('#otheCustomer').hide();
-
+                        $('#other_name').hide();
+                        $('#other_phone').hide();
                     }
                 });
 
-                // Other Product
-                $('#otherAccu').hide();
-                $('#product_id').change(function() {
-                    var val_cust = $('#product_id').val();
-
-                    if (val_cust == 'other_accu') {
-                        $('#otherAccu').show();
-                    } else {
-                        $('#otherAccu').hide();
-
-                    }
-                });
-                $('#file_received').hide();
-                $('#ttd_received').hide();
-                $('#choose_received').change(function() {
-                    var val_cust = $('#choose_received').val();
-
-                    if (val_cust == 'file') {
-                        $('#file_received').show();
-                        $('#ttd_received').hide();
-                    } else if (val_cust == 'signature') {
-                        $('#file_received').hide();
-                        $('#ttd_received').show();
-                    } else {
-                        $('#file_received').hide();
-                        $('#ttd_received').hide();
+                //    PREVIEW IMAGE
+                const imgInput = document.getElementById('inputreference');
+                const imgEl = document.getElementById('previewimg');
+                const previewLabel = document.getElementById('previewLabel');
+                imgInput.addEventListener('change', () => {
+                    if (imgInput.files && imgInput.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            imgEl.src = e.target.result;
+                            imgEl.removeAttribute('hidden');
+                            previewLabel.removeAttribute('hidden');
+                        }
+                        reader.readAsDataURL(imgInput.files[0]);
                     }
                 });
             });

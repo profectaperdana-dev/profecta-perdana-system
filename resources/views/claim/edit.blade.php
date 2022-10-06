@@ -55,27 +55,26 @@
         </script> --}}
         <script>
             $(document).ready(function() {
+                // SUBMIT 1x
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
                 });
-                // $('.result').select2({
-                //     placeholder: '-Select Result-',
-                //     allowClear: true
-                // });
-                // $('.receipt').select2({
-                //     placeholder: '-Select Method-',
-                //     allowClear: true
-                // });
+
+                // SIGNATURE
                 var sig = $('#sig').signature({
                     syncField: '#signature64',
                     syncFormat: 'PNG',
                     // distance: 0
                 });
+
+                // CLEAR SIGNATURE
                 $('#clear').click(function(e) {
                     e.preventDefault();
                     sig.signature('clear');
                     $("#signature64").val('');
                 });
+
+                // CUSTOMER
                 $('#otheCustomer').hide();
                 $('#cust').change(function() {
                     var val_cust = $('#cust').val();
@@ -87,20 +86,20 @@
 
                     }
                 });
-                $('#file_received').hide();
-                $('#ttd_received').hide();
-                $('#choose_received').change(function() {
-                    var val_cust = $('#choose_received').val();
 
-                    if (val_cust == 'file') {
-                        $('#file_received').show();
-                        $('#ttd_received').hide();
-                    } else if (val_cust == 'signature') {
-                        $('#file_received').hide();
-                        $('#ttd_received').show();
-                    } else {
-                        $('#file_received').hide();
-                        $('#ttd_received').hide();
+                //    PREVIEW IMAGE
+                const imgInput = document.getElementById('inputreference');
+                const imgEl = document.getElementById('previewimg');
+                const previewLabel = document.getElementById('previewLabel');
+                imgInput.addEventListener('change', () => {
+                    if (imgInput.files && imgInput.files[0]) {
+                        const reader = new FileReader();
+                        reader.onload = (e) => {
+                            imgEl.src = e.target.result;
+                            imgEl.removeAttribute('hidden');
+                            previewLabel.removeAttribute('hidden');
+                        }
+                        reader.readAsDataURL(imgInput.files[0]);
                     }
                 });
             });

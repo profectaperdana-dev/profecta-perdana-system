@@ -17,6 +17,11 @@
                 width: 100% !important;
                 height: auto;
             }
+
+            .img-rotate {
+                transform: rotate(270deg);
+
+            }
         </style>
     @endpush
 
@@ -78,17 +83,8 @@
                                             {{-- early check --}}
                                             <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-lg" role="document">
-                                                    {{-- <div class="modal-content"> --}}
-                                                    {{-- <div class="modal-header text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Detail Data Early
-                                                                Check
-                                                                {{ $value->claim_number }}</h5>
-                                                            </h5>
-                                                            <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div> --}}
-                                                    {{-- <div class="modal-body"> --}}
+                                                <div class="modal-dialog modal-xl" role="document">
+
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-sm-14 col-md-12 col-lg-12">
@@ -121,6 +117,30 @@
                                                                                         class="form-control"
                                                                                         placeholder="Serial Number" readonly
                                                                                         value="{{ $value->customer_id }}">
+                                                                                    <div class="input-group"
+                                                                                        class="otherCustomer mt-3">
+                                                                                        {{-- Sub Name Customer --}}
+                                                                                        <input name="sub_name"
+                                                                                            type="text" id="other_name"
+                                                                                            readonly
+                                                                                            class="form-control text-capitalize fw-bold "
+                                                                                            placeholder="Enter Name"
+                                                                                            aria-label="Username"
+                                                                                            value="{{ $value->sub_name }}">
+
+                                                                                        {{-- End Sub Name Customer --}}
+
+                                                                                        {{-- SUb Phone Customer --}}
+                                                                                        <input name="sub_phone"
+                                                                                            type="number" id="other_phone"
+                                                                                            class="form-control fw-bold "
+                                                                                            readonly
+                                                                                            placeholder="Enter Phone"
+                                                                                            aria-label="Server"
+                                                                                            value="{{ $value->sub_phone }}">
+
+                                                                                        {{-- End Sub Phone Customer --}}
+                                                                                    </div>
                                                                                 </div>
                                                                                 <div class="form-group col-lg-4 col-md-12">
                                                                                     <label>Car Type</label>
@@ -143,7 +163,8 @@
                                                                                         Plat Number</label>
                                                                                     <input type="text"
                                                                                         class="form-control text-uppercase"
-                                                                                        placeholder="Serial Number" readonly
+                                                                                        placeholder="Serial Number"
+                                                                                        readonly
                                                                                         value="{{ $value->plate_number }}">
                                                                                 </div>
 
@@ -178,30 +199,47 @@
                                                                                         class="form-control" readonly
                                                                                         value="{{ $value->e_charging }}">
                                                                                 </div>
-                                                                                <div class="form-group col-md-12">
-                                                                                    <label>Diagnosa</label>
-                                                                                    <p>
-                                                                                        @php
-                                                                                            echo htmlspecialchars_decode(htmlspecialchars_decode($value['diagnosa']));
-                                                                                        @endphp
-                                                                                    </p>
 
+                                                                                <div class="form-group col-md-12">
+                                                                                    <label for="">Diagnosa</label>
+                                                                                    @foreach ($value->accuClaimDetailsBy as $key => $row)
+                                                                                        <div>{{ $key + 1 }}.
+                                                                                            {{ $row->diagnosa }}
+                                                                                        </div>
+                                                                                    @endforeach
                                                                                 </div>
-                                                                                <div class="form-group col-md-6">
+                                                                                <div class="form-group col-lg-4 col-md-12">
                                                                                     <label>
                                                                                         Submitted By,</label>
                                                                                     <br>
                                                                                     <p><strong>{{ $value->createdBy->name }}</strong>
                                                                                     </p>
                                                                                 </div>
-                                                                                <div
-                                                                                    class="form-group text-center col-md-6">
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label>
+                                                                                        Evidence,</label>
+                                                                                    <br>
+                                                                                    <div class="text-center"> <img
+                                                                                            class="img-fluid shadow"
+                                                                                            style="width: 200px"
+                                                                                            id="img"
+                                                                                            src="{{ asset('file_evidence/' . $value->e_foto) }}"
+                                                                                            alt="">
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
                                                                                     <label>
                                                                                         Received By,</label>
                                                                                     <br>
-                                                                                    <img class="img-fluid"
-                                                                                        src="{{ asset('receivedBy/' . $value->e_receivedBy) }}"
-                                                                                        alt="">
+                                                                                    <div class="text-center"> <img
+                                                                                            class="img-fluid img-rotate shadow"
+                                                                                            style="width: 200px"
+                                                                                            id="img"
+                                                                                            src="{{ asset('file_signature/' . $value->e_receivedBy) }}"
+                                                                                            alt="">
+                                                                                    </div>
+
                                                                                 </div>
                                                                                 <hr>
                                                                                 <a class="btn btn-danger" href="#"

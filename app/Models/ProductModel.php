@@ -17,6 +17,10 @@ class ProductModel extends Model
     {
         return $this->hasOne(SubTypeModel::class, 'id', 'id_sub_type')->withTrashed();
     }
+    public function materials()
+    {
+        return $this->hasOne(MaterialModel::class, 'id', 'id_material')->withTrashed();
+    }
 
     public function sub_materials()
     {
