@@ -244,12 +244,29 @@
                                         name="diagnosa[]" value="Broken battery">
                                     Broken battery
                                 </label>
-                                <input type="text" class="form-control" placeholder="Enter other diagnosa"
-                                    name="other_diagnosa">
+                            </div>
+                            <div class="col-lg-12 col-md-12 form-group">
+
+                                <label class="d-block" for="chk-ani2">
+                                    <input class="checkbox_animated" id="cekDiagnosa" type="checkbox" check
+                                        value="">
+                                    Other Diagnosa
+                                </label>
+                                <div hidden class="col-lg-12 col-md-12 form-group" id="otherDiagnosa">
+                                    <input type="text" class="form-control" placeholder="Enter other diagnosa"
+                                        name="other_diagnosa">
+                                </div>
                             </div>
                         </div>
                     </div>
                     {{-- END CLAIM ACCU --}}
+
+                    {{-- loaned battery --}}
+                    <div class="col-lg-12 col-md-12 form-group">
+                        <label>Loaned Battery</label>
+                        <input type="" class="form-control" name="id_" required>
+                    </div>
+                    {{-- end loaned battery --}}
 
                     {{-- FORM RECEIVED --}}
                     <div class="col-lg-12 col-md-12 form-group">

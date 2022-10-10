@@ -10,7 +10,7 @@
         <style>
             .kbw-signature {
                 width: 100%;
-                height: 300px;
+                height: 500px;
             }
 
             #sig canvas {
@@ -55,6 +55,38 @@
         </script> --}}
         <script>
             $(document).ready(function() {
+                // OTHER DIAGNOSE
+                // $('#otherDiagnosa').hide();
+
+                $('#cekDiagnosa').click(function() {
+                    var checked = $(this).prop('checked');
+                    console.log(checked);
+                    if (checked == true) {
+                        $('#otherDiagnosa').attr('hidden', false);
+
+                    } else {
+                        $('#otherDiagnosa').attr('hidden', true);
+                    }
+                });
+
+
+                // CHOOSE SUPPLIER
+                $('#warrantyTo').hide();
+                $('#warehouseTo').hide();
+                $('#result').on('change', function() {
+                    var result = $(this).val();
+                    if (result == "CP03 - Waranty Accepted") {
+                        $('#warrantyTo').show();
+                        $('#warehouseTo').hide();
+                    } else if (result == "CP04 - Good Will") {
+                        $('#warrantyTo').hide();
+                        $('#warehouseTo').show();
+                    } else {
+                        $('#warrantyTo').hide();
+                        $('#warehouseTo').hide();
+                    }
+                });
+
                 // SUBMIT 1x
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);

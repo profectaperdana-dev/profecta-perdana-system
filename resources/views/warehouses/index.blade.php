@@ -43,36 +43,48 @@
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label class="font-weight-bold">Address</label>
-                                            <textarea placeholder="Address Warehouses" name="alamat" id="" cols="30" rows="5"
-                                                class="form-control text-capitalize {{ $errors->first('alamat') ? ' is-invalid' : '' }}" required></textarea>
+                                        <label class="font-weight-bold">Type Warehouse</label>
+                                        <select name="type" class="form-control uoms text-uppercase" id="">
+                                            <option value="" selected>-Choose Type-
+                                            </option>
+                                            @foreach ($warehouse_types as $value)
+                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
+                                </div>
 
-                                            @error('alamat')
-                                                <small class="text-danger">{{ $message }}.</small>
-                                            @enderror
-                                        </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="font-weight-bold">Address</label>
+                                        <textarea placeholder="Address Warehouses" name="alamat" id="" cols="30" rows="5"
+                                            class="form-control text-capitalize {{ $errors->first('alamat') ? ' is-invalid' : '' }}" required></textarea>
+
+                                        @error('alamat')
+                                            <small class="text-danger">{{ $message }}.</small>
+                                        @enderror
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <label>
-                                                Sales Area</label>
-                                            <select id="" required name="id_area"
-                                                class="form-control uoms {{ $errors->first('id_area') ? ' is-invalid' : '' }}">
-                                                <option value="" selected>-Choose Area-</option>
-                                                @foreach ($areas as $list_area)
-                                                    <option value="{{ $list_area->id }}">
-                                                        {{ $list_area->area_name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('id_area')
-                                                <div class="invalid-feedback">
-                                                    {{ $message }}
-                                                </div>
-                                            @enderror
-                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label>
+                                            Sales Area</label>
+                                        <select id="" required name="id_area"
+                                            class="form-control uoms {{ $errors->first('id_area') ? ' is-invalid' : '' }}">
+                                            <option value="" selected>-Choose Area-</option>
+                                            @foreach ($areas as $list_area)
+                                                <option value="{{ $list_area->id }}">
+                                                    {{ $list_area->area_name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('id_area')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
                                     </div>
-                                    {{-- <div class="form-group row">
+                                </div>
+                                {{-- <div class="form-group row">
                                         <div class="col-md-12">
                                             <label class="font-weight-bold">Latitude</label>
                                             <input type="text"
@@ -83,7 +95,7 @@
                                             @enderror
                                         </div>
                                     </div> --}}
-                                    {{-- <div class="form-group row">
+                                {{-- <div class="form-group row">
                                         <div class="col-md-12">
                                             <label class="font-weight-bold">Longitude</label>
                                             <input type="text"
@@ -94,18 +106,16 @@
                                             @enderror
                                         </div>
                                     </div> --}}
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <button type="reset" class="btn btn-warning"
-                                                data-dismiss="modal">Reset</button>
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <button type="reset" class="btn btn-warning" data-dismiss="modal">Reset</button>
+                                        <button type="submit" class="btn btn-primary">Save</button>
                                     </div>
                                 </div>
-
                             </div>
-                        </form>
+
                     </div>
+                    </form>
                 </div>
             </div>
             <div class="col-sm-7">
@@ -123,6 +133,7 @@
                                         <th></th>
                                         <th>#</th>
                                         <th>Warehouese</th>
+                                        <th>Type</th>
                                         <th>Address</th>
                                         <th>Sales Area</th>
                                         {{-- <th>Coordinate Point</th> --}}
@@ -165,7 +176,7 @@
                                                                 <div class="row">
                                                                     <div class="col-md-12 font-weight-bold">
                                                                         <div class="form-group row font-weight-bold">
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-12 form-group">
                                                                                 <label class="font-weight-bold">Name
                                                                                     Warehouses</label>
                                                                                 <input type="text"
@@ -179,7 +190,7 @@
                                                                                 @enderror
                                                                             </div>
 
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-12 form-group">
                                                                                 <label
                                                                                     class="font-weight-bold">Address</label>
                                                                                 <textarea placeholder="Address Warehouses" name="alamat_" id="" cols="30" rows="5"
@@ -191,7 +202,7 @@
                                                                                 @enderror
                                                                             </div>
 
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-12 form-group">
                                                                                 <label>
                                                                                     Sales Area</label>
                                                                                 <select id="" required
@@ -211,43 +222,31 @@
                                                                                     </div>
                                                                                 @enderror
                                                                             </div>
-                                                                        </div>
-                                                                        {{-- <div class="form-group row">
-                                                                            <div class="col-md-4">
-                                                                                <label
-                                                                                    class="font-weight-bold">Latitude</label>
-                                                                                <input type="text"
-                                                                                    value="{{ $value->latitude }}"
-                                                                                    class="form-control text-capitalize {{ $errors->first('latitude_') ? ' is-invalid' : '' }}"
-                                                                                    name="latitude_"
-                                                                                    placeholder="Latitude Warehouses"
-                                                                                    required>
-                                                                                @error('latitude_')
-                                                                                    <small
-                                                                                        class="text-danger">{{ $message }}.</small>
-                                                                                @enderror
-                                                                            </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <label class="font-weight-bold">Type
+                                                                                        Warehouse</label>
+                                                                                    <select name="type_"
+                                                                                        class="form-control uoms">
+                                                                                        @foreach ($warehouse_types as $val)
+                                                                                            <option
+                                                                                                value="{{ $val->id }}"
+                                                                                                @if ($value->type == $val->id) selected @endif>
+                                                                                                {{ $val->name }}
+                                                                                            </option>
+                                                                                        @endforeach
 
-                                                                            <div class="col-md-4">
-                                                                                <label
-                                                                                    class="font-weight-bold">Longitude</label>
-                                                                                <input type="text"
-                                                                                    value="{{ $value->longitude }}"
-                                                                                    class="form-control text-capitalize {{ $errors->first('longitude_') ? ' is-invalid' : '' }}"
-                                                                                    name="longitude_"
-                                                                                    placeholder="Longitude Warehouses"
-                                                                                    required>
-                                                                                @error('longitude_')
-                                                                                    <small
-                                                                                        class="text-danger">{{ $message }}.</small>
-                                                                                @enderror
+
+
+                                                                                    </select>
+                                                                                </div>
                                                                             </div>
-                                                                            <div class="col-md-4">
+                                                                            <div class="col-md-12 form-group">
                                                                                 <label>
                                                                                     Status</label>
                                                                                 <select id="" required
                                                                                     name="status"
-                                                                                    class="form-control uoms {{ $errors->first('status') ? ' is-invalid' : '' }}">
+                                                                                    class="form-control uoms {{ $errors->first('status_supplier') ? ' is-invalid' : '' }}">
                                                                                     <option value="{{ $value->status }}"
                                                                                         selected>
                                                                                         @if ($value->status == 0)
@@ -261,13 +260,14 @@
                                                                                     <option value="0">Non
                                                                                         Active</option>
                                                                                 </select>
-                                                                                @error('status')
+                                                                                @error('status_supplier')
                                                                                     <div class="invalid-feedback">
                                                                                         {{ $message }}
                                                                                     </div>
                                                                                 @enderror
                                                                             </div>
-                                                                        </div> --}}
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -321,6 +321,7 @@
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->warehouses }}</td>
+                                            <td>{{ $value->typeBy->name }}</td>
                                             <td>
                                                 <address>{{ $value->alamat }}</address>
                                             </td>

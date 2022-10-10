@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\SuppliersModel;
+use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -18,9 +19,12 @@ class SuppliersController extends Controller
     {
         // abort(403, 'Unauthorized action.');
         $title = 'Data Suppliers';
+        $warehouse = WarehouseModel::join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
+            ->select('warehouses.*', 'warehouse_types.name')
+            ->where('warehouse_types.name', 'SUPPLIER')->get();
         $data = SuppliersModel::latest()->get();
 
-        return view('suppliers.index', compact('title', 'data'));
+        return view('suppliers.index', compact('title', 'data', 'warehouse'));
     }
 
     /**
@@ -53,6 +57,7 @@ class SuppliersController extends Controller
         $model = new SuppliersModel();
         $model->nama_supplier = $request->get('nama_supplier');
         $model->alamat_supplier = $request->get('alamat_supplier');
+        $model->id_warehouse = $request->get('id_warehouse');
         $model->no_telepon_supplier = $request->get('no_telepon_supplier');
         $model->npwp_supplier = $request->get('npwp_supplier');
         $model->pic_supplier = $request->get('pic_supplier');
@@ -110,6 +115,8 @@ class SuppliersController extends Controller
         $model = SuppliersModel::find($id);
         $model->nama_supplier = $request->get('nama_supplier_');
         $model->alamat_supplier = $request->get('alamat_supplier_');
+        $model->id_warehouse = $request->get('id_warehouse_');
+
         $model->no_telepon_supplier = $request->get('no_telepon_supplier_');
         $model->npwp_supplier = $request->get('npwp_supplier_');
         $model->pic_supplier = $request->get('pic_supplier_');

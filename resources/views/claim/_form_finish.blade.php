@@ -12,13 +12,13 @@
                             <div class="input-group" class="otherCustomer mt-3">
                                 {{-- Sub Name Customer --}}
                                 <input name="sub_name" type="text" id="other_name" readonly
-                                    class="form-control text-capitalize fw-bold" placeholder="Enter Name"
-                                    aria-label="Username" value="{{ $value->sub_name }}">
+                                    class="form-control text-capitalize fw-bold bg-primary text-white"
+                                    placeholder="Enter Name" aria-label="Username" value="{{ $value->sub_name }}">
                                 {{-- End Sub Name Customer --}}
                                 {{-- SUb Phone Customer --}}
-                                <input name="sub_phone" type="number" id="other_phone" class="form-control fw-bold "
-                                    readonly placeholder="Enter Phone" aria-label="Server"
-                                    value="{{ $value->sub_phone }}">
+                                <input name="sub_phone" type="number" id="other_phone"
+                                    class="form-control  bg-primary fw-bold text-white" readonly
+                                    placeholder="Enter Phone" aria-label="Server" value="{{ $value->sub_phone }}">
                                 {{-- End Sub Phone Customer --}}
                             </div>
                         </div>
@@ -107,22 +107,54 @@
                                     </div>
                                 @enderror
                             </div>
-                            <div class="col-lg-6 col-md-12 form-group">
+                            <div class="col-lg-12 col-md-12 form-group">
                                 @foreach ($value->accuClaimDetailsBy as $key => $row)
                                     <label class="d-block" for="chk-ani2">
-                                        <input class="checkbox_animated" type="checkbox" checked readonly disabled
-                                            name="diagnosa[]" value="Forgot to turn off the vehicle electricity">
-                                        {{ $row->diagnosa }} </label>
+                                        <input class="checkbox_animated" type="checkbox" checked name="diagnosa[]"
+                                            value="{{ $row->diagnosa }}">
+                                        {{ $row->diagnosa }}
+                                    </label>
                                 @endforeach
+
+
+                                <label class="d-block" for="chk-ani2">
+                                    <input class="checkbox_animated" id="cekDiagnosa" type="checkbox" check
+                                        value="other_diagnosa">
+                                    Other Diagnosa
+                                </label>
+                                <div hidden class="col-lg-12 col-md-12 form-group" id="otherDiagnosa">
+                                    <input type="text" class="form-control" placeholder="Enter other diagnosa"
+                                        name="other_diagnosa">
+                                </div>
                             </div>
                             <div class="col-12 col-md-12 form-group">
                                 <label>Result</label>
-                                <select name="result" id="" class="form-control uoms">
+                                <select name="result" class="form-control uoms" id="result">
                                     <option value="" selected>-Choose Result-</option>
                                     <option value="CP01 - Good Condition">CP01 - Good Condition</option>
                                     <option value="CP02 - Waranty Rejected">CP02 - Waranty Rejected</option>
                                     <option value="CP03 - Waranty Accepted">CP03 - Waranty Accepted</option>
                                     <option value="CP04 - Good Will">CP04 - Good Will</option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-12 form-group" id="warrantyTo">
+                                <label>Warranty To</label>
+                                <select name="result" id="" class="form-control uoms">
+                                    <option value="" selected>-Choose Supplier-</option>
+                                    @foreach ($suppliers as $row)
+                                        <option value="{{ $row->id_warehouse }}">{{ $row->nama_supplier }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-12 form-group" id="warehouseTo">
+                                <label>Warehouse To</label>
+                                <select name="warehouse_id" id="" class="form-control uoms">
+                                    <option value="" selected>-Choose Warehouse-</option>
+                                    @foreach ($warehouse as $row)
+                                        <option value="{{ $row->id }}">{{ $row->warehouses }}</option>
+                                    @endforeach
+
                                 </select>
                             </div>
                             <div id="file_received" class="col-lg-12 col-md-12 form-group">

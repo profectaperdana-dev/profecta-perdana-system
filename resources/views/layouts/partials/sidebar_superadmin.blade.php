@@ -126,10 +126,20 @@
                             href="{{ url('/discounts') }}"><i data-feather="percent"></i><span>Master
                                 Discount</span></a>
                     </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('warehouses') ? 'active' : '' }}"
-                            href="{{ url('/warehouses') }}"><i data-feather="server"></i><span>Master
-                                Warehouses</span></a>
+
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('warehouse_types') || request()->is('warehouses')) active @endif"
+                            href="javascript:void(0)"><i data-feather="server"></i><span>Master Warehouse</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('warehouse_types') || request()->is('warehouses')) block @else none @endif ">
+                            <li><a href="{{ url('/warehouse_types') }}"
+                                    class="{{ request()->is('warehouse_types') ? 'active' : '' }}">Type Warehouse</a>
+                            </li>
+                            <li><a href="{{ url('/warehouses') }}"
+                                    class="{{ request()->is('warehouses') ? 'active' : '' }}">Warehouses</a>
+                            </li>
+
+
+                        </ul>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('supliers') ? 'active' : '' }}"

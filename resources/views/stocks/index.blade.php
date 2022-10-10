@@ -55,7 +55,8 @@
                                                             <option value="">Choose Warehouse</option>
                                                             @foreach ($warehouse as $warehouses)
                                                                 <option value="{{ $warehouses->id }}">
-                                                                    {{ $warehouses->warehouses }}</option>
+                                                                    {{ $warehouses->warehouses }}/{{ $warehouses->typeBy->name }}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                         @error('warehouses_id')
@@ -230,7 +231,8 @@
                                             </div>
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->warehouseBy->warehouses }}</td>
+                                            <td>{{ $value->warehouseBy->warehouses }}/{{ $value->warehouseBy->typeBy->name }}
+                                            </td>
                                             <td>{{ $value->productBy->nama_barang }}</td>
                                             <td>{{ $value->stock }}</td>
 
