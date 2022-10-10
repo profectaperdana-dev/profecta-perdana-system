@@ -234,6 +234,14 @@
                         </a>
                     </li>
                     <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation/approval') ? 'active' : '' }}"
+                            href="{{ url('/stock_mutation/approval') }}"><i data-feather="edit"></i><span>Approve
+                                Stock
+                                Mutation
+                            </span>
+                        </a>
+                    </li>
+                    <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation') ? 'active' : '' }}"
                             href="{{ url('/stock_mutation') }}"><i data-feather="clipboard"></i><span>Stock
                                 Mutations List

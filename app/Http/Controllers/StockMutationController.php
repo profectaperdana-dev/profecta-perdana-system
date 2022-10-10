@@ -76,6 +76,96 @@ class StockMutationController extends Controller
         return view('stock_mutations.create', $data);
     }
 
+    public function approval()
+    {
+        $unapprove_mutation = StockMutationModel::where('isapprove', 0)->latest()->get();
+        $all_warehouses = WarehouseModel::all();
+
+        $data = [
+            'title' => 'Stock Mutation Need Approve',
+            'warehouses' => $all_warehouses,
+            'mutations' => $unapprove_mutation
+        ];
+
+        return view('stock_mutations.approval', $data);
+    }
+
+    public function approve_mutation(Request $request, $id)
+    {
+        // Validate Input
+        $request->validate([
+            "from" => "required|numeric",
+            "to" => "required|numeric",
+            "remark" => "required",
+            "mutationFields.*.product_id" => "required|numeric",
+            "mutationFields.*.qty" => "required|numeric"
+        ]);
+
+        if ($request->mutationFields == null) {
+            return Redirect::back()->with('error', 'There are no products!');
+        }
+
+        //Check Duplicate and exceeds stock
+        $products_arr = [];
+
+        foreach ($request->mutationFields as $check) {
+            array_push($products_arr, $check['product_id']);
+            $getstock = StockModel::where('products_id', $check['product_id'])->where('warehouses_id', $request->get('from'))->first();
+            if ($check['qty'] > $getstock->stock) {
+                return Redirect::back()->with('error', 'Mutation Fail! The number of items exceeds the stock.');
+            }
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return Redirect::back()->with('error', 'Mutation Fail! You enter duplicate product.');
+        }
+
+        $selected_mutation = StockMutationModel::where('id', $id)->first();
+        $selected_mutation->from = $request->get('from');
+        $selected_mutation->to = $request->get('to');
+        $selected_mutation->remark = $request->get('remark');
+        $selected_mutation->isapprove = 1;
+        $selected_mutation->save();
+
+        foreach ($request->mutationFields as $item) {
+            $selected_detail = StockMutationDetailModel::where('mutation_id', $id)->where('product_id', $item['product_id'])->first();
+            if ($selected_detail == null) {
+                $detail = new StockMutationDetailModel();
+                $detail->mutation_id = $id;
+                $detail->product_id = $item['product_id'];
+                $detail->qty = $item['qty'];
+                $detail->save();
+            } else {
+                $selected_detail->qty = $item['qty'];
+                $selected_detail->save();
+            }
+
+
+            //Change Stock Warehouse From
+            $getstockfrom = StockModel::where('products_id', $item['product_id'])->where('warehouses_id', $selected_mutation->from)->first();
+            $old_stock = $getstockfrom->stock;
+            $getstockfrom->stock = $old_stock - $item['qty'];
+            $getstockfrom->save();
+
+            //Change Stock Warehouse To
+            $getstockto = StockModel::where('products_id', $item['product_id'])->where('warehouses_id', $selected_mutation->to)->first();
+            if ($getstockto == null) {
+                $newstock = new StockModel();
+                $newstock->products_id = $detail->product_id;
+                $newstock->warehouses_id = $selected_mutation->to;
+                $newstock->stock = $item['qty'];
+                $newstock->save();
+            } else {
+                $old_stock = $getstockto->stock;
+                $getstockto->stock = $old_stock + $item['qty'];
+                $getstockto->save();
+            }
+        }
+
+        return redirect('/stock_mutation/approval')->with('success', 'Approve Stock Mutation Success!');
+    }
+
     public function select()
     {
         try {
@@ -183,27 +273,121 @@ class StockMutationController extends Controller
             $detail->qty = $item['qty'];
             $detail->save();
 
+            // //Change Stock Warehouse From
+            // $getstockfrom = StockModel::where('products_id', $detail->product_id)->where('warehouses_id', $model->from)->first();
+            // $old_stock = $getstockfrom->stock;
+            // $getstockfrom->stock = $old_stock - $detail->qty;
+            // $getstockfrom->save();
+
+            // //Change Stock Warehouse To
+            // $getstockto = StockModel::where('products_id', $detail->product_id)->where('warehouses_id', $model->to)->first();
+            // if ($getstockto == null) {
+            //     $newstock = new StockModel();
+            //     $newstock->products_id = $detail->product_id;
+            //     $newstock->warehouses_id = $model->to;
+            //     $newstock->stock = $detail->qty;
+            //     $newstock->save();
+            // } else {
+            //     $old_stock = $getstockto->stock;
+            //     $getstockto->stock = $old_stock + $detail->qty;
+            //     $getstockto->save();
+            // }
+        }
+
+        return redirect('/stock_mutation/create')->with('success', 'Create Stock Mutation Success!');
+    }
+
+    public function update_mutation(Request $request, $id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin')
+        ) {
+            abort(403);
+        }
+        // Validate Input
+        $request->validate([
+            "mutationFields.*.product_id" => "required|numeric",
+            "mutationFields.*.qty" => "required|numeric",
+            "remark" => "required"
+        ]);
+        $selected_mutation = StockMutationModel::where('id', $id)->first();
+
+        //Check Number of product
+        if ($request->mutationFields == null) {
+            return Redirect::back()->with('error', 'There are no products!');
+        }
+
+        //Check Duplicate
+        $products_arr = [];
+
+        foreach ($request->mutationFields as $check) {
+            array_push($products_arr, $check['product_id']);
+            $getstock = StockModel::where('products_id', $check['product_id'])->where('warehouses_id', $selected_mutation->from)->first();
+            if ($getstock != null) {
+                if ($check['qty'] > $getstock->stock) {
+                    return Redirect::back()->with('error', 'Mutation Edit Fail! The number of items exceeds the stock.');
+                }
+            }
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return Redirect::back()->with('error', 'Stock Mutation Edit Fail! You enter duplicate product.');
+        }
+
+
+
+        //Restore stock before changed
+        $mutation_restore = StockMutationDetailModel::where('mutation_id', $id)->get();
+        foreach ($mutation_restore as $restore) {
+            //From Warehouse
+            $stock_from = StockModel::where('warehouses_id', $selected_mutation->from)
+                ->where('products_id', $restore->product_id)->first();
+            $stock_from->stock = $stock_from->stock + $restore->qty;
+            $stock_from->save();
+
+            //To Warehouse
+            $stock_to = StockModel::where('warehouses_id', $selected_mutation->to)
+                ->where('products_id', $restore->product_id)->first();
+            $stock_to->stock = $stock_to->stock - $restore->qty;
+            $stock_to->save();
+        }
+
+        foreach ($request->mutationFields as $item) {
+            $selected_detail = StockMutationDetailModel::where('mutation_id', $id)->where('product_id', $item['product_id'])->first();
+            if ($selected_detail == null) {
+                $detail = new StockMutationDetailModel();
+                $detail->mutation_id = $id;
+                $detail->product_id = $item['product_id'];
+                $detail->qty = $item['qty'];
+                $detail->save();
+            } else {
+                $selected_detail->qty = $item['qty'];
+                $selected_detail->save();
+            }
+
+
             //Change Stock Warehouse From
-            $getstockfrom = StockModel::where('products_id', $detail->product_id)->where('warehouses_id', $model->from)->first();
+            $getstockfrom = StockModel::where('products_id', $item['product_id'])->where('warehouses_id', $selected_mutation->from)->first();
             $old_stock = $getstockfrom->stock;
-            $getstockfrom->stock = $old_stock - $detail->qty;
+            $getstockfrom->stock = $old_stock - $item['qty'];
             $getstockfrom->save();
 
             //Change Stock Warehouse To
-            $getstockto = StockModel::where('products_id', $detail->product_id)->where('warehouses_id', $model->to)->first();
+            $getstockto = StockModel::where('products_id', $item['product_id'])->where('warehouses_id', $selected_mutation->to)->first();
             if ($getstockto == null) {
                 $newstock = new StockModel();
                 $newstock->products_id = $detail->product_id;
-                $newstock->warehouses_id = $model->to;
-                $newstock->stock = $detail->qty;
+                $newstock->warehouses_id = $selected_mutation->to;
+                $newstock->stock = $item['qty'];
                 $newstock->save();
             } else {
                 $old_stock = $getstockto->stock;
-                $getstockto->stock = $old_stock + $detail->qty;
+                $getstockto->stock = $old_stock + $item['qty'];
                 $getstockto->save();
             }
         }
 
-        return redirect('/stock_mutation')->with('success', 'Stock Mutation Success!');
+        return redirect('/stock_mutation')->with('success', 'Edit Stock Mutation Success!');
     }
 }
