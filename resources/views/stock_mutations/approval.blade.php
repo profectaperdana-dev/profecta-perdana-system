@@ -17,7 +17,7 @@
                 <div class="col-sm-12">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
                     <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        Manage the stock mutations.
+                        You can approve stock mutations.
                     </h6>
                 </div>
             </div>
@@ -32,35 +32,6 @@
                         <h5></h5>
                     </div>
                     <div class="card-body">
-
-                        <div class="form-group row col-12">
-                            <div class="col-4">
-                                <label class="col-form-label text-end">Start Date</label>
-                                <div class="input-group">
-                                    <input class="form-control digits" type="date" data-language="en" placeholder="Start"
-                                        name="from_date" id="from_date">
-                                </div>
-                            </div>
-                            <div class="col-4">
-                                <label class="col-form-label text-end">End Date</label>
-                                <div class="input-group">
-                                    <input class="form-control digits" type="date" data-language="en" placeholder="Start"
-                                        name="to_date" id="to_date">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <label class="col-form-label text-end">&nbsp;</label>
-                                <div class="input-group">
-                                    <button class="btn btn-primary" name="filter" id="filter">Filter</button>
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <label class="col-form-label text-end">&nbsp;</label>
-                                <div class="input-group">
-                                    <button class="btn btn-warning" name="refresh" id="refresh">Refresh</button>
-                                </div>
-                            </div>
-                        </div>
                         <div class="table-responsive">
                             <table id="example1" class="table text-capitalize" style="width:100%">
                                 <thead>
@@ -76,7 +47,21 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                    @foreach ($mutations as $mutation)
+                                        <tr>
+                                            <td class="text-center"><a class="btn btn-primary btn-sm modal-btn2"
+                                                    href="#" data-bs-toggle="modal" data-original-title="test"
+                                                    data-bs-target="#approveData{{ $mutation->id }}">Approve
+                                            </td>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $mutation->mutation_number }}</td>
+                                            <td>{{ date('d-M-Y', strtotime($mutation->mutation_date)) }}</td>
+                                            <td>{{ $mutation->fromWarehouse->warehouses }}</td>
+                                            <td>{{ $mutation->toWarehouse->warehouses }}</td>
+                                            <td>{{ $mutation->remark }}</td>
+                                            <td>{{ $mutation->createdBy->name }}</td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -85,6 +70,149 @@
             </div>
         </div>
     </div>
+
+    @foreach ($mutations as $mutation)
+        <div class="modal fade" id="approveData{{ $mutation->id }}" data-bs-keyboard="false"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Approve Mutation
+                            :
+                            {{ $mutation->mutation_number }}</h5>
+                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form action="{{ url('stock_mutation/' . $mutation->id . '/approve_mutation') }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="form-group row">
+                                            <div class="col-md-6 form-group mr-5">
+                                                <label>From Warehouse</label>
+                                                <select name="from" required
+                                                    class="form-control materials from_warehouse {{ $errors->first('from') ? ' is-invalid' : '' }}">
+                                                    @can('isSuperAdmin')
+                                                        <option value="" selected>-Choose Warehouse From-</option>
+                                                        @foreach ($warehouses as $warehouse)
+                                                            <option value="{{ $warehouse->id }}"
+                                                                @if ($mutation->from == $warehouse->id) selected @endif>
+                                                                {{ $warehouse->warehouses }}
+                                                            </option>
+                                                        @endforeach
+                                                    @elsecan('isWarehouseKeeper')
+                                                        <option value="{{ Auth::user()->warehouse_id }}" selected>
+                                                            {{ Auth::user()->warehouseBy->warehouses }}
+                                                        </option>
+                                                    @endcan
+
+                                                </select>
+                                                @error('from')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-md-6 form-group">
+                                                <label>
+                                                    To Warehouse</label>
+                                                <select name="to" id="" required
+                                                    class="form-control uoms {{ $errors->first('to') ? ' is-invalid' : '' }}">
+                                                    <option value="" selected>-Choose Warehouse To -</option>
+                                                    @foreach ($warehouses as $warehouse)
+                                                        <option value="{{ $warehouse->id }}"
+                                                            @if ($mutation->to == $warehouse->id) selected @endif>
+                                                            {{ $warehouse->warehouses }}
+                                                        </option>
+                                                    @endforeach
+                                                </select>
+                                                @error('to')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+
+                                        </div>
+                                        <div class="form-group row">
+                                            <div class="col-md-12 form-group mr-5">
+                                                <label>Remarks</label>
+                                                <textarea class="form-control" name="remark" id="" cols="30" rows="5" required>{{ $mutation->remark }}</textarea>
+                                            </div>
+                                        </div>
+                                        {{-- <input type="hidden" id="mutation_id" value="{{ $mutation->id }}">
+                                        <input type="hidden" id="from_warehouse" value="{{ $mutation->from }}">
+                                        <input type="hidden" id="to_warehouse" value="{{ $mutation->to }}"> --}}
+                                        <div class="row" id="formMutation">
+                                            @foreach ($mutation->stockMutationDetailBy as $item)
+                                                <input type="hidden" class="loop" value="{{ $loop->index }}">
+                                                <div class="row">
+                                                    <div class="form-group col-7">
+                                                        <label>Product</label>
+                                                        <select name="mutationFields[{{ $loop->index }}][product_id]"
+                                                            class="form-control productM" required>
+                                                            <option value="">Choose Product</option>
+                                                            <option value="{{ $item->product_id }}" selected>
+                                                                {{ $item->productBy->nama_barang . ' (' . $item->productBy->sub_materials->nama_sub_material . ', ' . $item->productBy->sub_types->type_name . ')' }}
+                                                            </option>
+                                                        </select>
+                                                        @error('mutationFields[{{ $loop->index }}][product_id]')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+                                                    <div class="col-3 col-md-3 form-group">
+                                                        <label>Qty</label>
+                                                        <input type="number" class="form-control" required
+                                                            name="mutationFields[{{ $loop->index }}][qty]"
+                                                            value="{{ $item->qty }}" id="">
+                                                        <small class="from-stock" hidden>Stock : 0</small>
+
+                                                        @error('mutationFields[{{ $loop->index }}][qty]')
+                                                            <div class="invalid-feedback">
+                                                                {{ $message }}
+                                                            </div>
+                                                        @enderror
+                                                    </div>
+
+                                                    @if ($loop->index == 0)
+                                                        <div class="col-2 col-md-2 form-group">
+                                                            <label for="">&nbsp;</label>
+                                                            <a id="addM" href="javascript:void(0)"
+                                                                class="form-control text-white text-center"
+                                                                style="border:none; background-color:green">+</a>
+                                                        </div>
+                                                    @else
+                                                        <div class="col-2 col-md-2 form-group">
+                                                            <label for="">&nbsp;</label>
+                                                            <a id="" href="javascript:void(0)"
+                                                                class="form-control remMutation text-white text-center"
+                                                                style="border:none; background-color:red">-</a>
+                                                        </div>
+                                                    @endif
+
+                                                </div>
+                                            @endforeach
+                                        </div>
+
+                                        <div class="form-group">
+
+                                            <button type="reset" class="btn btn-warning">Reset</button>
+                                            <button type="submit" class="btn btn-primary">Approve</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    @endforeach
     {{-- <input type="text" hidden value="{{ $ }}"> --}}
     <!-- Container-fluid Ends-->
     @push('scripts')
@@ -112,60 +240,7 @@
 
                 function load_data(from_date = '', to_date = '') {
                     $('#example1').DataTable({
-                        processing: true,
-                        serverSide: true,
-                        ajax: {
-                            url: "{{ url('/stock_mutation') }}",
-                            data: {
-                                from_date: from_date,
-                                to_date: to_date
-                            }
-                        },
-                        columns: [{
-                                width: '5%',
-                                data: 'action',
-                                name: 'action',
-                                orderable: false,
-                            }, {
-                                width: '5%',
-                                data: 'DT_RowIndex',
-                                name: 'DT_Row_Index',
-                                "className": "text-center",
-                                orderable: false,
-                                searchable: false
-                            },
-                            {
-                                data: 'mutation_number',
-                                name: 'mutation_number'
 
-                            },
-                            {
-                                data: 'mutation_date',
-                                name: 'mutation_date'
-
-                            },
-                            {
-                                data: 'from',
-                                name: 'from'
-
-                            },
-                            {
-                                data: 'to',
-                                name: 'to'
-
-                            },
-                            {
-                                data: 'remark',
-                                name: 'remark',
-                            },
-                            {
-                                data: 'created_by',
-                                name: 'created_by',
-                            },
-                        ],
-                        order: [
-                            [0, 'desc']
-                        ],
                         dom: 'Bfrtip',
                         lengthMenu: [
                             [10, 25, 50, -1],
@@ -241,9 +316,8 @@
 
                     let modal_id = $(this).attr('data-bs-target');
                     let mutation_id = $(modal_id).find('#mutation_id').val();
-                    let warehouse_from = $(modal_id).find('#from_warehouse').val();
+                    let warehouse_from = $(modal_id).find('.from_warehouse').val();
                     let warehouse_to = $(modal_id).find('#to_warehouse').val();
-                    console.log(warehouse_from);
 
                     //Get Customer ID
                     $(modal_id).find(".uoms").select2({
@@ -310,6 +384,10 @@
 
                             },
                         });
+                    });
+
+                    $(modal_id).on('change', '.from_warehouse', function() {
+                        warehouse_from = $(this).val();
                     });
 
                     //Get Customer ID
