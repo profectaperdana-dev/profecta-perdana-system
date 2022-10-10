@@ -16,4 +16,8 @@ class SuppliersModel extends Model
     {
         return $this->hasOne(SubMaterialModel::class, 'id', 'sub_materials_id')->withTrashed();
     }
+    public function warehouseBy()
+    {
+        return $this->hasOne(WarehouseModel::class, 'id', 'id_warehouse')->withTrashed();
+    }
 }

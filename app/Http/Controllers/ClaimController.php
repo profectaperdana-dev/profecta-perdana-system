@@ -8,6 +8,8 @@ use App\Models\CarBrandModel;
 use App\Models\CarTypeModel;
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
+use App\Models\StockMutationModel;
+use App\Models\SuppliersModel;
 use App\Models\WarehouseModel;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -27,6 +29,7 @@ class ClaimController extends Controller
         $product = ProductModel::all();
         $customer = CustomerModel::all();
         $data = AccuClaimModel::where('status', 0)->latest()->get();
+
         return view('claim.index', compact('title', 'product', 'customer', 'data'));
     }
 
@@ -35,6 +38,7 @@ class ClaimController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
     public function create()
     {
         $title = 'Early Checking';
@@ -60,6 +64,7 @@ class ClaimController extends Controller
         }
         return response()->json($sub_materials);
     }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -68,6 +73,7 @@ class ClaimController extends Controller
      */
     public function store(Request $request)
     {
+        //* CLAIM ACCU
         $request->validate([
             // Customer
             'customer_id' => 'required',
@@ -90,7 +96,7 @@ class ClaimController extends Controller
         ]);
         if ($request->parent_material == 'Battery') {
 
-            // get claim number
+            //* GET CLAIM NUMBER
             $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
                 ->select('customer_areas.area_code', 'warehouses.id')
                 ->where('warehouses.id', Auth::user()->warehouse_id)
@@ -103,43 +109,42 @@ class ClaimController extends Controller
             $tahun = substr($year, -2);
             $order_number = 'CLPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $cust_number_id;
 
-            // save claim
+            //* INSERT CLAIM
             $model = new AccuClaimModel();
             $model->claim_number = $order_number;
             $model->claim_date = Carbon::now();
 
-            // Customer
+            //* CUSTOMER
             $model->customer_id = $request->customer_id;
             $model->sub_name = $request->sub_name;
             $model->sub_phone = $request->sub_phone;
             $model->plate_number = $request->plate_number;
 
-
-            // Product
+            //* PRODUCT
             $model->product_id = $request->product_id;
             $model->material = $request->material;
             $model->type_material = $request->type_material;
 
-            // Car
+            //* CAR
             $model->car_type_id = $request->car_type_id;
             $model->car_brand_id = $request->car_brand_id;
 
-            // Accu
+            //* ACCU
             $model->e_voltage = $request->e_voltage;
             $model->e_cca = $request->e_cca;
             $model->e_starting = $request->e_starting;
             $model->e_charging = $request->e_charging;
 
-            // submit and receive by
+            //* SUBMIT CLAIM
             $model->e_submittedBy = Auth::user()->id;
 
-            // Evidence
+            //* EVIDENCE
             $file = $request->file;
             $nama_file = time() . '.' . $file->getClientOriginalExtension();
             $file->move("file_evidence/", $nama_file);
             $model->e_foto = $nama_file;
 
-            // Signature
+            //* SIGNATURE
             $folderPath = public_path('file_signature/');
             $image_parts = explode(";base64,", $request->signed);
             $image_type_aux = explode("image/", $image_parts[0]);
@@ -152,27 +157,29 @@ class ClaimController extends Controller
             $saved = $model->save();
 
             if ($saved) {
-                // diagnostic
+                //* INSERT CLAIM DIAGNOSIS
                 $sundays = $request->input('diagnosa');
-                $sundaysArray = array();
+                $sundaysArray = [];
                 foreach ($sundays as $sunday) {
-                    $sundaysArray[] = $sunday;
-
+                    array_push($sundaysArray, $sunday);
                     $data = new AccuClaimDetailModel();
                     $data->id_accu_claim = $model->id;
                     $data->diagnosa = $sunday;
                     $data->save();
                 }
                 if ($request->other_diagnosa != null) {
+                    $data = new AccuClaimDetailModel();
+                    $data->id_accu_claim = $model->id;
                     $data->diagnosa = $request->other_diagnosa;
+                    $data->save();
                 }
-                $data->save();
 
                 return redirect()->route('claim.index')->with('success', 'Claim ' . $model->claim_number . ' has been created');
             } else {
                 return redirect()->route('claim.index')->with('error', 'Claim failed to create');
             }
         }
+        //* END CLAIM ACCU
     }
 
 
@@ -198,8 +205,12 @@ class ClaimController extends Controller
     public function edit($id)
     {
         $title = 'Finish Claim';
+        $suppliers = SuppliersModel::all();
+        $warehouse = WarehouseModel::join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
+            ->select('warehouses.*', 'warehouse_types.name')
+            ->whereIn('warehouse_types.name', ['CO1', 'C02'])->get();
         $value = AccuClaimModel::find($id);
-        return view('claim.edit', compact('title',  'value'));
+        return view('claim.edit', compact('title',  'value', 'suppliers', 'warehouse'));
     }
 
     /**
@@ -211,14 +222,75 @@ class ClaimController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // * FINISH CLAIM ACCU
+        $request->validate([
+            // Accu
+            'f_voltage' => 'required',
+            'f_cca' => 'required',
+            'f_starting' => 'required',
+            'f_charging' => 'required',
+            'file' => 'required',
+        ]);
+
+        //* FINISH CLAIM ACCU
+
+        //* CLAIM DATA
         $model = AccuClaimModel::find($id);
         $model->f_voltage = $request->f_voltage;
         $model->f_cca = $request->f_cca;
         $model->f_starting = $request->f_starting;
         $model->f_charging = $request->f_charging;
+
+        //* UPDATE CLAIM DIAGNOSIS
+        $diagnosa = $request->input('diagnosa');
+        $diagnosaArray = [];
+        foreach ($diagnosa as $value) {
+            array_push($diagnosaArray, $value);
+        }
+        if ($request->other_diagnosa != null) {
+            array_push($diagnosaArray, $request->other_diagnosa);
+            $data = new  AccuClaimDetailModel();
+            $data->id_accu_claim = $model->id;
+            $data->diagnosa = $request->other_diagnosa;
+            $data->save();
+        }
+        $data =  AccuClaimDetailModel::where('id_accu_claim', $id)->get();
+        foreach ($data as $value) {
+            if (!in_array($value->diagnosa, $diagnosaArray)) {
+                $value->delete();
+            }
+        }
+
+        //* MUTASI
+        if ($request->result == 'CP03 - Waranty Accepted') {
+            $mutasi = new StockMutationModel();
+        }
+
+        // * EVIDENCE RECEIVED
+        $file = $request->file;
+        $nama_file = time() . '.' . $file->getClientOriginalExtension();
+        $file->move("file_evidence/", $nama_file);
+        $model->e_foto = $nama_file;
+
+        //* SIGNATURE RECEIVED
+        $folderPath = public_path('file_signature/');
+        $image_parts = explode(";base64,", $request->signed);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = uniqid() . '.png';
+        $file = $folderPath . $fileName;
+        file_put_contents($file, $image_base64);
+        $model->f_receivedBy = $fileName;
+
+
+
+
+        $saved = $model->save();
         $model->result = $request->result;
         $model->cost = $request->cost;
         $model->date_replaced = Carbon::now();
+
 
         // submit and receive by
         $model->f_submittedBy = Auth::user()->id;

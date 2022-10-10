@@ -193,5 +193,12 @@
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                $('form').submit(function() {
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                });
+            });
+        </script>
     @endpush
 @endsection

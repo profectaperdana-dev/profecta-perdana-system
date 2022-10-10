@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerAreaModel;
 use App\Models\WarehouseModel;
+use App\Models\WarehouseTypeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -22,9 +23,9 @@ class WarehouseController extends Controller
         $data = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
             ->latest('warehouses.id')
             ->get(['warehouses.*', 'customer_areas.area_name']);
-
+        $warehouse_types = WarehouseTypeModel::all();
         $areas = CustomerAreaModel::latest()->get();
-        return view('warehouses.index', compact('title', 'data', 'areas'));
+        return view('warehouses.index', compact('title', 'data', 'areas', 'warehouse_types'));
     }
 
     /**
@@ -52,6 +53,7 @@ class WarehouseController extends Controller
         ]);
         $model = new WarehouseModel();
         $model->warehouses = $request->get('warehouses');
+        $model->type = $request->get('type');
         $model->alamat = $request->get('alamat');
         $model->id_area = $request->get('id_area');
         $model->latitude = '-';
@@ -105,6 +107,7 @@ class WarehouseController extends Controller
         ]);
         $model =  WarehouseModel::find($id);
         $model->warehouses = $request->get('warehouses_');
+        $model->type = $request->get('type_');
         $model->alamat = $request->get('alamat_');
         $model->id_area = $request->get('id_area_');
 

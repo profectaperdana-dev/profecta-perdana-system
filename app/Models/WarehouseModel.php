@@ -17,4 +17,8 @@ class WarehouseModel extends Model
     {
         return $this->hasMany(CustomerModel::class, 'area_cust_id', 'id_area');
     }
+    public function typeBy()
+    {
+        return $this->hasOne(WarehouseTypeModel::class, 'id', 'type');
+    }
 }

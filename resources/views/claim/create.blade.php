@@ -54,6 +54,18 @@
         <script>
             $(document).ready(function() {
 
+                // OTHER DIAGNOSE
+                $('#cekDiagnosa').click(function() {
+                    var checked = $(this).prop('checked');
+                    console.log(checked);
+                    if (checked == true) {
+                        $('#otherDiagnosa').attr('hidden', false);
+
+                    } else {
+                        $('#otherDiagnosa').attr('hidden', true);
+                    }
+                });
+
                 // PRODUCT
                 $('#accu_claims').hide();
                 $(document).on('change', '#product_id', function() {

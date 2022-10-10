@@ -32,6 +32,7 @@ use App\Http\Controllers\StockMutationController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
+use App\Http\Controllers\WarehouseTypeController;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -175,6 +176,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/purchase_orders', PurchaseOrderController::class);
     Route::resource('/file_invoice', FilesController::class);
     Route::resource('/claim', ClaimController::class);
+    Route::resource('/warehouse_types', WarehouseTypeController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {
