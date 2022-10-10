@@ -55,7 +55,7 @@
                             class="form-control uoms {{ $errors->first('product_id') ? ' is-invalid' : '' }}">
                             <option value="" selected>-Choose Product-</option>
                             @foreach ($product as $row)
-                                <option value="{{ $row->nama_barang }}"
+                                <option value="{{ $row->id }}"
                                     data-material="{{ $row->sub_materials->nama_sub_material }}"
                                     data-type_material="{{ $row->sub_types->type_name }}"
                                     data-parent_material={{ $row->materials->nama_material }}>
@@ -258,15 +258,23 @@
                                 </div>
                             </div>
                         </div>
+                        {{-- loaned battery --}}
+                        <div class="col-lg-12 col-md-12 form-group">
+                            <label>Loaned Battery</label>
+                            <select name="loan_product_id" id="" class="form-control uoms">
+                                <option value="">-Select Loaned Product-</option>
+                                @foreach ($stock as $row)
+                                    <option value="{{ $row->productBy->id }}">
+                                        {{ $row->productBy->sub_materials->nama_sub_material }}/{{ $row->productBy->sub_types->type_name }}/{{ $row->productBy->nama_barang }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- end loaned battery --}}
                     </div>
                     {{-- END CLAIM ACCU --}}
 
-                    {{-- loaned battery --}}
-                    <div class="col-lg-12 col-md-12 form-group">
-                        <label>Loaned Battery</label>
-                        <input type="" class="form-control" name="id_" required>
-                    </div>
-                    {{-- end loaned battery --}}
+
 
                     {{-- FORM RECEIVED --}}
                     <div class="col-lg-12 col-md-12 form-group">

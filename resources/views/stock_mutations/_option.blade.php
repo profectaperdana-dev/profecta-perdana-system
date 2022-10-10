@@ -13,7 +13,7 @@
     <a class="dropdown-item" href="{{ url('return/' . $mutation->id . '/print') }}">Print Return</a>
 </div> --}}
 
-<div class="modal fade" id="detailReturn{{ $mutation->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="detailReturn{{ $mutation->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -66,9 +66,9 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
-<div class="modal fade" id="editReturn{{ $mutation->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="editReturn{{ $mutation->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -179,4 +179,4 @@
 
         </div>
     </div>
-</div>
+</div> --}}

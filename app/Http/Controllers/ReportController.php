@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\ClaimModel;
+use App\Models\AccuAccuClaimModel;
+use App\Models\AccuClaimDetailModel;
+use App\Models\AccuClaimModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderDetailModel;
 use App\Models\ReturnDetailModel;
@@ -297,6 +299,18 @@ class ReportController extends Controller
 
     public function reportClaim(Request $request)
     {
+        // $invoice = AccuClaimModel::join('users', 'users.id', '=', 'accu_claims.e_submittedBy')
+        //     ->select('accu_claims.*', 'users.name')
+        //     ->where('accu_claims.status', 1)
+        //     ->first();
+        // // dd($invoice->id);
+        // $detail = AccuClaimDetailModel::where('id_accu_claim', $invoice->id)->get();
+
+        // $diagnosa = '';
+        // foreach ($detail as $value) {
+        //     $diagnosa .= $value->diagnosa . ', ';
+        // }
+        // dd($diagnosa);
         if (
             !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
             && !Gate::allows('isFinance')
@@ -310,12 +324,12 @@ class ReportController extends Controller
                 ->first();
             if (!empty($request->from_date)) {
                 if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
-                    $invoice = ClaimModel::where('status', 1)
+                    $invoice = AccuClaimModel::where('status', 1)
                         ->whereBetween('claim_date', array($request->from_date, $request->to_date))
                         ->latest()
                         ->get();
                 } else {
-                    $invoice = ClaimModel::where('status', 1)
+                    $invoice = AccuClaimModel::where('status', 1)
                         ->where('claim_number', 'like', "%$kode_area->area_code%")
                         ->whereBetween('claim_date', array($request->from_date, $request->to_date))
                         ->latest()
@@ -323,36 +337,43 @@ class ReportController extends Controller
                 }
             } else {
                 if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
-                    $invoice = ClaimModel::join('users', 'users.id', '=', 'claims.e_submittedBy')
-                        ->select('claims.*', 'users.*')
-                        ->where('claims.status', 1)
+                    $invoice = AccuClaimModel::join('users', 'users.id', '=', 'accu_claims.e_submittedBy')
+                        ->select('accu_claims.*', 'users.name')
+                        ->where('accu_claims.status', 1)
                         ->get();
                 } else {
-                    $invoice = ClaimModel::where('status', 1)
-                        ->where('claim_number', 'like', "%$kode_area->area_code%")
-                        ->latest()
+                    $invoice = AccuClaimModel::join('users', 'users.id', '=', 'accu_claims.e_submittedBy')
+                        ->select('accu_claims.*', 'users.*')
+                        ->where('accu_claims.status', 1)
                         ->get();
                 }
             }
             return datatables()->of($invoice)
-                ->editColumn('car_brand_id', function (ClaimModel $claimModel) {
-                    return $claimModel->carBrandBy->car_brand;
+                ->editColumn('car_brand_id', function (AccuClaimModel $AccuClaimModel) {
+                    return $AccuClaimModel->carBrandBy->car_brand;
                 })
-                ->editColumn('car_type_id', function (ClaimModel $claimModel) {
-                    return $claimModel->carTypeBy->car_type;
+                ->editColumn('car_type_id', function (AccuClaimModel $AccuClaimModel) {
+                    return $AccuClaimModel->carTypeBy->car_type;
                 })
-                ->editColumn('diagnosa', function (ClaimModel $ClaimModel) {
-                    return
-                        htmlspecialchars_decode(htmlspecialchars_decode($ClaimModel->diagnosa));
+                ->editColumn('diagnosa', function (AccuClaimModel $AccuClaimModel) {
+                    $detail = AccuClaimDetailModel::where('id_accu_claim', $AccuClaimModel->id)->get();
+
+                    $diagnosa = '';
+                    foreach ($detail as $key => $value) {
+                        $diagnosa .= $value->diagnosa . ',<br>';
+                    }
+                    return $diagnosa;
+
+                    // return $valDiagnosa;
                 })
-                ->editColumn('plate_number', function (ClaimModel $ClaimModel) {
-                    return '<div class="text-uppercase"> ' . $ClaimModel->plate_number . '</div>';
+                ->editColumn('plate_number', function (AccuClaimModel $AccuClaimModel) {
+                    return '<div class="text-uppercase"> ' . $AccuClaimModel->plate_number . '</div>';
                 })
-                ->editColumn('cost', function (ClaimModel $ClaimModel) {
-                    return number_format($ClaimModel->cost);
+                ->editColumn('cost', function (AccuClaimModel $AccuClaimModel) {
+                    return number_format($AccuClaimModel->cost);
                 })
-                ->editColumn('e_submittedBy', function (ClaimModel $ClaimModel) {
-                    return $ClaimModel->createdBy->name;
+                ->editColumn('e_submittedBy', function (AccuClaimModel $AccuClaimModel) {
+                    return $AccuClaimModel->createdBy->name;
                 })
                 ->rawColumns(['plate_number', 'diagnosa', 'cost', 'e_submittedBy'])
                 ->addIndexColumn()

@@ -204,9 +204,9 @@
                                                                                         -Choose Warehouse-</option>
                                                                                     @foreach ($warehouse as $val)
                                                                                         <option
-                                                                                            value="{{ $value->id }}"
-                                                                                            @if ($val->id == $value->id_warehouse) selected @endif>
-                                                                                            {{ $val->warehouses }}
+                                                                                            value="{{ $val->id }}"
+                                                                                            {{ $val->id == $value->id_warehouse ? 'selected' : '' }}>
+                                                                                            {{ $val->warehouses }}</option>
                                                                                         </option>
                                                                                     @endforeach
                                                                                 </select>
