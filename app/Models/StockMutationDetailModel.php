@@ -15,4 +15,9 @@ class StockMutationDetailModel extends Model
     {
         return $this->belongsTo(StockMutationModel::class, 'mutation_id', 'id');
     }
+
+    public function productBy()
+    {
+        return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
+    }
 }

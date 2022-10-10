@@ -237,22 +237,18 @@
                         </div>
                     </li>
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutations/create') ? 'active' : '' }}"
-                            href="{{ url('/claim/create') }}"><i data-feather="edit"></i><span>Create Claim
-                            </span></a>
+                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation/create') ? 'active' : '' }}"
+                            href="{{ url('/stock_mutation/create') }}"><i data-feather="edit"></i><span>Create Stock
+                                Mutation
+                            </span>
+                        </a>
                     </li>
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('claim') ? 'active' : '' }}"
-                            href="{{ url('/claim') }}"><i data-feather="clipboard"></i><span>Claim List
-                            </span></a>
-                    </li>
-
-
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('history_claim') ? 'active' : '' }}"
-                            href="{{ url('/history_claim') }}"><i data-feather="folder"></i><span>History Claims
-
-                            </span></a>
+                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation') ? 'active' : '' }}"
+                            href="{{ url('/stock_mutation') }}"><i data-feather="clipboard"></i><span>Stock
+                                Mutations List
+                            </span>
+                        </a>
                     </li>
 
                     <li class="sidebar-main-title">

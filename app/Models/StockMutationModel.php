@@ -18,12 +18,12 @@ class StockMutationModel extends Model
 
     public function fromWarehouse()
     {
-        return $this->hasOne(WarehouseModel::class, 'from');
+        return $this->hasOne(WarehouseModel::class, 'id', 'from')->withTrashed();
     }
 
     public function toWarehouse()
     {
-        return $this->hasOne(WarehouseModel::class, 'to');
+        return $this->hasOne(WarehouseModel::class, 'id', 'to')->withTrashed();
     }
 
     public function createdBy()
