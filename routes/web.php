@@ -137,6 +137,10 @@ Route::group(['middleware' => 'auth'], function () {
     });
     Route::prefix('stock_mutation')->group(function () {
         Route::get('/', [StockMutationController::class, 'index']);
+        Route::get('/create', [StockMutationController::class, 'create']);
+        Route::get('/select', [StockMutationController::class, 'select']);
+        Route::get('/getQtyDetail', [StockMutationController::class, 'getQtyDetail']);
+        Route::post('/store', [StockMutationController::class, 'store']);
     });
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {

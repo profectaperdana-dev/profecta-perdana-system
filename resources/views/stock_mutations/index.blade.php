@@ -115,7 +115,7 @@
                         processing: true,
                         serverSide: true,
                         ajax: {
-                            url: "{{ url('/stock_mutations') }}",
+                            url: "{{ url('/stock_mutation') }}",
                             data: {
                                 from_date: from_date,
                                 to_date: to_date
