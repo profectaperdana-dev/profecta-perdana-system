@@ -139,7 +139,7 @@
                                                                                                 class="form-control text-uppercase"
                                                                                                 placeholder="Product Code"
                                                                                                 readonly
-                                                                                                value="@if ($value->material == null) {{ $value->product_id }}@else{{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }} @endif">
+                                                                                                value="{{ $value->material }}/{{ $value->type_material }}/{{ $value->productSales->nama_barang }}">
                                                                                         </div>
 
                                                                                         <div class="form-group col-md-4">
@@ -163,12 +163,12 @@
                                                                                         </div>
                                                                                         <div class="form-group col-md-6">
                                                                                             <label>
-                                                                                                Cost</label>
+                                                                                                Loan Product</label>
                                                                                             <input type="text"
                                                                                                 class="form-control"
                                                                                                 placeholder="Serial Number"
                                                                                                 readonly
-                                                                                                value="Rp {{ number_format($value->cost) }}">
+                                                                                                value="{{ $value->loanBy->nama_barang }}">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -225,31 +225,53 @@
                                                                                             </div>
                                                                                             <div
                                                                                                 class="form-group col-md-12">
-                                                                                                <label>Diagnosa</label>
 
-                                                                                                <p>@php
-                                                                                                    echo htmlspecialchars_decode(htmlspecialchars_decode($value->diagnosa));
-                                                                                                @endphp</p>
+                                                                                                <label
+                                                                                                    for="">Diagnosa</label>
+                                                                                                @foreach ($value->accuClaimDetailsBy as $key => $row)
+                                                                                                    <div>
+                                                                                                        {{ $key + 1 }}.
+                                                                                                        {{ $row->diagnosa }}
+                                                                                                    </div>
+                                                                                                @endforeach
 
 
                                                                                             </div>
                                                                                             <div
-                                                                                                class="form-group col-md-6">
+                                                                                                class="form-group col-lg-4 col-md-12">
                                                                                                 <label>
-                                                                                                    Submitted
-                                                                                                    By,</label>
+                                                                                                    Submitted By,</label>
                                                                                                 <br>
                                                                                                 <p><strong>{{ $value->createdBy->name }}</strong>
                                                                                                 </p>
                                                                                             </div>
                                                                                             <div
-                                                                                                class="form-group text-center col-md-6">
+                                                                                                class="form-group col-lg-4 col-md-12">
+                                                                                                <label>
+                                                                                                    Evidence,</label>
+                                                                                                <br>
+                                                                                                <div class="text-center">
+                                                                                                    <img class="img-fluid shadow"
+                                                                                                        style="width: 200px"
+                                                                                                        id="img"
+                                                                                                        src="{{ asset('file_evidence/' . $value->e_foto) }}"
+                                                                                                        alt="">
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="form-group col-lg-4 col-md-12">
                                                                                                 <label>
                                                                                                     Received By,</label>
                                                                                                 <br>
-                                                                                                <img class="img-fluid"
-                                                                                                    src="{{ asset('receivedBy/' . $value->e_receivedBy) }}"
-                                                                                                    alt="">
+                                                                                                <div class="text-center">
+                                                                                                    <img class="img-fluid img-rotate shadow"
+                                                                                                        style="width: 200px"
+                                                                                                        id="img"
+                                                                                                        src="{{ asset('file_signature/' . $value->e_receivedBy) }}"
+                                                                                                        alt="">
+                                                                                                </div>
+
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>
@@ -317,22 +339,40 @@
                                                                                             </div>
 
                                                                                             <div
-                                                                                                class="form-group col-md-6">
+                                                                                                class="form-group col-lg-4 col-md-12">
                                                                                                 <label>
-                                                                                                    Submitted
-                                                                                                    By,</label>
+                                                                                                    Submitted By,</label>
                                                                                                 <br>
                                                                                                 <p><strong>{{ $value->createdBy->name }}</strong>
                                                                                                 </p>
                                                                                             </div>
                                                                                             <div
-                                                                                                class="form-group text-center col-md-6">
+                                                                                                class="form-group col-lg-4 col-md-12">
+                                                                                                <label>
+                                                                                                    Evidence,</label>
+                                                                                                <br>
+                                                                                                <div class="text-center">
+                                                                                                    <img class="img-fluid shadow"
+                                                                                                        style="width: 200px"
+                                                                                                        id="img"
+                                                                                                        src="{{ asset('file_evidence/' . $value->f_foto) }}"
+                                                                                                        alt="">
+                                                                                                </div>
+
+                                                                                            </div>
+                                                                                            <div
+                                                                                                class="form-group col-lg-4 col-md-12">
                                                                                                 <label>
                                                                                                     Received By,</label>
                                                                                                 <br>
-                                                                                                <img class="img-fluid"
-                                                                                                    src="{{ asset('receivedBy/' . $value->f_receivedBy) }}"
-                                                                                                    alt="">
+                                                                                                <div class="text-center">
+                                                                                                    <img class="img-fluid img-rotate shadow"
+                                                                                                        style="width: 200px"
+                                                                                                        id="img"
+                                                                                                        src="{{ asset('file_signature/' . $value->f_receivedBy) }}"
+                                                                                                        alt="">
+                                                                                                </div>
+
                                                                                             </div>
                                                                                         </div>
                                                                                     </div>

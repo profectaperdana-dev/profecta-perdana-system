@@ -8,10 +8,13 @@ use App\Models\CarBrandModel;
 use App\Models\CarTypeModel;
 use App\Models\CustomerModel;
 use App\Models\ProductModel;
+use App\Models\StockModel;
+use App\Models\StockMutationDetailModel;
 use App\Models\StockMutationModel;
 use App\Models\SuppliersModel;
 use App\Models\WarehouseModel;
 use Carbon\Carbon;
+use Clockwork\Web\Web;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -46,7 +49,12 @@ class ClaimController extends Controller
         $customer = CustomerModel::all();
         $data = AccuClaimModel::latest()->get();
         $brand = CarBrandModel::all();
-        return view('claim.create', compact('title', 'product', 'customer', 'data', 'brand'));
+        $stock = StockModel::join('warehouses', 'warehouses.id', '=', 'stocks.warehouses_id')
+            ->join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
+            ->select('stocks.*', 'warehouses.type', 'warehouse_types.name')
+            ->where('warehouse_types.name', 'C01')
+            ->get();
+        return view('claim.create', compact('title', 'product', 'customer', 'data', 'brand', 'stock'));
     }
     public function select($id)
     {
@@ -154,9 +162,20 @@ class ClaimController extends Controller
             $file = $folderPath . $fileName;
             file_put_contents($file, $image_base64);
             $model->e_receivedBy = $fileName;
+            $model->loan_product_id = $request->loan_product_id;
             $saved = $model->save();
 
             if ($saved) {
+                //* UPDATE STOCK
+                $stock = StockModel::join('warehouses', 'warehouses.id', '=', 'stocks.warehouses_id')
+                    ->join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
+                    ->select('stocks.*', 'warehouses.type', 'warehouse_types.name')
+                    ->where('warehouse_types.name', 'C01')
+                    ->where('stocks.products_id', $request->loan_product_id)
+                    ->first();
+                $stock->stock = $stock->stock - 1;
+                $stock->save();
+
                 //* INSERT CLAIM DIAGNOSIS
                 $sundays = $request->input('diagnosa');
                 $sundaysArray = [];
@@ -264,13 +283,56 @@ class ClaimController extends Controller
         //* MUTASI
         if ($request->result == 'CP03 - Waranty Accepted') {
             $mutasi = new StockMutationModel();
+            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
+                ->select('customer_areas.area_code', 'warehouses.id')
+                ->where('warehouses.id', Auth::user()->warehouse_id)
+                ->first();
+            $length = 3;
+            $id = intval(StockMutationModel::where('mutation_number', 'like', "%$kode_area->area_code%")->max('id')) + 1;
+            $cust_number_id = str_pad($id, $length, '0', STR_PAD_LEFT);
+            $year = Carbon::now()->format('Y'); // 2022
+            $month = Carbon::now()->format('m'); // 2022
+            $tahun = substr($year, -2);
+            $mutation_number = 'SMPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $cust_number_id;
+            $mutasi->mutation_number = $mutation_number;
+            $mutasi->mutation_date = Carbon::now()->format('Y-m-d');
+            $mutasi->from = Auth::user()->warehouse_id;
+            $mutasi->to = $request->to;
+            $mutasi->remark = 'CP03 - Waranty Accepted ' . $mutasi->fromWarehouse->warehouses . ' to ' . $mutasi->toWarehouse->warehouses;
+            $mutasi->created_by = Auth::user()->id;
+            $mutasi->save();
+
+            $mutasi_detail = new StockMutationDetailModel();
+            $mutasi_detail->mutation_id  = $mutasi->id;
+            $mutasi_detail->product_id = $model->product_id;
+            $mutasi_detail->qty = 1;
+            $mutasi_detail->save();
+
+            //* UPDATE STOCK
+            $stock = StockModel::where('warehouses_id', Auth::user()->warehouse_id)->where('products_id', $model->product_id)->first();
+            // dd($stock);
+            $stock->stock = $stock->stock - 1;
+            $stock->save();
+
+            // * UPDATE STOCK MUTATION
+            $stock_mutasi = StockModel::where('warehouses_id', $mutasi->to)->where('products_id', $model->product_id)->first();
+            if ($stock_mutasi == null) {
+                $stock_mutasi = new StockModel();
+                $stock_mutasi->warehouses_id = $mutasi->to;
+                $stock_mutasi->products_id = $model->product_id;
+                $stock_mutasi->stock = 1;
+                $stock_mutasi->save();
+            } else {
+                $stock_mutasi->stock = $stock_mutasi->stock + 1;
+                $stock_mutasi->save();
+            }
         }
 
         // * EVIDENCE RECEIVED
         $file = $request->file;
         $nama_file = time() . '.' . $file->getClientOriginalExtension();
         $file->move("file_evidence/", $nama_file);
-        $model->e_foto = $nama_file;
+        $model->f_foto = $nama_file;
 
         //* SIGNATURE RECEIVED
         $folderPath = public_path('file_signature/');
@@ -283,36 +345,25 @@ class ClaimController extends Controller
         file_put_contents($file, $image_base64);
         $model->f_receivedBy = $fileName;
 
-
-
-
-        $saved = $model->save();
+        // * DATE REPLACEMENT & RESULT
         $model->result = $request->result;
         $model->cost = $request->cost;
         $model->date_replaced = Carbon::now();
-
-
-        // submit and receive by
-        $model->f_submittedBy = Auth::user()->id;
-        if ($request->get('receipt_method') == 'file') {
-            $file = $request->file;
-            $nama_file = time() . '.' . $file->getClientOriginalExtension();
-            $file->move("receivedBy/", $nama_file);
-            $model->f_receivedBy = $nama_file;
-        } else {
-            $folderPath = public_path('receivedBy/');
-            $image_parts = explode(";base64,", $request->signed);
-            $image_type_aux = explode("image/", $image_parts[0]);
-            $image_type = $image_type_aux[1];
-            $image_base64 = base64_decode($image_parts[1]);
-            $fileName = uniqid() . '.png';
-            $file = $folderPath . $fileName;
-            file_put_contents($file, $image_base64);
-            $model->f_receivedBy = $fileName;
-        }
         $model->status = 1;
+
+        //* UPDATE STOCK LOAN
+        $stock_loan = StockModel::join('warehouses', 'warehouses.id', '=', 'stocks.warehouses_id')
+            ->join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
+            ->select('stocks.*', 'warehouses.type', 'warehouse_types.name')
+            ->where('warehouse_types.name', 'C01')
+            ->where('stocks.products_id', $model->loan_product_id)
+            ->first();
+        $stock_loan->stock = $stock_loan->stock + 1;
+        $stock_loan->save();
+
+
+        //* UPDATE CLAIM ACCU
         $saved = $model->save();
-        $id = $model->id;
         if ($saved) {
             return redirect()->route('claim.index')->with('success', 'Claim has been created');
         } else {
@@ -340,7 +391,10 @@ class ClaimController extends Controller
     public function destroy($id)
     {
         $model = AccuClaimModel::find($id);
-        unlink('receivedBy/' . $model->e_receivedBy);
+        unlink('file_evidence/' . $model->e_foto);
+        unlink('file_evidence/' . $model->e_receivedBy);
+        unlink('file_signature/' . $model->f_foto);
+        unlink('file_signature/' . $model->f_receivedBy);
         $deleted = $model->delete();
         if ($deleted) {
             return redirect()->route('claim.index')->with('success', 'Claim has been deleted');

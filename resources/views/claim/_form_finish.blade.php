@@ -139,7 +139,7 @@
                             </div>
                             <div class="col-12 col-md-12 form-group" id="warrantyTo">
                                 <label>Warranty To</label>
-                                <select name="result" id="" class="form-control uoms">
+                                <select name="to" id="" class="form-control uoms">
                                     <option value="" selected>-Choose Supplier-</option>
                                     @foreach ($suppliers as $row)
                                         <option value="{{ $row->id_warehouse }}">{{ $row->nama_supplier }}</option>

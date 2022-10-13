@@ -116,7 +116,6 @@ class SuppliersController extends Controller
         $model->nama_supplier = $request->get('nama_supplier_');
         $model->alamat_supplier = $request->get('alamat_supplier_');
         $model->id_warehouse = $request->get('id_warehouse_');
-
         $model->no_telepon_supplier = $request->get('no_telepon_supplier_');
         $model->npwp_supplier = $request->get('npwp_supplier_');
         $model->pic_supplier = $request->get('pic_supplier_');

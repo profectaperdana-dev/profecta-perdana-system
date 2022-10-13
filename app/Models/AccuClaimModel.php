@@ -13,9 +13,14 @@ class AccuClaimModel extends Model
     {
         return $this->hasOne(CustomerModel::class, 'id', 'customer_id')->withTrashed();
     }
+
     public function productSales()
     {
         return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
+    }
+    public function loanBy()
+    {
+        return $this->hasOne(ProductModel::class, 'id', 'loan_product_id')->withTrashed();
     }
     public function createdBy()
     {

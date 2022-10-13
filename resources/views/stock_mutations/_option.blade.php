@@ -66,7 +66,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}
 
 <div class="modal fade" id="editMutation{{ $mutation->id }}" data-bs-keyboard="false"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -164,4 +164,4 @@
 
         </div>
     </div>
-</div>
+</div> --}}
