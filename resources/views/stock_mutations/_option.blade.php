@@ -1,17 +1,6 @@
 <a href="#" class="btn btn-sm btn-primary" href="#" data-bs-toggle="modal" data-original-title="test"
     data-bs-target="#detailMutation{{ $mutation->id }}">
     ACTION</a>
-{{-- <div class="dropdown-menu" aria-labelledby="">
-    <h5 class="dropdown-header">Actions</h5>
-    @can('isSuperAdmin')
-        <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal" data-original-title="test"
-            data-bs-target="#editReturn{{ $mutation->id }}">Edit</a>
-    @endcan
-    <a class="dropdown-item" href="#" data-bs-toggle="modal" data-original-title="test"
-        data-bs-target="#detailReturn{{ $mutation->id }}">Detail</a>
-    <h5 class="dropdown-header">Prints</h5>
-    <a class="dropdown-item" href="{{ url('return/' . $mutation->id . '/print') }}">Print Return</a>
-</div> --}}
 
 <div class="modal fade" id="detailMutation{{ $mutation->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
@@ -60,13 +49,14 @@
                             data-bs-dismiss="modal">Edit
                         </button>
                     @endcan
+                    <a class="btn btn-info" href="{{ url('stock_mutation/' . $mutation->id . '/print_do') }}">Print</a>
                     <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
                 </div>
 
             </div>
         </div>
     </div>
-</div> --}}
+</div>
 
 <div class="modal fade" id="editMutation{{ $mutation->id }}" data-bs-keyboard="false"
     aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -164,4 +154,4 @@
 
         </div>
     </div>
-</div> --}}
+</div>

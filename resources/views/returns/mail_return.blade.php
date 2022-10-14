@@ -531,97 +531,7 @@
                                                                                             </tbody>
                                                                                         </table>
                                                                                     </div>
-                                                                                    {{-- <div class="row fw-700"
-                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
-                                                                                        <table class=""
-                                                                                            role="presentation"
-                                                                                            border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="table-layout: fixed; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td class="col-4 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 33.333333%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Due Date
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                    <td class="col-1 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 8.333333%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            :</div>
-                                                                                                    </td>
-                                                                                                    <td class="col-7 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 58.333333%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            {{ $data->duedate }}
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div> --}}
-                                                                                    {{-- <div class="row fw-700"
-                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
-                                                                                        <table class=""
-                                                                                            role="presentation"
-                                                                                            border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="table-layout: fixed; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td class="col-4 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 33.333333%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Payment
-                                                                                                            Method</div>
-                                                                                                    </td>
-                                                                                                    <td class="col-1 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 8.333333%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            :</div>
-                                                                                                    </td>
-                                                                                                    <td class="col-7 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 58.333333%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            @if ($data->payment_method == 1)
-                                                                                                                Cash On
-                                                                                                                Delivery
-                                                                                                            @elseif($data->payment_method == 2)
-                                                                                                                Cash
-                                                                                                                Before
-                                                                                                                Delivery
-                                                                                                            @else
-                                                                                                                Credit
-                                                                                                            @endif
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div> --}}
+
                                                                                     <table class="s-2 w-full"
                                                                                         role="presentation"
                                                                                         border="0" cellpadding="0"
@@ -709,8 +619,8 @@
                                                                                                         $hargaDiskon = $value->productBy->harga_jual_nonretail * $diskon;
                                                                                                         $hargaAfterDiskon = $value->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
                                                                                                         $sub_total = $hargaAfterDiskon * $value->qty;
-                                                                                                        $ppn = 0.11 * $sub_total;
-                                                                                                        $total = $sub_total + $ppn;
+                                                                                                        $ppn_total = $ppn * $sub_total;
+                                                                                                        $total = $sub_total + $ppn_total;
                                                                                                     @endphp
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="right"
@@ -789,159 +699,8 @@
                                                                             <tr>
                                                                                 <td style="line-height: 24px; font-size: 12px; width: 100%; margin: 0; padding: 20px;"
                                                                                     align="left">
-                                                                                    {{-- <div class="row fw-700"
-                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
-                                                                                        <table class=""
-                                                                                            role="presentation"
-                                                                                            border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="table-layout: fixed; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td class="col-12 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 100%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Bank Mandiri
-                                                                                                            113-00-7779777-1
-                                                                                                            : an. CV
-                                                                                                            Profecta
-                                                                                                            Perdana
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
+
                                                                                     <div class="row fw-700"
-                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
-                                                                                        <table class=""
-                                                                                            role="presentation"
-                                                                                            border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="table-layout: fixed; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td class="col-12 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 100%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Bank BCA
-                                                                                                            853-085-3099
-                                                                                                            : an. CV
-                                                                                                            Profecta
-                                                                                                            Perdana
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                    <div class="row fw-700"
-                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
-                                                                                        <table class=""
-                                                                                            role="presentation"
-                                                                                            border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="table-layout: fixed; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td class="col-12 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 100%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Thank You !
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                    <div class="row fw-700"
-                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
-                                                                                        <table class=""
-                                                                                            role="presentation"
-                                                                                            border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="table-layout: fixed; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td class="col-12 text-left text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 100%; margin: 0;"
-                                                                                                        align="left"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            We're
-                                                                                                            looking
-                                                                                                            forward to
-                                                                                                            working with
-                                                                                                            you again
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                    <table class="s-5 w-full"
-                                                                                        role="presentation"
-                                                                                        border="0" cellpadding="0"
-                                                                                        cellspacing="0"
-                                                                                        style="width: 100%;"
-                                                                                        width="100%">
-                                                                                        <tbody>
-                                                                                            <tr>
-                                                                                                <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
-                                                                                                    align="left"
-                                                                                                    width="100%"
-                                                                                                    height="20">
-                                                                                                    &#160;
-                                                                                                </td>
-                                                                                            </tr>
-                                                                                        </tbody>
-                                                                                    </table>
-                                                                                    <div class="row  fw-700"
-                                                                                        style="margin-right: -24px; font-weight: 700 !important;">
-                                                                                        <table class=""
-                                                                                            role="presentation"
-                                                                                            border="0"
-                                                                                            cellpadding="0"
-                                                                                            cellspacing="0"
-                                                                                            style="table-layout: fixed; width: 100%;"
-                                                                                            width="100%">
-                                                                                            <tbody>
-                                                                                                <tr>
-                                                                                                    <td class="col-12 text-center text-sm"
-                                                                                                        style="line-height: 16.8px; font-size: 14px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 100%; margin: 0;"
-                                                                                                        align="center"
-                                                                                                        valign="top">
-                                                                                                        <div class="text-sm"
-                                                                                                            style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            <strong>Sincerely
-                                                                                                                Yours,</strong>
-                                                                                                        </div>
-                                                                                                    </td>
-                                                                                                </tr>
-                                                                                            </tbody>
-                                                                                        </table>
-                                                                                    </div>
-                                                                                    <br>
-                                                                                    <br> --}}
-                                                                                    <div class="row  fw-700"
                                                                                         style="margin-right: -24px; font-weight: 700 !important;">
                                                                                         <table class=""
                                                                                             role="presentation"
@@ -961,8 +720,7 @@
                                                                                                             <strong>*Please
                                                                                                                 check
                                                                                                                 your
-                                                                                                                order
-                                                                                                                invoice
+                                                                                                                return
                                                                                                                 in the
                                                                                                                 attached
                                                                                                                 file</strong>

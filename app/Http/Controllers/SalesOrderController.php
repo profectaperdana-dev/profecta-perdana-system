@@ -19,6 +19,7 @@ use App\Models\SalesOrderModel;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
+use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Dompdf\Options;
@@ -144,7 +145,7 @@ class SalesOrderController extends Controller
             ->whereNotIn('products_id', $products_arr)->delete();
 
         //Count PPN and Total
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $model->ppn = $ppn;
         $model->total = $total;
         $model->total_after_ppn = $total + $ppn;
@@ -290,7 +291,8 @@ class SalesOrderController extends Controller
 
         checkOverDue();
         $customer = CustomerModel::where('status', 1)->latest()->get();
-        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'dataSalesOrderDebt', 'customer', 'dataSalesOrderReject'));
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
+        return view('recent_sales_order.index', compact('title', 'dataSalesOrder', 'ppn', 'dataSalesOrderDebt', 'customer', 'dataSalesOrderReject'));
     }
 
     /**
@@ -427,7 +429,7 @@ class SalesOrderController extends Controller
                 }
             }
         }
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $model->ppn = $ppn;
         $model->total = $total;
         $model->total_after_ppn = $total + $ppn;
@@ -600,7 +602,7 @@ class SalesOrderController extends Controller
             ->whereNotIn('products_id', $products_arr)->delete();
 
         //Count PPN and Total
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $model->ppn = $ppn;
         $model->total = $total;
         $model->total_after_ppn = $total + $ppn;
@@ -825,8 +827,10 @@ class SalesOrderController extends Controller
                 ->addIndexColumn()
                 ->make(true);
         }
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
         $data = [
             'title' => "All data invoice in profecta perdana : " . Auth::user()->warehouseBy->warehouses,
+            'ppn' => $ppn
         ];
 
         return view('invoice.index', $data);

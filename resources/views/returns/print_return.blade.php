@@ -191,8 +191,8 @@
                             $hargaDiskon = $value->productBy->harga_jual_nonretail * $diskon;
                             $hargaAfterDiskon = $value->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
                             $sub_total = $hargaAfterDiskon * $value->qty;
-                            $ppn = 0.11 * $sub_total;
-                            $total = $sub_total + $ppn;
+                            $ppn_total = $ppn * $sub_total;
+                            $total = $sub_total + $ppn_total;
                         @endphp
                         <td style="text-align:right;margin-right:30px">{{ number_format($total, 0, ',', '.') }}
                         </td>

@@ -61,6 +61,7 @@
                                 </div>
                             </div>
                         </div>
+                        <input type="hidden" name="ppn" id="ppn" value="{{ $ppn }}">
                         <div class="table-responsive">
                             <table id="example1" class="table text-capitalize" style="width:100%">
                                 <thead>
@@ -487,7 +488,7 @@
                             //   alert($(this).parent().siblings().find('.cekQty-edit').val());
                         });
 
-                        ppn = total * 0.11;
+                        ppn = total * $('#ppn').val();
                         total_after_ppn = total + ppn;
                         $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math
                             .round(ppn)

@@ -11,6 +11,7 @@ use App\Models\ReturnDetailModel;
 use App\Models\ReturnPurchaseDetailModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
+use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -89,7 +90,7 @@ class ReportController extends Controller
                     $hargaDiskon = $SalesOrderDetailModel->productSales->harga_jual_nonretail * $diskon;
                     $hargaAfterDiskon = $SalesOrderDetailModel->productSales->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
                     $sub_total = $hargaAfterDiskon * $SalesOrderDetailModel->qty;
-                    $ppn = 0.11 * $sub_total;
+                    $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $sub_total;
                     $total = $sub_total + $ppn;
                     return number_format($total, 0, ',', '.');
                 })
@@ -257,7 +258,7 @@ class ReportController extends Controller
                 ->editColumn('ppn', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
                     if (Gate::allows('isSuperAdmin')) {
                         $total = $purchaseOrderDetailModel->productBy->harga_beli * $purchaseOrderDetailModel->qty;
-                        $ppn = 0.11 * $total;
+                        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
 
                         return number_format($ppn, 0, ',', '.');
                     } else return 'Restricted';
@@ -265,7 +266,7 @@ class ReportController extends Controller
                 ->editColumn('total_ppn', function (PurchaseOrderDetailModel $purchaseOrderDetailModel) {
                     if (Gate::allows('isSuperAdmin')) {
                         $total = $purchaseOrderDetailModel->productBy->harga_beli * $purchaseOrderDetailModel->qty;
-                        $ppn = 0.11 * $total;
+                        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
                         $total_ppn = $total + $ppn;
                         return number_format($total_ppn, 0, ',', '.');
                     } else return 'Restricted';
@@ -435,7 +436,7 @@ class ReportController extends Controller
                     $hargaDiskon = $returnDetailModel->productBy->harga_jual_nonretail * $diskon;
                     $hargaAfterDiskon = $returnDetailModel->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
                     $sub_total = $hargaAfterDiskon * $returnDetailModel->qty;
-                    $ppn = 0.11 * $sub_total;
+                    $ppn = (ValueAddedTaxModel::first()->ppn / 100)  * $sub_total;
                     $total = $sub_total + $ppn;
                     return number_format($total, 0, ',', '.');
                 })

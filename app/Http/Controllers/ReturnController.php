@@ -12,6 +12,7 @@ use App\Models\ReturnPurchaseModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
 use App\Models\StockModel;
+use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF;
@@ -293,7 +294,7 @@ class ReturnController extends Controller
             $hargaAfterDiskon = ($product->harga_jual_nonretail -  $hargaDiskon) - $selected_sod->discount_rp;
             $total = $total + ($hargaAfterDiskon * $detail->qty);
         }
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $model->total = $total + $ppn;
         $model->save();
 
@@ -543,7 +544,7 @@ class ReturnController extends Controller
             $hargaAfterDiskon = ($products->harga_jual_nonretail -  $hargaDiskon)  - $selected_sod->discount_rp;
             $total = $total + ($hargaAfterDiskon * $product['qty']);
         }
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $selected_return->total = $total + $ppn;
         $saved = $selected_return->save();
 
@@ -700,7 +701,9 @@ class ReturnController extends Controller
         $data->pdf_return = $data->return_number . '.pdf';
         $data->save();
 
-        $pdf = FacadePdf::loadView('returns.print_return', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->return_number . '.pdf');
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
+
+        $pdf = FacadePdf::loadView('returns.print_return', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->return_number . '.pdf');
 
         return $pdf->download($data->pdf_return);
     }

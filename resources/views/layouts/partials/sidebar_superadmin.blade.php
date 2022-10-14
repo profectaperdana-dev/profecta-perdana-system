@@ -126,6 +126,11 @@
                             href="{{ url('/discounts') }}"><i data-feather="percent"></i><span>Master
                                 Discount</span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('value_added_tax') ? 'active' : '' }}"
+                            href="{{ url('/value_added_tax') }}"><i data-feather="percent"></i><span>Master
+                                Value-added Tax</span></a>
+                    </li>
 
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('warehouse_types') || request()->is('warehouses')) active @endif"
                             href="javascript:void(0)"><i data-feather="server"></i><span>Master Warehouse</span></a>
@@ -164,7 +169,8 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/create') ? 'active' : '' }}"
-                            href="{{ url('/purchase_orders/create') }}"><i data-feather="shopping-bag"></i><span>Create
+                            href="{{ url('/purchase_orders/create') }}"><i
+                                data-feather="shopping-bag"></i><span>Create
                                 Purchase Order
                             </span></a>
                     </li>

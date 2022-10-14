@@ -29,6 +29,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\StockMutationController;
+use App\Http\Controllers\ValueAddedTaxController;
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
@@ -129,6 +130,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/{id}/print', [ReturnController::class, 'print_return']);
         Route::get('/{id}/send_email', [SendEmailController::class, 'send_return']);
     });
+
     Route::prefix('return_purchase')->group(function () {
         Route::get('/', [ReturnController::class, 'index_purchase']);
         Route::get('/{id}', [ReturnController::class, 'create_purchase']);
@@ -136,6 +138,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/{id}/update_return_purchase', [ReturnController::class, 'update_return_purchase']);
         Route::get('/{id}/print', [ReturnController::class, 'print_return_purchase']);
     });
+
     Route::prefix('stock_mutation')->group(function () {
         Route::get('/', [StockMutationController::class, 'index']);
         Route::get('/create', [StockMutationController::class, 'create']);
@@ -145,7 +148,14 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/getQtyDetail', [StockMutationController::class, 'getQtyDetail']);
         Route::post('/store', [StockMutationController::class, 'store']);
         Route::post('/{id}/update_mutation', [StockMutationController::class, 'update_mutation']);
+        Route::get('/{id}/print_do', [StockMutationController::class, 'print_do']);
     });
+
+    Route::prefix('value_added_tax')->group(function () {
+        Route::get('/', [ValueAddedTaxController::class, 'index']);
+        Route::post('/{id}/update', [ValueAddedTaxController::class, 'update']);
+    });
+
 
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
         Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);

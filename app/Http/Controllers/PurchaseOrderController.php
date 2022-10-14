@@ -11,6 +11,7 @@ use App\Models\ReturnPurchaseDetailModel;
 use App\Models\ReturnPurchaseModel;
 use App\Models\StockModel;
 use App\Models\SuppliersModel;
+use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
 use Carbon\Carbon;
 use DateTimeImmutable;
@@ -273,7 +274,7 @@ class PurchaseOrderController extends Controller
                 }
             }
         }
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $model->total = $total + $ppn;
         $saved = $model->save();
 
@@ -380,7 +381,7 @@ class PurchaseOrderController extends Controller
             ->whereNotIn('product_id', $products_arr)->delete();
 
         //Save total
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100)  * $total;
         $model->total = $total + $ppn;
 
         $saved_model = $model->save();
@@ -465,7 +466,7 @@ class PurchaseOrderController extends Controller
 
         //Save total
         $model->isvalidated = 1;
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100)  * $total;
         $model->total = $total + $ppn;
 
         $saved_model = $model->save();
@@ -607,7 +608,7 @@ class PurchaseOrderController extends Controller
 
 
         //Save total
-        $ppn = 0.11 * $total;
+        $ppn = (ValueAddedTaxModel::first()->ppn / 100)  * $total;
         $model->total = $total + $ppn;
 
         $saved_model = $model->save();

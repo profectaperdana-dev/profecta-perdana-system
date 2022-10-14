@@ -6,6 +6,7 @@ use App\Models\StockModel;
 use App\Models\StockMutationDetailModel;
 use App\Models\StockMutationModel;
 use App\Models\WarehouseModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -389,5 +390,23 @@ class StockMutationController extends Controller
         }
 
         return redirect('/stock_mutation')->with('success', 'Edit Stock Mutation Success!');
+    }
+
+    public function print_do($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')
+        ) {
+            abort(403);
+        }
+        $data = StockMutationModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $do_number = str_replace('SMPP', 'SMDOPP', $data->mutation_number);
+        $data->pdf_do = $do_number . '.pdf';
+        $data->save();
+
+        $pdf = Pdf::loadView('stock_mutations.print_do', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->mutation_number . '.pdf');
+
+        return $pdf->download($data->pdf_do);
     }
 }
