@@ -251,6 +251,7 @@
                     });
 
                     $(modal_id).find(".productM").select2({
+                        dropdownParent: modal_id,
                         width: "100%",
                         ajax: {
                             type: "GET",
