@@ -1,7 +1,7 @@
 $(document).ready(function () {
-    $("form").submit(function () {
-        $(this).find('button[type="submit"]').prop("disabled", true);
-    });
+    // $("form").submit(function () {
+    //     $(this).find('button[type="submit"]').prop("disabled", true);
+    // });
 
     $(
         ".editPayments,.uoms,.materials,.submaterials, .category-cust, .area-cust, .role-acc, .warehouse-acc, .sub_type, .discount, .job-acc"
@@ -124,8 +124,12 @@ $(document).ready(function () {
         ajax: {
             type: "GET",
             url: "/products/selectAll",
-            data: {
-                _token: csrf,
+            data: function (params) {
+                return {
+                    _token: csrf,
+                    q: params.term, // search term
+                    c: customer_id,
+                };
             },
             dataType: "json",
             delay: 250,
@@ -134,7 +138,10 @@ $(document).ready(function () {
                     results: $.map(data, function (item) {
                         return [
                             {
-                                text: item.nama_barang,
+                                text:
+                                    "("+ item.nama_sub_material + "/" + item.type_name + ") - " + item.nama_barang,
+
+                                  
                                 id: item.id,
                             },
                         ];
@@ -146,11 +153,11 @@ $(document).ready(function () {
     $("#addStock").on("click", function () {
         ++y;
         let form =
-            '<div class="form-group row"> <div class="form-group col-5" > <label> Product </label> <select name="stockFields[' +
+            '<div class="form-group row"> <div class="form-group col-7"> <label> Product </label> <select name="stockFields[' +
             y +
             '][product_id]"' +
             'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
-            '</div> <div class="form-group col-5">' +
+            '</div> <div class="form-group col-3">' +
             '<label> Stock </label> <input type="number" name="stockFields[' +
             y +
             '][stock]" id="discount"' +
@@ -165,9 +172,13 @@ $(document).ready(function () {
             ajax: {
                 type: "GET",
                 url: "/products/selectAll",
-                data: {
+                data: function (params) {
+                return {
                     _token: csrf,
-                },
+                    q: params.term, // search term
+                    // c: customer_id,
+                };
+              },
                 dataType: "json",
                 delay: 250,
                 processResults: function (data) {
@@ -175,7 +186,8 @@ $(document).ready(function () {
                         results: $.map(data, function (item) {
                             return [
                                 {
-                                    text: item.nama_barang,
+                                     text:
+                                   "("+ item.nama_sub_material + "/" + item.type_name + ") - " + item.nama_barang,
                                     id: item.id,
                                 },
                             ];

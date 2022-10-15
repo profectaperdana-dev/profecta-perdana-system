@@ -69,7 +69,7 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
-                                            <div class="form-group col-md-5">
+                                            <div class="form-group col-md-7">
                                                 <label>Product</label>
                                                 <select name="stockFields[0][product_id]"
                                                     class="form-control @error('stockFields[0][product_id]') is-invalid @enderror product-append-all"
@@ -233,7 +233,9 @@
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->warehouseBy->warehouses }}/{{ $value->warehouseBy->typeBy->name }}
                                             </td>
-                                            <td>{{ $value->productBy->nama_barang }}</td>
+                                            <td>({{ $value->productBy->sub_materials->nama_sub_material }}/{{ $value->productBy->sub_types->type_name }})
+                                                - {{ $value->productBy->nama_barang }}
+                                            </td>
                                             <td>{{ $value->stock }}</td>
 
 

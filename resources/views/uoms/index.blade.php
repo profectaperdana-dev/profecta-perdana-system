@@ -37,7 +37,7 @@
                                             <label class="font-weight-bold">Name Unit of Measurement</label>
                                             <input type="text"
                                                 class="form-control text-capitalize {{ $errors->first('uom') ? ' is-invalid' : '' }}"
-                                                name="uom" placeholder="Name Unit of Measurement" required>
+                                                name="uom" placeholder="Name Unit of Measurement">
                                             @error('uom')
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror

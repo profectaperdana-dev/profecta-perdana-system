@@ -25,7 +25,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
+                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Read
                         {{ $title }}
                 </div>
 
@@ -43,23 +43,43 @@
                             <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th></th>
                                         <th>#</th>
                                         <th>Claim Number</th>
-                                        <th>Claim Date</th>
+                                        <th> Date</th>
                                         <th>Customer</th>
                                         <th>Accu Type</th>
                                         <th>Plat Number</th>
-                                        <th>View Card Claim</th>
+                                        <th>Detail</th>
                                     </tr>
 
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $key => $value)
                                         <tr>
+                                            <td style="width: 5%">
+                                                <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
+                                                    aria-expanded="false"><i data-feather="settings"></i></a>
+                                                <div class="dropdown-menu" aria-labelledby="">
+                                                    <h5 class="dropdown-header">Actions</h5>
+                                                    {{-- <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                        data-original-title="test"
+                                                        data-bs-target="#detailData{{ $value->id }}">Result Claim</a> --}}
+                                                    <a class="dropdown-item"
+                                                        href="{{ url('/pdf_claim_accu_finish/' . $value->id) }}">Download
+                                                        PDF</a>
+                                                    @if ($value->email != null)
+                                                        <a class="dropdown-item"
+                                                            href="{{ url('/send_early_accu_claim_finish/' . $value->id) }}">Send
+                                                            By
+                                                            Email</a>
+                                                    @endif
+                                                </div>
+                                            </td>
                                             <td>{{ $key + 1 }}</td>
                                             <td class="text-uppercase">{{ $value->claim_number }}</td>
                                             <td>{{ $value->claim_date }}</td>
-                                            <td>{{ $value->customer_id }}</td>
+                                            <td>{{ $value->customer_id }}/{{ $value->sub_name }}</td>
                                             <td>
                                                 @if ($value->material == null)
                                                     {{ $value->product_id }}
@@ -69,7 +89,7 @@
                                             </td>
                                             <td class="text-uppercase">{{ $value->plate_number }}</td>
 
-                                            <td>
+                                            <td class="text-center">
                                                 <a class="btn btn-sm btn-primary" href="#" data-bs-toggle="modal"
                                                     data-original-title="test"
                                                     data-bs-target="#detailData{{ $value->id }}">View Detail</a>
@@ -78,15 +98,6 @@
                                             <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog modal-xl" role="document">
-                                                    {{-- <div class="modal-content">
-                                                        <div class="modal-header text-center">
-                                                            <h5 class="modal-title" id="exampleModalLabel">Detail Data
-                                                                {{ $value->claim_number }}</h5>
-                                                            </h5>
-                                                            <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                                                aria-label="Close"></button>
-                                                        </div> --}}
-                                                    {{-- <div class="modal-body"> --}}
                                                     <div class="container-fluid">
                                                         <div class="row">
                                                             <div class="col-sm-14 col-md-12 col-lg-12">
@@ -153,22 +164,30 @@
                                                                                         </div>
                                                                                         <div class="form-group col-md-6">
                                                                                             <label>
-                                                                                                Customer/Phone
-                                                                                                Number</label>
+                                                                                                Customer Name</label>
                                                                                             <input type="text"
                                                                                                 class="form-control"
                                                                                                 placeholder="Serial Number"
                                                                                                 readonly
-                                                                                                value="{{ $value->customer_id }}">
+                                                                                                value="{{ $value->customer_id }}/{{ $value->sub_name }}">
                                                                                         </div>
                                                                                         <div class="form-group col-md-6">
                                                                                             <label>
-                                                                                                Loan Product</label>
+                                                                                                Customer Phone/Email</label>
                                                                                             <input type="text"
                                                                                                 class="form-control"
                                                                                                 placeholder="Serial Number"
                                                                                                 readonly
-                                                                                                value="{{ $value->loanBy->nama_barang }}">
+                                                                                                value="{{ $value->sub_phone }}@if ($value->email != null) /{{ $value->email }} @endif">
+                                                                                        </div>
+                                                                                        <div class="form-group col-md-12">
+                                                                                            <label>
+                                                                                                Loaned Battery</label>
+                                                                                            <input type="text"
+                                                                                                class="form-control"
+                                                                                                placeholder="Serial Number"
+                                                                                                readonly
+                                                                                                value="{{ $value->loanBy->sub_materials->nama_sub_material }}/{{ $value->loanBy->sub_types->type_name }}/{{ $value->loanBy->nama_barang }}">
                                                                                         </div>
                                                                                     </div>
                                                                                 </div>
@@ -240,7 +259,7 @@
                                                                                             <div
                                                                                                 class="form-group col-lg-4 col-md-12">
                                                                                                 <label>
-                                                                                                    Submitted By,</label>
+                                                                                                    Received By,</label>
                                                                                                 <br>
                                                                                                 <p><strong>{{ $value->createdBy->name }}</strong>
                                                                                                 </p>
@@ -262,10 +281,10 @@
                                                                                             <div
                                                                                                 class="form-group col-lg-4 col-md-12">
                                                                                                 <label>
-                                                                                                    Received By,</label>
+                                                                                                    Submitted By</label>
                                                                                                 <br>
                                                                                                 <div class="text-center">
-                                                                                                    <img class="img-fluid img-rotate shadow"
+                                                                                                    <img class="img-fluid img-rotate "
                                                                                                         style="width: 200px"
                                                                                                         id="img"
                                                                                                         src="{{ asset('file_signature/' . $value->e_receivedBy) }}"
@@ -284,7 +303,7 @@
                                                                                                     class="form-control bg-primary text-white text-center"
                                                                                                     placeholder="Serial Number"
                                                                                                     readonly
-                                                                                                    value="Finally Check">
+                                                                                                    value="Final Check">
                                                                                             </div>
                                                                                             <div
                                                                                                 class="form-group col-md-6">
@@ -366,7 +385,7 @@
                                                                                                     Received By,</label>
                                                                                                 <br>
                                                                                                 <div class="text-center">
-                                                                                                    <img class="img-fluid img-rotate shadow"
+                                                                                                    <img class="img-fluid img-rotate "
                                                                                                         style="width: 200px"
                                                                                                         id="img"
                                                                                                         src="{{ asset('file_signature/' . $value->f_receivedBy) }}"
