@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\AccuClaimEarlyMail;
+use App\Mail\AccuClaimFinishMail;
 use App\Mail\InvoiceMail;
 use App\Mail\NotifyMail;
 use App\Mail\PoMail;
 use App\Mail\ReturnMail;
+use App\Models\AccuClaimModel;
 use App\Models\PurchaseOrderModel;
 use App\Models\ReturnModel;
 use App\Models\SalesOrderModel;
@@ -86,6 +89,57 @@ class SendEmailController extends Controller
             return redirect('/return')->with('error', 'Send Return Invoice By Email Failed !');
         } else {
             return redirect('/return')->with('success', 'Send Return Invoice ' . $data->return_number . ' to ' . $data->salesOrderBy->customerBy->name_cust . ' by Email Success !');
+        }
+    }
+    public function sendEarlyAccuClaim($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance') && !Gate::allows('isTeknisi')
+        ) {
+            abort(403);
+        }
+        $data = AccuClaimModel::where('id', $id)->first();
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = PDF::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim/' . $data->claim_number . '.pdf');
+
+        $name = $data->email;
+        if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
+            return redirect('claim')->with('error', ' Invalid email format');
+        } else {
+            Mail::to($data->email)->queue(new AccuClaimEarlyMail($warehouse, $data));
+        }
+
+        if (Mail::failures()) {
+            return redirect('/claim')->with('error', 'Send Invoice By Email Failed !');
+        } else {
+            return redirect('/claim')->with('success', 'Send Invoice ' . $data->claim_number . ' to ' . $data->sub_name . ' by Email Success !');
+        }
+    }
+
+    public function sendEarlyAccuClaimFinish($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            && !Gate::allows('isFinance') && !Gate::allows('isTeknisi')
+        ) {
+            abort(403);
+        }
+        $data = AccuClaimModel::where('id', $id)->first();
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = PDF::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim_finish/' . $data->claim_number . '.pdf');
+
+        $name = $data->email;
+        if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
+            return redirect('history_claim')->with('error', ' Invalid email format');
+        } else {
+            Mail::to($data->email)->queue(new AccuClaimFinishMail($warehouse, $data));
+        }
+
+        if (Mail::failures()) {
+            return redirect('/history_claim')->with('error', 'Send Invoice By Email Failed !');
+        } else {
+            return redirect('/history_claim')->with('success', 'Send Invoice ' . $data->claim_number . ' to ' . $data->sub_name . ' by Email Success !');
         }
     }
 }

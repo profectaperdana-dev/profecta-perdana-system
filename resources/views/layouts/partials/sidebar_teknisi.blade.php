@@ -51,24 +51,60 @@
                             <h6>Claims & Informations</h6>
                         </div>
                     </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('claim/create') ? 'active' : '' }}"
-                            href="{{ url('/claim/create') }}"><i data-feather="edit"></i><span>Create Claim
-                            </span></a>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('claim/create') || request()->is('claim_tyre/create')) active @endif"
+                            href="javascript:void(0)"><i data-feather="edit"></i><span>Create Claim</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('claim/create') || request()->is('claim_tyre/create')) block @else none @endif ">
+                            <li><a href="{{ url('/claim/create') }}"
+                                    class="{{ request()->is('claim/create') ? 'active' : '' }}">Accu Claim</a>
+                            </li>
+                            <li><a href="{{ url('/claim_tyre/create') }}"
+                                    class="{{ request()->is('claim_tyre/create') ? 'active' : '' }}">Tyre
+                                    Claim</a>
+                            </li>
+
+
+                        </ul>
                     </li>
-                    <li>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('claim') || request()->is('claim_tyre')) active @endif"
+                            href="javascript:void(0)"><i data-feather="clipboard"></i><span>Early Checking
+                                List</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('claim') || request()->is('claim_tyre')) block @else none @endif ">
+                            <li><a href="{{ url('/claim') }}"
+                                    class="{{ request()->is('claim') ? 'active' : '' }}">Early Checking Accu</a>
+                            </li>
+                            <li><a href="{{ url('/claim_tyre') }}"
+                                    class="{{ request()->is('claim_tyre') ? 'active' : '' }}">
+                                    Early Checking Tyre</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {{-- <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('claim') ? 'active' : '' }}"
-                            href="{{ url('/claim') }}"><i data-feather="clipboard"></i><span>Claim List
+                            href="{{ url('/claim') }}"><i data-feather="clipboard"></i><span>Early Checking List
                             </span></a>
+                    </li> --}}
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('history_claim') || request()->is('')) active @endif"
+                            href="javascript:void(0)"><i data-feather="folder"></i><span>Claim Completed</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('history_claim') || request()->is('')) block @else none @endif ">
+                            <li><a href="{{ url('/history_claim') }}"
+                                    class="{{ request()->is('history_claim') ? 'active' : '' }}">Completed Accu
+                                    Claim</a>
+                            </li>
+                            <li><a href="{{ url('/') }}" class="{{ request()->is('') ? 'active' : '' }}">
+                                    Completed Tyre Claim</a>
+                            </li>
+                        </ul>
                     </li>
 
-
-                    <li>
+                    {{-- <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('history_claim') ? 'active' : '' }}"
                             href="{{ url('/history_claim') }}"><i data-feather="folder"></i><span>History Claims
 
                             </span></a>
-                    </li>
+                    </li> --}}
 
                 </ul>
             </div>

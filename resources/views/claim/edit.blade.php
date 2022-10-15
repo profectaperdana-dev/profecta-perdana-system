@@ -35,7 +35,8 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <form method="post" action="{{ url('claim/' . $value->id) }}" enctype="multipart/form-data">
+            <form class="needs-validation" novalidate method="post" action="{{ url('claim/' . $value->id) }}"
+                enctype="multipart/form-data">
                 @csrf
                 <input name="_method" type="hidden" value="PATCH">
                 @include('claim._form_finish')
@@ -49,28 +50,31 @@
         <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-        {{-- <script src="https://cdn.ckeditor.com/4.19.1/standard/ckeditor.js"></script>
-        <script type="text/javascript">
-            CKEDITOR.replace('result');
-        </script> --}}
+        <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script>
             $(document).ready(function() {
                 // OTHER DIAGNOSE
                 // $('#otherDiagnosa').hide();
 
+                // OTHER DIAGNOSE
+                $('.reqdiag').attr('required', false);
                 $('#cekDiagnosa').click(function() {
                     var checked = $(this).prop('checked');
-                    console.log(checked);
+                    // console.log(checked);
                     if (checked == true) {
                         $('#otherDiagnosa').attr('hidden', false);
-
+                        $('.reqdiag').attr('required', true);
                     } else {
                         $('#otherDiagnosa').attr('hidden', true);
+                        $('.reqdiag').attr('required', false);
+
                     }
                 });
 
 
                 // CHOOSE SUPPLIER
+                $('#warrantyAccepted').attr('required', false);
+                $('#goodWill').attr('required', false);
                 $('#warrantyTo').hide();
                 $('#warehouseTo').hide();
                 $('#result').on('change', function() {
@@ -78,19 +82,26 @@
                     if (result == "CP03 - Waranty Accepted") {
                         $('#warrantyTo').show();
                         $('#warehouseTo').hide();
+                        $('#warrantyAccepted').attr('required', true);
+                        $('#goodWill').attr('required', false);
                     } else if (result == "CP04 - Good Will") {
                         $('#warrantyTo').hide();
                         $('#warehouseTo').show();
+                        $('#warrantyAccepted').attr('required', false);
+                        $('#goodWill').attr('required', true);
+
                     } else {
                         $('#warrantyTo').hide();
                         $('#warehouseTo').hide();
+                        $('#warrantyAccepted').attr('required', false);
+                        $('#goodWill').attr('required', false);
                     }
                 });
 
                 // SUBMIT 1x
-                $('form').submit(function() {
-                    $(this).find('button[type="submit"]').prop('disabled', true);
-                });
+                // $('form').submit(function() {
+                //     $(this).find('button[type="submit"]').prop('disabled', true);
+                // });
 
                 // SIGNATURE
                 var sig = $('#sig').signature({
@@ -135,6 +146,27 @@
                     }
                 });
             });
+        </script>
+        <script>
+            $(function() {
+
+                let validator = $('form.needs-validation').jbvalidator({
+                    errorMessage: true,
+                    successClass: true,
+                    language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+                });
+                //custom validate methode
+                validator.validator.custom = function(el, event) {
+                    if ($(el).is('[name=signed]') && $(el).val().length < 1) {
+                        return "<span class='text-danger'>Please don't leave the signature form blank </span>";
+                    }
+                }
+
+
+
+                //reload instance after dynamic element is added
+                validator.reload();
+            })
         </script>
     @endpush
 @endsection

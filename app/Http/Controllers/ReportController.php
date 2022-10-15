@@ -94,27 +94,7 @@ class ReportController extends Controller
                     $total = $sub_total + $ppn;
                     return number_format($total, 0, ',', '.');
                 })
-                // ->editColumn('payment_method', function ($data) {
-                //     if ($data->payment_method == 1) {
-                //         return 'COD';
-                //     } elseif ($data->payment_method == 2) {
-                //         return 'CBD';
-                //     } else {
-                //         return 'Credit';
-                //     }
-                // })
 
-                // ->editColumn('order_number', function ($data) use ($temp_1, $temp_2) {
-                // $temp_1 = $data->order_number;
-                // if ($temp_1 != $temp_2) {
-                //     $temp_2 = $temp_1;
-                //     return $temp_1 . ',' . $temp_2;
-                // } else {
-                //     return '';
-                // }
-
-                // return $data->order_number;
-                // })
                 ->editColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->order_date));
                 })
@@ -129,19 +109,37 @@ class ReportController extends Controller
                 ->editColumn('discount_rp', function ($data) {
                     return number_format($data->discount_rp, 0, ',', '.');
                 })
-                // ->editColumn('total_after_ppn', function ($data) {
-                //     return number_format($data->total_after_ppn, 0, ',', '.');
-                // })
-                // ->editColumn('total', function ($data) {
-                //     return number_format($data->total, 0, ',', '.');
-                // })
-                // ->editColumn('isPaid', function ($data) {
-                //     if ($data->isPaid == 0) {
-                //         return 'Unpaid';
-                //     } else {
-                //         return 'Paid';
-                //     }
-                // })
+                ->editColumn('total', function ($data) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        $diskon_persen = $data->discount / 100;
+                        $produk_diskon = $data->productSales->harga_jual_nonretail * $diskon_persen;
+                        $harga_setelah_diskon = $data->productSales->harga_jual_nonretail - $produk_diskon - $data->discount_rp;
+                        $total = $harga_setelah_diskon * $data->qty;
+                        return number_format($total, 0, ',', '.');
+                    } else return 'Restricted';
+                })
+                ->editColumn('ppn', function ($data) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        $diskon_persen = $data->discount / 100;
+                        $produk_diskon = $data->productSales->harga_jual_nonretail * $diskon_persen;
+                        $harga_setelah_diskon = $data->productSales->harga_jual_nonretail - $produk_diskon - $data->discount_rp;
+                        $total = $harga_setelah_diskon * $data->qty;
+                        $ppn = 0.11 * $total;
+                        return number_format($ppn, 0, ',', '.');
+                    } else return 'Restricted';
+                })
+                ->editColumn('total_ppn', function ($data) {
+                    if (Gate::allows('isSuperAdmin')) {
+                        $diskon_persen = $data->discount / 100;
+                        $produk_diskon = $data->productSales->harga_jual_nonretail * $diskon_persen;
+                        $harga_setelah_diskon = $data->productSales->harga_jual_nonretail - $produk_diskon - $data->discount_rp;
+                        $total = $harga_setelah_diskon * $data->qty;
+                        $ppn = 0.11 * $total;
+                        $total_ppn = $total + $ppn;
+                        return number_format($total_ppn, 0, ',', '.');
+                    } else return 'Restricted';
+                })
+
                 ->editColumn('material', function (SalesOrderDetailModel $SalesOrderDetailModel) {
                     return $SalesOrderDetailModel->productSales->sub_materials->nama_sub_material;
                 })
@@ -355,6 +353,9 @@ class ReportController extends Controller
                 })
                 ->editColumn('car_type_id', function (AccuClaimModel $AccuClaimModel) {
                     return $AccuClaimModel->carTypeBy->car_type;
+                })
+                ->editColumn('product_id', function (AccuClaimModel $AccuClaimModel) {
+                    return $AccuClaimModel->productSales->nama_barang;
                 })
                 ->editColumn('diagnosa', function (AccuClaimModel $AccuClaimModel) {
                     $detail = AccuClaimDetailModel::where('id_accu_claim', $AccuClaimModel->id)->get();
