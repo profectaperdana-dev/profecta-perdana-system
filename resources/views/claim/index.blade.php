@@ -17,11 +17,6 @@
                 width: 100% !important;
                 height: auto;
             }
-
-            .img-rotate {
-                transform: rotate(270deg);
-
-            }
         </style>
     @endpush
 
@@ -30,7 +25,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
+                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Early Checking
                         {{ $title }}
                 </div>
 
@@ -45,7 +40,7 @@
                     <div class="card-header pb-0">
                         {{-- <h5>All Data</h5> --}}
                         <a class="btn btn-primary" href="{{ url('claim/create') }}">
-                            + Create Claim
+                            + Create Accu Claim
                         </a>
                         <hr class="bg-primary">
 
@@ -75,6 +70,15 @@
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-original-title="test"
                                                         data-bs-target="#detailData{{ $value->id }}">Early Check</a>
+                                                    <a class="dropdown-item"
+                                                        href="{{ url('/pdf_claim_accu/' . $value->id) }}">Download
+                                                        PDF</a>
+                                                    @if ($value->email != null)
+                                                        <a class="dropdown-item"
+                                                            href="{{ url('/send_early_accu_claim/' . $value->id) }}">Send By
+                                                            Email</a>
+                                                    @endif
+
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-original-title="test"
                                                         data-bs-target="#deleteData{{ $value->id }}">Delete</a>
@@ -111,42 +115,54 @@
                                                                                 </div>
                                                                                 <div class="form-group col-lg-4 col-md-12">
                                                                                     <label>
-                                                                                        Customer/Phone
-                                                                                        Number</label>
+                                                                                        Customer Source</label>
                                                                                     <input type="text"
                                                                                         class="form-control"
                                                                                         placeholder="Serial Number" readonly
                                                                                         value="{{ $value->customer_id }}">
-                                                                                    <div class="input-group"
-                                                                                        class="otherCustomer mt-3">
-                                                                                        {{-- Sub Name Customer --}}
-                                                                                        <input name="sub_name"
-                                                                                            type="text" id="other_name"
-                                                                                            readonly
-                                                                                            class="form-control text-capitalize fw-bold "
-                                                                                            placeholder="Enter Name"
-                                                                                            aria-label="Username"
-                                                                                            value="{{ $value->sub_name }}">
 
-                                                                                        {{-- End Sub Name Customer --}}
+                                                                                </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label for="">Name
+                                                                                        Customer</label>
+                                                                                    {{-- Sub Name Customer --}}
+                                                                                    <input name="sub_name" type="text"
+                                                                                        id="other_name" readonly
+                                                                                        class="form-control text-capitalize fw-bold "
+                                                                                        placeholder="Enter Name"
+                                                                                        aria-label="Username"
+                                                                                        value="{{ $value->sub_name }}">
 
-                                                                                        {{-- SUb Phone Customer --}}
-                                                                                        <input name="sub_phone"
-                                                                                            type="number" id="other_phone"
-                                                                                            class="form-control fw-bold "
-                                                                                            readonly
-                                                                                            placeholder="Enter Phone"
-                                                                                            aria-label="Server"
-                                                                                            value="{{ $value->sub_phone }}">
+                                                                                    {{-- End Sub Name Customer --}}
 
-                                                                                        {{-- End Sub Phone Customer --}}
-                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label for="">Phone/Email
+                                                                                        Customer</label>
+                                                                                    {{-- SUb Phone Customer --}}
+                                                                                    <input name="sub_phone" type=""
+                                                                                        id="other_phone"
+                                                                                        class="form-control fw-bold "
+                                                                                        readonly placeholder="Enter Phone"
+                                                                                        aria-label="Server"
+                                                                                        value="{{ $value->sub_phone }}@if ($value->email != null) / {{ $value->email }} @endif">
+                                                                                    {{-- End Sub Phone Customer --}}
+                                                                                </div>
+
+                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                    <label for="">Loaned
+                                                                                        Battery</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control" disabled
+                                                                                        readonly
+                                                                                        value="{{ $value->loanBy->sub_materials->nama_sub_material }}/{{ $value->loanBy->sub_types->type_name }}/{{ $value->loanBy->nama_barang }}">
                                                                                 </div>
                                                                                 <div class="form-group col-lg-4 col-md-12">
                                                                                     <label>Car Type</label>
                                                                                     <input type="text"
                                                                                         class="form-control text-capitalize"
-                                                                                        placeholder="Serial Number" readonly
+                                                                                        placeholder="Serial Number"
+                                                                                        readonly
                                                                                         value="{{ $value->carBrandBy->car_brand }} / {{ $value->carTypeBy->car_type }}">
 
                                                                                 </div>
@@ -155,7 +171,7 @@
                                                                                     <input type="text"
                                                                                         class="form-control text-uppercase"
                                                                                         placeholder="Product Code" readonly
-                                                                                        value="@if ($value->material == null) {{ $value->product_id }}@else{{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }} @endif">
+                                                                                        value="{{ $value->material }}/{{ $value->type_material }}/{{ $value->productSales->nama_barang }}">
                                                                                 </div>
 
                                                                                 <div class="form-group col-lg-4 col-md-12">
@@ -208,15 +224,22 @@
                                                                                         </div>
                                                                                     @endforeach
                                                                                 </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>
+                                                                                <div
+                                                                                    class="form-group col-lg-4 col-md-12 text-center">
+                                                                                    <label class="text-center">
                                                                                         Submitted By,</label>
                                                                                     <br>
-                                                                                    <p><strong>{{ $value->createdBy->name }}</strong>
-                                                                                    </p>
+                                                                                    <div class="text-center"> <img
+                                                                                            class="img-fluid img-rotate"
+                                                                                            style="width: 200px"
+                                                                                            id="img"
+                                                                                            src="{{ asset('file_signature/' . $value->e_receivedBy) }}"
+                                                                                            alt="">
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>
+                                                                                <div
+                                                                                    class="form-group col-lg-4 col-md-12 text-center">
+                                                                                    <label class="text-center">
                                                                                         Evidence,</label>
                                                                                     <br>
                                                                                     <div class="text-center"> <img
@@ -228,17 +251,15 @@
                                                                                     </div>
 
                                                                                 </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>
+                                                                                <div
+                                                                                    class="form-group col-lg-4 col-md-12 text-center">
+                                                                                    <label class="text-center">
                                                                                         Received By,</label>
                                                                                     <br>
-                                                                                    <div class="text-center"> <img
-                                                                                            class="img-fluid img-rotate shadow"
-                                                                                            style="width: 200px"
-                                                                                            id="img"
-                                                                                            src="{{ asset('file_signature/' . $value->e_receivedBy) }}"
-                                                                                            alt="">
-                                                                                    </div>
+                                                                                    <p class="text-center">
+                                                                                        <strong>{{ $value->createdBy->name }}</strong>
+                                                                                    </p>
+
 
                                                                                 </div>
                                                                                 <hr>
@@ -297,14 +318,14 @@
                                                 </div>
                                             </div>
                                             {{-- End Modal Delete UOM --}}
-                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ $loop->iteration }}</td>
                                             <td class="text-uppercase">{{ $value->claim_number }}</td>
-                                            <td>{{ $value->customer_id }}</td>
+                                            <td>{{ $value->customer_id }}/{{ $value->sub_name }}</td>
                                             <td>
                                                 @if ($value->material == null)
                                                     {{ $value->product_id }}
                                                 @else
-                                                    {{ $value->material }}/{{ $value->type_material }}/{{ $value->product_id }}
+                                                    {{ $value->material }}/{{ $value->type_material }}/{{ $value->productSales->nama_barang }}
                                                 @endif
 
 

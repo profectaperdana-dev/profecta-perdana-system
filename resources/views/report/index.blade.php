@@ -90,7 +90,11 @@
                                         <th>Qty</th>
                                         <th>Discount (%)</th>
                                         <th>Discount (Rp)</th>
-                                        <th>Total</th>
+                                        <th>Total (Exclude PPN)</th>
+                                        <th>PPN</th>
+                                        <th>Total (Include PPN)</th>
+
+
 
                                     </tr>
                                 </thead>
@@ -168,8 +172,8 @@
 
                             },
                             {
-                                data: 'due_date',
-                                name: 'due_date'
+                                data: 'duedate',
+                                name: 'duedate'
 
                             },
                             {
@@ -231,6 +235,16 @@
                             {
                                 data: 'total',
                                 name: 'total'
+
+                            },
+                            {
+                                data: 'ppn',
+                                name: 'ppn'
+
+                            },
+                            {
+                                data: 'total_ppn',
+                                name: 'total_ppn'
 
                             },
 

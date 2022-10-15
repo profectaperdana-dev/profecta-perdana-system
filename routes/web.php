@@ -120,6 +120,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/purchase_order/getAllDetail', [PurchaseOrderController::class, 'getAllDetail']);
     Route::get('/data_by_sales/', [AnalysisController::class, 'dataBySales']);
     Route::post('/invoice/{id}/edit_superadmin', [SalesOrderController::class, 'editSuperadmin']);
+    Route::get('/pdf_claim_accu/{id}', [ClaimController::class, 'pdfClaimAccu']);
+    Route::get('/pdf_claim_accu_finish/{id}', [ClaimController::class, 'pdfClaimAccuFinish']);
+    Route::get('send_early_accu_claim/{id}', [SendEmailController::class, 'sendEarlyAccuClaim']);
+    Route::get('send_early_accu_claim_finish/{id}', [SendEmailController::class, 'sendEarlyAccuClaimFinish']);
+    Route::get('claim_tyre', [ClaimController::class, 'indexTyre']);
+    Route::get('claim_tyre/create', [ClaimController::class, 'createTyre']);
+    Route::post('claim_tyre/store', [ClaimController::class, 'storeTyre']);
 
     Route::prefix('return')->group(function () {
         Route::get('/', [ReturnController::class, 'index']);
