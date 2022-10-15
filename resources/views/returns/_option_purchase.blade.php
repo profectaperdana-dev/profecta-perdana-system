@@ -169,7 +169,7 @@
                                 <div class="form-group">
 
                                     <button type="reset" class="btn btn-warning">Reset</button>
-                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                         data-original-title="test" data-bs-target="#detailReturn{{ $return->id }}"
                                         data-bs-dismiss="modal">Detail

@@ -9,6 +9,7 @@ use App\Mail\ReturnMail;
 use App\Models\PurchaseOrderModel;
 use App\Models\ReturnModel;
 use App\Models\SalesOrderModel;
+use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 // use Barryvdh\DomPDF\PDF;
@@ -71,7 +72,8 @@ class SendEmailController extends Controller
         }
         $data = ReturnModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = FacadePdf::loadView('returns.print_return', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->return_number . '.pdf');
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
+        $pdf = FacadePdf::loadView('returns.print_return', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->return_number . '.pdf');
 
         $name = $data->salesOrderBy->customerBy->email_cust;
         if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {

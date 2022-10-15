@@ -29,10 +29,12 @@ class StockMutationController extends Controller
             if (!empty($request->from_date)) {
                 $mutation = StockMutationModel::with('stockMutationDetailBy', 'fromWarehouse', 'toWarehouse', 'createdBy')
                     ->whereBetween('mutation_date', array($request->from_date, $request->to_date))
+                    ->where('isapprove', 1)
                     ->latest()
                     ->get();
             } else {
                 $mutation = StockMutationModel::with('stockMutationDetailBy', 'fromWarehouse', 'toWarehouse', 'createdBy')
+                    ->where('isapprove', 1)
                     ->latest()
                     ->get();
             }

@@ -133,7 +133,7 @@
 
     <!-- Wrap the content of your PDF inside a main tag -->
     <main>
-        <table style="width:100%;">
+        <table style="width:100%;margin-top:2em">
             <thead style="border-bottom:1px solid black">
                 <tr style="">
                     <th style="text-align:center;padding:2px;width:15%">No</th>

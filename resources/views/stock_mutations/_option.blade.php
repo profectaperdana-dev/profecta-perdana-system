@@ -49,7 +49,8 @@
                             data-bs-dismiss="modal">Edit
                         </button>
                     @endcan
-                    <a class="btn btn-info" href="{{ url('stock_mutation/' . $mutation->id . '/print_do') }}">Print</a>
+                    <a class="btn btn-info" href="{{ url('stock_mutation/' . $mutation->id . '/print_do') }}">Print
+                        Delivery Order</a>
                     <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
                 </div>
 
@@ -139,7 +140,7 @@
                                 <div class="form-group">
 
                                     <button type="reset" class="btn btn-warning">Reset</button>
-                                    <button type="submit" class="btn btn-primary">Create</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
                                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
                                         data-original-title="test"
                                         data-bs-target="#detailMutation{{ $mutation->id }}"
