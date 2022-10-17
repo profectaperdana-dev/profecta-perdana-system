@@ -243,7 +243,6 @@
                     let mutation_id = $(modal_id).find('#mutation_id').val();
                     let warehouse_from = $(modal_id).find('#from_warehouse').val();
                     let warehouse_to = $(modal_id).find('#to_warehouse').val();
-                    console.log(warehouse_from);
 
                     //Get Customer ID
                     $(modal_id).find(".uoms").select2({
