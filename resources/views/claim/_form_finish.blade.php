@@ -86,7 +86,7 @@
                         <div class="form-group row font-weight-bold">
                             <div class="col-lg-6 col-md-12 form-group">
                                 <label>Voltage</label>
-                                <input type="number" required placeholder="Enter Voltage"
+                                <input type="text" required placeholder="Enter Voltage"
                                     class="form-control {{ $errors->first('f_voltage') ? ' is-invalid' : '' }}"
                                     name="f_voltage">
                                 @error('f_voltage')
@@ -97,7 +97,7 @@
                             </div>
                             <div class="col-lg-6 col-md-12 form-group">
                                 <label>CCA</label>
-                                <input type="number" placeholder="Enter CCA" required
+                                <input type="text" placeholder="Enter CCA" required
                                     class="form-control  {{ $errors->first('f_cca') ? ' is-invalid' : '' }}"
                                     name="f_cca">
                                 @error('f_cca')
@@ -108,7 +108,7 @@
                             </div>
                             <div class="col-lg-6  col-md-12 form-group">
                                 <label>Starting</label>
-                                <input type="number" required placeholder="Enter Starting"
+                                <input type="text" required placeholder="Enter Starting"
                                     class="form-control {{ $errors->first('f_starting') ? ' is-invalid' : '' }}"
                                     name="f_starting">
                                 @error('f_starting')
@@ -119,7 +119,7 @@
                             </div>
                             <div class="col-lg-6 col-md-12 form-group">
                                 <label>Charging</label>
-                                <input type="number" required placeholder="Enter Charging"
+                                <input type="text" required placeholder="Enter Charging"
                                     class="form-control {{ $errors->first('f_charging') ? ' is-invalid' : '' }}"
                                     name="f_charging">
                                 @error('f_charging')

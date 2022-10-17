@@ -128,6 +128,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('claim_tyre', [ClaimController::class, 'indexTyre']);
     Route::get('claim_tyre/create', [ClaimController::class, 'createTyre']);
     Route::post('claim_tyre/store', [ClaimController::class, 'storeTyre']);
+    Route::delete('claim_tyre_del/{id}', [ClaimController::class, 'delTyre']);
 
     Route::prefix('return')->group(function () {
         Route::get('/', [ReturnController::class, 'index']);

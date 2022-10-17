@@ -527,7 +527,7 @@ class ClaimController extends Controller
         $year = Carbon::now()->format('Y'); // 2022
         $month = Carbon::now()->format('m'); // 2022
         $tahun = substr($year, -2);
-        $order_number = 'ACCU-CLPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $cust_number_id;
+        $order_number = 'TYRE-CLPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $cust_number_id;
 
         //* insert data
         $model->claim_number = $order_number;
@@ -577,6 +577,19 @@ class ClaimController extends Controller
             return redirect('claim_tyre')->with('success', 'Claim has been created');
         } else {
             return redirect('claim_tyre')->with('error', 'Claim failed to create');
+        }
+    }
+
+    public function delTyre($id)
+    {
+        $model = TyreClaimModel::find($id);
+        unlink('file_evidence/' . $model->e_foto);
+        unlink('file_signature/' . $model->e_signature);
+        $deleted = $model->delete();
+        if ($deleted) {
+            return redirect('claim_tyre')->with('success', 'Claim has been deleted');
+        } else {
+            return redirect('claim_tyre')->with('error', 'Claim failed to delete');
         }
     }
 }

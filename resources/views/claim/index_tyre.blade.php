@@ -156,15 +156,15 @@
                                                                                         value="{{ $value->carBrandBy->car_brand }} / {{ $value->carTypeBy->car_type }}">
 
                                                                                 </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>Accu type</label>
+                                                                                <div class="form-group col-lg-6 col-md-12">
+                                                                                    <label>Tyre type</label>
                                                                                     <input type="text"
                                                                                         class="form-control text-uppercase"
                                                                                         placeholder="Product Code" readonly
                                                                                         value="{{ $value->material }}/{{ $value->type_material }}/{{ $value->productBy->nama_barang }}">
                                                                                 </div>
 
-                                                                                <div class="form-group col-lg-4 col-md-12">
+                                                                                <div class="form-group col-lg-6 col-md-12">
                                                                                     <label>
                                                                                         Plat Number</label>
                                                                                     <input type="text"
@@ -174,36 +174,90 @@
                                                                                         value="{{ $value->plate_number }}">
                                                                                 </div>
 
-
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>
-                                                                                        Voltage
-                                                                                    </label>
-                                                                                    <input type="text" readonly
-                                                                                        class="form-control"
-                                                                                        value="{{ $value->e_voltage }}">
-                                                                                </div>
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>CCA </label>
+                                                                                <div
+                                                                                    class="col-lg-6  col-md-12 form-group">
+                                                                                    <label>Application</label>
                                                                                     <input type="text"
-                                                                                        class="form-control" readonly
-                                                                                        placeholder="Retail Selling Price"
-                                                                                        value="{{ $value->e_cca }}">
+                                                                                        class="form-control text-capitalize"
+                                                                                        placeholder="Serial Number"
+                                                                                        readonly disabled
+                                                                                        value="{{ $value->application }}">
 
                                                                                 </div>
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>Starting</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control" readonly
-                                                                                        placeholder="Non Retail Selling Price"
-                                                                                        value="{{ $value->e_starting }}">
-                                                                                </div>
 
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>Charging</label>
+                                                                                <div class="col-lg-6 col-md-12 form-group">
+                                                                                    <label>DOT/DOM</label>
                                                                                     <input type="text"
-                                                                                        class="form-control" readonly
-                                                                                        value="{{ $value->e_charging }}">
+                                                                                        class="form-control text-capitalize"
+                                                                                        placeholder="Serial Number"
+                                                                                        readonly disabled
+                                                                                        value="{{ $value->dot }}">
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-12 form-group">
+                                                                                    <label>Serial Number</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control text-capitalize"
+                                                                                        placeholder="Serial Number"
+                                                                                        readonly disabled
+                                                                                        value="{{ $value->serial_number }}">
+
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-12 form-group">
+                                                                                    <label for="">Remaining Thread
+                                                                                        Depth</label>
+                                                                                    <div class="input-group mb-3">
+                                                                                        <div class="input-group-prepend">
+                                                                                            <span class="input-group-text"
+                                                                                                id="basic-addon1">RTD</span>
+                                                                                        </div>
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            placeholder="Enter" disabled
+                                                                                            readonly
+                                                                                            value="{{ $value->rtd1 }}"
+                                                                                            name="rtd1"
+                                                                                            aria-label="Username"
+                                                                                            aria-describedby="basic-addon1">
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            placeholder="Enter" disabled
+                                                                                            readonly
+                                                                                            value="{{ $value->rtd2 }}"
+                                                                                            name="rtd2"
+                                                                                            aria-label="Username"
+                                                                                            aria-describedby="basic-addon1">
+                                                                                        <input type="number"
+                                                                                            class="form-control"
+                                                                                            placeholder="Enter" disabled
+                                                                                            readonly
+                                                                                            value="{{ $value->rtd3 }}"
+                                                                                            name="rtd3"
+                                                                                            aria-label="Username"
+                                                                                            aria-describedby="basic-addon1">
+                                                                                    </div>
+
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-12 form-group">
+                                                                                    <label for="">Complaint
+                                                                                        Area</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control text-capitalize"
+                                                                                        placeholder="Serial Number"
+                                                                                        readonly disabled
+                                                                                        value="{{ $value->complaint_area }}">
+
+                                                                                </div>
+                                                                                <div class="col-lg-6 col-md-12 form-group">
+                                                                                    <label for="">Reason for
+                                                                                        Complaint</label>
+                                                                                    <input type="text"
+                                                                                        class="form-control text-capitalize"
+                                                                                        placeholder="Serial Number"
+                                                                                        readonly disabled
+                                                                                        value="{{ $value->reason }}">
+
+
+
                                                                                 </div>
 
 
@@ -267,7 +321,8 @@
                                             <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('claim/' . $value->id) }}"
+                                                    <form method="post"
+                                                        action="{{ url('claim_tyre_del/' . $value->id) }}"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <input name="_method" type="hidden" value="DELETE">

@@ -41,9 +41,9 @@
                     {{-- End Customer --}}
                     {{-- Product --}}
                     <div class="col-lg-12 col-md-12 form-group">
-                        <label>Product </label>
+                        <label>Accu Type </label>
                         <select name="product_id" id="product_id" required class="form-select select2">
-                            <option value="" selected>-Choose Product-</option>
+                            <option value="" selected>-Choose Accu-</option>
                             @foreach ($product as $row)
                                 <option value="{{ $row->id }}"
                                     data-material="{{ $row->sub_materials->nama_sub_material }}"
@@ -103,26 +103,26 @@
 
                             <div class="col-lg-3 col-md-12 form-group">
                                 <label>Voltage</label>
-                                <input data-v-min="1" required type="number" placeholder="Enter Voltage"
+                                <input data-v-min="1" required type="text" placeholder="Enter Voltage"
                                     class="form-control" name="e_voltage">
 
                             </div>
                             <div class="col-lg-3 col-md-12 form-group">
                                 <label>CCA</label>
-                                <input data-v-min="1" required type="number" placeholder="Enter CCA"
+                                <input data-v-min="1" required type="text" placeholder="Enter CCA"
                                     class="form-control" name="e_cca">
 
                             </div>
 
                             <div class="col-lg-3  col-md-12 form-group">
                                 <label>Starting</label>
-                                <input data-v-min="1" required type="number" placeholder="Enter Starting"
+                                <input data-v-min="1" required type="text" placeholder="Enter Starting"
                                     class="form-control" name="e_starting">
 
                             </div>
                             <div class="col-lg-3 col-md-12 form-group">
                                 <label>Charging</label>
-                                <input data-v-min="1" required type="number" placeholder="Enter Charging"
+                                <input data-v-min="1" required type="text" placeholder="Enter Charging"
                                     class="form-control" name="e_charging">
 
                             </div>
@@ -216,9 +216,9 @@
                             </div>
                             {{-- loaned battery --}}
                             <div class="col-lg-12 col-md-12 form-group">
-                                <label>Loaned Battery</label>
+                                <label>Loaned Accu</label>
                                 <select name="loan_product_id" id="" class="form-select select2" required>
-                                    <option value="">-Select Loaned Product-</option>
+                                    <option value="">-Select Loaned Accu-</option>
                                     @foreach ($stock as $row)
                                         <option value="{{ $row->productBy->id }}">
                                             ({{ $row->productBy->sub_materials->nama_sub_material }}/{{ $row->productBy->sub_types->type_name }})

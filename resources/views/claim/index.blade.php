@@ -151,7 +151,7 @@
 
                                                                                 <div class="form-group col-lg-4 col-md-12">
                                                                                     <label for="">Loaned
-                                                                                        Battery</label>
+                                                                                        Accu Type</label>
                                                                                     <input type="text"
                                                                                         class="form-control" disabled
                                                                                         readonly
@@ -217,7 +217,8 @@
                                                                                 </div>
 
                                                                                 <div class="form-group col-md-12">
-                                                                                    <label for="">Diagnosa</label>
+                                                                                    <label
+                                                                                        for="">Diagnostic</label>
                                                                                     @foreach ($value->accuClaimDetailsBy as $key => $row)
                                                                                         <div>{{ $key + 1 }}.
                                                                                             {{ $row->diagnosa }}
