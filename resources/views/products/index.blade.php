@@ -134,7 +134,7 @@
 
 
                                                                             <div class="form-group col-md-4">
-                                                                                <label>Purchase Price
+                                                                                <label>Purchase Price (exclude PPN)
                                                                                 </label>
                                                                                 <input type="text" readonly
                                                                                     class="form-control"
@@ -142,7 +142,8 @@
 
                                                                             </div>
                                                                             <div class="form-group col-md-4">
-                                                                                <label>Retail Selling Price </label>
+                                                                                <label>Retail Selling Price (exclude
+                                                                                    PPN)</label>
                                                                                 <input type="text" class="form-control"
                                                                                     readonly
                                                                                     placeholder="Retail Selling Price"
@@ -151,7 +152,7 @@
                                                                             </div>
                                                                             <div class="form-group col-md-4">
                                                                                 <label>Non Retail Selling
-                                                                                    Price</label>
+                                                                                    Price (exclude PPN)</label>
                                                                                 <input type="text" class="form-control"
                                                                                     readonly
                                                                                     placeholder="Non Retail Selling Price"
@@ -163,6 +164,7 @@
                                                                                 <input type="number" class="form-control"
                                                                                     readonly value="{{ $value->berat }}">
                                                                             </div>
+
                                                                             <div class="form-group col-md-3">
                                                                                 <label>Min Stock</label>
                                                                                 <input type="number" class="form-control"

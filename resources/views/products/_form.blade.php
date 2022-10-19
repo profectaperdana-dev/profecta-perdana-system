@@ -103,7 +103,7 @@
                 @enderror
             </div>
             <div class="col-md-3 form-group">
-                <label>Purchase Price</label>
+                <label>Purchase Price (exclude PPN)</label>
                 <input type="text" class="form-control {{ $errors->first('harga_beli') ? ' is-invalid' : '' }}"
                     required placeholder="Purchase Price" name="harga_beli"
                     value="{{ old('harga_beli', number_format($data->harga_beli)) }}">
@@ -114,7 +114,7 @@
                 @enderror
             </div>
             <div class="col-md-3 form-group">
-                <label>Retail Selling Price </label>
+                <label>Retail Selling Price (exclude PPN)</label>
                 <input type="number" class="form-control {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
                     required placeholder="Retail Selling Price" name="harga_jual"
                     value="{{ old('harga_jual', $data->harga_jual) }}">
@@ -125,7 +125,7 @@
                 @enderror
             </div>
             <div class="col-md-3 form-group">
-                <label>Non Retail Selling Price</label>
+                <label>Non Retail Selling Price (exclude PPN)</label>
                 <input type="number"
                     class="form-control {{ $errors->first('harga_jual_nonretail') ? ' is-invalid' : '' }}" required
                     placeholder="Non Retail Selling Price" name="harga_jual_nonretail"

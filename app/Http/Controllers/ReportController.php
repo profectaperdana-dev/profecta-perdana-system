@@ -98,6 +98,13 @@ class ReportController extends Controller
                 ->editColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->order_date));
                 })
+                ->editColumn('duedate', function ($data) {
+                    if ($data->duedate != null) {
+                        return date('d-M-Y', strtotime($data->duedate));
+                    } else {
+                        return '-';
+                    }
+                })
                 ->editColumn('paid_date', function ($data) {
                     if ($data->paid_date == null) {
                         return "-";

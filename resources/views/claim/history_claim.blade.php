@@ -48,8 +48,8 @@
                                         <th>Claim Number</th>
                                         <th> Date</th>
                                         <th>Customer</th>
-                                        <th>Accu Type</th>
-                                        <th>Plat Number</th>
+                                        <th>Battery Type</th>
+                                        <th>Plate Number</th>
                                         <th>Detail</th>
                                     </tr>
 
@@ -145,7 +145,7 @@
 
                                                                                         </div>
                                                                                         <div class="form-group col-md-4">
-                                                                                            <label>Accu type</label>
+                                                                                            <label>Battery type</label>
                                                                                             <input type="text"
                                                                                                 class="form-control text-uppercase"
                                                                                                 placeholder="Product Code"
@@ -155,7 +155,7 @@
 
                                                                                         <div class="form-group col-md-4">
                                                                                             <label>
-                                                                                                Plat Number</label>
+                                                                                                Plate Number</label>
                                                                                             <input type="text"
                                                                                                 class="form-control text-uppercase"
                                                                                                 placeholder="Serial Number"

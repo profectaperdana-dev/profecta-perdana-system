@@ -14,6 +14,8 @@ use App\Models\StockMutationModel;
 use App\Models\SuppliersModel;
 use App\Models\TyreClaimModel;
 use App\Models\WarehouseModel;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
+use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use Clockwork\Web\Web;
 use Illuminate\Http\Request;
@@ -31,7 +33,7 @@ class ClaimController extends Controller
     //? CLAIM ACCU
     public function index()
     {
-        $title = 'Accu Claim';
+        $title = 'Battery Claim';
         $product = ProductModel::all();
         $customer = CustomerModel::all();
         $data = AccuClaimModel::where('status', 0)->latest()->get();
@@ -43,7 +45,7 @@ class ClaimController extends Controller
     {
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data = AccuClaimModel::find($id);
-        $pdf = \PDF::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
+        $pdf = FacadePdf::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
         return $pdf->stream();
     }
 
@@ -51,7 +53,7 @@ class ClaimController extends Controller
     {
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data = AccuClaimModel::find($id);
-        $pdf = \PDF::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
+        $pdf = FacadePdf::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
         return $pdf->stream();
     }
     /**
@@ -133,7 +135,7 @@ class ClaimController extends Controller
         $year = Carbon::now()->format('Y'); // 2022
         $month = Carbon::now()->format('m'); // 2022
         $tahun = substr($year, -2);
-        $order_number = 'ACCU-CLPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $cust_number_id;
+        $order_number = 'BATTERY-CLPP-' . $kode_area->area_code . '-' . $tahun  . $month  . $cust_number_id;
 
         //* INSERT CLAIM
         $model = new AccuClaimModel();
@@ -144,7 +146,7 @@ class ClaimController extends Controller
         $model->customer_id = $request->customer_id;
         $model->sub_name = $request->sub_name;
         $model->sub_phone = $request->sub_phone;
-        $model->plate_number = $request->plate_number;
+        $model->plate_number = strtoupper($request->plate_number);
         $model->email = $request->sub_email;
 
         //* PRODUCT
@@ -539,7 +541,7 @@ class ClaimController extends Controller
         $model->product_id = $request->product_id;
         $model->material = $request->material;
         $model->type_material = $request->type_material;
-        $model->plate_number = $request->plate_number;
+        $model->plate_number = strtoupper($request->plate_number);
         //* CAR
         $model->car_type_id = $request->car_type_id;
         $model->car_brand_id = $request->car_brand_id;

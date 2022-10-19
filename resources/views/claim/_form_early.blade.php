@@ -41,9 +41,9 @@
                     {{-- End Customer --}}
                     {{-- Product --}}
                     <div class="col-lg-12 col-md-12 form-group">
-                        <label>Accu Type </label>
+                        <label>Battery Type </label>
                         <select name="product_id" id="product_id" required class="form-select select2">
-                            <option value="" selected>-Choose Accu-</option>
+                            <option value="" selected>-Choose Battery-</option>
                             @foreach ($product as $row)
                                 <option value="{{ $row->id }}"
                                     data-material="{{ $row->sub_materials->nama_sub_material }}"
@@ -62,7 +62,7 @@
 
                     {{-- Information Car --}}
                     <div class="col-12 col-md-4  form-group">
-                        <label>Plat Number</label>
+                        <label>Plate Number</label>
                         <input type="text" placeholder="Enter Plat Number" required
                             class="form-control text-uppercase " name="plate_number">
                     </div>
@@ -92,13 +92,13 @@
             <div class="ribbon-wrapper card">
                 <div class="card-body">
                     <div class="col-lg-12 col-md-12 form-group">
-                        <h5 class="text-center"><span class="bg-primary text-white form-control"><strong>ACCU
+                        <h5 class="text-center"><span class="bg-primary text-white form-control"><strong>BATTERY
                                     COMPLAINT FORM</strong>
                             </span> </h5>
                     </div>
                     <div class="ribbon ribbon-clip ribbon-warning">Early Checking</div>
                     <div class="col-md-12">
-                        {{-- FORM CLAIM ACCU --}}
+                        {{-- FORM CLAIM Battery --}}
                         <div class="form-group row font-weight-bold">
 
                             <div class="col-lg-3 col-md-12 form-group">
@@ -216,9 +216,9 @@
                             </div>
                             {{-- loaned battery --}}
                             <div class="col-lg-12 col-md-12 form-group">
-                                <label>Loaned Accu</label>
+                                <label>Loaned Battery</label>
                                 <select name="loan_product_id" id="" class="form-select select2" required>
-                                    <option value="">-Select Loaned Accu-</option>
+                                    <option value="">-Select Loaned Battery-</option>
                                     @foreach ($stock as $row)
                                         <option value="{{ $row->productBy->id }}">
                                             ({{ $row->productBy->sub_materials->nama_sub_material }}/{{ $row->productBy->sub_types->type_name }})
@@ -229,7 +229,7 @@
                             </div>
                             {{-- end loaned battery --}}
                         </div>
-                        {{-- END CLAIM ACCU --}}
+                        {{-- END CLAIM Battery --}}
 
 
 

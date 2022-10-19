@@ -37,7 +37,7 @@
                         {{-- End Customer --}}
                         {{-- Product --}}
                         <div class="col-lg-6 col-md-12 form-group">
-                            <label>Accu type </label>
+                            <label>Battery type </label>
                             <input type="text" class="form-control text-uppercase" placeholder="Product Code"
                                 readonly
                                 value="{{ $value->material }}/{{ $value->type_material }}/{{ $value->productSales->nama_barang }}">
@@ -52,7 +52,7 @@
 
                         {{-- Information Car --}}
                         <div class="col-12 col-md-4  form-group">
-                            <label>Plat Number</label>
+                            <label>Plate Number</label>
                             <input type="text" class="form-control text-uppercase" placeholder="Serial Number"
                                 readonly value="{{ $value->plate_number }}">
                         </div>
@@ -77,7 +77,7 @@
             <div class="ribbon-wrapper card">
                 <div class="card-body">
                     <div class="col-lg-12 col-md-12 form-group">
-                        <h5 class="text-center"><span class="bg-primary text-white form-control"><strong>ACCU
+                        <h5 class="text-center"><span class="bg-primary text-white form-control"><strong>BATTERY
                                     COMPLAINT FORM</strong>
                             </span> </h5>
                     </div>

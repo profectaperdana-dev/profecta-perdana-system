@@ -169,7 +169,7 @@
                                                                     align="left" bgcolor="#0a58ca">
                                                                     <div class="h5 fw-800 text-white text-center"
                                                                         style="color: #ffffff; padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 20px; line-height: 24px; margin: 0;"
-                                                                        align="center">CLAIM CONFIRMED</div>
+                                                                        align="center">CLAIM REPORT</div>
                                                                 </td>
                                                             </tr>
                                                         </tbody>
@@ -279,7 +279,7 @@
                                                                                     <td class="text-xs"
                                                                                         style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                         align="left" valign="top">
-                                                                                        Accu Type</td>
+                                                                                        Battery Type</td>
                                                                                     <td class="text-xs"
                                                                                         style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                         align="left" valign="top">

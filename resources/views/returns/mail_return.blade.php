@@ -235,7 +235,8 @@
                                                                                                         align="center"
                                                                                                         valign="top">
                                                                                                         <strong>REVIEW
-                                                                                                            RETURN</strong>
+                                                                                                            RETURN
+                                                                                                            SALES</strong>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
@@ -565,10 +566,6 @@
                                                                                                     valign="top">Item
                                                                                                     Desciption</th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                    align="right"
-                                                                                                    valign="top">
-                                                                                                    Price</th>
-                                                                                                <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="center"
                                                                                                     valign="top">Qty
                                                                                                 </th>
@@ -595,11 +592,6 @@
                                                                                                         align="left"
                                                                                                         valign="top">
                                                                                                         {{ $value->productBy->nama_barang }}
-                                                                                                    </td>
-                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                        align="right"
-                                                                                                        valign="top">
-                                                                                                        {{ number_format($value->productBy->harga_jual_nonretail, 0, ',', '.') }}
                                                                                                     </td>
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
@@ -633,7 +625,7 @@
                                                                                         </tbody>
                                                                                         <tfoot>
                                                                                             <tr>
-                                                                                                <th colspan="4"
+                                                                                                <th colspan="3"
                                                                                                     class="text-right"
                                                                                                     style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"

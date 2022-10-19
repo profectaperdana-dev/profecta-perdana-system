@@ -63,7 +63,7 @@
                 <select name="return_reason2" class="form-control uoms">
                     <option value="">-- Choose Who's Responsible -- </option>
                     <option value="Principal">Principal</option>
-                    <option value="Us">Us</option>
+                    <option value="Internal">Internal</option>
                 </select>
             </div>
             <div class="form-group col-6 other" hidden>

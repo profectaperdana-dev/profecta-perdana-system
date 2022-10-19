@@ -15,7 +15,7 @@
             </div>
             <div class="card">
                 <div class="card-body bg-blue-600">
-                    <div class="h5 fw-800 text-white text-center">CLAIM CONFIRMED</div>
+                    <div class="h5 fw-800 text-white text-center">CLAIM REPORT</div>
                 </div>
                 <div class="card-body">
                     <div class="space-y-3">
@@ -44,7 +44,7 @@
 
                                 </tr>
                                 <tr>
-                                    <td class="text-xs">Accu Type</td>
+                                    <td class="text-xs">Battery Type</td>
                                     <td class="text-xs">: Amaron Hi Life B24L</td>
                                     <td class="text-xs">Loaned Battery</td>
                                     <td class="text-xs">: Amaron Hi Life B24L</td>
@@ -53,7 +53,7 @@
                             </tbody>
                         </table>
                         <hr>
-                        <p class="fw-500 text-primary">BATTERY TEST</p>
+                        <p class="fw-500 text-primary">EARLY TEST RESULT</p>
                         <table class="table">
                             <tr>
                                 <td class="text-xs text-center">Voltage : </td>
