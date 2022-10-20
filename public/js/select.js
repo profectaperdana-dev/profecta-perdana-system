@@ -195,7 +195,7 @@ $(document).ready(function () {
                     };
                 },
             },
-        });
+        }); 
     });
 
     $(document).on("click", ".remStock", function () {

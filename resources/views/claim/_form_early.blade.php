@@ -26,7 +26,7 @@
                     <div hidden id="other_phone" class="col-lg-4 col-md-12 form-group">
                         <label for="">&nbsp;</label>
                         {{-- SUb Phone Customer --}}
-                        <input name="sub_phone" data-v-min-length="11" data-v-max-length="13" type="number" required
+                        <input name="sub_phone" data-v-min-length="9" data-v-max-length="13" type="text" required
                             class="form-control fw-bold " placeholder="Enter Phone" aria-label="Server">
                         {{-- End Sub Phone Customer --}}
                     </div>

@@ -3,6 +3,7 @@
 
 <head>
     <!-- Compiled with Bootstrap Email version: 1.3.1 -->
+    <title>{{ $data->claim_number }}</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <meta name="x-apple-disable-message-reformatting">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -77,12 +78,6 @@
                 height: 0 !important
             }
 
-            .s-3>tbody>tr>td {
-                font-size: 12px !important;
-                line-height: 12px !important;
-                height: 12px !important
-            }
-
             .s-5>tbody>tr>td {
                 font-size: 20px !important;
                 line-height: 20px !important;
@@ -114,39 +109,27 @@
                             <tr>
                                 <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 0 16px;"
                                     align="left">
-                                    <table class="s-10 w-full" role="presentation" border="0" cellpadding="0"
+                                    <table class="s-5 w-full" role="presentation" border="0" cellpadding="0"
                                         cellspacing="0" style="width: 100%;" width="100%">
                                         <tbody>
                                             <tr>
-                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
-                                                    align="left" width="100%" height="40">
+                                                <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
+                                                    align="left" width="100%" height="20">
                                                     &#160;
                                                 </td>
                                             </tr>
                                         </tbody>
                                     </table>
-                                    <table class="ax-center" role="presentation" align="center" border="0"
-                                        cellpadding="0" cellspacing="0" style="margin: 0 auto;">
-                                        <tbody>
-                                            <tr>
-                                                <td style="line-height: 24px; font-size: 16px; margin: 0;"
-                                                    align="left">
-                                                    <div class="">
-                                                        <img class="img-fluid"
-                                                            style="width: 200px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; max-width: 100%; border-style: none; border-width: 0;"
-                                                            src="https://id.joblum.com/uploads/30/29229.jpg"
-                                                            alt="Some Image" width="100%">
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                    <table class="s-10 w-full" role="presentation" border="0" cellpadding="0"
+                                    <div class="text-center" style="" align="center"> <img
+                                            src="https://iili.io/tTHjV9.png" alt="logo"
+                                            style="width: 150px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; border-style: none; border-width: 0;">
+                                    </div>
+                                    <table class="s-5 w-full" role="presentation" border="0" cellpadding="0"
                                         cellspacing="0" style="width: 100%;" width="100%">
                                         <tbody>
                                             <tr>
-                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
-                                                    align="left" width="100%" height="40">
+                                                <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
+                                                    align="left" width="100%" height="20">
                                                     &#160;
                                                 </td>
                                             </tr>
@@ -160,378 +143,154 @@
                                             <tr>
                                                 <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0;"
                                                     align="left" bgcolor="#ffffff">
-                                                    <table class="card-body bg-blue-600" role="presentation"
-                                                        border="0" cellpadding="0" cellspacing="0"
-                                                        style="width: 100%;" bgcolor="#0a58ca">
-                                                        <tbody>
+                                                    <table class="table" border="0" cellpadding="0" cellspacing="0"
+                                                        style="width: 100%; max-width: 100%;">
+                                                        <thead>
                                                             <tr>
-                                                                <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 20px;"
-                                                                    align="left" bgcolor="#0a58ca">
-                                                                    <div class="h5 fw-800 text-white text-center"
-                                                                        style="color: #ffffff; padding-top: 0; padding-bottom: 0; font-weight: 800 !important; vertical-align: baseline; font-size: 20px; line-height: 24px; margin: 0;"
+                                                                <td colspan="2"
+                                                                    style="width: 50% !important; line-height: 24px; font-size: 16px; margin: 0;"
+                                                                    class="bg-blue-600" align="left"
+                                                                    bgcolor="#0a58ca">
+                                                                    <div class="fw-800 text-white text-center"
+                                                                        style="color: #ffffff; font-weight: 800 !important;"
                                                                         align="center">CLAIM REPORT</div>
                                                                 </td>
-                                                            </tr>
-                                                        </tbody>
-                                                    </table>
-                                                    <table class="card-body" role="presentation" border="0"
-                                                        cellpadding="0" cellspacing="0" style="width: 100%;">
-                                                        <tbody>
-                                                            <tr>
-                                                                <td style="line-height: 24px; font-size: 16px; width: 100%; margin: 0; padding: 20px;"
-                                                                    align="left">
-                                                                    <div class="space-y-3">
-                                                                        <p class="text-black"
-                                                                            style="line-height: 24px; font-size: 16px; color: #000000; width: 100%; margin: 0;"
-                                                                            align="left">Hi, <span
-                                                                                class="text-success fw-500"
-                                                                                style="color: #198754; font-weight: 500 !important;">{{ $data->sub_name }}</span>
-                                                                            . This is your
-                                                                            claim
-                                                                            information <span
-                                                                                class="text-warning fw-600"
-                                                                                style="color: #2ca332; font-weight: 600 !important;">FINISH
-                                                                                CLAIM : {{ $data->result }}</span>
-                                                                        </p>
-                                                                        <table class="s-3 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 12px; font-size: 12px; width: 100%; height: 12px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="12">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="table" border="0"
-                                                                            cellpadding="0" cellspacing="0"
-                                                                            style="width: 100%; max-width: 100%;">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Claim Number</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        : {{ $data->claim_number }}</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Claim Date</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        :
-                                                                                        {{ date('d F Y', strtotime($data->claim_date)) }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Customer</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        : {{ $data->sub_name }}</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Phone/Email</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        : {{ $data->sub_phone }}
-                                                                                        @if ($data->sub_email != null)
-                                                                                            / {{ $data->sub_email }}
-                                                                                        @endif
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Plate Number</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        : {{ $data->plate_number }}</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Car Type</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        :
-                                                                                        {{ $data->carBrandBy->car_brand }}
-                                                                                        /
-                                                                                        {{ $data->carTypeBy->car_type }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                                <tr>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Battery Type</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        :
-                                                                                        {{ $data->material }}/{{ $data->type_material }}/{{ $data->productSales->nama_barang }}
-                                                                                    </td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        Loaned Battery</td>
-                                                                                    <td class="text-xs"
-                                                                                        style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                        align="left" valign="top">
-                                                                                        :
-                                                                                        {{ $data->loanBy->sub_materials->nama_sub_material }}/{{ $data->loanBy->sub_types->type_name }}/{{ $data->loanBy->nama_barang }}
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="s-3 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 12px; font-size: 12px; width: 100%; height: 12px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="12">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="s-5 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="20">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="hr" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; height: 1px; width: 100%; margin: 0;"
-                                                                                        align="left">
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="s-5 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="20">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <p class="fw-500 text-primary"
-                                                                            style="line-height: 24px; font-size: 16px; color: #0d6efd; font-weight: 500 !important; width: 100%; margin: 0;"
-                                                                            align="left">RESULT BATTERY TEST</p>
-                                                                        <table class="s-3 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 12px; font-size: 12px; width: 100%; height: 12px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="12">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="table" border="0"
-                                                                            cellpadding="0" cellspacing="0"
-                                                                            style="width: 100%; max-width: 100%;">
-                                                                            <tr>
-                                                                                <td class="text-xs text-center"
-                                                                                    style="line-height: 14.4px; font-size: 12px; margin: 0;"
-                                                                                    align="center">Voltage :
-                                                                                    {{ $data->f_voltage }}</td>
-                                                                                <td class="text-xs text-center"
-                                                                                    style="line-height: 14.4px; font-size: 12px; margin: 0;"
-                                                                                    align="center">CCA :
-                                                                                    {{ $data->f_cca }}</td>
-                                                                                <td class="text-xs text-center"
-                                                                                    style="line-height: 14.4px; font-size: 12px; margin: 0;"
-                                                                                    align="center">Starting :
-                                                                                    {{ $data->f_starting }}</td>
-                                                                                <td class="text-xs text-center"
-                                                                                    style="line-height: 14.4px; font-size: 12px; margin: 0;"
-                                                                                    align="center">Charging :
-                                                                                    {{ $data->f_charging }}</td>
-                                                                            </tr>
-                                                                        </table>
-                                                                        <table class="s-3 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 12px; font-size: 12px; width: 100%; height: 12px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="12">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="s-5 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="20">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="hr" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; height: 1px; width: 100%; margin: 0;"
-                                                                                        align="left">
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <table class="s-5 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="20">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <p class="fw-500 text-primary"
-                                                                            style="line-height: 24px; font-size: 16px; color: #0d6efd; font-weight: 500 !important; width: 100%; margin: 0;"
-                                                                            align="left">RESULT DIAGNOSTIC</p>
-                                                                        <table class="s-3 w-full" role="presentation"
-                                                                            border="0" cellpadding="0"
-                                                                            cellspacing="0" style="width: 100%;"
-                                                                            width="100%">
-                                                                            <tbody>
-                                                                                <tr>
-                                                                                    <td style="line-height: 12px; font-size: 12px; width: 100%; height: 12px; margin: 0;"
-                                                                                        align="left" width="100%"
-                                                                                        height="12">
-                                                                                        &#160;
-                                                                                    </td>
-                                                                                </tr>
-                                                                            </tbody>
-                                                                        </table>
-                                                                        <div class="row"
-                                                                            style="margin-right: -24px;">
-
-                                                                            <table class="" role="presentation"
-                                                                                border="0" cellpadding="0"
-                                                                                cellspacing="0"
-                                                                                style="table-layout: fixed; width: 100%;"
-                                                                                width="100%">
-                                                                                @foreach ($data->accuClaimDetailsBy as $key => $row)
-                                                                                    <tbody>
-                                                                                        <tr>
-
-                                                                                            <td class="col-6 text-xs"
-                                                                                                style="line-height: 14.4px; font-size: 12px; min-height: 1px; font-weight: normal; padding-right: 24px; width: 50%; margin: 0;"
-                                                                                                align="left"
-                                                                                                valign="top">
-                                                                                                {{ $loop->iteration }}.
-                                                                                                {{ $row->diagnosa }}
-                                                                                            </td>
-                                                                                            <br>
-
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                @endforeach
-                                                                            </table>
-
-                                                                        </div>
-
-                                                                    </div>
-                                                                    <table class="s-5 w-full" role="presentation"
-                                                                        border="0" cellpadding="0"
-                                                                        cellspacing="0" style="width: 100%;"
-                                                                        width="100%">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
-                                                                                    align="left" width="100%"
-                                                                                    height="20">
-                                                                                    &#160;
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <table class="hr" role="presentation"
-                                                                        border="0" cellpadding="0"
-                                                                        cellspacing="0" style="width: 100%;">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; height: 1px; width: 100%; margin: 0;"
-                                                                                    align="left">
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-                                                                    <table class="s-5 w-full" role="presentation"
-                                                                        border="0" cellpadding="0"
-                                                                        cellspacing="0" style="width: 100%;"
-                                                                        width="100%">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td style="line-height: 20px; font-size: 20px; width: 100%; height: 20px; margin: 0;"
-                                                                                    align="left" width="100%"
-                                                                                    height="20">
-                                                                                    &#160;
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
-
+                                                                <td colspan="2"
+                                                                    style="width: 50% !important; line-height: 24px; font-size: 16px; margin: 0;"
+                                                                    class="bg-yellow-500" align="left"
+                                                                    bgcolor="#ffc107">
+                                                                    <div class="fw-800 text-white text-center"
+                                                                        style="color: #ffffff; font-weight: 800 !important;"
+                                                                        align="center">FINISH CHECKING</div>
                                                                 </td>
                                                             </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Claim Number</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    {{ $data->claim_number }}</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Claim Date</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    {{ date('d F y', strtotime($data->claim_date)) }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Customer</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    {{ $data->sub_name }}</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Phone/Email</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    {{ $data->sub_phone }}@if ($data->sub_email != null)
+                                                                        /{{ $data->sub_email }}
+                                                                    @endif
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Plate Number</td>
+                                                                <td class="text-xs"
+                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    {{ $data->plate_number }}</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Car Type</td>
+                                                                <td class="text-xs"
+                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    {{ $data->carBrandBy->car_brand }}
+                                                                    {{ $data->carTypeBy->car_type }}
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Battery Type</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    ({{ $data->material }}/{{ $data->type_material }})
+                                                                    -
+                                                                    {{ $data->productSales->nama_barang }}
+                                                                </td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Loaned Battery</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    ({{ $data->loanBy->sub_materials->nama_sub_material }}/{{ $data->loanBy->sub_types->type_name }}
+                                                                    ) - {{ $data->loanBy->nama_barang }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="4"
+                                                                    style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">
+                                                                    <div class="fw-600 text-sm text-center"
+                                                                        style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
+                                                                        align="center">EARLY BATTERY TEST</div>
+                                                                </td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-xs text-center"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="center" valign="top">Voltage :
+                                                                    {{ $data->f_voltage }}</td>
+                                                                <td class="text-xs text-center"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="center" valign="top">CCA :
+                                                                    {{ $data->f_cca }}</td>
+                                                                <td class="text-xs text-center"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="center" valign="top">Starting :
+                                                                    {{ $data->f_starting }}</td>
+                                                                <td class="text-xs text-center"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="center" valign="top">Charging :
+                                                                    {{ $data->f_charging }}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="4"
+                                                                    style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="center" valign="top">
+                                                                    <div class="fw-600 text-sm text-center"
+                                                                        style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
+                                                                        align="center">EARLY DIAGNOSTIC</div>
+                                                                </td>
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td colspan="4" class="text-xs text-center"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">
+                                                                    @foreach ($data->accuClaimDetailsBy as $key => $row)
+                                                                        {{ $loop->iteration }}. {{ $row->diagnosa }}
+                                                                        <br>
+                                                                    @endforeach
+                                                                </td>
+
+                                                            </tr>
+
+
+
                                                         </tbody>
                                                     </table>
                                                 </td>

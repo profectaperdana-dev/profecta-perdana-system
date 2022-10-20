@@ -164,7 +164,7 @@
                                                                                                         valign="top">
                                                                                                         <img style="width: 150px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; max-width: 100%; border-style: none; border-width: 0;"
                                                                                                             class="img-fluid"
-                                                                                                            src="https://id.joblum.com/uploads/30/29229.jpg"
+                                                                                                            src="https://iili.io/tTHjV9.png"
                                                                                                             alt="Some Image"
                                                                                                             width="100%">
                                                                                                     </td>

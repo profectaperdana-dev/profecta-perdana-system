@@ -59,7 +59,7 @@
                 @include('layouts.partials.sidebar_teknisi')
             @endcan
             <!-- Page Sidebar Ends-->
-            <div class="page-body">
+            <div class="page-body" style="margin-top: 100px">
                 @yield('content')
 
             </div>

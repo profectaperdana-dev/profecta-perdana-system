@@ -72,31 +72,7 @@
                 });
 
 
-                // CHOOSE SUPPLIER
-                $('#warrantyAccepted').attr('required', false);
-                $('#goodWill').attr('required', false);
-                $('#warrantyTo').hide();
-                $('#warehouseTo').hide();
-                $('#result').on('change', function() {
-                    var result = $(this).val();
-                    if (result == "CP03 - Waranty Accepted") {
-                        $('#warrantyTo').show();
-                        $('#warehouseTo').hide();
-                        $('#warrantyAccepted').attr('required', true);
-                        $('#goodWill').attr('required', false);
-                    } else if (result == "CP04 - Good Will") {
-                        $('#warrantyTo').hide();
-                        $('#warehouseTo').show();
-                        $('#warrantyAccepted').attr('required', false);
-                        $('#goodWill').attr('required', true);
 
-                    } else {
-                        $('#warrantyTo').hide();
-                        $('#warehouseTo').hide();
-                        $('#warrantyAccepted').attr('required', false);
-                        $('#goodWill').attr('required', false);
-                    }
-                });
 
                 // SUBMIT 1x
                 // $('form').submit(function() {
