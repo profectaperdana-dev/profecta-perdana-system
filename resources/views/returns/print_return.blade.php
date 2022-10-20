@@ -116,7 +116,7 @@
                 </th>
             </tr>
             <tr>
-                <th colspan="6" style="text-align: center">RETURN
+                <th colspan="6" style="text-align: center">RETURN SALES
 
                 </th>
             </tr>
@@ -149,8 +149,6 @@
                 <tr style="">
                     <th style="text-align:center;padding:5px">No</th>
                     <th style="text-align:left;padding:5px">Item Description</th>
-                    <th style="text-align:left;padding:5px">Warehouse</th>
-                    <th style="text-align:right;padding:5px">Price (Rp)</th>
                     <th style="text-align:center;padding:5px">Qty</th>
                     <th style="text-align:right;padding:5px;margin-right:30px";>Total</th>
                 </tr>
@@ -172,11 +170,6 @@
                             {{ $value->productBy->sub_types->type_name }}&nbsp;
                             {{ $value->productBy->nama_barang }}
                         </td>
-                        <td style="text-align:left;padding:5px">
-                            {{ $data->salesOrderBy->customerBy->warehouseBy->warehouses }}
-                        </td>
-                        <td style="text-align:right;padding:5px">
-                            {{ number_format($value->productBy->harga_jual_nonretail, 0, ',', '.') }}</td>
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
                         @php
                             $diskon = 0;

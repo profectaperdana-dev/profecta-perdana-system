@@ -7,7 +7,7 @@
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Mutation
+                <h5 class="modal-title" id="exampleModalLabel">Number Mutation
                     :
                     {{ $mutation->mutation_number }}</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -16,6 +16,18 @@
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="row justify-content-between">
+                                <div class="form-group col-7 col-lg-3">
+                                    <div>From:
+                                        {{ $mutation->fromWarehouse->warehouses }}</div>
+                                    <div> To: {{ $mutation->toWarehouse->warehouses }}
+                                    </div>
+                                </div>
+                                <div class="form-group col-7 col-lg-3">
+                                    Return Date: {{ date('d-M-Y', strtotime($mutation->mutation_date)) }}
+
+                                </div>
+                            </div>
                             <div class="row" id="formReturn">
                                 @foreach ($mutation->stockMutationDetailBy as $item)
                                     <div class="row">

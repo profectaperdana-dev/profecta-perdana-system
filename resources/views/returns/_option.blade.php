@@ -18,31 +18,81 @@
     <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Detail Return
-                    :
-                    {{ $return->return_number }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">
+                    <div>
+                        Return Number
+                        :
+                        {{ $return->return_number }}
+                    </div>
+                    <div>
+                        From Invoice
+                        :
+                        {{ $return->salesOrderBy->order_number }}
+                    </div>
+                </h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-md-12">
+                            <div class="row justify-content-between">
+                                <div class="form-group col-7 col-lg-5">
+                                    Customer:
+                                    {{ $return->salesOrderBy->customerBy->name_cust . ' | ' . $return->salesOrderBy->customerBy->code_cust }}
+                                </div>
+                                <div class="form-group col-7 col-lg-3">
+                                    Return Date: {{ date('d-M-Y', strtotime($return->return_date)) }}
+                                </div>
+                            </div>
                             <div class="row" id="formReturn">
                                 @foreach ($return->returnDetailsBy as $item)
                                     <div class="row">
-                                        <div class="form-group col-7">
+                                        <div class="form-group col-5 col-md-7">
                                             <label>Product</label>
                                             <input readonly class="form-control"
                                                 value="{{ $item->productBy->nama_barang . ' (' . $item->productBy->sub_materials->nama_sub_material . ', ' . $item->productBy->sub_types->type_name . ')' }}">
                                         </div>
-                                        <div class="col-3 col-md-3 form-group">
+                                        <div class="col-3 col-md-2 form-group">
                                             <label>Qty</label>
                                             <input type="number" class="form-control" readonly
                                                 value="{{ $item->qty }}" id="">
                                         </div>
 
+                                        @php
+                                            $diskon = 0;
+                                            $diskon_rp = 0;
+                                            $getdiskon = $return->salesOrderBy->salesOrderDetailsBy;
+                                            foreach ($getdiskon as $dis) {
+                                                if ($dis->products_id == $item->product_id) {
+                                                    $diskon = $dis->discount / 100;
+                                                    $diskon_rp = $dis->discount_rp;
+                                                }
+                                            }
+                                            $hargaDiskon = $item->productBy->harga_jual_nonretail * $diskon;
+                                            $hargaAfterDiskon = $item->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
+                                            $sub_total = $hargaAfterDiskon * $item->qty;
+                                            $ppn_total = $ppn * $sub_total;
+                                            $total = $sub_total + $ppn_total;
+                                        @endphp
+                                        <div class="col-4 col-md-3 form-group">
+                                            <label>Amount (Rp)</label>
+                                            <input type="text" class="form-control" readonly
+                                                value="{{ number_format($total, 0, ',', '.') }}" id="">
+                                        </div>
+
                                     </div>
                                 @endforeach
+                            </div>
+                            <hr>
+                            <div class="row justify-content-between">
+                                <div class="form-group col-3">
+                                    <strong>Total:</strong>
+
+                                </div>
+                                <div class="form-group col-4 col-lg-2">
+                                    <strong>Rp. {{ number_format($return->total, 0, ',', '.') }}</strong>
+                                </div>
                             </div>
                             <div class="row mt-3">
                                 <div class="form-group col-6">

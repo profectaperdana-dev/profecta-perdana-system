@@ -13,6 +13,7 @@ use App\Models\StockModel;
 use App\Models\SuppliersModel;
 use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Carbon\Carbon;
 use DateTimeImmutable;
 use DateTimeZone;
@@ -151,7 +152,7 @@ class PurchaseOrderController extends Controller
         $data = PurchaseOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
 
-        $pdf = PDF::loadView('purchase_orders.print_po', compact('data', 'warehouse'))->setPaper('A5', 'landscape');
+        $pdf = FacadePdf::loadView('purchase_orders.print_po', compact('data', 'warehouse'))->setPaper('A5', 'landscape');
         return $pdf->download($data->order_number . '.pdf');
     }
 
@@ -388,7 +389,7 @@ class PurchaseOrderController extends Controller
         if ($saved_model == true) {
             $data = PurchaseOrderModel::where('order_number', $model->order_number)->first();
             $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-            $pdf = PDF::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->order_number . '.pdf');
+            $pdf = FacadePdf::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->order_number . '.pdf');
 
             return redirect('/all_purchase_orders')->with('success', "Purchase Order Update Success");
         } else {
@@ -615,7 +616,7 @@ class PurchaseOrderController extends Controller
         if ($saved_model == true) {
             $data = PurchaseOrderModel::where('order_number', $model->order_number)->first();
             $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-            $pdf = PDF::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->order_number . '_edited.pdf');
+            $pdf = FacadePdf::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->order_number . '_edited.pdf');
 
             return redirect('/all_purchase_orders')->with('success', "Purchase Order Update Success");
         } else {

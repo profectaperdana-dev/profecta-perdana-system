@@ -21,6 +21,7 @@ use App\Models\SalesOrderDetailModel;
 use App\Models\StockModel;
 use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Barryvdh\DomPDF\PDF as DomPDFPDF;
 use Dompdf\Options;
 use Illuminate\Support\Facades\App;
@@ -185,10 +186,10 @@ class SalesOrderController extends Controller
             $data = SalesOrderModel::where('order_number', $model->order_number)->first();
             $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
             if ($model->pdf_do != '') {
-                $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
+                $pdf = FacadePdf::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
             }
             if ($model->pdf_invoice != '') {
-                $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
+                $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
             }
             return redirect('/invoice')->with('Info', "Invoice success update !");
         } else {
@@ -202,7 +203,7 @@ class SalesOrderController extends Controller
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
 
         $sales_order_credit = SalesOrderCreditModel::where('sales_order_id', $sales_order)->get();
-        $pdf = PDF::loadView('invoice.print_history_payment', compact('warehouse', 'sales_order', 'sales_order_credit'))->setPaper('A5', 'landscape');
+        $pdf = FacadePdf::loadView('invoice.print_history_payment', compact('warehouse', 'sales_order', 'sales_order_credit'))->setPaper('A5', 'landscape');
         return $pdf->stream('history_payment.pdf');
     }
 
@@ -220,7 +221,7 @@ class SalesOrderController extends Controller
         $data->pdf_invoice = $data->order_number . '.pdf';
         $data->save();
 
-        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
+        $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
 
 
 
@@ -240,7 +241,7 @@ class SalesOrderController extends Controller
         $data->pdf_do = $so_number . '.pdf';
         $data->save();
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $so_number . '.pdf');
+        $pdf = FacadePdf::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $so_number . '.pdf');
         return $pdf->download($data->pdf_do);
     }
 
@@ -713,10 +714,10 @@ class SalesOrderController extends Controller
             $data = SalesOrderModel::where('order_number', $model->order_number)->first();
             $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
             if ($model->pdf_do != '') {
-                $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
+                $pdf = FacadePdf::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_do);
             }
             if ($model->pdf_invoice != '') {
-                $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
+                $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
             }
             return redirect('/recent_sales_order')->with('success', "Sales Order Verification Success");
         } else {
@@ -829,7 +830,7 @@ class SalesOrderController extends Controller
         }
         $ppn = ValueAddedTaxModel::first()->ppn / 100;
         $data = [
-            'title' => "All data invoice in profecta perdana : " . Auth::user()->warehouseBy->warehouses,
+            'title' => "Invoicing : " . Auth::user()->warehouseBy->warehouses,
             'ppn' => $ppn
         ];
 
@@ -896,10 +897,10 @@ class SalesOrderController extends Controller
         $data = SalesOrderModel::where('order_number', $selected_so->order_number)->first();
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         if ($selected_so->pdf_do != '') {
-            $pdf = PDF::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $selected_so->pdf_do);
+            $pdf = FacadePdf::loadView('invoice.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $selected_so->pdf_do);
         }
         if ($selected_so->pdf_invoice != '') {
-            $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $selected_so->pdf_invoice);
+            $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $selected_so->pdf_invoice);
         }
         return redirect('/invoice')->with('success', "Sales Order Approval Success");
     }
@@ -990,13 +991,8 @@ class SalesOrderController extends Controller
                     }
                 })
                 ->editColumn('total_after_ppn', function ($data) {
-                    return number_format($data->total_after_ppn, 0, ',', '.');
-                })
-                ->editColumn('total', function ($data) {
-                    return number_format($data->total, 0, ',', '.');
-                })
-                ->editColumn('ppn', function ($data) {
-                    return number_format($data->ppn, 0, ',', '.');
+                    $total_return = ReturnModel::where('sales_order_id', $data->id)->sum('total');
+                    return number_format($data->total_after_ppn - $total_return, 0, ',', '.');
                 })
                 ->editColumn('order_date', function ($data) {
                     return date('d-M-Y', strtotime($data->order_date));

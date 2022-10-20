@@ -78,7 +78,7 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('invoice') ? 'active' : '' }}"
-                            href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>All Invoice
+                            href="{{ url('/invoice') }}"><i data-feather="folder"></i></i><span>Invoicing
                             </span></a>
                     </li>
                     <li>

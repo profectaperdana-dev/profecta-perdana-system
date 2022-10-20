@@ -166,7 +166,7 @@
 
                                                                                 <div class="form-group col-lg-6 col-md-12">
                                                                                     <label>
-                                                                                        Plat Number</label>
+                                                                                        Plate Number</label>
                                                                                     <input type="text"
                                                                                         class="form-control text-uppercase"
                                                                                         placeholder="Serial Number"

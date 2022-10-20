@@ -40,7 +40,7 @@
                     <div class="card-header pb-0">
                         {{-- <h5>All Data</h5> --}}
                         <a class="btn btn-primary" href="{{ url('claim/create') }}">
-                            + Create Accu Claim
+                            + Create Battery Claim
                         </a>
                         <hr class="bg-primary">
 
@@ -54,7 +54,7 @@
                                         <th>#</th>
                                         <th>Claim Number</th>
                                         <th>Customer</th>
-                                        <th>Accu Type</th>
+                                        <th>Battery Type</th>
                                         <th>Finish Claim</th>
                                     </tr>
 
@@ -151,7 +151,7 @@
 
                                                                                 <div class="form-group col-lg-4 col-md-12">
                                                                                     <label for="">Loaned
-                                                                                        Accu Type</label>
+                                                                                        Battery Type</label>
                                                                                     <input type="text"
                                                                                         class="form-control" disabled
                                                                                         readonly
@@ -167,7 +167,7 @@
 
                                                                                 </div>
                                                                                 <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>Accu type</label>
+                                                                                    <label>Battery type</label>
                                                                                     <input type="text"
                                                                                         class="form-control text-uppercase"
                                                                                         placeholder="Product Code" readonly
@@ -176,7 +176,7 @@
 
                                                                                 <div class="form-group col-lg-4 col-md-12">
                                                                                     <label>
-                                                                                        Plat Number</label>
+                                                                                        Plate Number</label>
                                                                                     <input type="text"
                                                                                         class="form-control text-uppercase"
                                                                                         placeholder="Serial Number"

@@ -133,16 +133,18 @@ class StockMutationController extends Controller
 
         foreach ($request->mutationFields as $item) {
             $selected_detail = StockMutationDetailModel::where('mutation_id', $id)->where('product_id', $item['product_id'])->first();
+
             if ($selected_detail == null) {
-                $detail = new StockMutationDetailModel();
-                $detail->mutation_id = $id;
-                $detail->product_id = $item['product_id'];
-                $detail->qty = $item['qty'];
-                $detail->save();
+                $selected_detail = new StockMutationDetailModel();
+                $selected_detail->mutation_id = $id;
+                $selected_detail->product_id = $item['product_id'];
+                $selected_detail->qty = $item['qty'];
+                $selected_detail->save();
             } else {
                 $selected_detail->qty = $item['qty'];
                 $selected_detail->save();
             }
+
 
 
             //Change Stock Warehouse From
@@ -155,7 +157,7 @@ class StockMutationController extends Controller
             $getstockto = StockModel::where('products_id', $item['product_id'])->where('warehouses_id', $selected_mutation->to)->first();
             if ($getstockto == null) {
                 $newstock = new StockModel();
-                $newstock->products_id = $detail->product_id;
+                $newstock->products_id = $selected_detail->product_id;
                 $newstock->warehouses_id = $selected_mutation->to;
                 $newstock->stock = $item['qty'];
                 $newstock->save();
@@ -275,26 +277,6 @@ class StockMutationController extends Controller
             $detail->product_id = $item['product_id'];
             $detail->qty = $item['qty'];
             $detail->save();
-
-            // //Change Stock Warehouse From
-            // $getstockfrom = StockModel::where('products_id', $detail->product_id)->where('warehouses_id', $model->from)->first();
-            // $old_stock = $getstockfrom->stock;
-            // $getstockfrom->stock = $old_stock - $detail->qty;
-            // $getstockfrom->save();
-
-            // //Change Stock Warehouse To
-            // $getstockto = StockModel::where('products_id', $detail->product_id)->where('warehouses_id', $model->to)->first();
-            // if ($getstockto == null) {
-            //     $newstock = new StockModel();
-            //     $newstock->products_id = $detail->product_id;
-            //     $newstock->warehouses_id = $model->to;
-            //     $newstock->stock = $detail->qty;
-            //     $newstock->save();
-            // } else {
-            //     $old_stock = $getstockto->stock;
-            //     $getstockto->stock = $old_stock + $detail->qty;
-            //     $getstockto->save();
-            // }
         }
 
         return redirect('/stock_mutation/create')->with('success', 'Create Stock Mutation Success!');

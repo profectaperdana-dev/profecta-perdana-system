@@ -42,12 +42,12 @@ class ReturnController extends Controller
         // dd($request->all());
         if ($request->ajax()) {
             if (!empty($request->from_date)) {
-                $return = ReturnModel::with('returnDetailsBy', 'createdBy')
+                $return = ReturnModel::with('returnDetailsBy', 'createdBy', 'salesOrderBy', 'salesOrderBy.customerBy')
                     ->whereBetween('return_date', array($request->from_date, $request->to_date))
                     ->latest()
                     ->get();
             } else {
-                $return = ReturnModel::with('returnDetailsBy', 'createdBy')
+                $return = ReturnModel::with('returnDetailsBy', 'createdBy', 'salesOrderBy', 'salesOrderBy.customerBy')
                     ->latest()
                     ->get();
             }
@@ -66,7 +66,8 @@ class ReturnController extends Controller
                 })
                 ->addIndexColumn() //memberikan penomoran
                 ->addColumn('action', function ($return) {
-                    return view('returns._option', compact('return'))->render();
+                    $ppn = ValueAddedTaxModel::first()->ppn / 100;
+                    return view('returns._option', compact('return', 'ppn'))->render();
                 })
                 ->rawColumns(['action'])
                 // ->rawColumns()
@@ -92,18 +93,22 @@ class ReturnController extends Controller
         // dd($request->all());
         if ($request->ajax()) {
             if (!empty($request->from_date)) {
-                $return = ReturnPurchaseModel::with('returnDetailsBy', 'createdBy')
+                $return = ReturnPurchaseModel::with('returnDetailsBy', 'createdBy', 'purchaseOrderBy')
                     ->whereBetween('return_date', array($request->from_date, $request->to_date))
                     ->latest()
                     ->get();
             } else {
-                $return = ReturnPurchaseModel::with('returnDetailsBy', 'createdBy')
+                $return = ReturnPurchaseModel::with('returnDetailsBy', 'createdBy', 'purchaseOrderBy')
                     ->latest()
                     ->get();
             }
             return datatables()->of($return)
                 ->editColumn('total', function ($data) {
-                    return number_format($data->total, 0, ',', '.');
+                    if (!Gate::allows('isSuperAdmin')) {
+                        return 'Restricted';
+                    } else {
+                        return number_format($data->total, 0, ',', '.');
+                    }
                 })
                 ->editColumn('return_date', function ($data) {
                     return date('d-M-Y', strtotime($data->return_date));
@@ -116,7 +121,8 @@ class ReturnController extends Controller
                 })
                 ->addIndexColumn() //memberikan penomoran
                 ->addColumn('action', function ($return) {
-                    return view('returns._option_purchase', compact('return'))->render();
+                    $ppn = ValueAddedTaxModel::first()->ppn / 100;
+                    return view('returns._option_purchase', compact('return', 'ppn'))->render();
                 })
                 ->rawColumns(['action'])
                 // ->rawColumns()
@@ -416,7 +422,9 @@ class ReturnController extends Controller
             $product = ProductModel::where('id', $detail->product_id)->first();
             $total = $total + ($product->harga_beli * $detail->qty);
         }
-        $model->total = $total;
+        $ppn_total = (ValueAddedTaxModel::first()->ppn / 100) * $total;
+        $total_sub = $total + $ppn_total;
+        $model->total = $total_sub;
         $model->save();
 
         if ($selected_po->isvalidated == 1) {
@@ -670,7 +678,9 @@ class ReturnController extends Controller
             $products = ProductModel::where('id', $product['product_id'])->first();
             $total = $total + ($products->harga_beli * $product['qty']);
         }
-        $selected_return->total = $total;
+        $ppn_total = (ValueAddedTaxModel::first()->ppn / 100) * $total;
+        $total_sub = $total + $ppn_total;
+        $selected_return->total = $total_sub;
         $saved = $selected_return->save();
 
         if ($selected_return->purchaseOrderBy->isvalidated == 1) {
@@ -717,10 +727,11 @@ class ReturnController extends Controller
         }
         $data = ReturnPurchaseModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
         $data->pdf_return = $data->return_number . '.pdf';
         $data->save();
 
-        $pdf = FacadePdf::loadView('returns.print_return_purchase', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->return_number . '.pdf');
+        $pdf = FacadePdf::loadView('returns.print_return_purchase', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->return_number . '.pdf');
 
         return $pdf->download($data->pdf_return);
     }

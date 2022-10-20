@@ -63,7 +63,7 @@
 
                     {{-- Information Car --}}
                     <div class="col-12 col-md-4  form-group">
-                        <label>Plat Number</label>
+                        <label>Plate Number</label>
                         <input type="text" placeholder="Enter Plat Number" required
                             class="form-control text-uppercase " name="plate_number">
                     </div>
