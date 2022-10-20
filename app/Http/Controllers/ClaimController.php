@@ -43,7 +43,7 @@ class ClaimController extends Controller
     {
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data = AccuClaimModel::find($id);
-        $pdf = \PDF::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
+        $pdf = \PDF::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('D4', 'potrait');
         return $pdf->stream();
     }
 
@@ -51,7 +51,7 @@ class ClaimController extends Controller
     {
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data = AccuClaimModel::find($id);
-        $pdf = \PDF::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
+        $pdf = \PDF::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('D4', 'potrait');
         return $pdf->stream();
     }
     /**
@@ -252,12 +252,7 @@ class ClaimController extends Controller
     public function edit($id)
     {
         $title = 'Finish Claim';
-        $suppliers = SuppliersModel::all();
-        $warehouse = WarehouseModel::join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
-            ->select('warehouses.*', 'warehouse_types.name')
-            ->where('warehouse_types.name', 'C02')
-            ->orWhere('warehouse_types.name', 'C03')
-            ->get();
+
         $value = AccuClaimModel::find($id);
         return view('claim.edit', compact('title',  'value', 'suppliers', 'warehouse'));
     }
@@ -311,7 +306,69 @@ class ClaimController extends Controller
             }
         }
 
-        //* MUTASI
+
+
+        // * EVIDENCE RECEIVED
+        $file = $request->file;
+        $nama_file = time() . '.' . $file->getClientOriginalExtension();
+        $file->move("file_evidence/", $nama_file);
+        $model->f_foto = $nama_file;
+
+        //* SIGNATURE RECEIVED
+        $folderPath = public_path('file_signature/');
+        $image_parts = explode(";base64,", $request->signed);
+        $image_type_aux = explode("image/", $image_parts[0]);
+        $image_type = $image_type_aux[1];
+        $image_base64 = base64_decode($image_parts[1]);
+        $fileName = uniqid() . '.png';
+        $file = $folderPath . $fileName;
+        file_put_contents($file, $image_base64);
+        $model->f_receivedBy = $fileName;
+
+        // * DATE REPLACEMENT & RESULT
+        $model->result = $request->result;
+        $model->cost = $request->cost;
+        $model->date_replaced = Carbon::now();
+        $model->status = 1;
+
+        //* UPDATE STOCK LOAN
+        $stock_loan = StockModel::join('warehouses', 'warehouses.id', '=', 'stocks.warehouses_id')
+            ->join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
+            ->select('stocks.*', 'warehouses.type', 'warehouse_types.name')
+            ->where('warehouse_types.name', 'C01')
+            ->where('stocks.products_id', $model->loan_product_id)
+            ->first();
+        $stock_loan->stock = $stock_loan->stock + 1;
+        $stock_loan->save();
+
+
+        //* UPDATE CLAIM ACCU
+        $saved = $model->save();
+        if ($saved) {
+            return redirect()->route('claim.index')->with('success', 'Claim has been created');
+        } else {
+            return redirect()->route('claim.index')->with('error', 'Claim failed to create');
+        }
+    }
+    public function historyClaim()
+    {
+        $title = 'History Claim';
+        $suppliers = SuppliersModel::all();
+        $warehouse = WarehouseModel::join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
+            ->select('warehouses.*', 'warehouse_types.name')
+            ->where('warehouse_types.name', 'C02')
+            ->orWhere('warehouse_types.name', 'C03')
+            ->get();
+        if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isTeknisi')) {
+            $data = AccuClaimModel::where('status', 1)->latest()->get();
+        } else {
+            $data = AccuClaimModel::where('e_submittedBy', Auth::user()->id)->where('status', 1)->latest()->get();
+        }
+        return view('claim.history_claim', compact('title', 'data', 'suppliers', 'warehouse'));
+    }
+    public function mutasiClaim(Request $request, $id)
+    {
+        $model = AccuClaimModel::where('id', $id)->first();
         if ($request->result == 'CP03 - Waranty Accepted') {
             $mutasi = new StockMutationModel();
             $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
@@ -413,60 +470,13 @@ class ClaimController extends Controller
                 $stock_mutasi->save();
             }
         }
-
-        // * EVIDENCE RECEIVED
-        $file = $request->file;
-        $nama_file = time() . '.' . $file->getClientOriginalExtension();
-        $file->move("file_evidence/", $nama_file);
-        $model->f_foto = $nama_file;
-
-        //* SIGNATURE RECEIVED
-        $folderPath = public_path('file_signature/');
-        $image_parts = explode(";base64,", $request->signed);
-        $image_type_aux = explode("image/", $image_parts[0]);
-        $image_type = $image_type_aux[1];
-        $image_base64 = base64_decode($image_parts[1]);
-        $fileName = uniqid() . '.png';
-        $file = $folderPath . $fileName;
-        file_put_contents($file, $image_base64);
-        $model->f_receivedBy = $fileName;
-
-        // * DATE REPLACEMENT & RESULT
         $model->result = $request->result;
-        $model->cost = $request->cost;
-        $model->date_replaced = Carbon::now();
-        $model->status = 1;
-
-        //* UPDATE STOCK LOAN
-        $stock_loan = StockModel::join('warehouses', 'warehouses.id', '=', 'stocks.warehouses_id')
-            ->join('warehouse_types', 'warehouse_types.id', '=', 'warehouses.type')
-            ->select('stocks.*', 'warehouses.type', 'warehouse_types.name')
-            ->where('warehouse_types.name', 'C01')
-            ->where('stocks.products_id', $model->loan_product_id)
-            ->first();
-        $stock_loan->stock = $stock_loan->stock + 1;
-        $stock_loan->save();
-
-
-        //* UPDATE CLAIM ACCU
         $saved = $model->save();
         if ($saved) {
-            return redirect()->route('claim.index')->with('success', 'Claim has been created');
+            return redirect('history_claim')->with('success', 'Claim has been updated');
         } else {
-            return redirect()->route('claim.index')->with('error', 'Claim failed to create');
+            return redirect('history_claim')->with('error', 'Claim failed to update');
         }
-    }
-    public function historyClaim()
-    {
-        $title = 'History Claim';
-        if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isTeknisi')) {
-            $data = AccuClaimModel::where('status', 1)->latest()->get();
-        } else {
-            $data = AccuClaimModel::where('e_submittedBy', Auth::user()->id)->where('status', 1)->latest()->get();
-        }
-
-
-        return view('claim.history_claim', compact('title', 'data'));
     }
     /**
      * Remove the specified resource from storage.

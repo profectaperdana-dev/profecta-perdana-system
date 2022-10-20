@@ -148,36 +148,8 @@
                                 <input type="text" class="form-control reqdiag" placeholder="Enter other diagnosa"
                                     name="other_diagnosa" required>
                             </div>
-                            <div class="col-12 col-md-12 form-group">
-                                <label>Result</label>
-                                <select name="result" class="form-select uoms" id="result" required>
-                                    <option value="" selected>-Choose Result-</option>
-                                    <option value="CP01 - Good Condition">CP01 - Good Condition</option>
-                                    <option value="CP02 - Waranty Rejected">CP02 - Waranty Rejected</option>
-                                    <option value="CP03 - Waranty Accepted">CP03 - Waranty Accepted</option>
-                                    <option value="CP04 - Good Will">CP04 - Good Will</option>
-                                </select>
-                            </div>
-                            <div class="col-12 col-md-12 form-group" id="warrantyTo">
-                                <label>Warranty To</label>
-                                <select name="to" id="warrantyAccepted" class="form-select uoms" required>
-                                    <option value="" selected>-Choose Supplier-</option>
-                                    @foreach ($suppliers as $row)
-                                        <option value="{{ $row->id_warehouse }}">{{ $row->nama_supplier }}</option>
-                                    @endforeach
 
-                                </select>
-                            </div>
-                            <div class="col-12 col-md-12 form-group" id="warehouseTo">
-                                <label>Warehouse To</label>
-                                <select name="to_warehouse" id="goodWill" class="form-select uoms" required>
-                                    <option value="" selected>-Choose Warehouse-</option>
-                                    @foreach ($warehouse as $row)
-                                        <option value="{{ $row->id }}">{{ $row->warehouses }}</option>
-                                    @endforeach
 
-                                </select>
-                            </div>
                             <div id="file_received" class="col-lg-12 col-md-12 form-group">
                                 <label>Evidence of Delivery</label>
                                 <input type="file" class="form-control" name="file" id="inputreference"

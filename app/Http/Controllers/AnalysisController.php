@@ -181,4 +181,6 @@ class AnalysisController extends Controller
             return response()->json($data_product['chart_data']);
         }
     }
+
+    // make report profit and loss by sales
 }

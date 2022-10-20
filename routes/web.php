@@ -28,6 +28,7 @@ use App\Http\Controllers\UomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ClaimController;
+use App\Http\Controllers\MotorController;
 use App\Http\Controllers\StockMutationController;
 use App\Http\Controllers\ValueAddedTaxController;
 use App\Models\CustomerModel;
@@ -129,6 +130,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('claim_tyre/create', [ClaimController::class, 'createTyre']);
     Route::post('claim_tyre/store', [ClaimController::class, 'storeTyre']);
     Route::delete('claim_tyre_del/{id}', [ClaimController::class, 'delTyre']);
+    Route::post('mutasi_claim/{id}', [ClaimController::class, 'mutasiClaim']);
+    Route::get('motorcycle_type', [MotorController::class, 'motorcycleType']);
+    Route::post('motorcycle_type/store', [MotorController::class, 'storeMotorcycleType']);
+    Route::post('motorcycle_type/update/{id}', [MotorController::class, 'updateMotorcycleType']);
+    Route::delete('motorcycle_type/delete/{id}', [MotorController::class, 'deleteMotorcycleType']);
 
     Route::prefix('return')->group(function () {
         Route::get('/', [ReturnController::class, 'index']);
@@ -181,6 +187,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/product_sub_types', SubTypeController::class);
         Route::resource('/products', ProductController::class);
         Route::resource('/second_product', SecondProductController::class);
+        Route::resource('/motorcycle', MotorController::class);
     });
 
     Route::resource('/customers', CustomerController::class);

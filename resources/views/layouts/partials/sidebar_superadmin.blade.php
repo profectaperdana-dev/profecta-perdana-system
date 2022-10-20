@@ -151,6 +151,26 @@
                             href="{{ url('/supliers') }}"><i data-feather="battery"></i><span>Master
                                 Suppliers</span></a>
                     </li>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('') || request()->is('motorcycle') || request()->is('motorcycle_type')) active @endif"
+                            href="javascript:void(0)"><i data-feather="airplay"></i><span>Master Vehicle</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('') || request()->is('motorcycle') || request()->is('motorcycle_type')) block @else none @endif ">
+                            <li><a href="{{ url('/') }}" class="{{ request()->is('') ? 'active' : '' }}">Car
+                                    Brand</a>
+                            </li>
+                            <li><a href="{{ url('/') }}" class="{{ request()->is('') ? 'active' : '' }}">Car
+                                    Type</a>
+                            </li>
+                            <li><a href="{{ url('/motorcycle') }}"
+                                    class="{{ request()->is('motorcycle') ? 'active' : '' }}">Motorcycle Brand</a>
+                            </li>
+                            <li><a href="{{ url('/motorcycle_type') }}"
+                                    class="{{ request()->is('motorcycle_type') ? 'active' : '' }}">Motorcycle Type</a>
+                            </li>
+
+
+                        </ul>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Information</h6>
@@ -161,6 +181,32 @@
                             href="{{ url('/check_stock') }}"><i data-feather="inbox"></i><span>Check
                                 Stock
                             </span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Transaction Trade-In</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation/create') ? 'active' : '' }}"
+                            href="{{ url('/stock_mutation/create') }}"><i data-feather="edit"></i><span>Trade-in
+                                Product List
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation/approval') ? 'active' : '' }}"
+                            href="{{ url('/stock_mutation/approval') }}"><i data-feather="edit"></i><span>Create
+                                Trade-In
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation') ? 'active' : '' }}"
+                            href="{{ url('/stock_mutation') }}"><i data-feather="clipboard"></i><span>Trade-In
+                                Invoicing
+                            </span>
+                        </a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -345,7 +391,8 @@
                                     class="{{ request()->is('report_claim') ? 'active' : '' }}">Report Claim</a>
                             </li>
                             <li><a href="{{ url('/report_return_invoice') }}"
-                                    class="{{ request()->is('report_return_invoice') ? 'active' : '' }}">Report Return
+                                    class="{{ request()->is('report_return_invoice') ? 'active' : '' }}">Report
+                                    Return
                                     Invoice</a>
                             </li>
                             <li><a href="{{ url('/report_return_purchases') }}"
