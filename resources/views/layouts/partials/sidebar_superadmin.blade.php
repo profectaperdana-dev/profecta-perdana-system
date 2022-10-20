@@ -88,6 +88,10 @@
                                 <a href="{{ url('/second_product') }}"
                                     class="{{ request()->is('second_product') ? 'active' : '' }}">Second Products</a>
                             </li>
+                            <li>
+                                <a href="{{ url('/trade_in') }}"
+                                    class="{{ request()->is('trade_in') ? 'active' : '' }}">Product Trade In</a>
+                            </li>
 
 
                         </ul>
@@ -187,16 +191,10 @@
                             <h6>Transaction Trade-In</h6>
                         </div>
                     </li>
+
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation/create') ? 'active' : '' }}"
-                            href="{{ url('/stock_mutation/create') }}"><i data-feather="edit"></i><span>Trade-in
-                                Product List
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation/approval') ? 'active' : '' }}"
-                            href="{{ url('/stock_mutation/approval') }}"><i data-feather="edit"></i><span>Create
+                        <a class="nav-link menu-title link-nav {{ request()->is('') ? 'active' : '' }}"
+                            href="{{ url('/') }}"><i data-feather="edit"></i><span>Create
                                 Trade-In
                             </span>
                         </a>

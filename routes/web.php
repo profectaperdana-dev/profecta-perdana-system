@@ -29,6 +29,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\MotorController;
+use App\Http\Controllers\ProductTradeInController;
 use App\Http\Controllers\StockMutationController;
 use App\Http\Controllers\ValueAddedTaxController;
 use App\Models\CustomerModel;
@@ -188,6 +189,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/products', ProductController::class);
         Route::resource('/second_product', SecondProductController::class);
         Route::resource('/motorcycle', MotorController::class);
+        Route::resource('/trade_in', ProductTradeInController::class);
     });
 
     Route::resource('/customers', CustomerController::class);
