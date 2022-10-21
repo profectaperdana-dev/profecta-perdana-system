@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\CarController;
 use App\Http\Controllers\CheckStockController;
 use App\Http\Controllers\CustomerAreasController;
 use App\Http\Controllers\CustomerCategoriesController;
@@ -137,6 +138,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('motorcycle_type/update/{id}', [MotorController::class, 'updateMotorcycleType']);
     Route::delete('motorcycle_type/delete/{id}', [MotorController::class, 'deleteMotorcycleType']);
 
+    Route::prefix('cars_type')->group(function () {
+        Route::get('/', [CarController::class, 'index_type']);
+        Route::post('/store', [CarController::class, 'store_type']);
+        Route::post('/update_type/{id}', [CarController::class, 'update_type']);
+        Route::delete('/delete/{id}', [CarController::class, 'delete_type']);
+    });
+
     Route::prefix('return')->group(function () {
         Route::get('/', [ReturnController::class, 'index']);
         Route::get('/{id}', [ReturnController::class, 'create']);
@@ -189,6 +197,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/products', ProductController::class);
         Route::resource('/second_product', SecondProductController::class);
         Route::resource('/motorcycle', MotorController::class);
+        Route::resource('/cars', CarController::class);
         Route::resource('/trade_in', ProductTradeInController::class);
     });
 

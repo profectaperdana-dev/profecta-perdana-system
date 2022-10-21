@@ -158,11 +158,16 @@
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('') || request()->is('motorcycle') || request()->is('motorcycle_type')) active @endif"
                             href="javascript:void(0)"><i data-feather="airplay"></i><span>Master Vehicle</span></a>
                         <ul class="nav-submenu menu-content"
-                            style="display: @if (request()->is('') || request()->is('motorcycle') || request()->is('motorcycle_type')) block @else none @endif ">
-                            <li><a href="{{ url('/') }}" class="{{ request()->is('') ? 'active' : '' }}">Car
+                            style="display: @if (request()->is('cars') ||
+                                request()->is('cars_type') ||
+                                request()->is('motorcycle') ||
+                                request()->is('motorcycle_type')) block @else none @endif ">
+                            <li><a href="{{ url('cars/') }}"
+                                    class="{{ request()->is('cars') ? 'active' : '' }}">Car
                                     Brand</a>
                             </li>
-                            <li><a href="{{ url('/') }}" class="{{ request()->is('') ? 'active' : '' }}">Car
+                            <li><a href="{{ url('cars_type/') }}"
+                                    class="{{ request()->is('cars_type') ? 'active' : '' }}">Car
                                     Type</a>
                             </li>
                             <li><a href="{{ url('/motorcycle') }}"
