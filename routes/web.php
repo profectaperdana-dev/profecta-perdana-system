@@ -29,6 +29,7 @@ use App\Http\Controllers\UomController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ClaimController;
+use App\Http\Controllers\DirectSalesController;
 use App\Http\Controllers\MotorController;
 use App\Http\Controllers\ProductTradeInController;
 use App\Http\Controllers\StockMutationController;
@@ -137,6 +138,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('motorcycle_type/store', [MotorController::class, 'storeMotorcycleType']);
     Route::post('motorcycle_type/update/{id}', [MotorController::class, 'updateMotorcycleType']);
     Route::delete('motorcycle_type/delete/{id}', [MotorController::class, 'deleteMotorcycleType']);
+
+    Route::prefix('retail')->group(function () {
+        Route::get('/', [DirectSalesController::class, 'index']);
+        Route::get('/create', [DirectSalesController::class, 'create']);
+    });
 
     Route::prefix('cars_type')->group(function () {
         Route::get('/', [CarController::class, 'index_type']);

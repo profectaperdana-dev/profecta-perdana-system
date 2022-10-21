@@ -182,6 +182,16 @@
                     </li>
                     <li class="sidebar-main-title">
                         <div>
+                            <h6>Retail</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail/create') ? 'active' : '' }}"
+                            href="{{ url('/retail/create') }}"><i data-feather="inbox"></i><span>Create Order
+                            </span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
                             <h6>Information</h6>
                         </div>
                     </li>

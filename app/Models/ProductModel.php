@@ -32,6 +32,11 @@ class ProductModel extends Model
         return $this->hasOne(UomModel::class, 'id', 'id_uom')->withTrashed();
     }
 
+    public function stockBy()
+    {
+        return $this->hasOne(StockModel::class, 'products_id', 'id')->withTrashed();
+    }
+
     public function getRouteKeyName()
     {
         return 'kode_barang';
