@@ -84,10 +84,10 @@
                                     class="{{ request()->is('stocks') ? 'active' : '' }}">Products
                                     Stocks</a>
                             </li>
-                            <li>
+                            {{-- <li>
                                 <a href="{{ url('/second_product') }}"
                                     class="{{ request()->is('second_product') ? 'active' : '' }}">Second Products</a>
-                            </li>
+                            </li> --}}
                             <li>
                                 <a href="{{ url('/trade_in') }}"
                                     class="{{ request()->is('trade_in') ? 'active' : '' }}">Product Trade In</a>
@@ -198,15 +198,15 @@
                     </li>
 
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('') ? 'active' : '' }}"
-                            href="{{ url('/') }}"><i data-feather="edit"></i><span>Create
+                        <a class="nav-link menu-title link-nav {{ request()->is('create/trade_in') ? 'active' : '' }}"
+                            href="{{ url('/create/trade_in') }}"><i data-feather="edit"></i><span>Create
                                 Trade-In
                             </span>
                         </a>
                     </li>
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation') ? 'active' : '' }}"
-                            href="{{ url('/stock_mutation') }}"><i data-feather="clipboard"></i><span>Trade-In
+                        <a class="nav-link menu-title link-nav {{ request()->is('trade_invoice') ? 'active' : '' }}"
+                            href="{{ url('/trade_invoice') }}"><i data-feather="clipboard"></i><span>Trade-In
                                 Invoicing
                             </span>
                         </a>
@@ -378,12 +378,16 @@
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('report_sales') ||
                                 request()->is('report_purchase') ||
+                                request()->is('report_trade_in') ||
                                 request()->is('report_claim') ||
                                 request()->is('report_return_invoice') ||
                                 request()->is('report_return_purchases')) active @endif"
                             href="javascript:void(0)"><i data-feather="book-open"></i><span>Report</span></a>
                         <ul class="nav-submenu menu-content"
-                            style="display: @if (request()->is('report_sales') || request()->is('report_purchase') || request()->is('report_claim')) block @else none @endif ">
+                            style="display: @if (request()->is('report_sales') ||
+                                request()->is('report_trade_in') ||
+                                request()->is('report_purchase') ||
+                                request()->is('report_claim')) block @else none @endif ">
                             <li><a href="{{ url('/report_sales') }}"
                                     class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Invoice</a>
                             </li>
@@ -402,6 +406,11 @@
                                     class="{{ request()->is('report_return_purchases') ? 'active' : '' }}">Report
                                     Return
                                     Purchases</a>
+                            </li>
+                            <li><a href="{{ url('/report_trade_in') }}"
+                                    class="{{ request()->is('report_trade_in') ? 'active' : '' }}">Report
+                                    Trade-In
+                                </a>
                             </li>
                         </ul>
 

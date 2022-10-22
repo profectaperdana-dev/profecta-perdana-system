@@ -110,26 +110,44 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                                                    {{ $value->satuan }}</h5>
+                                                                    {{ $value->name_product_trade_in }}</h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="container-fluid">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <label class="font-weight-bold ">Name
-                                                                                Unit of Measurement</label>
-                                                                            <input type="text"
-                                                                                class="form-control text-capitalize {{ $errors->first('editSatuan') ? ' is-invalid' : '' }}"
-                                                                                name="editSatuan"
-                                                                                value="{{ $value->satuan }}"
-                                                                                placeholder="Name Unit of Measurement">
-                                                                            @error('editSatuan')
-                                                                                <small
-                                                                                    class="text-danger">{{ $message }}.</small>
-                                                                            @enderror
+                                                                    <div class="col-md-12">
+                                                                        <div class="form-group row">
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="font-weight-bold">Battery</label>
+                                                                                <input type="text"
+                                                                                    class="form-control text-capitalize {{ $errors->first('name_product_trade_ins') ? ' is-invalid' : '' }}"
+                                                                                    name="name_product_trade_ins"
+                                                                                    placeholder="Name product trade in"
+                                                                                    value="{{ $value->name_product_trade_in }}">
+                                                                                @error('name_product_trade_ins')
+                                                                                    <small
+                                                                                        class="text-danger">{{ $message }}.</small>
+                                                                                @enderror
+                                                                            </div>
                                                                         </div>
+                                                                        <div class="form-group row">
+                                                                            <div class="col-md-12">
+                                                                                <label
+                                                                                    class="font-weight-bold">Price</label>
+                                                                                <input type="number"
+                                                                                    class="form-control text-capitalize {{ $errors->first('price_product_trade_ins') ? ' is-invalid' : '' }}"
+                                                                                    name="price_product_trade_ins"
+                                                                                    placeholder="Price product trade in"
+                                                                                    value="{{ $value->price_product_trade_in }}">
+                                                                                @error('price_product_trade_ins')
+                                                                                    <small
+                                                                                        class="text-danger">{{ $message }}.</small>
+                                                                                @enderror
+                                                                            </div>
+                                                                        </div>
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -157,7 +175,7 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                                                    {{ $value->satuan }}</h5>
+                                                                    {{ $value->name_product_trade_in }}</h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>

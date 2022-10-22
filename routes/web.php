@@ -137,6 +137,14 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('motorcycle_type/store', [MotorController::class, 'storeMotorcycleType']);
     Route::post('motorcycle_type/update/{id}', [MotorController::class, 'updateMotorcycleType']);
     Route::delete('motorcycle_type/delete/{id}', [MotorController::class, 'deleteMotorcycleType']);
+    Route::get('create/trade_in', [ProductTradeInController::class, 'product_trade_in']);
+    Route::get('all_product_trade_in', [ProductTradeInController::class, 'product_trade_in_all']);
+    Route::post('trade_in/store', [ProductTradeInController::class, 'storeTradeIn']);
+    Route::get('trade_invoice', [ProductTradeInController::class, 'tradeInvoice']);
+    Route::get('send_email_trade_invoice/{id}', [SendEmailController::class, 'sendTradeInvoice']);
+    Route::get('trade_invoice/{id}/print', [ProductTradeInController::class, 'printTradeInvoice']);
+    Route::get('report_trade_in', [ReportController::class, 'reportTradeIn']);
+
 
     Route::prefix('cars_type')->group(function () {
         Route::get('/', [CarController::class, 'index_type']);
