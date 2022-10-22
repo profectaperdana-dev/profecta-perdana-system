@@ -146,6 +146,16 @@
                     </div>
                 @enderror
             </div>
+            <div class="col-md-3 form-group">
+                <label>Shown At</label>
+                <select name="shown" required
+                    class="form-control sub_type {{ $errors->first('shown') ? ' is-invalid' : '' }}">
+                    <option value="">-Choose Shown At-</option>
+                    <option value="all" @if ($data->shown == 'all') selected @endif>All</option>
+                    <option value="retail" @if ($data->shown == 'retail') selected @endif>Retail</option>
+                    <option value="non-retail" @if ($data->shown == 'non-retail') selected @endif>Non-retail</option>
+                </select>
+            </div>
             @if (!request()->is('products/create'))
                 <div class="col-md-3 form-group">
                     <label>

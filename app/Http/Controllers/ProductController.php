@@ -75,8 +75,10 @@ class ProductController extends Controller
                         ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
                         ->where('product_sub_types.type_name', 'LIKE', "%$search%")
                         ->where('stocks.warehouses_id', $customer->warehouseBy->id)
+                        ->whereIn('products.shown', ['non-retail', 'all'])
                         ->orWhere('products.nama_barang', 'LIKE', "%$search%")
                         ->where('stocks.warehouses_id', $customer->warehouseBy->id)
+                        ->whereIn('products.shown', ['non-retail', 'all'])
                         ->get();
                 } else {
                     $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')
@@ -85,8 +87,10 @@ class ProductController extends Controller
                         ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
                         ->where('product_sub_types.type_name', 'LIKE', "%$search%")
                         ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                        ->whereIn('products.shown', ['non-retail', 'all'])
                         ->orWhere('products.nama_barang', 'LIKE', "%$search%")
                         ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                        ->whereIn('products.shown', ['non-retail', 'all'])
                         ->get();
                 }
             } else {
@@ -97,6 +101,7 @@ class ProductController extends Controller
                         ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
                         ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
                         ->where('stocks.warehouses_id', $customer->warehouseBy->id)
+                        ->whereIn('products.shown', ['non-retail', 'all'])
                         ->latest()->get();
                 } else {
                     $product = StockModel::join('products', 'products.id', '=', 'stocks.products_id')->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id')
@@ -104,6 +109,7 @@ class ProductController extends Controller
                         ->join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
                         ->select('stocks.*', 'products.nama_barang AS nama_barang', 'products.id AS id', 'product_sub_types.type_name AS type_name', 'product_sub_materials.nama_sub_material AS nama_sub_material')
                         ->where('stocks.warehouses_id', Auth::user()->warehouseBy->id)
+                        ->whereIn('products.shown', ['non-retail', 'all'])
                         ->latest()->get();
                 }
             }
@@ -161,6 +167,7 @@ class ProductController extends Controller
                 'harga_jual' => 'required',
                 'harga_jual_nonretail' => 'required',
                 'minstok' => 'required',
+                'shown' => 'required',
                 'foto_barang' => 'required',
 
             ],
@@ -176,6 +183,7 @@ class ProductController extends Controller
                 'harga_jual.required' => 'The Retail Selling Price is required',
                 'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
                 'minstok.required' => 'The Min Stock required',
+                'shown.required' => 'The Shown At required',
                 'foto_barang.required' => 'You have to choose Product Photo File',
 
             ]
@@ -200,6 +208,7 @@ class ProductController extends Controller
         $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->minstok = $request->get('minstok');
+        $model->shown = $request->get('shown');
         // $model->tgl_produksi = $request->get('tgl_produksi');
         $model->status = 1;
         $file = $request->foto_barang;
@@ -268,6 +277,7 @@ class ProductController extends Controller
                 'harga_jual' => 'required',
                 'harga_jual_nonretail' => 'required',
                 'minstok' => 'required',
+                'shown' => 'required',
                 'status' => 'required',
 
 
@@ -283,6 +293,7 @@ class ProductController extends Controller
                 'harga_jual.required' => 'The Retail Selling Price is required',
                 'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
                 'minstok.required' => 'The Min Stock required',
+                'shown.required' => 'The Shown At requierd',
                 'status.required' => 'The Status is required',
 
 
@@ -305,6 +316,7 @@ class ProductController extends Controller
         $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->minstok = $request->get('minstok');
+        $model->shown = $request->get('shown');
         $model->status = $request->get('status');
 
         $url_lama = $request->get('url_lama');

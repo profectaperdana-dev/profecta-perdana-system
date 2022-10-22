@@ -172,6 +172,12 @@
                                                                                     value="{{ $value->minstok }}">
                                                                             </div>
                                                                             <div class="form-group col-md-3">
+                                                                                <label>Shown At</label>
+                                                                                <input type="text" class="form-control"
+                                                                                    readonly
+                                                                                    value="{{ ucfirst($value->shown) }}">
+                                                                            </div>
+                                                                            <div class="form-group col-md-3">
                                                                                 <label>Status</label>
                                                                                 @if ($value->status == 0)
                                                                                     <div>
