@@ -136,7 +136,7 @@ $(document).ready(function () {
             processResults: function (data) {
                 return {
                     results: $.map(data, function (item) {
-                        return [
+                        return [ 
                             {
                                 text:
                                     "("+ item.nama_sub_material + "/" + item.type_name + ") - " + item.nama_barang,
