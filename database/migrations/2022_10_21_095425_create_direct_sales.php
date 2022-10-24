@@ -21,6 +21,8 @@ class CreateDirectSales extends Migration
             $table->string('cust_phone');
             $table->string('cust_ktp')->nullable();
             $table->string('cust_email')->nullable();
+            $table->string('district');
+            $table->string('address');
             $table->string('plate_number');
             $table->integer('car_brand_id')->nullable();
             $table->integer('car_type_id')->nullable();

@@ -203,4 +203,21 @@ class MotorController extends Controller
             return redirect('motorcycle_type')->with('error', 'Data failed to delete');
         }
     }
+
+    public function select($id)
+    {
+        $sub_materials = [];
+        $material_id = $id;
+
+        if (request()->has('q')) {
+            $search = request()->q;
+            $sub_materials = MotorTypeModel::select("id", "name_type", "id_motor_brand")
+                ->where('name_type', 'LIKE', "%$search%")
+                ->where('id_motor_brand', $material_id)
+                ->get();
+        } else {
+            $sub_materials = MotorTypeModel::where('id_motor_brand', $material_id)->get();
+        }
+        return response()->json($sub_materials);
+    }
 }

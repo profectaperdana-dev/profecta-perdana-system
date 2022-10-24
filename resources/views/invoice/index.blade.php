@@ -492,21 +492,21 @@
                         total_after_ppn = total + ppn;
                         $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math
                             .round(ppn)
-                            .toLocaleString('us', {
+                            .toLocaleString('id', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
                         $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
                             .round(total)
                             .toLocaleString(
-                                'us', {
+                                'id', {
                                     minimumFractionDigits: 0,
                                     maximumFractionDigits: 0
                                 }));
                         $(this).closest('.row').siblings().find('.total-after-ppn').val(
                             'Rp. ' + Math
                             .round(
-                                total_after_ppn).toLocaleString('us', {
+                                total_after_ppn).toLocaleString('id', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));

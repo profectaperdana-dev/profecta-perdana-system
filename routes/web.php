@@ -138,10 +138,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('motorcycle_type/store', [MotorController::class, 'storeMotorcycleType']);
     Route::post('motorcycle_type/update/{id}', [MotorController::class, 'updateMotorcycleType']);
     Route::delete('motorcycle_type/delete/{id}', [MotorController::class, 'deleteMotorcycleType']);
+    Route::get('motocycle_brand/select/{id}', [MotorController::class, 'select']);
+    Route::get('district/selectAll', [DirectSalesController::class, 'select']);
 
     Route::prefix('retail')->group(function () {
         Route::get('/', [DirectSalesController::class, 'index']);
         Route::get('/create', [DirectSalesController::class, 'create']);
+        Route::post('/store', [DirectSalesController::class, 'store']);
     });
 
     Route::prefix('cars_type')->group(function () {
