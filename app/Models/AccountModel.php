@@ -6,9 +6,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class ProductTradeInModel extends Model
+class AccountModel extends Model
 {
     use HasFactory;
     use SoftDeletes;
-    protected $table = 'product_trade_ins';
+    protected $table = 'accounts';
+
+    public function accountSubs()
+    {
+        return $this->hasMany(AccountSubModel::class, 'account_id', 'id')->withTrashed();
+    }
 }

@@ -76,7 +76,7 @@ $(document).ready(function () {
         }
     });
     //  Event on change select material:end
-
+ 
     //  Event on change select regency:start
     $("#sub-material").change(function () {
         //clear select
@@ -136,7 +136,7 @@ $(document).ready(function () {
             processResults: function (data) {
                 return {
                     results: $.map(data, function (item) {
-                        return [
+                        return [ 
                             {
                                 text:
                                     "("+ item.nama_sub_material + "/" + item.type_name + ") - " + item.nama_barang,

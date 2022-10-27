@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountingController;
+use App\Http\Controllers\AccountSubController;
+use App\Http\Controllers\AccountSubTypeController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CheckStockController;
@@ -138,6 +142,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('motorcycle_type/store', [MotorController::class, 'storeMotorcycleType']);
     Route::post('motorcycle_type/update/{id}', [MotorController::class, 'updateMotorcycleType']);
     Route::delete('motorcycle_type/delete/{id}', [MotorController::class, 'deleteMotorcycleType']);
+    Route::get('create/trade_in', [ProductTradeInController::class, 'product_trade_in']);
+    Route::get('all_product_trade_in', [ProductTradeInController::class, 'product_trade_in_all']);
+    Route::post('trade_in/store', [ProductTradeInController::class, 'storeTradeIn']);
+    Route::get('trade_invoice', [ProductTradeInController::class, 'tradeInvoice']);
+    Route::get('send_email_trade_invoice/{id}', [SendEmailController::class, 'sendTradeInvoice']);
+    Route::get('trade_invoice/{id}/print', [ProductTradeInController::class, 'printTradeInvoice']);
+    Route::get('report_trade_in', [ReportController::class, 'reportTradeIn']);
+    Route::get('jurnal', [AccountingController::class, 'jurnal']);
+    Route::get('expenses/create', [AccountingController::class, 'createExpenses']);
+    Route::get('/sub_account/select/{id}', [AccountingController::class, 'select']);
+    Route::get('/sub_type_account/select/{id}', [AccountingController::class, 'select_type']);
+
     Route::get('motocycle_brand/select/{id}', [MotorController::class, 'select']);
     Route::get('district/selectAll', [DirectSalesController::class, 'select']);
 
@@ -214,6 +230,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/motorcycle', MotorController::class);
         Route::resource('/cars', CarController::class);
         Route::resource('/trade_in', ProductTradeInController::class);
+        Route::resource('/account', AccountController::class);
+        Route::resource('/account_sub', AccountSubController::class);
+        Route::resource('/account_sub_type', AccountSubTypeController::class);
     });
 
     Route::resource('/customers', CustomerController::class);

@@ -29,10 +29,20 @@ class SecondProductController extends Controller
 
         //     return view('second_product.index', compact('title', 'data', 'product', 'warehouse'));
         // } else {
-        $title = 'Data Second Product All Warehouse';
-        $data = SecondProductModel::with('warehouseStockBy', 'productBy')->latest()->get();
+        $data = SecondProductModel::with(['warehouseStockBy'], ['productTradeBy'])->latest()->get();
         $product = ProductModel::latest()->get();
-        $warehouse = WarehouseModel::latest()->get();
+
+        if (Gate::allows('isSuperAdmin')) {
+            $title = 'Data Second Product All Warehouse';
+
+            $warehouse = WarehouseModel::where('type', 7)->latest()->get();
+        } else {
+            $type = Auth::user()->warehouseBy->id_area;
+            $title = 'Data Second Product' . Auth::user()->warehouseBy->warehouses;
+
+            $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->latest()->get();
+        }
+
 
         return view('second_product.index', compact('title', 'data', 'product', 'warehouse'));
         // }

@@ -9,8 +9,10 @@ use DateTimeImmutable;
 use App\Models\ProductModel;
 use Illuminate\Http\Request;
 use App\Events\SOMessage;
+use App\Models\AccountSubTypeModel;
 use App\Models\CustomerModel;
 use App\Models\DiscountModel;
+use App\Models\JurnalModel;
 use App\Models\NotificationsModel;
 use App\Models\ReturnDetailModel;
 use App\Models\ReturnModel;
@@ -570,7 +572,7 @@ class SalesOrderController extends Controller
 
         //Save SOD Input and Count total
         $total = 0;
-
+        $totalDiskon = 0;
         foreach ($request->editProduct as $product) {
             $product_exist = SalesOrderDetailModel::where('sales_orders_id', $id)
                 ->where('products_id', $product['products_id'])->first();
@@ -596,6 +598,8 @@ class SalesOrderController extends Controller
             $total = $total + ($hargaAfterDiskon * $product['qty']);
 
             $harga_awal = $harga->harga_beli * $product['qty'];
+
+            $totalDiskon = $totalDiskon + ($hargaDiskon + $product['discount_rp']) * $product['qty'];
         }
 
         //Delete product that not in SOD Input
@@ -636,8 +640,28 @@ class SalesOrderController extends Controller
                 $model->pdf_do = $do . '.pdf';
                 $model->pdf_invoice = $iv_number . '.pdf';
                 $model->order_number = $iv_number;
-                // profit
 
+
+                //* choose account type 
+                $account_type = AccountSubTypeModel::where('id', 1)->first();
+                //* create jurnals sales invoice
+                $jurnal = new JurnalModel();
+                $jurnal->date = carbon::now();
+                $jurnal->code = $account_type->name . ' ' . $model->order_number;
+                $jurnal->total = $model->total;
+                $jurnal->status = 1;
+                $jurnal->save();
+
+                //*create jurnals discount
+                if ($totalDiskon > 0) {
+                    $account_types = AccountSubTypeModel::where('id', 43)->first();
+                    $jurnal = new JurnalModel();
+                    $jurnal->date = carbon::now();
+                    $jurnal->code = $account_types->name . ' ' . $model->order_number;
+                    $jurnal->total = $totalDiskon;
+                    $jurnal->status = 1;
+                    $jurnal->save();
+                }
                 //Potong Stock
                 $selected_sod = SalesOrderDetailModel::where('sales_orders_id', $id)->get();
                 foreach ($selected_sod as $value) {

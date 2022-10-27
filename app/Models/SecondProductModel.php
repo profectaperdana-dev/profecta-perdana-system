@@ -12,9 +12,9 @@ class SecondProductModel extends Model
     use SoftDeletes;
     protected $table = 'second_products';
 
-    public function productBy()
+    public function productTradeBy()
     {
-        return $this->hasOne(ProductModel::class, 'id', 'products_id')->withTrashed();
+        return $this->hasOne(ProductTradeInModel::class, 'id', 'products_id')->withTrashed();
     }
 
     public function warehouseStockBy()

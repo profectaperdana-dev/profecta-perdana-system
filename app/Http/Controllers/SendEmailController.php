@@ -9,11 +9,13 @@ use App\Mail\NotifyMail;
 use App\Mail\PoMail;
 use App\Mail\RetailMail;
 use App\Mail\ReturnMail;
+use App\Mail\TradeInMail;
 use App\Models\AccuClaimModel;
 use App\Models\DirectSalesModel;
 use App\Models\PurchaseOrderModel;
 use App\Models\ReturnModel;
 use App\Models\SalesOrderModel;
+use App\Models\TradeInModel;
 use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
@@ -169,6 +171,31 @@ class SendEmailController extends Controller
             return redirect('/history_claim')->with('error', 'Send Invoice By Email Failed !');
         } else {
             return redirect('/history_claim')->with('success', 'Send Invoice ' . $data->claim_number . ' to ' . $data->sub_name . ' by Email Success !');
+        }
+    }
+
+    public function sendTradeInvoice($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') &&  !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        $data = TradeInModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = FacadePdf::loadView('product_trade_in.print_trade_in', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf_trade_in/' . $data->trade_in_number . '.pdf');
+
+        $name = $data->customer_email;
+        if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
+            return redirect('/trade_invoice')->with('error', ' Invalid email format');
+        } else {
+            Mail::to($name)->queue(new TradeInMail($warehouse, $data));
+        }
+
+        if (Mail::failures()) {
+            return redirect('/trade_invoice')->with('error', 'Send Trade-In Invoice By Email Failed !');
+        } else {
+            return redirect('/trade_invoice')->with('success', 'Send Trade-In Invoice ' . $data->trade_in_number . ' to ' . $name . ' by Email Success !');
         }
     }
 }

@@ -26,39 +26,53 @@
                         <hr class="bg-primary">
                     </div>
                     <div class="card-body">
-                        <form class="form-label-left input_mask" method="post" action="{{ url('/trade_in') }}"
+                        <form class="form-label-left input_mask" method="post" action="{{ url('/account') }}"
                             enctype="multipart/form-data">
                             @csrf
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="font-weight-bold">Code</label>
+                                            <input type="text" required min="0"
+                                                class="form-control text-capitalize {{ $errors->first('code') ? ' is-invalid' : '' }}"
+                                                name="code" placeholder="Account Code">
+                                            @error('code')
+                                                <small class="text-danger">{{ $message }}.</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="font-weight-bold">Name</label>
+                                            <input type="text" required
+                                                class="form-control text-capitalize {{ $errors->first('name') ? ' is-invalid' : '' }}"
+                                                name="name" placeholder="Account Name">
+                                            @error('name')
+                                                <small class="text-danger">{{ $message }}.</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <label class="font-weight-bold">Cost</label>
+                                            <input type="number" min="0"
+                                                class="form-control text-capitalize {{ $errors->first('biaya') ? ' is-invalid' : '' }}"
+                                                name="biaya" placeholder="Cost">
+                                            @error('biaya')
+                                                <small class="text-danger">{{ $message }}.</small>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <div class="col-md-12">
+                                            <button type="reset" class="btn btn-warning"
+                                                data-dismiss="modal">Reset</button>
+                                            <button type="submit" class="btn btn-primary">Save</button>
+                                        </div>
+                                    </div>
+                                </div>
 
-                            <div class="col-md-12">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <label class="font-weight-bold">Battery</label>
-                                        <input type="text"
-                                            class="form-control text-capitalize {{ $errors->first('name_product_trade_in') ? ' is-invalid' : '' }}"
-                                            name="name_product_trade_in" placeholder="Name product trade in">
-                                        @error('name_product_trade_in')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <label class="font-weight-bold">Price</label>
-                                        <input type="number"
-                                            class="form-control text-capitalize {{ $errors->first('price_product_trade_in') ? ' is-invalid' : '' }}"
-                                            name="price_product_trade_in" placeholder="Price product trade in">
-                                        @error('price_product_trade_in')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <button type="reset" class="btn btn-warning" data-dismiss="modal">Reset</button>
-                                        <button type="submit" class="btn btn-primary">Save</button>
-                                    </div>
-                                </div>
                             </div>
                         </form>
                     </div>
@@ -77,9 +91,10 @@
                                 <thead>
                                     <tr>
                                         <th style="width: 10%"></th>
-                                        <th>#</th>
-                                        <th>Battery</th>
-                                        <th>Price</th>
+                                        {{-- <th>#</th> --}}
+                                        <th> Code</th>
+                                        <th> Name</th>
+                                        {{-- <th> Cost</th> --}}
 
                                     </tr>
                                 </thead>
@@ -103,49 +118,68 @@
                                             <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('trade_in/' . $value->id) }}"
+                                                    <form method="post" action="{{ url('account/' . $value->id) }}"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <input name="_method" type="hidden" value="PATCH">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                                                    {{ $value->name_product_trade_in }}</h5>
+                                                                    {{ $value->code }}</h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
                                                             <div class="modal-body">
                                                                 <div class="container-fluid">
-                                                                    <div class="col-md-12">
-                                                                        <div class="form-group row">
-                                                                            <div class="col-md-12">
-                                                                                <label
-                                                                                    class="font-weight-bold">Battery</label>
-                                                                                <input type="text"
-                                                                                    class="form-control text-capitalize {{ $errors->first('name_product_trade_ins') ? ' is-invalid' : '' }}"
-                                                                                    name="name_product_trade_ins"
-                                                                                    placeholder="Name product trade in"
-                                                                                    value="{{ $value->name_product_trade_in }}">
-                                                                                @error('name_product_trade_ins')
-                                                                                    <small
-                                                                                        class="text-danger">{{ $message }}.</small>
-                                                                                @enderror
+                                                                    <div class="form-group row">
+                                                                        <div class="col-md-12">
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <label class="font-weight-bold">
+                                                                                        Code</label>
+                                                                                    <input type="text" required
+                                                                                        min="0"
+                                                                                        class="form-control text-capitalize {{ $errors->first('codes') ? ' is-invalid' : '' }}"
+                                                                                        name="codes"
+                                                                                        value="{{ $value->code }}"
+                                                                                        placeholder="Enter Account Code">
+                                                                                    @error('codes')
+                                                                                        <small
+                                                                                            class="text-danger">{{ $message }}.</small>
+                                                                                    @enderror
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="form-group row">
-                                                                            <div class="col-md-12">
-                                                                                <label
-                                                                                    class="font-weight-bold">Price</label>
-                                                                                <input type="number"
-                                                                                    class="form-control text-capitalize {{ $errors->first('price_product_trade_ins') ? ' is-invalid' : '' }}"
-                                                                                    name="price_product_trade_ins"
-                                                                                    placeholder="Price product trade in"
-                                                                                    value="{{ $value->price_product_trade_in }}">
-                                                                                @error('price_product_trade_ins')
-                                                                                    <small
-                                                                                        class="text-danger">{{ $message }}.</small>
-                                                                                @enderror
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <label class="font-weight-bold">
+                                                                                        Name</label>
+                                                                                    <input type="text" required
+                                                                                        value="{{ $value->name }}"
+                                                                                        class="form-control text-capitalize {{ $errors->first('names') ? ' is-invalid' : '' }}"
+                                                                                        name="names"
+                                                                                        placeholder="Enter Account Name">
+                                                                                    @error('names')
+                                                                                        <small
+                                                                                            class="text-danger">{{ $message }}.</small>
+                                                                                    @enderror
+                                                                                </div>
                                                                             </div>
+                                                                            <div class="form-group row">
+                                                                                <div class="col-md-12">
+                                                                                    <label class="font-weight-bold">
+                                                                                        Cost</label>
+                                                                                    <input type="number" min="0"
+                                                                                        class="form-control text-capitalize {{ $errors->first('biayas') ? ' is-invalid' : '' }}"
+                                                                                        name="biayas"
+                                                                                        placeholder="Enter Cost"
+                                                                                        value="{{ $value->biaya }}">
+                                                                                    @error('biayas')
+                                                                                        <small
+                                                                                            class="text-danger">{{ $message }}.</small>
+                                                                                    @enderror
+                                                                                </div>
+                                                                            </div>
+
                                                                         </div>
 
                                                                     </div>
@@ -168,14 +202,14 @@
                                             <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('trade_in/' . $value->id) }}"
+                                                    <form method="post" action="{{ url('account/' . $value->id) }}"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <input name="_method" type="hidden" value="DELETE">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                                                    {{ $value->name_product_trade_in }}</h5>
+                                                                    {{ $value->code }}</h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -199,9 +233,12 @@
                                                 </div>
                                             </div>
                                             {{-- End Modal Delete UOM --}}
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->name_product_trade_in }}</td>
-                                            <td>Rp {{ number_format($value->price_product_trade_in) }}</td>
+                                            {{-- <td>{{ $key + 1 }}</td> --}}
+                                            <td>{{ $value->code }}</td>
+                                            <td>{{ $value->name }}</td>
+                                            {{-- <td>@currency($value->biaya)</td> --}}
+
+
                                         </tr>
                                     @endforeach
                                 </tbody>

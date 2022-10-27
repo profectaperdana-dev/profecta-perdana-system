@@ -11,6 +11,8 @@ use App\Models\ReturnDetailModel;
 use App\Models\ReturnPurchaseDetailModel;
 use App\Models\SalesOrderDetailModel;
 use App\Models\SalesOrderModel;
+use App\Models\TradeInDetailModel;
+use App\Models\TradeInModel;
 use App\Models\ValueAddedTaxModel;
 use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
@@ -556,5 +558,77 @@ class ReportController extends Controller
             'title' => "All Report Return Purchases in Profecta Perdana : " . Auth::user()->warehouseBy->warehouses,
         ];
         return view('report.return_purchase', $data);
+    }
+
+    public function reportTradeIn(Request $request)
+    {
+
+        // dd($invoice);
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        if ($request->ajax()) {
+
+            if (!empty($request->from_date)) {
+
+                $invoice = TradeInDetailModel::with('tradeInOrderBy', 'productTradeIn')
+                    ->whereHas('tradeInOrderBy', function ($query) use ($request) {
+                        $query->whereBetween('trade_in_date', array($request->from_date, $request->to_date));
+                    })
+                    ->latest()
+                    ->get();
+            } else {
+                $invoice = TradeInDetailModel::with('tradeInOrderBy', 'productTradeIn')
+                    ->latest()
+                    ->get();
+            }
+
+            return datatables()->of($invoice)
+                ->editColumn('trade_in_number', function (TradeInDetailModel $TradeInDetailModel) {
+                    return $TradeInDetailModel->tradeInOrderBy->trade_in_number;
+                })
+                ->editColumn('trade_in_date', function (TradeInDetailModel $TradeInDetailModel) {
+                    return date('d F Y', strtotime($TradeInDetailModel->tradeInOrderBy->trade_in_date));
+                })
+                ->editColumn('customer', function (TradeInDetailModel $TradeInDetailModel) {
+                    return $TradeInDetailModel->tradeInOrderBy->customer;
+                })
+                ->editColumn('customer_nik', function (TradeInDetailModel $TradeInDetailModel) {
+                    return $TradeInDetailModel->tradeInOrderBy->customer_nik;
+                })
+                ->editColumn('customer_phone', function (TradeInDetailModel $TradeInDetailModel) {
+                    return $TradeInDetailModel->tradeInOrderBy->customer_phone;
+                })
+                ->editColumn('customer_email', function (TradeInDetailModel $TradeInDetailModel) {
+                    return $TradeInDetailModel->tradeInOrderBy->customer_email;
+                })
+                ->editColumn('product_trade_in', function (TradeInDetailModel $TradeInDetailModel) {
+                    return $TradeInDetailModel->productTradeIn->name_product_trade_in;
+                })
+
+
+                ->editColumn('total', function (TradeInDetailModel $TradeInDetailModel) {
+                    return number_format($TradeInDetailModel->tradeInOrderBy->total, 0, ',', '.');
+                })
+                ->editColumn('createdBy', function (TradeInDetailModel $TradeInDetailModel) {
+                    return $TradeInDetailModel->tradeInOrderBy->tradeBy->name;
+                })
+
+
+                ->addIndexColumn() //memberikan penomoran
+                // ->addColumn('action', function ($invoice) {
+
+                //     return view('product_trade_in._option', compact('invoice'))->render();
+                // })
+                // ->rawColumns()
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "Report Trade-In in Profecta Perdana",
+        ];
+        return view('report.trade_report', $data);
     }
 }
