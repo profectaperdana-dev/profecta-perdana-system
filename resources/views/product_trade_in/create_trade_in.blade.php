@@ -67,10 +67,7 @@
             $(document).ready(function() {
                 let csrf = $('meta[name="csrf-token"]').attr("content");
 
-                // $('form').submit(function() {
-                //     $(this).find('button[type="submit"]').prop('disabled', true);
-                // });
-                // x = 0;
+
                 y = 0;
 
                 $(".all_product_TradeIn").select2({

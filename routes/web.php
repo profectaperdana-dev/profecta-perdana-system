@@ -1,5 +1,9 @@
 <?php
 
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\AccountingController;
+use App\Http\Controllers\AccountSubController;
+use App\Http\Controllers\AccountSubTypeController;
 use App\Http\Controllers\AnalysisController;
 use App\Http\Controllers\CheckStockController;
 use App\Http\Controllers\CustomerAreasController;
@@ -143,6 +147,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('send_email_trade_invoice/{id}', [SendEmailController::class, 'sendTradeInvoice']);
     Route::get('trade_invoice/{id}/print', [ProductTradeInController::class, 'printTradeInvoice']);
     Route::get('report_trade_in', [ReportController::class, 'reportTradeIn']);
+    Route::get('jurnal', [AccountingController::class, 'jurnal']);
+    Route::get('expenses/create', [AccountingController::class, 'createExpenses']);
+    Route::get('/sub_account/select/{id}', [AccountingController::class, 'select']);
+    Route::get('/sub_type_account/select/{id}', [AccountingController::class, 'select_type']);
 
 
     Route::prefix('return')->group(function () {
@@ -198,6 +206,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/second_product', SecondProductController::class);
         Route::resource('/motorcycle', MotorController::class);
         Route::resource('/trade_in', ProductTradeInController::class);
+        Route::resource('/account', AccountController::class);
+        Route::resource('/account_sub', AccountSubController::class);
+        Route::resource('/account_sub_type', AccountSubTypeController::class);
     });
 
     Route::resource('/customers', CustomerController::class);

@@ -32,7 +32,7 @@
                         <h5>Create Data</h5>
                         <hr class="bg-primary">
                         <div class="row justify-content-end">
-                            <button class="col-2 btn btn-primary btn-sm" id="addStock">+</button>
+                            <button class="col-2 btn btn-primary btn-sm" id="addStocks">+</button>
                         </div>
                     </div>
                     <div class="card-body">
@@ -67,11 +67,11 @@
                                         </div>
                                         <div class="form-group row">
                                             <div class="form-group col-md-5">
-                                                <label>Product</label>
+                                                <label>Battery</label>
                                                 <select name="stockFields[0][product_id]"
-                                                    class="form-control @error('stockFields[0][product_id]') is-invalid @enderror product-append-all"
+                                                    class="form-control @error('stockFields[0][product_id]') is-invalid @enderror all_product_TradeIn"
                                                     required>
-                                                    <option value="">Choose Product</option>
+                                                    <option value="">-Choose Battery-</option>
                                                 </select>
                                                 @error('stockFields[0][product_id]')
                                                     <div class="invalid-feedback">
@@ -80,7 +80,7 @@
                                                 @enderror
                                             </div>
                                             <div class="form-group col-md-5">
-                                                <label>Second Products</label>
+                                                <label>Stock</label>
                                                 <input type="number" name="stockFields[0][stock]" id="stock"
                                                     class="form-control @error('stockFields[0][stock]') is-invalid @enderror"
                                                     placeholder="Enter stock" required>
@@ -124,7 +124,7 @@
                                         <th>#</th>
                                         <th>Warehouse</th>
                                         <th>Products</th>
-                                        <th>Qty Second Product</th>
+                                        <th>Qty</th>
 
                                     </tr>
                                 </thead>
@@ -155,7 +155,8 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                                                    {{ $value->productBy->nama_barang }}</h5>
+                                                                    {{ $value->productTradeBy->name_product_trade_in }}
+                                                                </h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -204,7 +205,8 @@
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                                                    {{ $value->productBy->nama_barang }}</h5>
+                                                                    {{ $value->productTradeBy->name_product_trade_in }}
+                                                                </h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -230,7 +232,7 @@
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->warehouseStockBy->warehouses }}</td>
-                                            <td>{{ $value->productBy->nama_barang }}</td>
+                                            <td>{{ $value->productTradeBy->name_product_trade_in }}</td>
                                             <td>{{ $value->qty }}</td>
 
 
@@ -257,6 +259,91 @@
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
         <script>
             $(document).ready(function() {
+                let csrf = $('meta[name="csrf-token"]').attr("content");
+
+
+                y = 0;
+
+                $(".all_product_TradeIn").select2({
+                    width: "100%",
+                    ajax: {
+                        type: "GET",
+                        url: "/all_product_trade_in",
+                        data: function(params) {
+                            return {
+                                _token: csrf,
+                                q: params.term, // search term
+                            };
+                        },
+                        dataType: "json",
+                        delay: 250,
+                        processResults: function(data) {
+                            return {
+                                results: $.map(data, function(item) {
+                                    return [{
+                                        text: item.name_product_trade_in,
+
+
+                                        id: item.id,
+                                    }, ];
+                                }),
+                            };
+                        },
+                    },
+                });
+                $("#addStocks").on("click", function() {
+                    ++y;
+                    let form =
+                        '<div class="mx-auto py-2 form-group row"> <div class="form-group col-5">' +
+                        '<label>Baterry</label> <select name="stockFields[' +
+                        y +
+                        '][product_id]" class="form-control all_product_TradeIn" required>' +
+                        '<option value="">-Choose Battery-</option> ' +
+                        "</select>" +
+                        '</div>' +
+                        '<div class="col-3 col-md-5 form-group">' +
+                        "<label> Stock </label> " +
+                        '<input placeholder="Enter stock" class="form-control cekQty" required name="stockFields[' +
+                        y +
+                        '][stock]">' +
+                        "</div>" +
+                        '<div class="col-2 col-md-2 form-group">' +
+                        '<label for="">&nbsp;</label>' +
+                        '<a href="javascript:void(0)" class="form-control text-white remTradeIn text-center" style="border:none; background-color:red">X</a></div></div>';
+
+                    $("#formdynamic").append(form);
+                    $(".all_product_TradeIn").select2({
+                        width: "100%",
+                        ajax: {
+                            type: "GET",
+                            url: "/all_product_trade_in",
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item.name_product_trade_in,
+
+
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+
+                });
+                $(document).on("click", ".remTradeIn", function() {
+                    $(this).parents(".form-group").remove();
+                });
                 $('#example').DataTable({
                     dom: 'Bfrtip',
                     buttons: [{

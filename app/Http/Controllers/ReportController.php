@@ -590,7 +590,7 @@ class ReportController extends Controller
                     return $TradeInDetailModel->tradeInOrderBy->trade_in_number;
                 })
                 ->editColumn('trade_in_date', function (TradeInDetailModel $TradeInDetailModel) {
-                    return $TradeInDetailModel->tradeInOrderBy->trade_in_date;
+                    return date('d F Y', strtotime($TradeInDetailModel->tradeInOrderBy->trade_in_date));
                 })
                 ->editColumn('customer', function (TradeInDetailModel $TradeInDetailModel) {
                     return $TradeInDetailModel->tradeInOrderBy->customer;

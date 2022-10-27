@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\ProductTradeInModel;
+use App\Models\SecondProductModel;
+use App\Models\StockModel;
 use App\Models\TradeInDetailModel;
 use App\Models\TradeInModel;
 use App\Models\WarehouseModel;
@@ -11,7 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
-
+use Illuminate\Support\Facades\DB;
 
 class ProductTradeInController extends Controller
 {
@@ -165,6 +167,7 @@ class ProductTradeInController extends Controller
             "tradeFields.*.qty" => "required",
         ]);
 
+
         //* save data trade in
         $model = new TradeInModel();
 
@@ -204,9 +207,13 @@ class ProductTradeInController extends Controller
         $model->createdBy = Auth::user()->id;
         $saved = $model->save();
 
+
+
         // save purchase order details
         $total = 0;
         $message_duplicate = '';
+
+        // dd($warehouse);
         if ($saved) {
             foreach ($request->tradeFields as $value) {
                 $data = new TradeInDetailModel();
@@ -225,18 +232,34 @@ class ProductTradeInController extends Controller
                     $total = $total + ($harga->price_product_trade_in * $data->qty);
                     $data->save();
                 }
+                $type = Auth::user()->warehouseBy->id_area;
+                $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->first();
+
+                $second_stock = SecondProductModel::where('warehouses_id', $warehouse->id)->where('products_id', $data->product_trade_in)->first();
+
+                // dd($second_stock);
+                if ($second_stock == null) {
+                    $second_stock = new SecondProductModel();
+                    $second_stock->warehouses_id = $warehouse->id;
+                    $second_stock->products_id = $data->product_trade_in;
+                    $second_stock->qty = $data->qty;
+                    $second_stock->save();
+                } else {
+                    $second_stock->qty = $second_stock->qty +  $data->qty;
+                    $second_stock->save();
+                }
             }
         }
         $model->total = $total;
         $saved = $model->save();
 
         if (empty($message_duplicate) && $saved) {
-            return redirect('trade_invoice')->with('success', 'Create Trade-In order ' . $model->trade_in_number . ' success');
+            return redirect('create/trade_in')->with('success', 'Create Trade-In order ' . $model->trade_in_number . ' success');
         } elseif (!empty($message_duplicate) && $saved) {
 
-            return redirect('trade_invoice')->with('info', 'Trade-In Order add Success! ' . $message_duplicate);
+            return redirect('create/trade_in')->with('info', 'Trade-In Order add Success! ' . $message_duplicate);
         } else {
-            return redirect('trade_invoice')->with('error', 'Add Trade-In Order Fail! Please make sure you have filled all the input');
+            return redirect('create/trade_in')->with('error', 'Add Trade-In Order Fail! Please make sure you have filled all the input');
         }
     }
 

@@ -76,7 +76,7 @@ $(document).ready(function () {
         }
     });
     //  Event on change select material:end
-
+ 
     //  Event on change select regency:start
     $("#sub-material").change(function () {
         //clear select
