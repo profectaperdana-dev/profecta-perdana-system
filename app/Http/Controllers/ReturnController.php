@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AccountSubTypeModel;
+use App\Models\JurnalModel;
 use App\Models\ProductModel;
 use App\Models\PurchaseOrderDetailModel;
 use App\Models\PurchaseOrderModel;
@@ -303,7 +305,15 @@ class ReturnController extends Controller
         $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $model->total = $total + $ppn;
         $model->save();
-
+        //* choose account type 
+        $account_type = AccountSubTypeModel::where('id', 48)->first();
+        //* create jurnals sales invoice
+        $jurnal = new JurnalModel();
+        $jurnal->date = carbon::now();
+        $jurnal->code = $account_type->name . ' ' . $model->return_number;
+        $jurnal->total = $total;
+        $jurnal->status = 1;
+        $jurnal->save();
         //Change Stock
         $returnDetail = ReturnDetailModel::where('return_id', $model->id)->get();
         $selected_so = SalesOrderModel::where('id', $model->sales_order_id)->first();

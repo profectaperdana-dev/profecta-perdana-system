@@ -153,12 +153,13 @@
             </thead>
             <tbody>
                 @php
+                    $total = 0;
+                    
                     $y = 0;
                 @endphp
                 @foreach ($data->tradeInDetailBy as $key => $value)
                     {{-- @for ($i = 0; $i < 6; $i++) --}}
                     <?php
-                    $total = 0;
                     $y++;
                     ?>
                     <tr>
