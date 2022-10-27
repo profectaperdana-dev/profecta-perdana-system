@@ -145,6 +145,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/', [DirectSalesController::class, 'index']);
         Route::get('/create', [DirectSalesController::class, 'create']);
         Route::post('/store', [DirectSalesController::class, 'store']);
+        Route::get('/credit', [DirectSalesController::class, 'credit']);
+        Route::get('/print_invoice/{id}', [DirectSalesController::class, 'print_invoice']);
+        Route::get('/send_mail/{id}', [SendEmailController::class, 'send_mail_retail']);
+        Route::get('/mark_as_paid/{id}', [DirectSalesController::class, 'mark_as_paid']);
+        Route::get('/selectProductAll', [DirectSalesController::class, 'selectProductAll']);
+        Route::post('/{id}/update_retail', [DirectSalesController::class, 'update_retail']);
     });
 
     Route::prefix('cars_type')->group(function () {

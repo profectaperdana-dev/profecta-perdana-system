@@ -110,8 +110,7 @@
                     </a>
                     @can('isSuperAdmin')
                         <button class="btn btn-secondary modal-btn2" type="button" data-bs-toggle="modal"
-                            data-original-title="test" data-bs-target="#editReturn{{ $return->id }}"
-                            data-bs-dismiss="modal">Edit
+                            data-original-title="test" data-bs-target="#editReturn{{ $return->id }}">Edit
                         </button>
                     @endcan
                     <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
@@ -224,8 +223,8 @@
                                     <button type="reset" class="btn btn-warning">Reset</button>
                                     <button type="submit" class="btn btn-primary">Save</button>
                                     <button class="btn btn-secondary" type="button" data-bs-toggle="modal"
-                                        data-original-title="test" data-bs-target="#detailReturn{{ $return->id }}"
-                                        data-bs-dismiss="modal">Detail
+                                        data-original-title="test"
+                                        data-bs-target="#detailReturn{{ $return->id }}">Detail
                                     </button>
                                 </div>
                             </div>

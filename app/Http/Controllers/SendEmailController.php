@@ -7,8 +7,10 @@ use App\Mail\AccuClaimFinishMail;
 use App\Mail\InvoiceMail;
 use App\Mail\NotifyMail;
 use App\Mail\PoMail;
+use App\Mail\RetailMail;
 use App\Mail\ReturnMail;
 use App\Models\AccuClaimModel;
+use App\Models\DirectSalesModel;
 use App\Models\PurchaseOrderModel;
 use App\Models\ReturnModel;
 use App\Models\SalesOrderModel;
@@ -91,6 +93,33 @@ class SendEmailController extends Controller
             return redirect('/return')->with('success', 'Send Return Invoice ' . $data->return_number . ' to ' . $data->salesOrderBy->customerBy->name_cust . ' by Email Success !');
         }
     }
+
+    public function send_mail_retail($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') &&  !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        $data = DirectSalesModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
+        $pdf = FacadePdf::loadView('direct_sales.print_invoice', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
+
+        $name = $data->cust_email;
+        if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
+            return redirect('/retail')->with('error', ' Invalid email format');
+        } else {
+            Mail::to($data->cust_email)->queue(new RetailMail($warehouse, $data));
+        }
+
+        if (Mail::failures()) {
+            return redirect('/retail')->with('error', 'Send Invoice By Email Failed !');
+        } else {
+            return redirect('/retail')->with('success', 'Send Invoice ' . $data->order_number . ' to ' . $data->cust_name . ' by Email Success !');
+        }
+    }
+
     public function sendEarlyAccuClaim($id)
     {
         if (

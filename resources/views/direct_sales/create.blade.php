@@ -64,6 +64,7 @@
                             <th class="text-center">#</th>
                             <th>Product</th>
                             <th>Qty</th>
+                            <th>Disc (%)</th>
                         </tr>
                     </thead>
                     <tbody id="table-cart">
@@ -119,31 +120,35 @@
                                                 <div class="row">
                                                     <div class="mb-3 col-sm-6">
                                                         <label>Name</label>
-                                                        <input class="form-control" type="text" name="cust_name"
-                                                            required>
+                                                        <input class="form-control" placeholder="Enter Name" type="text"
+                                                            name="cust_name" required>
                                                     </div>
                                                     <div class="mb-3 col-sm-6">
                                                         <label>Phone Number</label>
-                                                        <input class="form-control" type="text" name="cust_phone"
-                                                            required>
+                                                        <input class="form-control" placeholder="Enter Phone Number"
+                                                            type="text" name="cust_phone" required>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="mb-3 col-sm-6">
                                                         <label>ID Card Number</label>
-                                                        <input class="form-control" type="text" name="cust_ktp" required>
+                                                        <input class="form-control" placeholder="Enter ID Card Number"
+                                                            type="text" name="cust_ktp" required>
+                                                        <div class="form-text">*Optional</div>
                                                     </div>
                                                     <div class="mb-3 col-sm-6">
                                                         <label>Email Address</label>
-                                                        <input class="form-control" type="email" name="cust_email"
-                                                            required>
+                                                        <input class="form-control" placeholder="Enter Email"
+                                                            type="email" name="cust_email">
+                                                        <div class="form-text">*Optional</div>
+
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="mb-3 col-sm-6">
                                                         <label>Plate Number</label>
-                                                        <input class="form-control" type="text" name="plate_number"
-                                                            required>
+                                                        <input class="form-control" placeholder="Enter Plate Number"
+                                                            type="text" name="plate_number" required>
                                                     </div>
                                                     <div class="mb-3 col-sm-6">
                                                         <label>Vehicle</label>
@@ -206,14 +211,15 @@
                                                     </div>
                                                     <div class="mb-3 col-sm-6">
                                                         <label>Address</label>
-                                                        <input type="text" class="form-control" name="address"
-                                                            required>
+                                                        <input type="text" placeholder="Enter Address"
+                                                            class="form-control" name="address" required>
                                                     </div>
                                                 </div>
                                                 <div class="row">
                                                     <div class="mb-3">
                                                         <label>Remark</label>
-                                                        <input class="form-control" type="text" name="remark">
+                                                        <input class="form-control" placeholder="Enter Remark"
+                                                            type="text" name="remark">
                                                     </div>
                                                 </div>
                                             </div>
@@ -302,7 +308,13 @@
                 let arr_sub_material = [];
                 let arr_sub_type = [];
                 let arr_harga_jual = [];
+                let modal_id = $('.modalButton').attr('data-bs-target');
 
+
+                $('.select2').select2({
+                    width: "100%",
+                    dropdownParent: modal_id,
+                });
                 //Add Product to Cart
                 $(document).on('click', '.addProduct', function() {
                     $(this).prop('disabled', true);
@@ -333,16 +345,16 @@
                         '</button>' +
                         '<input type="hidden" class="product-id-cart" value="' + product_id + '">' +
                         '</td>' +
-                        '<td>' + material + ' - ' +
+                        '<td><small>' +
                         sub_material + ' ' + sub_type + ': ' +
                         '<strong>' + product_name + '</strong>' +
-                        '</td>' +
-                        '<td><strong><input type="number" value="0" class="form-control" name="" id="qty' +
+                        '</small></td>' +
+                        '<td><input type="number" value="0" class="form-control" name="" id="qty' +
                         product_id +
-                        '"></strong></td>' +
-                        '<input type="hidden" name="retails[0][product_id]" value="">' +
-                        '<input type="hidden" name="retails[0][qty]" value="">' +
-                        '<input type="hidden" name="retails[0][discount]" value="">' +
+                        '"></td>' +
+                        '<td><input type="number" value="0" class="form-control" name="" id="disc' +
+                        product_id +
+                        '"></td>' +
                         '</tr>';
 
                     $(document).find('#table-cart').append(addCart);
@@ -460,54 +472,32 @@
                         }
                     });
 
-                    $(modal_id).find('.select2').select2({
-                        width: "100%",
-                        dropdownParent: modal_id,
-                    });
-
-                    $(modal_id).find('.district-retail').select2({
-                        dropdownParent: modal_id,
-                        width: "100%",
-                        ajax: {
-                            type: "GET",
-                            url: "/district/selectAll/",
-                            data: function(params) {
-                                return {
-                                    _token: csrf,
-                                    q: params.term, // search term
-                                };
-                            },
-                            dataType: "json",
-                            delay: 250,
-                            processResults: function(data) {
-                                return {
-                                    results: $.map(data, function(item) {
-                                        return {
-                                            text: item.district_name,
-                                            id: item.id,
-                                        };
-                                    }),
-                                };
-                            },
-                        },
-                    })
                     let total_all = 0;
                     for (let index = 0; index < arr_product_id.length; index++) {
                         let qty = $(document).find('#table-cart').find('#qty' + arr_product_id[index]).val();
-                        let format_harga = (parseInt(arr_harga_jual[index]) * qty).toLocaleString('id', {
+                        let disc = $(document).find('#table-cart').find('#disc' + arr_product_id[index]).val();
+
+                        let diskon = parseInt(arr_harga_jual[index]) * (disc / 100);
+                        let hargaDiskon = parseInt(arr_harga_jual[index]) - diskon;
+
+                        let format_harga = (hargaDiskon * qty).toLocaleString('id', {
                             minimumFractionDigits: 0,
                             maximumFractionDigits: 0
                         });
 
                         let product_qty_total = `
-                            <li><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ${arr_material[index]} - ${arr_sub_material[index]} ${arr_sub_type[index]}: 
-                                ${arr_product_name[index]} × ${qty} <span>Rp. ${format_harga}</span>
+                            <li><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ${arr_sub_material[index]} ${arr_sub_type[index]}: 
+                                ${arr_product_name[index]} × ${qty} Disc: ${disc}% <span>Rp. ${format_harga}</span>
                             </li>
+                            <input type="hidden" name="retails[${index}][product_id]" value="${arr_product_id[index]}" >
+                            <input type="hidden" name="retails[${index}][qty]" value="${qty}" >
+                            <input type="hidden" name="retails[${index}][discount]" value="${disc}" >
                         `;
                         $(modal_id).find('#products-qty-total').append(product_qty_total);
 
-                        total_all = total_all + (parseInt(arr_harga_jual[index]) * qty);
+                        total_all = total_all + (hargaDiskon * qty);
                     }
+
 
                     $(modal_id).find('#products-detail').find('#total-exl').text('Rp. ' + total_all
                         .toLocaleString(
@@ -531,10 +521,45 @@
                             maximumFractionDigits: 0
                         }));
 
+                    let input_total = `
+                    <input type="hidden" name="total_excl" value="${total_all}">
+                    <input type="hidden" name="total_ppn" value="${total_ppn}">
+                    <input type="hidden" name="total_incl" value="${total_incl}">
+                    `;
+
+                    $(modal_id).find('#products-detail').append(input_total);
+
                     $(modal_id).on('hidden.bs.modal', function() {
                         total_all = 0;
                         $(modal_id).find('#products-qty-total').html('');
                     });
+                });
+
+                $(document).find('.district-retail').select2({
+                    width: "100%",
+                    dropdownParent: modal_id,
+                    ajax: {
+                        type: "GET",
+                        url: "/district/selectAll/",
+                        data: function(params) {
+                            return {
+                                _token: csrf,
+                                q: params.term, // search term
+                            };
+                        },
+                        dataType: "json",
+                        delay: 250,
+                        processResults: function(data) {
+                            return {
+                                results: $.map(data, function(item) {
+                                    return {
+                                        text: item.district_name,
+                                        id: item.district_name,
+                                    };
+                                }),
+                            };
+                        },
+                    },
                 });
 
             });

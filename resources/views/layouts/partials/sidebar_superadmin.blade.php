@@ -190,6 +190,16 @@
                             href="{{ url('/retail/create') }}"><i data-feather="inbox"></i><span>Create Order
                             </span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail/') ? 'active' : '' }}"
+                            href="{{ url('/retail') }}"><i data-feather="inbox"></i><span>Invoicing
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail/credit') ? 'active' : '' }}"
+                            href="{{ url('/retail/credit') }}"><i data-feather="inbox"></i><span>Credit
+                            </span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Information</h6>
