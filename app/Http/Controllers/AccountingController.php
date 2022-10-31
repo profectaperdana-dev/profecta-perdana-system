@@ -92,6 +92,59 @@ class AccountingController extends Controller
         }
         return response()->json($sub_materials);
     }
+
+    public function profit_loss()
+    {
+        $income = JurnalModel::where('account_code', '1')->sum('total');
+        $load_discount = JurnalModel::where('account_code', '2.2.703.804.102')->sum('total');
+        $load_return = JurnalModel::where('account_code', '2.2.703.804.8')->sum('total');
+
+        $data = [
+            'title' => 'Profit and Loss',
+            'income' => $income,
+            'load_discount' => $load_discount,
+            'load_return' => $load_return
+        ];
+
+        return view('accounting.loss_profit', $data);
+    }
+
+    public function store_expense(Request $request)
+    {
+        //* validate
+        $request->validate([
+            "account_id" => "required",
+            "sub_account_id" => "required",
+            "date" => "required",
+            "memo" => "required",
+            "total" => "required"
+        ]);
+
+        $model = new JurnalModel();
+        $model->date = $request->date;
+        $account_id = AccountModel::where('id', $request->account_id)->first();
+        $sub_account_id = AccountSubModel::where('id', $request->sub_account_id)->first();
+        $type_account_id = "";
+        if ($request->type_account_id) {
+            $type_account_id = AccountSubTypeModel::where('id', $request->type_account_id)->first();
+        }
+        if ($account_id->code == "2.2.703.802.2") {
+            $model->code = $sub_account_id->name . " - " . $type_account_id->name;
+            $model->account_code = $type_account_id->code;
+        } else {
+            $model->code = $sub_account_id->name;
+            $model->account_code = $sub_account_id->code;
+        }
+        $model->memo = $request->memo;
+        $model->total = $request->total;
+        $saved = $model->save();
+
+        if ($saved) {
+            return redirect('/expenses/create')->with('success', 'Add Expense Success!');
+        } else {
+            return redirect('/expenses/create')->with('error', 'Add Expense Fail!');
+        }
+    }
     /** 
      * Show the form for creating a new resource.
      *

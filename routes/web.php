@@ -150,12 +150,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('trade_invoice/{id}/print', [ProductTradeInController::class, 'printTradeInvoice']);
     Route::get('report_trade_in', [ReportController::class, 'reportTradeIn']);
     Route::get('jurnal', [AccountingController::class, 'jurnal']);
-    Route::get('expenses/create', [AccountingController::class, 'createExpenses']);
     Route::get('/sub_account/select/{id}', [AccountingController::class, 'select']);
     Route::get('/sub_type_account/select/{id}', [AccountingController::class, 'select_type']);
     Route::get('motocycle_brand/select/{id}', [MotorController::class, 'select']);
     Route::get('district/selectAll', [DirectSalesController::class, 'select']);
     Route::post('expenses/store', [AccountingController::class, 'storeExpenses']);
+
+    Route::get('profit_loss', [AccountingController::class, 'profit_loss']);
+
+    Route::prefix('expenses')->group(function () {
+        Route::get('/create', [AccountingController::class, 'createExpenses']);
+        Route::post('/store', [AccountingController::class, 'store_expense']);
+    });
 
     Route::prefix('retail')->group(function () {
         Route::get('/', [DirectSalesController::class, 'index']);
@@ -167,6 +173,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/mark_as_paid/{id}', [DirectSalesController::class, 'mark_as_paid']);
         Route::get('/selectProductAll', [DirectSalesController::class, 'selectProductAll']);
         Route::post('/{id}/update_retail', [DirectSalesController::class, 'update_retail']);
+        Route::get('/search', [DirectSalesController::class, 'search']);
+        Route::get('/selectById', [DirectSalesController::class, 'selectById']);
     });
 
     Route::prefix('cars_type')->group(function () {

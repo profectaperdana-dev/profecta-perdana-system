@@ -6,15 +6,16 @@
                 <div class="product-search">
                     <div class="input-group mb-3">
                         <input type="text" class="form-control" placeholder="Search..." aria-label="Recipient's username"
-                            aria-describedby="basic-addon2">
+                            aria-describedby="basic-addon2" id="searchRetail">
                         <span class="input-group-text"><i class="fa fa-search"></i></span>
                     </div>
                 </div>
             </div>
             <div class="row row-cols row-cols-lg-7 g-2 g-lg-1 mb-5">
-                <div class="btn btn-outline-primary col me-1">All</div>
+                <div class="btn btn-outline-primary col me-1 active btn-sub" data-id="all">All</div>
                 @foreach ($sub_materials as $item)
-                    <div class="btn btn-outline-primary col me-1">{{ $item->nama_sub_material }}</div>
+                    <div class="btn btn-outline-primary col me-1 btn-sub" data-id="{{ $item->id }}">
+                        {{ $item->nama_sub_material }}</div>
                 @endforeach
             </div>
         </div>

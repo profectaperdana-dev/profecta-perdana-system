@@ -312,6 +312,7 @@ class ReturnController extends Controller
         $jurnal->date = carbon::now();
         $jurnal->code = $account_type->name . ' ' . $model->return_number;
         $jurnal->total = $total;
+        $jurnal->account_code = "2.2.703.804.8";
         $jurnal->status = 1;
         $jurnal->save();
         //Change Stock

@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
+                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">
                         {{ $title }}
                 </div>
 
@@ -26,7 +26,7 @@
                         <hr class="bg-primary">
                     </div>
                     <div class="card-body">
-                        <form class="form-label-left input_mask" method="post" action="{{ url('/product_uoms') }}"
+                        <form class="form-label-left input_mask" method="post" action="{{ url('/expenses/store') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
@@ -35,7 +35,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-4">
                                             <label class="font-weight-bold">Account</label>
-                                            <select name="" class="form-control text-capitalize account"
+                                            <select name="account_id" class="form-control text-capitalize account"
                                                 id="">
                                                 <option value="">-- Select Account --</option>
                                                 @foreach ($account as $item)
@@ -47,7 +47,7 @@
 
                                         <div class="col-md-4">
                                             <label class="font-weight-bold">Sub Account</label>
-                                            <select name="" class="form-control sub_account text-capitalize">
+                                            <select name="sub_account_id" class="form-control sub_account text-capitalize">
                                                 <option value="">-- Select Sub Account --</option>
 
                                             </select>
@@ -55,7 +55,8 @@
 
                                         <div class="col-md-4" hidden id="type_account">
                                             <label class="font-weight-bold">Sub Type Account</label>
-                                            <select name="" class="form-control sub_type_account text-capitalize">
+                                            <select name="type_account_id"
+                                                class="form-control sub_type_account text-capitalize">
                                                 <option value="">-- Select Sub Type Account --</option>
 
                                             </select>
@@ -65,9 +66,9 @@
                                         <div class="col-md-4">
                                             <label class="font-weight-bold">Date</label>
                                             <input type="date"
-                                                class="form-control text-capitalize {{ $errors->first('uom') ? ' is-invalid' : '' }}"
-                                                name="uom" placeholder="Name Unit of Measurement">
-                                            @error('uom')
+                                                class="form-control text-capitalize {{ $errors->first('date') ? ' is-invalid' : '' }}"
+                                                name="date" placeholder="Date">
+                                            @error('date')
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>
@@ -75,9 +76,9 @@
                                         <div class="col-md-4">
                                             <label class="font-weight-bold">Memo</label>
                                             <input type="text"
-                                                class="form-control text-capitalize {{ $errors->first('uom') ? ' is-invalid' : '' }}"
-                                                name="uom" placeholder="Name Unit of Measurement">
-                                            @error('uom')
+                                                class="form-control text-capitalize {{ $errors->first('memo') ? ' is-invalid' : '' }}"
+                                                name="memo" placeholder="Enter Memo">
+                                            @error('memo')
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>
@@ -85,9 +86,9 @@
                                         <div class="col-md-4">
                                             <label class="font-weight-bold">Total</label>
                                             <input type="number"
-                                                class="form-control text-capitalize {{ $errors->first('uom') ? ' is-invalid' : '' }}"
-                                                name="uom" placeholder="Name Unit of Measurement">
-                                            @error('uom')
+                                                class="form-control text-capitalize {{ $errors->first('total') ? ' is-invalid' : '' }}"
+                                                name="total" placeholder="Enter Total">
+                                            @error('total')
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>

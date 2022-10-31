@@ -278,6 +278,54 @@ class DirectSalesController extends Controller
         return response()->json($sub_materials);
     }
 
+    public function search()
+    {
+        $sub_materials = [];
+        $search = request()->q;
+        if (!empty($search)) {
+            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
+                ->whereIn('shown', ['all', 'retail'])
+                ->whereHas('stockBy', function ($query) {
+                    $query->where('warehouses_id', Auth::user()->warehouse_id);
+                })->where('nama_barang', 'LIKE', "%$search%")
+                ->get();
+        } else {
+            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
+                ->whereIn('shown', ['all', 'retail'])
+                ->whereHas('stockBy', function ($query) {
+                    $query->where('warehouses_id', Auth::user()->warehouse_id);
+                })
+                ->get();
+        }
+
+
+        return response()->json($sub_materials);
+    }
+
+    public function selectById()
+    {
+        $sub_materials = [];
+        $search = request()->s;
+        if ($search != "all") {
+            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
+                ->whereIn('shown', ['all', 'retail'])
+                ->whereHas('stockBy', function ($query) {
+                    $query->where('warehouses_id', Auth::user()->warehouse_id);
+                })->where('id_sub_material', $search)
+                ->get();
+        } else {
+            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
+                ->whereIn('shown', ['all', 'retail'])
+                ->whereHas('stockBy', function ($query) {
+                    $query->where('warehouses_id', Auth::user()->warehouse_id);
+                })
+                ->get();
+        }
+
+
+        return response()->json($sub_materials);
+    }
+
     public function credit(Request $request)
     {
         if (!Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')) {
