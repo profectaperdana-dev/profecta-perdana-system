@@ -221,7 +221,7 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('jurnal') ? 'active' : '' }}"
-                            href="{{ url('/jurnal') }}"><i data-feather="inbox"></i><span>Jurnals
+                            href="{{ url('/jurnal') }}"><i data-feather="inbox"></i><span>Journal
                             </span></a>
                     </li>
                     <li class="sidebar-main-title">

@@ -649,6 +649,7 @@ class SalesOrderController extends Controller
                 $jurnal->date = carbon::now();
                 $jurnal->code = $account_type->name . ' ' . $model->order_number;
                 $jurnal->total = $model->total;
+                $jurnal->account_code = "1";
                 $jurnal->status = 1;
                 $jurnal->save();
 
@@ -659,6 +660,7 @@ class SalesOrderController extends Controller
                     $jurnal->date = carbon::now();
                     $jurnal->code = $account_types->name . ' ' . $model->order_number;
                     $jurnal->total = $totalDiskon;
+                    $jurnal->account_code = "2.2.703.804.102";
                     $jurnal->status = 1;
                     $jurnal->save();
                 }
