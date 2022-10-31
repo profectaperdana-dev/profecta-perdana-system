@@ -153,9 +153,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('expenses/create', [AccountingController::class, 'createExpenses']);
     Route::get('/sub_account/select/{id}', [AccountingController::class, 'select']);
     Route::get('/sub_type_account/select/{id}', [AccountingController::class, 'select_type']);
-
     Route::get('motocycle_brand/select/{id}', [MotorController::class, 'select']);
     Route::get('district/selectAll', [DirectSalesController::class, 'select']);
+    Route::post('expenses/store', [AccountingController::class, 'storeExpenses']);
 
     Route::prefix('retail')->group(function () {
         Route::get('/', [DirectSalesController::class, 'index']);

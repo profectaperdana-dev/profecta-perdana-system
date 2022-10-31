@@ -254,9 +254,10 @@ class ClaimController extends Controller
     public function edit($id)
     {
         $title = 'Finish Claim';
-
+        // $suppliers = SuppliersModel::all();
         $value = AccuClaimModel::find($id);
-        return view('claim.edit', compact('title',  'value', 'suppliers', 'warehouse'));
+        // $warehouse = WarehouseModel::all();
+        return view('claim.edit', compact('title',  'value'));
     }
 
     /**

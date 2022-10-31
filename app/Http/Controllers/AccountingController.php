@@ -36,6 +36,28 @@ class AccountingController extends Controller
         return view('accounting.create_expanse', compact('title', 'account'));
     }
 
+    public function storeExpenses(Request $request)
+    {
+        $request->validate([
+            'account_id' => 'required',
+            'account_sub_id' => 'required',
+            'account_sub_type_id' => 'required',
+            'description' => 'required',
+            'amount' => 'required',
+            'date' => 'required',
+        ]);
+        $data = [
+            'account_id' => $request->account_id,
+            'account_sub_id' => $request->account_sub_id,
+            'account_sub_type_id' => $request->account_sub_type_id,
+            'description' => $request->description,
+            'amount' => $request->amount,
+            'date' => $request->date,
+        ];
+        JurnalModel::create($data);
+        return redirect()->route('accounting.jurnal')->with('success', 'Data has been added');
+    }
+
     public function select($id)
     {
         $sub_materials = [];
@@ -88,7 +110,7 @@ class AccountingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //* 
     }
 
     /**
