@@ -4,6 +4,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
     @endpush
 
+    @include('accounting.detail')
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
@@ -26,17 +27,42 @@
                         <hr class="bg-primary">
                     </div>
                     <div class="card-body">
+                        <form action="">
+                            <div class="form-group row">
+                                <div class="col-lg-4 col-6">
+                                    <label class="col-form-label text-end">Start Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control digits" type="date" data-language="en"
+                                            placeholder="Start" name="from_date" id="from_date">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-6">
+                                    <label class="col-form-label text-end">End Date</label>
+                                    <div class="input-group">
+                                        <input class="form-control digits" type="date" data-language="en"
+                                            placeholder="Start" name="to_date" id="to_date">
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-2">
+                                    <label class="col-form-label text-end">&nbsp;</label>
+                                    <div class="input-group">
+                                        <button type="submit" class="btn btn-primary form-control text-white"
+                                            name="filter" id="filter">Filter</button>
+                                    </div>
+                                </div>
+                                <div class="col-6 col-lg-2">
+                                    <label class="col-form-label text-end">&nbsp;</label>
+                                    <div class="input-group">
+                                        <a href="{{ url('/profit_loss') }}"
+                                            class="btn btn-warning form-control text-white">Refresh</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
                         <div class="table-responsive">
                             <table id="income"
                                 class="table table-sm table-hover table-striped expandable-table text-capitalize"
                                 style="width:100%">
-                                {{-- <thead>
-                                    <tr>
-                                        <th class="fs-3 fw-bold">I. Sales</th>
-                                        <th></th>
-                                        <th></th>
-                                    </tr>
-                                </thead> --}}
                                 <tbody>
                                     <tr>
                                         <th class="text-start">Gross Income</th>
@@ -74,25 +100,20 @@
                                         <td></td>
                                     </tr>
                                     <tr>
-
                                         <th class="text-start fw-bold">Net Income (@currency($income) - @currency($load_discount + $load_return))
                                         </th>
-
                                         </th>
                                         <td></td>
                                         <td class="text-end fw-bold">
                                         </td>
                                         <td class="text-end"></td>
                                         <th class="text-end"> @currency($income - ($load_discount + $load_return))</th>
-
                                     </tr>
                                     <tr>
                                         <td></td>
                                         <td class="text-start fw-bold">Cost Of Goods Sold </td>
-
                                         <td class="text-end">
                                         </td>
-
                                         <td></td>
                                         <td class="text-end fw-bold">
                                             (@currency($load_hpp - $load_return_hpp))
@@ -104,80 +125,126 @@
                                         <td></td>
                                         <td class="text-end">
                                         </td>
-
                                         <td></td>
                                         <td class="text-end fw-bold">
-                                            @currency($income - ($load_discount + $load_return) - $load_hpp)
+                                            @php
+                                                $gross_profit = $income - ($load_discount + $load_return) - ($load_hpp - $load_return_hpp);
+                                            @endphp
+                                            @currency($gross_profit)
                                         </td>
                                     </tr>
                                     <tr>
                                         <td colspan="5" class="text-start fw-bold">Operational Expense :</td>
-
                                     </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Purchase Operational Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                    @if ($biaya_pembelian != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start">
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-original-title="test" data-bs-target="#pembelian">Purchase
+                                                    Operational
+                                                    Expense
+                                                </a>
+                                            </td>
+                                            <td class="text-end">@currency($biaya_pembelian)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
+                                        </tr>
+                                    @endif
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Communication Expense</td>
-                                        <td class="text-end">@currency($biaya_komunikasi)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                    @if ($biaya_komunikasi != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start">
+                                                <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    data-original-title="test" data-bs-target="#komunikasi">Communication
+                                                    Expense
+                                                </a>
+                                            </td>
+                                            <td class="text-end">@currency($biaya_komunikasi)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
+                                        </tr>
+                                    @endif
+                                    @if ($biaya_gaji != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start"> <a class="dropdown-item" href="#"
+                                                    data-bs-toggle="modal" data-original-title="test"
+                                                    data-bs-target="#gaji">Salaries Expense
+                                                </a></td>
+                                            <td class="text-end">@currency($biaya_gaji)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Salaries Expense</td>
-                                        <td class="text-end">@currency($biaya_gaji)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                        </tr>
+                                    @endif
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Promotion Expense</td>
-                                        <td class="text-end">@currency($biaya_promosi)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                    @if ($biaya_promosi != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start"><a class="dropdown-item" href="#"
+                                                    data-bs-toggle="modal" data-original-title="test"
+                                                    data-bs-target="#promosi">Promotion Expense</a></td>
+                                            <td class="text-end">@currency($biaya_promosi)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Vehicle Expense</td>
-                                        <td class="text-end">@currency($biaya_kendaraan)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                        </tr>
+                                    @endif
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Building Expense</td>
-                                        <td class="text-end">@currency($biaya_gedung)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                    @if ($biaya_kendaraan != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start"><a class="dropdown-item" href="#"
+                                                    data-bs-toggle="modal" data-original-title="test"
+                                                    data-bs-target="#kendaraan">Vehicle Expense</a></td>
+                                            <td class="text-end">@currency($biaya_kendaraan)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Sales Operational Expense</td>
-                                        <td class="text-end">@currency($biaya_penjualan)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                        </tr>
+                                    @endif
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Office Expense</td>
-                                        <td class="text-end">@currency($biaya_kantor)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
+                                    @if ($biaya_gedung != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start"><a class="dropdown-item" href="#"
+                                                    data-bs-toggle="modal" data-original-title="test"
+                                                    data-bs-target="#gedung">Building Expense</a></td>
+                                            <td class="text-end">@currency($biaya_gedung)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
 
-                                    </tr>
+                                        </tr>
+                                    @endif
+
+                                    @if ($biaya_penjualan != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start"><a class="dropdown-item" href="#"
+                                                    data-bs-toggle="modal" data-original-title="test"
+                                                    data-bs-target="#penjualan">Sales Operational Expense</a></td>
+                                            <td class="text-end">@currency($biaya_penjualan)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
+
+                                        </tr>
+                                    @endif
+
+                                    @if ($biaya_kantor != null)
+                                        <tr>
+                                            <td></td>
+                                            <td class="text-start"><a class="dropdown-item" href="#"
+                                                    data-bs-toggle="modal" data-original-title="test"
+                                                    data-bs-target="#kantor">Office Expense</a></td>
+                                            <td class="text-end">@currency($biaya_kantor)</td>
+                                            <td class="text-end"></td>
+                                            <td></td>
+
+                                        </tr>
+                                    @endif
+
                                     @php
                                         $total_operational = $biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor;
                                     @endphp
@@ -192,7 +259,7 @@
                                         </td>
                                         <td></td>
                                     </tr>
-                                    <tr>
+                                    {{-- <tr>
                                         <td colspan="5" class="text-start fw-bold"> Non Operational Expense :</td>
 
                                     </tr>
@@ -282,7 +349,7 @@
                                         <td class="text-end fw-bold">
                                             @currency($biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor)
                                         </td>
-                                    </tr>
+                                    </tr> --}}
                                     <tr>
                                         <th class="text-start">Net Profit
                                         </th>
@@ -293,7 +360,7 @@
                                         </td>
                                         <td></td>
                                         <td class="text-end fw-bold">
-                                            @currency($biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor)
+                                            @currency($gross_profit - $total_operational)
                                         </td>
                                     </tr>
                                 </tbody>
