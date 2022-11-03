@@ -27,7 +27,7 @@ class AccountingController extends Controller
     public function jurnal()
     {
         //* view data from database
-        $data = JurnalModel::latest()->get();
+        $data = JurnalModel::orderBy('date', 'DESC')->get();
         $title = 'Journal';
         return view('accounting.jurnal', compact('data', 'title'));
     }
@@ -104,21 +104,75 @@ class AccountingController extends Controller
         return response()->json($sub_materials);
     }
 
-    public function profit_loss()
+    public function profit_loss(Request $request)
     {
-        $income = JurnalModel::where('account_code', '1')->sum('total');
-        $load_discount = JurnalModel::where('account_code', '2.2.703.804.102')->sum('total');
-        $load_return = JurnalModel::where('account_code', '2.2.703.804.8')->sum('total');
-        $load_hpp = JurnalModel::where('account_code', '2')->sum('total');
-        $load_return_hpp = JurnalModel::where('account_code', '3')->sum('total');
-        $biaya_komunikasi =  JurnalModel::where('account_code', '2.2.703.802.2.11')->sum('total');
-        $biaya_pembelian = JurnalModel::where('account_code', '2.2.703.802.2.1')->sum('total');
-        $biaya_promosi = JurnalModel::where('account_code', '2.2.703.802.2.16')->sum('total');
-        $biaya_gaji = JurnalModel::where('account_code', '2.2.703.802.2.13')->sum('total');
-        $biaya_kendaraan = JurnalModel::where('account_code', '2.2.703.802.2.17')->sum('total');
-        $biaya_gedung = JurnalModel::where('account_code', '2.2.703.802.2.18')->sum('total');
-        $biaya_penjualan = JurnalModel::where('account_code', '2.2.703.802.2.19')->sum('total');
-        $biaya_kantor = JurnalModel::where('account_code', '2.2.703.802.2.20')->sum('total');
+        if (!empty($request->from_date)) {
+            $income = JurnalModel::where('account_code', '1')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $load_discount = JurnalModel::where('account_code', '2.2.703.804.102')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $load_return = JurnalModel::where('account_code', '2.2.703.804.8')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $load_hpp = JurnalModel::where('account_code', '2')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $load_return_hpp = JurnalModel::where('account_code', '3')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+
+            //* get data
+            $komunikasi =   JurnalModel::where('account_code', '2.2.703.802.2.11')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+            $pembelian = JurnalModel::where('account_code', '2.2.703.802.2.1')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+            $promosi = JurnalModel::where('account_code', '2.2.703.802.2.16')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+            $gaji = JurnalModel::where('account_code', '2.2.703.802.2.13')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+            $kendaraan = JurnalModel::where('account_code', '2.2.703.802.2.17')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+            $gedung = JurnalModel::where('account_code', '2.2.703.802.2.18')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+            $penjualan = JurnalModel::where('account_code', '2.2.703.802.2.19')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+            $kantor = JurnalModel::where('account_code', '2.2.703.802.2.20')->whereBetween('date', array($request->from_date, $request->to_date))->latest()->get();
+
+
+            //* opersional
+            $biaya_komunikasi =  JurnalModel::where('account_code', '2.2.703.802.2.11')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $biaya_pembelian = JurnalModel::where('account_code', '2.2.703.802.2.1')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $biaya_promosi = JurnalModel::where('account_code', '2.2.703.802.2.16')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $biaya_gaji = JurnalModel::where('account_code', '2.2.703.802.2.13')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $biaya_kendaraan = JurnalModel::where('account_code', '2.2.703.802.2.17')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $biaya_gedung = JurnalModel::where('account_code', '2.2.703.802.2.18')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $biaya_penjualan = JurnalModel::where('account_code', '2.2.703.802.2.19')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+            $biaya_kantor = JurnalModel::where('account_code', '2.2.703.802.2.20')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
+        } else {
+            $income = JurnalModel::where('account_code', '1')->whereMonth('date', date('m'))->sum('total');
+            $load_discount = JurnalModel::where('account_code', '2.2.703.804.102')->whereMonth('date', date('m'))->sum('total');
+            $load_return = JurnalModel::where('account_code', '2.2.703.804.8')->whereMonth('date', date('m'))->sum('total');
+            $load_hpp = JurnalModel::where('account_code', '2')->whereMonth('date', date('m'))->sum('total');
+            $load_return_hpp = JurnalModel::where('account_code', '3')->whereMonth('date', date('m'))->sum('total');
+
+            //* operasional komunikasi
+            $biaya_komunikasi =  JurnalModel::where('account_code', '2.2.703.802.2.11')->whereMonth('date', date('m'))->sum('total');
+            $komunikasi =   JurnalModel::where('account_code', '2.2.703.802.2.11')->whereMonth('date', date('m'))->latest()->get();
+
+            //* operasional pembelian
+            $biaya_pembelian = JurnalModel::where('account_code', '2.2.703.802.2.1')->whereMonth('date', date('m'))->sum('total');
+            $pembelian = JurnalModel::where('account_code', '2.2.703.802.2.1')->whereMonth('date', date('m'))->latest()->get();
+
+            //* operasional promosi
+            $biaya_promosi = JurnalModel::where('account_code', '2.2.703.802.2.16')->whereMonth('date', date('m'))->sum('total');
+            $promosi = JurnalModel::where('account_code', '2.2.703.802.2.16')->whereMonth('date', date('m'))->latest()->get();
+
+            //* operasional gaji
+            $biaya_gaji = JurnalModel::where('account_code', '2.2.703.802.2.13')->whereMonth('date', date('m'))->sum('total');
+            $gaji = JurnalModel::where('account_code', '2.2.703.802.2.13')->whereMonth('date', date('m'))->latest()->get();
+
+            //* operasional kendaraan
+            $biaya_kendaraan = JurnalModel::where('account_code', '2.2.703.802.2.17')->whereMonth('date', date('m'))->sum('total');
+            $kendaraan = JurnalModel::where('account_code', '2.2.703.802.2.17')->whereMonth('date', date('m'))->latest()->get();
+
+            //* operasional gedung
+            $biaya_gedung = JurnalModel::where('account_code', '2.2.703.802.2.18')->whereMonth('date', date('m'))->sum('total');
+            $gedung = JurnalModel::where('account_code', '2.2.703.802.2.18')->whereMonth('date', date('m'))->latest()->get();
+
+            //* operasional penjualan
+            $biaya_penjualan = JurnalModel::where('account_code', '2.2.703.802.2.19')->whereMonth('date', date('m'))->sum('total');
+            $penjualan = JurnalModel::where('account_code', '2.2.703.802.2.19')->whereMonth('date', date('m'))->latest()->get();
+
+            //* operasional kantor
+            $biaya_kantor = JurnalModel::where('account_code', '2.2.703.802.2.20')->whereMonth('date', date('m'))->sum('total');
+            $kantor = JurnalModel::where('account_code', '2.2.703.802.2.20')->whereMonth('date', date('m'))->latest()->get();
+        }
+
         // dd($income);
         $data = [
             'title' => 'Profit and Loss',
@@ -127,6 +181,8 @@ class AccountingController extends Controller
             'load_return' => $load_return,
             'load_hpp' => $load_hpp,
             'load_return_hpp' => $load_return_hpp,
+
+            //* sum operasional
             'biaya_komunikasi' => $biaya_komunikasi,
             'biaya_pembelian' => $biaya_pembelian,
             'biaya_promosi' => $biaya_promosi,
@@ -135,6 +191,17 @@ class AccountingController extends Controller
             'biaya_gedung' => $biaya_gedung,
             'biaya_penjualan' => $biaya_penjualan,
             'biaya_kantor' => $biaya_kantor,
+
+            //*get data
+            'pembelian' => $pembelian,
+            'komunikasi' => $komunikasi,
+            'gaji' => $gaji,
+            'promosi' => $promosi,
+            'kendaraan' => $kendaraan,
+            'gedung' => $gedung,
+            'penjualan' => $penjualan,
+            'kantor' => $kantor,
+
 
 
         ];
