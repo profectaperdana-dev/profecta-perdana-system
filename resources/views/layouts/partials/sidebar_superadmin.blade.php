@@ -20,6 +20,16 @@
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="mainnav">
+                <ul>
+                    <li class="ms-3">
+                        <form class="form-inline search-form">
+                            <div class="search-bg">
+                                <input class="form-control-plaintext" placeholder="Search here....." id="searchLink">
+                            </div>
+                        </form>
+                    </li>
+                </ul>
+
                 <ul class="nav-menu custom-scrollbar">
                     <li class="back-btn">
                         <div class="mobile-back text-end"><span>Back</span><i class="fa fa-angle-right ps-2"
@@ -224,6 +234,12 @@
                             href="{{ url('/jurnal') }}"><i data-feather="inbox"></i><span>Journal
                             </span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('depreciation/create') ? 'active' : '' }}"
+                            href="{{ url('/depreciation/create') }}"><i data-feather="inbox"></i><span>Input
+                                Depreciation
+                            </span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Retail</h6>
@@ -235,7 +251,7 @@
                             </span></a>
                     </li>
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('retail/') ? 'active' : '' }}"
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail') ? 'active' : '' }}"
                             href="{{ url('/retail') }}"><i data-feather="inbox"></i><span>Invoicing
                             </span></a>
                     </li>

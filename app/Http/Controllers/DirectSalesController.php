@@ -463,7 +463,14 @@ class DirectSalesController extends Controller
             'retails.*.discount' => 'required',
 
         ]);
-
+        //Restore stock to before changed
+        $direct_restore = DirectSalesDetailModel::where('direct_id', $id)->get();
+        foreach ($direct_restore as $restore) {
+            $stock = StockModel::where('warehouses_id', Auth::user()->warehouse_id)
+                ->where('products_id', $restore->product_id)->first();
+            $stock->stock = $stock->stock + $restore->qty;
+            $stock->save();
+        }
         //Check Number of product
         if ($request->retails == null) {
             return Redirect::back()->with('error', 'There are no products!');
@@ -493,27 +500,22 @@ class DirectSalesController extends Controller
         $selected_direct->district = $request->district;
         $selected_direct->address = $request->address;
         $selected_direct->plate_number = strtoupper(str_replace(' ', '', $request->plate_number));
-        if ($request->vehicle == 'Car') {
-            $selected_direct->car_brand_id = $request->car_brand_id;
-            $selected_direct->car_type_id = $request->car_type_id;
-            $selected_direct->motor_brand_id = null;
-            $selected_direct->motor_type_id = null;
-        } else {
-            $selected_direct->car_brand_id = null;
-            $selected_direct->car_type_id = null;
-            $selected_direct->motor_brand_id = $request->motor_brand_id;
-            $selected_direct->motor_type_id = $request->motor_type_id;
+        if ($request->vehicle != null) {
+            if ($request->vehicle == 'Car') {
+                $selected_direct->car_brand_id = $request->car_brand_id;
+                $selected_direct->car_type_id = $request->car_type_id;
+                $selected_direct->motor_brand_id = null;
+                $selected_direct->motor_type_id = null;
+            } else {
+                $selected_direct->car_brand_id = null;
+                $selected_direct->car_type_id = null;
+                $selected_direct->motor_brand_id = $request->motor_brand_id;
+                $selected_direct->motor_type_id = $request->motor_type_id;
+            }
         }
+
         $selected_direct->remark = $request->remark;
 
-        //Restore stock to before changed
-        $direct_restore = DirectSalesDetailModel::where('direct_id', $id)->get();
-        foreach ($direct_restore as $restore) {
-            $stock = StockModel::where('warehouses_id', Auth::user()->warehouse_id)
-                ->where('products_id', $restore->product_id)->first();
-            $stock->stock = $stock->stock + $restore->qty;
-            $stock->save();
-        }
 
         //Save Return Input and Total and Change Stock
         $total = 0;
@@ -550,6 +552,7 @@ class DirectSalesController extends Controller
             $getStock->stock = $old_stock - $product['qty'];
             $getStock->save();
         }
+
         $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $selected_direct->total_excl = $total;
         $selected_direct->total_ppn = $ppn;

@@ -163,6 +163,12 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [AccountingController::class, 'store_expense']);
     });
 
+    Route::prefix('depreciation')->group(function () {
+        Route::get('/', [AccountingController::class, 'depreciation']);
+        Route::get('/create', [AccountingController::class, 'create_depreciation']);
+        Route::post('/store', [AccountingController::class, 'store_depreciation']);
+    });
+
     Route::prefix('retail')->group(function () {
         Route::get('/', [DirectSalesController::class, 'index']);
         Route::get('/create', [DirectSalesController::class, 'create']);

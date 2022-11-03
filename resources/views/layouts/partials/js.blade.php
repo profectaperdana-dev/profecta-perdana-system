@@ -61,3 +61,29 @@
 
  <!-- Notification -->
  @include('layouts.partials.notify')
+
+ <script>
+     const sidenavOptions = $(document).find('.nav-link, .sidebar-main-title');
+     const showSidenavOptions = () => {
+         Array.from(sidenavOptions).forEach((el) => {
+             el.style.display = 'flex';
+         });
+     };
+     $(document).on('input', '#searchLink', function() {
+         const searchInputSidenav = $(this).val();
+
+         const filter = searchInputSidenav.toLowerCase();
+         showSidenavOptions();
+         const valueExist = !!filter.length;
+
+         if (valueExist) {
+             Array.from(sidenavOptions).forEach((el) => {
+                 const elText = el.textContent.trim().toLowerCase();
+                 const isIncluded = elText.includes(filter);
+                 if (!isIncluded) {
+                     el.style.display = 'none';
+                 }
+             });
+         }
+     });
+ </script>
