@@ -224,6 +224,11 @@
                             href="{{ url('/jurnal') }}"><i data-feather="inbox"></i><span>Journal
                             </span></a>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('profit_loss') ? 'active' : '' }}"
+                            href="{{ url('/profit_loss') }}"><i data-feather="inbox"></i><span>Profit & Loss
+                            </span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Retail</h6>

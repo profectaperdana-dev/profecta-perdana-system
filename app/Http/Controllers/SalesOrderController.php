@@ -571,6 +571,7 @@ class SalesOrderController extends Controller
         }
 
         //Save SOD Input and Count total
+        $hpp = 0;
         $total = 0;
         $totalDiskon = 0;
         foreach ($request->editProduct as $product) {
@@ -600,6 +601,7 @@ class SalesOrderController extends Controller
             $harga_awal = $harga->harga_beli * $product['qty'];
 
             $totalDiskon = $totalDiskon + ($hargaDiskon + $product['discount_rp']) * $product['qty'];
+            $hpp = $hpp + $harga_awal;
         }
 
         //Delete product that not in SOD Input
@@ -641,13 +643,19 @@ class SalesOrderController extends Controller
                 $model->pdf_invoice = $iv_number . '.pdf';
                 $model->order_number = $iv_number;
 
-
+                //*HPP
+                $jurnal_hpp = new JurnalModel();
+                $jurnal_hpp->date = carbon::now();
+                $jurnal_hpp->code = 'Cost Of Goods Sold' . ' ' . $model->order_number;
+                $jurnal_hpp->total = $hpp;
+                $jurnal_hpp->account_code = "2";
+                $jurnal_hpp->status = 1;
+                $jurnal_hpp->save();
                 //* choose account type 
-                $account_type = AccountSubTypeModel::where('id', 1)->first();
                 //* create jurnals sales invoice
                 $jurnal = new JurnalModel();
                 $jurnal->date = carbon::now();
-                $jurnal->code = $account_type->name . ' ' . $model->order_number;
+                $jurnal->code = 'Sales' . ' ' . $model->order_number;
                 $jurnal->total = $model->total;
                 $jurnal->account_code = "1";
                 $jurnal->status = 1;
@@ -658,7 +666,7 @@ class SalesOrderController extends Controller
                     $account_types = AccountSubTypeModel::where('id', 43)->first();
                     $jurnal = new JurnalModel();
                     $jurnal->date = carbon::now();
-                    $jurnal->code = $account_types->name . ' ' . $model->order_number;
+                    $jurnal->code = 'Discount' . ' ' . $model->order_number;
                     $jurnal->total = $totalDiskon;
                     $jurnal->account_code = "2.2.703.804.102";
                     $jurnal->status = 1;
