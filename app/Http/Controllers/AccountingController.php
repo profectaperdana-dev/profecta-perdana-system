@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AccountModel;
 use App\Models\AccountSubModel;
 use App\Models\AccountSubTypeModel;
+use App\Models\AssetModel;
 use App\Models\DepreciationModel;
 use App\Models\JurnalModel;
 use Illuminate\Http\Request;
@@ -60,14 +61,6 @@ class AccountingController extends Controller
         JurnalModel::create($data);
         return redirect()->route('accounting.jurnal')->with('success', 'Data has been added');
     }
-
-    public function create_depreciation()
-    {
-        $title = 'Create Depreciation';
-        // $account = AccountModel::latest()->get();
-        return view('accounting.create_depreciation', compact('title'));
-    }
-
 
     public function select($id)
     {
@@ -180,38 +173,11 @@ class AccountingController extends Controller
         }
     }
 
-    public function store_depreciation(Request $request)
-    {
-        //* validate
-        $request->validate([
-            "asset" => "required",
-            "amount" => "required|numeric",
-            "lifetime" => "required|numeric",
-            "acquisition_year" => "required",
-            "acquisition_cost" => "required|numeric"
-        ]);
-
-        $model = new DepreciationModel();
-        $model->asset = $request->asset;
-        $model->amount = $request->amount;
-        $model->lifetime = $request->lifetime;
-        $model->acquisition_year = $request->acquisition_year;
-        $model->acquisition_cost = $request->acquisition_cost;
-        $model->created_by = Auth::user()->id;
-        $saved = $model->save();
-
-        if ($saved) {
-            return redirect('/depreciation/create')->with('success', 'Add Depreciation Success!');
-        } else {
-            return redirect('/depreciation/create')->with('error', 'Add Depreciation Fail!');
-        }
-    }
-
     public function depreciation()
     {
-        $all_depreciation = DepreciationModel::latest()->get();
+        $all_depreciation = AssetModel::latest()->get();
 
-        $smallest_date = DepreciationModel::all('acquisition_year')->min('acquisition_year');
+        $smallest_date = AssetModel::all('acquisition_year')->min('acquisition_year');
         $smallest_year = date('Y', strtotime($smallest_date));
         $current_year = date('Y') - 1;
         $data = [
@@ -220,8 +186,6 @@ class AccountingController extends Controller
             'smallest_year' => $smallest_year,
             'current_year' => $current_year
         ];
-        foreach ($all_depreciation as $value) {
-        }
     }
     /** 
      * Show the form for creating a new resource.

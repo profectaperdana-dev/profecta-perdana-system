@@ -219,6 +219,11 @@
 
                         </ul>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('asset') ? 'active' : '' }}"
+                            href="{{ url('/asset') }}"><i data-feather="percent"></i><span>Master
+                                Assets</span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Report Accounting</h6>
@@ -240,8 +245,8 @@
                             </span></a>
                     </li>
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('depreciation/create') ? 'active' : '' }}"
-                            href="{{ url('/depreciation/create') }}"><i data-feather="inbox"></i><span>Input
+                        <a class="nav-link menu-title link-nav {{ request()->is('depreciation') ? 'active' : '' }}"
+                            href="{{ url('/depreciation') }}"><i data-feather="inbox"></i><span>
                                 Depreciation
                             </span></a>
                     </li>

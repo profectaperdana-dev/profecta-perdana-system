@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\AccountSubController;
 use App\Http\Controllers\AccountSubTypeController;
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CheckStockController;
 use App\Http\Controllers\CustomerAreasController;
@@ -165,8 +166,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::prefix('depreciation')->group(function () {
         Route::get('/', [AccountingController::class, 'depreciation']);
-        Route::get('/create', [AccountingController::class, 'create_depreciation']);
-        Route::post('/store', [AccountingController::class, 'store_depreciation']);
     });
 
     Route::prefix('retail')->group(function () {
@@ -261,6 +260,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/file_invoice', FilesController::class);
     Route::resource('/claim', ClaimController::class);
     Route::resource('/warehouse_types', WarehouseTypeController::class);
+    Route::resource('/asset', AssetController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {
