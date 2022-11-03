@@ -235,6 +235,11 @@
                             </span></a>
                     </li>
                     <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('profit_loss') ? 'active' : '' }}"
+                            href="{{ url('/profit_loss') }}"><i data-feather="inbox"></i><span>Profit & Loss
+                            </span></a>
+                    </li>
+                    <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('depreciation/create') ? 'active' : '' }}"
                             href="{{ url('/depreciation/create') }}"><i data-feather="inbox"></i><span>Input
                                 Depreciation

@@ -258,6 +258,7 @@ class ReturnController extends Controller
         }
 
         $total = 0;
+        $hpp = 0;
         foreach ($request->returnFields as $item) {
             $detail = new ReturnDetailModel();
             $detail->return_id = $model->id;
@@ -301,6 +302,7 @@ class ReturnController extends Controller
             $hargaDiskon = $product->harga_jual_nonretail * $diskon;
             $hargaAfterDiskon = ($product->harga_jual_nonretail -  $hargaDiskon) - $selected_sod->discount_rp;
             $total = $total + ($hargaAfterDiskon * $detail->qty);
+            $hpp = $hpp + ($product->harga_beli * $detail->qty);
         }
         $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
         $model->total = $total + $ppn;
@@ -310,11 +312,20 @@ class ReturnController extends Controller
         //* create jurnals sales invoice
         $jurnal = new JurnalModel();
         $jurnal->date = carbon::now();
-        $jurnal->code = $account_type->name . ' ' . $model->return_number;
+        $jurnal->code = 'Sales Return' . ' ' . $model->return_number;
         $jurnal->total = $total;
         $jurnal->account_code = "2.2.703.804.8";
         $jurnal->status = 1;
         $jurnal->save();
+
+        $jurnal_hpp = new JurnalModel();
+        $jurnal_hpp->date = carbon::now();
+        $jurnal_hpp->code = 'Sales Return HPP' . ' ' . $model->return_number;
+        $jurnal_hpp->total = $hpp;
+        $jurnal_hpp->account_code = "3";
+        $jurnal_hpp->status = 1;
+        $jurnal_hpp->save();
+
         //Change Stock
         $returnDetail = ReturnDetailModel::where('return_id', $model->id)->get();
         $selected_so = SalesOrderModel::where('id', $model->sales_order_id)->first();

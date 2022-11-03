@@ -39,6 +39,28 @@ class AccountingController extends Controller
         return view('accounting.create_expanse', compact('title', 'account'));
     }
 
+    public function storeExpenses(Request $request)
+    {
+        $request->validate([
+            'account_id' => 'required',
+            'account_sub_id' => 'required',
+            'account_sub_type_id' => 'required',
+            'description' => 'required',
+            'amount' => 'required',
+            'date' => 'required',
+        ]);
+        $data = [
+            'account_id' => $request->account_id,
+            'account_sub_id' => $request->account_sub_id,
+            'account_sub_type_id' => $request->account_sub_type_id,
+            'description' => $request->description,
+            'amount' => $request->amount,
+            'date' => $request->date,
+        ];
+        JurnalModel::create($data);
+        return redirect()->route('accounting.jurnal')->with('success', 'Data has been added');
+    }
+
     public function create_depreciation()
     {
         $title = 'Create Depreciation';
@@ -87,12 +109,34 @@ class AccountingController extends Controller
         $income = JurnalModel::where('account_code', '1')->sum('total');
         $load_discount = JurnalModel::where('account_code', '2.2.703.804.102')->sum('total');
         $load_return = JurnalModel::where('account_code', '2.2.703.804.8')->sum('total');
-
+        $load_hpp = JurnalModel::where('account_code', '2')->sum('total');
+        $load_return_hpp = JurnalModel::where('account_code', '3')->sum('total');
+        $biaya_komunikasi =  JurnalModel::where('account_code', '2.2.703.802.2.11')->sum('total');
+        $biaya_pembelian = JurnalModel::where('account_code', '2.2.703.802.2.1')->sum('total');
+        $biaya_promosi = JurnalModel::where('account_code', '2.2.703.802.2.16')->sum('total');
+        $biaya_gaji = JurnalModel::where('account_code', '2.2.703.802.2.13')->sum('total');
+        $biaya_kendaraan = JurnalModel::where('account_code', '2.2.703.802.2.17')->sum('total');
+        $biaya_gedung = JurnalModel::where('account_code', '2.2.703.802.2.18')->sum('total');
+        $biaya_penjualan = JurnalModel::where('account_code', '2.2.703.802.2.19')->sum('total');
+        $biaya_kantor = JurnalModel::where('account_code', '2.2.703.802.2.20')->sum('total');
+        // dd($income);
         $data = [
             'title' => 'Profit and Loss',
             'income' => $income,
             'load_discount' => $load_discount,
-            'load_return' => $load_return
+            'load_return' => $load_return,
+            'load_hpp' => $load_hpp,
+            'load_return_hpp' => $load_return_hpp,
+            'biaya_komunikasi' => $biaya_komunikasi,
+            'biaya_pembelian' => $biaya_pembelian,
+            'biaya_promosi' => $biaya_promosi,
+            'biaya_gaji' => $biaya_gaji,
+            'biaya_kendaraan' => $biaya_kendaraan,
+            'biaya_gedung' => $biaya_gedung,
+            'biaya_penjualan' => $biaya_penjualan,
+            'biaya_kantor' => $biaya_kantor,
+
+
         ];
 
         return view('accounting.loss_profit', $data);
@@ -119,13 +163,14 @@ class AccountingController extends Controller
         }
         if ($account_id->code == "2.2.703.802.2") {
             $model->code = $sub_account_id->name . " - " . $type_account_id->name;
-            $model->account_code = $type_account_id->code;
+            $model->account_code = $sub_account_id->code;
         } else {
             $model->code = $sub_account_id->name;
             $model->account_code = $sub_account_id->code;
         }
         $model->memo = $request->memo;
         $model->total = $request->total;
+        $model->status = 1;
         $saved = $model->save();
 
         if ($saved) {
@@ -196,7 +241,7 @@ class AccountingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //* 
     }
 
     /**
