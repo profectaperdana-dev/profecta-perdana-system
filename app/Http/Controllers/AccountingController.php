@@ -247,12 +247,33 @@ class AccountingController extends Controller
         $smallest_date = AssetModel::all('acquisition_year')->min('acquisition_year');
         $smallest_year = date('Y', strtotime($smallest_date));
         $current_year = date('Y') - 1;
+
+        //Count Total
+        $total = [];
+
+        foreach ($all_depreciation as $item) {
+            $temp_cost = $item->acquisition_cost;
+            for ($i = 0; $i < $current_year - $smallest_year + 1; $i++) {
+                if (date('Y', strtotime($item->acquisition_year)) == $smallest_year + $i) {
+                    $month = date('n', strtotime($item->acquisition_year));
+                    $countmonth = 13 - intval($month);
+                    $cost_per_month = $item->acquisition_cost / $item->lifetime;
+                    $cost_current = $cost_per_month * $countmonth;
+                } else {
+                    $cost_per_month = $item->acquisition_cost / $item->lifetime;
+                    $cost_current = $cost_per_month * 12;
+                }
+                $temp_cost = $temp_cost - $cost_current;
+            }
+        }
+
         $data = [
-            'title' => 'Depreciation',
+            'title' => 'Depreciation of Assets',
             'depreciations' => $all_depreciation,
             'smallest_year' => $smallest_year,
             'current_year' => $current_year
         ];
+        return view('accounting.depreciation', $data);
     }
     /** 
      * Show the form for creating a new resource.

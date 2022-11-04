@@ -27,278 +27,87 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="income"
+                            <table id="depreciation"
                                 class="table table-sm table-hover table-striped expandable-table text-capitalize"
                                 style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th class="fs-3 fw-bold">Asset Name</th>
+                                        <th>Asset Name</th>
                                         <th>Amount</th>
                                         <th>Lifetime (In Month)</th>
                                         <th>Year of Acquisition</th>
-
+                                        @for ($i = 0; $i < $current_year - $smallest_year + 1; $i++)
+                                            <th>Acquisition Cost {{ $smallest_year + $i }}</th>
+                                            <th>Depreciation {{ $smallest_year + $i }}</th>
+                                            <th>End Book Value {{ $smallest_year + $i }}</th>
+                                        @endfor
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <th class="text-start">Gross Income</th>
-                                        <td></td>
-                                        <td class="text-end"></td>
-                                        <td class="text-end">@currency($income)</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Sales Discount </td>
-                                        <td class="text-end">@currency($load_discount)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Sales Return </td>
-                                        <td class="text-end">@currency($load_return)</td>
-                                        </td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <th class="text-start">Total Selling Expense
-                                        </th>
-                                        <td class="text-end"></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($load_discount + $load_return)
-                                        </td>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-
-                                        <th class="text-start fw-bold">Net Income (@currency($income) - @currency($load_discount + $load_return))
-                                        </th>
-
-                                        </th>
-                                        <td></td>
-                                        <td class="text-end fw-bold">
-                                        </td>
-                                        <td class="text-end"></td>
-                                        <th class="text-end"> @currency($income - ($load_discount + $load_return))</th>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start fw-bold">Cost Of Goods Sold </td>
-
-                                        <td class="text-end">
-                                        </td>
-
-                                        <td></td>
-                                        <td class="text-end fw-bold">
-                                            (@currency($load_hpp - $load_return_hpp))
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-start fw-bold">Gross Profit (@currency($income - ($load_discount + $load_return)) -
-                                            @currency($load_hpp))</td>
-                                        <td></td>
-                                        <td class="text-end">
-                                        </td>
-
-                                        <td></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($income - ($load_discount + $load_return) - $load_hpp)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" class="text-start fw-bold">Operational Expense :</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Purchase Operational Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Communication Expense</td>
-                                        <td class="text-end">@currency($biaya_komunikasi)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Salaries Expense</td>
-                                        <td class="text-end">@currency($biaya_gaji)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Promotion Expense</td>
-                                        <td class="text-end">@currency($biaya_promosi)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Vehicle Expense</td>
-                                        <td class="text-end">@currency($biaya_kendaraan)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Building Expense</td>
-                                        <td class="text-end">@currency($biaya_gedung)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Sales Operational Expense</td>
-                                        <td class="text-end">@currency($biaya_penjualan)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Office Expense</td>
-                                        <td class="text-end">@currency($biaya_kantor)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-
-                                    </tr>
-                                    @php
-                                        $total_operational = $biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor;
-                                    @endphp
-                                    <tr>
-                                        <td></td>
-                                        <th class="text-start">Total Operational Expense
-                                        </th>
-                                        <td class="text-end"></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($total_operational)
-                                        </td>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="5" class="text-start fw-bold"> Non Operational Expense :</td>
-
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Depreciation Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Interest Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Entertainment Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Bank Service Charge</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">PPN</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Income Tax Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Return Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Magazine Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Car GPS Renewal Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <th class="text-start">Total Non Operational Expense
-                                        </th>
-                                        <td class="text-end"></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor)
-                                        </td>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-start">Total Expense (@currency($total_operational) )
-                                        </th>
-                                        <td></td>
-
-                                        <td class="text-end"></td>
-
-                                        </td>
-                                        <td></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor)
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-start">Net Profit
-                                        </th>
-                                        <td></td>
-
-                                        <td class="text-end"></td>
-
-                                        </td>
-                                        <td></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor)
-                                        </td>
-                                    </tr>
+                                    @foreach ($depreciations as $item)
+                                        <tr>
+                                            <td>{{ $item->asset_name }}</td>
+                                            <td>{{ $item->amount }}</td>
+                                            <td>{{ $item->lifetime }}</td>
+                                            <td>{{ date('d/m/Y', strtotime($item->acquisition_year)) }}</td>
+                                            @php
+                                                $temp_cost = $item->acquisition_cost;
+                                            @endphp
+                                            @for ($i = 0; $i < $current_year - $smallest_year + 1; $i++)
+                                                @if (date('Y', strtotime($item->acquisition_year)) == $smallest_year + $i)
+                                                    <td>{{ number_format($item->acquisition_cost, 0, ',', '.') }}</td>
+                                                @else
+                                                    <td>-</td>
+                                                @endif
+                                                @if (date('Y', strtotime($item->acquisition_year)) <= $smallest_year + $i)
+                                                    @if (date('Y', strtotime($item->acquisition_year)) == $smallest_year + $i)
+                                                        @php
+                                                            $month = date('n', strtotime($item->acquisition_year));
+                                                            $countmonth = 13 - intval($month);
+                                                            $cost_per_month = $item->acquisition_cost / $item->lifetime;
+                                                            $cost_current = $cost_per_month * $countmonth;
+                                                            $check_cost = $temp_cost - $cost_current;
+                                                        @endphp
+                                                        @if ($check_cost <= 0 && $temp_cost != 0)
+                                                            <td>{{ number_format($temp_cost, 0, ',', '.') }}</td>
+                                                        @elseif ($check_cost <= 0 && $temp_cost == 0)
+                                                            <td>-</td>
+                                                        @else
+                                                            <td>{{ number_format($cost_current, 0, ',', '.') }}</td>
+                                                        @endif
+                                                    @else
+                                                        @php
+                                                            $cost_per_month = $item->acquisition_cost / $item->lifetime;
+                                                            $cost_current = $cost_per_month * 12;
+                                                            $check_cost = $temp_cost - $cost_current;
+                                                        @endphp
+                                                        @if ($check_cost <= 0 && $temp_cost != 0)
+                                                            <td>{{ number_format($temp_cost, 0, ',', '.') }}</td>
+                                                        @elseif ($check_cost <= 0 && $temp_cost == 0)
+                                                            <td>-</td>
+                                                        @else
+                                                            <td>{{ number_format($cost_current, 0, ',', '.') }}</td>
+                                                        @endif
+                                                    @endif
+                                                    @php
+                                                        $temp_cost = $temp_cost - $cost_current;
+                                                    @endphp
+                                                    @if ($temp_cost <= 0)
+                                                        <td>-</td>
+                                                    @else
+                                                        <td>{{ number_format($temp_cost, 0, ',', '.') }}</td>
+                                                    @endif
+                                                @else
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                @endif
+                                            @endfor
+                                        </tr>
+                                    @endforeach
                                 </tbody>
+                                <tfoot>
+                                    <th colspan="4" class="text-center">Total</th>
+                                </tfoot>
                             </table>
                         </div>
                         <br>
@@ -317,6 +126,54 @@
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
                 });
+
+
+                function getTabletoArray() {
+                    var table = $('#depreciation');
+                    var data = [];
+
+                    table.find('tr').each(function(i, el) {
+                        // no thead
+                        if (i != 0) {
+                            var $tds = $(this).find('td');
+                            var row = [];
+                            $tds.each(function(i, el) {
+                                row.push($(this).text());
+                            });
+                            data.push(row);
+                        }
+
+                    });
+                    //no tfoot
+                    data.pop();
+
+                    return data;
+                }
+
+                let all_values = getTabletoArray();
+                let total_arr = [];
+                for (let i = 4; i < all_values[0].length; i++) {
+                    let temp_total = 0;
+                    for (let j = 0; j < all_values.length; j++) {
+                        let raw_string = all_values[j][i];
+                        if (raw_string == '-') {
+                            temp_total = temp_total + 0;
+                        } else {
+                            let no_dots_string = raw_string.replaceAll('.', '');
+                            let sub_total = parseInt(no_dots_string);
+                            temp_total = temp_total + sub_total;
+                        }
+                    }
+                    total_arr.push(temp_total);
+                }
+                let foot = $('#depreciation').find('tfoot tr');
+                for (let index = 0; index < total_arr.length; index++) {
+                    let sub_foot = '<th>' + total_arr[index].toLocaleString('id', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    }) + '</th>';
+                    foot.append(sub_foot);
+                }
             });
         </script>
     @endpush

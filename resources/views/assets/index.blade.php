@@ -229,7 +229,7 @@
                         url: "/customers/getTotalCredit/" + customer_id,
                         dataType: "json",
                         success: function(data) {
-                            node_form.val(data.toLocaleString('us', {
+                            node_form.val(data.toLocaleString('id', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
