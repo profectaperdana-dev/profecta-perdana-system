@@ -90,7 +90,9 @@
                                                         @endif
                                                     @endif
                                                     @php
-                                                        $temp_cost = $temp_cost - $cost_current;
+                                                        if ($temp_cost > 0) {
+                                                            $temp_cost = $temp_cost - $cost_current;
+                                                        }
                                                     @endphp
                                                     @if ($temp_cost <= 0)
                                                         <td>-</td>
