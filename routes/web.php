@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\AccountSubController;
 use App\Http\Controllers\AccountSubTypeController;
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\AssetCategoryController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CheckStockController;
@@ -43,6 +44,7 @@ use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
 use App\Http\Controllers\WarehouseTypeController;
+use App\Models\AssetCategoryModel;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -261,6 +263,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/claim', ClaimController::class);
     Route::resource('/warehouse_types', WarehouseTypeController::class);
     Route::resource('/asset', AssetController::class);
+    Route::resource('/asset_category', AssetCategoryController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

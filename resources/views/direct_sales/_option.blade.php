@@ -23,7 +23,11 @@
                             <div class="row justify-content-between">
                                 <div class="form-group col-7 col-lg-5">
                                     Customer:
-                                    {{ $direct->cust_name }}
+                                    @if (is_numeric($direct->cust_name))
+                                        {{ $direct->customerBy->name_cust }}
+                                    @else
+                                        {{ $direct->cust_name }}
+                                    @endif
                                 </div>
                                 <div class="form-group col-7 col-lg-3">
                                     Order Date: {{ date('d-M-Y', strtotime($direct->order_date)) }}
@@ -115,10 +119,6 @@
                     <a class="btn btn-primary" href="{{ url('retail/send_mail/' . $direct->id) }}">Send
                         Email
                     </a>
-                    @if ($direct->isPaid == 0)
-                        <a class="btn btn-primary" href="{{ url('retail/mark_as_paid/' . $direct->id) }}">Mark as Paid
-                        </a>
-                    @endif
                     @can('isSuperAdmin')
                         <button class="btn btn-secondary modalRetail" type="button" data-bs-toggle="modal"
                             data-original-title="test" data-bs-target="#editDirect{{ $direct->id }}"
@@ -153,28 +153,47 @@
                                     <div class="row">
                                         <div class="mb-3 col-sm-6">
                                             <label>Name</label>
-                                            <input class="form-control" placeholder="Enter Name" type="text"
-                                                name="cust_name" value="{{ $direct->cust_name }}" required>
+                                            <select class="form-control select2" name="cust_name" id="cust"
+                                                required>
+                                                <option value="">Choose Customer
+                                                </option>
+                                                <option value="other_cust"
+                                                    @if (!is_numeric($direct->cust_name)) selected @endif>
+                                                    Other
+                                                </option>
+                                                @foreach ($customers as $item)
+                                                    <option value="{{ $item->id }}"
+                                                        @if ($direct->cust_name == $item->id) selected @endif>
+                                                        {{ $item->name_cust }}
+                                                    </option>
+                                                @endforeach
+                                            </select>
+                                            <input class="form-control manual-cust" placeholder="Enter Name"
+                                                type="text" name="cust_name_manual"
+                                                @if (!is_numeric($direct->cust_name)) value="{{ $direct->cust_name }}"
+                                                @else
+                                                hidden @endif>
                                         </div>
                                         <div class="mb-3 col-sm-6">
                                             <label>Phone Number</label>
-                                            <input class="form-control" placeholder="Enter Phone Number"
+                                            <input class="form-control phone" placeholder="Enter Phone Number"
                                                 type="text" name="cust_phone" value="{{ $direct->cust_phone }}"
-                                                required>
+                                                @if (is_numeric($direct->cust_name)) readonly @endif>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="mb-3 col-sm-6">
+                                        <div class="mb-3 col-sm-6 ">
                                             <label>ID Card Number</label>
-                                            <input class="form-control" placeholder="Enter ID Card Number"
+                                            <input class="form-control id_card" placeholder="Enter ID Card Number"
                                                 type="text" name="cust_ktp" value="{{ $direct->cust_ktp }}"
-                                                required>
+                                                @if (is_numeric($direct->cust_name)) readonly @endif>
                                             <div class="form-text">*Optional</div>
                                         </div>
                                         <div class="mb-3 col-sm-6">
                                             <label>Email Address</label>
-                                            <input class="form-control" placeholder="Enter Email" type="email"
-                                                name="cust_email" value="{{ $direct->cust_email }}">
+                                            <input class="form-control email_add" placeholder="Enter Email"
+                                                type="text" name="cust_email" value="{{ $direct->cust_email }}"
+                                                @if (is_numeric($direct->cust_name)) readonly @endif>
                                             <div class="form-text">*Optional</div>
 
                                         </div>
@@ -182,16 +201,19 @@
                                     <div class="row">
                                         <div class="mb-3 col-sm-6">
                                             <label>Plate Number</label>
-                                            <input class="form-control" placeholder="Enter Plate Number"
-                                                type="text" name="plate_number" required
+                                            <input class="form-control plate" placeholder="Enter Plate Number"
+                                                type="text" name="plate_number"
+                                                @if (is_numeric($direct->cust_name)) readonly @endif
                                                 value="{{ $direct->plate_number }}">
                                         </div>
-                                        <div class="mb-3 col-sm-6">
+                                        <div class="mb-3 col-sm-6 vehicle"
+                                            @if (is_numeric($direct->cust_name)) hidden @endif>
                                             <label>Vehicle</label>
-                                            <select class="form-control select2 vehicle" name="vehicle">
+                                            <select class="form-control select2" name="vehicle" id="vehicle">
                                                 <option value="">Choose Vehicle</option>
                                                 <option value="Car">Car</option>
                                                 <option value="Motocycle">Motocycle</option>
+                                                <option value="Other">Other</option>
                                             </select>
                                         </div>
                                     </div>
@@ -245,23 +267,76 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="mb-3 col-sm-6">
+                                        <div class="form-group col-md-4">
+                                            <label>Province</label>
+                                            <select name="province"
+                                                class="form-control province @error('province') is-invalid @enderror"
+                                                @if (is_numeric($direct->cust_name)) readonly @endif>
+                                                <option value="{{ $direct->province }}" selected>
+                                                    {{ $direct->province }}
+                                                </option>
+                                                {{-- @if ($customer->province != null)
+                                                    <option selected value="{{ $customer->province }}">
+                                                        {{ $customer->province }}
+                                                    </option>
+                                                @endif --}}
+                                            </select>
+                                            @error('province')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-4">
                                             <label>District</label>
-                                            <select class="form-control district-retail" required name="district">
-                                                <option value="">Choose District</option>
+                                            <select name="district"
+                                                class="form-control city @error('district') is-invalid @enderror"
+                                                @if (is_numeric($direct->cust_name)) readonly @endif>
                                                 <option value="{{ $direct->district }}" selected>
                                                     {{ $direct->district }}
                                                 </option>
+                                                {{-- @if ($customer->city != null)
+                                                    <option selected value="{{ $customer->city }}">
+                                                        {{ $customer->city }}
+                                                    </option>
+                                                @endif --}}
                                             </select>
+                                            @error('district')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
-                                        <div class="mb-3 col-sm-6">
-                                            <label>Address</label>
-                                            <input type="text" placeholder="Enter Address" class="form-control"
-                                                name="address" value="{{ $direct->address }}" required>
+                                        <div class="form-group col-md-4">
+                                            <label>Sub-district</label>
+                                            <select name="sub_district"
+                                                class="form-control district @error('sub_district') is-invalid @enderror"
+                                                @if (is_numeric($direct->cust_name)) readonly @endif>
+                                                <option value="{{ $direct->sub_district }}" selected>
+                                                    {{ $direct->sub_district }}
+                                                </option>
+                                                {{-- @if ($customer->district != null)
+                                                    <option selected value="{{ $customer->district }}">
+                                                        {{ $customer->district }}
+                                                    </option>
+                                                @endif --}}
+                                            </select>
+                                            @error('sub_district')
+                                                <div class="invalid-feedback">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="mb-3">
+                                        <div class="mb-3 col-sm-6">
+                                            <label>Address</label>
+                                            <input type="text" placeholder="Enter Address"
+                                                class="form-control address" name="address"
+                                                value="{{ $direct->address }}"
+                                                @if (is_numeric($direct->cust_name)) readonly @endif>
+                                        </div>
+                                        <div class="mb-3 col-sm-6">
                                             <label>Remark</label>
                                             <input class="form-control" placeholder="Enter Remark" type="text"
                                                 name="remark" value="{{ $direct->remark }}">

@@ -219,10 +219,19 @@
 
                         </ul>
                     </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('asset') ? 'active' : '' }}"
-                            href="{{ url('/asset') }}"><i data-feather="percent"></i><span>Master
+                    <li class="dropdown"><a
+                            class="nav-link menu-title @if (request()->is('asset') || request()->is('asset_category')) active @endif"
+                            href="javascript:void(0)"><i data-feather="book-open"></i><span>Master
                                 Assets</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('asset') || request()->is('asset_category')) block @else none @endif ">
+                            <li><a href="{{ url('/asset_category') }}"
+                                    class="{{ request()->is('asset_category') ? 'active' : '' }}">Asset Categories</a>
+                            </li>
+                            <li><a href="{{ url('/asset') }}"
+                                    class="{{ request()->is('asset') ? 'active' : '' }}">Assets</a>
+                            </li>
+                        </ul>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
@@ -263,11 +272,6 @@
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('retail') ? 'active' : '' }}"
                             href="{{ url('/retail') }}"><i data-feather="inbox"></i><span>Invoicing
-                            </span></a>
-                    </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('retail/credit') ? 'active' : '' }}"
-                            href="{{ url('/retail/credit') }}"><i data-feather="inbox"></i><span>Credit
                             </span></a>
                     </li>
                     <li class="sidebar-main-title">

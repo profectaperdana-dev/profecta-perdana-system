@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CarBrandModel;
+use App\Models\CustomerModel;
 use App\Models\DirectSalesDetailModel;
 use App\Models\DirectSalesModel;
 use App\Models\DistrictModel;
@@ -17,6 +18,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Redirect;
 
 class DirectSalesController extends Controller
@@ -69,6 +71,26 @@ class DirectSalesController extends Controller
                         return '-';
                     } else return $directSalesModel->motorTypeBy->name_type;
                 })
+                ->editColumn('cust_name', function (DirectSalesModel $directSalesModel) {
+                    if (is_numeric($directSalesModel->cust_name)) {
+                        return $directSalesModel->customerBy->name_cust;
+                    } else return $directSalesModel->cust_name;
+                })
+                ->editColumn('cust_ktp', function ($data) {
+                    if ($data->cust_ktp == null) {
+                        return "-";
+                    } else return $data->cust_ktp;
+                })
+                ->editColumn('cust_email', function ($data) {
+                    if ($data->cust_email == null) {
+                        return "-";
+                    } else return $data->cust_email;
+                })
+                ->editColumn('other', function ($data) {
+                    if ($data->other == null) {
+                        return "-";
+                    } else return $data->other;
+                })
                 ->editColumn('total_excl', function ($data) {
                     return number_format($data->total_excl, 0, ',', '.');
                 })
@@ -81,17 +103,13 @@ class DirectSalesController extends Controller
                 ->editColumn('created_by', function (DirectSalesModel $directSalesModel) {
                     return $directSalesModel->createdBy->name;
                 })
-                ->editColumn('isPaid', function ($data) {
-                    if ($data->isPaid == 1) {
-                        return 'Paid';
-                    } else return 'Unpaid';
-                })
                 ->addIndexColumn() //memberikan penomoran
                 ->addColumn('action', function ($direct) {
                     $ppn = ValueAddedTaxModel::first()->ppn / 100;
                     $car_brands = CarBrandModel::with('typeBy')->oldest('car_brand')->get();
                     $motor_brands = MotorBrandModel::with('typeBy')->oldest('name_brand')->get();
-                    return view('direct_sales._option', compact('direct', 'ppn', 'car_brands', 'motor_brands'))->render();
+                    $customers = CustomerModel::latest()->get();
+                    return view('direct_sales._option', compact('direct', 'ppn', 'car_brands', 'motor_brands', 'customers'))->render();
                 })
                 ->rawColumns(['action'])
                 // ->rawColumns()
@@ -120,7 +138,7 @@ class DirectSalesController extends Controller
         $motor_brands = MotorBrandModel::with('typeBy')->oldest('name_brand')->get();
         $sub_materials = SubMaterialModel::all();
         $ppn = ValueAddedTaxModel::first()->ppn / 100;
-        $districts = DistrictModel::all();
+        $customers = CustomerModel::where('status', 1)->latest()->get();
 
         $data = [
             'title' => 'Create Retail Order',
@@ -129,7 +147,7 @@ class DirectSalesController extends Controller
             'motor_brands' => $motor_brands,
             'sub_materials' => $sub_materials,
             'ppn' => $ppn,
-            'districts' => $districts
+            'customers' => $customers
         ];
 
         return view('direct_sales.create', $data);
@@ -139,23 +157,38 @@ class DirectSalesController extends Controller
     {
         // dd($request->all());
         // validate
-        $request->validate([
-            'cust_name' => 'required',
-            'cust_phone' => 'required',
-            'cust_ktp' => 'required',
-            'cust_email' => 'required',
-            'district' => 'required',
-            'plate_number' => 'required',
-            'vehicle' => 'required',
-            'address' => 'required',
-            'remark' => 'required',
-            'retails.*.product_id' => 'required',
-            'retails.*.qty' => 'required',
-            'retails.*.discount' => 'required',
-            'total_excl' => 'required|numeric',
-            'total_ppn' => 'required|numeric',
-            'total_incl' => 'required|numeric'
-        ]);
+        if ($request->cust_name == 'other_cust') {
+            $request->validate([
+                'cust_name' => 'required',
+                'cust_phone' => 'required',
+                'district' => 'required',
+                'plate_number' => 'required',
+                'vehicle' => 'required',
+                'province' => 'required',
+                'district' => 'required',
+                'sub_district' => 'required',
+                'address' => 'required',
+                'remark' => 'required',
+                'retails.*.product_id' => 'required',
+                'retails.*.qty' => 'required',
+                'retails.*.discount' => 'required',
+                'total_excl' => 'required|numeric',
+                'total_ppn' => 'required|numeric',
+                'total_incl' => 'required|numeric'
+            ]);
+        } else {
+            $request->validate([
+                'cust_name' => 'required',
+                'remark' => 'required',
+                'retails.*.product_id' => 'required',
+                'retails.*.qty' => 'required',
+                'retails.*.discount' => 'required',
+                'total_excl' => 'required|numeric',
+                'total_ppn' => 'required|numeric',
+                'total_incl' => 'required|numeric'
+            ]);
+        }
+
 
         $model = new DirectSalesModel();
 
@@ -174,34 +207,65 @@ class DirectSalesController extends Controller
         $model->order_number = $order_number;
 
         $model->order_date = date('Y-m-d');
-        $model->cust_name = $request->cust_name;
-        $model->cust_phone = $request->cust_phone;
-        $model->cust_ktp = $request->cust_ktp;
-        $model->cust_email = $request->cust_email;
-        $model->district = $request->district;
-        $model->address = $request->address;
-        $model->created_by = Auth::user()->id;
-        $model->plate_number = strtoupper(str_replace(' ', '', $request->plate_number));
-        if ($request->vehicle == 'Car') {
-            $model->car_brand_id = $request->car_brand_id;
-            $model->car_type_id = $request->car_type_id;
-            $model->motor_brand_id = null;
-            $model->motor_type_id = null;
+
+        if ($request->cust_name == 'other_cust') {
+            $model->cust_name = $request->cust_name_manual;
+            $model->cust_phone = $request->cust_phone;
+            $model->cust_ktp = $request->cust_ktp;
+            $model->cust_email = $request->cust_email;
+
+            //Get Province, City, District, Village
+            $province_name = $this->getNameProvince($request->province);
+            $model->province = ucwords(strtolower($province_name));
+            $district_name = $this->getNameCity($request->district);
+            $model->district = ucwords(strtolower($district_name));
+            $sub_district_name = $this->getNameDistrict($request->sub_district);
+            $model->sub_district = ucwords(strtolower($sub_district_name));
+
+            $model->address = $request->address;
+            $model->plate_number = strtoupper(str_replace(' ', '', $request->plate_number));
+            if ($request->vehicle == 'Car') {
+                $model->car_brand_id = $request->car_brand_id;
+                $model->car_type_id = $request->car_type_id;
+                $model->motor_brand_id = null;
+                $model->motor_type_id = null;
+                $model->other = null;
+            } else if ($request->vehicle == 'Motocycle') {
+                $model->car_brand_id = null;
+                $model->car_type_id = null;
+                $model->other = null;
+                $model->motor_brand_id = $request->motor_brand_id;
+                $model->motor_type_id = $request->motor_type_id;
+            } else {
+                $model->car_brand_id = null;
+                $model->car_type_id = null;
+                $model->other = $request->other;
+                $model->motor_brand_id = null;
+                $model->motor_type_id = null;
+            }
         } else {
+            $model->cust_name = $request->cust_name;
+            $selected_cust = CustomerModel::where('id', $request->cust_name)->first();
+            $model->cust_phone = $selected_cust->phone_cust;
+            $model->cust_ktp = null;
+            $model->cust_email = $selected_cust->email_cust;
+            $model->province = $selected_cust->province;
+            $model->district = $selected_cust->city;
+            $model->sub_district = $selected_cust->district;
+            $model->address = $selected_cust->address_cust;
+            $model->plate_number = '-';
             $model->car_brand_id = null;
             $model->car_type_id = null;
-            $model->motor_brand_id = $request->motor_brand_id;
-            $model->motor_type_id = $request->motor_type_id;
+            $model->other = null;
+            $model->motor_brand_id = null;
+            $model->motor_type_id = null;
         }
+
         $model->remark = $request->remark;
+        $model->created_by = Auth::user()->id;
         $model->total_excl = $request->total_excl;
         $model->total_ppn = $request->total_ppn;
         $model->total_incl = $request->total_incl;
-        if ($request->payment == "cash") {
-            $model->isPaid = 1;
-        } else {
-            $model->isPaid = 0;
-        }
         $model->pdf_invoice = $model->order_number . '.pdf';
         $model->pdf_do = $model->order_number . '.pdf';
         $saved = $model->save();
@@ -326,94 +390,6 @@ class DirectSalesController extends Controller
         return response()->json($sub_materials);
     }
 
-    public function credit(Request $request)
-    {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')) {
-            abort(403);
-        }
-        if ($request->ajax()) {
-            $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
-                ->select('customer_areas.area_code', 'warehouses.id')
-                ->where('warehouses.id', Auth::user()->warehouse_id)
-                ->first();
-            if (!empty($request->from_date)) {
-
-                $direct = DirectSalesModel::with('createdBy', 'carBrandBy', 'carTypeBy', 'motorBrandBy', 'motorTypeBy')
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
-                    ->where('isPaid', 0)
-                    ->whereBetween('order_date', array($request->from_date, $request->to_date))
-                    ->latest()
-                    ->get();
-            } else {
-
-                $direct = DirectSalesModel::with('createdBy', 'carBrandBy', 'carTypeBy', 'motorBrandBy', 'motorTypeBy')
-                    ->where('order_number', 'like', "%$kode_area->area_code%")
-                    ->where('isPaid', 0)
-                    ->latest()
-                    ->get();
-            }
-            return datatables()->of($direct)
-                ->editColumn('order_date', function ($data) {
-                    return date('d-M-Y', strtotime($data->order_date));
-                })
-                ->editColumn('car_brand_id', function (DirectSalesModel $directSalesModel) {
-                    if ($directSalesModel->car_brand_id == null) {
-                        return '-';
-                    } else return $directSalesModel->carBrandBy->car_brand;
-                })
-                ->editColumn('car_type_id', function (DirectSalesModel $directSalesModel) {
-                    if ($directSalesModel->car_type_id == null) {
-                        return '-';
-                    } else return $directSalesModel->carTypeBy->car_type;
-                })
-                ->editColumn('motor_brand_id', function (DirectSalesModel $directSalesModel) {
-                    if ($directSalesModel->motor_brand_id == null) {
-                        return '-';
-                    } else return $directSalesModel->motorBrandBy->name_brand;
-                })
-                ->editColumn('motor_type_id', function (DirectSalesModel $directSalesModel) {
-                    if ($directSalesModel->motor_type_id == null) {
-                        return '-';
-                    } else return $directSalesModel->motorTypeBy->name_type;
-                })
-                ->editColumn('total_excl', function ($data) {
-                    return number_format($data->total_excl, 0, ',', '.');
-                })
-                ->editColumn('total_ppn', function ($data) {
-                    return number_format($data->total_ppn, 0, ',', '.');
-                })
-                ->editColumn('total_incl', function ($data) {
-                    return number_format($data->total_incl, 0, ',', '.');
-                })
-                ->editColumn('created_by', function (DirectSalesModel $directSalesModel) {
-                    return $directSalesModel->createdBy->name;
-                })
-                ->editColumn('isPaid', function ($data) {
-                    if ($data->isPaid == 1) {
-                        return 'Paid';
-                    } else return 'Unpaid';
-                })
-                ->addIndexColumn() //memberikan penomoran
-                ->addColumn('action', function ($direct) {
-                    $ppn = ValueAddedTaxModel::first()->ppn / 100;
-                    return view('direct_sales._option', compact('direct', 'ppn'))->render();
-                })
-                ->rawColumns(['action'])
-                // ->rawColumns()
-                ->addIndexColumn()
-                ->make(true);
-        }
-
-        $ppn = ValueAddedTaxModel::first()->ppn / 100;
-        $data = [
-            "title" => "Invoicing Credit Retail",
-            "ppn" => $ppn
-            // 'order_number' =>
-        ];
-
-        return view('direct_sales.credit', $data);
-    }
-
     public function print_invoice($id)
     {
         if (
@@ -448,21 +424,31 @@ class DirectSalesController extends Controller
         ) {
             abort(403);
         }
-        // Validate Input
-        $request->validate([
-            'cust_name' => 'required',
-            'cust_phone' => 'required',
-            'cust_ktp' => 'required',
-            'cust_email' => 'required',
-            'district' => 'required',
-            'plate_number' => 'required',
-            'address' => 'required',
-            'remark' => 'required',
-            'retails.*.product_id' => 'required',
-            'retails.*.qty' => 'required',
-            'retails.*.discount' => 'required',
 
-        ]);
+        if ($request->cust_name == 'other_cust') {
+            $validation = $request->validate([
+                'cust_name' => 'required',
+                'cust_phone' => 'required',
+                'plate_number' => 'required',
+                'province' => 'required',
+                'district' => 'required',
+                'sub_district' => 'required',
+                'address' => 'required',
+                'remark' => 'required',
+                'retails.*.product_id' => 'required',
+                'retails.*.qty' => 'required',
+                'retails.*.discount' => 'required',
+            ]);
+        } else {
+            $validation = $request->validate([
+                'cust_name' => 'required',
+                'remark' => 'required',
+                'retails.*.product_id' => 'required',
+                'retails.*.qty' => 'required',
+                'retails.*.discount' => 'required',
+            ]);
+        }
+
         //Restore stock to before changed
         $direct_restore = DirectSalesDetailModel::where('direct_id', $id)->get();
         foreach ($direct_restore as $restore) {
@@ -493,25 +479,59 @@ class DirectSalesController extends Controller
         }
 
         $selected_direct = DirectSalesModel::where('id', $id)->first();
-        $selected_direct->cust_name = $request->cust_name;
-        $selected_direct->cust_phone = $request->cust_phone;
-        $selected_direct->cust_ktp = $request->cust_ktp;
-        $selected_direct->cust_email = $request->cust_email;
-        $selected_direct->district = $request->district;
-        $selected_direct->address = $request->address;
-        $selected_direct->plate_number = strtoupper(str_replace(' ', '', $request->plate_number));
-        if ($request->vehicle != null) {
+        if ($request->cust_name == 'other_cust') {
+            $selected_direct->cust_name = $request->cust_name_manual;
+            $selected_direct->cust_phone = $request->cust_phone;
+            $selected_direct->cust_ktp = $request->cust_ktp;
+            $selected_direct->cust_email = $request->cust_email;
+
+            if (is_numeric($request->province)) {
+                //Get Province, City, District, Village
+                $province_name = $this->getNameProvince($request->province);
+                $selected_direct->province = ucwords(strtolower($province_name));
+                $district_name = $this->getNameCity($request->district);
+                $selected_direct->district = ucwords(strtolower($district_name));
+                $sub_district_name = $this->getNameDistrict($request->sub_district);
+                $selected_direct->sub_district = ucwords(strtolower($sub_district_name));
+            }
+
+            $selected_direct->address = $request->address;
+            $selected_direct->plate_number = strtoupper(str_replace(' ', '', $request->plate_number));
             if ($request->vehicle == 'Car') {
                 $selected_direct->car_brand_id = $request->car_brand_id;
                 $selected_direct->car_type_id = $request->car_type_id;
                 $selected_direct->motor_brand_id = null;
                 $selected_direct->motor_type_id = null;
+                $selected_direct->other = null;
+            } else if ($request->vehicle == 'Motocycle') {
+                $selected_direct->car_brand_id = null;
+                $selected_direct->car_type_id = null;
+                $selected_direct->other = null;
+                $selected_direct->motor_brand_id = $request->motor_brand_id;
+                $selected_direct->motor_type_id = $request->motor_type_id;
             } else {
                 $selected_direct->car_brand_id = null;
                 $selected_direct->car_type_id = null;
-                $selected_direct->motor_brand_id = $request->motor_brand_id;
-                $selected_direct->motor_type_id = $request->motor_type_id;
+                $selected_direct->other = $request->other;
+                $selected_direct->motor_brand_id = null;
+                $selected_direct->motor_type_id = null;
             }
+        } else {
+            $selected_direct->cust_name = $request->cust_name;
+            $selected_cust = CustomerModel::where('id', $request->cust_name)->first();
+            $selected_direct->cust_phone = $selected_cust->phone_cust;
+            $selected_direct->cust_ktp = null;
+            $selected_direct->cust_email = $selected_cust->email_cust;
+            $selected_direct->province = $selected_cust->province;
+            $selected_direct->district = $selected_cust->city;
+            $selected_direct->sub_district = $selected_cust->district;
+            $selected_direct->address = $selected_cust->address_cust;
+            $selected_direct->plate_number = '-';
+            $selected_direct->car_brand_id = null;
+            $selected_direct->car_type_id = null;
+            $selected_direct->other = null;
+            $selected_direct->motor_brand_id = null;
+            $selected_direct->motor_type_id = null;
         }
 
         $selected_direct->remark = $request->remark;
@@ -560,5 +580,28 @@ class DirectSalesController extends Controller
         $saved = $selected_direct->save();
 
         return redirect('/retail')->with('success', 'Edit Invoice Retail Success!');
+    }
+
+    public function getNameProvince($id)
+    {
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/province/' . $id . '.json');
+        $getProvinces = $getAPI->json();
+        // dd($getProvinces['name']);
+        return $getProvinces['name'];
+        // dd($getProvinces['name']);
+    }
+
+    public function getNameCity($id)
+    {
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/regency/' . $id . '.json');
+        $getCities = $getAPI->json();
+        return $getCities['name'];
+    }
+
+    public function getNameDistrict($id)
+    {
+        $getAPI = Http::get('https://preposterous-cat.github.io/api-wilayah-indonesia/static/api/district/' . $id . '.json');
+        $getDistricts = $getAPI->json();
+        return $getDistricts['name'];
     }
 }

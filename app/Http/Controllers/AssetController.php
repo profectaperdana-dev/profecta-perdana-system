@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AssetCategoryModel;
 use App\Models\AssetModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -31,8 +32,10 @@ class AssetController extends Controller
      */
     public function create()
     {
+        $all_categories = AssetCategoryModel::oldest('name')->get();
         $data = [
             'title' => 'Create Asset',
+            'categories' => $all_categories
         ];
         return view('assets.create', $data);
     }
@@ -47,7 +50,7 @@ class AssetController extends Controller
     {
         //* validate
         $request->validate([
-            "asset_code" => "required|unique:assets",
+            "asset_category" => "required",
             "asset_name" => "required",
             "amount" => "required|numeric",
             "lifetime" => "required|numeric",
@@ -56,7 +59,14 @@ class AssetController extends Controller
         ]);
 
         $model = new AssetModel();
-        $model->asset_code = $request->asset_code;
+
+        //Create Code
+        $selected_category = AssetCategoryModel::where('id', $request->asset_category)->first();
+        $code = $selected_category->code;
+        $count_asset = AssetModel::where('asset_code', 'LIKE', "%$code%")->max('id');
+        $model->asset_code = $code . ($count_asset + 1);
+
+        $model->category_id = $request->asset_category;
         $model->asset_name = $request->asset_name;
         $model->amount = $request->amount;
         $model->lifetime = $request->lifetime;

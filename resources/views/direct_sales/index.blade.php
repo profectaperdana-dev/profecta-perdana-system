@@ -74,18 +74,20 @@
                                         <th>Phone Number</th>
                                         <th>ID Card Number</th>
                                         <th>Email</th>
+                                        <th>Province</th>
                                         <th>District</th>
+                                        <th>Sub District</th>
                                         <th>Address</th>
                                         <th>Plate Number</th>
                                         <th>Car Brand</th>
                                         <th>Car Type</th>
                                         <th>Motocycle Brand</th>
                                         <th>Motocycle Type</th>
+                                        <th>Other</th>
                                         <th>Remark</th>
                                         <th>Total (Exclude PPN)</th>
                                         <th>Total PPN</th>
                                         <th>Total (Include PPN)</th>
-                                        <th>Paid Status</th>
                                         <th>Created By</th>
 
                                     </tr>
@@ -178,8 +180,16 @@
                                 name: 'cust_email'
                             },
                             {
+                                data: 'province',
+                                name: 'province'
+                            },
+                            {
                                 data: 'district',
                                 name: 'district'
+                            },
+                            {
+                                data: 'sub_district',
+                                name: 'sub_district'
                             },
                             {
                                 data: 'address',
@@ -206,6 +216,10 @@
                                 name: 'motor_type_id'
                             },
                             {
+                                data: 'other',
+                                name: 'other'
+                            },
+                            {
                                 data: 'remark',
                                 name: 'remark'
                             },
@@ -220,10 +234,6 @@
                             {
                                 data: 'total_incl',
                                 name: 'total_incl'
-                            },
-                            {
-                                data: 'isPaid',
-                                name: 'isPaid'
                             },
                             {
                                 data: 'created_by',
@@ -340,14 +350,155 @@
                         },
                     });
 
+                    $(modal_id).find('#cust').change(function() {
+                        if ($(this).val() == 'other_cust') {
+                            $('.manual-cust').attr('hidden', false);
+                            $('.phone').attr('readonly', false);
+                            $('.id_card').attr('readonly', false);
+                            $('.email_add').attr('readonly', false);
+                            $('.plate').attr('readonly', false);
+                            $('.vehicle').attr('hidden', false);
+                            $('.geo').attr('hidden', false);
+                            $('.province').attr('readonly', false);
+                            $('.city').attr('readonly', false);
+                            $('.district').attr('readonly', false);
+                            $('.address').attr('readonly', false);
+
+                            $(modal_id).find(".province").select2({
+                                width: "100%",
+                                dropdownParent: modal_id,
+                                placeholder: "Select Customer Province",
+                                minimumResultsForSearch: -1,
+                                sorter: data => data.sort((a, b) => a.text.localeCompare(b
+                                    .text)),
+                                ajax: {
+                                    type: "GET",
+                                    url: "/customers/getProvince",
+                                    data: function(params) {
+                                        return {
+                                            _token: csrf,
+                                            q: params.term, // search term
+                                        };
+                                    },
+                                    dataType: "json",
+                                    delay: 250,
+                                    processResults: function(data) {
+                                        return {
+                                            results: $.map(data, function(item) {
+                                                return [{
+                                                    text: item.name,
+                                                    id: item.id,
+                                                }, ];
+                                            }),
+                                        };
+                                    },
+                                },
+                            });
+
+                            $(modal_id).find('.province').change(function() {
+                                let province_value = $(modal_id).find('.province').val();
+
+                                $(modal_id).find(".city").select2({
+                                    width: "100%",
+                                    dropdownParent: modal_id,
+                                    minimumResultsForSearch: -1,
+                                    placeholder: "Select Customer City",
+                                    sorter: data => data.sort((a, b) => a.text
+                                        .localeCompare(b
+                                            .text)),
+                                    ajax: {
+                                        type: "GET",
+                                        url: "/customers/getCity/" + province_value,
+                                        data: function(params) {
+                                            return {
+                                                _token: csrf,
+                                                q: params.term, // search term
+                                            };
+                                        },
+                                        dataType: "json",
+                                        delay: 250,
+                                        processResults: function(data) {
+                                            return {
+                                                results: $.map(data, function(
+                                                    item) {
+                                                    return [{
+                                                        text: item
+                                                            .name,
+                                                        id: item.id,
+                                                    }, ];
+                                                }),
+                                            };
+                                        },
+                                    },
+                                });
+                            });
+
+                            $(modal_id).find('.city').change(function() {
+                                let city_value = $(modal_id).find('.city').val();
+
+                                $(modal_id).find(".district").select2({
+                                    width: "100%",
+                                    dropdownParent: modal_id,
+                                    minimumResultsForSearch: -1,
+                                    placeholder: "Select Customer District",
+                                    sorter: data => data.sort((a, b) => a.text
+                                        .localeCompare(b
+                                            .text)),
+                                    ajax: {
+                                        type: "GET",
+                                        url: "/customers/getDistrict/" + city_value,
+                                        data: function(params) {
+                                            return {
+                                                _token: csrf,
+                                                q: params.term, // search term
+                                            };
+                                        },
+                                        dataType: "json",
+                                        delay: 250,
+                                        processResults: function(data) {
+                                            return {
+                                                results: $.map(data, function(
+                                                    item) {
+                                                    return [{
+                                                        text: item
+                                                            .name,
+                                                        id: item.id,
+                                                    }, ];
+                                                }),
+                                            };
+                                        },
+                                    },
+                                });
+                            });
+                        } else {
+                            $('.manual-cust').attr('hidden', true);
+                            $('.phone').attr('readonly', true);
+                            $('.id_card').attr('readonly', true);
+                            $('.email_add').attr('readonly', true);
+                            $('.plate').attr('readonly', true);
+                            $('.vehicle').attr('hidden', true);
+                            $('.geo').attr('hidden', true);
+                            $('.province').attr('readonly', true);
+                            $('.city').attr('readonly', true);
+                            $('.district').attr('readonly', true);
+                            $('.address').attr('readonly', true);
+                        }
+                    });
+
                     //Choose Vehicle
-                    $(modal_id).find('.vehicle').change(function() {
+                    $(modal_id).find('#vehicle').change(function() {
                         if ($(this).val() == "Car") {
                             $(modal_id).find('#car').attr('hidden', false);
                             $(modal_id).find('#motor').attr('hidden', true);
-                        } else {
+                            $(modal_id).find('#other').attr('hidden', true);
+                        } else if ($(this).val() == "Motocycle") {
                             $(modal_id).find('#car').attr('hidden', true);
                             $(modal_id).find('#motor').attr('hidden', false);
+                            $(modal_id).find('#other').attr('hidden', true);
+                        } else {
+                            $(modal_id).find('#car').attr('hidden', true);
+                            $(modal_id).find('#motor').attr('hidden', true);
+                            $(modal_id).find('#other').attr('hidden', false);
                         }
                     });
 
@@ -424,6 +575,111 @@
                             $(modal_id).find(".motor-type").empty();
                         }
                     });
+
+                    let cust = $(modal_id).find('#cust').val();
+                    if (cust == 'other_cust') {
+                        $(modal_id).find(".province").select2({
+                            width: "100%",
+                            dropdownParent: modal_id,
+                            placeholder: "Select Customer Province",
+                            minimumResultsForSearch: -1,
+                            sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
+                            ajax: {
+                                type: "GET",
+                                url: "/customers/getProvince",
+                                data: function(params) {
+                                    return {
+                                        _token: csrf,
+                                        q: params.term, // search term
+                                    };
+                                },
+                                dataType: "json",
+                                delay: 250,
+                                processResults: function(data) {
+                                    return {
+                                        results: $.map(data, function(item) {
+                                            return [{
+                                                text: item.name,
+                                                id: item.id,
+                                            }, ];
+                                        }),
+                                    };
+                                },
+                            },
+                        });
+
+                        $(modal_id).find('.province').change(function() {
+                            let province_value = $(modal_id).find('.province').val();
+
+                            $(modal_id).find(".city").select2({
+                                width: "100%",
+                                dropdownParent: modal_id,
+                                minimumResultsForSearch: -1,
+                                placeholder: "Select Customer City",
+                                sorter: data => data.sort((a, b) => a.text.localeCompare(b
+                                    .text)),
+                                ajax: {
+                                    type: "GET",
+                                    url: "/customers/getCity/" + province_value,
+                                    data: function(params) {
+                                        return {
+                                            _token: csrf,
+                                            q: params.term, // search term
+                                        };
+                                    },
+                                    dataType: "json",
+                                    delay: 250,
+                                    processResults: function(data) {
+                                        return {
+                                            results: $.map(data, function(item) {
+                                                return [{
+                                                    text: item.name,
+                                                    id: item.id,
+                                                }, ];
+                                            }),
+                                        };
+                                    },
+                                },
+                            });
+                        });
+
+                        $(modal_id).find('.city').change(function() {
+                            let city_value = $(modal_id).find('.city').val();
+
+                            $(modal_id).find(".district").select2({
+                                width: "100%",
+                                dropdownParent: modal_id,
+                                minimumResultsForSearch: -1,
+                                placeholder: "Select Customer District",
+                                sorter: data => data.sort((a, b) => a.text.localeCompare(b
+                                    .text)),
+                                ajax: {
+                                    type: "GET",
+                                    url: "/customers/getDistrict/" + city_value,
+                                    data: function(params) {
+                                        return {
+                                            _token: csrf,
+                                            q: params.term, // search term
+                                        };
+                                    },
+                                    dataType: "json",
+                                    delay: 250,
+                                    processResults: function(data) {
+                                        return {
+                                            results: $.map(data, function(item) {
+                                                return [{
+                                                    text: item.name,
+                                                    id: item.id,
+                                                }, ];
+                                            }),
+                                        };
+                                    },
+                                },
+                            });
+                        });
+                    }
+
+
                     let x = $(modal_id)
                         .find('.modal-body')
                         .find('#formRetail')
