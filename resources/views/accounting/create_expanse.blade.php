@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('content')
     @push('css')
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
     @endpush
 
     <div class="container-fluid">
@@ -24,84 +23,66 @@
                     <div class="card-header pb-0">
                         <h5>Create Data</h5>
                         <hr class="bg-primary">
+                        <div class="row justify-content-end">
+                        </div>
                     </div>
                     <div class="card-body">
-                        <form class="form-label-left input_mask" method="post" action="{{ url('/expenses/store') }}"
+                        <form class="needs-validation" novalidate method="post" action="{{ url('/expenses/store') }}"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-
                                 <div class="col-md-12">
-                                    <div class="form-group row">
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold">Account</label>
-                                            <select name="account_id" class="form-control text-capitalize account"
-                                                id="">
-                                                <option value="">-- Select Account --</option>
-                                                @foreach ($account as $item)
-                                                    <option value="{{ $item->id }}">({{ $item->code }})
-                                                        {{ $item->name }}</option>
-                                                @endforeach
-                                            </select>
+                                    <div class="row font-weight-bold " id="formTradeIn">
+                                        <div class="form-group row">
+                                            <div class="col-md-12 form-group">
+                                                <label class="text-black">
+                                                    Date</label>
+                                                <input type="date" name="date" class="form-control text-capitalize"
+                                                    placeholder="Enter Date" required>
+                                            </div>
                                         </div>
-
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold">Sub Account</label>
-                                            <select name="sub_account_id" class="form-control sub_account text-capitalize">
-                                                <option value="">-- Select Sub Account --</option>
-
-                                            </select>
-                                        </div>
-
-                                        <div class="col-md-4" hidden id="type_account">
-                                            <label class="font-weight-bold">Sub Type Account</label>
-                                            <select name="type_account_id"
-                                                class="form-control sub_type_account text-capitalize">
-                                                <option value="">-- Select Sub Type Account --</option>
-
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold">Date</label>
-                                            <input type="date"
-                                                class="form-control text-capitalize {{ $errors->first('date') ? ' is-invalid' : '' }}"
-                                                name="date" placeholder="Date">
-                                            @error('date')
-                                                <small class="text-danger">{{ $message }}.</small>
-                                            @enderror
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold">Memo</label>
-                                            <input type="text"
-                                                class="form-control text-capitalize {{ $errors->first('memo') ? ' is-invalid' : '' }}"
-                                                name="memo" placeholder="Enter Memo">
-                                            @error('memo')
-                                                <small class="text-danger">{{ $message }}.</small>
-                                            @enderror
-                                        </div>
-
-                                        <div class="col-md-4">
-                                            <label class="font-weight-bold">Total</label>
-                                            <input type="number"
-                                                class="form-control text-capitalize {{ $errors->first('total') ? ' is-invalid' : '' }}"
-                                                name="total" placeholder="Enter Total">
-                                            @error('total')
-                                                <small class="text-danger">{{ $message }}.</small>
-                                            @enderror
+                                        <div class="mx-auto py-2 form-group row bg-primary rounded">
+                                            <div class="form-group col-4">
+                                                <label class="font-weight-bold">Account</label>
+                                                <select name="accountFields[0][account]"
+                                                    class="account form-control text-capitalize required">
+                                                    <option value="">--Select Account--</option>
+                                                    @foreach ($account as $type_account)
+                                                        <option value="{{ $type_account->id }}">
+                                                            ({{ $type_account->code }})
+                                                            - {{ $type_account->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                            <div class="col-4 col-md-3 form-group">
+                                                <label class="font-weight-bold">Memo</label>
+                                                <input type="text" required class="form-control text-capitalize"
+                                                    name="accountFields[0][memo]" placeholder="Enter Memo">
+                                            </div>
+                                            <div class="col-3 col-md-3 form-group">
+                                                <label class="font-weight-bold">Total</label>
+                                                <input type="text" required class="total form-control text-capitalize"
+                                                    placeholder="Enter Total">
+                                                <input type="hidden" name="accountFields[0][total]" class="total_">
+                                            </div>
+                                            <div class="col-1 col-md-2 form-group">
+                                                <label for="">&nbsp;</label>
+                                                <a id="addfields" href="javascript:void(0)"
+                                                    class="form-control text-white  text-center"
+                                                    style="border:none; background-color:green">+</a>
+                                            </div>
                                         </div>
                                     </div>
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <button type="reset" class="btn btn-warning"
-                                                data-dismiss="modal">Reset</button>
-                                            <button type="submit" class="btn btn-primary">Save</button>
-                                        </div>
-                                    </div>
+
                                 </div>
 
+                                <div class="form-group">
+                                    <a class="btn btn-danger" href="{{ url('sales_order/') }}"> <i class="ti ti-arrow-left">
+                                        </i> Back
+                                    </a>
+                                    <button type="reset" class="btn btn-warning">Reset</button>
+                                    <button type="submit" class="btn btn-primary">Save</button>
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -112,107 +93,147 @@
     </div>
     <!-- Container-fluid Ends-->
     @push('scripts')
-        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script>
             $(document).ready(function() {
-                $('form').submit(function() {
-                    $(this).find('button[type="submit"]').prop('disabled', true);
-                });
+                let csrf = $('meta[name="csrf-token"]').attr("content");
 
+                //* format total
+                y = 0;
+                $('.total').on('keyup', function() {
+                    var selection = window.getSelection().toString();
+                    if (selection !== '') {
+                        return;
+                    }
+                    // When the arrow keys are pressed, abort.
+                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                        return;
+                    }
+                    var $this = $(this);
+                    // Get the value.
+                    var input = $this.val();
+                    var input = input.replace(/[\D\s\._\-]+/g, "");
+                    input = input ? parseInt(input, 10) : 0;
+                    $this.val(function() {
+                        return (input === 0) ? "" : input.toLocaleString("id-ID");
+                    });
+                    $this.next().val(input);
+                });
                 $('.account').select2({
                     width: '100%',
-
                 });
 
-                $('.account').on('change', function() {
-                    var account = $(this).val();
-                    if (account == '1') {
-                        $('#type_account').attr('hidden', false);
-                    } else if (account == '2') {
-                        $('#type_account').attr('hidden', true);
-                    } else {
-                        $('#type_account').attr('hidden', false);
-                    }
-                });
-                $(".account").change(function() {
-                    //clear select
-                    $(".sub_account").empty();
-                    //set id
-                    let host = window.location.host;
-                    let brand_id = $(".account").val();
-                    // console.log(brand_id);
-                    let csrf = $('meta[name="csrf-token"]').attr("content");
-                    if (brand_id) {
-                        $(".sub_account").select2({
-                            width: "100%",
-                            ajax: {
-                                type: "GET",
-                                url: "/sub_account/select/" + brand_id,
-                                data: function(params) {
-                                    return {
-                                        _token: csrf,
-                                        q: params.term, // search term
-                                    };
-                                },
-                                dataType: "json",
-                                delay: 250,
-                                processResults: function(data) {
-                                    return {
-                                        results: $.map(data, function(item) {
-                                            return {
-                                                text: '(' + item.code + ') ' + item.name,
-                                                id: item.id,
-                                            };
-                                        }),
-                                    };
-                                },
-                            },
+
+                $("#addfields").on("click", function() {
+                    ++y;
+
+                    let form = `<div class="mx-auto py-2 form-group row bg-primary rounded">
+                                            <div class="form-group col-4">
+                                                <label class="font-weight-bold">Account</label>
+                                                <select name="accountFields[${y}][account]"
+                                                    class="account subType form-control text-capitalize required">
+                                                    <option value="">--Select Account--</option>
+                                                </select>
+                                            </div>
+                                            <div class="col-4 col-md-3 form-group">
+                                                <label class="font-weight-bold">Memo</label>
+                                                <input type="text" required class="form-control text-capitalize"
+                                                    name="accountFields[${y}][memo]" placeholder="Enter Memo">
+                                            </div>
+                                            <div class="col-3 col-md-3 form-group">
+                                                <label class="font-weight-bold">Total</label>
+                                                <input type="text" required class="form-control text-capitalize total"
+                                                     placeholder="Enter Total">
+                                                <input type="hidden" class="total_" name="accountFields[${y}][total]">
+                                            </div>
+                                            <div class="col-1 col-md-2 form-group">
+                                                <label for="">&nbsp;</label>
+                                                <a href="javascript:void(0)"
+                                                    class="form-control text-white remTradeIn text-center"
+                                                    style="border:none; background-color:red">-</a>
+                                            </div>
+                                        </div>`;
+
+                    $("#formTradeIn").append(form);
+                    $(function() {
+
+                        let validator = $('form.needs-validation').jbvalidator({
+                            errorMessage: true,
+                            successClass: true,
+                            language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
                         });
-                    } else {
-                        $(".sub_account").empty();
-                    }
-                });
-                $(".sub_account").change(function() {
-                    //clear select
-                    $(".sub_type_account").empty();
-                    //set id
-                    let host = window.location.host;
-                    let brand_id = $(".sub_account").val();
-                    console.log(brand_id);
-                    let csrf = $('meta[name="csrf-token"]').attr("content");
-                    if (brand_id) {
-                        $(".sub_type_account").select2({
-                            width: "100%",
-                            ajax: {
-                                type: "GET",
-                                url: "/sub_type_account/select/" + brand_id,
-                                data: function(params) {
-                                    return {
-                                        _token: csrf,
-                                        q: params.term, // search term
-                                    };
-                                },
-                                dataType: "json",
-                                delay: 250,
-                                processResults: function(data) {
-                                    return {
-                                        results: $.map(data, function(item) {
-                                            return {
-                                                text: '(' + item.code + ') ' + item.name,
-                                                id: item.id,
-                                            };
-                                        }),
-                                    };
-                                },
-                            },
+
+                        validator.reload();
+                    })
+
+                    //* format discount rupiah
+                    $('.total').on('keyup', function() {
+                        var selection = window.getSelection().toString();
+                        if (selection !== '') {
+                            return;
+                        }
+                        // When the arrow keys are pressed, abort.
+                        if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                            return;
+                        }
+                        var $this = $(this);
+                        // Get the value.
+                        var input = $this.val();
+                        var input = input.replace(/[\D\s\._\-]+/g, "");
+                        input = input ? parseInt(input, 10) : 0;
+                        $this.val(function() {
+                            return (input === 0) ? "" : input.toLocaleString("id-ID");
                         });
-                    } else {
-                        $(".sub_type_account").empty();
-                    }
+                        $this.next().val(input);
+
+                    });
+                    $('.account').select2({
+                        width: '100%',
+                    });
+                    $(".subType").select2({
+                        width: "100%",
+                        ajax: {
+                            type: "GET",
+                            url: "/sub_type_account/select/",
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: '(' + item.code + ') ' + item
+                                                .name,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+                    $(document).on("click", ".remTradeIn", function() {
+                        $(this).parents(".form-group").remove();
+                    });
                 });
 
             });
+        </script>
+        <script>
+            $(function() {
+
+                let validator = $('form.needs-validation').jbvalidator({
+                    errorMessage: true,
+                    successClass: true,
+                    language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+                });
+
+                validator.reload();
+            })
         </script>
     @endpush
 @endsection

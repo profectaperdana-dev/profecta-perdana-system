@@ -242,7 +242,7 @@
                                             <td class="text-uppercase">{{ $value->kode_barang }}</td>
                                             <td>{{ $value->nama_barang }}</td>
                                             <td>{{ $value->no_seri }}</td>
-                                            <td>{{ $value->berat }}</td>
+                                            <td>{{ number_format($value->berat, 0, ',', '.') }}</td>
                                             <td>{{ $value->nama_material }}/{{ $value->nama_sub_material }}/{{ $value->type_name }}
                                             </td>
 

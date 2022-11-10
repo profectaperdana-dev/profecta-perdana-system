@@ -10,6 +10,10 @@
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
+        @page {
+            size: 23cm 20cm portrait;
+        }
+
         body,
         table,
         td {
@@ -147,55 +151,49 @@
                                                         style="width: 100%; max-width: 100%;">
                                                         <thead>
                                                             <tr>
-                                                                <td colspan="2"
-                                                                    style="width: 50% !important; line-height: 24px; font-size: 16px; margin: 0;"
-                                                                    class="bg-blue-600" align="left"
-                                                                    bgcolor="#0a58ca">
+                                                                <td colspan="4"
+                                                                    style="width: 50% !important; line-height: 80%; font-size: 16px; margin: 0;backgorund-color: hsl(356, 51%, 47%);"
+                                                                    align="left" bgcolor="#e62e29">
                                                                     <div class="fw-800 text-white text-center"
-                                                                        style="color: #ffffff; font-weight: 800 !important;"
-                                                                        align="center">CLAIM REPORT</div>
+                                                                        style="color: #ffffff; font-weight: 500 !important; margin-bottom:0px;"
+                                                                        align="center">
+                                                                        <h4>FINISH CLAIM INFORMATION</h4>
+                                                                    </div>
                                                                 </td>
-                                                                <td colspan="2"
-                                                                    style="width: 50% !important; line-height: 24px; font-size: 16px; margin: 0;"
-                                                                    class="bg-yellow-500" align="left"
-                                                                    bgcolor="#ffc107">
-                                                                    <div class="fw-800 text-white text-center"
-                                                                        style="color: #ffffff; font-weight: 800 !important;"
-                                                                        align="center">RESULT CLAIM</div>
-                                                                </td>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Claim Number</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->claim_number }}</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Claim Date</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ date('d F y', strtotime($data->claim_date)) }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Customer</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="text-transform: capitalize;line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->sub_name }}</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Phone/Email</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->sub_phone }}@if ($data->sub_email != null)
                                                                         /{{ $data->sub_email }}
@@ -204,17 +202,17 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Plate Number</td>
                                                                 <td class="text-xs"
-                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="text-transform: uppercase !important;line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->plate_number }}</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Car Type</td>
                                                                 <td class="text-xs"
-                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="text-transform: uppercase !important;line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->carBrandBy->car_brand }}
                                                                     {{ $data->carTypeBy->car_type }}
@@ -222,93 +220,72 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Battery Type</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     ({{ $data->material }}/{{ $data->type_material }})
                                                                     -
                                                                     {{ $data->productSales->nama_barang }}
                                                                 </td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Loaned Battery</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     ({{ $data->loanBy->sub_materials->nama_sub_material }}/{{ $data->loanBy->sub_types->type_name }}
                                                                     ) - {{ $data->loanBy->nama_barang }}</td>
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="4"
-                                                                    style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">
-                                                                    <div class="fw-600 text-sm text-center"
-                                                                        style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
-                                                                        align="center">FINISH BATTERY TEST</div>
+                                                                    style="border-top-width: 1px;border-top-color: #e2e8f0; margin-top:-500px;line-height:80%;">
+                                                                    <center>
+                                                                        <p><b> Finish Battery Test</b></p>
+                                                                    </center>
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">Voltage :
                                                                     {{ $data->f_voltage }}</td>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">CCA :
                                                                     {{ $data->f_cca }}</td>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">Starting :
                                                                     {{ $data->f_starting }}</td>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">Charging :
                                                                     {{ $data->f_charging }}</td>
                                                             </tr>
                                                             <tr>
-                                                                <td colspan="2"
-                                                                    style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">
-                                                                    <div class="fw-600 text-sm text-center"
-                                                                        style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
-                                                                        align="center">FINISH DIAGNOSTIC</div>
-                                                                </td>
-                                                                <td colspan="2"
-                                                                    style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">
-                                                                    <div class="fw-600 text-sm text-center"
-                                                                        style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
-                                                                        align="center">CLAIM EVIDENCE</div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
                                                                 <td colspan="2" class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:1.6; font-size: 12px; border-top-width: 2px; border-top-color: #e2e8f0; border-top-style: solid; margin-bottom: 10px; "
                                                                     align="left" valign="top">
+                                                                    <center>
+                                                                        <h3>Finish Diagnostic</h3>
+                                                                    </center>
                                                                     @foreach ($data->accuClaimDetailsBy as $key => $row)
-                                                                        {{ $loop->iteration }}. {{ $row->diagnosa }}
+                                                                        <div
+                                                                            style="margin-left: 10px; line-height:50%;">
+                                                                            {{ $loop->iteration }}.
+                                                                            {{ $row->diagnosa }}</div>
                                                                         <br>
                                                                     @endforeach
                                                                 </td>
                                                                 <td colspan="2" class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height:1.6; font-size: 12px; border-top-width: 2px; border-top-color: #e2e8f0; border-top-style: solid; margin-bottom: 10px; "
                                                                     align="center" valign="top">
-                                                                    <table class="s-10 w-full" role="presentation"
-                                                                        border="0" cellpadding="0"
-                                                                        cellspacing="0" style="width: 100%;"
-                                                                        width="100%">
-                                                                        <tbody>
-                                                                            <tr>
-                                                                                <td style="line-height: 40px; font-size: 40px; width: 100%; height: 40px; margin: 0;"
-                                                                                    align="left" width="100%"
-                                                                                    height="40">
-                                                                                    &#160;
-                                                                                </td>
-                                                                            </tr>
-                                                                        </tbody>
-                                                                    </table>
+                                                                    <center>
+                                                                        <h3>Claim Evidence</h3>
+                                                                    </center>
+
                                                                     <table class="ax-center" role="presentation"
                                                                         align="center" border="0" cellpadding="0"
                                                                         cellspacing="0" style="margin: 0 auto;">
@@ -343,45 +320,40 @@
                                                                     </table>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                                <td colspan="2"
-                                                                    style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">
-                                                                    <div class="fw-600 text-sm text-center"
-                                                                        style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
-                                                                        align="center">Submitted By,</div>
-                                                                </td>
 
+
+                                                            <tr>
                                                                 <td colspan="2"
                                                                     style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">
                                                                     <div class="fw-600 text-sm text-center"
                                                                         style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
-                                                                        align="center">Received By,</div>
-                                                                </td>
-                                                            </tr>
-                                                            <tr>
-                                                                <td colspan="2" class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="center" valign="top">
-                                                                    <p class="fw-600 text-black text-center"
-                                                                        style="line-height: 24px; font-size: 16px; color: #000000; font-weight: 600 !important; width: 100%; margin: 0;"
                                                                         align="center">
-                                                                        {{ $data->createdBy->name }}
-                                                                    </p>
+                                                                        <h5>Submitted By,</h5>
+                                                                        <p class="fw-600 text-black text-center"
+                                                                            style="line-height: 24px; font-size: 16px; color: #000000; font-weight: 600 !important; width: 100%; margin: 0;"
+                                                                            align="center">
+                                                                            {{ $data->createdBy->name }}
+                                                                        </p>
+                                                                    </div>
+                                                                </td>
 
-                                                                </td>
-                                                                <td colspan="2" class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="center" valign="top">
-                                                                    <img class="img-fluid"
-                                                                        style="width: 200px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; max-width: 100%; border-style: none; border-width: 0;"
-                                                                        src="{{ public_path('file_signature/' . $data->f_receivedBy) }}"
-                                                                        alt="Some Image" width="100%">
+                                                                <td colspan="2"
+                                                                    style="line-height: 24px; font-size: 16px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">
+                                                                    <div class="fw-600 text-sm text-center"
+                                                                        style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
+                                                                        align="center">
+                                                                        <h5>Received By,</h5>
+                                                                        <img class="img-fluid"
+                                                                            style="width: 200px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; max-width: 100%; border-style: none; border-width: 0;"
+                                                                            src="{{ public_path('file_signature/' . $data->f_receivedBy) }}"
+                                                                            alt="Some Image" width="100%">
+                                                                    </div>
                                                                 </td>
                                                             </tr>
-                                                            <tr>
-                                                            </tr>
+
+
                                                         </tbody>
                                                     </table>
                                                 </td>

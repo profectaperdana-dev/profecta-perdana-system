@@ -147,22 +147,16 @@
                                                         style="width: 100%; max-width: 100%;">
                                                         <thead>
                                                             <tr>
-                                                                <td colspan="2"
-                                                                    style="width: 50% !important; line-height: 24px; font-size: 16px; margin: 0;"
-                                                                    class="bg-blue-600" align="left"
-                                                                    bgcolor="#0a58ca">
+                                                                <td colspan="4"
+                                                                    style="width: 50% !important; line-height: 80%; font-size: 16px; margin: 0;backgorund-color: hsl(356, 51%, 47%);"
+                                                                    align="left" bgcolor="#e62e29">
                                                                     <div class="fw-800 text-white text-center"
-                                                                        style="color: #ffffff; font-weight: 800 !important;"
-                                                                        align="center">CLAIM REPORT</div>
+                                                                        style="color: #ffffff; font-weight: 500 !important; margin-bottom:0px;"
+                                                                        align="center">
+                                                                        <h4>EARLY CLAIM INFORMATION</h4>
+                                                                    </div>
                                                                 </td>
-                                                                <td colspan="2"
-                                                                    style="width: 50% !important; line-height: 24px; font-size: 16px; margin: 0;"
-                                                                    class="bg-yellow-500" align="left"
-                                                                    bgcolor="#ffc107">
-                                                                    <div class="fw-800 text-white text-center"
-                                                                        style="color: #ffffff; font-weight: 800 !important;"
-                                                                        align="center">EARLY CHECKING</div>
-                                                                </td>
+
                                                             </tr>
                                                         </thead>
                                                         <tbody>
@@ -246,7 +240,7 @@
                                                                     align="left" valign="top">
                                                                     <div class="fw-600 text-sm text-center"
                                                                         style="font-size: 14px; line-height: 16.8px; font-weight: 600 !important;"
-                                                                        align="center">FINISH BATTERY TEST</div>
+                                                                        align="center">EARLY BATTERY TEST</div>
                                                                 </td>
                                                             </tr>
                                                             <tr>

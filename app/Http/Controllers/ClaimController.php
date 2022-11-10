@@ -45,8 +45,8 @@ class ClaimController extends Controller
     {
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data = AccuClaimModel::find($id);
-        $pdf = FacadePdf::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
-        return $pdf->stream("", array("Attachment" => false));
+        $pdf = FacadePdf::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'));
+        return $pdf->stream();
     }
 
     public function pdfClaimAccuFinish($id)
@@ -101,28 +101,7 @@ class ClaimController extends Controller
      */
     public function store(Request $request)
     {
-        //* CLAIM ACCU
-        // $request->validate([
-        //     // Customer
-        //     'customer_id' => 'required',
-        //     'sub_name' => 'required',
-        //     'sub_phone' => 'required',
 
-        //     // Product
-        //     'product_id' => 'required',
-
-        //     // Car
-        //     'car_brand_id' => 'required',
-        //     'car_type_id' => 'required',
-        //     'plate_number' => 'required',
-
-        //     // Accu
-        //     'e_voltage' => 'required',
-        //     'e_cca' => 'required',
-        //     'e_starting' => 'required',
-        //     'e_charging' => 'required',
-        //     'file' => 'required',
-        // ]);
 
         //* GET CLAIM NUMBER
         $kode_area = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
