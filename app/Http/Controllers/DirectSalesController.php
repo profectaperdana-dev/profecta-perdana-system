@@ -172,6 +172,7 @@ class DirectSalesController extends Controller
                 'retails.*.product_id' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
+                'retails.*.discount_rp' => 'required',
                 'total_excl' => 'required|numeric',
                 'total_ppn' => 'required|numeric',
                 'total_incl' => 'required|numeric'
@@ -183,6 +184,7 @@ class DirectSalesController extends Controller
                 'retails.*.product_id' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
+                'retails.*.discount_rp' => 'required',
                 'total_excl' => 'required|numeric',
                 'total_ppn' => 'required|numeric',
                 'total_incl' => 'required|numeric'
@@ -280,6 +282,7 @@ class DirectSalesController extends Controller
             $detail->product_id = $item['product_id'];
             $detail->qty = $item['qty'];
             $detail->discount = $item['discount'];
+            $detail->discount_rp = $item['discount_rp'];
             $detail->save();
 
             //Change stock

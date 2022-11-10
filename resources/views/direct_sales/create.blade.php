@@ -58,17 +58,9 @@
             </div>
             <div class="offcanvas-body">
                 <hr class="bg-primary">
-                <table class="table table-borderless table-success table-striped">
-                    <thead class="table-light">
-                        <tr>
-                            <th class="text-center">#</th>
-                            <th>Product</th>
-                            <th>Qty</th>
-                            <th>Disc (%)</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-cart">
-                        {{-- @foreach ($retail_products as $item)
+
+                <div id="table-cart">
+                    {{-- @foreach ($retail_products as $item)
                                 <tr class="form-group">
                                     <td><button type="button" class="btn btn-sm p-3 text-center text-danger fs-5"><i
                                                 class="fa fa-trash" aria-hidden="true"></i>
@@ -86,12 +78,17 @@
                                 @break
                             @endif
                         @endforeach --}}
-                    </tbody>
+                </div>
 
-                </table>
 
-                <button type="button" class="btn btn-secondary col-12 modalButton" data-bs-toggle="modal"
-                    data-bs-target="#checkoutModal">Checkout</button>
+                <br>
+                <div class="row">
+                    <div class="col">
+                        <button type="button" class="btn btn-secondary col-12 modalButton" data-bs-toggle="modal"
+                            data-bs-target="#checkoutModal">Checkout</button>
+                    </div>
+                </div>
+
             </div>
 
 
@@ -180,7 +177,8 @@
                                                             <option selected="" value="">Choose Car Brand
                                                             </option>
                                                             @foreach ($car_brands as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->car_brand }}
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->car_brand }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -200,7 +198,8 @@
                                                             name="motor_brand_id">
                                                             <option selected="" value="">Choose...</option>
                                                             @foreach ($motor_brands as $item)
-                                                                <option value="{{ $item->id }}">{{ $item->name_brand }}
+                                                                <option value="{{ $item->id }}">
+                                                                    {{ $item->name_brand }}
                                                                 </option>
                                                             @endforeach
                                                         </select>
@@ -380,30 +379,60 @@
                     let harga_jual = $(this).parent().find('.harga').val();
                     arr_harga_jual.push(harga_jual);
 
-                    let addCart = '<tr class="form-group"><td>' +
-                        '<button type="button" class="btn btn-sm p-3 text-center text-danger fs-5 remProduct">' +
-                        '<i class="fa fa-trash" aria-hidden="true"></i>' +
-                        '</button>' +
-                        '<input type="hidden" class="product-id-cart" value="' + product_id + '">' +
-                        '</td>' +
-                        '<td><small>' +
-                        sub_material + ' ' + sub_type + ': ' +
-                        '<strong>' + product_name + '</strong>' +
-                        '</small></td>' +
-                        '<td><input type="number" value="0" class="form-control" name="" id="qty' +
-                        product_id +
-                        '"></td>' +
-                        '<td><input type="number" value="0" class="form-control" name="" id="disc' +
-                        product_id +
-                        '"></td>' +
-                        '</tr>';
+                    let addCart = `
+                    <div class="bg-light text-dark py-2 mb-2 parent-cart">
+                        <div class="row align-items-center">
+                            <div class="col-2">
+                                <button type="button" class="btn btn-sm p-3 text-center text-danger fs-5 remProduct"><i
+                                        class="fa fa-trash" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                            <input type="hidden" class="product-id-cart" value="${product_id}">
+                            <div class="col-10">
+                                ${ sub_material} -
+                                ${sub_type}:
+                                <strong>${product_name}</strong>
+                            </div>
+                        </div>
+                        <div class="row mx-2">
+                            <div class="col-4">
+                                <label for="">Qty</label>
+                                <input type="number" value="0" class="form-control" name="" id="qty${product_id}">
+                            </div>
+                            <div class="col-4">
+                                <label for="">Disc (%)</label>
+                                <input type="number" value="0" class="form-control" name="" id="disc${product_id}">
+                            </div>
+                            <div class="col-4">
+                                <label for="">Disc (Rp)</label>
+                                <input type="number" value="0" class="form-control" name="" id="discrp${product_id}">
+                            </div>
+                        </div>
+                    </div>`;
+                    // let addCart = '<tr class="form-group"><td>' +
+                    //     '<button type="button" class="btn btn-sm p-3 text-center text-danger fs-5 remProduct">' +
+                    //     '<i class="fa fa-trash" aria-hidden="true"></i>' +
+                    //     '</button>' +
+                    //     '<input type="hidden" class="product-id-cart" value="' + product_id + '">' +
+                    //     '</td>' +
+                    //     '<td><small>' +
+                    //     sub_material + ' ' + sub_type + ': ' +
+                    //     '<strong>' + product_name + '</strong>' +
+                    //     '</small></td>' +
+                    //     '<td><input type="number" value="0" class="form-control" name="" id="qty' +
+                    //     product_id +
+                    //     '"></td>' +
+                    //     '<td><input type="number" value="0" class="form-control" name="" id="disc' +
+                    //     product_id +
+                    //     '"></td>' +
+                    //     '</tr>';
 
                     $(document).find('#table-cart').append(addCart);
                 });
 
                 //Remove Product to Cart
                 $(document).on('click', '.remProduct', function() {
-                    let product_id_cart = $(this).parent().find('.product-id-cart').val();
+                    let product_id_cart = $(this).parents().parents().children('.product-id-cart').val();
                     let parent_node = $('#product-list').find('#detailProduct' + product_id_cart)
                         .next()
                         .next();
@@ -418,7 +447,7 @@
                     arr_sub_type.splice(indexArray, 1);
                     arr_harga_jual.splice(indexArray, 1);
 
-                    $(this).closest('.form-group').remove();
+                    $(this).closest('.parent-cart').remove();
                     $('#count-cart').text(--count_cart);
                 });
 
@@ -640,9 +669,15 @@
                     for (let index = 0; index < arr_product_id.length; index++) {
                         let qty = $(document).find('#table-cart').find('#qty' + arr_product_id[index]).val();
                         let disc = $(document).find('#table-cart').find('#disc' + arr_product_id[index]).val();
+                        let disc_rp = $(document).find('#table-cart').find('#discrp' + arr_product_id[index])
+                            .val();
+                        let format_disc_rp = parseInt(disc_rp).toLocaleString('id', {
+                            minimumFractionDigits: 0,
+                            maximumFractionDigits: 0
+                        });
 
                         let diskon = parseInt(arr_harga_jual[index]) * (disc / 100);
-                        let hargaDiskon = parseInt(arr_harga_jual[index]) - diskon;
+                        let hargaDiskon = parseInt(arr_harga_jual[index]) - diskon - disc_rp;
 
                         let format_harga = (hargaDiskon * qty).toLocaleString('id', {
                             minimumFractionDigits: 0,
@@ -651,12 +686,13 @@
 
                         let product_qty_total = `
                             <li><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ${arr_sub_material[index]} ${arr_sub_type[index]}: 
-                                ${arr_product_name[index]} × ${qty} Disc: ${disc}% <span>Rp. ${format_harga}</span>
+                                ${arr_product_name[index]} × ${qty} <br> Disc: ${disc}% + ${format_disc_rp} <span>Rp. ${format_harga}</span>
                             </li>
                             <input type="hidden" name="retails[${index}][product_id]" value="${arr_product_id[index]}" >
                             <input type="hidden" name="retails[${index}][qty]" value="${qty}" >
                             <input type="hidden" name="retails[${index}][discount]" value="${disc}" >
-                        `;
+                            <input type="hidden" name="retails[${index}][discount_rp]" value="${disc_rp}" >
+                            `;
                         $(modal_id).find('#products-qty-total').append(product_qty_total);
 
                         total_all = total_all + (hargaDiskon * qty);

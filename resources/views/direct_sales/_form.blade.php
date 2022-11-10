@@ -71,12 +71,7 @@
                                                                 {{ $item->stockBy->stock . ' ' . $item->uoms->satuan }}
                                                             </h6>
                                                         </div>
-                                                        <div class="product-qnty">
 
-                                                            <div class="addcart-btn"><a type="button"
-                                                                    class="btn btn-primary me-3">Add
-                                                                    to Cart </a></div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                                 <button class="btn-close" type="button" data-bs-dismiss="modal"

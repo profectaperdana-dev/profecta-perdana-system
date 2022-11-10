@@ -45,7 +45,7 @@
                             <div class="row" id="formReturn">
                                 @foreach ($direct->directSalesDetailBy as $item)
                                     <div class="row mx-auto py-2 form-group bg-primary">
-                                        <div class="form-group col-12 col-lg-5">
+                                        <div class="form-group col-9 col-lg-4">
                                             <label>Product</label>
                                             <input readonly class="form-control"
                                                 value="{{ $item->productBy->nama_barang . ' (' . $item->productBy->sub_materials->nama_sub_material . ', ' . $item->productBy->sub_types->type_name . ')' }}">
@@ -55,12 +55,16 @@
                                             <input type="number" class="form-control" readonly
                                                 value="{{ $item->qty }}" id="">
                                         </div>
-                                        <div class="col-4 col-lg-2 form-group">
+                                        <div class="col-4 col-lg-1 form-group">
                                             <label>Disc (%)</label>
                                             <input type="number" class="form-control" readonly
                                                 value="{{ $item->discount }}" id="">
                                         </div>
-
+                                        <div class="col-4 col-lg-2 form-group">
+                                            <label>Disc (Rp)</label>
+                                            <input type="number" class="form-control" readonly
+                                                value="{{ $item->discount_rp }}" id="">
+                                        </div>
                                         @php
                                             $disc = $item->discount / 100;
                                             $hargadisc = $item->productBy->harga_jual * $disc;
