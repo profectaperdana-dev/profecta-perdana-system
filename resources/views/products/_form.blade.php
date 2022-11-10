@@ -94,8 +94,10 @@
             </div>
             <div class="col-md-3 form-group">
                 <label>Product Weight <span><small class="badge badge-danger">gram</small></span></label>
-                <input type="number" class="form-control {{ $errors->first('berat') ? ' is-invalid' : '' }}" required
-                    placeholder="Product Weight" name="berat" value="{{ old('berat', $data->berat) }}">
+                <input type="text" class="form-control {{ $errors->first('berat') ? ' is-invalid' : '' }}" required
+                    placeholder="Product Weight" id="berat"
+                    value="{{ old('berat', number_format($data->berat, 0, ',', '.')) }}">
+                <input type="hidden" name="berat" id="berat_" value="{{ $data->berat }}">
                 @error('berat')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -103,10 +105,11 @@
                 @enderror
             </div>
             <div class="col-md-3 form-group">
-                <label>Purchase Price (exclude PPN)</label>
+                <label>Purchase Price <small class="badge badge-primary">(exclude PPN)</small> </label>
                 <input type="text" class="form-control {{ $errors->first('harga_beli') ? ' is-invalid' : '' }}"
-                    required placeholder="Purchase Price" name="harga_beli"
-                    value="{{ old('harga_beli', number_format($data->harga_beli)) }}">
+                    required placeholder="Purchase Price" id="harga_beli"
+                    value="{{ old('harga_beli', number_format($data->harga_beli, 0, ',', '.')) }}">
+                <input type="hidden" id="harga_beli_" name="harga_beli" value="{{ $data->harga_beli }}">
                 @error('harga_beli')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -114,10 +117,11 @@
                 @enderror
             </div>
             <div class="col-md-3 form-group">
-                <label>Retail Selling Price (exclude PPN)</label>
-                <input type="number" class="form-control {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
-                    required placeholder="Retail Selling Price" name="harga_jual"
-                    value="{{ old('harga_jual', $data->harga_jual) }}">
+                <label>Retail Price <small class="badge badge-primary">(exclude PPN)</small></label>
+                <input type="text" class="form-control {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
+                    id="harga_jual" required placeholder="Retail Selling Price"
+                    value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}">
+                <input type="hidden" name="harga_jual" id="harga_jual_" value="{{ $data->harga_jual }}">
                 @error('harga_jual')
                     <div class="invalid-feedback">
                         {{ $message }}
@@ -125,11 +129,13 @@
                 @enderror
             </div>
             <div class="col-md-3 form-group">
-                <label>Non Retail Selling Price (exclude PPN)</label>
-                <input type="number"
+                <label>Non Retail Price<small class="badge badge-primary">(exclude PPN)</small></label>
+                <input type="text"
                     class="form-control {{ $errors->first('harga_jual_nonretail') ? ' is-invalid' : '' }}" required
-                    placeholder="Non Retail Selling Price" name="harga_jual_nonretail"
-                    value="{{ old('harga_jual_nonretail', $data->harga_jual_nonretail) }}">
+                    placeholder="Non Retail Selling Price" id="harga_jual_nonretail"
+                    value="{{ old('harga_jual_nonretail', number_format($data->harga_jual_nonretail, 0, ',', '.')) }}">
+                <input type="hidden" name="harga_jual_nonretail" id="harga_jual_nonretail_"
+                    value="{{ $data->harga_jual_nonretail }}">
                 @error('harga_jual_nonretail')
                     <div class="invalid-feedback">
                         {{ $message }}

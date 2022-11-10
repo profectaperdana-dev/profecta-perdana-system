@@ -23,7 +23,7 @@ class WarehouseController extends Controller
         $data = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
             ->latest('warehouses.id')
             ->get(['warehouses.*', 'customer_areas.area_name']);
-        $warehouse_types = WarehouseTypeModel::all();
+        $warehouse_types = WarehouseTypeModel::get();
         $areas = CustomerAreaModel::latest()->get();
         return view('warehouses.index', compact('title', 'data', 'areas', 'warehouse_types'));
     }

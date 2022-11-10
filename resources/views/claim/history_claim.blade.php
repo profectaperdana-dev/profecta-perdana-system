@@ -479,18 +479,20 @@
                                                                                                             value="{{ $value->f_charging }}">
                                                                                                     </div>
 
+                                                                                                    @if ($value->result != null)
+                                                                                                        <div
+                                                                                                            class="form-group col-md-12">
+                                                                                                            <label>Result</label>
 
-                                                                                                    <div
-                                                                                                        class="form-group col-md-12">
-                                                                                                        <label>Result</label>
-
-                                                                                                        <p>@php
-                                                                                                            echo htmlspecialchars_decode(htmlspecialchars_decode($value->result));
-                                                                                                        @endphp
-                                                                                                        </p>
+                                                                                                            <p>@php
+                                                                                                                echo htmlspecialchars_decode(htmlspecialchars_decode($value->result));
+                                                                                                            @endphp
+                                                                                                            </p>
 
 
-                                                                                                    </div>
+                                                                                                        </div>
+                                                                                                    @endif
+
 
                                                                                                     <div
                                                                                                         class="form-group col-lg-4 col-md-12">
