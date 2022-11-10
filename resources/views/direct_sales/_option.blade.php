@@ -65,6 +65,7 @@
                                             <input type="number" class="form-control" readonly
                                                 value="{{ $item->discount_rp }}" id="">
                                         </div>
+
                                         @php
                                             $disc = $item->discount / 100;
                                             $hargadisc = $item->productBy->harga_jual * $disc;

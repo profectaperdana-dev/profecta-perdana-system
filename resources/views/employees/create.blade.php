@@ -1,0 +1,180 @@
+@extends('layouts.master')
+@section('content')
+    @push('css')
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+    @endpush
+
+    <div class="container-fluid">
+        <div class="page-header">
+            <div class="row">
+                <div class="col-sm-6">
+                    <h3 class="font-weight-bold"> {{ $title }}</h3>
+                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create
+                        {{ $title }}
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid starts-->
+    <div class="container-fluid">
+        <div class="row">
+
+            <div class="col-sm-12">
+                <div class="card">
+
+                    <div class="card-body">
+                        <form method="post" action="{{ url('employee/') }}" enctype="multipart/form-data">
+                            @csrf
+                            @include('employees._form')
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Container-fluid Ends-->
+    @push('scripts')
+        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script src="{{ asset('js/custom.js') }}"></script>
+        <script>
+            let csrf = $('meta[name="csrf-token"]').attr("content");
+
+            $(document).ready(function() {
+                $('form').submit(function() {
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                });
+                $(".province").select2({
+                    width: "100%",
+                    placeholder: "Select Province",
+                    minimumResultsForSearch: -1,
+                    sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
+                    ajax: {
+                        type: "GET",
+                        url: "/customers/getProvince",
+                        data: function(params) {
+                            return {
+                                _token: csrf,
+                                q: params.term, // search term
+                            };
+                        },
+                        dataType: "json",
+                        delay: 250,
+                        processResults: function(data) {
+                            return {
+                                results: $.map(data, function(item) {
+                                    return [{
+                                        text: item.name,
+                                        id: item.id,
+                                    }, ];
+                                }),
+                            };
+                        },
+                    },
+                });
+
+                $('.province').change(function() {
+                    let province_value = $('.province').val();
+
+                    $(".city").select2({
+                        width: "100%",
+                        minimumResultsForSearch: -1,
+                        placeholder: "Select District",
+                        sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
+                        ajax: {
+                            type: "GET",
+                            url: "/customers/getCity/" + province_value,
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item.name,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+                });
+
+                $('.city').change(function() {
+                    let city_value = $('.city').val();
+
+                    $(".district").select2({
+                        width: "100%",
+                        minimumResultsForSearch: -1,
+                        placeholder: "Select Sub-District",
+                        sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
+                        ajax: {
+                            type: "GET",
+                            url: "/customers/getDistrict/" + city_value,
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item.name,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+                });
+
+                $('.district').change(function() {
+                    let district_value = $('.district').val();
+
+                    $(".village").select2({
+                        width: "100%",
+                        minimumResultsForSearch: -1,
+                        placeholder: "Select Customer Village",
+                        sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
+                        ajax: {
+                            type: "GET",
+                            url: "/customers/getVillage/" + district_value,
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item.name,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+                });
+
+
+            });
+        </script>
+    @endpush
+@endsection

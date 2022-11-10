@@ -233,6 +233,11 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('employee') ? 'active' : '' }}"
+                            href="{{ url('/employee') }}"><i data-feather="percent"></i><span>Master
+                                Employees</span></a>
+                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Report Accounting</h6>

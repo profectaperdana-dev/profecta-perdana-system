@@ -36,6 +36,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\DirectSalesController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MotorController;
 use App\Http\Controllers\ProductTradeInController;
 use App\Http\Controllers\StockMutationController;
@@ -264,6 +265,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/warehouse_types', WarehouseTypeController::class);
     Route::resource('/asset', AssetController::class);
     Route::resource('/asset_category', AssetCategoryController::class);
+    Route::resource('/employee', EmployeeController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {
