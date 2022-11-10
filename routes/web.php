@@ -37,6 +37,8 @@ use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\DirectSalesController;
 use App\Http\Controllers\MotorController;
 use App\Http\Controllers\ProductTradeInController;
+use App\Http\Controllers\ProspectiveEmployeeController;
+use App\Http\Controllers\SecondSaleController;
 use App\Http\Controllers\StockMutationController;
 use App\Http\Controllers\ValueAddedTaxController;
 use App\Models\CustomerModel;
@@ -59,6 +61,9 @@ use PhpParser\Node\Stmt\Return_;
 |
 */
 
+Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
+Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
+Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -85,9 +90,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
     Route::post('/sales_orders/{id}/verify', [SalesOrderController::class, 'verify']);
     Route::get('/need_approval', [SalesOrderController::class, 'soNeedApproval']);
-    Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
-    Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
-    Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
+
     Route::get('/customers/getVillage/{district_id}', [CustomerController::class, 'getVillage']);
     Route::get('/invoice', [SalesOrderController::class, 'getInvoiceData']);
     Route::get('/invoice/{id}/invoice_with_ppn', [SalesOrderController::class, 'printInoiceWithPpn']);
@@ -152,10 +155,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('report_trade_in', [ReportController::class, 'reportTradeIn']);
     Route::get('jurnal', [AccountingController::class, 'jurnal']);
     Route::get('/sub_account/select/{id}', [AccountingController::class, 'select']);
-    Route::get('/sub_type_account/select/{id}', [AccountingController::class, 'select_type']);
+    Route::get('/sub_type_account/select/', [AccountingController::class, 'select_type']);
     Route::get('motocycle_brand/select/{id}', [MotorController::class, 'select']);
     Route::get('district/selectAll', [DirectSalesController::class, 'select']);
     Route::post('expenses/store', [AccountingController::class, 'storeExpenses']);
+    Route::get('/retail_second_products/select', [SecondSaleController::class, 'select']);
+    Route::get('/retail_second_products/cekQty/{id_product}', [SecondSaleController::class, 'cekQty']);
+    Route::get('prospective_employees/create_code', [ProspectiveEmployeeController::class, 'createCode']);
 
     Route::get('profit_loss', [AccountingController::class, 'profit_loss']);
 
@@ -261,11 +267,15 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/claim', ClaimController::class);
     Route::resource('/warehouse_types', WarehouseTypeController::class);
     Route::resource('/asset', AssetController::class);
+    Route::resource('/retail_second_products', SecondSaleController::class);
+    Route::resource('/prospective_employees', ProspectiveEmployeeController::class, ['except' => ['show']]);
 });
 
 Route::group(['middleware' => 'guest'], function () {
+
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
+    Route::get('/prospective_employees/fill_form', [ProspectiveEmployeeController::class, 'fill_form']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

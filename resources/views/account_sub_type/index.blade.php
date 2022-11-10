@@ -33,7 +33,6 @@
                             enctype="multipart/form-data">
                             @csrf
                             <div class="row">
-
                                 <div class="col-md-12" id="formdynamic">
                                     <div class="form-group row">
                                         <div class="col-md-12">
@@ -42,7 +41,7 @@
                                                 <option value="">-- Select Account --</option>
                                                 @foreach ($accountSub as $item)
                                                     <option value="{{ $item->id }}">
-                                                        ({{ $item->account->code }}.{{ $item->code }})
+                                                        ({{ $item->code }})
                                                         {{ $item->account->name }} -
                                                         {{ $item->name }}</option>
                                                 @endforeach

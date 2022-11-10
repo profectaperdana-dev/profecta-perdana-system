@@ -81,7 +81,7 @@
                                                             $cost_current = $cost_per_month * 12;
                                                             $check_cost = $temp_cost - $cost_current;
                                                         @endphp
-                                                        @if ($check_cost <= 0 && $temp_cost != 0)
+                                                        @if ($check_cost <= 0 && $temp_cost < 0)
                                                             <td>{{ number_format($temp_cost, 0, ',', '.') }}</td>
                                                         @elseif ($check_cost <= 0 && $temp_cost == 0)
                                                             <td>-</td>

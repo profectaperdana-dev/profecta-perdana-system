@@ -32,12 +32,9 @@
                                     <tr>
                                         <th>#</th>
                                         <th>date</th>
-                                        <th>Code</th>
-                                        <th>Name Transaction</th>
+
+                                        <th>Code - Name Transaction</th>
                                         <th>Memo</th>
-                                        <th>Due Date</th>
-                                        <th>Installment</th>
-                                        <th>Status</th>
                                         <th>Total</th>
 
                                     </tr>
@@ -48,12 +45,9 @@
 
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ date('d F y', strtotime($value->date)) }} </td>
-                                            <td>{{ $value->account_code }}</td>
+                                            {{-- <td>{{ $value->account_code }}</td> --}}
                                             <td>{{ $value->code }}</td>
                                             <td>{{ $value->memo }}</td>
-                                            <td>{{ $value->due_date }}</td>
-                                            <td>{{ $value->installment }}</td>
-                                            <td>{{ $value->status }}</td>
                                             <td>@currency($value->total) </td>
 
 

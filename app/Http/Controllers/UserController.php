@@ -28,7 +28,7 @@ class UserController extends Controller
             ->get();
         $all_roles = RoleModel::latest()->get();
         $all_jobs = JobModel::latest()->get();
-        $all_warehouses = WarehouseModel::latest()->get();
+        $all_warehouses = WarehouseModel::where('type', 5)->get();
 
         $data = [
             'title' => 'User Account',

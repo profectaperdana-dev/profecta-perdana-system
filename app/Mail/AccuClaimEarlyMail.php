@@ -33,7 +33,7 @@ class AccuClaimEarlyMail extends Mailable
     {
         return $this->view('claim.pdf_accu_claims_mail')
             ->from('noreply@profectaperdana.com', 'PROFECTA PERDANA')
-            ->subject('CLAIM CONFIRMED ' . $this->data->claim_number)
+            ->subject('EARLY CLAIM INFORMATION ' . $this->data->claim_number)
             ->with(['data' => $this->data, 'warehouse' => $this->warehouse])
             ->attach(public_path('pdf_claim/' . $this->data->claim_number . '.pdf'));
     }

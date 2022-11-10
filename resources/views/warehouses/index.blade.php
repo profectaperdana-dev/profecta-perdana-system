@@ -45,10 +45,12 @@
                                     <div class="form-group row">
                                         <label class="font-weight-bold">Type Warehouse</label>
                                         <select name="type" class="form-control uoms text-uppercase" id="">
-                                            <option value="" selected>-Choose Type-
+                                            <option value="" selected>--Choose Type--
                                             </option>
                                             @foreach ($warehouse_types as $value)
-                                                <option value="{{ $value->id }}">{{ $value->name }}</option>
+                                                <option value="{{ $value->id }}">{{ $value->name }} -
+                                                    ({{ $value->detail }})
+                                                </option>
                                             @endforeach
                                         </select>
                                     </div>

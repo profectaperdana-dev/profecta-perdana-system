@@ -252,6 +252,40 @@
                     </li>
                     <li class="sidebar-main-title">
                         <div>
+                            <h6>Prospective Employees</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products/create') ? 'active' : '' }}"
+                            href="{{ url('/prospective_employees/create') }}"><i
+                                data-feather="inbox"></i><span>Create Form Prospective Employees
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products') ? 'active' : '' }}"
+                            href="{{ url('/prospective_employees') }}"><i data-feather="inbox"></i><span>All Data
+                                Prospective
+                                Employees
+                            </span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Retail Seconds Product</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products/create') ? 'active' : '' }}"
+                            href="{{ url('/retail_second_products/create') }}"><i
+                                data-feather="inbox"></i><span>Create Order
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products') ? 'active' : '' }}"
+                            href="{{ url('/retail_second_products') }}"><i data-feather="inbox"></i><span>Invoicing
+                            </span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
                             <h6>Retail</h6>
                         </div>
                     </li>
