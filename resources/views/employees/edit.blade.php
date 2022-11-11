@@ -9,7 +9,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold"> {{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create
+                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Edit
                         {{ $title }}
                 </div>
 
@@ -24,9 +24,10 @@
                 <div class="card">
 
                     <div class="card-body">
-                        <form class="needs-validation" novalidate method="post" action="{{ url('employee/') }}"
-                            enctype="multipart/form-data">
+                        <form class="needs-validation" novalidate method="post"
+                            action="{{ url('employee/' . $employee->id) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             @include('employees._form')
                         </form>
                     </div>

@@ -206,7 +206,7 @@
                                                                                 <input type="text"
                                                                                     class="form-control credit-limit"
                                                                                     readonly
-                                                                                    value="{{ number_format($value->credit_limit) }}">
+                                                                                    value="{{ number_format($value->credit_limit, 0, ',', '.') }}">
                                                                             </div>
                                                                             <div class="form-group col-md-4">
                                                                                 <label>Total Credit</label>

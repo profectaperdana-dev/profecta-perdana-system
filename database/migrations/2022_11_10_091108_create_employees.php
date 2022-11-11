@@ -42,6 +42,7 @@ class CreateEmployees extends Migration
             $table->string('father_phone');
             $table->integer('salary');
             $table->date('work_date');
+            $table->string('job');
             $table->string('photo');
             $table->integer('created_by');
             $table->softDeletes();

@@ -23,11 +23,13 @@
                         <label>Gender</label>
                         <br>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" value="0">
+                            <input class="form-check-input" type="radio" name="gender" value="0"
+                                @if ($employee->gender == 0) checked @endif>
                             <label class="form-check-label" for="inlineRadio1">Woman</label>
                         </div>
                         <div class="form-check form-check-inline">
-                            <input class="form-check-input" type="radio" name="gender" value="1">
+                            <input class="form-check-input" type="radio" name="gender" value="1"
+                                @if ($employee->gender == 1) checked @endif>
                             <label class="form-check-label" for="inlineRadio2">Man</label>
                         </div>
                         @error('gender')
@@ -90,7 +92,7 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label>Email</label>
-                        <input type="text" name="email" value="{{ old('email', $employee->email) }}"
+                        <input type="email" name="email" value="{{ old('email', $employee->email) }}"
                             class="form-control @error('email') is-invalid @enderror"
                             placeholder="Employee Email Number" required>
                         @error('email')
@@ -173,28 +175,28 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label>Study Degree</label>
-                        <select name="last_education_first"
-                            class="form-control @error('last_education_first') is-invalid @enderror" required>
+                        <select name="last_edu_first"
+                            class="form-control uoms @error('last_edu_first') is-invalid @enderror" required>
                             <option selected value="">
                                 -- Choose Study Degree --
                             </option>
-                            <option value="SHS">
+                            <option value="SHS" @if ($employee->last_edu_first == 'SHS') selected @endif>
                                 Senior High School
                             </option>
-                            <option value="Associate">
+                            <option value="Associate" @if ($employee->last_edu_first == 'Associate') selected @endif>
                                 Associate Degree
                             </option>
-                            <option value="Bachelor">
+                            <option value="Bachelor" @if ($employee->last_edu_first == 'Bachelor') selected @endif>
                                 Bachelor Degree
                             </option>
-                            <option value="Master">
+                            <option value="Master" @if ($employee->last_edu_first == 'Master') selected @endif>
                                 Master Degree
                             </option>
-                            <option value="Doctoral">
+                            <option value="Doctoral" @if ($employee->last_edu_first == 'Doctoral') selected @endif>
                                 Doctoral Degree
                             </option>
                         </select>
-                        @error('last_education_first')
+                        @error('last_edu_first')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -202,11 +204,11 @@
                     </div>
                     <div class="form-group col-md-4">
                         <label>Institution Name</label>
-                        <input type="text" name="school_name"
-                            value="{{ old('school_name', $employee->school_name) }}"
+                        <input type="text" name="school_name_first"
+                            value="{{ old('school_name_first', $employee->school_name_first) }}"
                             class="form-control form-control-lg @error('school_name') is-invalid @enderror"
                             placeholder="Enter Institution Name" required>
-                        @error('school_name')
+                        @error('school_name_first')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -216,9 +218,10 @@
                         <label>Study Period</label>
                         <div class="input-group mb-3">
                             <input type="date" class="form-control" placeholder="From" name="from_first"
-                                required>
+                                value="{{ old('from_first', $employee->from_first) }}" required>
                             <span class="input-group-text">To</span>
-                            <input type="date" class="form-control" placeholder="To" name="to_first" required>
+                            <input type="date" class="form-control" placeholder="To" name="to_first"
+                                value="{{ old('to_first', $employee->to_first) }}" required>
                         </div>
                         @error('from_first')
                             <div class="invalid-feedback">
@@ -235,28 +238,28 @@
                 <div class="row">
                     <div class="form-group col-md-4">
                         <label>Study Degree</label>
-                        <select name="last_education_sec"
-                            class="form-control @error('last_education_sec') is-invalid @enderror" required>
+                        <select name="last_edu_sec"
+                            class="form-control uoms @error('last_edu_sec') is-invalid @enderror" required>
                             <option selected value="">
                                 -- Choose Study Degree --
                             </option>
-                            <option value="SHS">
+                            <option value="SHS" @if ($employee->last_edu_sec == 'SHS') selected @endif>
                                 Senior High School
                             </option>
-                            <option value="Associate">
+                            <option value="Associate" @if ($employee->last_edu_sec == 'Associate') selected @endif>
                                 Associate Degree
                             </option>
-                            <option value="Bachelor">
+                            <option value="Bachelor" @if ($employee->last_edu_sec == 'Bachelor') selected @endif>
                                 Bachelor Degree
                             </option>
-                            <option value="Master">
+                            <option value="Master" @if ($employee->last_edu_sec == 'Master') selected @endif>
                                 Master Degree
                             </option>
-                            <option value="Doctoral">
+                            <option value="Doctoral" @if ($employee->last_edu_sec == 'Doctoral') selected @endif>
                                 Doctoral Degree
                             </option>
                         </select>
-                        @error('last_education_sec')
+                        @error('last_edu_sec')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -277,9 +280,11 @@
                     <div class="form-group col-md-4">
                         <label>Study Period</label>
                         <div class="input-group mb-3">
-                            <input type="date" class="form-control" placeholder="From" name="from_sec" required>
+                            <input type="date" class="form-control" placeholder="From" name="from_sec"
+                                value="{{ old('from_sec', $employee->from_sec) }}" required>
                             <span class="input-group-text">To</span>
-                            <input type="date" class="form-control" placeholder="To" name="to_sec" required>
+                            <input type="date" class="form-control" placeholder="To" name="to_sec"
+                                value="{{ old('to_sec', $employee->to_sec) }}" required>
                         </div>
                         @error('from_sec')
                             <div class="invalid-feedback">
@@ -385,6 +390,46 @@
                         @enderror
                     </div>
                     <div class="form-group col-md-4">
+                        <label>Job</label>
+                        <select name="job" class="form-control uoms @error('job') is-invalid @enderror" required>
+                            <option selected value="">
+                                -- Choose Employee Job --
+                            </option>
+                            <option value="Administrator" @if ($employee->job == 'Administrator') selected @endif>
+                                Administrator
+                            </option>
+                            <option value="Warehousekeeper" @if ($employee->job == 'Warehousekeeper') selected @endif>
+                                Warehousekeeper
+                            </option>
+                            <option value="Sales" @if ($employee->job == 'Sales') selected @endif>
+                                Sales
+                            </option>
+                            <option value="Finance" @if ($employee->job == 'Finance') selected @endif>
+                                Finance
+                            </option>
+                            <option value="Programmer" @if ($employee->job == 'Programmer') selected @endif>
+                                Programmer
+                            </option>
+                            <option value="Technician" @if ($employee->job == 'Technician') selected @endif>
+                                Technician
+                            </option>
+                            <option value="Human Resource and General Affair"
+                                @if ($employee->job == 'Human Resource and General Affair') selected @endif>
+                                Human Resource and General Affair
+                            </option>
+                            <option value="Office Boy" @if ($employee->job == 'Office Boy') selected @endif>
+                                Office Boy
+                            </option>
+                        </select>
+                        @error('job')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
                         <label>Employee Photo</label>
                         <input type="file" name="photo" id="inputreference"
                             class="form-control @error('photo') is-invalid @enderror">

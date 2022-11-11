@@ -78,7 +78,7 @@
                                                         <div class="modal-body">
                                                             <div class="container-fluid">
                                                                 <div class="row">
-                                                                    <div class="col-md-4 font-weight-bold mb-5">
+                                                                    <div class="col-lg-4 font-weight-bold mb-5">
                                                                         <label>Employee's Photo</label>
                                                                         <img width="100%" class="img-fluid shadow-lg"
                                                                             src="{{ asset('images/employees/' . $value->photo) }}"
@@ -86,169 +86,237 @@
                                                                     </div>
                                                                     <input class="id" type="hidden"
                                                                         value="{{ $value->id }}" readonly>
-                                                                    <div class="col-md-8">
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-4">
-                                                                                <label>Employee ID</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    placeholder="Customer Code" readonly
-                                                                                    value="{{ $value->employee_id }}">
+                                                                    <div class="col-lg-8">
+                                                                        <div class="card">
+                                                                            <div class="card-header pb-0">
+                                                                                <h5>Personal Data</h5>
+                                                                                <hr class="bg-primary">
                                                                             </div>
-                                                                            <div class="form-group col-md-4">
-                                                                                <label>Name</label>
-                                                                                <input type="text" class="form-control "
-                                                                                    placeholder="Employee Name" readonly
-                                                                                    value="{{ $value->name }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-4">
-                                                                                <label>Gender</label>
-                                                                                <input type="text" class="form-control "
-                                                                                    placeholder="Customer ID Card" readonly
-                                                                                    @if ($value->gender == 0) value="Woman"
-                                                                                    @else
-                                                                                    value="Man" @endif>
+                                                                            <div class="card-body">
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Employee ID</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Customer Code"
+                                                                                            readonly
+                                                                                            value="{{ $value->employee_id }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Name</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control "
+                                                                                            placeholder="Employee Name"
+                                                                                            readonly
+                                                                                            value="{{ $value->name }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Gender</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control "
+                                                                                            placeholder="Customer ID Card"
+                                                                                            readonly
+                                                                                            @if ($value->gender == 0) value="Woman"
+                                                                                            @else
+                                                                                            value="Man" @endif>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Phone Number</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            name="" id=""
+                                                                                            value="{{ $value->phone }}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Emergency Number</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            name="" id=""
+                                                                                            value="{{ $value->emergency_phone }}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Email</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            name="" id=""
+                                                                                            value="{{ $value->email }}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-6">
+                                                                                        <label>Birth Place</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{ $value->birth_place }}"
+                                                                                            readonly>
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-6">
+                                                                                        <label>Birth Date</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            value="{{ date('d-M-Y', strtotime($value->birth_date)) }}"
+                                                                                            readonly>
+                                                                                    </div>
+
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-12">
+                                                                                        <label>Address</label>
+                                                                                        <textarea class="form-control" rows="3" readonly>{{ $value->address . ', ' . $value->sub_district . ', ' . $value->district . ', ' . $value->province }}</textarea>
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-4">
-                                                                                <label>Phone Number</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    name="" id=""
-                                                                                    value="{{ $value->phone }}" readonly>
+                                                                        <div class="card">
+                                                                            <div class="card-header pb-0">
+                                                                                <h5>Education Data</h5>
+                                                                                <hr class="bg-primary">
                                                                             </div>
-                                                                            <div class="form-group col-md-4">
-                                                                                <label>Emergency Number</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    name="" id=""
-                                                                                    value="{{ $value->emergency_phone }}"
-                                                                                    readonly>
-                                                                            </div>
-                                                                            <div class="form-group col-md-4">
-                                                                                <label>Email</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    name="" id=""
-                                                                                    value="{{ $value->email }}" readonly>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>Birth Place</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    value="{{ $value->birth_place }}"
-                                                                                    readonly>
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>Birth Date</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    value="{{ date('d-M-Y', strtotime($value->birth_date)) }}"
-                                                                                    readonly>
-                                                                            </div>
-
-                                                                        </div>
-
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-12">
-                                                                                <label>Address</label>
-                                                                                <textarea class="form-control" rows="3" readonly>{{ $value->address . ', ' . $value->sub_district . ', ' . $value->district . ', ' . $value->province }}</textarea>
-                                                                            </div>
-                                                                        </div>
-
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>Study Degree
-                                                                                </label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ $value->last_education_first }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>
-                                                                                    Institution Name</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ $value->school_name_first }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>
-                                                                                    Study Period</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ $value->from_first . ' - ' . $value->to_first }}">
-                                                                            </div>
-                                                                        </div>
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>Study Degree
-                                                                                </label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ $value->last_education_sec }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>
-                                                                                    Institution Name</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ $value->school_name_sec }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>
-                                                                                    Study Period</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ $value->from_sec . ' - ' . $value->to_sec }}">
+                                                                            <div class="card-body">
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-3">
+                                                                                        <label>Study Degree
+                                                                                        </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->last_edu_first }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>
+                                                                                            Institution Name</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->school_name_first }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-5">
+                                                                                        <label>
+                                                                                            Study Period</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ date('d-M-Y', strtotime($value->from_first)) . ' Until ' . date('d-M-Y', strtotime($value->to_first)) }}">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-3">
+                                                                                        <label>Study Degree
+                                                                                        </label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->last_edu_sec }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>
+                                                                                            Institution Name</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->school_name_sec }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-5">
+                                                                                        <label>
+                                                                                            Study Period</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ date('d-M-Y', strtotime($value->from_sec)) . ' Until ' . date('d-M-Y', strtotime($value->to_sec)) }}">
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>
-                                                                                    Mother's Name</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->mom_name }}">
+                                                                        <div class="card">
+                                                                            <div class="card-header pb-0">
+                                                                                <h5>Family Data</h5>
+                                                                                <hr class="bg-primary">
                                                                             </div>
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>
-                                                                                    Mother's Phone Number</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    placeholder="Serial Number" readonly
-                                                                                    value="{{ $value->mom_phone }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>Father's Name
-                                                                                </label>
-                                                                                <input type="text" readonly
-                                                                                    class="form-control"
-                                                                                    value="{{ $value->father_name }}">
-                                                                            </div>
-                                                                            <div class="form-group col-md-3">
-                                                                                <label>Father's Phone Number
-                                                                                </label>
-                                                                                <input type="text" readonly
-                                                                                    class="form-control"
-                                                                                    value="{{ $value->father_phone }}">
+                                                                            <div class="card-body">
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-6">
+                                                                                        <label>
+                                                                                            Mother's Name</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $value->mom_name }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-6">
+                                                                                        <label>
+                                                                                            Mother's Phone Number</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control"
+                                                                                            placeholder="Serial Number"
+                                                                                            readonly
+                                                                                            value="{{ $value->mom_phone }}">
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-6">
+                                                                                        <label>Father's Name
+                                                                                        </label>
+                                                                                        <input type="text" readonly
+                                                                                            class="form-control"
+                                                                                            value="{{ $value->father_name }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-6">
+                                                                                        <label>Father's Phone Number
+                                                                                        </label>
+                                                                                        <input type="text" readonly
+                                                                                            class="form-control"
+                                                                                            value="{{ $value->father_phone }}">
+                                                                                    </div>
+                                                                                </div>
                                                                             </div>
                                                                         </div>
 
-                                                                        <div class="form-group row font-weight-bold">
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>Start Work Date</label>
-                                                                                <input type="text" class="form-control"
-                                                                                    readonly
-                                                                                    value="{{ date('d-M-Y', strtotime($value->work_date)) }}">
+                                                                        <div class="card">
+                                                                            <div class="card-header pb-0">
+                                                                                <h5>Work Data</h5>
+                                                                                <hr class="bg-primary">
                                                                             </div>
-                                                                            <div class="form-group col-md-6">
-                                                                                <label>Salary</label>
-                                                                                <input type="text"
-                                                                                    class="form-control credit-limit"
-                                                                                    readonly
-                                                                                    value="{{ number_format($value->salary) }}">
-                                                                            </div>
+                                                                            <div class="card-body">
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Start Work Date</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ date('d-M-Y', strtotime($value->work_date)) }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Job</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control" readonly
+                                                                                            value="{{ $value->job }}">
+                                                                                    </div>
+                                                                                    <div class="form-group col-lg-4">
+                                                                                        <label>Salary</label>
+                                                                                        <input type="text"
+                                                                                            class="form-control credit-limit"
+                                                                                            readonly
+                                                                                            value="{{ number_format($value->salary, 0, ',', '.') }}">
+                                                                                    </div>
 
+                                                                                </div>
+                                                                            </div>
                                                                         </div>
+
+
                                                                     </div>
                                                                 </div>
                                                             </div>
@@ -281,7 +349,7 @@
                                                                 <div class="modal-body">
                                                                     <div class="container-fluid">
                                                                         <div class="form-group row">
-                                                                            <div class="col-md-12">
+                                                                            <div class="col-lg-12">
                                                                                 <h5>Are you sure delete this data ?</h5>
                                                                             </div>
                                                                         </div>
