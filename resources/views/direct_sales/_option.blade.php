@@ -120,7 +120,19 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <a class="btn btn-info" href="{{ url('retail/print_invoice/' . $direct->id) }}">Print</a>
+                    <div class="btn-group dropup">
+                        <button type="button" class="btn btn-info dropdown-toggle" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Print
+                        </button>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item"
+                                    href="{{ url('retail/print_invoice/' . $direct->id) }}">Invoice</a></li>
+                            <li><a class="dropdown-item" href="{{ url('retail/print_do/' . $direct->id) }}">Delivery
+                                    Order</a></li>
+                        </ul>
+                    </div>
+
                     <a class="btn btn-primary" href="{{ url('retail/send_mail/' . $direct->id) }}">Send
                         Email
                     </a>
@@ -359,7 +371,7 @@
                                     @foreach ($direct->directSalesDetailBy as $item)
                                         <input type="hidden" class="loop" value="{{ $loop->index }}">
                                         <div class="mx-auto py-2 form-group row bg-primary">
-                                            <div class="form-group col-12 col-lg-6">
+                                            <div class="form-group col-12 col-lg-5">
                                                 <label>Product</label>
                                                 <select name="retails[{{ $loop->index }}][product_id]"
                                                     class="form-control productRetail" required>
@@ -374,7 +386,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-4 col-lg-2 form-group">
+                                            <div class="col-3 col-lg-2 form-group">
                                                 <label>Qty</label>
                                                 <input type="number" class="form-control" required
                                                     name="retails[{{ $loop->index }}][qty]"
@@ -385,7 +397,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-4 col-lg-2 form-group">
+                                            <div class="col-3 col-lg-2 form-group">
                                                 <label>Disc (%)</label>
                                                 <input type="number" class="form-control" required
                                                     name="retails[{{ $loop->index }}][discount]"
@@ -396,8 +408,19 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                            <div class="col-4 col-lg-2 form-group">
+                                                <label>Disc (Rp)</label>
+                                                <input type="number" class="form-control" required
+                                                    name="retails[{{ $loop->index }}][discount_rp]"
+                                                    value="{{ $item->discount }}" id="">
+                                                @error('retails[{{ $loop->index }}][discount_rp]')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
 
-                                            <div class="col-3 col-md-2 form-group">
+                                            <div class="col-2 col-lg-1 form-group">
                                                 <label for="">&nbsp;</label>
                                                 <a id="" href="javascript:void(0)"
                                                     class="form-control remSo-edit text-white text-center"

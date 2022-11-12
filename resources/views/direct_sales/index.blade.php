@@ -692,7 +692,7 @@
                         var form =
                             '<div class="mx-auto py-2 form-group row bg-primary">' +
                             '<input type="hidden" class="loop" value="' + x + '">' +
-                            '<div class="form-group col-12 col-lg-6">' +
+                            '<div class="form-group col-12 col-lg-5">' +
                             "<label>Product</label>" +
                             '<select name="retails[' +
                             x +
@@ -700,20 +700,26 @@
                             '<option value="">Choose Product</option> ' +
                             "</select>" +
                             "</div>" +
-                            '<div class="col-4 col-lg-2 form-group">' +
+                            '<div class="col-3 col-lg-2 form-group">' +
                             "<label> Qty </label> " +
                             '<input type="number" class="form-control" required name="retails[' +
                             x +
                             '][qty]">' +
                             '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
                             "</div> " +
-                            '<div class="col-4 col-lg-2 form-group">' +
+                            '<div class="col-3 col-lg-2 form-group">' +
                             "<label>Disc (%)</label>" +
                             '<input type="number" class="form-control" name="retails[' +
                             x +
                             '][discount]" id="">' +
                             "</div>" +
-                            '<div class="col-1 col-md-2 form-group">' +
+                            '<div class="col-4 col-lg-2 form-group">' +
+                            "<label>Disc (Rp)</label>" +
+                            '<input type="number" class="form-control" name="retails[' +
+                            x +
+                            '][discount_rp]" id="">' +
+                            "</div>" +
+                            '<div class="col-2 col-lg-1 form-group">' +
                             '<label for=""> &nbsp; </label>' +
                             '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
                             "- </a> " +

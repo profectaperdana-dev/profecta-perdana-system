@@ -183,6 +183,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [DirectSalesController::class, 'store']);
         Route::get('/credit', [DirectSalesController::class, 'credit']);
         Route::get('/print_invoice/{id}', [DirectSalesController::class, 'print_invoice']);
+        Route::get('/print_do/{id}', [DirectSalesController::class, 'print_do']);
         Route::get('/send_mail/{id}', [SendEmailController::class, 'send_mail_retail']);
         Route::get('/mark_as_paid/{id}', [DirectSalesController::class, 'mark_as_paid']);
         Route::get('/selectProductAll', [DirectSalesController::class, 'selectProductAll']);

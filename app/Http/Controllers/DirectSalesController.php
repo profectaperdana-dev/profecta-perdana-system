@@ -412,6 +412,22 @@ class DirectSalesController extends Controller
         return $pdf->download($data->pdf_invoice);
     }
 
+    public function print_do($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        $data = DirectSalesModel::find($id);
+        $so_number = str_replace('RSPP', 'DOPP', $data->order_number);
+        $data->pdf_do = $so_number . '.pdf';
+        $data->save();
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $pdf = Pdf::loadView('direct_sales.delivery_order', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $so_number . '.pdf');
+        return $pdf->download($data->pdf_do);
+    }
+
     public function mark_as_paid($id)
     {
         $selected_direct = DirectSalesModel::where('id', $id)->first();
@@ -441,6 +457,7 @@ class DirectSalesController extends Controller
                 'retails.*.product_id' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
+                'retails.*.discount_rp' => 'required',
             ]);
         } else {
             $validation = $request->validate([
@@ -449,6 +466,7 @@ class DirectSalesController extends Controller
                 'retails.*.product_id' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
+                'retails.*.discount_rp' => 'required',
             ]);
         }
 
@@ -551,6 +569,7 @@ class DirectSalesController extends Controller
                 $old_qty = $product_exist->qty;
                 $product_exist->qty = $product['qty'];
                 $product_exist->discount = $product['discount'];
+                $product_exist->discount_rp = $product['discount_rp'];
                 $product_exist->save();
             } else {
                 $new_product = new DirectSalesDetailModel();
@@ -558,13 +577,14 @@ class DirectSalesController extends Controller
                 $new_product->product_id = $product['product_id'];
                 $new_product->qty = $product['qty'];
                 $new_product->discount = $product['discount'];
+                $new_product->discount_rp = $product['discount_rp'];
                 $new_product->save();
             }
             //Count Total
             $products = ProductModel::where('id', $product['product_id'])->first();
             $diskon =  $product['discount'] / 100;
             $hargaDiskon = $products->harga_jual * $diskon;
-            $hargaAfterDiskon = ($products->harga_jual -  $hargaDiskon);
+            $hargaAfterDiskon = ($products->harga_jual -  $hargaDiskon) - $product['discount_rp'];
             $total = $total + ($hargaAfterDiskon * $product['qty']);
 
             //Change Stock
