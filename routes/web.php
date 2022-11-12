@@ -61,9 +61,14 @@ use PhpParser\Node\Stmt\Return_;
 |
 */
 
+Route::post('/prospective_employees/store_form', [ProspectiveEmployeeController::class, 'store_form']);
 Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
 Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
 Route::get('/customers/getDistrict/{city_id}', [CustomerController::class, 'getDistrict']);
+Route::get('/prospective_employees/fill_form/{any}', [ProspectiveEmployeeController::class, 'fill_form']);
+Route::get('/form_filled_successfully', [ProspectiveEmployeeController::class, 'form_filled_successfully']);
+Route::get('/prospective_employees/print_data/{any}', [ProspectiveEmployeeController::class, 'print_data']);
+
 Route::get('/', function () {
     return view('auth.login');
 });
@@ -268,14 +273,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/warehouse_types', WarehouseTypeController::class);
     Route::resource('/asset', AssetController::class);
     Route::resource('/retail_second_products', SecondSaleController::class);
-    Route::resource('/prospective_employees', ProspectiveEmployeeController::class, ['except' => ['show']]);
+    Route::resource('/prospective_employees', ProspectiveEmployeeController::class, ['except' => ['show', 'store_form']]);
 });
 
 Route::group(['middleware' => 'guest'], function () {
 
     Route::get('/login', [LoginController::class, 'index'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate']);
-    Route::get('/prospective_employees/fill_form', [ProspectiveEmployeeController::class, 'fill_form']);
 });
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

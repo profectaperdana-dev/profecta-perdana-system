@@ -24,7 +24,7 @@
                     </div>
                     <div class="card-body">
                         <form class="needs-validation" novalidate method="post"
-                            action="{{ url('prospective_employees/') }}" enctype="multipart/form-data" id="">
+                            action="{{ url('prospective_employees/store_form') }}" enctype="multipart/form-data">
                             @csrf
                             @include('prospective_employee._form')
                         </form>

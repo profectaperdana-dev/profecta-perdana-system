@@ -3,6 +3,7 @@
             <div class="ribbon-wrapper card">
                 <div class="card-body">
                     <div class="ribbon ribbon-bookmark ribbon-primary">Personal Data</div>
+                    <input type="text" value="{{ url()->current() }}" name="link">
                     <div class="row font-weight-bold">
                         <div class="form-group row">
                             <div class="col-md-6 form-group">
@@ -54,17 +55,22 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label for=""><span class="text-danger">*</span> Address</label>
-                                <textarea required name="" class="form-control" id="" cols="30" rows="5"></textarea>
+                                <textarea required name="address" class="form-control" id="" cols="30" rows="5"></textarea>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label><span class="text-danger">*</span>Email</label>
+                                <input type="email" name="email" class="form-control text-capitalize"
+                                    placeholder="Email" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <label><span class="text-danger">*</span> Phone Number</label>
-                                <input type="text" name="name" class="form-control text-capitalize"
+                                <input type="text" name="phone_number" class="form-control text-capitalize"
                                     placeholder="Phone Number" required>
 
                             </div>
                             <div class="form-group col-md-6">
                                 <label>Telp. Number</label>
-                                <input type="text" name="name" class="form-control text-capitalize"
+                                <input type="text" name="house_phone_number	" class="form-control text-capitalize"
                                     placeholder="House Phone Number" required>
                             </div>
                             <div class="col-md-12
@@ -155,48 +161,48 @@
                                     <label>
                                         Couple Name</label>
                                     <input type="text" name="couple_name" class="form-control text-capitalize"
-                                        placeholder="Couple Name" required>
+                                        placeholder="Couple Name">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>
                                         Couple Education</label>
                                     <input type="text" name="couple_education" class="form-control"
-                                        placeholder="Couple Education" required>
+                                        placeholder="Couple Education">
                                 </div>
                                 <div class="col-md-6 form-group">
                                     <label>
                                         Couple Occupation</label>
                                     <input type="text" name="couple_occupation" class="form-control"
-                                        placeholder="Couple Occupation" required>
+                                        placeholder="Couple Occupation">
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Number of Children</label>
                                     <input type="number" name="number_of_children" class="form-control"
-                                        placeholder="Number of Children" required>
+                                        placeholder="Number of Children">
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Child's Age <small>1st</small></label>
                                     <input type="number" name="child_1_age" class="form-control"
-                                        placeholder="Child's Age" required>
+                                        placeholder="Child's Age">
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Child's Age <small>2nd</small></label>
                                     <input type="number" name="child_2_age" class="form-control"
-                                        placeholder="Child's Age" required>
+                                        placeholder="Child's Age">
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Child's Age <small>3rd</small></label>
                                     <input type="number" name="child_3_age" class="form-control"
-                                        placeholder="Child's Age" required>
+                                        placeholder="Child's Age">
 
                                 </div>
                                 <div class="form-group col-md-3">
                                     <label>Child's Age <small>4th</small></label>
                                     <input type="number" name="child_4_age" class="form-control"
-                                        placeholder="Child's Age" required>
+                                        placeholder="Child's Age">
 
                                 </div>
                             </div>
@@ -258,7 +264,6 @@
                                     </div>
                                     <input type="text" name="related_number_phone_2" class="form-control"
                                         placeholder="Number Phone Relate" required>
-
                                 </div>
                             </div>
 
@@ -403,12 +408,10 @@
             </div>
         </div>
         <div class="row">
-
-
             <div class="form-group">
-                <a class="btn btn-danger" href="{{ url('sales_order/') }}"> <i class="ti ti-arrow-left"> </i> Back
-                </a>
+
                 <button type="reset" class="btn btn-warning">Reset</button>
+
                 <button type="submit" class="btn btn-primary save-button">Save</button>
             </div>
         </div>
