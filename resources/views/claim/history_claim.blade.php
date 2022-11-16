@@ -50,6 +50,7 @@
                                         <th>Customer</th>
                                         <th>Battery Type</th>
                                         <th>Plate Number</th>
+                                        <th>Claim Duration</th>
                                         <th>Detail</th>
                                     </tr>
 
@@ -92,6 +93,11 @@
                                                 @endif
                                             </td>
                                             <td class="text-uppercase">{{ $value->plate_number }}</td>
+                                            @php
+                                                $update = date('h:i:s', strtotime($value->updated_at));
+                                                $create = date('h:i:s', strtotime($value->created_at));
+                                            @endphp
+                                            <td>{{ $create . ' - ' . $update }}</td>
 
                                             <td class="text-center">
                                                 <a class="btn btn-sm btn-primary" href="#" data-bs-toggle="modal"
