@@ -22,7 +22,8 @@
                 <div class="card">
                     <div class="card-header pb-0">
 
-                        <a class="btn btn-primary click_this" href="{{ url('prospective_employees/create_code') }}">+ Make
+                        <a class="btn btn-primary click_this" href="{{ url('prospective_employees/create_code') }}">+ Create
+                            Link
                             Form</a>
 
                     </div>
@@ -34,86 +35,42 @@
                                     <tr>
                                         <th style="2%">action</th>
                                         <th>No</th>
-                                        <th>Code Generation</th>
-
+                                        <th>Link Form</th>
+                                        <th>Name Candidate</th>
                                         <th>Status</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($data as $key => $value)
                                         <tr>
-                                            <td style="width: 10%">
+                                            <td style="width: 3%">
                                                 <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false"><i data-feather="settings"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="">
                                                     <h5 class="dropdown-header">Actions</h5>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-original-title="test"
-                                                        data-bs-target="#changeData{{ $value->id }}">Edit</a>
+                                                    @if ($value->status == 1)
+                                                        <a class="dropdown-item "
+                                                            href="{{ url('prospective_employees/print_data/' . $value->code) }}">Print</a>
+                                                    @endif
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
                                                         data-original-title="test"
                                                         data-bs-target="#deleteData{{ $value->id }}">Delete</a>
                                                 </div>
                                             </td>
-                                            {{-- Modul Edit UOM --}}
-                                            <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('product_uoms/' . $value->id) }}"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input name="_method" type="hidden" value="PATCH">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                                                    {{ $value->satuan }}</h5>
-                                                                <button class="btn-close" type="button"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="container-fluid">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <label class="font-weight-bold ">Name
-                                                                                Unit of Measurement</label>
-                                                                            <input type="text"
-                                                                                class="form-control text-capitalize {{ $errors->first('editSatuan') ? ' is-invalid' : '' }}"
-                                                                                name="editSatuan"
-                                                                                value="{{ $value->satuan }}"
-                                                                                placeholder="Name Unit of Measurement">
-                                                                            @error('editSatuan')
-                                                                                <small
-                                                                                    class="text-danger">{{ $message }}.</small>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-danger" type="button"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="reset"
-                                                                    class="btn btn-warning">Reset</button>
-                                                                <button class="btn btn-primary" type="submit">Save
-                                                                    changes</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            {{-- End Modal Edit UOM --}}
+
                                             {{-- Modul Delete UOM --}}
                                             <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('product_uoms/' . $value->id) }}"
+                                                <div class="modal-dialog modal-lg" role="document">
+                                                    <form method="post"
+                                                        action="{{ url('prospective_employees/' . $value->id) }}"
                                                         enctype="multipart/form-data">
                                                         @csrf
                                                         <input name="_method" type="hidden" value="DELETE">
                                                         <div class="modal-content">
                                                             <div class="modal-header">
                                                                 <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                                                    {{ $value->satuan }}</h5>
+                                                                </h5>
                                                                 <button class="btn-close" type="button"
                                                                     data-bs-dismiss="modal" aria-label="Close"></button>
                                                             </div>
@@ -121,7 +78,11 @@
                                                                 <div class="container-fluid">
                                                                     <div class="form-group row">
                                                                         <div class="col-md-12">
-                                                                            <h5>Are you sure delete this data ?</h5>
+                                                                            <h5>Are you sure delete this link form ?</h5>
+                                                                            <input type="text"
+                                                                                class="form-control text-info"
+                                                                                value="{{ $value->link }}" readonly>
+
                                                                         </div>
                                                                     </div>
                                                                 </div>
@@ -137,9 +98,27 @@
                                                 </div>
                                             </div>
                                             {{-- End Modal Delete UOM --}}
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->code }}</td>
+                                            <td style="width: 3%">{{ $loop->iteration }}.</td>
+                                            <td style="width: 50%">
+                                                <div class="input-group pill-input-group"> <input
+                                                        class="form-control code text-info" type="text "
+                                                        value="{{ url()->current() . '/fill_form/' . $value->code }}">
+                                                    <span class="input-group-text"><a href="#" class="copy_code">
+                                                            <i class="icofont icofont-ui-copy"></i></a>
+                                                    </span>
+
+                                                </div>
+                                            </td>
+
                                             <td>
+                                                @if ($value->status == 1)
+                                                    <span>{{ $value->name }}</span>
+                                                @else
+                                                    <span class="badge badge-danger">Form Not Filled</span>
+                                                @endif
+
+                                            </td>
+                                            <td style="width: 10%">
                                                 @if ($value->status == 1)
                                                     <span class="badge badge-success">Form Filled</span>
                                                 @else
@@ -147,7 +126,6 @@
                                                 @endif
 
                                             </td>
-
                                 </tbody>
                                 @endforeach
                             </table>
@@ -162,5 +140,44 @@
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script>
+            $(document).ready(function() {
+                $('.copy_code').click(function() {
+                    var code = $(this).closest('td').find('.code').val();
+                    var $temp = $("<input>");
+                    $("body").append($temp);
+                    $temp.val(code).select();
+                    document.execCommand("copy");
+                    $temp.remove();
+                    $.notify({
+                        title: 'Copied Code Success',
+                        message: code
+                    }, {
+                        type: 'success',
+                        allow_dismiss: true,
+                        newest_on_top: true,
+                        mouse_over: true,
+                        showProgressbar: false,
+                        spacing: 10,
+                        timer: 3000,
+                        placement: {
+                            from: 'top',
+                            align: 'right'
+                        },
+                        offset: {
+                            x: 30,
+                            y: 30
+                        },
+                        delay: 1000,
+                        z_index: 10000,
+                        animate: {
+                            enter: 'animated swing',
+                            exit: 'animated swing'
+                        }
+                    });
+                    // alert('Code copied : ' + code);
+                });
+            });
+        </script>
     @endpush
 @endsection

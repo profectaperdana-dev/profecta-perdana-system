@@ -270,18 +270,12 @@
                         </div>
                     </li>
                     <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products/create') ? 'active' : '' }}"
-                            href="{{ url('/prospective_employees/create') }}"><i
-                                data-feather="inbox"></i><span>Create Form Prospective Employees
+                        <a class="nav-link menu-title link-nav {{ request()->is('prospective_employees') ? 'active' : '' }}"
+                            href="{{ url('/prospective_employees/') }}"><i data-feather="inbox"></i><span>Form
+                                Prospective Employees
                             </span></a>
                     </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products') ? 'active' : '' }}"
-                            href="{{ url('/prospective_employees') }}"><i data-feather="inbox"></i><span>All Data
-                                Prospective
-                                Employees
-                            </span></a>
-                    </li>
+
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Retail Seconds Product</h6>
