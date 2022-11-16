@@ -32,4 +32,9 @@ class User extends Authenticatable
     {
         return $this->hasOne(JobModel::class, 'id', 'job_id')->withTrashed();
     }
+
+    public function employeeBy()
+    {
+        return $this->hasOne(EmployeeModel::class, 'id', 'employee_id')->withTrashed();
+    }
 }

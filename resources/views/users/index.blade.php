@@ -32,22 +32,17 @@
 
                                 <div class="col-md-12">
                                     <div class="form-group">
-                                        <label>Name</label>
-                                        <input type="text" name="name"
-                                            class="form-control @error('name') is-invalid @enderror"
-                                            placeholder="Enter Account Name" required>
-                                        @error('name')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="form-group">
-                                        <label>Email</label>
-                                        <input type="email" name="email"
-                                            class="form-control @error('email') is-invalid @enderror"
-                                            placeholder="Enter Account Email" required>
-                                        @error('email')
+                                        <label>Employee</label>
+                                        <select name="employee_id"
+                                            class="form-control role-acc @error('employee_id') is-invalid @enderror"
+                                            required>
+                                            <option value="">Choose Employee</option>
+                                            @foreach ($employees as $employee)
+                                                <option value="{{ $employee->id }}">
+                                                    {{ $employee->name }}</option>
+                                            @endforeach
+                                        </select>
+                                        @error('employee_id')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
                                             </div>
@@ -173,13 +168,19 @@
                                                                 <div class="container-fluid">
                                                                     <div class="form-group row">
                                                                         <div class="col-md-12">
-                                                                            <label>Name</label>
-                                                                            <input type="text"
-                                                                                class="form-control @error('name_edit') is-invalid @enderror"
-                                                                                name="name_edit"
-                                                                                value="{{ $value->name }}"
-                                                                                placeholder="Enter Account Name" required>
-                                                                            @error('name_edit')
+                                                                            <label>Employee</label>
+                                                                            <select name="employee_id_edit"
+                                                                                class="form-control role-acc @error('employee_id_edit') is-invalid @enderror"
+                                                                                required>
+                                                                                <option value="">Choose Employee
+                                                                                </option>
+                                                                                @foreach ($employees as $employee)
+                                                                                    <option value="{{ $employee->id }}"
+                                                                                        @if ($value->employee_id == $employee->id) selected @endif>
+                                                                                        {{ $employee->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
+                                                                            @error('employe_id_edit')
                                                                                 <div class="invalid-feedback">
                                                                                     {{ $message }}
                                                                                 </div>
@@ -312,8 +313,8 @@
                                             </div>
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->name }}</td>
-                                            <td>{{ $value->email }}</td>
+                                            <td>{{ $value->employeeBy->name }}</td>
+                                            <td>{{ $value->employeeBy->email }}</td>
                                             <td>{{ $value->job_name }}</td>
                                             <td>{{ $value->role_name }}</td>
                                             <td>{{ $value->warehouse_name }}</td>

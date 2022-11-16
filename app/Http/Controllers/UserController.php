@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeModel;
 use App\Models\JobModel;
 use App\Models\RoleModel;
 use App\Models\User;
@@ -29,13 +30,15 @@ class UserController extends Controller
         $all_roles = RoleModel::latest()->get();
         $all_jobs = JobModel::latest()->get();
         $all_warehouses = WarehouseModel::where('type', 5)->get();
+        $all_employees = EmployeeModel::oldest('name')->get();
 
         $data = [
             'title' => 'User Account',
             'users' => $all_users,
             'roles' => $all_roles,
             'jobs' => $all_jobs,
-            'warehouses' => $all_warehouses
+            'warehouses' => $all_warehouses,
+            'employees' => $all_employees
         ];
 
         return view('users.index', $data);
@@ -50,8 +53,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validated_data = $request->validate([
-            'name' => 'required',
-            'email' => 'required|email:dns|unique:users,email',
+            'employee_id' => 'required',
             'job_id' => 'required|numeric',
             'role_id' => 'required|numeric',
             'warehouse_id' => 'required|numeric'
@@ -78,14 +80,14 @@ class UserController extends Controller
             abort(403);
         }
         $validated_data = $request->validate([
-            'name_edit' => 'required',
+            'employee_id_edit' => 'required',
             'role_id_edit' => 'required|numeric',
             'job_id_edit' => 'required|numeric',
             'warehouse_id_edit' => 'required|numeric'
         ]);
 
         $current_user = User::where('id', $id)->firstOrFail();
-        $current_user->name = $validated_data['name_edit'];
+        $current_user->employee_id = $validated_data['employee_id_edit'];
         $current_user->role_id = $validated_data['role_id_edit'];
         $current_user->job_id = $validated_data['job_id_edit'];
         $current_user->warehouse_id = $validated_data['warehouse_id_edit'];

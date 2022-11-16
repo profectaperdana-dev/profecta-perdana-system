@@ -11,7 +11,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
         @page {
-            size: 23cm 20cm portrait;
+            size: 80mm 80mm portrait;
         }
 
         body,

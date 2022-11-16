@@ -28,7 +28,7 @@
                             </div>
                         </div>
                         <div class="card-body text-center p-t-0">
-                            <h3 class="font-light">Wellcome Back, {{ Auth::user()->name }} !!</h3>
+                            <h3 class="font-light">Welcome Back, {{ Auth::user()->employeeBy->name }} !!</h3>
                             <p>Welcome to the profecta perdana system! we are glad that you are visite this dashboard. we
                                 will
                                 be happy
@@ -145,7 +145,7 @@
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
                                 <div class="media-body"><span class="m-0">Sales Today (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_day) }}</h4><i class="icon-bg"
+                                    <h4 class="mb-0 counter">{{ number_format($so_day, 0, ',', '.') }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
                             </div>
@@ -158,8 +158,8 @@
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
                                 <div class="media-body"><span class="m-0">All Sales (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_total) }}</h4><i class="icon-bg"
-                                        data-feather="credit-card"></i>
+                                    <h4 class="mb-0 counter">{{ number_format($so_total, 0, ',', '.') }}</h4><i
+                                        class="icon-bg" data-feather="credit-card"></i>
                                 </div>
                             </div>
                         </div>
@@ -200,8 +200,8 @@
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
                                 <div class="media-body"><span class="m-0">Sales (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
-                                        data-feather="credit-card"></i>
+                                    <h4 class="mb-0 counter">{{ number_format($so_today, 0, ',', '.') }}</h4><i
+                                        class="icon-bg" data-feather="credit-card"></i>
                                 </div>
                             </div>
                         </div>
@@ -228,8 +228,8 @@
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
                                 <div class="media-body"><span class="m-0"> Sales Today (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
-                                        data-feather="credit-card"></i>
+                                    <h4 class="mb-0 counter">{{ number_format($so_today, 0, ',', '.') }}</h4><i
+                                        class="icon-bg" data-feather="credit-card"></i>
                                 </div>
                             </div>
                         </div>
@@ -308,8 +308,8 @@
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
                                 <div class="media-body"><span class="m-0">Sales Today (IDR) </span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_today) }}</h4><i class="icon-bg"
-                                        data-feather="credit-card"></i>
+                                    <h4 class="mb-0 counter">{{ number_format($so_today, 0, ',', '.') }}</h4><i
+                                        class="icon-bg" data-feather="credit-card"></i>
                                 </div>
                             </div>
                         </div>
@@ -321,7 +321,7 @@
                             <div class="media static-top-widget">
                                 <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
                                 <div class="media-body"><span class="m-0">Sales This Month (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($month) }}</h4><i class="icon-bg"
+                                    <h4 class="mb-0 counter">{{ number_format($month, 0, ',', '.') }}</h4><i class="icon-bg"
                                         data-feather="credit-card"></i>
                                 </div>
                             </div>
