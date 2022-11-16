@@ -5,6 +5,7 @@ use App\Http\Controllers\AccountingController;
 use App\Http\Controllers\AccountSubController;
 use App\Http\Controllers\AccountSubTypeController;
 use App\Http\Controllers\AnalysisController;
+use App\Http\Controllers\AssetCategoryController;
 use App\Http\Controllers\AssetController;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\CheckStockController;
@@ -35,6 +36,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\ClaimController;
 use App\Http\Controllers\DirectSalesController;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\MotorController;
 use App\Http\Controllers\ProductTradeInController;
 use App\Http\Controllers\ProspectiveEmployeeController;
@@ -45,6 +47,7 @@ use App\Models\CustomerModel;
 use App\Models\MaterialModel;
 use App\Models\SalesOrderModel;
 use App\Http\Controllers\WarehouseTypeController;
+use App\Models\AssetCategoryModel;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
@@ -185,6 +188,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/store', [DirectSalesController::class, 'store']);
         Route::get('/credit', [DirectSalesController::class, 'credit']);
         Route::get('/print_invoice/{id}', [DirectSalesController::class, 'print_invoice']);
+        Route::get('/print_do/{id}', [DirectSalesController::class, 'print_do']);
         Route::get('/send_mail/{id}', [SendEmailController::class, 'send_mail_retail']);
         Route::get('/mark_as_paid/{id}', [DirectSalesController::class, 'mark_as_paid']);
         Route::get('/selectProductAll', [DirectSalesController::class, 'selectProductAll']);
@@ -274,6 +278,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('/asset', AssetController::class);
     Route::resource('/retail_second_products', SecondSaleController::class);
     Route::resource('/prospective_employees', ProspectiveEmployeeController::class, ['except' => ['show', 'store_form']]);
+    Route::resource('/asset_category', AssetCategoryController::class);
+    Route::resource('/employee', EmployeeController::class);
 });
 
 Route::group(['middleware' => 'guest'], function () {

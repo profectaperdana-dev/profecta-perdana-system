@@ -54,7 +54,7 @@ class ClaimController extends Controller
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $data = AccuClaimModel::find($id);
         $pdf = FacadePdf::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait');
-        return $pdf->stream();
+        return $pdf->stream("", array("Attachment" => false));
     }
     /**
      * Show the form for creating a new resource.

@@ -73,6 +73,9 @@
                                                     <a class="dropdown-item"
                                                         href="{{ url('/pdf_claim_accu/' . $value->id) }}">Download
                                                         PDF</a>
+                                                    <a class="dropdown-item"
+                                                        href="my.bluetoothprint.scheme://{{ url('/pdf_claim_accu/' . $value->id) }}">Download
+                                                        New</a>
                                                     @if ($value->email != null)
                                                         <a class="dropdown-item"
                                                             href="{{ url('/send_early_accu_claim/' . $value->id) }}">Send By

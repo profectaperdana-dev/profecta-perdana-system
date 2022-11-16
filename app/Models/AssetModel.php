@@ -16,4 +16,9 @@ class AssetModel extends Model
     {
         return $this->hasOne(User::class, 'id', 'created_by')->withTrashed();
     }
+
+    public function categoryBy()
+    {
+        return $this->belongsTo(AssetCategoryModel::class, 'category_id', 'id');
+    }
 }

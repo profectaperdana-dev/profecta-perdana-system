@@ -39,4 +39,9 @@ class DirectSalesModel extends Model
     {
         return $this->hasOne(MotorTypeModel::class, 'id', 'motor_type_id')->withTrashed();
     }
+
+    public function customerBy()
+    {
+        return $this->hasOne(CustomerModel::class, 'id', 'cust_name')->withTrashed();
+    }
 }

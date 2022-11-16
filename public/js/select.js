@@ -3,6 +3,25 @@ $(document).ready(function () {
     //     $(this).find('button[type="submit"]').prop("disabled", true);
     // });
 
+    $('.format-number').on('keyup', function() {
+        var selection = window.getSelection().toString();
+        if (selection !== '') {
+            return;
+        }
+        // When the arrow keys are pressed, abort.
+        if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+            return;
+        }
+        var $this = $(this);
+        // Get the value.
+        var input = $this.val();
+        var input = input.replace(/[\D\s\._\-]+/g, "");
+        input = input ? parseInt(input, 10) : 0;
+        $this.val(function() {
+            return (input === 0) ? "" : input.toLocaleString("id-ID");
+        });
+    });
+
     $(
         ".editPayments,.uoms,.materials,.submaterials, .category-cust, .area-cust, .role-acc, .warehouse-acc, .sub_type, .discount, .job-acc"
     ).select2({

@@ -35,11 +35,17 @@
 
                                     <div class=" row">
                                         <div class="form-group col-md-4">
-                                            <label class="font-weight-bold">Code of Asset</label>
-                                            <input type="text"
-                                                class="form-control {{ $errors->first('asset_code') ? ' is-invalid' : '' }}"
-                                                name="asset_code" placeholder="Enter Code of Asset" required>
-                                            @error('asset_code')
+                                            <label class="font-weight-bold">Category of Asset</label>
+                                            <select name="asset_category"
+                                                class="form-control category-cust @error('asset_category') is-invalid @enderror"
+                                                required>
+                                                <option value="">Choose Category of Asset</option>
+                                                @foreach ($categories as $category)
+                                                    <option value="{{ $category->id }}">
+                                                        {{ $category->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('asset_category')
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>

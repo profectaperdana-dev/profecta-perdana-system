@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,7 +20,12 @@ class LoginController extends Controller
             'password' => 'required'
         ]);
 
-        if (Auth::attempt($credentials)) {
+        $getIdByEmail = EmployeeModel::where('email', $request->email)->first();
+        if ($getIdByEmail == null) {
+            return back()->with('error', 'Login failed! Please check your email and password');
+        }
+
+        if (Auth::attempt(['employee_id' => $getIdByEmail->id, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->intended('home');
         }
