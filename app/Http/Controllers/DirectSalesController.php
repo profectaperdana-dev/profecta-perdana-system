@@ -411,6 +411,24 @@ class DirectSalesController extends Controller
 
         return $pdf->download($data->pdf_invoice);
     }
+    public function PrintStruk($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        $data = DirectSalesModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $data->pdf_invoice = $data->order_number . '.pdf';
+        $data->save();
+
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
+
+        $pdf = Pdf::loadView('direct_sales.print_struk', compact('warehouse', 'data', 'ppn'))->save('pdf/' . $data->order_number . '.pdf');
+
+        return $pdf->stream($data->pdf_invoice);
+    }
 
     public function print_do($id)
     {

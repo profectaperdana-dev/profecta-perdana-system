@@ -126,6 +126,8 @@
                             Print
                         </button>
                         <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{{ url('retail/print_struk/' . $direct->id) }}">Print
+                                    Struk</a></li>
                             <li><a class="dropdown-item"
                                     href="{{ url('retail/print_invoice/' . $direct->id) }}">Invoice</a></li>
                             <li><a class="dropdown-item" href="{{ url('retail/print_do/' . $direct->id) }}">Delivery
