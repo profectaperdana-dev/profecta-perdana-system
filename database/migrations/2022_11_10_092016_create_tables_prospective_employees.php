@@ -16,7 +16,8 @@ class CreateTablesProspectiveEmployees extends Migration
         Schema::create('prospective_employees', function (Blueprint $table) {
             $table->id();
             //* CODE
-            $table->string('code', 6)->unique();
+            $table->string('code')->unique();
+            $table->string('link')->unique();
 
             //* Data Pribadi
             $table->string('name')->nullable();
