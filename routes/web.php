@@ -195,6 +195,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('/{id}/update_retail', [DirectSalesController::class, 'update_retail']);
         Route::get('/search', [DirectSalesController::class, 'search']);
         Route::get('/selectById', [DirectSalesController::class, 'selectById']);
+        Route::get('/print_struk/{id}', [DirectSalesController::class, 'PrintStruk']);
     });
 
     Route::prefix('cars_type')->group(function () {

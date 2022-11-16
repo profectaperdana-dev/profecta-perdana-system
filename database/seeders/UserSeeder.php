@@ -15,10 +15,11 @@ class UserSeeder extends Seeder
     public function run()
     {
         $superAdmin = User::create([
-            'name' => 'Super Admin',
-            'email' => 'arif@mail.com',
+            'employee_id' => '3',
             'password' => bcrypt('12345678'),
             'role_id' => 1,
+            'job_id' => 3,
+            'phone_number' => '08123456789',
             'warehouse_id' => 1,
             'photo_profile' => '-',
         ]);
