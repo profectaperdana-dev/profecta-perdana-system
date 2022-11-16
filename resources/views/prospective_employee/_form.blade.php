@@ -3,7 +3,7 @@
             <div class="ribbon-wrapper card">
                 <div class="card-body">
                     <div class="ribbon ribbon-bookmark ribbon-primary">Personal Data</div>
-                    <input type="text" value="{{ url()->current() }}" name="link">
+                    <input type="hidden" value="{{ url()->current() }}" name="link">
                     <div class="row font-weight-bold">
                         <div class="form-group row">
                             <div class="col-md-6 form-group">
@@ -305,7 +305,7 @@
                                         Last Salary <small>[1]</small></label>
                                     <input type="text" class="form-control last_salary_1"
                                         placeholder="Last Salary">
-                                    <input type="text" name="last_salary_1">
+                                    <input type="hidden" name="last_salary_1">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Reason Stop Work<small>[1]</small></label>
@@ -341,7 +341,7 @@
                                         Last Salary <small>[2]</small></label>
                                     <input type="text" class="form-control last_salary_2"
                                         placeholder="Last Salary">
-                                    <input type="text" name="last_salary_2">
+                                    <input type="hidden" name="last_salary_2">
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label>Reason Stop Work<small>[2]</small></label>
@@ -400,7 +400,7 @@
                             </label>
                             <input type="text" class="form-control salary_expected" placeholder="Salary Expected"
                                 required>
-                            <input type="text" name="salary_expected">
+                            <input type="hidden" name="salary_expected">
                         </div>
                     </div>
 
