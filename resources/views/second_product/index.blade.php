@@ -347,14 +347,6 @@
                 $('#example').DataTable({
                     dom: 'Bfrtip',
                     buttons: [{
-                            title: 'RAB',
-                            extend: 'pdf',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
                             title: 'Data Stock Profecta ',
                             extend: 'print',
                             exportOptions: {

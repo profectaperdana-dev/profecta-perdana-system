@@ -12,11 +12,11 @@
             Email</a>
     @endif
     <h5 class="dropdown-header">Prints</h5>
-    <a class="dropdown-item" href="{{ url('trade_invoice/print_struk/' . $invoice->id . '/print') }}">Print Struk</a>
+    <a class="dropdown-item" href="{{ url('second_sale/print_struk/' . $invoice->id . '/print') }}">Print Struk</a>
 </div>
 
 {{-- ! Modal Edit Invoice Trade In --}}
-<div class="modal fade" id="manageData{{ $invoice->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
+{{-- <div class="modal fade" id="manageData{{ $invoice->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -128,4 +128,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> --}}

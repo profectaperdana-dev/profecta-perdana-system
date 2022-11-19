@@ -424,8 +424,9 @@ class DirectSalesController extends Controller
         $data->save();
 
         $ppn = ValueAddedTaxModel::first()->ppn / 100;
+        $ppn_ = $ppn * 100;
 
-        $pdf = Pdf::loadView('direct_sales.print_struk', compact('warehouse', 'data', 'ppn'))->save('pdf/' . $data->order_number . '.pdf');
+        $pdf = Pdf::loadView('direct_sales.print_struk', compact('warehouse', 'data', 'ppn_'))->save('pdf/' . $data->order_number . '.pdf');
 
         return $pdf->stream($data->pdf_invoice);
     }

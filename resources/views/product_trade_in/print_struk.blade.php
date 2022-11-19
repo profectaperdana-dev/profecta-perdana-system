@@ -28,7 +28,7 @@
         <tr>
             <td style="font-size: 10pt">No. Invoice</td>
             <td style="font-size: 10pt">:</td>
-            <td style="font-size: 10pt">{{ $data->order_number }}</td>
+            <td style="font-size: 10pt">{{ $data->trade_in_number }}</td>
         </tr>
         <tr>
             <td style="font-size: 10pt">Date</td>
@@ -49,22 +49,22 @@
             $total_diskon = 0;
             $total_diskon_persen = 0;
         @endphp
-        @foreach ($data->directSalesDetailBy as $item)
+        @foreach ($data->tradeInDetailBy as $item)
             <tr>
-                <td style="font-size: 8pt"> {{ $item->productBy->nama_barang }}
+                <td style="font-size: 8pt"> {{ $item->productTradeIn->name_product_trade_in }}
+
                 </td>
-                <td align="right" style="font-size: 8pt">{{ number_format($item->productBy->harga_jual, 0, ',', '.') }}
+                <td align="right" style="font-size: 8pt">
+                    {{ number_format($item->productTradeIn->price_product_trade_in, 0, ',', '.') }}
                 </td>
                 <td align="center" style="font-size: 8pt">{{ $item->qty }}</td>
                 @php
-                    $diskon = $item->productBy->harga_jual * ($item->discount / 100);
-                    $hargaDiskon = $item->productBy->harga_jual - $diskon;
+                    // $diskon = $item->productTradeIn->price_product_trade_in * ($item->discount / 100);
+                    // $hargaDiskon = $item->productTradeIn->price_product_trade_in - $diskon;
                     
-                    $total_diskon += $hargaDiskon * $item->qty;
-                    $discount_rp = $item->discount_rp * $item->qty;
-                    
-                    $total_diskon_persen += $item->discount_rp * $item->qty;
-                    $sub_total = $item->productBy->harga_jual * $item->qty;
+                    // $total_diskon += $diskon * $item->qty;
+                    // $total_diskon_persen += $item->discount_rp * $item->qty;
+                    $sub_total = $item->productTradeIn->price_product_trade_in * $item->qty;
                     
                 @endphp
                 <td style="font-size: 8pt" align="right">{{ number_format($sub_total, 0, ',', '.') }}</td>
@@ -76,29 +76,29 @@
             </td>
 
         </tr>
-        <tr>
+        {{-- <tr>
             <td align="right" colspan="3" style="font-size: 8pt">Discount</td>
             <td style="font-size: 8pt" align="right">{{ number_format($diskon * $item->qty, 0, ',', '.') }}</td>
         </tr>
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">Discount Rupiah</td>
             <td style="font-size: 8pt" align="right">
-                {{ number_format($discount_rp * $item->qty, 0, ',', '.') }}</td>
+                {{ number_format($item->discount_rp * $item->qty, 0, ',', '.') }}</td>
         </tr>
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">Total Excl.</td>
             <td style="font-size: 8pt" align="right">
                 {{ number_format($data->total_excl, 0, ',', '.') }}</td>
-        </tr>
-        <tr>
+        </tr> --}}
+        {{-- <tr>
             <td align="right" colspan="3" style="font-size: 8pt">PPN {{ $ppn_ }}%</td>
             <td style="font-size: 8pt" align="right">
                 {{ number_format($data->total_ppn, 0, ',', '.') }}</td>
-        </tr>
+        </tr> --}}
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">TOTAL</td>
             <td style="font-size: 8pt;border:1px solid black"" align="right">
-                {{ number_format($data->total_incl, 0, ',', '.') }}</td>
+                {{ number_format($data->total, 0, ',', '.') }}</td>
         </tr>
     </table>
     <center>

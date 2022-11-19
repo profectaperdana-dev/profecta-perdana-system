@@ -45,9 +45,11 @@
                                 <div class="form-group row">
                                     <div class="col-md-12">
                                         <label class="font-weight-bold">Price</label>
-                                        <input type="number"
+                                        <input type="text"
                                             class="form-control text-capitalize {{ $errors->first('price_product_trade_in') ? ' is-invalid' : '' }}"
-                                            name="price_product_trade_in" placeholder="Price product trade in">
+                                            placeholder="Price product trade in" id="harga_jual_nonretail">
+                                        <input type="hidden" name="price_product_trade_in" id="harga_jual_nonretail_"
+                                            value="">
                                         @error('price_product_trade_in')
                                             <small class="text-danger">{{ $message }}.</small>
                                         @enderror
@@ -136,10 +138,13 @@
                                                                             <div class="col-md-12">
                                                                                 <label
                                                                                     class="font-weight-bold">Price</label>
-                                                                                <input type="number"
-                                                                                    class="form-control text-capitalize {{ $errors->first('price_product_trade_ins') ? ' is-invalid' : '' }}"
-                                                                                    name="price_product_trade_ins"
+                                                                                <input type="text"
+                                                                                    class="form-control trade_ins text-capitalize {{ $errors->first('price_product_trade_ins') ? ' is-invalid' : '' }}"
                                                                                     placeholder="Price product trade in"
+                                                                                    value="{{ number_format($value->price_product_trade_in, 0, ',', '.') }}">
+                                                                                <input type="hidden"
+                                                                                    name="price_product_trade_ins"
+                                                                                    class="trade_ins_"
                                                                                     value="{{ $value->price_product_trade_in }}">
                                                                                 @error('price_product_trade_ins')
                                                                                     <small
@@ -221,6 +226,46 @@
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
                 });
+                $('#harga_jual_nonretail').on('keyup', function() {
+                    var selection = window.getSelection().toString();
+                    if (selection !== '') {
+                        return;
+                    }
+                    // When the arrow keys are pressed, abort.
+                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                        return;
+                    }
+                    var $this = $(this);
+                    // Get the value.
+                    var input = $this.val();
+                    var input = input.replace(/[\D\s\._\-]+/g, "");
+                    input = input ? parseInt(input, 10) : 0;
+                    $this.val(function() {
+                        return (input === 0) ? "" : input.toLocaleString("id-ID");
+                    });
+                    $('#harga_jual_nonretail_').val(input);
+                });
+                $('.trade_ins').on('keyup', function() {
+                    var selection = window.getSelection().toString();
+                    if (selection !== '') {
+                        return;
+                    }
+                    // When the arrow keys are pressed, abort.
+                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                        return;
+                    }
+                    var $this = $(this);
+                    // Get the value.
+                    var input = $this.val();
+                    var input = input.replace(/[\D\s\._\-]+/g, "");
+                    input = input ? parseInt(input, 10) : 0;
+                    $this.val(function() {
+                        return (input === 0) ? "" : input.toLocaleString("id-ID");
+                    });
+                    $('.trade_ins_').val(input);
+                });
+
+
             });
         </script>
     @endpush

@@ -15,29 +15,157 @@ class StockController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * 
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
 
         if (Gate::allows('warehouse_keeper')) {
-            $id = Auth::user()->warehouseBy->id;
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
-            $data = StockModel::where('warehouses_id', $id)->get();
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%Profecta Perdana%');
+                $query->where('warehouses_id', Auth::user()->warehouseBy->id);
+            })->latest()->get();
             $product = ProductModel::latest()->get();
-            $warehouse = WarehouseModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [5])->latest()->get();
 
             return view('stocks.index', compact('title', 'data', 'product', 'warehouse'));
         } else {
             $title = 'Data Stocks Product All Warehouse';
-            $data = StockModel::with('warehouseBy', 'productBy')->latest()->get();
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%Profecta Perdana%');
+            })->latest()->get();
             $product = ProductModel::latest()->get();
-            $warehouse = WarehouseModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [5])->latest()->get();
 
             return view('stocks.index', compact('title', 'data', 'product', 'warehouse'));
         }
     }
+
+    // ! stock c01
+    public function stock_c01()
+    {
+        if (Gate::allows('warehouse_keeper')) {
+            $id = Auth::user()->warehouseBy->id;
+            $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(C0-1)%');
+                $query->where('warehouses_id', Auth::user()->warehouseBy->id);
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [1])->latest()->get();
+
+            return view('stocks.stock_c01', compact('title', 'data', 'product', 'warehouse'));
+        } else {
+            $title = 'Data Stocks Product All Warehouse';
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(C0-1)%');
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [1])->latest()->get();
+
+            return view('stocks.stock_c01', compact('title', 'data', 'product', 'warehouse'));
+        }
+    }
+    // ! stock c02
+    public function stock_c02()
+    {
+        if (Gate::allows('warehouse_keeper')) {
+            $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(C0-2)%');
+                $query->where('warehouses_id', Auth::user()->warehouseBy->id);
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [2])->latest()->get();
+
+            return view('stocks.stock_c02', compact('title', 'data', 'product', 'warehouse'));
+        } else {
+            $title = 'Data Stocks Product All Warehouse';
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(C0-2)%');
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [2])->latest()->get();
+
+            return view('stocks.stock_c02', compact('title', 'data', 'product', 'warehouse'));
+        }
+    }
+    // ! stock c03
+    public function stock_c03()
+    {
+        if (Gate::allows('warehouse_keeper')) {
+            $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(C0-3)%');
+                $query->where('warehouses_id', Auth::user()->warehouseBy->id);
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [3])->latest()->get();
+
+            return view('stocks.stock_c03', compact('title', 'data', 'product', 'warehouse'));
+        } else {
+            $title = 'Data Stocks Product All Warehouse';
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(C0-3)%');
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [3])->latest()->get();
+
+            return view('stocks.stock_c03', compact('title', 'data', 'product', 'warehouse'));
+        }
+    }
+    // ! stock ss-01
+    public function stock_ss01()
+    {
+        if (Gate::allows('warehouse_keeper')) {
+            $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(SS-01)%');
+                $query->where('warehouses_id', Auth::user()->warehouseBy->id);
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [4])->latest()->get();
+
+            return view('stocks.stock_ss01', compact('title', 'data', 'product', 'warehouse'));
+        } else {
+            $title = 'Data Stocks Product All Warehouse';
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(SS-01)%');
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [4])->latest()->get();
+
+            return view('stocks.stock_ss01', compact('title', 'data', 'product', 'warehouse'));
+        }
+    }
+    // ! stock supplier
+    public function stock_supplier()
+    {
+        if (Gate::allows('warehouse_keeper')) {
+            $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(supplier)%');
+                $query->where('warehouses_id', Auth::user()->warehouseBy->id);
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [6])->latest()->get();
+
+            return view('stocks.stock_supplier', compact('title', 'data', 'product', 'warehouse'));
+        } else {
+            $title = 'Data Stocks Product All Warehouse';
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%(supplier)%');
+            })->latest()->get();
+            $product = ProductModel::latest()->get();
+            $warehouse = WarehouseModel::whereIn('type', [6])->latest()->get();
+
+            return view('stocks.stock_supplier', compact('title', 'data', 'product', 'warehouse'));
+        }
+    }
+
+
     public function cekProduk(Request $request)
     {
         try {
@@ -99,13 +227,55 @@ class StockController extends Controller
                 $issaved = $model->save();
             }
         }
-
-        if (empty($message_duplicate) && $issaved == true) {
-            return redirect('/stocks')->with('success', 'Create Stocks Success');
-        } elseif (!empty($message_duplicate) && $issaved == true) {
-            return redirect('/stocks')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
-        } else {
-            return redirect('/stocks')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
+        $cek_redirect = WarehouseModel::where('id', $request->get('warehouses_id'))->first();
+        if ($cek_redirect->type == 1) {
+            if (empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_c01')->with('success', 'Create Stocks Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_c01')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
+            } else {
+                return redirect('/stock_c01')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
+            }
+        } else if ($cek_redirect->type == 2) {
+            if (empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_c02')->with('success', 'Create Stocks Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_c02')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
+            } else {
+                return redirect('/stock_c02')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
+            }
+        } else if ($cek_redirect->type == 3) {
+            if (empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_c03')->with('success', 'Create Stocks Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_c03')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
+            } else {
+                return redirect('/stock_c03')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
+            }
+        } else if ($cek_redirect->type == 4) {
+            if (empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_ss01')->with('success', 'Create Stocks Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_ss01')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
+            } else {
+                return redirect('/stock_ss01')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
+            }
+        } else if ($cek_redirect->type == 5) {
+            if (empty($message_duplicate) && $issaved == true) {
+                return redirect('/stocks')->with('success', 'Create Stocks Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+                return redirect('/stocks')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
+            } else {
+                return redirect('/stocks')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
+            }
+        } else if ($cek_redirect->type == 6) {
+            if (empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_supplier')->with('success', 'Create Stocks Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+                return redirect('/stock_supplier')->with('success', 'Some of Stocks add maybe Success! ' . $message_duplicate);
+            } else {
+                return redirect('/stock_supplier')->with('error', 'Create Stocks Fail! Please make sure you have filled all the input');
+            }
         }
     }
 
@@ -172,7 +342,7 @@ class StockController extends Controller
         $model = StockModel::where('id', $id)->firstOrFail();
         $model->stock = $validate_data['stock_'];
         $model->save();
-        return redirect('/stocks')->with('success', 'Stocks Edit Success');
+        return redirect()->back()->with('success', 'Stocks Edit Success');
     }
 
     /**
@@ -188,6 +358,6 @@ class StockController extends Controller
         }
         $model = StockModel::find($id);
         $model->delete();
-        return redirect('/stocks')->with('error', 'Delete Data Stocks Success');
+        return redirect('')->back()->with('error', 'Delete Data Stocks Success');
     }
 }

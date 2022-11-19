@@ -104,6 +104,7 @@
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script>
             $(document).ready(function() {
 
@@ -242,6 +243,162 @@
                     $('#to_date').val('');
                     $('#example1').DataTable().destroy();
                     load_data();
+                });
+
+                // Edit Invoice
+                $(document).on("click", ".modal-btn2", function(event) {
+                    let validator = $('form.needs-validation').jbvalidator({
+                        errorMessage: true,
+                        successClass: true,
+                        language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+                    });
+
+                    validator.reload();
+                    let csrf = $('meta[name="csrf-token"]').attr("content");
+                    // $(document).on("click", ".modal-btn2", function() {
+                    let modal_id = $(this).attr('data-bs-target');
+                    //Get Customer ID
+                    console.log(modal_id);
+                    $(modal_id).find(".productSo-edit").select2({
+                        width: "100%",
+                        dropdownParent: modal_id,
+                        ajax: {
+                            type: "GET",
+                            url: "/all_product_trade_in",
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item.name_product_trade_in,
+
+
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+
+
+                    let x = $(modal_id)
+                        .find('.modal-body')
+                        .find('.formSo-edit')
+                        .children('.form-group')
+                        .last()
+                        .find('.loop')
+                        .val();
+                    //Get discount depent on product
+
+
+                    $(modal_id).on("click", ".addSo-edit", function() {
+                        ++x;
+                        var form =
+                            '<div class="mx-auto py-2 form-group row bg-primary"> <div class="form-group col-7">' +
+                            '<label>Baterry</label> <select name="tradeFields[' +
+                            x +
+                            '][product_trade_in]" class="form-control productSo-edit" required>' +
+                            '<option value="">-Choose Battery-</option> ' +
+                            "</select>" +
+                            '</div>' +
+                            '<div class="col-3 col-md-3 form-group">' +
+                            "<label> Qty </label> " +
+                            '<input class="form-control cekQty-edit" required name="tradeFields[' +
+                            x +
+                            '][qty]">' +
+                            "</div>" +
+                            '<div class="col-2 col-md-2 form-group">' +
+                            '<label for="">&nbsp;</label>' +
+                            '<a href="javascript:void(0)" class="form-control text-white remSo-edit text-center" style="border:none; background-color:red">X</a></div></div>';
+                        $(modal_id).find(".formSo-edit").append(form);
+
+                        $(modal_id).find(".productSo-edit").select2({
+                            width: "100%",
+                            dropdownParent: modal_id,
+                            ajax: {
+                                type: "GET",
+                                url: "/all_product_trade_in",
+                                data: function(params) {
+                                    return {
+                                        _token: csrf,
+                                        q: params.term, // search term
+                                    };
+                                },
+                                dataType: "json",
+                                delay: 250,
+                                processResults: function(data) {
+                                    return {
+                                        results: $.map(data, function(item) {
+                                            return [{
+                                                text: item
+                                                    .name_product_trade_in,
+
+
+                                                id: item.id,
+                                            }, ];
+                                        }),
+                                    };
+                                },
+                            },
+                        });
+                    });
+
+                    //remove Sales Order fields
+                    $(modal_id).on("click", ".remSo-edit", function() {
+                        $(this).closest(".row").remove();
+                    });
+
+                    //reload total
+                    $(modal_id).on('click', '.btn-reload', function() {
+                        let total = 0;
+                        $(modal_id).find('.productSo-edit').each(function() {
+                            let product_id = $(this).val();
+                            let cost = function() {
+                                let temp = 0;
+                                $.ajax({
+                                    async: false,
+                                    context: this,
+                                    type: "GET",
+                                    url: "/tradein/selectCost/" +
+                                        product_id,
+                                    dataType: "json",
+                                    success: function(data) {
+                                        temp = data
+                                            .price_product_trade_in
+                                    },
+                                });
+                                console.log(temp);
+                                return temp;
+                            }();
+
+                            let qty = $(this).parent().siblings().find(
+                                '.cekQty-edit').val();
+                            console.log(qty);
+                            total = total + (cost * qty);
+
+                            console.log(total);
+                        });
+
+
+                        $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
+                            .round(total)
+                            .toLocaleString(
+                                'id', {
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 0
+                                }));
+                    });
+                    $(modal_id).on('hidden.bs.modal', function() {
+                        $(modal_id).unbind();
+                    });
                 });
             });
         </script>

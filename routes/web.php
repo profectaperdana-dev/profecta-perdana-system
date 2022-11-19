@@ -98,7 +98,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/stocks/cekQty/{product_id}', [StockController::class, 'cekQty']);
     Route::post('/sales_orders/{id}/verify', [SalesOrderController::class, 'verify']);
     Route::get('/need_approval', [SalesOrderController::class, 'soNeedApproval']);
-
     Route::get('/customers/getVillage/{district_id}', [CustomerController::class, 'getVillage']);
     Route::get('/invoice', [SalesOrderController::class, 'getInvoiceData']);
     Route::get('/invoice/{id}/invoice_with_ppn', [SalesOrderController::class, 'printInoiceWithPpn']);
@@ -160,6 +159,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('trade_invoice', [ProductTradeInController::class, 'tradeInvoice']);
     Route::get('send_email_trade_invoice/{id}', [SendEmailController::class, 'sendTradeInvoice']);
     Route::get('trade_invoice/{id}/print', [ProductTradeInController::class, 'printTradeInvoice']);
+    Route::get('trade_invoice/print_struk/{id}/print', [ProductTradeInController::class, 'printStruk']);
+    Route::get('second_sale/print_struk/{id}/print', [SecondSaleController::class, 'printStruk']);
     Route::get('report_trade_in', [ReportController::class, 'reportTradeIn']);
     Route::get('jurnal', [AccountingController::class, 'jurnal']);
     Route::get('/sub_account/select/{id}', [AccountingController::class, 'select']);
@@ -170,8 +171,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/retail_second_products/select', [SecondSaleController::class, 'select']);
     Route::get('/retail_second_products/cekQty/{id_product}', [SecondSaleController::class, 'cekQty']);
     Route::get('prospective_employees/create_code', [ProspectiveEmployeeController::class, 'createCode']);
-
     Route::get('profit_loss', [AccountingController::class, 'profit_loss']);
+    Route::get('stock_c01', [StockController::class, 'stock_c01']);
+    Route::get('stock_c02', [StockController::class, 'stock_c02']);
+    Route::get('stock_c03', [StockController::class, 'stock_c03']);
+    Route::get('stock_ss01', [StockController::class, 'stock_ss01']);
+    Route::get('stock_supplier', [StockController::class, 'stock_supplier']);
+    Route::get('/tradein/selectCost/{id}', [ProductTradeInController::class, 'selectCost']);
+    Route::get('trade_invoice/{id}/edit', [ProductTradeInController::class, 'editTradeInvoice']);
+    Route::post('/trade_in/{id}/edit_superadmin', [ProductTradeInController::class, 'editSuperadmin']);
+
 
     Route::prefix('expenses')->group(function () {
         Route::get('/create', [AccountingController::class, 'createExpenses']);
