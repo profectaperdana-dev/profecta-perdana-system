@@ -42,6 +42,28 @@
                                 Discount</span></a>
                     </li>
                     <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('value_added_tax') ? 'active' : '' }}"
+                            href="{{ url('/value_added_tax') }}"><i data-feather="percent"></i><span>Manage
+                                Value-added Tax</span></a>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('account_sub_type') || request()->is('account') || request()->is('account_sub')) active @endif"
+                            href="javascript:void(0)"><i data-feather="book-open"></i><span>Manage
+                                Accounting</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('account_sub_type') || request()->is('account') || request()->is('account_sub')) block @else none @endif ">
+                            <li><a href="{{ url('/account') }}"
+                                    class="{{ request()->is('account') ? 'active' : '' }}">Accounts</a>
+                            </li>
+                            <li><a href="{{ url('/account_sub') }}"
+                                    class="{{ request()->is('account_sub') ? 'active' : '' }}">Accounts Sub</a>
+                            </li>
+                            <li><a href="{{ url('/account_sub_type') }}"
+                                    class="{{ request()->is('account_sub_type') ? 'active' : '' }}">Accounts Sub
+                                    Type</a></li>
+
+                        </ul>
+                    </li>
+                    <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('customers/create') ? 'active' : '' }}"
                             href="{{ url('/customers/create') }}"><i data-feather="user-check"></i><span>Create
                                 Customers
@@ -83,7 +105,34 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('return') ? 'active' : '' }}"
-                            href="{{ url('/return') }}"><i data-feather="retweet"></i></i><span>Return Sales
+                            href="{{ url('/return') }}"><i data-feather="rotate-ccw"></i></i><span>Return Invoice
+                            </span></a>
+                    </li>
+
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Report Accounting</h6>
+                        </div>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('expenses/create') ? 'active' : '' }}"
+                            href="{{ url('/expenses/create') }}"><i data-feather="inbox"></i><span>Input Expenses
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('jurnal') ? 'active' : '' }}"
+                            href="{{ url('/jurnal') }}"><i data-feather="inbox"></i><span>Journal
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('profit_loss') ? 'active' : '' }}"
+                            href="{{ url('/profit_loss') }}"><i data-feather="inbox"></i><span>Profit & Loss
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('depreciation') ? 'active' : '' }}"
+                            href="{{ url('/depreciation') }}"><i data-feather="inbox"></i><span>
+                                Depreciation
                             </span></a>
                     </li>
 
@@ -104,20 +153,70 @@
                             <h6>Reports & Files</h6>
                         </div>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('report_sales') ||
+                        request()->is('report_purchase') ||
+                        request()->is('report_trade_in') ||
+                        request()->is('report_claim') ||
+                        request()->is('report_return_invoice') ||
+                        request()->is('report_return_purchases')) active @endif"
+                            href="javascript:void(0)"><i data-feather="book-open"></i><span>Report</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('report_sales') ||
+                                request()->is('report_trade_in') ||
+                                request()->is('report_purchase') ||
+                                request()->is('report_claim')) block @else none @endif ">
+                            <li><a href="{{ url('/report_sales') }}"
+                                    class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Invoice</a>
+                            </li>
+                            <li><a href="{{ url('/report_purchase') }}"
+                                    class="{{ request()->is('report_purchase') ? 'active' : '' }}">Report Purchase
+                                </a></li>
+                            <li><a href="{{ url('/report_claim') }}"
+                                    class="{{ request()->is('report_claim') ? 'active' : '' }}">Report Claim</a>
+                            </li>
+                            <li><a href="{{ url('/report_return_invoice') }}"
+                                    class="{{ request()->is('report_return_invoice') ? 'active' : '' }}">Report
+                                    Return
+                                    Invoice</a>
+                            </li>
+                            <li><a href="{{ url('/report_return_purchases') }}"
+                                    class="{{ request()->is('report_return_purchases') ? 'active' : '' }}">Report
+                                    Return
+                                    Purchases</a>
+                            </li>
+                            <li><a href="{{ url('/report_trade_in') }}"
+                                    class="{{ request()->is('report_trade_in') ? 'active' : '' }}">Report
+                                    Trade-In
+                                </a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('analytics') ? 'active' : '' }}"
+                            href="{{ url('/analytics') }}"><i data-feather="activity"></i></i><span>Analysis
+                            </span></a>
+                    </li>
+                    <li class="dropdown"><a
+                            class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
                             href="javascript:void(0)"><i data-feather="archive"></i><span>Files Arsip</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) block @else none @endif ">
                             <li><a href="{{ url('/file_invoice') }}"
                                     class="{{ request()->is('file_invoice') ? 'active' : '' }}">File Invoice</a></li>
-                            <li>
-                                <a href="{{ url('/file_do') }}"
+                            <li><a href="{{ url('/file_do') }}"
                                     class="{{ request()->is('file_do') ? 'active' : '' }}">File
                                     Delivery
                                     Order
-                                </a>
+                                </a></li>
+                            <li><a href="{{ url('/file_po') }}"
+                                    class="{{ request()->is('file_po') ? 'active' : '' }}">File
+                                    Purchase
+                                    Order</a>
                             </li>
+
                         </ul>
+
                     </li>
 
                 </ul>

@@ -69,6 +69,11 @@ class StockMutationController extends Controller
 
     public function create()
     {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')
+        ) {
+            abort(403);
+        }
         $all_warehouses = WarehouseModel::all();
 
         $data = [
@@ -81,6 +86,11 @@ class StockMutationController extends Controller
 
     public function approval()
     {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')
+        ) {
+            abort(403);
+        }
         $unapprove_mutation = StockMutationModel::where('isapprove', 0)->latest()->get();
         $all_warehouses = WarehouseModel::all();
 
@@ -95,6 +105,11 @@ class StockMutationController extends Controller
 
     public function approve_mutation(Request $request, $id)
     {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')
+        ) {
+            abort(403);
+        }
         // Validate Input
         $request->validate([
             "from" => "required|numeric",

@@ -60,6 +60,9 @@ class UserController extends Controller
 
         ]);
 
+        $selected_employee = EmployeeModel::where('id', $validated_data['employee_id'])->first();
+        $validated_data['name'] = $selected_employee->name;
+        $validated_data['email'] = $selected_employee->email;
         $validated_data['password'] = bcrypt('profecta123');
 
         User::create($validated_data);

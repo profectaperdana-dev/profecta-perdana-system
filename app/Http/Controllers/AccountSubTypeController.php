@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AccountSubModel;
 use App\Models\AccountSubTypeModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AccountSubTypeController extends Controller
 {
@@ -15,6 +16,9 @@ class AccountSubTypeController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         //* view all account sub types
         $title = 'Account Sub Type';
         $data = AccountSubTypeModel::orderBy('code', 'asc')->get();
@@ -30,7 +34,7 @@ class AccountSubTypeController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -41,6 +45,7 @@ class AccountSubTypeController extends Controller
      */
     public function store(Request $request)
     {
+
         //* validate
         $request->validate([
             "account_sub_id" => "required",
@@ -87,7 +92,7 @@ class AccountSubTypeController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -98,7 +103,7 @@ class AccountSubTypeController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -110,6 +115,9 @@ class AccountSubTypeController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         //* validate
         $request->validate([
             "account_ids" => "required",
@@ -139,6 +147,6 @@ class AccountSubTypeController extends Controller
      */
     public function destroy($id)
     {
-        //
+        abort(404);
     }
 }

@@ -552,6 +552,7 @@
                 setTimeout(() => {
                     var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
                     chart.render();
+                    $('.main-nav').show();
                 }, 2100);
             });
         </script>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
@@ -124,6 +125,7 @@ class EmployeeController extends Controller
         $selected_employee->work_date = $request->work_date;
         $selected_employee->salary = $request->salary;
         $selected_employee->job = $request->job;
+        $selected_employee->created_by = Auth::user()->id;
 
         //Process Image
         $file = $request->file('photo');

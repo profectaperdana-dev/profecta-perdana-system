@@ -10,6 +10,9 @@ class ValueAddedTaxController extends Controller
 {
     public function index()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         $all_taxes = ValueAddedTaxModel::all();
         $data = [
             'title' => 'Master Value-added Tax (PPN)',

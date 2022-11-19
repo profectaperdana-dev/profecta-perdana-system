@@ -395,6 +395,12 @@
                             </div>
                         </div>
                         <div class="row mx-2">
+                            <div class="col">
+                                <label for="">Series Code</label>
+                                <input type="text" placeholder="Enter Series Code" class="form-control" name="" id="code${product_id}">
+                            </div>
+                        </div>
+                        <div class="row mx-2">
                             <div class="col-4">
                                 <label for="">Qty</label>
                                 <input type="number" value="0" class="form-control" name="" id="qty${product_id}">
@@ -668,6 +674,7 @@
                     let total_all = 0;
                     for (let index = 0; index < arr_product_id.length; index++) {
                         let qty = $(document).find('#table-cart').find('#qty' + arr_product_id[index]).val();
+                        let code = $(document).find('#table-cart').find('#code' + arr_product_id[index]).val();
                         let disc = $(document).find('#table-cart').find('#disc' + arr_product_id[index]).val();
                         let disc_rp = $(document).find('#table-cart').find('#discrp' + arr_product_id[index])
                             .val();
@@ -685,11 +692,13 @@
                         });
 
                         let product_qty_total = `
+                            <li>Series Code: ${code}</li>
                             <li><i class="fa fa-chevron-circle-right" aria-hidden="true"></i> ${arr_sub_material[index]} ${arr_sub_type[index]}: 
                                 ${arr_product_name[index]} × ${qty} <br> Disc: ${disc}% + ${format_disc_rp} <span>Rp. ${format_harga}</span>
                             </li>
                             <input type="hidden" name="retails[${index}][product_id]" value="${arr_product_id[index]}" >
                             <input type="hidden" name="retails[${index}][qty]" value="${qty}" >
+                            <input type="hidden" name="retails[${index}][product_code]" value="${code}" >
                             <input type="hidden" name="retails[${index}][discount]" value="${disc}" >
                             <input type="hidden" name="retails[${index}][discount_rp]" value="${disc_rp}" >
                             `;

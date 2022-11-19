@@ -151,7 +151,7 @@
                                                     aria-expanded="false"><i data-feather="settings"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="">
                                                     <h5 class="dropdown-header">Actions</h5>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    <a class="dropdown-item modal-btn" href="#" data-bs-toggle="modal"
                                                         data-original-title="test"
                                                         data-bs-target="#changeData{{ $value->id }}">Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
@@ -351,5 +351,16 @@
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script>
+            $(document).on("click", ".modal-btn", function(event) {
+                let modal_id = $(this).attr('data-bs-target');
+
+                $(modal_id).find(".uoms").select2({
+                    width: "100%",
+                    dropdownParent: modal_id,
+                });
+
+            });
+        </script>
     @endpush
 @endsection

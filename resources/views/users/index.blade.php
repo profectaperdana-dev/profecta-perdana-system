@@ -141,7 +141,7 @@
                                                     aria-expanded="false"><i data-feather="settings"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="">
                                                     <h5 class="dropdown-header">Actions</h5>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
+                                                    <a class="dropdown-item modal-btn" href="#" data-bs-toggle="modal"
                                                         data-original-title="test"
                                                         data-bs-target="#changeData{{ $value->id }}">Edit</a>
                                                     <a class="dropdown-item" href="#" data-bs-toggle="modal"
@@ -313,8 +313,8 @@
                                             </div>
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->employeeBy->name }}</td>
-                                            <td>{{ $value->employeeBy->email }}</td>
+                                            <td>{{ $value->name }}</td>
+                                            <td>{{ $value->email }}</td>
                                             <td>{{ $value->job_name }}</td>
                                             <td>{{ $value->role_name }}</td>
                                             <td>{{ $value->warehouse_name }}</td>
@@ -338,6 +338,16 @@
             $(document).ready(function() {
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
+                });
+
+                $(document).on("click", ".modal-btn", function(event) {
+                    let modal_id = $(this).attr('data-bs-target');
+
+                    $(modal_id).find(".role-acc, .job-acc").select2({
+                        width: "100%",
+                        dropdownParent: modal_id,
+                    });
+
                 });
             })
         </script>

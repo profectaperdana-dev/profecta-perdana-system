@@ -169,7 +169,7 @@ class ReportController extends Controller
     public function report_po(Request $request)
     {
         if (
-            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            !Gate::allows('isSuperAdmin')
             && !Gate::allows('isFinance')
         ) {
             abort(403);
@@ -307,20 +307,8 @@ class ReportController extends Controller
 
     public function reportClaim(Request $request)
     {
-        // $invoice = AccuClaimModel::join('users', 'users.id', '=', 'accu_claims.e_submittedBy')
-        //     ->select('accu_claims.*', 'users.name')
-        //     ->where('accu_claims.status', 1)
-        //     ->first();
-        // // dd($invoice->id);
-        // $detail = AccuClaimDetailModel::where('id_accu_claim', $invoice->id)->get();
-
-        // $diagnosa = '';
-        // foreach ($detail as $value) {
-        //     $diagnosa .= $value->diagnosa . ', ';
-        // }
-        // dd($diagnosa);
         if (
-            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isTeknisi')
             && !Gate::allows('isFinance')
         ) {
             abort(403);

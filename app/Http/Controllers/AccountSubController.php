@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AccountModel;
 use App\Models\AccountSubModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AccountSubController extends Controller
 {
@@ -15,6 +16,9 @@ class AccountSubController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         //* view data
         $title = 'Account Sub';
         $data = AccountSubModel::orderBy('code', 'asc')->get();
@@ -29,7 +33,7 @@ class AccountSubController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -97,7 +101,7 @@ class AccountSubController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -109,6 +113,9 @@ class AccountSubController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         //* validate
         $request->validate([
             "account_ids" => "required",
@@ -139,6 +146,9 @@ class AccountSubController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         //* delete
         $data = AccountSubModel::find($id);
         $delete = $data->delete();

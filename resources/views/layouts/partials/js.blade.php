@@ -63,6 +63,13 @@
  @include('layouts.partials.notify')
 
  <script>
+     if ('virtualKeyboard' in navigator) {
+         // The VirtualKeyboard API is supported!
+         navigator.virtualKeyboard.overlaysContent = true;
+         navigator.virtualKeyboard.show();
+         // When you want to hide it
+         navigator.virtualKeyboard.hide();
+     }
      const sidenavOptions = $(document).find('.nav-link, .sidebar-main-title');
      const showSidenavOptions = () => {
          Array.from(sidenavOptions).forEach((el) => {

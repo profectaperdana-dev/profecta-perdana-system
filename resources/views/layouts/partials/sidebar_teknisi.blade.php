@@ -99,6 +99,32 @@
                         </ul>
                     </li>
 
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Analysis Report & Files</h6>
+                        </div>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('report_sales') ||
+                        request()->is('report_purchase') ||
+                        request()->is('report_trade_in') ||
+                        request()->is('report_claim') ||
+                        request()->is('report_return_invoice') ||
+                        request()->is('report_return_purchases')) active @endif"
+                            href="javascript:void(0)"><i data-feather="book-open"></i><span>Report</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('report_sales') ||
+                                request()->is('report_trade_in') ||
+                                request()->is('report_purchase') ||
+                                request()->is('report_claim')) block @else none @endif ">
+
+                            <li><a href="{{ url('/report_claim') }}"
+                                    class="{{ request()->is('report_claim') ? 'active' : '' }}">Report Claim</a>
+                            </li>
+
+                        </ul>
+
+                    </li>
+
                     {{-- <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('history_claim') ? 'active' : '' }}"
                             href="{{ url('/history_claim') }}"><i data-feather="folder"></i><span>History Claims

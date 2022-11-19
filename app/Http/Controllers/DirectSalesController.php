@@ -170,6 +170,7 @@ class DirectSalesController extends Controller
                 'address' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
+                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -182,6 +183,7 @@ class DirectSalesController extends Controller
                 'cust_name' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
+                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -280,6 +282,7 @@ class DirectSalesController extends Controller
             $detail = new DirectSalesDetailModel();
             $detail->direct_id = $model->id;
             $detail->product_id = $item['product_id'];
+            $detail->product_code = $item['product_code'];
             $detail->qty = $item['qty'];
             $detail->discount = $item['discount'];
             $detail->discount_rp = $item['discount_rp'];
@@ -446,14 +449,6 @@ class DirectSalesController extends Controller
         return $pdf->download($data->pdf_do);
     }
 
-    public function mark_as_paid($id)
-    {
-        $selected_direct = DirectSalesModel::where('id', $id)->first();
-        $selected_direct->isPaid = 1;
-        $selected_direct->save();
-        return Redirect::back()->with('success', 'Paid Success!');
-    }
-
     public function update_retail(Request $request, $id)
     {
         if (
@@ -473,6 +468,7 @@ class DirectSalesController extends Controller
                 'address' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
+                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -482,6 +478,7 @@ class DirectSalesController extends Controller
                 'cust_name' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
+                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -586,6 +583,7 @@ class DirectSalesController extends Controller
             if ($product_exist != null) {
                 $old_qty = $product_exist->qty;
                 $product_exist->qty = $product['qty'];
+                $product_exist->product_code = $product['product_code'];
                 $product_exist->discount = $product['discount'];
                 $product_exist->discount_rp = $product['discount_rp'];
                 $product_exist->save();
@@ -593,6 +591,7 @@ class DirectSalesController extends Controller
                 $new_product = new DirectSalesDetailModel();
                 $new_product->direct_id = $id;
                 $new_product->product_id = $product['product_id'];
+                $new_product->product_code = $product['product_code'];
                 $new_product->qty = $product['qty'];
                 $new_product->discount = $product['discount'];
                 $new_product->discount_rp = $product['discount_rp'];

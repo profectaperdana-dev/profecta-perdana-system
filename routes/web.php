@@ -259,11 +259,11 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('/motorcycle', MotorController::class);
         Route::resource('/cars', CarController::class);
         Route::resource('/trade_in', ProductTradeInController::class);
-        Route::resource('/account', AccountController::class);
-        Route::resource('/account_sub', AccountSubController::class);
-        Route::resource('/account_sub_type', AccountSubTypeController::class);
     });
 
+    Route::resource('/account', AccountController::class);
+    Route::resource('/account_sub', AccountSubController::class);
+    Route::resource('/account_sub_type', AccountSubTypeController::class);
     Route::resource('/customers', CustomerController::class);
     Route::resource('/profiles', ProfileController::class);
     Route::patch('/profiles/{id}/photo', [ProfileController::class, 'changePhoto']);

@@ -30,7 +30,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
+                            <table id="basic-2" class="display expandable-table" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th></th>
@@ -38,6 +38,7 @@
                                         <th>Employee ID</th>
                                         <th>Name</th>
                                         <th>Gender</th>
+                                        <th>Job</th>
                                         <th>Phone</th>
                                         <th>Email</th>
                                     </tr>
@@ -378,6 +379,7 @@
                                                     Man
                                                 @endif
                                             </td>
+                                            <td>{{ $value->job }}</td>
                                             <td>{{ $value->phone }}</td>
                                             <td>{{ $value->email }}</td>
 
@@ -398,7 +400,9 @@
         <script>
             $(document).ready(function() {
                 let csrf = $('meta[name="csrf-token"]').attr("content");
-
+                $('form').submit(function() {
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                });
             });
         </script>
     @endpush

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AccountModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Gate;
 
 class AccountController extends Controller
 {
@@ -14,6 +15,9 @@ class AccountController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         $title = 'Account';
         $data = AccountModel::orderBy('code', 'asc')->get();
         return view('account.index', compact('title', 'data'));
@@ -26,7 +30,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -37,6 +41,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
+
         //* Validate
         $request->validate([
             'code' => 'required',
@@ -64,7 +69,7 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -75,7 +80,7 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -87,6 +92,9 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (!Gate::allows('level1') && !Gate::allows('level2')) {
+            abort(403);
+        }
         //* Validate
         $request->validate([
             'codes' => 'required',
@@ -115,6 +123,9 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
+        if (!Gate::allows('level1')) {
+            abort(403);
+        }
         //* Delete data
         $model = AccountModel::find($id);
         $deleted = $model->delete();

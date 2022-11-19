@@ -46,7 +46,7 @@
                                 @foreach ($direct->directSalesDetailBy as $item)
                                     <div class="row mx-auto py-2 form-group bg-primary">
                                         <div class="form-group col-9 col-lg-4">
-                                            <label>Product</label>
+                                            <label>Product - Series Code: {{ $item->product_code }}</label>
                                             <input readonly class="form-control"
                                                 value="{{ $item->productBy->nama_barang . ' (' . $item->productBy->sub_materials->nama_sub_material . ', ' . $item->productBy->sub_types->type_name . ')' }}">
                                         </div>
@@ -373,7 +373,7 @@
                                     @foreach ($direct->directSalesDetailBy as $item)
                                         <input type="hidden" class="loop" value="{{ $loop->index }}">
                                         <div class="mx-auto py-2 form-group row bg-primary">
-                                            <div class="form-group col-12 col-lg-5">
+                                            <div class="form-group col-12 col-lg-4">
                                                 <label>Product</label>
                                                 <select name="retails[{{ $loop->index }}][product_id]"
                                                     class="form-control productRetail" required>
@@ -389,6 +389,17 @@
                                                 @enderror
                                             </div>
                                             <div class="col-3 col-lg-2 form-group">
+                                                <label>Product Code</label>
+                                                <input type="text" class="form-control" required
+                                                    name="retails[{{ $loop->index }}][product_code]"
+                                                    value="{{ $item->product_code }}" id="">
+                                                @error('retails[{{ $loop->index }}][product_code]')
+                                                    <div class="invalid-feedback">
+                                                        {{ $message }}
+                                                    </div>
+                                                @enderror
+                                            </div>
+                                            <div class="col-3 col-lg-1 form-group">
                                                 <label>Qty</label>
                                                 <input type="number" class="form-control" required
                                                     name="retails[{{ $loop->index }}][qty]"

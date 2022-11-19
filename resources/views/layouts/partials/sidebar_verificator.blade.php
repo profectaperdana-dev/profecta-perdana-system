@@ -80,6 +80,54 @@
                                 Stock
                             </span></a>
                     </li>
+                    <li class="sidebar-main-title">
+                        <div>
+                            <h6>Analysis Report & Files</h6>
+                        </div>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('report_sales') ||
+                        request()->is('report_purchase') ||
+                        request()->is('report_trade_in') ||
+                        request()->is('report_claim') ||
+                        request()->is('report_return_invoice') ||
+                        request()->is('report_return_purchases')) active @endif"
+                            href="javascript:void(0)"><i data-feather="book-open"></i><span>Report</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('report_sales') ||
+                                request()->is('report_trade_in') ||
+                                request()->is('report_purchase') ||
+                                request()->is('report_claim')) block @else none @endif ">
+                            <li><a href="{{ url('/report_sales') }}"
+                                    class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Invoice</a>
+                            </li>
+                            <li><a href="{{ url('/report_return_invoice') }}"
+                                    class="{{ request()->is('report_return_invoice') ? 'active' : '' }}">Report
+                                    Return
+                                    Invoice</a>
+                            </li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('analytics') ? 'active' : '' }}"
+                            href="{{ url('/analytics') }}"><i data-feather="activity"></i></i><span>Analysis
+                            </span></a>
+                    </li>
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
+                            href="javascript:void(0)"><i data-feather="archive"></i><span>Files Arsip</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) block @else none @endif ">
+                            <li><a href="{{ url('/file_invoice') }}"
+                                    class="{{ request()->is('file_invoice') ? 'active' : '' }}">File Invoice</a></li>
+                            <li><a href="{{ url('/file_do') }}"
+                                    class="{{ request()->is('file_do') ? 'active' : '' }}">File
+                                    Delivery
+                                    Order
+                                </a></li>
+
+                        </ul>
+
+                    </li>
                 </ul>
             </div>
             <div class="right-arrow" id="right-arrow"><i data-feather="arrow-right"></i></div>

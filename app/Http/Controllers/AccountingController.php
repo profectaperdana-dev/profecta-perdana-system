@@ -10,6 +10,7 @@ use App\Models\DepreciationModel;
 use App\Models\JurnalModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
 
 class AccountingController extends Controller
 {
@@ -20,6 +21,9 @@ class AccountingController extends Controller
      */
     public function index()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         //* view data from database
         $data = JurnalModel::latest()->get();
         $title = 'Jurnal';
@@ -27,6 +31,9 @@ class AccountingController extends Controller
     }
     public function jurnal()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         //* view data from database
         $data = JurnalModel::orderBy('date', 'DESC')->get();
         $title = 'Journal';
@@ -35,6 +42,9 @@ class AccountingController extends Controller
 
     public function createExpenses()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         $title = 'Create Expenses';
         $account = AccountSubTypeModel::latest()->get();
         return view('accounting.create_expanse', compact('title', 'account'));
@@ -59,6 +69,9 @@ class AccountingController extends Controller
 
     public function profit_loss(Request $request)
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         if (!empty($request->from_date)) {
             $income = JurnalModel::where('account_code', '1')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
             $load_discount = JurnalModel::where('account_code', '2.2.703.804.102')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
@@ -184,6 +197,9 @@ class AccountingController extends Controller
 
     public function depreciation()
     {
+        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+            abort(403);
+        }
         $all_depreciation = AssetModel::latest()->get();
 
         $smallest_date = AssetModel::all('acquisition_year')->min('acquisition_year');
@@ -224,7 +240,7 @@ class AccountingController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -235,7 +251,7 @@ class AccountingController extends Controller
      */
     public function store(Request $request)
     {
-        //* 
+        abort(404);
     }
 
     /**
@@ -246,7 +262,7 @@ class AccountingController extends Controller
      */
     public function show($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -257,7 +273,7 @@ class AccountingController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -269,7 +285,7 @@ class AccountingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        abort(404);
     }
 
     /**
@@ -280,6 +296,6 @@ class AccountingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        abort(404);
     }
 }
