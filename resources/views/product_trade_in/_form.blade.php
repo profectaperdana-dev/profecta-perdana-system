@@ -7,11 +7,7 @@
                         Customers</label>
                     <input type="text" name="customer" class="form-control text-capitalize" placeholder="Name Customer"
                         required>
-                    @error('customer')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label>
@@ -25,21 +21,13 @@
                         Customers Phone</label>
                     <input type="text" data-v-min-length="9" data-v-max-length="13" number name="customer_phone"
                         class="form-control" placeholder="Customer Phone" required>
-                    @error('customer_phone')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+
                 </div>
                 <div class="col-md-6 form-group">
                     <label>
                         Customers Email</label>
                     <input type="email" name="customer_email" class="form-control" placeholder="Customer Email">
-                    @error('customer_email')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+
                 </div>
 
             </div>

@@ -261,6 +261,7 @@
                     $('#example1').DataTable().destroy();
                     load_data();
                 });
+
                 $(document).on("click", ".modal-btn2", function(event) {
                     let csrf = $('meta[name="csrf-token"]').attr("content");
 

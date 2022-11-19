@@ -50,16 +50,7 @@
                     successClass: true,
                     language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
                 });
-                //custom validate methode
-                // validator.validator.custom = function(el, event) {
-                //     if ($(el).is('[name=signed]') && $(el).val().length < 1) {
-                //         return "<span class='text-danger'>Please don't leave the signature form blank </span>";
-                //     }
-                // }
 
-
-
-                //reload instance after dynamic element is added
                 validator.reload();
             })
         </script>

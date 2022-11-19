@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
 use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Illuminate\Support\Facades\DB;
+use PhpParser\Builder\Trait_;
 
 class ProductTradeInController extends Controller
 {
@@ -329,6 +330,20 @@ class ProductTradeInController extends Controller
 
         // return view('invoice.index', $data);
     }
+    public function printStruk($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        $data = TradeInModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+
+        $pdf = FacadePdf::loadView('product_trade_in.print_struk', compact('warehouse', 'data'));
+
+        return $pdf->stream($data->trade_in_number . '.pdf');
+    }
 
     public function printTradeInvoice($id)
     {
@@ -337,5 +352,124 @@ class ProductTradeInController extends Controller
         $pdf = FacadePdf::loadView('product_trade_in.print_trade_in', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->stream('pdf_trade_in/' . $data->trade_in_number . '.pdf');
 
         return $pdf;
+    }
+
+    public function selectCost($product_id)
+
+    {
+        try {
+            $product = ProductTradeInModel::select('id', 'price_product_trade_in')
+                ->where('id', $product_id)
+                ->first();
+
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+    }
+
+    public function editSuperadmin(Request $request, $id)
+    {
+        // dd($request->all());
+        if (
+            !Gate::allows('isSuperAdmin')
+        ) {
+            abort(403);
+        }
+        $model = tradeInModel::find($id);
+        //* get customer 
+        $model->customer = $request->customer;
+        $model->customer_phone = $request->customer_phone;
+
+        if ($request->customer_email) {
+            $model->customer_email = $request->customer_email;
+        } else {
+            $model->customer_email = '-';
+        }
+        if ($request->customer_nik) {
+            $model->customer_nik = $request->customer_nik;
+        } else {
+            $model->customer_nik = '-';
+        }
+        //* created by
+        $model->createdBy = Auth::user()->id;
+        $saved = $model->save();
+        // save purchase order details
+        $total = 0;
+
+        //Check Duplicate
+        $products_arr = [];
+        foreach ($request->tradeFields as $check) {
+            array_push($products_arr, $check['product_trade_in']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return redirect()->back()->with('error', "You enter duplicate products! Please check again!");
+        }
+
+        $type = Auth::user()->warehouseBy->id_area;
+        $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->first();
+        $po_restore = TradeInDetailModel::where('trade_in_id', $id)->get();
+        foreach ($po_restore as $restore) {
+            $stock = SecondProductModel::where('warehouses_id', $warehouse->id)
+                ->where('products_id', $restore->product_trade_in)->first();
+            $stock->qty = $stock->qty - $restore->qty;
+            $stock->save();
+        }
+
+
+
+        if ($saved) {
+            foreach ($request->tradeFields as $value) {
+                $data = TradeInDetailModel::where('trade_in_id', $model->id)
+                    ->where('product_trade_in', $value['product_trade_in'])
+                    ->first();
+                if ($data) {
+                    $data->product_trade_in = $value['product_trade_in'];
+                    $data->qty = $value['qty'];
+                    $data->save();
+                } else {
+                    $detail = new TradeInDetailModel();
+                    $detail->trade_in_id = $model->id;
+                    $detail->product_trade_in = $value['product_trade_in'];
+                    $detail->qty = $value['qty'];
+                    $detail->save();
+                }
+
+                $harga = ProductTradeInModel::where('id', $value['product_trade_in'])->first();
+                $total = $total + ($harga->price_product_trade_in * $value['qty']);
+
+                $type = Auth::user()->warehouseBy->id_area;
+                $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->first();
+
+                $second_stock = SecondProductModel::where('warehouses_id', $warehouse->id)->where('products_id', $value['product_trade_in'])->first();
+
+                // dd($second_stock);
+                if ($second_stock == null) {
+                    $second_stock = new SecondProductModel();
+                    $second_stock->warehouses_id = $warehouse->id;
+                    $second_stock->products_id = $value['product_trade_in'];
+                    $second_stock->qty = $value['qty'];
+                    $second_stock->save();
+                } else {
+                    $second_stock->qty = $second_stock->qty +  $value['qty'];
+                    $second_stock->save();
+                }
+            }
+            //Delete product that not in SOD Input
+            $del = TradeInDetailModel::where('trade_in_id', $id)
+                ->whereNotIn('product_trade_in', $products_arr)->delete();
+            $model->total = $total;
+            $saved = $model->save();
+            if (empty($message_duplicate) && $saved) {
+                return redirect()->back()->with('success', 'Create Trade-In order ' . $model->trade_in_number . ' success');
+            } elseif (!empty($message_duplicate) && $saved) {
+
+                return redirect()->back()->with('info', 'Trade-In Order add Success! ' . $message_duplicate);
+            } else {
+                return redirect()->back()->with('error', 'Add Trade-In Order Fail! Please make sure you have filled all the input');
+            }
+        }
     }
 }

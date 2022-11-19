@@ -7,6 +7,7 @@ use App\Models\SecondProductModel;
 use App\Models\SecondSaleDetailModel;
 use App\Models\SecondSaleModel;
 use App\Models\WarehouseModel;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Http\Request;
@@ -71,7 +72,7 @@ class SecondSaleController extends Controller
                 ->addIndexColumn() //memberikan penomoran
                 ->addColumn('action', function ($invoice) {
 
-                    return view('product_trade_in._option', compact('invoice'))->render();
+                    return view('second_sale._option', compact('invoice'))->render();
                 })
                 ->rawColumns(['action'], ['createdBy'])
                 // ->rawColumns()
@@ -83,7 +84,20 @@ class SecondSaleController extends Controller
         ];
         return view('second_sale.index', $data);
     }
+    public function printStruk($id)
+    {
+        if (
+            !Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')
+        ) {
+            abort(403);
+        }
+        $data = SecondSaleModel::find($id);
+        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
 
+        $pdf = Pdf::loadView('second_sale.print_struk', compact('warehouse', 'data'));
+
+        return $pdf->stream($data->second_sale_number . '.pdf');
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -101,10 +115,12 @@ class SecondSaleController extends Controller
             if (request()->has('q')) {
                 $search = request()->q;
                 $product = SecondProductModel::join('product_trade_ins', 'product_trade_ins.id', '=', 'second_products.products_id')
-                    ->join('warehouses', 'warehouses.id', '=', 'second_products.warehouses_id')
                     ->select('second_products.*', 'product_trade_ins.*, warehouses.*')
+                    ->join('warehouses', 'warehouses.id', '=', 'second_products.warehouses_id')
+                    ->select('second_products.*', 'product_trade_ins.*')
                     ->where('product_trade_ins.name_product_trade_in', 'LIKE', "%$search%")
                     ->where('warehouses.id_area', '=', Auth::user()->warehouseBy->id_area)
+                    ->where('second_products.qty', '>', 0)
                     ->get();
             } else {
                 $product = SecondProductModel::join('product_trade_ins', 'product_trade_ins.id', '=', 'second_products.products_id')
@@ -112,6 +128,7 @@ class SecondSaleController extends Controller
                     ->join('warehouses', 'warehouses.id', '=', 'second_products.warehouses_id')
                     ->select('second_products.*', 'product_trade_ins.*')
                     ->where('warehouses.id_area', '=', Auth::user()->warehouseBy->id_area)
+                    ->where('second_products.qty', '>', 0)
                     ->get();
             }
             return response()->json($product);
@@ -179,7 +196,7 @@ class SecondSaleController extends Controller
                 $model_detail = new SecondSaleDetailModel();
                 $model_detail->second_sale_id = $model->id;
                 $model_detail->product_second_id = $value['product_trade_in'];
-
+                $model_detail->qty = $value['qty'];
                 if ($value['disc_percent'] == null) {
                     $model_detail->discount = 0;
                 } else {

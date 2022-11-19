@@ -45,15 +45,17 @@
                         <a class="nav-link menu-title link-nav {{ request()->is('home') ? 'active' : '' }}"
                             href="{{ url('/home') }}"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
+
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Master Data</h6>
                         </div>
                     </li>
+
+                    {{-- ! master product   --}}
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('product_materials') ||
                         request()->is('products') ||
-                        request()->is('second_product') ||
-                        request()->is('stocks') ||
+                        request()->is('trade_in') ||
                         request()->is('product_sub_materials') ||
                         request()->is('product_sub_types') ||
                         request()->is('product_uoms')) active @endif"
@@ -61,10 +63,9 @@
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('product_materials') ||
                                 request()->is('products') ||
-                                request()->is('second_product') ||
-                                request()->is('stocks') ||
                                 request()->is('product_sub_materials') ||
                                 request()->is('product_sub_types') ||
+                                request()->is('trade_in') ||
                                 request()->is('product_uoms')) block @else none @endif ">
                             <li>
                                 <a href="{{ url('/product_uoms') }}"
@@ -90,32 +91,67 @@
                                     class="{{ request()->is('products') ? 'active' : '' }}">Products</a>
                             </li>
                             <li>
-                                <a href="{{ url('/stocks') }}"
-                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Products
-                                    Stocks</a>
+                                <a href="{{ url('/trade_in') }}"
+                                    class="{{ request()->is('trade_in') ? 'active' : '' }}">Products Trade In</a>
                             </li>
-
-
 
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('trade_in') || request()->is('stock_trade_in')) active @endif"
-                            href="javascript:void(0)"><i data-feather="server"></i><span>Master
-                                Trade-In</span></a>
+                    {{-- ! end master product --}}
+
+
+
+                    {{-- ! master stock --}}
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('stocks') ||
+                        request()->is('second_product') ||
+                        request()->is('stock_c01') ||
+                        request()->is('stock_c02') ||
+                        request()->is('stock_c03') ||
+                        request()->is('stock_ss01') ||
+                        request()->is('stock_supplier')) active @endif"
+                            href="javascript:void(0)"><i data-feather="server"></i><span>Master Stock
+                            </span></a>
                         <ul class="nav-submenu menu-content"
-                            style="display: @if (request()->is('trade_in') || request()->is('stock_trade_in')) block @else none @endif ">
+                            style="display: @if (request()->is('stocks') ||
+                                request()->is('second_product') ||
+                                request()->is('stock_c01') ||
+                                request()->is('stock_c02') ||
+                                request()->is('stock_c03') ||
+                                request()->is('stock_ss01') ||
+                                request()->is('stock_supplier')) block @else none @endif ">
                             <li>
-                                <a href="{{ url('/trade_in') }}"
-                                    class="{{ request()->is('trade_in') ? 'active' : '' }}">Product Trade In</a>
+                                <a href="{{ url('/stocks') }}"
+                                    class="{{ request()->is('stocks') ? 'active' : '' }}">Stock Profecta Perdana
+                                </a>
                             </li>
                             <li><a href="{{ url('/second_product') }}"
-                                    class="{{ request()->is('second_product') ? 'active' : '' }}">Stock Second
-                                    Product</a>
+                                    class="{{ request()->is('second_product') ? 'active' : '' }}">Stock Second Product
+                                </a>
                             </li>
-
-
+                            <li><a href="{{ url('/stock_c01') }}"
+                                    class="{{ request()->is('stock_c01') ? 'active' : '' }}">Stock C-01
+                                </a>
+                            </li>
+                            <li><a href="{{ url('/stock_c02') }}"
+                                    class="{{ request()->is('stock_c02') ? 'active' : '' }}">Stock C-02
+                                </a>
+                            </li>
+                            <li><a href="{{ url('/stock_c03') }}"
+                                    class="{{ request()->is('stock_c03') ? 'active' : '' }}">Stock C-03
+                                </a>
+                            </li>
+                            <li><a href="{{ url('/stock_ss01') }}"
+                                    class="{{ request()->is('stock_ss01') ? 'active' : '' }}">Stock SS-01
+                                </a>
+                            </li>
+                            <li><a href="{{ url('/stock_supplier') }}"
+                                    class="{{ request()->is('stock_supplier') ? 'active' : '' }}">Stock Supplier
+                                </a>
+                            </li>
                         </ul>
                     </li>
+                    {{-- ! end master stock --}}
+
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('customers') || request()->is('customer_categories') || request()->is('customer_areas')) active @endif"
                             href="javascript:void(0)"><i data-feather="user-check"></i><span>Master Customers</span></a>
                         <ul class="nav-submenu menu-content"
@@ -156,7 +192,8 @@
                                 Value-added Tax</span></a>
                     </li>
 
-                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('warehouse_types') || request()->is('warehouses')) active @endif"
+                    <li class="dropdown"><a
+                            class="nav-link menu-title @if (request()->is('warehouse_types') || request()->is('warehouses')) active @endif"
                             href="javascript:void(0)"><i data-feather="server"></i><span>Master Warehouse</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('warehouse_types') || request()->is('warehouses')) block @else none @endif ">
@@ -240,6 +277,18 @@
                     </li>
                     <li class="sidebar-main-title">
                         <div>
+                            <h6>Information</h6>
+                        </div>
+                    </li>
+
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('check_stock') ? 'active' : '' }}"
+                            href="{{ url('/check_stock') }}"><i data-feather="inbox"></i><span>Check
+                                Stock
+                            </span></a>
+                    </li>
+                    <li class="sidebar-main-title">
+                        <div>
                             <h6>Report Accounting</h6>
                         </div>
                     </li>
@@ -307,18 +356,7 @@
                             href="{{ url('/retail') }}"><i data-feather="inbox"></i><span>Invoicing
                             </span></a>
                     </li>
-                    <li class="sidebar-main-title">
-                        <div>
-                            <h6>Information</h6>
-                        </div>
-                    </li>
 
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('check_stock') ? 'active' : '' }}"
-                            href="{{ url('/check_stock') }}"><i data-feather="inbox"></i><span>Check
-                                Stock
-                            </span></a>
-                    </li>
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Transaction Trade-In</h6>
@@ -353,7 +391,8 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders') ? 'active' : '' }}"
-                            href="{{ url('/purchase_orders') }}"><i data-feather="bookmark"></i><span>PO Need Approve
+                            href="{{ url('/purchase_orders') }}"><i data-feather="bookmark"></i><span>PO Need
+                                Approve
                             </span></a>
                     </li>
                     <li>

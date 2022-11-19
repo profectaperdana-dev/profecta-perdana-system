@@ -18,15 +18,20 @@ class CheckStockController extends Controller
     {
         if (Gate::allows('isSuperAdmin') || Gate::allows('isFinance') || Gate::allows('isVerificator')) {
             $title = 'All Warehouse Data Stocks Product ';
-            $data = StockModel::with(['productBy.sub_types', 'productBy.sub_materials', 'productBy.uoms', 'warehouseBy'])->latest('warehouses_id')->get();
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%Profecta Perdana%');
+            })->latest()->get();
         } else {
             $title = 'Data Stocks Product at ' . Auth::user()->warehouseBy->warehouses;
-            $data = StockModel::with(['productBy.sub_types', 'productBy.sub_materials', 'productBy.uoms'])->where('warehouses_id', Auth::user()->warehouse_id)->get();
+            $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
+                $query->where('warehouses', 'like', '%Profecta Perdana%');
+                $query->where('warehouses_id', Auth::user()->warehouseBy->id);
+            })->latest()->get();
         }
         return view('cek_stok.index', compact('data', 'title'));
     }
 
-    /**
+    /** 
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
