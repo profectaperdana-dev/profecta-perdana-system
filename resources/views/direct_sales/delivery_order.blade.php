@@ -123,7 +123,7 @@
 
                 </td>
                 <td style="text-align:left">
-                    : {{ $now = date('Y-m-d') }} <br>
+                    : {{ $now = date('d-m-Y') }} <br>
 
                 </td>
 

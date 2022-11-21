@@ -27,7 +27,7 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        abort(404);
     }
 
     /**
@@ -72,7 +72,7 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        //
+        abort(404);
     }
 
     /**

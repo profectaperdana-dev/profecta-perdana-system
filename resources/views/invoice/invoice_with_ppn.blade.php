@@ -183,7 +183,9 @@
                         <td style="text-align: center">{{ $value->discount_rp }}</td>
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
                         @php
-                            $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
+                            $disc = $value->discount / 100;
+                            $disc_cost = $value->productSales->harga_jual_nonretail * $disc;
+                            $sub_total = ($value->productSales->harga_jual_nonretail - $disc_cost - $value->discount_rp) * $value->qty;
                         @endphp
                         <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>
                     </tr>

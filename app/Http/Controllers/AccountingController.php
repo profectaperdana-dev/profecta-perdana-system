@@ -21,7 +21,7 @@ class AccountingController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
         //* view data from database
@@ -31,7 +31,7 @@ class AccountingController extends Controller
     }
     public function jurnal()
     {
-        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
         //* view data from database
@@ -42,7 +42,7 @@ class AccountingController extends Controller
 
     public function createExpenses()
     {
-        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
         $title = 'Create Expenses';
@@ -69,7 +69,7 @@ class AccountingController extends Controller
 
     public function profit_loss(Request $request)
     {
-        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
         if (!empty($request->from_date)) {
@@ -197,7 +197,7 @@ class AccountingController extends Controller
 
     public function depreciation()
     {
-        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
         $all_depreciation = AssetModel::latest()->get();

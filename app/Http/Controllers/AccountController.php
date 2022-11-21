@@ -15,7 +15,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
         $title = 'Account';

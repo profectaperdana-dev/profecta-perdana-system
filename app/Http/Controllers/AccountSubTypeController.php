@@ -16,7 +16,7 @@ class AccountSubTypeController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('isSuperadmin') && !Gate::allows('isFinance')) {
+        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
         //* view all account sub types
