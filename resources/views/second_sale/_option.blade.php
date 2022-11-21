@@ -16,7 +16,7 @@
 </div>
 
 {{-- ! Modal Edit Invoice Trade In --}}
-{{-- <div class="modal fade" id="manageData{{ $invoice->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="manageData{{ $invoice->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
@@ -24,20 +24,21 @@
                 <h5 class="modal-title" id="exampleModalLabel">Trade-In
                     Order
                     :
-                    {{ $invoice->trade_in_number }}</h5>
+                    {{ $invoice->second_sale_number }}</h5>
                 <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
                 <form class="needs-validation" novalidate method="post"
-                    action="{{ url('trade_in/' . $invoice->id . '/edit_superadmin') }}" enctype="multipart/form-data">
+                    action="{{ url('second_sale/' . $invoice->id . '/edit_superadmin') }}"
+                    enctype="multipart/form-data">
                     @csrf
                     <div class="container-fluid">
                         <div class="form-group row">
                             <div class="col-md-6 form-group">
                                 <label>
                                     Customers Name</label>
-                                <input type="text" name="customer" required class="form-control"
-                                    value="{{ $invoice->customer }}">
+                                <input type="text" name="customer_name" required class="form-control"
+                                    value="{{ $invoice->customer_name }}">
                             </div>
                             <div class="col-md-6 form-group">
                                 <label>
@@ -61,25 +62,38 @@
                         </div>
                         <hr>
                         <div class="form-group row formSo-edit">
-                            @foreach ($invoice->tradeInDetailBy as $detail)
+                            @foreach ($invoice->second_sale_details as $detail)
                                 <div class="mx-auto py-2 form-group row bg-primary">
-                                    <div class="form-group col-7">
+                                    <div class="form-group col-6 col-md-4">
                                         <label>Baterry</label>
                                         <select name="tradeFields[{{ $loop->index }}][product_trade_in]"
-                                            class="form-control productSo-edit" required>
-                                            @if ($detail->product_trade_in != null)
-                                                <option value="{{ $detail->product_trade_in }}" selected>
-                                                    {{ $detail->productTradeIn->name_product_trade_in }}
+                                            class="form-control productSo-edit id_product" required>
+                                            @if ($detail->secondProduct != null)
+                                                <option value="{{ $detail->product_second_id }}" selected>
+                                                    {{ $detail->secondProduct->name_product_trade_in }}
                                                 </option>
                                             @endif
                                         </select>
-
                                     </div>
-                                    <div class="col-3 col-md-3 form-group">
+                                    <div class="col-6 col-md-2 form-group">
                                         <label>Qty</label>
-                                        <input class="form-control cekQty-edit" required
+                                        <small class="text-danger qty-warning" hidden>Out of Stock</small>
+                                        <input class="form-control cek_stock cekQty-edit" required
                                             name="tradeFields[{{ $loop->index }}][qty]" id=""
                                             value="{{ $detail->qty }}">
+
+                                    </div>
+                                    <div class="col-5 col-md-2 form-group">
+                                        <label>Disc (%)</label>
+                                        <input type="number" class="form-control disc_persen"
+                                            name="tradeFields[{{ $loop->index }}][disc_percent]" id=""
+                                            value="{{ $detail->discount }}">
+                                    </div>
+                                    <div class="col-5 col-md-2 form-group">
+                                        <label>Disc (Rp)</label>
+                                        <input class="form-control disc_rp" id=""
+                                            name="tradeFields[{{ $loop->index }}][disc_rp]"
+                                            value="{{ $detail->discount_rp }}">
 
                                     </div>
                                     @if ($loop->index == 0)
@@ -96,6 +110,7 @@
                                                 class="btn btn-danger form-control text-white remSo-edit">-</a>
                                         </div>
                                     @endif
+
                                 </div>
                             @endforeach
                         </div>
@@ -128,4 +143,4 @@
             </div>
         </div>
     </div>
-</div> --}}
+</div>

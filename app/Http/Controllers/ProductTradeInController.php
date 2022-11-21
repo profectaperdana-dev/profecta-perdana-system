@@ -339,7 +339,6 @@ class ProductTradeInController extends Controller
         }
         $data = TradeInModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-
         $pdf = FacadePdf::loadView('product_trade_in.print_struk', compact('warehouse', 'data'));
 
         return $pdf->stream($data->trade_in_number . '.pdf');
