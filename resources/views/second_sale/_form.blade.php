@@ -47,7 +47,7 @@
                 </div>
                 <div class="col-5 col-md-2 form-group">
                     <label>Disc (Rp)</label>
-                    <input class="form-control total" id="">
+                    <input class="form-control " id="">
                     <input type="hidden" name="tradeFields[0][disc_rp]">
                 </div>
                 <div class="col-2 col-md-2 form-group">

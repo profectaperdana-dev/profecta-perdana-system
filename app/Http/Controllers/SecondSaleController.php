@@ -289,4 +289,111 @@ class SecondSaleController extends Controller
     {
         //
     }
+    public function editSuperadmin(Request $request, $id)
+    {
+        // dd($request->all());
+        if (
+            !Gate::allows('isSuperAdmin')
+        ) {
+            abort(403);
+        }
+        $model = SecondSaleModel::find($id);
+        //* get customer 
+        $model->customer_name = $request->customer_name;
+        $model->customer_phone = $request->customer_phone;
+
+        if ($request->customer_email) {
+            $model->customer_email = $request->customer_email;
+        } else {
+            $model->customer_email = '-';
+        }
+        if ($request->customer_nik) {
+            $model->customer_nik = $request->customer_nik;
+        } else {
+            $model->customer_nik = '-';
+        }
+        //* created by
+        $model->created_by = Auth::user()->id;
+        $saved = $model->save();
+        // save purchase order details
+        $total = 0;
+
+        //Check Duplicate
+        $products_arr = [];
+        foreach ($request->tradeFields as $check) {
+            array_push($products_arr, $check['product_trade_in']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+
+        if (!empty($duplicates)) {
+            return redirect()->back()->with('error', "You enter duplicate products! Please check again!");
+        }
+
+        $type = Auth::user()->warehouseBy->id_area;
+        $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->first();
+        $po_restore = SecondSaleDetailModel::where('second_sale_id', $id)->get();
+        foreach ($po_restore as $restore) {
+            $stock = SecondProductModel::where('warehouses_id', $warehouse->id)
+                ->where('products_id', $restore->product_second_id)->first();
+            $stock->qty = $stock->qty + $restore->qty;
+            $stock->save();
+        }
+
+
+
+        if ($saved) {
+            foreach ($request->tradeFields as $value) {
+                $data = SecondSaleDetailModel::where('second_sale_id', $model->id)
+                    ->where('product_second_id', $value['product_trade_in'])
+                    ->first();
+                if ($data) {
+                    $data->product_second_id = $value['product_trade_in'];
+                    $data->discount = $value['disc_percent'];
+                    $data->discount_rp = $value['disc_rp'];
+                    $data->qty = $value['qty'];
+                    $data->save();
+                } else {
+                    $detail = new SecondSaleDetailModel();
+                    $detail->second_sale_id = $model->id;
+                    $detail->discount = $value['disc_percent'];
+                    $detail->discount_rp = $value['disc_rp'];
+                    $detail->qty = $value['qty'];
+                    $detail->save();
+                }
+
+                $harga = ProductTradeInModel::where('id', $value['product_trade_in'])->first();
+                $total = $total + ($harga->price_product_trade_in * $value['qty']);
+
+                $type = Auth::user()->warehouseBy->id_area;
+                $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->first();
+
+                $second_stock = SecondProductModel::where('warehouses_id', $warehouse->id)->where('products_id', $value['product_trade_in'])->first();
+
+                // dd($second_stock);
+                if ($second_stock == null) {
+                    $second_stock = new SecondProductModel();
+                    $second_stock->warehouses_id = $warehouse->id;
+                    $second_stock->products_id = $value['product_trade_in'];
+                    $second_stock->qty = $value['qty'];
+                    $second_stock->save();
+                } else {
+                    $second_stock->qty = $second_stock->qty -  $value['qty'];
+                    $second_stock->save();
+                }
+            }
+            //Delete product that not in SOD Input
+            $del = SecondSaleDetailModel::where('second_sale_id', $id)
+                ->whereNotIn('product_second_id', $products_arr)->delete();
+            $model->total = $total;
+            $saved = $model->save();
+            if (empty($message_duplicate) && $saved) {
+                return redirect()->back()->with('success', 'Create Trade-In order ' . $model->second_sale_number . ' success');
+            } elseif (!empty($message_duplicate) && $saved) {
+
+                return redirect()->back()->with('info', 'Trade-In Order add Success! ' . $message_duplicate);
+            } else {
+                return redirect()->back()->with('error', 'Add Trade-In Order Fail! Please make sure you have filled all the input');
+            }
+        }
+    }
 }

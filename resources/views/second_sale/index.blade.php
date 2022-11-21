@@ -104,6 +104,8 @@
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
+
         <script>
             $(document).ready(function() {
 
@@ -242,6 +244,259 @@
                     $('#to_date').val('');
                     $('#example1').DataTable().destroy();
                     load_data();
+                });
+
+                // Edit Invoice
+                $(document).on("click", ".modal-btn2", function(event) {
+
+                    let validator = $('form.needs-validation').jbvalidator({
+                        errorMessage: true,
+                        successClass: true,
+                        language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+                    });
+                    validator.reload();
+
+
+
+                    let csrf = $('meta[name="csrf-token"]').attr("content");
+                    // $(document).on("click", ".modal-btn2", function() {
+                    let modal_id = $(this).attr('data-bs-target');
+                    // let id_product = $(modal_id).find('.id_product').val();
+                    // console.log(id_product);
+
+                    // $(modal_id).on('change', '.id_product', function() {
+                    //     id_product = $(this).val();
+                    //     console.log(id_product);
+
+                    // });
+                    var stokNow = $('.cekQty-edit').val();
+                    $(modal_id).on("input", ".cekQty-edit", function() {
+                        const qtyValue = $(this).val();
+                        let product_id = $(this).parent('.form-group').prev().find('.productSo-edit')
+                            .val();
+                        console.log(product_id);
+                        $.ajax({
+                            context: this,
+                            type: "GET",
+                            url: "/retail_second_products/cekQty/" + product_id,
+                            data: {
+                                _token: csrf,
+                            },
+                            dataType: "json",
+                            success: function(data) {
+                                if (parseInt(qtyValue) > parseInt(data.qty)) {
+                                    $(this).parent().find(".qty-warning").removeAttr(
+                                        "hidden");
+                                    $(this).addClass("is-invalid");
+                                } else {
+                                    $(this)
+                                        .parent()
+                                        .find(".qty-warning")
+                                        .attr("hidden", "true");
+                                    $(this).removeClass("is-invalid");
+                                }
+                            },
+                        });
+                    });
+                    // $(modal_id).on("input", ".cek_stock", function() {
+                    //     let qtyValue = $(this).val();
+
+                    //     $.ajax({
+                    //         context: this,
+                    //         type: "GET",
+                    //         url: "/retail_second_products/cekQty/" + id_product,
+                    //         data: {
+                    //             _token: csrf,
+                    //         },
+                    //         dataType: "json",
+                    //         success: function(data) {
+                    //             if (parseInt(qtyValue) > parseInt(data.qty)) {
+                    //                 $(this).parent().find(".qty-warning").removeAttr(
+                    //                     "hidden");
+                    //                 $(this).addClass("is-invalid");
+                    //             } else {
+                    //                 $(this)
+                    //                     .parent()
+                    //                     .find(".qty-warning")
+                    //                     .attr("hidden", "true");
+                    //                 $(this).removeClass("is-invalid");
+                    //             }
+                    //         },
+                    //     });
+                    // });
+
+
+
+                    //Get Customer ID
+                    console.log(modal_id);
+                    $(modal_id).find(".productSo-edit").select2({
+                        dropdownParent: modal_id,
+                        width: "100%",
+                        ajax: {
+                            type: "GET",
+                            url: "/retail_second_products/select",
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item.name_product_trade_in,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+
+
+                    let x = $(modal_id)
+                        .find('.modal-body')
+                        .find('.formSo-edit')
+                        .children('.form-group')
+                        .last()
+                        .find('.loop')
+                        .val();
+                    //Get discount depent on product
+
+                    $(modal_id).on("click", ".addSo-edit", function() {
+                        console.log(x);
+
+                        ++x;
+                        var form = ` <div class="mx-auto py-2 form-group row bg-primary">
+                <div class="form-group col-6 col-md-4">
+                    <label>Baterry</label>
+                    <select name="tradeFields[${x}][product_trade_in]" class="form-control productSo-edit id_product" required>
+                        <option value="">--Choose Battery--</option>
+                    </select>
+                </div>
+                <div class="col-6 col-md-2 form-group">
+                    <label>Qty</label>
+                    <input required class="form-control cekQty-edit cek_stock" required name="tradeFields[${x}][qty]" id="">
+                    <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
+
+                </div>
+                <div class="col-5 col-md-2 form-group">
+                    <label>Disc (%)</label>
+                    <input required type="number" class="form-control disc_persen"  name="tradeFields[${x}][disc_percent]">
+                </div>
+                <div class="col-5 col-md-2 form-group">
+                    <label>Disc (Rp)</label>
+                    <input required type="number" class="form-control disc_rp" class="" name="tradeFields[${x}][disc_rp]">
+                </div>
+                <div class="col-2 col-md-2 form-group">
+                    <label for="">&nbsp;</label>
+                    <a href="javascript:void(0)"class="form-control text-white remSo-edit text-center"
+                     style="border:none; background-color:red">-</a>
+                </div>
+
+            </div>`;
+                        $(modal_id).find(".formSo-edit").append(form);
+
+                        $(modal_id).find(".productSo-edit").select2({
+                            width: "100%",
+                            dropdownParent: modal_id,
+                            ajax: {
+                                type: "GET",
+                                url: "/retail_second_products/select",
+                                data: function(params) {
+                                    return {
+                                        _token: csrf,
+                                        q: params.term, // search term
+                                    };
+                                },
+                                dataType: "json",
+                                delay: 250,
+                                processResults: function(data) {
+                                    return {
+                                        results: $.map(data, function(item) {
+                                            return [{
+                                                text: item
+                                                    .name_product_trade_in,
+                                                id: item.id,
+                                            }, ];
+                                        }),
+                                    };
+                                },
+                            },
+                        });
+                    });
+
+                    //remove Sales Order fields
+                    $(modal_id).on("click", ".remSo-edit", function() {
+                        $(this).closest(".row").remove();
+                    });
+
+                    //reload total
+                    $(modal_id).on('click', '.btn-reload', function() {
+                        let total = 0;
+                        $(modal_id).find('.productSo-edit').each(function() {
+                            let product_id = $(this).val();
+                            let cost = function() {
+                                let temp = 0;
+                                $.ajax({
+                                    async: false,
+                                    context: this,
+                                    type: "GET",
+                                    url: "/tradein/selectCost/" +
+                                        product_id,
+                                    dataType: "json",
+                                    success: function(data) {
+                                        temp = data
+                                            .price_product_trade_in
+                                    },
+                                });
+                                // console.log(temp);
+                                return temp;
+                            }();
+
+                            var disc_persen = $(this).closest('.row').find('.disc_persen')
+                                .val();
+                            var disc_rp = $(this).parent().siblings().find(
+                                '.disc_rp').val();
+                            let qty = $(this).parent().siblings().find(
+                                '.cekQty-edit').val();
+                            // console.log(qty);
+
+
+                            if (disc_persen == null) {
+                                disc_persen = 0;
+                            }
+
+                            if (disc_rp == null) {
+                                disc_rp = 0;
+                            }
+                            let disc_cost = cost * disc_persen / 100;
+                            let cost_after_disc = cost - disc_cost;
+
+
+                            let discount = parseInt(cost_after_disc) - parseInt(disc_rp);
+                            total = total + (discount * qty);
+                            console.log('diskon rp =' + disc_rp);
+                            console.log('diskon% =' + disc_persen);
+
+                            // console.log(total);
+                        });
+
+
+                        $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
+                            .round(total)
+                            .toLocaleString(
+                                'id', {
+                                    minimumFractionDigits: 0,
+                                    maximumFractionDigits: 0
+                                }));
+                    });
+                    $(modal_id).on('hidden.bs.modal', function() {
+                        $(modal_id).unbind();
+                    });
                 });
             });
         </script>

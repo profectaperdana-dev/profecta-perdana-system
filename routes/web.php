@@ -180,6 +180,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/tradein/selectCost/{id}', [ProductTradeInController::class, 'selectCost']);
     Route::get('trade_invoice/{id}/edit', [ProductTradeInController::class, 'editTradeInvoice']);
     Route::post('/trade_in/{id}/edit_superadmin', [ProductTradeInController::class, 'editSuperadmin']);
+    Route::post('/second_sale/{id}/edit_superadmin', [SecondSaleController::class, 'editSuperadmin']);
 
 
     Route::prefix('expenses')->group(function () {
