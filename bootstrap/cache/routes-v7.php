@@ -24,7 +24,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KqosI0WBwlZ9Kk0G',
+            '_route' => 'generated::hm9MnEj8tKVx8VzJ',
           ),
           1 => NULL,
           2 => 
@@ -44,7 +44,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::GyRCbpU7tD21FopG',
+            '_route' => 'generated::b6H4yvkVlxhrsCdE',
           ),
           1 => NULL,
           2 => 
@@ -63,7 +63,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::VDn4PgG8bKmmANzS',
+            '_route' => 'generated::sIfZ4EMmh6EmBsCx',
           ),
           1 => NULL,
           2 => 
@@ -82,7 +82,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::RzmkogVDIUj26gEI',
+            '_route' => 'generated::TYsXuyVOGXr3u2eb',
           ),
           1 => NULL,
           2 => 
@@ -101,7 +101,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::mWMvcWnhNJ2KYVZC',
+            '_route' => 'generated::EGB5Ii8dj8Pt0aKN',
           ),
           1 => NULL,
           2 => 
@@ -121,7 +121,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::BskBJfsoxmwuVu2O',
+            '_route' => 'generated::8T3pGcYIiQ3QL7N1',
           ),
           1 => NULL,
           2 => 
@@ -141,7 +141,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::wrAax07fNkdMDsW8',
+            '_route' => 'generated::YKyN7IvThIbVlUYu',
           ),
           1 => NULL,
           2 => 
@@ -161,7 +161,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::OxNJGjnvLQCXM1b9',
+            '_route' => 'generated::GeoO8Fnmidfx8yr1',
           ),
           1 => NULL,
           2 => 
@@ -181,7 +181,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::nFUDZZEa9gVMqLl0',
+            '_route' => 'generated::VSymVdOe8PNNROk3',
           ),
           1 => NULL,
           2 => 
@@ -202,7 +202,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::YHaV6U90HBiVqxVD',
+            '_route' => 'generated::upMzjVKcrLE8kgHa',
           ),
           1 => NULL,
           2 => 
@@ -222,7 +222,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::S9d9AgIDdZQUbpmO',
+            '_route' => 'generated::K4Na4oj3jvTe3kvI',
           ),
           1 => NULL,
           2 => 
@@ -241,7 +241,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::GpCyhqIvgyWLPuD4',
+            '_route' => 'generated::P5apv7fiaMQeysoN',
           ),
           1 => NULL,
           2 => 
@@ -261,7 +261,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::iJOA9J7QDD9vap58',
+            '_route' => 'generated::FaJ45ywOI0sB6lfJ',
           ),
           1 => NULL,
           2 => 
@@ -281,7 +281,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::NyOjtmujqXM1WUDI',
+            '_route' => 'generated::gthoaQscOjuLRivz',
           ),
           1 => NULL,
           2 => 
@@ -301,7 +301,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::eqbcrNMMSbM4nF5p',
+            '_route' => 'generated::4Qo8zcMv92zphyqm',
           ),
           1 => NULL,
           2 => 
@@ -321,7 +321,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::JnmJ2AHFvzjgLTV7',
+            '_route' => 'generated::FURrjX3iAZWClZaD',
           ),
           1 => NULL,
           2 => 
@@ -341,7 +341,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::iR07FWBMEow9dcwd',
+            '_route' => 'generated::9xm7igiUGNvaJLna',
           ),
           1 => NULL,
           2 => 
@@ -361,7 +361,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::zbQsY4UrGT5vER8I',
+            '_route' => 'generated::f231DrrGYSozSJmf',
           ),
           1 => NULL,
           2 => 
@@ -381,7 +381,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::WkhO8Kz2B8lGZSz9',
+            '_route' => 'generated::qhC6XeSIGeml5tK8',
           ),
           1 => NULL,
           2 => 
@@ -401,7 +401,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::liNRyixN1bhatxY0',
+            '_route' => 'generated::Ze5u4YqQBYjyFmjq',
           ),
           1 => NULL,
           2 => 
@@ -421,7 +421,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::WexaiNomyBAceA2V',
+            '_route' => 'generated::5DDzcQe8cxS9X7KF',
           ),
           1 => NULL,
           2 => 
@@ -441,7 +441,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::iB8YdcvsO0ujoXgC',
+            '_route' => 'generated::csf4X1DXXSiFgIrT',
           ),
           1 => NULL,
           2 => 
@@ -461,7 +461,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::I48DGKfWsmP4TOmK',
+            '_route' => 'generated::Okkm6pZcA5g5hTpE',
           ),
           1 => NULL,
           2 => 
@@ -481,7 +481,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::VEo35fAGN3dMi0oL',
+            '_route' => 'generated::3ypEDSL8jFXmp9Gu',
           ),
           1 => NULL,
           2 => 
@@ -501,7 +501,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::tNSighUNIIG7ZXAm',
+            '_route' => 'generated::h7GqjR5YPrSiqlsf',
           ),
           1 => NULL,
           2 => 
@@ -521,7 +521,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::iNF7um3BGOYOIC73',
+            '_route' => 'generated::TYDyiXMMsULiXkxF',
           ),
           1 => NULL,
           2 => 
@@ -541,7 +541,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::5OCRxUfi5dsqYFOP',
+            '_route' => 'generated::tD2mlLGdTcRP36Ew',
           ),
           1 => NULL,
           2 => 
@@ -561,7 +561,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::4rT4rV31pvSk07cu',
+            '_route' => 'generated::Ju77BfICJ6TJkz0R',
           ),
           1 => NULL,
           2 => 
@@ -581,7 +581,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::gZldsWmAkzW7lZ5A',
+            '_route' => 'generated::WITPc8lCbouYnQqD',
           ),
           1 => NULL,
           2 => 
@@ -601,7 +601,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::juOwGfUTsGHCQeZG',
+            '_route' => 'generated::jGwBoDOqdwadTcix',
           ),
           1 => NULL,
           2 => 
@@ -621,7 +621,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::UkCnYAFCPicRIBWZ',
+            '_route' => 'generated::P5wozL1yVm4jm4xx',
           ),
           1 => NULL,
           2 => 
@@ -641,7 +641,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bzq4HyD56DvgAjbY',
+            '_route' => 'generated::HOudehQvuz5ZBFIZ',
           ),
           1 => NULL,
           2 => 
@@ -661,7 +661,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::flH7cWaMEmzDMs5q',
+            '_route' => 'generated::oaNsg4KtWLsHSa1u',
           ),
           1 => NULL,
           2 => 
@@ -681,7 +681,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Q7NhhmS89fZEisU5',
+            '_route' => 'generated::lA2KcmYeXGq6LS8P',
           ),
           1 => NULL,
           2 => 
@@ -701,7 +701,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bqbq9sQMAS88HRQT',
+            '_route' => 'generated::CAzhtdtXZFbw2PpG',
           ),
           1 => NULL,
           2 => 
@@ -721,7 +721,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::b5SuE8pBjwOKd5hC',
+            '_route' => 'generated::KqWQyfBYiTIN6OFD',
           ),
           1 => NULL,
           2 => 
@@ -741,7 +741,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::4DQWcRIGqKw7tVBb',
+            '_route' => 'generated::3X3MphyzwGFd8Z3y',
           ),
           1 => NULL,
           2 => 
@@ -761,7 +761,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::fiEHb3htxcQQp5y3',
+            '_route' => 'generated::0hTTHdN0Cyi4piyk',
           ),
           1 => NULL,
           2 => 
@@ -781,7 +781,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::aISTf8WTC94d4cz6',
+            '_route' => 'generated::UuWHd4wNAOCiRlMb',
           ),
           1 => NULL,
           2 => 
@@ -801,7 +801,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::uetVyPhRSwP6uZpb',
+            '_route' => 'generated::UoqOrskGElmfLDJU',
           ),
           1 => NULL,
           2 => 
@@ -821,7 +821,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::R28kx3i1kdVEPUg2',
+            '_route' => 'generated::xV2O5FXNNVvahGOr',
           ),
           1 => NULL,
           2 => 
@@ -841,7 +841,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::U8rD1t9kUxwqFg4L',
+            '_route' => 'generated::d0s5TQYG4aSmv46Y',
           ),
           1 => NULL,
           2 => 
@@ -861,7 +861,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::XIYkkVE1alpqFaM5',
+            '_route' => 'generated::pqvql0zx9AV7uu5n',
           ),
           1 => NULL,
           2 => 
@@ -881,7 +881,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::l5ZtiAmnCpML4pEi',
+            '_route' => 'generated::lLkpR96tarJntfk1',
           ),
           1 => NULL,
           2 => 
@@ -901,7 +901,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::WrKT0Yu0SOKSa0xs',
+            '_route' => 'generated::VUkfSKoYZl5ZDays',
           ),
           1 => NULL,
           2 => 
@@ -921,7 +921,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::dYqKrqTGtqsHj49g',
+            '_route' => 'generated::4EqyywMOv5fuNtWh',
           ),
           1 => NULL,
           2 => 
@@ -941,7 +941,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::F4528fF0MiBXYRJg',
+            '_route' => 'generated::kUgdjcOhY8h6Yx90',
           ),
           1 => NULL,
           2 => 
@@ -961,7 +961,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::vVxSJykZQP7aoaQy',
+            '_route' => 'generated::wf45WWr2ry3hUYCM',
           ),
           1 => NULL,
           2 => 
@@ -981,7 +981,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::LSF0TKpmFLDeZPLS',
+            '_route' => 'generated::DZk5OeYQQ8tn0Sbp',
           ),
           1 => NULL,
           2 => 
@@ -1001,7 +1001,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::4COKO4ZHW1k5Z3TW',
+            '_route' => 'generated::8xw9FNmBc3otaGfv',
           ),
           1 => NULL,
           2 => 
@@ -1020,7 +1020,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::vHho7sUf0MK0d46a',
+            '_route' => 'generated::o7CZAO054ACVHaug',
           ),
           1 => NULL,
           2 => 
@@ -1040,7 +1040,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::OuPn6TfzDgotZbGR',
+            '_route' => 'generated::Z7JRkoyQOPqqjiz6',
           ),
           1 => NULL,
           2 => 
@@ -1059,7 +1059,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Ow5xNjo1ichAUDqI',
+            '_route' => 'generated::3bGSlgEh5HpXausc',
           ),
           1 => NULL,
           2 => 
@@ -1079,7 +1079,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::M7C54v9OcYS3FUNc',
+            '_route' => 'generated::Cuog8pPYCZwiVikN',
           ),
           1 => NULL,
           2 => 
@@ -1099,7 +1099,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::SbVJYJwAcM1QyQLi',
+            '_route' => 'generated::yzNqppiw28znyC43',
           ),
           1 => NULL,
           2 => 
@@ -1118,7 +1118,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::N0cYdMoWzRrrAp2F',
+            '_route' => 'generated::dGr0S9gHogkDxU9A',
           ),
           1 => NULL,
           2 => 
@@ -1138,7 +1138,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::dSTI36TmJ4SjX8J7',
+            '_route' => 'generated::npvpVz02sBbYreCg',
           ),
           1 => NULL,
           2 => 
@@ -1158,7 +1158,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::TpfNh3tTraZCUM7C',
+            '_route' => 'generated::hwePogw9RWgwdiLy',
           ),
           1 => NULL,
           2 => 
@@ -1178,7 +1178,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::zSdXRS4tO8Gc6NVz',
+            '_route' => 'generated::jdKJ83N3iWIGcxb3',
           ),
           1 => NULL,
           2 => 
@@ -1198,7 +1198,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::TVYx0ylJ5PPTa0kW',
+            '_route' => 'generated::wBbzOdmGosrsmmfs',
           ),
           1 => NULL,
           2 => 
@@ -1218,7 +1218,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::DnxdwQTS132RaMqN',
+            '_route' => 'generated::EbwKzMD2IJ2ZYCiZ',
           ),
           1 => NULL,
           2 => 
@@ -1237,7 +1237,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ofMIM8USun4Odvp4',
+            '_route' => 'generated::CfjrRTXnLLc74dYC',
           ),
           1 => NULL,
           2 => 
@@ -1257,7 +1257,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::WIdycVUiqaiTkCR7',
+            '_route' => 'generated::Sfk5RmIJXoW2U7zi',
           ),
           1 => NULL,
           2 => 
@@ -1277,7 +1277,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::GJETFj3PMH8VdxY9',
+            '_route' => 'generated::o45kUl0JBbVkxPyM',
           ),
           1 => NULL,
           2 => 
@@ -1297,7 +1297,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::qn8p1eeZykk2HRxN',
+            '_route' => 'generated::QO2Zd4argrHF7kyr',
           ),
           1 => NULL,
           2 => 
@@ -1317,7 +1317,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::HoJeOPw7JuVwXrJr',
+            '_route' => 'generated::TN6txzSv01GLwal3',
           ),
           1 => NULL,
           2 => 
@@ -1337,7 +1337,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::X7iSRPa96uyNikRo',
+            '_route' => 'generated::bUdpq2wxm8XRtnze',
           ),
           1 => NULL,
           2 => 
@@ -1357,7 +1357,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::h0acI5XZOI0gNL9Z',
+            '_route' => 'generated::kg4tBYGzxQart4lt',
           ),
           1 => NULL,
           2 => 
@@ -1377,7 +1377,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::xOMXTZ74w4U1bwOO',
+            '_route' => 'generated::lIK7ArQA5EPEKnZX',
           ),
           1 => NULL,
           2 => 
@@ -1397,7 +1397,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::9BwLy8Rh2A4OmssW',
+            '_route' => 'generated::AvE7m18UaDmQAAGU',
           ),
           1 => NULL,
           2 => 
@@ -1417,7 +1417,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::7nYXRh5Kq9CyWsm9',
+            '_route' => 'generated::NgB4QJhtMnBwuJb4',
           ),
           1 => NULL,
           2 => 
@@ -1437,7 +1437,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::btO8xv9WqALETZAB',
+            '_route' => 'generated::lxU8UOg1j2tYz1SW',
           ),
           1 => NULL,
           2 => 
@@ -1457,7 +1457,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::B68oTCaFWnVtYWK2',
+            '_route' => 'generated::S6oMzKGYACETAJWK',
           ),
           1 => NULL,
           2 => 
@@ -1477,7 +1477,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::dmVHaZVnI3GF4bUw',
+            '_route' => 'generated::xI8ZCjWZqZBr5gql',
           ),
           1 => NULL,
           2 => 
@@ -1496,7 +1496,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bOltk07msNp68sxw',
+            '_route' => 'generated::QSOuZlLkv45EihSb',
           ),
           1 => NULL,
           2 => 
@@ -1516,7 +1516,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::xZAWmKHKPRW2BmGA',
+            '_route' => 'generated::JB7zEMNFHr9RVLyl',
           ),
           1 => NULL,
           2 => 
@@ -1536,7 +1536,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::J2Agq1OSUy86xcU1',
+            '_route' => 'generated::FTmo3r65CQn5SvVQ',
           ),
           1 => NULL,
           2 => 
@@ -1556,7 +1556,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::znJACuLyvjmbwJkj',
+            '_route' => 'generated::grLleND8TIs0P9b6',
           ),
           1 => NULL,
           2 => 
@@ -1576,7 +1576,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Pm6PekvJ4ZeSWNLc',
+            '_route' => 'generated::GnNlMXjx9mqWg2iA',
           ),
           1 => NULL,
           2 => 
@@ -1596,7 +1596,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::I4iitaYfvJZbwDOa',
+            '_route' => 'generated::B7pD1H5s5BiUB7w8',
           ),
           1 => NULL,
           2 => 
@@ -1615,7 +1615,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::YnqMai5OXXZ0ukdO',
+            '_route' => 'generated::SkM4qvHMseqahBXu',
           ),
           1 => NULL,
           2 => 
@@ -1635,7 +1635,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Ey9ICSXiLG3xGzV5',
+            '_route' => 'generated::ydskLpddE2AQKAXX',
           ),
           1 => NULL,
           2 => 
@@ -1655,7 +1655,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::8KHWquOPrl5DXpul',
+            '_route' => 'generated::BXNfE6qJanRLTRH7',
           ),
           1 => NULL,
           2 => 
@@ -1675,7 +1675,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::RgG5Kt85uibUboQf',
+            '_route' => 'generated::cJ9iyqPSoPzAHkVK',
           ),
           1 => NULL,
           2 => 
@@ -1695,7 +1695,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::K7ocpwRaW6kUlTT6',
+            '_route' => 'generated::v2A66nKeaJMZBsth',
           ),
           1 => NULL,
           2 => 
@@ -1715,7 +1715,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::d53dJA7CJjIjZF94',
+            '_route' => 'generated::s57URBffeyoByIPQ',
           ),
           1 => NULL,
           2 => 
@@ -1735,7 +1735,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::kEM2lZV0UnAJ0DeI',
+            '_route' => 'generated::xP4wILi89EzxOaiB',
           ),
           1 => NULL,
           2 => 
@@ -1755,7 +1755,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::wbqvA57GLxVc3xLf',
+            '_route' => 'generated::CJ8hEfdKFuWdI5tI',
           ),
           1 => NULL,
           2 => 
@@ -1774,7 +1774,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::pUx2Yu7OwE2AQD3c',
+            '_route' => 'generated::qcRo3xzVivAkWhtE',
           ),
           1 => NULL,
           2 => 
@@ -3715,7 +3715,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::B30oKFHrQDKfP3V6',
+            '_route' => 'generated::iBWigguP89GavRc3',
           ),
           1 => NULL,
           2 => 
@@ -3761,7 +3761,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::3jYbuPLmEhgLkZFT',
+            '_route' => 'generated::0tJ3Gv7qnEqERse5',
           ),
           1 => 
           array (
@@ -3784,7 +3784,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bipIK5UeR5WaSfOU',
+            '_route' => 'generated::tS6PnoYujcZ0uOJU',
           ),
           1 => 
           array (
@@ -3807,7 +3807,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::RmSwjfDBGUF6siAY',
+            '_route' => 'generated::toJRdOC3If96EaNC',
             'direction' => NULL,
             'count' => NULL,
           ),
@@ -3834,7 +3834,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::iQVg4dyPqz4RKIVw',
+            '_route' => 'generated::uG3YcdQ5JhmSBgz0',
           ),
           1 => 
           array (
@@ -3856,7 +3856,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::0wT2W8vTh28DFOXO',
+            '_route' => 'generated::8F1qNmAitHBagGVi',
           ),
           1 => 
           array (
@@ -3877,7 +3877,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::tDvkLsaLxrgdqKx2',
+            '_route' => 'generated::6r6lNgQ01J6UhpIS',
           ),
           1 => 
           array (
@@ -3899,7 +3899,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::JovvjflRoHPLR9n7',
+            '_route' => 'generated::N2Xbpq91gYyDNpd2',
           ),
           1 => 
           array (
@@ -3922,7 +3922,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Xey7oZcTXKY1vfcT',
+            '_route' => 'generated::j2JjDfSfmrCSmWlF',
           ),
           1 => 
           array (
@@ -3945,7 +3945,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::QLYyxngDutljO9bx',
+            '_route' => 'generated::CimEnCsGCZcsS0p5',
           ),
           1 => 
           array (
@@ -4055,7 +4055,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::zJEnnMkNIR4e3bCY',
+            '_route' => 'generated::gPoBZjqa0m3H1QsO',
           ),
           1 => 
           array (
@@ -4078,7 +4078,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::UQNLVx6EbNmgg2I0',
+            '_route' => 'generated::ZJ5pS5OzD5D4HhxV',
           ),
           1 => 
           array (
@@ -4101,7 +4101,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::fZPP8TALm4NPE9iZ',
+            '_route' => 'generated::6cGhqoIcDGweLORN',
           ),
           1 => 
           array (
@@ -4124,7 +4124,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KEuocbCx1uslRV7k',
+            '_route' => 'generated::bLiOaQvHuwHSgT3u',
           ),
           1 => 
           array (
@@ -4411,7 +4411,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::p5XYSneYM5EARu1n',
+            '_route' => 'generated::V12iy0gLRVfrKMeF',
           ),
           1 => 
           array (
@@ -4434,7 +4434,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::aUsW6ZZFSGw4cJSM',
+            '_route' => 'generated::Sr66iEYhEZ0OOfBu',
           ),
           1 => 
           array (
@@ -4456,7 +4456,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::270ldUrR5eJ1Bk65',
+            '_route' => 'generated::GOhcC0OmnXtUlDw9',
           ),
           1 => 
           array (
@@ -4654,7 +4654,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::cWwe0B2OTAT7f6lS',
+            '_route' => 'generated::kXQWWuVunrF9rDhU',
           ),
           1 => 
           array (
@@ -4677,7 +4677,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::NfnKqn6HGLtT6xvG',
+            '_route' => 'generated::yTkscaPj7UScRqRG',
           ),
           1 => 
           array (
@@ -4765,7 +4765,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::C96Au2AgH1N5fJw8',
+            '_route' => 'generated::C0ysFQOyVFHDZgEt',
           ),
           1 => 
           array (
@@ -4876,7 +4876,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::tBnj2FWlt7DD8wWx',
+            '_route' => 'generated::g1aq96mfQwcGFIbU',
           ),
           1 => 
           array (
@@ -5163,7 +5163,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::IpFpoEG7BmlCCusu',
+            '_route' => 'generated::XhGWODFIMP12rj0l',
           ),
           1 => 
           array (
@@ -5320,7 +5320,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::UQfLNbZP57cephZ8',
+            '_route' => 'generated::AkTPnrn2DxTmbH6N',
           ),
           1 => 
           array (
@@ -5342,7 +5342,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::dw3KJNmkvYgIlUwe',
+            '_route' => 'generated::QchvIXOWBZXBMNE1',
           ),
           1 => 
           array (
@@ -5406,7 +5406,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::v8eno58kdnXuKWfT',
+            '_route' => 'generated::gMJJkqIh3QxvPEIw',
           ),
           1 => 
           array (
@@ -5429,7 +5429,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::KFAEWqLPi5fomj9s',
+            '_route' => 'generated::z2LIFPkiGfFORk9H',
           ),
           1 => 
           array (
@@ -5452,7 +5452,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::uToPEnHYQoGWx3WX',
+            '_route' => 'generated::19VYlhIrqqUGzfKP',
           ),
           1 => 
           array (
@@ -5474,7 +5474,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::jdYyOfhNI2Dqc8B3',
+            '_route' => 'generated::kakJMbAt5EQWsk27',
           ),
           1 => 
           array (
@@ -5496,7 +5496,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::oJUx3EGjhTqg9gjh',
+            '_route' => 'generated::bVX4CrifBvFsn6XH',
           ),
           1 => 
           array (
@@ -5603,7 +5603,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::hZYj35ow7QkfIpSu',
+            '_route' => 'generated::5dxNUOx9ngkYRJW3',
           ),
           1 => 
           array (
@@ -5626,7 +5626,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::qyo0sTnMiiNYwdrL',
+            '_route' => 'generated::7zHdFa7Odl46vlwr',
           ),
           1 => 
           array (
@@ -5649,7 +5649,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::TnkU3FiErLGDgsZH',
+            '_route' => 'generated::TRadvtw3g96P9mbn',
           ),
           1 => 
           array (
@@ -5761,7 +5761,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::5Gxz0ohkrP5GcIt3',
+            '_route' => 'generated::FCB4rh7K5ZWjCB02',
           ),
           1 => 
           array (
@@ -5871,7 +5871,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::X6KQAtScpnZ62YlH',
+            '_route' => 'generated::NmXa493LwotDdZOv',
           ),
           1 => 
           array (
@@ -5982,7 +5982,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::W1dCbJo1ajV9ckyS',
+            '_route' => 'generated::TcHI9rxo0W6obIrl',
           ),
           1 => 
           array (
@@ -6093,7 +6093,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::AEVXqUgWlI8WJnfc',
+            '_route' => 'generated::JZMdbUxA2BOhjO8C',
           ),
           1 => 
           array (
@@ -6115,7 +6115,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::FaA40DKyuYFveSkT',
+            '_route' => 'generated::Yal6jAXpJyFQXu0x',
           ),
           1 => 
           array (
@@ -6137,7 +6137,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::rtlbbA0pcKCc0PO8',
+            '_route' => 'generated::WTdyYKpKEqS4YH01',
           ),
           1 => 
           array (
@@ -6160,7 +6160,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::vHFKwaaNtzJKdIIz',
+            '_route' => 'generated::SMC7ZCu4yLcpHTCx',
           ),
           1 => 
           array (
@@ -6182,7 +6182,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::dVjTlYUhupxoqmCr',
+            '_route' => 'generated::ng0KMJbkZEKXYLlr',
           ),
           1 => 
           array (
@@ -6205,7 +6205,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::VvHZ4ux1ecDcg7Vh',
+            '_route' => 'generated::9xzbqTtKhz14BjQJ',
           ),
           1 => 
           array (
@@ -6316,7 +6316,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::NWKURjbR3gvd60MR',
+            '_route' => 'generated::IUZLOLBlXWBXTq6e',
           ),
           1 => 
           array (
@@ -6339,7 +6339,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::gdYe7fSIV4AijNXi',
+            '_route' => 'generated::gfy7eD2kVRf7bbP7',
           ),
           1 => 
           array (
@@ -6362,7 +6362,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::3sYIr0ey49Ri4TrU',
+            '_route' => 'generated::IS7CON6w7moEwvwh',
           ),
           1 => 
           array (
@@ -6385,7 +6385,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::kZDtJEHvVHrpEWTk',
+            '_route' => 'generated::BXMg2q98tGho8eMu',
           ),
           1 => 
           array (
@@ -6408,7 +6408,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ftk6NKtvOTPIMqIa',
+            '_route' => 'generated::Z9DNHGW1FY3JAlZf',
           ),
           1 => 
           array (
@@ -6431,7 +6431,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::4fb2RRM9m1LyhJAE',
+            '_route' => 'generated::b2zIRSpYrhuDM46Q',
           ),
           1 => 
           array (
@@ -6454,7 +6454,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Q4FyMNmWYMICjVNl',
+            '_route' => 'generated::4ZJJWSxJyThZWZVf',
           ),
           1 => 
           array (
@@ -6564,7 +6564,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::S8JHNDHyFDlyApo2',
+            '_route' => 'generated::26fFEruxTq35KvXX',
           ),
           1 => 
           array (
@@ -6675,7 +6675,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Vf1xcSk9zgpYVlgd',
+            '_route' => 'generated::KWFJ5z2X0RAJKD4i',
           ),
           1 => 
           array (
@@ -6698,7 +6698,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::9gTes7UkKGvi9BoM',
+            '_route' => 'generated::a07qDp1ESUqsuWSr',
           ),
           1 => 
           array (
@@ -6721,7 +6721,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::yfEIzc7Jsk0HzI4R',
+            '_route' => 'generated::3cuNlePN3iUMNd80',
           ),
           1 => 
           array (
@@ -6743,7 +6743,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Rx80HmOAlB0xd2TN',
+            '_route' => 'generated::yCifaMHRMLfusIgS',
           ),
           1 => 
           array (
@@ -6766,7 +6766,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::artiXl8Z5lPaoukr',
+            '_route' => 'generated::S90wv6FRuC9gEd8J',
           ),
           1 => 
           array (
@@ -6788,7 +6788,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::Zd7KVL5ztQOEbEjI',
+            '_route' => 'generated::h0QyzKsSlo3FaHNX',
           ),
           1 => 
           array (
@@ -6811,7 +6811,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::apSKmAyo6Cobhiuq',
+            '_route' => 'generated::4GPMJdIsNMKRPhQD',
           ),
           1 => 
           array (
@@ -6834,7 +6834,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::91e4SYu4jTlzNaqC',
+            '_route' => 'generated::mQ9rlzrHjPz7GkSw',
           ),
           1 => 
           array (
@@ -6945,7 +6945,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::xlEHeIp6xmlnwfte',
+            '_route' => 'generated::AsufL3Kk4olsPrFU',
           ),
           1 => 
           array (
@@ -6968,7 +6968,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bpm88hPPlLoMhHac',
+            '_route' => 'generated::uwoBO4W1EOpJgVhJ',
           ),
           1 => 
           array (
@@ -6991,7 +6991,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::rJ2MRuQLacZyHAge',
+            '_route' => 'generated::wEmxDj1nfxViWPst',
           ),
           1 => 
           array (
@@ -7014,7 +7014,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::VbXzsJmIiIvVOhET',
+            '_route' => 'generated::mWmt3tw4uxh16vmE',
           ),
           1 => 
           array (
@@ -7037,7 +7037,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::vXnGJXvMD7ZX9rSW',
+            '_route' => 'generated::iW6dcwMNexQ8Hihb',
           ),
           1 => 
           array (
@@ -7059,7 +7059,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::bEGuIXdXxfCKpIXb',
+            '_route' => 'generated::GDCUBjsAzifIdbIf',
           ),
           1 => 
           array (
@@ -7082,7 +7082,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::1NRmrMimDW2NjL4w',
+            '_route' => 'generated::PWTOckEcfI3Z9wiF',
           ),
           1 => 
           array (
@@ -7105,7 +7105,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::80ZUYPW4Bcr8MFJO',
+            '_route' => 'generated::CvXVMC5UlV7XmDC9',
           ),
           1 => 
           array (
@@ -7126,7 +7126,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::WIS8L964mzxmOD51',
+            '_route' => 'generated::Wfk9ipvqgI23zKWh',
           ),
           1 => 
           array (
@@ -7148,7 +7148,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::QpAQgmC1QYqplxuR',
+            '_route' => 'generated::iuSjUMMFibTtCvZE',
           ),
           1 => 
           array (
@@ -7171,7 +7171,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::S9J0sEIuUqCXhrk5',
+            '_route' => 'generated::4sgqx243H9ltVJlO',
           ),
           1 => 
           array (
@@ -7194,7 +7194,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::07RqyToBh3w8Zbob',
+            '_route' => 'generated::LD3SQNGittwGGoEv',
           ),
           1 => 
           array (
@@ -7217,7 +7217,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::yn7EmzBbRw1YJwkP',
+            '_route' => 'generated::K40QRt5qvd94aEkB',
           ),
           1 => 
           array (
@@ -7238,7 +7238,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::MYYt5WVZQLbOcyQE',
+            '_route' => 'generated::HauD3jS8mDLn43ry',
           ),
           1 => 
           array (
@@ -7260,7 +7260,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::WfBOcJAJf9yIBc7e',
+            '_route' => 'generated::PDSrrTpxQ1FZcBdj',
           ),
           1 => 
           array (
@@ -7371,7 +7371,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::ZH15HspVTqgKqASS',
+            '_route' => 'generated::S4v9t3cDzGXw12yG',
           ),
           1 => 
           array (
@@ -7393,7 +7393,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::yw7MNHabWzCqn3d2',
+            '_route' => 'generated::c3av203aaM4nI9Pa',
           ),
           1 => 
           array (
@@ -7415,7 +7415,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::nxu413ziceWkrW2S',
+            '_route' => 'generated::t1Ww6QKNfEzLigud',
           ),
           1 => 
           array (
@@ -7525,7 +7525,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::fOsuOmebDpvRCNx9',
+            '_route' => 'generated::s8zdHTWPsfWjMIYD',
           ),
           1 => 
           array (
@@ -7548,7 +7548,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::rI3PwAYhzpEW9j5t',
+            '_route' => 'generated::4M5x29Sy1LuUtHiL',
           ),
           1 => 
           array (
@@ -7571,7 +7571,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::6ShNBYGaqppZjK8n',
+            '_route' => 'generated::uFepTcVw6LEazZGP',
           ),
           1 => 
           array (
@@ -7594,7 +7594,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::CubWXnbntzoCXYLT',
+            '_route' => 'generated::XRFg7Z8Z6T9amjD5',
           ),
           1 => 
           array (
@@ -7617,7 +7617,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::3QVPahrdAOy4KSHd',
+            '_route' => 'generated::FRl0NPbhAbeTvMf1',
           ),
           1 => 
           array (
@@ -7724,7 +7724,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::jeWhc35wsCcN9NFD',
+            '_route' => 'generated::jKma0Q7R9ae1JGGX',
           ),
           1 => 
           array (
@@ -7747,7 +7747,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 
           array (
-            '_route' => 'generated::RDFkk0Jwgu6bHyrv',
+            '_route' => 'generated::bJ62CxvBGdawC9Uh',
           ),
           1 => 
           array (
@@ -8570,7 +8570,7 @@ app('router')->setCompiledRoutes(
   ),
   'attributes' => 
   array (
-    'generated::KqosI0WBwlZ9Kk0G' => 
+    'generated::hm9MnEj8tKVx8VzJ' => 
     array (
       'methods' => 
       array (
@@ -8592,7 +8592,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::KqosI0WBwlZ9Kk0G',
+        'as' => 'generated::hm9MnEj8tKVx8VzJ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8608,7 +8608,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::3jYbuPLmEhgLkZFT' => 
+    'generated::0tJ3Gv7qnEqERse5' => 
     array (
       'methods' => 
       array (
@@ -8630,7 +8630,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::3jYbuPLmEhgLkZFT',
+        'as' => 'generated::0tJ3Gv7qnEqERse5',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8646,7 +8646,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::GyRCbpU7tD21FopG' => 
+    'generated::b6H4yvkVlxhrsCdE' => 
     array (
       'methods' => 
       array (
@@ -8667,7 +8667,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::GyRCbpU7tD21FopG',
+        'as' => 'generated::b6H4yvkVlxhrsCdE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8683,7 +8683,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::VDn4PgG8bKmmANzS' => 
+    'generated::sIfZ4EMmh6EmBsCx' => 
     array (
       'methods' => 
       array (
@@ -8704,7 +8704,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::VDn4PgG8bKmmANzS',
+        'as' => 'generated::sIfZ4EMmh6EmBsCx',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8720,7 +8720,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::RzmkogVDIUj26gEI' => 
+    'generated::TYsXuyVOGXr3u2eb' => 
     array (
       'methods' => 
       array (
@@ -8740,7 +8740,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::RzmkogVDIUj26gEI',
+        'as' => 'generated::TYsXuyVOGXr3u2eb',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8756,7 +8756,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bipIK5UeR5WaSfOU' => 
+    'generated::tS6PnoYujcZ0uOJU' => 
     array (
       'methods' => 
       array (
@@ -8768,7 +8768,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@getExtendedData',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@getExtendedData',
-        'as' => 'generated::bipIK5UeR5WaSfOU',
+        'as' => 'generated::tS6PnoYujcZ0uOJU',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8785,7 +8785,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::RmSwjfDBGUF6siAY' => 
+    'generated::toJRdOC3If96EaNC' => 
     array (
       'methods' => 
       array (
@@ -8797,7 +8797,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@getData',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@getData',
-        'as' => 'generated::RmSwjfDBGUF6siAY',
+        'as' => 'generated::toJRdOC3If96EaNC',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8816,7 +8816,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::iQVg4dyPqz4RKIVw' => 
+    'generated::uG3YcdQ5JhmSBgz0' => 
     array (
       'methods' => 
       array (
@@ -8827,7 +8827,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@updateData',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@updateData',
-        'as' => 'generated::iQVg4dyPqz4RKIVw',
+        'as' => 'generated::uG3YcdQ5JhmSBgz0',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8843,7 +8843,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::0wT2W8vTh28DFOXO' => 
+    'generated::8F1qNmAitHBagGVi' => 
     array (
       'methods' => 
       array (
@@ -8854,7 +8854,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@authenticate',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@authenticate',
-        'as' => 'generated::0wT2W8vTh28DFOXO',
+        'as' => 'generated::8F1qNmAitHBagGVi',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8870,7 +8870,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::mWMvcWnhNJ2KYVZC' => 
+    'generated::EGB5Ii8dj8Pt0aKN' => 
     array (
       'methods' => 
       array (
@@ -8882,7 +8882,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@webRedirect',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@webRedirect',
-        'as' => 'generated::mWMvcWnhNJ2KYVZC',
+        'as' => 'generated::EGB5Ii8dj8Pt0aKN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8898,7 +8898,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::BskBJfsoxmwuVu2O' => 
+    'generated::8T3pGcYIiQ3QL7N1' => 
     array (
       'methods' => 
       array (
@@ -8910,7 +8910,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@webIndex',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@webIndex',
-        'as' => 'generated::BskBJfsoxmwuVu2O',
+        'as' => 'generated::8T3pGcYIiQ3QL7N1',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8926,7 +8926,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Xey7oZcTXKY1vfcT' => 
+    'generated::j2JjDfSfmrCSmWlF' => 
     array (
       'methods' => 
       array (
@@ -8938,7 +8938,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@webAsset',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@webAsset',
-        'as' => 'generated::Xey7oZcTXKY1vfcT',
+        'as' => 'generated::j2JjDfSfmrCSmWlF',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8955,7 +8955,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::wrAax07fNkdMDsW8' => 
+    'generated::YKyN7IvThIbVlUYu' => 
     array (
       'methods' => 
       array (
@@ -8967,7 +8967,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@webRedirect',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@webRedirect',
-        'as' => 'generated::wrAax07fNkdMDsW8',
+        'as' => 'generated::YKyN7IvThIbVlUYu',
       ),
       'fallback' => false,
       'defaults' => 
@@ -8983,7 +8983,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::tDvkLsaLxrgdqKx2' => 
+    'generated::6r6lNgQ01J6UhpIS' => 
     array (
       'methods' => 
       array (
@@ -8995,7 +8995,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@webIndex',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@webIndex',
-        'as' => 'generated::tDvkLsaLxrgdqKx2',
+        'as' => 'generated::6r6lNgQ01J6UhpIS',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9011,7 +9011,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::JovvjflRoHPLR9n7' => 
+    'generated::N2Xbpq91gYyDNpd2' => 
     array (
       'methods' => 
       array (
@@ -9023,7 +9023,7 @@ app('router')->setCompiledRoutes(
       array (
         'uses' => 'Clockwork\\Support\\Laravel\\ClockworkController@webAsset',
         'controller' => 'Clockwork\\Support\\Laravel\\ClockworkController@webAsset',
-        'as' => 'generated::JovvjflRoHPLR9n7',
+        'as' => 'generated::N2Xbpq91gYyDNpd2',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9040,7 +9040,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::OxNJGjnvLQCXM1b9' => 
+    'generated::GeoO8Fnmidfx8yr1' => 
     array (
       'methods' => 
       array (
@@ -9061,7 +9061,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'web',
         ),
-        'as' => 'generated::OxNJGjnvLQCXM1b9',
+        'as' => 'generated::GeoO8Fnmidfx8yr1',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9077,7 +9077,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::nFUDZZEa9gVMqLl0' => 
+    'generated::VSymVdOe8PNNROk3' => 
     array (
       'methods' => 
       array (
@@ -9103,7 +9103,7 @@ app('router')->setCompiledRoutes(
         array (
           0 => 'Illuminate\\Foundation\\Http\\Middleware\\VerifyCsrfToken',
         ),
-        'as' => 'generated::nFUDZZEa9gVMqLl0',
+        'as' => 'generated::VSymVdOe8PNNROk3',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9119,7 +9119,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::YHaV6U90HBiVqxVD' => 
+    'generated::upMzjVKcrLE8kgHa' => 
     array (
       'methods' => 
       array (
@@ -9136,13 +9136,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:297:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:79:"function (\\Illuminate\\Http\\Request $request) {
     return $request->user();
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000037e8a270000000043f5472f";}";s:4:"hash";s:44:"a3phIR8vRe0qpl+cE58V6TbWwDk1+ozU+KzfmMWKe2Y=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000007ff066170000000045c044cf";}";s:4:"hash";s:44:"AmMadXvMw2int58US8L20wQXUNcCdwiB6oe4bKYnkEs=";}}',
         'namespace' => NULL,
         'prefix' => 'api',
         'where' => 
         array (
         ),
-        'as' => 'generated::YHaV6U90HBiVqxVD',
+        'as' => 'generated::upMzjVKcrLE8kgHa',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9158,7 +9158,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::S9d9AgIDdZQUbpmO' => 
+    'generated::K4Na4oj3jvTe3kvI' => 
     array (
       'methods' => 
       array (
@@ -9178,7 +9178,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::S9d9AgIDdZQUbpmO',
+        'as' => 'generated::K4Na4oj3jvTe3kvI',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9194,7 +9194,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::GpCyhqIvgyWLPuD4' => 
+    'generated::P5apv7fiaMQeysoN' => 
     array (
       'methods' => 
       array (
@@ -9215,7 +9215,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::GpCyhqIvgyWLPuD4',
+        'as' => 'generated::P5apv7fiaMQeysoN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9231,7 +9231,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::zJEnnMkNIR4e3bCY' => 
+    'generated::gPoBZjqa0m3H1QsO' => 
     array (
       'methods' => 
       array (
@@ -9252,7 +9252,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::zJEnnMkNIR4e3bCY',
+        'as' => 'generated::gPoBZjqa0m3H1QsO',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9268,7 +9268,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::UQNLVx6EbNmgg2I0' => 
+    'generated::ZJ5pS5OzD5D4HhxV' => 
     array (
       'methods' => 
       array (
@@ -9289,7 +9289,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::UQNLVx6EbNmgg2I0',
+        'as' => 'generated::ZJ5pS5OzD5D4HhxV',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9305,7 +9305,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::cWwe0B2OTAT7f6lS' => 
+    'generated::kXQWWuVunrF9rDhU' => 
     array (
       'methods' => 
       array (
@@ -9326,7 +9326,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::cWwe0B2OTAT7f6lS',
+        'as' => 'generated::kXQWWuVunrF9rDhU',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9342,7 +9342,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::iJOA9J7QDD9vap58' => 
+    'generated::FaJ45ywOI0sB6lfJ' => 
     array (
       'methods' => 
       array (
@@ -9363,7 +9363,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::iJOA9J7QDD9vap58',
+        'as' => 'generated::FaJ45ywOI0sB6lfJ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9379,7 +9379,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::NfnKqn6HGLtT6xvG' => 
+    'generated::yTkscaPj7UScRqRG' => 
     array (
       'methods' => 
       array (
@@ -9400,7 +9400,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::NfnKqn6HGLtT6xvG',
+        'as' => 'generated::yTkscaPj7UScRqRG',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9416,7 +9416,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::NyOjtmujqXM1WUDI' => 
+    'generated::gthoaQscOjuLRivz' => 
     array (
       'methods' => 
       array (
@@ -9432,13 +9432,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:267:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:49:"function () {
     return \\view(\'auth.login\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000037e8a300000000043f5472f";}";s:4:"hash";s:44:"cGC9i185xmj1CogNlTV99YKhfDCetpfXj0o6dw+u2fA=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000007ff066000000000045c044cf";}";s:4:"hash";s:44:"+ikboNXzA23JtIFqWTt9HK8K0zPJ6l8f6FvMn/OK5rY=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::NyOjtmujqXM1WUDI',
+        'as' => 'generated::gthoaQscOjuLRivz',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9454,7 +9454,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::eqbcrNMMSbM4nF5p' => 
+    'generated::4Qo8zcMv92zphyqm' => 
     array (
       'methods' => 
       array (
@@ -9470,13 +9470,13 @@ app('router')->setCompiledRoutes(
         ),
         'uses' => 'O:47:"Laravel\\SerializableClosure\\SerializableClosure":1:{s:12:"serializable";O:46:"Laravel\\SerializableClosure\\Serializers\\Signed":2:{s:12:"serializable";s:297:"O:46:"Laravel\\SerializableClosure\\Serializers\\Native":5:{s:3:"use";a:0:{}s:8:"function";s:79:"function () {
     \\Illuminate\\Support\\Facades\\Artisan::call(\'route:clear\');
-}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"00000000037e8a320000000043f5472f";}";s:4:"hash";s:44:"4pmfeDCYFnS0MLXjHeTpBSkIC7dasn1f+7QQN+vs7Rs=";}}',
+}";s:5:"scope";s:37:"Illuminate\\Routing\\RouteFileRegistrar";s:4:"this";N;s:4:"self";s:32:"000000007ff066020000000045c044cf";}";s:4:"hash";s:44:"luGyIKxsb4kci92y8yGX8zU2pdltfnioPgcEFeSN7rk=";}}',
         'namespace' => NULL,
         'prefix' => '',
         'where' => 
         array (
         ),
-        'as' => 'generated::eqbcrNMMSbM4nF5p',
+        'as' => 'generated::4Qo8zcMv92zphyqm',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9492,7 +9492,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::JnmJ2AHFvzjgLTV7' => 
+    'generated::FURrjX3iAZWClZaD' => 
     array (
       'methods' => 
       array (
@@ -9514,7 +9514,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::JnmJ2AHFvzjgLTV7',
+        'as' => 'generated::FURrjX3iAZWClZaD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9530,7 +9530,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::C96Au2AgH1N5fJw8' => 
+    'generated::C0ysFQOyVFHDZgEt' => 
     array (
       'methods' => 
       array (
@@ -9552,7 +9552,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::C96Au2AgH1N5fJw8',
+        'as' => 'generated::C0ysFQOyVFHDZgEt',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9568,7 +9568,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::tBnj2FWlt7DD8wWx' => 
+    'generated::g1aq96mfQwcGFIbU' => 
     array (
       'methods' => 
       array (
@@ -9590,7 +9590,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::tBnj2FWlt7DD8wWx',
+        'as' => 'generated::g1aq96mfQwcGFIbU',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9606,7 +9606,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::iR07FWBMEow9dcwd' => 
+    'generated::9xm7igiUGNvaJLna' => 
     array (
       'methods' => 
       array (
@@ -9628,7 +9628,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::iR07FWBMEow9dcwd',
+        'as' => 'generated::9xm7igiUGNvaJLna',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9644,7 +9644,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::zbQsY4UrGT5vER8I' => 
+    'generated::f231DrrGYSozSJmf' => 
     array (
       'methods' => 
       array (
@@ -9666,7 +9666,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::zbQsY4UrGT5vER8I',
+        'as' => 'generated::f231DrrGYSozSJmf',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9682,7 +9682,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::WkhO8Kz2B8lGZSz9' => 
+    'generated::qhC6XeSIGeml5tK8' => 
     array (
       'methods' => 
       array (
@@ -9704,7 +9704,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::WkhO8Kz2B8lGZSz9',
+        'as' => 'generated::qhC6XeSIGeml5tK8',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9720,7 +9720,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::TnkU3FiErLGDgsZH' => 
+    'generated::TRadvtw3g96P9mbn' => 
     array (
       'methods' => 
       array (
@@ -9742,7 +9742,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::TnkU3FiErLGDgsZH',
+        'as' => 'generated::TRadvtw3g96P9mbn',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9758,7 +9758,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::liNRyixN1bhatxY0' => 
+    'generated::Ze5u4YqQBYjyFmjq' => 
     array (
       'methods' => 
       array (
@@ -9780,7 +9780,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::liNRyixN1bhatxY0',
+        'as' => 'generated::Ze5u4YqQBYjyFmjq',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9796,7 +9796,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::WexaiNomyBAceA2V' => 
+    'generated::5DDzcQe8cxS9X7KF' => 
     array (
       'methods' => 
       array (
@@ -9818,7 +9818,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::WexaiNomyBAceA2V',
+        'as' => 'generated::5DDzcQe8cxS9X7KF',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9834,7 +9834,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::5Gxz0ohkrP5GcIt3' => 
+    'generated::FCB4rh7K5ZWjCB02' => 
     array (
       'methods' => 
       array (
@@ -9855,7 +9855,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::5Gxz0ohkrP5GcIt3',
+        'as' => 'generated::FCB4rh7K5ZWjCB02',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9871,7 +9871,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::iB8YdcvsO0ujoXgC' => 
+    'generated::csf4X1DXXSiFgIrT' => 
     array (
       'methods' => 
       array (
@@ -9893,7 +9893,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::iB8YdcvsO0ujoXgC',
+        'as' => 'generated::csf4X1DXXSiFgIrT',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9909,7 +9909,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::I48DGKfWsmP4TOmK' => 
+    'generated::Okkm6pZcA5g5hTpE' => 
     array (
       'methods' => 
       array (
@@ -9931,7 +9931,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::I48DGKfWsmP4TOmK',
+        'as' => 'generated::Okkm6pZcA5g5hTpE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9947,7 +9947,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::X6KQAtScpnZ62YlH' => 
+    'generated::NmXa493LwotDdZOv' => 
     array (
       'methods' => 
       array (
@@ -9969,7 +9969,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::X6KQAtScpnZ62YlH',
+        'as' => 'generated::NmXa493LwotDdZOv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -9985,7 +9985,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::W1dCbJo1ajV9ckyS' => 
+    'generated::TcHI9rxo0W6obIrl' => 
     array (
       'methods' => 
       array (
@@ -10007,7 +10007,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::W1dCbJo1ajV9ckyS',
+        'as' => 'generated::TcHI9rxo0W6obIrl',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10023,7 +10023,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::vHFKwaaNtzJKdIIz' => 
+    'generated::SMC7ZCu4yLcpHTCx' => 
     array (
       'methods' => 
       array (
@@ -10044,7 +10044,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::vHFKwaaNtzJKdIIz',
+        'as' => 'generated::SMC7ZCu4yLcpHTCx',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10060,7 +10060,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::VEo35fAGN3dMi0oL' => 
+    'generated::3ypEDSL8jFXmp9Gu' => 
     array (
       'methods' => 
       array (
@@ -10082,7 +10082,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::VEo35fAGN3dMi0oL',
+        'as' => 'generated::3ypEDSL8jFXmp9Gu',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10098,7 +10098,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::fZPP8TALm4NPE9iZ' => 
+    'generated::6cGhqoIcDGweLORN' => 
     array (
       'methods' => 
       array (
@@ -10120,7 +10120,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::fZPP8TALm4NPE9iZ',
+        'as' => 'generated::6cGhqoIcDGweLORN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10136,7 +10136,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::tNSighUNIIG7ZXAm' => 
+    'generated::h7GqjR5YPrSiqlsf' => 
     array (
       'methods' => 
       array (
@@ -10158,7 +10158,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::tNSighUNIIG7ZXAm',
+        'as' => 'generated::h7GqjR5YPrSiqlsf',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10174,7 +10174,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Vf1xcSk9zgpYVlgd' => 
+    'generated::KWFJ5z2X0RAJKD4i' => 
     array (
       'methods' => 
       array (
@@ -10196,7 +10196,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Vf1xcSk9zgpYVlgd',
+        'as' => 'generated::KWFJ5z2X0RAJKD4i',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10212,7 +10212,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::9gTes7UkKGvi9BoM' => 
+    'generated::a07qDp1ESUqsuWSr' => 
     array (
       'methods' => 
       array (
@@ -10234,7 +10234,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::9gTes7UkKGvi9BoM',
+        'as' => 'generated::a07qDp1ESUqsuWSr',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10250,7 +10250,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::yfEIzc7Jsk0HzI4R' => 
+    'generated::3cuNlePN3iUMNd80' => 
     array (
       'methods' => 
       array (
@@ -10271,7 +10271,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::yfEIzc7Jsk0HzI4R',
+        'as' => 'generated::3cuNlePN3iUMNd80',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10287,7 +10287,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::dVjTlYUhupxoqmCr' => 
+    'generated::ng0KMJbkZEKXYLlr' => 
     array (
       'methods' => 
       array (
@@ -10309,7 +10309,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::dVjTlYUhupxoqmCr',
+        'as' => 'generated::ng0KMJbkZEKXYLlr',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10325,7 +10325,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::IpFpoEG7BmlCCusu' => 
+    'generated::XhGWODFIMP12rj0l' => 
     array (
       'methods' => 
       array (
@@ -10347,7 +10347,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::IpFpoEG7BmlCCusu',
+        'as' => 'generated::XhGWODFIMP12rj0l',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10363,7 +10363,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::iNF7um3BGOYOIC73' => 
+    'generated::TYDyiXMMsULiXkxF' => 
     array (
       'methods' => 
       array (
@@ -10385,7 +10385,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::iNF7um3BGOYOIC73',
+        'as' => 'generated::TYDyiXMMsULiXkxF',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10401,7 +10401,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::NWKURjbR3gvd60MR' => 
+    'generated::IUZLOLBlXWBXTq6e' => 
     array (
       'methods' => 
       array (
@@ -10423,7 +10423,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::NWKURjbR3gvd60MR',
+        'as' => 'generated::IUZLOLBlXWBXTq6e',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10439,7 +10439,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::VvHZ4ux1ecDcg7Vh' => 
+    'generated::9xzbqTtKhz14BjQJ' => 
     array (
       'methods' => 
       array (
@@ -10461,7 +10461,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::VvHZ4ux1ecDcg7Vh',
+        'as' => 'generated::9xzbqTtKhz14BjQJ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10477,7 +10477,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::KEuocbCx1uslRV7k' => 
+    'generated::bLiOaQvHuwHSgT3u' => 
     array (
       'methods' => 
       array (
@@ -10499,7 +10499,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::KEuocbCx1uslRV7k',
+        'as' => 'generated::bLiOaQvHuwHSgT3u',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10515,7 +10515,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::5OCRxUfi5dsqYFOP' => 
+    'generated::tD2mlLGdTcRP36Ew' => 
     array (
       'methods' => 
       array (
@@ -10537,7 +10537,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::5OCRxUfi5dsqYFOP',
+        'as' => 'generated::tD2mlLGdTcRP36Ew',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10553,7 +10553,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::4rT4rV31pvSk07cu' => 
+    'generated::Ju77BfICJ6TJkz0R' => 
     array (
       'methods' => 
       array (
@@ -10575,7 +10575,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::4rT4rV31pvSk07cu',
+        'as' => 'generated::Ju77BfICJ6TJkz0R',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10591,7 +10591,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::KFAEWqLPi5fomj9s' => 
+    'generated::z2LIFPkiGfFORk9H' => 
     array (
       'methods' => 
       array (
@@ -10613,7 +10613,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::KFAEWqLPi5fomj9s',
+        'as' => 'generated::z2LIFPkiGfFORk9H',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10629,7 +10629,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::gdYe7fSIV4AijNXi' => 
+    'generated::gfy7eD2kVRf7bbP7' => 
     array (
       'methods' => 
       array (
@@ -10651,7 +10651,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::gdYe7fSIV4AijNXi',
+        'as' => 'generated::gfy7eD2kVRf7bbP7',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10667,7 +10667,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::gZldsWmAkzW7lZ5A' => 
+    'generated::WITPc8lCbouYnQqD' => 
     array (
       'methods' => 
       array (
@@ -10689,7 +10689,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::gZldsWmAkzW7lZ5A',
+        'as' => 'generated::WITPc8lCbouYnQqD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10705,7 +10705,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::juOwGfUTsGHCQeZG' => 
+    'generated::jGwBoDOqdwadTcix' => 
     array (
       'methods' => 
       array (
@@ -10727,7 +10727,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::juOwGfUTsGHCQeZG',
+        'as' => 'generated::jGwBoDOqdwadTcix',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10743,7 +10743,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Zd7KVL5ztQOEbEjI' => 
+    'generated::h0QyzKsSlo3FaHNX' => 
     array (
       'methods' => 
       array (
@@ -10765,7 +10765,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Zd7KVL5ztQOEbEjI',
+        'as' => 'generated::h0QyzKsSlo3FaHNX',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10781,7 +10781,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::uToPEnHYQoGWx3WX' => 
+    'generated::19VYlhIrqqUGzfKP' => 
     array (
       'methods' => 
       array (
@@ -10802,7 +10802,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::uToPEnHYQoGWx3WX',
+        'as' => 'generated::19VYlhIrqqUGzfKP',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10818,7 +10818,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::jdYyOfhNI2Dqc8B3' => 
+    'generated::kakJMbAt5EQWsk27' => 
     array (
       'methods' => 
       array (
@@ -10839,7 +10839,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::jdYyOfhNI2Dqc8B3',
+        'as' => 'generated::kakJMbAt5EQWsk27',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10855,7 +10855,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::UkCnYAFCPicRIBWZ' => 
+    'generated::P5wozL1yVm4jm4xx' => 
     array (
       'methods' => 
       array (
@@ -10877,7 +10877,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::UkCnYAFCPicRIBWZ',
+        'as' => 'generated::P5wozL1yVm4jm4xx',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10893,7 +10893,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::apSKmAyo6Cobhiuq' => 
+    'generated::4GPMJdIsNMKRPhQD' => 
     array (
       'methods' => 
       array (
@@ -10915,7 +10915,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::apSKmAyo6Cobhiuq',
+        'as' => 'generated::4GPMJdIsNMKRPhQD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10931,7 +10931,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Rx80HmOAlB0xd2TN' => 
+    'generated::yCifaMHRMLfusIgS' => 
     array (
       'methods' => 
       array (
@@ -10953,7 +10953,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Rx80HmOAlB0xd2TN',
+        'as' => 'generated::yCifaMHRMLfusIgS',
       ),
       'fallback' => false,
       'defaults' => 
@@ -10969,7 +10969,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::v8eno58kdnXuKWfT' => 
+    'generated::gMJJkqIh3QxvPEIw' => 
     array (
       'methods' => 
       array (
@@ -10991,7 +10991,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::v8eno58kdnXuKWfT',
+        'as' => 'generated::gMJJkqIh3QxvPEIw',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11007,7 +11007,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bzq4HyD56DvgAjbY' => 
+    'generated::HOudehQvuz5ZBFIZ' => 
     array (
       'methods' => 
       array (
@@ -11029,7 +11029,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bzq4HyD56DvgAjbY',
+        'as' => 'generated::HOudehQvuz5ZBFIZ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11045,7 +11045,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::flH7cWaMEmzDMs5q' => 
+    'generated::oaNsg4KtWLsHSa1u' => 
     array (
       'methods' => 
       array (
@@ -11067,7 +11067,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::flH7cWaMEmzDMs5q',
+        'as' => 'generated::oaNsg4KtWLsHSa1u',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11083,7 +11083,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Q7NhhmS89fZEisU5' => 
+    'generated::lA2KcmYeXGq6LS8P' => 
     array (
       'methods' => 
       array (
@@ -11105,7 +11105,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Q7NhhmS89fZEisU5',
+        'as' => 'generated::lA2KcmYeXGq6LS8P',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11121,7 +11121,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bqbq9sQMAS88HRQT' => 
+    'generated::CAzhtdtXZFbw2PpG' => 
     array (
       'methods' => 
       array (
@@ -11143,7 +11143,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bqbq9sQMAS88HRQT',
+        'as' => 'generated::CAzhtdtXZFbw2PpG',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11159,7 +11159,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::b5SuE8pBjwOKd5hC' => 
+    'generated::KqWQyfBYiTIN6OFD' => 
     array (
       'methods' => 
       array (
@@ -11181,7 +11181,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::b5SuE8pBjwOKd5hC',
+        'as' => 'generated::KqWQyfBYiTIN6OFD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11197,7 +11197,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::4DQWcRIGqKw7tVBb' => 
+    'generated::3X3MphyzwGFd8Z3y' => 
     array (
       'methods' => 
       array (
@@ -11219,7 +11219,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::4DQWcRIGqKw7tVBb',
+        'as' => 'generated::3X3MphyzwGFd8Z3y',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11235,7 +11235,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::fiEHb3htxcQQp5y3' => 
+    'generated::0hTTHdN0Cyi4piyk' => 
     array (
       'methods' => 
       array (
@@ -11257,7 +11257,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::fiEHb3htxcQQp5y3',
+        'as' => 'generated::0hTTHdN0Cyi4piyk',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11273,7 +11273,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::aISTf8WTC94d4cz6' => 
+    'generated::UuWHd4wNAOCiRlMb' => 
     array (
       'methods' => 
       array (
@@ -11295,7 +11295,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::aISTf8WTC94d4cz6',
+        'as' => 'generated::UuWHd4wNAOCiRlMb',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11311,7 +11311,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::uetVyPhRSwP6uZpb' => 
+    'generated::UoqOrskGElmfLDJU' => 
     array (
       'methods' => 
       array (
@@ -11333,7 +11333,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::uetVyPhRSwP6uZpb',
+        'as' => 'generated::UoqOrskGElmfLDJU',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11349,7 +11349,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::R28kx3i1kdVEPUg2' => 
+    'generated::xV2O5FXNNVvahGOr' => 
     array (
       'methods' => 
       array (
@@ -11371,7 +11371,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::R28kx3i1kdVEPUg2',
+        'as' => 'generated::xV2O5FXNNVvahGOr',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11387,7 +11387,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::U8rD1t9kUxwqFg4L' => 
+    'generated::d0s5TQYG4aSmv46Y' => 
     array (
       'methods' => 
       array (
@@ -11409,7 +11409,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::U8rD1t9kUxwqFg4L',
+        'as' => 'generated::d0s5TQYG4aSmv46Y',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11425,7 +11425,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::XIYkkVE1alpqFaM5' => 
+    'generated::pqvql0zx9AV7uu5n' => 
     array (
       'methods' => 
       array (
@@ -11447,7 +11447,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::XIYkkVE1alpqFaM5',
+        'as' => 'generated::pqvql0zx9AV7uu5n',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11463,7 +11463,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::p5XYSneYM5EARu1n' => 
+    'generated::V12iy0gLRVfrKMeF' => 
     array (
       'methods' => 
       array (
@@ -11485,7 +11485,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::p5XYSneYM5EARu1n',
+        'as' => 'generated::V12iy0gLRVfrKMeF',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11501,7 +11501,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::l5ZtiAmnCpML4pEi' => 
+    'generated::lLkpR96tarJntfk1' => 
     array (
       'methods' => 
       array (
@@ -11523,7 +11523,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::l5ZtiAmnCpML4pEi',
+        'as' => 'generated::lLkpR96tarJntfk1',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11539,7 +11539,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::WrKT0Yu0SOKSa0xs' => 
+    'generated::VUkfSKoYZl5ZDays' => 
     array (
       'methods' => 
       array (
@@ -11561,7 +11561,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::WrKT0Yu0SOKSa0xs',
+        'as' => 'generated::VUkfSKoYZl5ZDays',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11577,7 +11577,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::dYqKrqTGtqsHj49g' => 
+    'generated::4EqyywMOv5fuNtWh' => 
     array (
       'methods' => 
       array (
@@ -11599,7 +11599,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::dYqKrqTGtqsHj49g',
+        'as' => 'generated::4EqyywMOv5fuNtWh',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11615,7 +11615,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::F4528fF0MiBXYRJg' => 
+    'generated::kUgdjcOhY8h6Yx90' => 
     array (
       'methods' => 
       array (
@@ -11637,7 +11637,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::F4528fF0MiBXYRJg',
+        'as' => 'generated::kUgdjcOhY8h6Yx90',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11653,7 +11653,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::artiXl8Z5lPaoukr' => 
+    'generated::S90wv6FRuC9gEd8J' => 
     array (
       'methods' => 
       array (
@@ -11674,7 +11674,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::artiXl8Z5lPaoukr',
+        'as' => 'generated::S90wv6FRuC9gEd8J',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11690,7 +11690,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::hZYj35ow7QkfIpSu' => 
+    'generated::5dxNUOx9ngkYRJW3' => 
     array (
       'methods' => 
       array (
@@ -11712,7 +11712,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::hZYj35ow7QkfIpSu',
+        'as' => 'generated::5dxNUOx9ngkYRJW3',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11728,7 +11728,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::qyo0sTnMiiNYwdrL' => 
+    'generated::7zHdFa7Odl46vlwr' => 
     array (
       'methods' => 
       array (
@@ -11750,7 +11750,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::qyo0sTnMiiNYwdrL',
+        'as' => 'generated::7zHdFa7Odl46vlwr',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11766,7 +11766,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::kZDtJEHvVHrpEWTk' => 
+    'generated::BXMg2q98tGho8eMu' => 
     array (
       'methods' => 
       array (
@@ -11788,7 +11788,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::kZDtJEHvVHrpEWTk',
+        'as' => 'generated::BXMg2q98tGho8eMu',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11804,7 +11804,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ftk6NKtvOTPIMqIa' => 
+    'generated::Z9DNHGW1FY3JAlZf' => 
     array (
       'methods' => 
       array (
@@ -11826,7 +11826,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::ftk6NKtvOTPIMqIa',
+        'as' => 'generated::Z9DNHGW1FY3JAlZf',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11842,7 +11842,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::vVxSJykZQP7aoaQy' => 
+    'generated::wf45WWr2ry3hUYCM' => 
     array (
       'methods' => 
       array (
@@ -11864,7 +11864,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::vVxSJykZQP7aoaQy',
+        'as' => 'generated::wf45WWr2ry3hUYCM',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11880,7 +11880,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::LSF0TKpmFLDeZPLS' => 
+    'generated::DZk5OeYQQ8tn0Sbp' => 
     array (
       'methods' => 
       array (
@@ -11902,7 +11902,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::LSF0TKpmFLDeZPLS',
+        'as' => 'generated::DZk5OeYQQ8tn0Sbp',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11918,7 +11918,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::4COKO4ZHW1k5Z3TW' => 
+    'generated::8xw9FNmBc3otaGfv' => 
     array (
       'methods' => 
       array (
@@ -11939,7 +11939,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::4COKO4ZHW1k5Z3TW',
+        'as' => 'generated::8xw9FNmBc3otaGfv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11955,7 +11955,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::QLYyxngDutljO9bx' => 
+    'generated::CimEnCsGCZcsS0p5' => 
     array (
       'methods' => 
       array (
@@ -11976,7 +11976,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::QLYyxngDutljO9bx',
+        'as' => 'generated::CimEnCsGCZcsS0p5',
       ),
       'fallback' => false,
       'defaults' => 
@@ -11992,7 +11992,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ZH15HspVTqgKqASS' => 
+    'generated::S4v9t3cDzGXw12yG' => 
     array (
       'methods' => 
       array (
@@ -12013,7 +12013,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::ZH15HspVTqgKqASS',
+        'as' => 'generated::S4v9t3cDzGXw12yG',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12029,7 +12029,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::vHho7sUf0MK0d46a' => 
+    'generated::o7CZAO054ACVHaug' => 
     array (
       'methods' => 
       array (
@@ -12051,7 +12051,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::vHho7sUf0MK0d46a',
+        'as' => 'generated::o7CZAO054ACVHaug',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12067,7 +12067,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::OuPn6TfzDgotZbGR' => 
+    'generated::Z7JRkoyQOPqqjiz6' => 
     array (
       'methods' => 
       array (
@@ -12088,7 +12088,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::OuPn6TfzDgotZbGR',
+        'as' => 'generated::Z7JRkoyQOPqqjiz6',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12104,7 +12104,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::yw7MNHabWzCqn3d2' => 
+    'generated::c3av203aaM4nI9Pa' => 
     array (
       'methods' => 
       array (
@@ -12125,7 +12125,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::yw7MNHabWzCqn3d2',
+        'as' => 'generated::c3av203aaM4nI9Pa',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12141,7 +12141,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::nxu413ziceWkrW2S' => 
+    'generated::t1Ww6QKNfEzLigud' => 
     array (
       'methods' => 
       array (
@@ -12162,7 +12162,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::nxu413ziceWkrW2S',
+        'as' => 'generated::t1Ww6QKNfEzLigud',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12178,7 +12178,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Ow5xNjo1ichAUDqI' => 
+    'generated::3bGSlgEh5HpXausc' => 
     array (
       'methods' => 
       array (
@@ -12200,7 +12200,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Ow5xNjo1ichAUDqI',
+        'as' => 'generated::3bGSlgEh5HpXausc',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12216,7 +12216,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::M7C54v9OcYS3FUNc' => 
+    'generated::Cuog8pPYCZwiVikN' => 
     array (
       'methods' => 
       array (
@@ -12238,7 +12238,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::M7C54v9OcYS3FUNc',
+        'as' => 'generated::Cuog8pPYCZwiVikN',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12254,7 +12254,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::SbVJYJwAcM1QyQLi' => 
+    'generated::yzNqppiw28znyC43' => 
     array (
       'methods' => 
       array (
@@ -12275,7 +12275,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::SbVJYJwAcM1QyQLi',
+        'as' => 'generated::yzNqppiw28znyC43',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12291,7 +12291,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::N0cYdMoWzRrrAp2F' => 
+    'generated::dGr0S9gHogkDxU9A' => 
     array (
       'methods' => 
       array (
@@ -12313,7 +12313,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::N0cYdMoWzRrrAp2F',
+        'as' => 'generated::dGr0S9gHogkDxU9A',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12329,7 +12329,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::3sYIr0ey49Ri4TrU' => 
+    'generated::IS7CON6w7moEwvwh' => 
     array (
       'methods' => 
       array (
@@ -12351,7 +12351,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::3sYIr0ey49Ri4TrU',
+        'as' => 'generated::IS7CON6w7moEwvwh',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12367,7 +12367,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::rI3PwAYhzpEW9j5t' => 
+    'generated::4M5x29Sy1LuUtHiL' => 
     array (
       'methods' => 
       array (
@@ -12389,7 +12389,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::rI3PwAYhzpEW9j5t',
+        'as' => 'generated::4M5x29Sy1LuUtHiL',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12405,7 +12405,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::6ShNBYGaqppZjK8n' => 
+    'generated::uFepTcVw6LEazZGP' => 
     array (
       'methods' => 
       array (
@@ -12427,7 +12427,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::6ShNBYGaqppZjK8n',
+        'as' => 'generated::uFepTcVw6LEazZGP',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12443,7 +12443,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::4fb2RRM9m1LyhJAE' => 
+    'generated::b2zIRSpYrhuDM46Q' => 
     array (
       'methods' => 
       array (
@@ -12465,7 +12465,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::4fb2RRM9m1LyhJAE',
+        'as' => 'generated::b2zIRSpYrhuDM46Q',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12481,7 +12481,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::dSTI36TmJ4SjX8J7' => 
+    'generated::npvpVz02sBbYreCg' => 
     array (
       'methods' => 
       array (
@@ -12503,7 +12503,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::dSTI36TmJ4SjX8J7',
+        'as' => 'generated::npvpVz02sBbYreCg',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12519,7 +12519,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::TpfNh3tTraZCUM7C' => 
+    'generated::hwePogw9RWgwdiLy' => 
     array (
       'methods' => 
       array (
@@ -12541,7 +12541,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::TpfNh3tTraZCUM7C',
+        'as' => 'generated::hwePogw9RWgwdiLy',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12557,7 +12557,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::S8JHNDHyFDlyApo2' => 
+    'generated::26fFEruxTq35KvXX' => 
     array (
       'methods' => 
       array (
@@ -12579,7 +12579,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::S8JHNDHyFDlyApo2',
+        'as' => 'generated::26fFEruxTq35KvXX',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12595,7 +12595,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::zSdXRS4tO8Gc6NVz' => 
+    'generated::jdKJ83N3iWIGcxb3' => 
     array (
       'methods' => 
       array (
@@ -12617,7 +12617,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::zSdXRS4tO8Gc6NVz',
+        'as' => 'generated::jdKJ83N3iWIGcxb3',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12633,7 +12633,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::fOsuOmebDpvRCNx9' => 
+    'generated::s8zdHTWPsfWjMIYD' => 
     array (
       'methods' => 
       array (
@@ -12655,7 +12655,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::fOsuOmebDpvRCNx9',
+        'as' => 'generated::s8zdHTWPsfWjMIYD',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12671,7 +12671,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::TVYx0ylJ5PPTa0kW' => 
+    'generated::wBbzOdmGosrsmmfs' => 
     array (
       'methods' => 
       array (
@@ -12693,7 +12693,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::TVYx0ylJ5PPTa0kW',
+        'as' => 'generated::wBbzOdmGosrsmmfs',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12709,7 +12709,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::DnxdwQTS132RaMqN' => 
+    'generated::EbwKzMD2IJ2ZYCiZ' => 
     array (
       'methods' => 
       array (
@@ -12730,7 +12730,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::DnxdwQTS132RaMqN',
+        'as' => 'generated::EbwKzMD2IJ2ZYCiZ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12746,7 +12746,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::ofMIM8USun4Odvp4' => 
+    'generated::CfjrRTXnLLc74dYC' => 
     array (
       'methods' => 
       array (
@@ -12768,7 +12768,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::ofMIM8USun4Odvp4',
+        'as' => 'generated::CfjrRTXnLLc74dYC',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12784,7 +12784,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::91e4SYu4jTlzNaqC' => 
+    'generated::mQ9rlzrHjPz7GkSw' => 
     array (
       'methods' => 
       array (
@@ -12806,7 +12806,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::91e4SYu4jTlzNaqC',
+        'as' => 'generated::mQ9rlzrHjPz7GkSw',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12822,7 +12822,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::WIdycVUiqaiTkCR7' => 
+    'generated::Sfk5RmIJXoW2U7zi' => 
     array (
       'methods' => 
       array (
@@ -12844,7 +12844,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::WIdycVUiqaiTkCR7',
+        'as' => 'generated::Sfk5RmIJXoW2U7zi',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12860,7 +12860,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::GJETFj3PMH8VdxY9' => 
+    'generated::o45kUl0JBbVkxPyM' => 
     array (
       'methods' => 
       array (
@@ -12882,7 +12882,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::GJETFj3PMH8VdxY9',
+        'as' => 'generated::o45kUl0JBbVkxPyM',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12898,7 +12898,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::qn8p1eeZykk2HRxN' => 
+    'generated::QO2Zd4argrHF7kyr' => 
     array (
       'methods' => 
       array (
@@ -12920,7 +12920,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::qn8p1eeZykk2HRxN',
+        'as' => 'generated::QO2Zd4argrHF7kyr',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12936,7 +12936,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::HoJeOPw7JuVwXrJr' => 
+    'generated::TN6txzSv01GLwal3' => 
     array (
       'methods' => 
       array (
@@ -12958,7 +12958,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::HoJeOPw7JuVwXrJr',
+        'as' => 'generated::TN6txzSv01GLwal3',
       ),
       'fallback' => false,
       'defaults' => 
@@ -12974,7 +12974,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::X7iSRPa96uyNikRo' => 
+    'generated::bUdpq2wxm8XRtnze' => 
     array (
       'methods' => 
       array (
@@ -12996,7 +12996,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::X7iSRPa96uyNikRo',
+        'as' => 'generated::bUdpq2wxm8XRtnze',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13012,7 +13012,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::h0acI5XZOI0gNL9Z' => 
+    'generated::kg4tBYGzxQart4lt' => 
     array (
       'methods' => 
       array (
@@ -13034,7 +13034,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::h0acI5XZOI0gNL9Z',
+        'as' => 'generated::kg4tBYGzxQart4lt',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13050,7 +13050,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::xOMXTZ74w4U1bwOO' => 
+    'generated::lIK7ArQA5EPEKnZX' => 
     array (
       'methods' => 
       array (
@@ -13072,7 +13072,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::xOMXTZ74w4U1bwOO',
+        'as' => 'generated::lIK7ArQA5EPEKnZX',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13088,7 +13088,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::jeWhc35wsCcN9NFD' => 
+    'generated::jKma0Q7R9ae1JGGX' => 
     array (
       'methods' => 
       array (
@@ -13110,7 +13110,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::jeWhc35wsCcN9NFD',
+        'as' => 'generated::jKma0Q7R9ae1JGGX',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13126,7 +13126,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::CubWXnbntzoCXYLT' => 
+    'generated::XRFg7Z8Z6T9amjD5' => 
     array (
       'methods' => 
       array (
@@ -13148,7 +13148,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::CubWXnbntzoCXYLT',
+        'as' => 'generated::XRFg7Z8Z6T9amjD5',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13164,7 +13164,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::3QVPahrdAOy4KSHd' => 
+    'generated::FRl0NPbhAbeTvMf1' => 
     array (
       'methods' => 
       array (
@@ -13185,7 +13185,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::3QVPahrdAOy4KSHd',
+        'as' => 'generated::FRl0NPbhAbeTvMf1',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13201,7 +13201,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Q4FyMNmWYMICjVNl' => 
+    'generated::4ZJJWSxJyThZWZVf' => 
     array (
       'methods' => 
       array (
@@ -13222,7 +13222,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Q4FyMNmWYMICjVNl',
+        'as' => 'generated::4ZJJWSxJyThZWZVf',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13238,7 +13238,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::9BwLy8Rh2A4OmssW' => 
+    'generated::AvE7m18UaDmQAAGU' => 
     array (
       'methods' => 
       array (
@@ -13260,7 +13260,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::9BwLy8Rh2A4OmssW',
+        'as' => 'generated::AvE7m18UaDmQAAGU',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13276,7 +13276,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::7nYXRh5Kq9CyWsm9' => 
+    'generated::NgB4QJhtMnBwuJb4' => 
     array (
       'methods' => 
       array (
@@ -13298,7 +13298,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::7nYXRh5Kq9CyWsm9',
+        'as' => 'generated::NgB4QJhtMnBwuJb4',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13314,7 +13314,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::btO8xv9WqALETZAB' => 
+    'generated::lxU8UOg1j2tYz1SW' => 
     array (
       'methods' => 
       array (
@@ -13336,7 +13336,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::btO8xv9WqALETZAB',
+        'as' => 'generated::lxU8UOg1j2tYz1SW',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13352,7 +13352,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::B68oTCaFWnVtYWK2' => 
+    'generated::S6oMzKGYACETAJWK' => 
     array (
       'methods' => 
       array (
@@ -13374,7 +13374,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::B68oTCaFWnVtYWK2',
+        'as' => 'generated::S6oMzKGYACETAJWK',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13390,7 +13390,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::dmVHaZVnI3GF4bUw' => 
+    'generated::xI8ZCjWZqZBr5gql' => 
     array (
       'methods' => 
       array (
@@ -13411,7 +13411,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::dmVHaZVnI3GF4bUw',
+        'as' => 'generated::xI8ZCjWZqZBr5gql',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13427,7 +13427,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bOltk07msNp68sxw' => 
+    'generated::QSOuZlLkv45EihSb' => 
     array (
       'methods' => 
       array (
@@ -13449,7 +13449,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bOltk07msNp68sxw',
+        'as' => 'generated::QSOuZlLkv45EihSb',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13465,7 +13465,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::xlEHeIp6xmlnwfte' => 
+    'generated::AsufL3Kk4olsPrFU' => 
     array (
       'methods' => 
       array (
@@ -13487,7 +13487,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::xlEHeIp6xmlnwfte',
+        'as' => 'generated::AsufL3Kk4olsPrFU',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13503,7 +13503,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bpm88hPPlLoMhHac' => 
+    'generated::uwoBO4W1EOpJgVhJ' => 
     array (
       'methods' => 
       array (
@@ -13525,7 +13525,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bpm88hPPlLoMhHac',
+        'as' => 'generated::uwoBO4W1EOpJgVhJ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13541,7 +13541,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::rJ2MRuQLacZyHAge' => 
+    'generated::wEmxDj1nfxViWPst' => 
     array (
       'methods' => 
       array (
@@ -13563,7 +13563,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::rJ2MRuQLacZyHAge',
+        'as' => 'generated::wEmxDj1nfxViWPst',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13579,7 +13579,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::VbXzsJmIiIvVOhET' => 
+    'generated::mWmt3tw4uxh16vmE' => 
     array (
       'methods' => 
       array (
@@ -13601,7 +13601,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::VbXzsJmIiIvVOhET',
+        'as' => 'generated::mWmt3tw4uxh16vmE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13617,7 +13617,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::xZAWmKHKPRW2BmGA' => 
+    'generated::JB7zEMNFHr9RVLyl' => 
     array (
       'methods' => 
       array (
@@ -13639,7 +13639,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::xZAWmKHKPRW2BmGA',
+        'as' => 'generated::JB7zEMNFHr9RVLyl',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13655,7 +13655,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::vXnGJXvMD7ZX9rSW' => 
+    'generated::iW6dcwMNexQ8Hihb' => 
     array (
       'methods' => 
       array (
@@ -13676,7 +13676,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::vXnGJXvMD7ZX9rSW',
+        'as' => 'generated::iW6dcwMNexQ8Hihb',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13692,7 +13692,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::J2Agq1OSUy86xcU1' => 
+    'generated::FTmo3r65CQn5SvVQ' => 
     array (
       'methods' => 
       array (
@@ -13714,7 +13714,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::J2Agq1OSUy86xcU1',
+        'as' => 'generated::FTmo3r65CQn5SvVQ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13730,7 +13730,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::znJACuLyvjmbwJkj' => 
+    'generated::grLleND8TIs0P9b6' => 
     array (
       'methods' => 
       array (
@@ -13752,7 +13752,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::znJACuLyvjmbwJkj',
+        'as' => 'generated::grLleND8TIs0P9b6',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13768,7 +13768,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::bEGuIXdXxfCKpIXb' => 
+    'generated::GDCUBjsAzifIdbIf' => 
     array (
       'methods' => 
       array (
@@ -13790,7 +13790,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::bEGuIXdXxfCKpIXb',
+        'as' => 'generated::GDCUBjsAzifIdbIf',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13806,7 +13806,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Pm6PekvJ4ZeSWNLc' => 
+    'generated::GnNlMXjx9mqWg2iA' => 
     array (
       'methods' => 
       array (
@@ -13828,7 +13828,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Pm6PekvJ4ZeSWNLc',
+        'as' => 'generated::GnNlMXjx9mqWg2iA',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13844,7 +13844,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::I4iitaYfvJZbwDOa' => 
+    'generated::B7pD1H5s5BiUB7w8' => 
     array (
       'methods' => 
       array (
@@ -13865,7 +13865,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::I4iitaYfvJZbwDOa',
+        'as' => 'generated::B7pD1H5s5BiUB7w8',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13881,7 +13881,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::aUsW6ZZFSGw4cJSM' => 
+    'generated::Sr66iEYhEZ0OOfBu' => 
     array (
       'methods' => 
       array (
@@ -13902,7 +13902,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::aUsW6ZZFSGw4cJSM',
+        'as' => 'generated::Sr66iEYhEZ0OOfBu',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13918,7 +13918,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::270ldUrR5eJ1Bk65' => 
+    'generated::GOhcC0OmnXtUlDw9' => 
     array (
       'methods' => 
       array (
@@ -13939,7 +13939,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::270ldUrR5eJ1Bk65',
+        'as' => 'generated::GOhcC0OmnXtUlDw9',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13955,7 +13955,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::YnqMai5OXXZ0ukdO' => 
+    'generated::SkM4qvHMseqahBXu' => 
     array (
       'methods' => 
       array (
@@ -13977,7 +13977,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::YnqMai5OXXZ0ukdO',
+        'as' => 'generated::SkM4qvHMseqahBXu',
       ),
       'fallback' => false,
       'defaults' => 
@@ -13993,7 +13993,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::1NRmrMimDW2NjL4w' => 
+    'generated::PWTOckEcfI3Z9wiF' => 
     array (
       'methods' => 
       array (
@@ -14015,7 +14015,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::1NRmrMimDW2NjL4w',
+        'as' => 'generated::PWTOckEcfI3Z9wiF',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14031,7 +14031,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::80ZUYPW4Bcr8MFJO' => 
+    'generated::CvXVMC5UlV7XmDC9' => 
     array (
       'methods' => 
       array (
@@ -14052,7 +14052,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::80ZUYPW4Bcr8MFJO',
+        'as' => 'generated::CvXVMC5UlV7XmDC9',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14068,7 +14068,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::WIS8L964mzxmOD51' => 
+    'generated::Wfk9ipvqgI23zKWh' => 
     array (
       'methods' => 
       array (
@@ -14089,7 +14089,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::WIS8L964mzxmOD51',
+        'as' => 'generated::Wfk9ipvqgI23zKWh',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14105,7 +14105,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::QpAQgmC1QYqplxuR' => 
+    'generated::iuSjUMMFibTtCvZE' => 
     array (
       'methods' => 
       array (
@@ -14127,7 +14127,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::QpAQgmC1QYqplxuR',
+        'as' => 'generated::iuSjUMMFibTtCvZE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14143,7 +14143,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::S9J0sEIuUqCXhrk5' => 
+    'generated::4sgqx243H9ltVJlO' => 
     array (
       'methods' => 
       array (
@@ -14165,7 +14165,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::S9J0sEIuUqCXhrk5',
+        'as' => 'generated::4sgqx243H9ltVJlO',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14181,7 +14181,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::Ey9ICSXiLG3xGzV5' => 
+    'generated::ydskLpddE2AQKAXX' => 
     array (
       'methods' => 
       array (
@@ -14203,7 +14203,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::Ey9ICSXiLG3xGzV5',
+        'as' => 'generated::ydskLpddE2AQKAXX',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14219,7 +14219,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::07RqyToBh3w8Zbob' => 
+    'generated::LD3SQNGittwGGoEv' => 
     array (
       'methods' => 
       array (
@@ -14241,7 +14241,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::07RqyToBh3w8Zbob',
+        'as' => 'generated::LD3SQNGittwGGoEv',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14257,7 +14257,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::yn7EmzBbRw1YJwkP' => 
+    'generated::K40QRt5qvd94aEkB' => 
     array (
       'methods' => 
       array (
@@ -14278,7 +14278,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::yn7EmzBbRw1YJwkP',
+        'as' => 'generated::K40QRt5qvd94aEkB',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14294,7 +14294,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::MYYt5WVZQLbOcyQE' => 
+    'generated::HauD3jS8mDLn43ry' => 
     array (
       'methods' => 
       array (
@@ -14315,7 +14315,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::MYYt5WVZQLbOcyQE',
+        'as' => 'generated::HauD3jS8mDLn43ry',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14331,7 +14331,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::WfBOcJAJf9yIBc7e' => 
+    'generated::PDSrrTpxQ1FZcBdj' => 
     array (
       'methods' => 
       array (
@@ -14353,7 +14353,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::WfBOcJAJf9yIBc7e',
+        'as' => 'generated::PDSrrTpxQ1FZcBdj',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14369,7 +14369,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::8KHWquOPrl5DXpul' => 
+    'generated::BXNfE6qJanRLTRH7' => 
     array (
       'methods' => 
       array (
@@ -14391,7 +14391,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::8KHWquOPrl5DXpul',
+        'as' => 'generated::BXNfE6qJanRLTRH7',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14407,7 +14407,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::RgG5Kt85uibUboQf' => 
+    'generated::cJ9iyqPSoPzAHkVK' => 
     array (
       'methods' => 
       array (
@@ -14429,7 +14429,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::RgG5Kt85uibUboQf',
+        'as' => 'generated::cJ9iyqPSoPzAHkVK',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14445,7 +14445,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::K7ocpwRaW6kUlTT6' => 
+    'generated::v2A66nKeaJMZBsth' => 
     array (
       'methods' => 
       array (
@@ -14467,7 +14467,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::K7ocpwRaW6kUlTT6',
+        'as' => 'generated::v2A66nKeaJMZBsth',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14483,7 +14483,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::AEVXqUgWlI8WJnfc' => 
+    'generated::JZMdbUxA2BOhjO8C' => 
     array (
       'methods' => 
       array (
@@ -14504,7 +14504,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::AEVXqUgWlI8WJnfc',
+        'as' => 'generated::JZMdbUxA2BOhjO8C',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14520,7 +14520,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::d53dJA7CJjIjZF94' => 
+    'generated::s57URBffeyoByIPQ' => 
     array (
       'methods' => 
       array (
@@ -14542,7 +14542,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::d53dJA7CJjIjZF94',
+        'as' => 'generated::s57URBffeyoByIPQ',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14558,7 +14558,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::kEM2lZV0UnAJ0DeI' => 
+    'generated::xP4wILi89EzxOaiB' => 
     array (
       'methods' => 
       array (
@@ -14580,7 +14580,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::kEM2lZV0UnAJ0DeI',
+        'as' => 'generated::xP4wILi89EzxOaiB',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14596,7 +14596,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::wbqvA57GLxVc3xLf' => 
+    'generated::CJ8hEfdKFuWdI5tI' => 
     array (
       'methods' => 
       array (
@@ -14617,7 +14617,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::wbqvA57GLxVc3xLf',
+        'as' => 'generated::CJ8hEfdKFuWdI5tI',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14633,7 +14633,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::FaA40DKyuYFveSkT' => 
+    'generated::Yal6jAXpJyFQXu0x' => 
     array (
       'methods' => 
       array (
@@ -14654,7 +14654,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::FaA40DKyuYFveSkT',
+        'as' => 'generated::Yal6jAXpJyFQXu0x',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14670,7 +14670,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::rtlbbA0pcKCc0PO8' => 
+    'generated::WTdyYKpKEqS4YH01' => 
     array (
       'methods' => 
       array (
@@ -14692,7 +14692,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::rtlbbA0pcKCc0PO8',
+        'as' => 'generated::WTdyYKpKEqS4YH01',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14708,7 +14708,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::pUx2Yu7OwE2AQD3c' => 
+    'generated::qcRo3xzVivAkWhtE' => 
     array (
       'methods' => 
       array (
@@ -14730,7 +14730,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::pUx2Yu7OwE2AQD3c',
+        'as' => 'generated::qcRo3xzVivAkWhtE',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14746,7 +14746,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::RDFkk0Jwgu6bHyrv' => 
+    'generated::bJ62CxvBGdawC9Uh' => 
     array (
       'methods' => 
       array (
@@ -14767,7 +14767,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::RDFkk0Jwgu6bHyrv',
+        'as' => 'generated::bJ62CxvBGdawC9Uh',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14783,7 +14783,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::oJUx3EGjhTqg9gjh' => 
+    'generated::bVX4CrifBvFsn6XH' => 
     array (
       'methods' => 
       array (
@@ -14805,7 +14805,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::oJUx3EGjhTqg9gjh',
+        'as' => 'generated::bVX4CrifBvFsn6XH',
       ),
       'fallback' => false,
       'defaults' => 
@@ -14845,5038 +14845,44 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
       ),
-      'customer_categories.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customer_categories/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_categories.create',
-          'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@create',
-          'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_categories.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'customer_categories',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_categories.store',
-          'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@store',
-          'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_categories.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customer_categories/{customer_category}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_categories.show',
-          'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@show',
-          'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_categories.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customer_categories/{customer_category}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_categories.edit',
-          'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@edit',
-          'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_categories.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'customer_categories/{customer_category}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_categories.update',
-          'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@update',
-          'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_categories.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'customer_categories/{customer_category}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_categories.destroy',
-          'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@destroy',
-          'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_areas.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customer_areas',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_areas.index',
-          'uses' => 'App\\Http\\Controllers\\CustomerAreasController@index',
-          'controller' => 'App\\Http\\Controllers\\CustomerAreasController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_areas.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customer_areas/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_areas.create',
-          'uses' => 'App\\Http\\Controllers\\CustomerAreasController@create',
-          'controller' => 'App\\Http\\Controllers\\CustomerAreasController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_areas.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'customer_areas',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_areas.store',
-          'uses' => 'App\\Http\\Controllers\\CustomerAreasController@store',
-          'controller' => 'App\\Http\\Controllers\\CustomerAreasController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_areas.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customer_areas/{customer_area}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_areas.show',
-          'uses' => 'App\\Http\\Controllers\\CustomerAreasController@show',
-          'controller' => 'App\\Http\\Controllers\\CustomerAreasController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_areas.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customer_areas/{customer_area}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_areas.edit',
-          'uses' => 'App\\Http\\Controllers\\CustomerAreasController@edit',
-          'controller' => 'App\\Http\\Controllers\\CustomerAreasController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_areas.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'customer_areas/{customer_area}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_areas.update',
-          'uses' => 'App\\Http\\Controllers\\CustomerAreasController@update',
-          'controller' => 'App\\Http\\Controllers\\CustomerAreasController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customer_areas.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'customer_areas/{customer_area}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'customer_areas.destroy',
-          'uses' => 'App\\Http\\Controllers\\CustomerAreasController@destroy',
-          'controller' => 'App\\Http\\Controllers\\CustomerAreasController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouses.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouses',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'warehouses.index',
-          'uses' => 'App\\Http\\Controllers\\WarehouseController@index',
-          'controller' => 'App\\Http\\Controllers\\WarehouseController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouses.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouses/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'warehouses.create',
-          'uses' => 'App\\Http\\Controllers\\WarehouseController@create',
-          'controller' => 'App\\Http\\Controllers\\WarehouseController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouses.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'warehouses',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'warehouses.store',
-          'uses' => 'App\\Http\\Controllers\\WarehouseController@store',
-          'controller' => 'App\\Http\\Controllers\\WarehouseController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouses.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouses/{warehouse}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'warehouses.show',
-          'uses' => 'App\\Http\\Controllers\\WarehouseController@show',
-          'controller' => 'App\\Http\\Controllers\\WarehouseController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouses.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouses/{warehouse}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'warehouses.edit',
-          'uses' => 'App\\Http\\Controllers\\WarehouseController@edit',
-          'controller' => 'App\\Http\\Controllers\\WarehouseController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouses.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'warehouses/{warehouse}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'warehouses.update',
-          'uses' => 'App\\Http\\Controllers\\WarehouseController@update',
-          'controller' => 'App\\Http\\Controllers\\WarehouseController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouses.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'warehouses/{warehouse}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'warehouses.destroy',
-          'uses' => 'App\\Http\\Controllers\\WarehouseController@destroy',
-          'controller' => 'App\\Http\\Controllers\\WarehouseController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'supliers.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'supliers',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'supliers.index',
-          'uses' => 'App\\Http\\Controllers\\SuppliersController@index',
-          'controller' => 'App\\Http\\Controllers\\SuppliersController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'supliers.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'supliers/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'supliers.create',
-          'uses' => 'App\\Http\\Controllers\\SuppliersController@create',
-          'controller' => 'App\\Http\\Controllers\\SuppliersController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'supliers.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'supliers',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'supliers.store',
-          'uses' => 'App\\Http\\Controllers\\SuppliersController@store',
-          'controller' => 'App\\Http\\Controllers\\SuppliersController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'supliers.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'supliers/{suplier}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'supliers.show',
-          'uses' => 'App\\Http\\Controllers\\SuppliersController@show',
-          'controller' => 'App\\Http\\Controllers\\SuppliersController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'supliers.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'supliers/{suplier}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'supliers.edit',
-          'uses' => 'App\\Http\\Controllers\\SuppliersController@edit',
-          'controller' => 'App\\Http\\Controllers\\SuppliersController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'supliers.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'supliers/{suplier}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'supliers.update',
-          'uses' => 'App\\Http\\Controllers\\SuppliersController@update',
-          'controller' => 'App\\Http\\Controllers\\SuppliersController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'supliers.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'supliers/{suplier}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'supliers.destroy',
-          'uses' => 'App\\Http\\Controllers\\SuppliersController@destroy',
-          'controller' => 'App\\Http\\Controllers\\SuppliersController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'jobs.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'jobs',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'jobs.index',
-          'uses' => 'App\\Http\\Controllers\\JobController@index',
-          'controller' => 'App\\Http\\Controllers\\JobController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'jobs.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'jobs/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'jobs.create',
-          'uses' => 'App\\Http\\Controllers\\JobController@create',
-          'controller' => 'App\\Http\\Controllers\\JobController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'jobs.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'jobs',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'jobs.store',
-          'uses' => 'App\\Http\\Controllers\\JobController@store',
-          'controller' => 'App\\Http\\Controllers\\JobController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'jobs.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'jobs/{job}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'jobs.show',
-          'uses' => 'App\\Http\\Controllers\\JobController@show',
-          'controller' => 'App\\Http\\Controllers\\JobController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'jobs.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'jobs/{job}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'jobs.edit',
-          'uses' => 'App\\Http\\Controllers\\JobController@edit',
-          'controller' => 'App\\Http\\Controllers\\JobController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'jobs.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'jobs/{job}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'jobs.update',
-          'uses' => 'App\\Http\\Controllers\\JobController@update',
-          'controller' => 'App\\Http\\Controllers\\JobController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'jobs.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'jobs/{job}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'jobs.destroy',
-          'uses' => 'App\\Http\\Controllers\\JobController@destroy',
-          'controller' => 'App\\Http\\Controllers\\JobController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'roles.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'roles',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'roles.index',
-          'uses' => 'App\\Http\\Controllers\\RoleController@index',
-          'controller' => 'App\\Http\\Controllers\\RoleController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'roles.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'roles/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'roles.create',
-          'uses' => 'App\\Http\\Controllers\\RoleController@create',
-          'controller' => 'App\\Http\\Controllers\\RoleController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'roles.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'roles',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'roles.store',
-          'uses' => 'App\\Http\\Controllers\\RoleController@store',
-          'controller' => 'App\\Http\\Controllers\\RoleController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'roles.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'roles/{role}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'roles.show',
-          'uses' => 'App\\Http\\Controllers\\RoleController@show',
-          'controller' => 'App\\Http\\Controllers\\RoleController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'roles.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'roles/{role}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'roles.edit',
-          'uses' => 'App\\Http\\Controllers\\RoleController@edit',
-          'controller' => 'App\\Http\\Controllers\\RoleController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'roles.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'roles/{role}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'roles.update',
-          'uses' => 'App\\Http\\Controllers\\RoleController@update',
-          'controller' => 'App\\Http\\Controllers\\RoleController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'roles.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'roles/{role}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'roles.destroy',
-          'uses' => 'App\\Http\\Controllers\\RoleController@destroy',
-          'controller' => 'App\\Http\\Controllers\\RoleController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'users.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'users',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'users.index',
-          'uses' => 'App\\Http\\Controllers\\UserController@index',
-          'controller' => 'App\\Http\\Controllers\\UserController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'users.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'users/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'users.create',
-          'uses' => 'App\\Http\\Controllers\\UserController@create',
-          'controller' => 'App\\Http\\Controllers\\UserController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'users.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'users',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'users.store',
-          'uses' => 'App\\Http\\Controllers\\UserController@store',
-          'controller' => 'App\\Http\\Controllers\\UserController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'users.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'users/{user}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'users.show',
-          'uses' => 'App\\Http\\Controllers\\UserController@show',
-          'controller' => 'App\\Http\\Controllers\\UserController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'users.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'users/{user}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'users.edit',
-          'uses' => 'App\\Http\\Controllers\\UserController@edit',
-          'controller' => 'App\\Http\\Controllers\\UserController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'users.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'users/{user}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'users.update',
-          'uses' => 'App\\Http\\Controllers\\UserController@update',
-          'controller' => 'App\\Http\\Controllers\\UserController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'users.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'users/{user}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'users.destroy',
-          'uses' => 'App\\Http\\Controllers\\UserController@destroy',
-          'controller' => 'App\\Http\\Controllers\\UserController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_materials.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_materials',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_materials.index',
-          'uses' => 'App\\Http\\Controllers\\MaterialController@index',
-          'controller' => 'App\\Http\\Controllers\\MaterialController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_materials.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_materials/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_materials.create',
-          'uses' => 'App\\Http\\Controllers\\MaterialController@create',
-          'controller' => 'App\\Http\\Controllers\\MaterialController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_materials.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'product_materials',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_materials.store',
-          'uses' => 'App\\Http\\Controllers\\MaterialController@store',
-          'controller' => 'App\\Http\\Controllers\\MaterialController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_materials.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_materials/{product_material}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_materials.show',
-          'uses' => 'App\\Http\\Controllers\\MaterialController@show',
-          'controller' => 'App\\Http\\Controllers\\MaterialController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_materials.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_materials/{product_material}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_materials.edit',
-          'uses' => 'App\\Http\\Controllers\\MaterialController@edit',
-          'controller' => 'App\\Http\\Controllers\\MaterialController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_materials.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'product_materials/{product_material}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_materials.update',
-          'uses' => 'App\\Http\\Controllers\\MaterialController@update',
-          'controller' => 'App\\Http\\Controllers\\MaterialController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_materials.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'product_materials/{product_material}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_materials.destroy',
-          'uses' => 'App\\Http\\Controllers\\MaterialController@destroy',
-          'controller' => 'App\\Http\\Controllers\\MaterialController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_materials.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_materials',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_materials.index',
-          'uses' => 'App\\Http\\Controllers\\SubMaterialController@index',
-          'controller' => 'App\\Http\\Controllers\\SubMaterialController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_materials.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_materials/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_materials.create',
-          'uses' => 'App\\Http\\Controllers\\SubMaterialController@create',
-          'controller' => 'App\\Http\\Controllers\\SubMaterialController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_materials.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'product_sub_materials',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_materials.store',
-          'uses' => 'App\\Http\\Controllers\\SubMaterialController@store',
-          'controller' => 'App\\Http\\Controllers\\SubMaterialController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_materials.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_materials/{product_sub_material}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_materials.show',
-          'uses' => 'App\\Http\\Controllers\\SubMaterialController@show',
-          'controller' => 'App\\Http\\Controllers\\SubMaterialController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_materials.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_materials/{product_sub_material}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_materials.edit',
-          'uses' => 'App\\Http\\Controllers\\SubMaterialController@edit',
-          'controller' => 'App\\Http\\Controllers\\SubMaterialController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_materials.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'product_sub_materials/{product_sub_material}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_materials.update',
-          'uses' => 'App\\Http\\Controllers\\SubMaterialController@update',
-          'controller' => 'App\\Http\\Controllers\\SubMaterialController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_materials.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'product_sub_materials/{product_sub_material}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_materials.destroy',
-          'uses' => 'App\\Http\\Controllers\\SubMaterialController@destroy',
-          'controller' => 'App\\Http\\Controllers\\SubMaterialController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_uoms.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_uoms',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_uoms.index',
-          'uses' => 'App\\Http\\Controllers\\UomController@index',
-          'controller' => 'App\\Http\\Controllers\\UomController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_uoms.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_uoms/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_uoms.create',
-          'uses' => 'App\\Http\\Controllers\\UomController@create',
-          'controller' => 'App\\Http\\Controllers\\UomController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_uoms.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'product_uoms',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_uoms.store',
-          'uses' => 'App\\Http\\Controllers\\UomController@store',
-          'controller' => 'App\\Http\\Controllers\\UomController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_uoms.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_uoms/{product_uom}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_uoms.show',
-          'uses' => 'App\\Http\\Controllers\\UomController@show',
-          'controller' => 'App\\Http\\Controllers\\UomController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_uoms.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_uoms/{product_uom}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_uoms.edit',
-          'uses' => 'App\\Http\\Controllers\\UomController@edit',
-          'controller' => 'App\\Http\\Controllers\\UomController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_uoms.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'product_uoms/{product_uom}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_uoms.update',
-          'uses' => 'App\\Http\\Controllers\\UomController@update',
-          'controller' => 'App\\Http\\Controllers\\UomController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_uoms.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'product_uoms/{product_uom}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_uoms.destroy',
-          'uses' => 'App\\Http\\Controllers\\UomController@destroy',
-          'controller' => 'App\\Http\\Controllers\\UomController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_types.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_types',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_types.index',
-          'uses' => 'App\\Http\\Controllers\\SubTypeController@index',
-          'controller' => 'App\\Http\\Controllers\\SubTypeController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_types.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_types/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_types.create',
-          'uses' => 'App\\Http\\Controllers\\SubTypeController@create',
-          'controller' => 'App\\Http\\Controllers\\SubTypeController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_types.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'product_sub_types',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_types.store',
-          'uses' => 'App\\Http\\Controllers\\SubTypeController@store',
-          'controller' => 'App\\Http\\Controllers\\SubTypeController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_types.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_types/{product_sub_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_types.show',
-          'uses' => 'App\\Http\\Controllers\\SubTypeController@show',
-          'controller' => 'App\\Http\\Controllers\\SubTypeController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_types.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'product_sub_types/{product_sub_type}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_types.edit',
-          'uses' => 'App\\Http\\Controllers\\SubTypeController@edit',
-          'controller' => 'App\\Http\\Controllers\\SubTypeController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_types.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'product_sub_types/{product_sub_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_types.update',
-          'uses' => 'App\\Http\\Controllers\\SubTypeController@update',
-          'controller' => 'App\\Http\\Controllers\\SubTypeController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'product_sub_types.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'product_sub_types/{product_sub_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'product_sub_types.destroy',
-          'uses' => 'App\\Http\\Controllers\\SubTypeController@destroy',
-          'controller' => 'App\\Http\\Controllers\\SubTypeController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'products.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'products',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'products.index',
-          'uses' => 'App\\Http\\Controllers\\ProductController@index',
-          'controller' => 'App\\Http\\Controllers\\ProductController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'products.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'products/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'products.create',
-          'uses' => 'App\\Http\\Controllers\\ProductController@create',
-          'controller' => 'App\\Http\\Controllers\\ProductController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'products.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'products',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'products.store',
-          'uses' => 'App\\Http\\Controllers\\ProductController@store',
-          'controller' => 'App\\Http\\Controllers\\ProductController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'products.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'products/{product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'products.show',
-          'uses' => 'App\\Http\\Controllers\\ProductController@show',
-          'controller' => 'App\\Http\\Controllers\\ProductController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'products.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'products/{product}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'products.edit',
-          'uses' => 'App\\Http\\Controllers\\ProductController@edit',
-          'controller' => 'App\\Http\\Controllers\\ProductController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'products.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'products/{product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'products.update',
-          'uses' => 'App\\Http\\Controllers\\ProductController@update',
-          'controller' => 'App\\Http\\Controllers\\ProductController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'products.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'products/{product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'products.destroy',
-          'uses' => 'App\\Http\\Controllers\\ProductController@destroy',
-          'controller' => 'App\\Http\\Controllers\\ProductController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'second_product.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'second_product',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'second_product.index',
-          'uses' => 'App\\Http\\Controllers\\SecondProductController@index',
-          'controller' => 'App\\Http\\Controllers\\SecondProductController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'second_product.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'second_product/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'second_product.create',
-          'uses' => 'App\\Http\\Controllers\\SecondProductController@create',
-          'controller' => 'App\\Http\\Controllers\\SecondProductController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'second_product.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'second_product',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'second_product.store',
-          'uses' => 'App\\Http\\Controllers\\SecondProductController@store',
-          'controller' => 'App\\Http\\Controllers\\SecondProductController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'second_product.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'second_product/{second_product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'second_product.show',
-          'uses' => 'App\\Http\\Controllers\\SecondProductController@show',
-          'controller' => 'App\\Http\\Controllers\\SecondProductController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'second_product.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'second_product/{second_product}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'second_product.edit',
-          'uses' => 'App\\Http\\Controllers\\SecondProductController@edit',
-          'controller' => 'App\\Http\\Controllers\\SecondProductController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'second_product.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'second_product/{second_product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'second_product.update',
-          'uses' => 'App\\Http\\Controllers\\SecondProductController@update',
-          'controller' => 'App\\Http\\Controllers\\SecondProductController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'second_product.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'second_product/{second_product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'second_product.destroy',
-          'uses' => 'App\\Http\\Controllers\\SecondProductController@destroy',
-          'controller' => 'App\\Http\\Controllers\\SecondProductController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'motorcycle.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'motorcycle',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'motorcycle.index',
-          'uses' => 'App\\Http\\Controllers\\MotorController@index',
-          'controller' => 'App\\Http\\Controllers\\MotorController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'motorcycle.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'motorcycle/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'motorcycle.create',
-          'uses' => 'App\\Http\\Controllers\\MotorController@create',
-          'controller' => 'App\\Http\\Controllers\\MotorController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'motorcycle.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'motorcycle',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'motorcycle.store',
-          'uses' => 'App\\Http\\Controllers\\MotorController@store',
-          'controller' => 'App\\Http\\Controllers\\MotorController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'motorcycle.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'motorcycle/{motorcycle}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'motorcycle.show',
-          'uses' => 'App\\Http\\Controllers\\MotorController@show',
-          'controller' => 'App\\Http\\Controllers\\MotorController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'motorcycle.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'motorcycle/{motorcycle}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'motorcycle.edit',
-          'uses' => 'App\\Http\\Controllers\\MotorController@edit',
-          'controller' => 'App\\Http\\Controllers\\MotorController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'motorcycle.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'motorcycle/{motorcycle}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'motorcycle.update',
-          'uses' => 'App\\Http\\Controllers\\MotorController@update',
-          'controller' => 'App\\Http\\Controllers\\MotorController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'motorcycle.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'motorcycle/{motorcycle}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'motorcycle.destroy',
-          'uses' => 'App\\Http\\Controllers\\MotorController@destroy',
-          'controller' => 'App\\Http\\Controllers\\MotorController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'cars.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'cars',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'cars.index',
-          'uses' => 'App\\Http\\Controllers\\CarController@index',
-          'controller' => 'App\\Http\\Controllers\\CarController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'cars.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'cars/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'cars.create',
-          'uses' => 'App\\Http\\Controllers\\CarController@create',
-          'controller' => 'App\\Http\\Controllers\\CarController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'cars.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'cars',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'cars.store',
-          'uses' => 'App\\Http\\Controllers\\CarController@store',
-          'controller' => 'App\\Http\\Controllers\\CarController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'cars.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'cars/{car}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'cars.show',
-          'uses' => 'App\\Http\\Controllers\\CarController@show',
-          'controller' => 'App\\Http\\Controllers\\CarController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'cars.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'cars/{car}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'cars.edit',
-          'uses' => 'App\\Http\\Controllers\\CarController@edit',
-          'controller' => 'App\\Http\\Controllers\\CarController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'cars.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'cars/{car}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'cars.update',
-          'uses' => 'App\\Http\\Controllers\\CarController@update',
-          'controller' => 'App\\Http\\Controllers\\CarController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'cars.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'cars/{car}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'cars.destroy',
-          'uses' => 'App\\Http\\Controllers\\CarController@destroy',
-          'controller' => 'App\\Http\\Controllers\\CarController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'trade_in.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'trade_in',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'trade_in.index',
-          'uses' => 'App\\Http\\Controllers\\ProductTradeInController@index',
-          'controller' => 'App\\Http\\Controllers\\ProductTradeInController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'trade_in.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'trade_in/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'trade_in.create',
-          'uses' => 'App\\Http\\Controllers\\ProductTradeInController@create',
-          'controller' => 'App\\Http\\Controllers\\ProductTradeInController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'trade_in.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'trade_in',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'trade_in.store',
-          'uses' => 'App\\Http\\Controllers\\ProductTradeInController@store',
-          'controller' => 'App\\Http\\Controllers\\ProductTradeInController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'trade_in.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'trade_in/{trade_in}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'trade_in.show',
-          'uses' => 'App\\Http\\Controllers\\ProductTradeInController@show',
-          'controller' => 'App\\Http\\Controllers\\ProductTradeInController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'trade_in.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'trade_in/{trade_in}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'trade_in.edit',
-          'uses' => 'App\\Http\\Controllers\\ProductTradeInController@edit',
-          'controller' => 'App\\Http\\Controllers\\ProductTradeInController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'trade_in.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'trade_in/{trade_in}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'trade_in.update',
-          'uses' => 'App\\Http\\Controllers\\ProductTradeInController@update',
-          'controller' => 'App\\Http\\Controllers\\ProductTradeInController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'trade_in.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'trade_in/{trade_in}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-            2 => 'can:isSuperAdmin',
-          ),
-          'as' => 'trade_in.destroy',
-          'uses' => 'App\\Http\\Controllers\\ProductTradeInController@destroy',
-          'controller' => 'App\\Http\\Controllers\\ProductTradeInController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account.index',
-          'uses' => 'App\\Http\\Controllers\\AccountController@index',
-          'controller' => 'App\\Http\\Controllers\\AccountController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account.create',
-          'uses' => 'App\\Http\\Controllers\\AccountController@create',
-          'controller' => 'App\\Http\\Controllers\\AccountController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'account',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account.store',
-          'uses' => 'App\\Http\\Controllers\\AccountController@store',
-          'controller' => 'App\\Http\\Controllers\\AccountController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account/{account}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account.show',
-          'uses' => 'App\\Http\\Controllers\\AccountController@show',
-          'controller' => 'App\\Http\\Controllers\\AccountController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account/{account}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account.edit',
-          'uses' => 'App\\Http\\Controllers\\AccountController@edit',
-          'controller' => 'App\\Http\\Controllers\\AccountController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'account/{account}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account.update',
-          'uses' => 'App\\Http\\Controllers\\AccountController@update',
-          'controller' => 'App\\Http\\Controllers\\AccountController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'account/{account}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account.destroy',
-          'uses' => 'App\\Http\\Controllers\\AccountController@destroy',
-          'controller' => 'App\\Http\\Controllers\\AccountController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub.index',
-          'uses' => 'App\\Http\\Controllers\\AccountSubController@index',
-          'controller' => 'App\\Http\\Controllers\\AccountSubController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub.create',
-          'uses' => 'App\\Http\\Controllers\\AccountSubController@create',
-          'controller' => 'App\\Http\\Controllers\\AccountSubController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'account_sub',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub.store',
-          'uses' => 'App\\Http\\Controllers\\AccountSubController@store',
-          'controller' => 'App\\Http\\Controllers\\AccountSubController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub/{account_sub}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub.show',
-          'uses' => 'App\\Http\\Controllers\\AccountSubController@show',
-          'controller' => 'App\\Http\\Controllers\\AccountSubController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub/{account_sub}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub.edit',
-          'uses' => 'App\\Http\\Controllers\\AccountSubController@edit',
-          'controller' => 'App\\Http\\Controllers\\AccountSubController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'account_sub/{account_sub}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub.update',
-          'uses' => 'App\\Http\\Controllers\\AccountSubController@update',
-          'controller' => 'App\\Http\\Controllers\\AccountSubController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'account_sub/{account_sub}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub.destroy',
-          'uses' => 'App\\Http\\Controllers\\AccountSubController@destroy',
-          'controller' => 'App\\Http\\Controllers\\AccountSubController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub_type.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub_type',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub_type.index',
-          'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@index',
-          'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub_type.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub_type/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub_type.create',
-          'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@create',
-          'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub_type.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'account_sub_type',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub_type.store',
-          'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@store',
-          'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub_type.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub_type/{account_sub_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub_type.show',
-          'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@show',
-          'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub_type.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'account_sub_type/{account_sub_type}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub_type.edit',
-          'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@edit',
-          'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub_type.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'account_sub_type/{account_sub_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub_type.update',
-          'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@update',
-          'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'account_sub_type.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'account_sub_type/{account_sub_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'account_sub_type.destroy',
-          'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@destroy',
-          'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customers.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customers',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'customers.index',
-          'uses' => 'App\\Http\\Controllers\\CustomerController@index',
-          'controller' => 'App\\Http\\Controllers\\CustomerController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customers.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customers/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'customers.create',
-          'uses' => 'App\\Http\\Controllers\\CustomerController@create',
-          'controller' => 'App\\Http\\Controllers\\CustomerController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customers.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'customers',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'customers.store',
-          'uses' => 'App\\Http\\Controllers\\CustomerController@store',
-          'controller' => 'App\\Http\\Controllers\\CustomerController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customers.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customers/{customer}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'customers.show',
-          'uses' => 'App\\Http\\Controllers\\CustomerController@show',
-          'controller' => 'App\\Http\\Controllers\\CustomerController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customers.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'customers/{customer}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'customers.edit',
-          'uses' => 'App\\Http\\Controllers\\CustomerController@edit',
-          'controller' => 'App\\Http\\Controllers\\CustomerController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customers.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'customers/{customer}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'customers.update',
-          'uses' => 'App\\Http\\Controllers\\CustomerController@update',
-          'controller' => 'App\\Http\\Controllers\\CustomerController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'customers.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'customers/{customer}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'customers.destroy',
-          'uses' => 'App\\Http\\Controllers\\CustomerController@destroy',
-          'controller' => 'App\\Http\\Controllers\\CustomerController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'profiles.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'profiles',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'profiles.index',
-          'uses' => 'App\\Http\\Controllers\\ProfileController@index',
-          'controller' => 'App\\Http\\Controllers\\ProfileController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'profiles.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'profiles/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'profiles.create',
-          'uses' => 'App\\Http\\Controllers\\ProfileController@create',
-          'controller' => 'App\\Http\\Controllers\\ProfileController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'profiles.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'profiles',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'profiles.store',
-          'uses' => 'App\\Http\\Controllers\\ProfileController@store',
-          'controller' => 'App\\Http\\Controllers\\ProfileController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'profiles.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'profiles/{profile}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'profiles.show',
-          'uses' => 'App\\Http\\Controllers\\ProfileController@show',
-          'controller' => 'App\\Http\\Controllers\\ProfileController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'profiles.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'profiles/{profile}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'profiles.edit',
-          'uses' => 'App\\Http\\Controllers\\ProfileController@edit',
-          'controller' => 'App\\Http\\Controllers\\ProfileController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'profiles.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'profiles/{profile}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'profiles.update',
-          'uses' => 'App\\Http\\Controllers\\ProfileController@update',
-          'controller' => 'App\\Http\\Controllers\\ProfileController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'profiles.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'profiles/{profile}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'profiles.destroy',
-          'uses' => 'App\\Http\\Controllers\\ProfileController@destroy',
-          'controller' => 'App\\Http\\Controllers\\ProfileController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_categories.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customer_categories/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_categories.create',
+        'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@create',
+        'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
         ),
       ),
       'fallback' => false,
@@ -19893,7 +14899,5585 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::UQfLNbZP57cephZ8' => 
+    'customer_categories.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'customer_categories',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_categories.store',
+        'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@store',
+        'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_categories.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customer_categories/{customer_category}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_categories.show',
+        'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@show',
+        'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_categories.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customer_categories/{customer_category}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_categories.edit',
+        'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@edit',
+        'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_categories.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'customer_categories/{customer_category}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_categories.update',
+        'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@update',
+        'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_categories.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'customer_categories/{customer_category}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_categories.destroy',
+        'uses' => 'App\\Http\\Controllers\\CustomerCategoriesController@destroy',
+        'controller' => 'App\\Http\\Controllers\\CustomerCategoriesController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_areas.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customer_areas',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_areas.index',
+        'uses' => 'App\\Http\\Controllers\\CustomerAreasController@index',
+        'controller' => 'App\\Http\\Controllers\\CustomerAreasController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_areas.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customer_areas/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_areas.create',
+        'uses' => 'App\\Http\\Controllers\\CustomerAreasController@create',
+        'controller' => 'App\\Http\\Controllers\\CustomerAreasController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_areas.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'customer_areas',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_areas.store',
+        'uses' => 'App\\Http\\Controllers\\CustomerAreasController@store',
+        'controller' => 'App\\Http\\Controllers\\CustomerAreasController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_areas.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customer_areas/{customer_area}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_areas.show',
+        'uses' => 'App\\Http\\Controllers\\CustomerAreasController@show',
+        'controller' => 'App\\Http\\Controllers\\CustomerAreasController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_areas.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customer_areas/{customer_area}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_areas.edit',
+        'uses' => 'App\\Http\\Controllers\\CustomerAreasController@edit',
+        'controller' => 'App\\Http\\Controllers\\CustomerAreasController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_areas.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'customer_areas/{customer_area}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_areas.update',
+        'uses' => 'App\\Http\\Controllers\\CustomerAreasController@update',
+        'controller' => 'App\\Http\\Controllers\\CustomerAreasController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customer_areas.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'customer_areas/{customer_area}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'customer_areas.destroy',
+        'uses' => 'App\\Http\\Controllers\\CustomerAreasController@destroy',
+        'controller' => 'App\\Http\\Controllers\\CustomerAreasController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouses.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouses',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'warehouses.index',
+        'uses' => 'App\\Http\\Controllers\\WarehouseController@index',
+        'controller' => 'App\\Http\\Controllers\\WarehouseController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouses.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouses/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'warehouses.create',
+        'uses' => 'App\\Http\\Controllers\\WarehouseController@create',
+        'controller' => 'App\\Http\\Controllers\\WarehouseController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouses.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'warehouses',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'warehouses.store',
+        'uses' => 'App\\Http\\Controllers\\WarehouseController@store',
+        'controller' => 'App\\Http\\Controllers\\WarehouseController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouses.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouses/{warehouse}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'warehouses.show',
+        'uses' => 'App\\Http\\Controllers\\WarehouseController@show',
+        'controller' => 'App\\Http\\Controllers\\WarehouseController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouses.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouses/{warehouse}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'warehouses.edit',
+        'uses' => 'App\\Http\\Controllers\\WarehouseController@edit',
+        'controller' => 'App\\Http\\Controllers\\WarehouseController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouses.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'warehouses/{warehouse}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'warehouses.update',
+        'uses' => 'App\\Http\\Controllers\\WarehouseController@update',
+        'controller' => 'App\\Http\\Controllers\\WarehouseController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouses.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'warehouses/{warehouse}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'warehouses.destroy',
+        'uses' => 'App\\Http\\Controllers\\WarehouseController@destroy',
+        'controller' => 'App\\Http\\Controllers\\WarehouseController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'supliers.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'supliers',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'supliers.index',
+        'uses' => 'App\\Http\\Controllers\\SuppliersController@index',
+        'controller' => 'App\\Http\\Controllers\\SuppliersController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'supliers.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'supliers/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'supliers.create',
+        'uses' => 'App\\Http\\Controllers\\SuppliersController@create',
+        'controller' => 'App\\Http\\Controllers\\SuppliersController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'supliers.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'supliers',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'supliers.store',
+        'uses' => 'App\\Http\\Controllers\\SuppliersController@store',
+        'controller' => 'App\\Http\\Controllers\\SuppliersController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'supliers.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'supliers/{suplier}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'supliers.show',
+        'uses' => 'App\\Http\\Controllers\\SuppliersController@show',
+        'controller' => 'App\\Http\\Controllers\\SuppliersController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'supliers.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'supliers/{suplier}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'supliers.edit',
+        'uses' => 'App\\Http\\Controllers\\SuppliersController@edit',
+        'controller' => 'App\\Http\\Controllers\\SuppliersController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'supliers.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'supliers/{suplier}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'supliers.update',
+        'uses' => 'App\\Http\\Controllers\\SuppliersController@update',
+        'controller' => 'App\\Http\\Controllers\\SuppliersController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'supliers.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'supliers/{suplier}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'supliers.destroy',
+        'uses' => 'App\\Http\\Controllers\\SuppliersController@destroy',
+        'controller' => 'App\\Http\\Controllers\\SuppliersController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'jobs.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'jobs',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'jobs.index',
+        'uses' => 'App\\Http\\Controllers\\JobController@index',
+        'controller' => 'App\\Http\\Controllers\\JobController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'jobs.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'jobs/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'jobs.create',
+        'uses' => 'App\\Http\\Controllers\\JobController@create',
+        'controller' => 'App\\Http\\Controllers\\JobController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'jobs.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'jobs',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'jobs.store',
+        'uses' => 'App\\Http\\Controllers\\JobController@store',
+        'controller' => 'App\\Http\\Controllers\\JobController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'jobs.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'jobs/{job}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'jobs.show',
+        'uses' => 'App\\Http\\Controllers\\JobController@show',
+        'controller' => 'App\\Http\\Controllers\\JobController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'jobs.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'jobs/{job}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'jobs.edit',
+        'uses' => 'App\\Http\\Controllers\\JobController@edit',
+        'controller' => 'App\\Http\\Controllers\\JobController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'jobs.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'jobs/{job}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'jobs.update',
+        'uses' => 'App\\Http\\Controllers\\JobController@update',
+        'controller' => 'App\\Http\\Controllers\\JobController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'jobs.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'jobs/{job}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'jobs.destroy',
+        'uses' => 'App\\Http\\Controllers\\JobController@destroy',
+        'controller' => 'App\\Http\\Controllers\\JobController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'roles.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'roles',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'roles.index',
+        'uses' => 'App\\Http\\Controllers\\RoleController@index',
+        'controller' => 'App\\Http\\Controllers\\RoleController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'roles.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'roles/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'roles.create',
+        'uses' => 'App\\Http\\Controllers\\RoleController@create',
+        'controller' => 'App\\Http\\Controllers\\RoleController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'roles.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'roles',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'roles.store',
+        'uses' => 'App\\Http\\Controllers\\RoleController@store',
+        'controller' => 'App\\Http\\Controllers\\RoleController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'roles.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'roles/{role}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'roles.show',
+        'uses' => 'App\\Http\\Controllers\\RoleController@show',
+        'controller' => 'App\\Http\\Controllers\\RoleController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'roles.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'roles/{role}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'roles.edit',
+        'uses' => 'App\\Http\\Controllers\\RoleController@edit',
+        'controller' => 'App\\Http\\Controllers\\RoleController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'roles.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'roles/{role}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'roles.update',
+        'uses' => 'App\\Http\\Controllers\\RoleController@update',
+        'controller' => 'App\\Http\\Controllers\\RoleController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'roles.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'roles/{role}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'roles.destroy',
+        'uses' => 'App\\Http\\Controllers\\RoleController@destroy',
+        'controller' => 'App\\Http\\Controllers\\RoleController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'users.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'users',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'users.index',
+        'uses' => 'App\\Http\\Controllers\\UserController@index',
+        'controller' => 'App\\Http\\Controllers\\UserController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'users.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'users/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'users.create',
+        'uses' => 'App\\Http\\Controllers\\UserController@create',
+        'controller' => 'App\\Http\\Controllers\\UserController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'users.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'users',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'users.store',
+        'uses' => 'App\\Http\\Controllers\\UserController@store',
+        'controller' => 'App\\Http\\Controllers\\UserController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'users.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'users/{user}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'users.show',
+        'uses' => 'App\\Http\\Controllers\\UserController@show',
+        'controller' => 'App\\Http\\Controllers\\UserController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'users.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'users/{user}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'users.edit',
+        'uses' => 'App\\Http\\Controllers\\UserController@edit',
+        'controller' => 'App\\Http\\Controllers\\UserController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'users.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'users/{user}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'users.update',
+        'uses' => 'App\\Http\\Controllers\\UserController@update',
+        'controller' => 'App\\Http\\Controllers\\UserController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'users.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'users/{user}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'users.destroy',
+        'uses' => 'App\\Http\\Controllers\\UserController@destroy',
+        'controller' => 'App\\Http\\Controllers\\UserController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_materials.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_materials',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_materials.index',
+        'uses' => 'App\\Http\\Controllers\\MaterialController@index',
+        'controller' => 'App\\Http\\Controllers\\MaterialController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_materials.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_materials/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_materials.create',
+        'uses' => 'App\\Http\\Controllers\\MaterialController@create',
+        'controller' => 'App\\Http\\Controllers\\MaterialController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_materials.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'product_materials',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_materials.store',
+        'uses' => 'App\\Http\\Controllers\\MaterialController@store',
+        'controller' => 'App\\Http\\Controllers\\MaterialController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_materials.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_materials/{product_material}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_materials.show',
+        'uses' => 'App\\Http\\Controllers\\MaterialController@show',
+        'controller' => 'App\\Http\\Controllers\\MaterialController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_materials.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_materials/{product_material}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_materials.edit',
+        'uses' => 'App\\Http\\Controllers\\MaterialController@edit',
+        'controller' => 'App\\Http\\Controllers\\MaterialController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_materials.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'product_materials/{product_material}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_materials.update',
+        'uses' => 'App\\Http\\Controllers\\MaterialController@update',
+        'controller' => 'App\\Http\\Controllers\\MaterialController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_materials.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'product_materials/{product_material}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_materials.destroy',
+        'uses' => 'App\\Http\\Controllers\\MaterialController@destroy',
+        'controller' => 'App\\Http\\Controllers\\MaterialController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_materials.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_materials',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_materials.index',
+        'uses' => 'App\\Http\\Controllers\\SubMaterialController@index',
+        'controller' => 'App\\Http\\Controllers\\SubMaterialController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_materials.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_materials/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_materials.create',
+        'uses' => 'App\\Http\\Controllers\\SubMaterialController@create',
+        'controller' => 'App\\Http\\Controllers\\SubMaterialController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_materials.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'product_sub_materials',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_materials.store',
+        'uses' => 'App\\Http\\Controllers\\SubMaterialController@store',
+        'controller' => 'App\\Http\\Controllers\\SubMaterialController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_materials.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_materials/{product_sub_material}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_materials.show',
+        'uses' => 'App\\Http\\Controllers\\SubMaterialController@show',
+        'controller' => 'App\\Http\\Controllers\\SubMaterialController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_materials.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_materials/{product_sub_material}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_materials.edit',
+        'uses' => 'App\\Http\\Controllers\\SubMaterialController@edit',
+        'controller' => 'App\\Http\\Controllers\\SubMaterialController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_materials.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'product_sub_materials/{product_sub_material}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_materials.update',
+        'uses' => 'App\\Http\\Controllers\\SubMaterialController@update',
+        'controller' => 'App\\Http\\Controllers\\SubMaterialController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_materials.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'product_sub_materials/{product_sub_material}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_materials.destroy',
+        'uses' => 'App\\Http\\Controllers\\SubMaterialController@destroy',
+        'controller' => 'App\\Http\\Controllers\\SubMaterialController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_uoms.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_uoms',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_uoms.index',
+        'uses' => 'App\\Http\\Controllers\\UomController@index',
+        'controller' => 'App\\Http\\Controllers\\UomController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_uoms.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_uoms/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_uoms.create',
+        'uses' => 'App\\Http\\Controllers\\UomController@create',
+        'controller' => 'App\\Http\\Controllers\\UomController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_uoms.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'product_uoms',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_uoms.store',
+        'uses' => 'App\\Http\\Controllers\\UomController@store',
+        'controller' => 'App\\Http\\Controllers\\UomController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_uoms.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_uoms/{product_uom}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_uoms.show',
+        'uses' => 'App\\Http\\Controllers\\UomController@show',
+        'controller' => 'App\\Http\\Controllers\\UomController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_uoms.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_uoms/{product_uom}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_uoms.edit',
+        'uses' => 'App\\Http\\Controllers\\UomController@edit',
+        'controller' => 'App\\Http\\Controllers\\UomController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_uoms.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'product_uoms/{product_uom}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_uoms.update',
+        'uses' => 'App\\Http\\Controllers\\UomController@update',
+        'controller' => 'App\\Http\\Controllers\\UomController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_uoms.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'product_uoms/{product_uom}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_uoms.destroy',
+        'uses' => 'App\\Http\\Controllers\\UomController@destroy',
+        'controller' => 'App\\Http\\Controllers\\UomController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_types.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_types',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_types.index',
+        'uses' => 'App\\Http\\Controllers\\SubTypeController@index',
+        'controller' => 'App\\Http\\Controllers\\SubTypeController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_types.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_types/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_types.create',
+        'uses' => 'App\\Http\\Controllers\\SubTypeController@create',
+        'controller' => 'App\\Http\\Controllers\\SubTypeController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_types.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'product_sub_types',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_types.store',
+        'uses' => 'App\\Http\\Controllers\\SubTypeController@store',
+        'controller' => 'App\\Http\\Controllers\\SubTypeController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_types.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_types/{product_sub_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_types.show',
+        'uses' => 'App\\Http\\Controllers\\SubTypeController@show',
+        'controller' => 'App\\Http\\Controllers\\SubTypeController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_types.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'product_sub_types/{product_sub_type}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_types.edit',
+        'uses' => 'App\\Http\\Controllers\\SubTypeController@edit',
+        'controller' => 'App\\Http\\Controllers\\SubTypeController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_types.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'product_sub_types/{product_sub_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_types.update',
+        'uses' => 'App\\Http\\Controllers\\SubTypeController@update',
+        'controller' => 'App\\Http\\Controllers\\SubTypeController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'product_sub_types.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'product_sub_types/{product_sub_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'product_sub_types.destroy',
+        'uses' => 'App\\Http\\Controllers\\SubTypeController@destroy',
+        'controller' => 'App\\Http\\Controllers\\SubTypeController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'products.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'products',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'products.index',
+        'uses' => 'App\\Http\\Controllers\\ProductController@index',
+        'controller' => 'App\\Http\\Controllers\\ProductController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'products.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'products/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'products.create',
+        'uses' => 'App\\Http\\Controllers\\ProductController@create',
+        'controller' => 'App\\Http\\Controllers\\ProductController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'products.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'products',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'products.store',
+        'uses' => 'App\\Http\\Controllers\\ProductController@store',
+        'controller' => 'App\\Http\\Controllers\\ProductController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'products.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'products/{product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'products.show',
+        'uses' => 'App\\Http\\Controllers\\ProductController@show',
+        'controller' => 'App\\Http\\Controllers\\ProductController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'products.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'products/{product}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'products.edit',
+        'uses' => 'App\\Http\\Controllers\\ProductController@edit',
+        'controller' => 'App\\Http\\Controllers\\ProductController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'products.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'products/{product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'products.update',
+        'uses' => 'App\\Http\\Controllers\\ProductController@update',
+        'controller' => 'App\\Http\\Controllers\\ProductController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'products.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'products/{product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'products.destroy',
+        'uses' => 'App\\Http\\Controllers\\ProductController@destroy',
+        'controller' => 'App\\Http\\Controllers\\ProductController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'second_product.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'second_product',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'second_product.index',
+        'uses' => 'App\\Http\\Controllers\\SecondProductController@index',
+        'controller' => 'App\\Http\\Controllers\\SecondProductController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'second_product.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'second_product/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'second_product.create',
+        'uses' => 'App\\Http\\Controllers\\SecondProductController@create',
+        'controller' => 'App\\Http\\Controllers\\SecondProductController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'second_product.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'second_product',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'second_product.store',
+        'uses' => 'App\\Http\\Controllers\\SecondProductController@store',
+        'controller' => 'App\\Http\\Controllers\\SecondProductController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'second_product.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'second_product/{second_product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'second_product.show',
+        'uses' => 'App\\Http\\Controllers\\SecondProductController@show',
+        'controller' => 'App\\Http\\Controllers\\SecondProductController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'second_product.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'second_product/{second_product}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'second_product.edit',
+        'uses' => 'App\\Http\\Controllers\\SecondProductController@edit',
+        'controller' => 'App\\Http\\Controllers\\SecondProductController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'second_product.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'second_product/{second_product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'second_product.update',
+        'uses' => 'App\\Http\\Controllers\\SecondProductController@update',
+        'controller' => 'App\\Http\\Controllers\\SecondProductController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'second_product.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'second_product/{second_product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'second_product.destroy',
+        'uses' => 'App\\Http\\Controllers\\SecondProductController@destroy',
+        'controller' => 'App\\Http\\Controllers\\SecondProductController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'motorcycle.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'motorcycle',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'motorcycle.index',
+        'uses' => 'App\\Http\\Controllers\\MotorController@index',
+        'controller' => 'App\\Http\\Controllers\\MotorController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'motorcycle.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'motorcycle/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'motorcycle.create',
+        'uses' => 'App\\Http\\Controllers\\MotorController@create',
+        'controller' => 'App\\Http\\Controllers\\MotorController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'motorcycle.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'motorcycle',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'motorcycle.store',
+        'uses' => 'App\\Http\\Controllers\\MotorController@store',
+        'controller' => 'App\\Http\\Controllers\\MotorController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'motorcycle.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'motorcycle/{motorcycle}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'motorcycle.show',
+        'uses' => 'App\\Http\\Controllers\\MotorController@show',
+        'controller' => 'App\\Http\\Controllers\\MotorController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'motorcycle.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'motorcycle/{motorcycle}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'motorcycle.edit',
+        'uses' => 'App\\Http\\Controllers\\MotorController@edit',
+        'controller' => 'App\\Http\\Controllers\\MotorController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'motorcycle.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'motorcycle/{motorcycle}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'motorcycle.update',
+        'uses' => 'App\\Http\\Controllers\\MotorController@update',
+        'controller' => 'App\\Http\\Controllers\\MotorController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'motorcycle.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'motorcycle/{motorcycle}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'motorcycle.destroy',
+        'uses' => 'App\\Http\\Controllers\\MotorController@destroy',
+        'controller' => 'App\\Http\\Controllers\\MotorController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'cars.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'cars',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'cars.index',
+        'uses' => 'App\\Http\\Controllers\\CarController@index',
+        'controller' => 'App\\Http\\Controllers\\CarController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'cars.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'cars/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'cars.create',
+        'uses' => 'App\\Http\\Controllers\\CarController@create',
+        'controller' => 'App\\Http\\Controllers\\CarController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'cars.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'cars',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'cars.store',
+        'uses' => 'App\\Http\\Controllers\\CarController@store',
+        'controller' => 'App\\Http\\Controllers\\CarController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'cars.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'cars/{car}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'cars.show',
+        'uses' => 'App\\Http\\Controllers\\CarController@show',
+        'controller' => 'App\\Http\\Controllers\\CarController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'cars.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'cars/{car}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'cars.edit',
+        'uses' => 'App\\Http\\Controllers\\CarController@edit',
+        'controller' => 'App\\Http\\Controllers\\CarController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'cars.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'cars/{car}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'cars.update',
+        'uses' => 'App\\Http\\Controllers\\CarController@update',
+        'controller' => 'App\\Http\\Controllers\\CarController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'cars.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'cars/{car}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'cars.destroy',
+        'uses' => 'App\\Http\\Controllers\\CarController@destroy',
+        'controller' => 'App\\Http\\Controllers\\CarController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'trade_in.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'trade_in',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'trade_in.index',
+        'uses' => 'App\\Http\\Controllers\\ProductTradeInController@index',
+        'controller' => 'App\\Http\\Controllers\\ProductTradeInController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'trade_in.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'trade_in/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'trade_in.create',
+        'uses' => 'App\\Http\\Controllers\\ProductTradeInController@create',
+        'controller' => 'App\\Http\\Controllers\\ProductTradeInController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'trade_in.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'trade_in',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'trade_in.store',
+        'uses' => 'App\\Http\\Controllers\\ProductTradeInController@store',
+        'controller' => 'App\\Http\\Controllers\\ProductTradeInController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'trade_in.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'trade_in/{trade_in}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'trade_in.show',
+        'uses' => 'App\\Http\\Controllers\\ProductTradeInController@show',
+        'controller' => 'App\\Http\\Controllers\\ProductTradeInController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'trade_in.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'trade_in/{trade_in}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'trade_in.edit',
+        'uses' => 'App\\Http\\Controllers\\ProductTradeInController@edit',
+        'controller' => 'App\\Http\\Controllers\\ProductTradeInController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'trade_in.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'trade_in/{trade_in}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'trade_in.update',
+        'uses' => 'App\\Http\\Controllers\\ProductTradeInController@update',
+        'controller' => 'App\\Http\\Controllers\\ProductTradeInController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'trade_in.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'trade_in/{trade_in}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+          2 => 'can:isSuperAdmin',
+        ),
+        'as' => 'trade_in.destroy',
+        'uses' => 'App\\Http\\Controllers\\ProductTradeInController@destroy',
+        'controller' => 'App\\Http\\Controllers\\ProductTradeInController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account.index',
+        'uses' => 'App\\Http\\Controllers\\AccountController@index',
+        'controller' => 'App\\Http\\Controllers\\AccountController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account.create',
+        'uses' => 'App\\Http\\Controllers\\AccountController@create',
+        'controller' => 'App\\Http\\Controllers\\AccountController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'account',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account.store',
+        'uses' => 'App\\Http\\Controllers\\AccountController@store',
+        'controller' => 'App\\Http\\Controllers\\AccountController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/{account}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account.show',
+        'uses' => 'App\\Http\\Controllers\\AccountController@show',
+        'controller' => 'App\\Http\\Controllers\\AccountController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account/{account}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account.edit',
+        'uses' => 'App\\Http\\Controllers\\AccountController@edit',
+        'controller' => 'App\\Http\\Controllers\\AccountController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'account/{account}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account.update',
+        'uses' => 'App\\Http\\Controllers\\AccountController@update',
+        'controller' => 'App\\Http\\Controllers\\AccountController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'account/{account}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account.destroy',
+        'uses' => 'App\\Http\\Controllers\\AccountController@destroy',
+        'controller' => 'App\\Http\\Controllers\\AccountController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub.index',
+        'uses' => 'App\\Http\\Controllers\\AccountSubController@index',
+        'controller' => 'App\\Http\\Controllers\\AccountSubController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub.create',
+        'uses' => 'App\\Http\\Controllers\\AccountSubController@create',
+        'controller' => 'App\\Http\\Controllers\\AccountSubController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'account_sub',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub.store',
+        'uses' => 'App\\Http\\Controllers\\AccountSubController@store',
+        'controller' => 'App\\Http\\Controllers\\AccountSubController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub/{account_sub}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub.show',
+        'uses' => 'App\\Http\\Controllers\\AccountSubController@show',
+        'controller' => 'App\\Http\\Controllers\\AccountSubController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub/{account_sub}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub.edit',
+        'uses' => 'App\\Http\\Controllers\\AccountSubController@edit',
+        'controller' => 'App\\Http\\Controllers\\AccountSubController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'account_sub/{account_sub}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub.update',
+        'uses' => 'App\\Http\\Controllers\\AccountSubController@update',
+        'controller' => 'App\\Http\\Controllers\\AccountSubController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'account_sub/{account_sub}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub.destroy',
+        'uses' => 'App\\Http\\Controllers\\AccountSubController@destroy',
+        'controller' => 'App\\Http\\Controllers\\AccountSubController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub_type.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub_type',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub_type.index',
+        'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@index',
+        'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub_type.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub_type/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub_type.create',
+        'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@create',
+        'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub_type.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'account_sub_type',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub_type.store',
+        'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@store',
+        'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub_type.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub_type/{account_sub_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub_type.show',
+        'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@show',
+        'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub_type.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'account_sub_type/{account_sub_type}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub_type.edit',
+        'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@edit',
+        'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub_type.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'account_sub_type/{account_sub_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub_type.update',
+        'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@update',
+        'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'account_sub_type.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'account_sub_type/{account_sub_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'account_sub_type.destroy',
+        'uses' => 'App\\Http\\Controllers\\AccountSubTypeController@destroy',
+        'controller' => 'App\\Http\\Controllers\\AccountSubTypeController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customers.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customers',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'customers.index',
+        'uses' => 'App\\Http\\Controllers\\CustomerController@index',
+        'controller' => 'App\\Http\\Controllers\\CustomerController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customers.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customers/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'customers.create',
+        'uses' => 'App\\Http\\Controllers\\CustomerController@create',
+        'controller' => 'App\\Http\\Controllers\\CustomerController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customers.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'customers',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'customers.store',
+        'uses' => 'App\\Http\\Controllers\\CustomerController@store',
+        'controller' => 'App\\Http\\Controllers\\CustomerController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customers.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customers/{customer}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'customers.show',
+        'uses' => 'App\\Http\\Controllers\\CustomerController@show',
+        'controller' => 'App\\Http\\Controllers\\CustomerController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customers.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'customers/{customer}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'customers.edit',
+        'uses' => 'App\\Http\\Controllers\\CustomerController@edit',
+        'controller' => 'App\\Http\\Controllers\\CustomerController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customers.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'customers/{customer}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'customers.update',
+        'uses' => 'App\\Http\\Controllers\\CustomerController@update',
+        'controller' => 'App\\Http\\Controllers\\CustomerController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'customers.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'customers/{customer}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'customers.destroy',
+        'uses' => 'App\\Http\\Controllers\\CustomerController@destroy',
+        'controller' => 'App\\Http\\Controllers\\CustomerController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'profiles.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'profiles',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'profiles.index',
+        'uses' => 'App\\Http\\Controllers\\ProfileController@index',
+        'controller' => 'App\\Http\\Controllers\\ProfileController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'profiles.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'profiles/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'profiles.create',
+        'uses' => 'App\\Http\\Controllers\\ProfileController@create',
+        'controller' => 'App\\Http\\Controllers\\ProfileController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'profiles.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'profiles',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'profiles.store',
+        'uses' => 'App\\Http\\Controllers\\ProfileController@store',
+        'controller' => 'App\\Http\\Controllers\\ProfileController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'profiles.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'profiles/{profile}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'profiles.show',
+        'uses' => 'App\\Http\\Controllers\\ProfileController@show',
+        'controller' => 'App\\Http\\Controllers\\ProfileController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'profiles.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'profiles/{profile}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'profiles.edit',
+        'uses' => 'App\\Http\\Controllers\\ProfileController@edit',
+        'controller' => 'App\\Http\\Controllers\\ProfileController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'profiles.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'profiles/{profile}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'profiles.update',
+        'uses' => 'App\\Http\\Controllers\\ProfileController@update',
+        'controller' => 'App\\Http\\Controllers\\ProfileController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'profiles.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'profiles/{profile}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'profiles.destroy',
+        'uses' => 'App\\Http\\Controllers\\ProfileController@destroy',
+        'controller' => 'App\\Http\\Controllers\\ProfileController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'generated::AkTPnrn2DxTmbH6N' => 
     array (
       'methods' => 
       array (
@@ -19914,7 +20498,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::UQfLNbZP57cephZ8',
+        'as' => 'generated::AkTPnrn2DxTmbH6N',
       ),
       'fallback' => false,
       'defaults' => 
@@ -19930,7 +20514,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::dw3KJNmkvYgIlUwe' => 
+    'generated::QchvIXOWBZXBMNE1' => 
     array (
       'methods' => 
       array (
@@ -19951,7 +20535,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::dw3KJNmkvYgIlUwe',
+        'as' => 'generated::QchvIXOWBZXBMNE1',
       ),
       'fallback' => false,
       'defaults' => 
@@ -19990,3005 +20574,3361 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'stocks.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'stocks/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'stocks.create',
-          'uses' => 'App\\Http\\Controllers\\StockController@create',
-          'controller' => 'App\\Http\\Controllers\\StockController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'stocks.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'stocks',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'stocks.store',
-          'uses' => 'App\\Http\\Controllers\\StockController@store',
-          'controller' => 'App\\Http\\Controllers\\StockController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'stocks.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'stocks/{stock}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'stocks.show',
-          'uses' => 'App\\Http\\Controllers\\StockController@show',
-          'controller' => 'App\\Http\\Controllers\\StockController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'stocks.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'stocks/{stock}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'stocks.edit',
-          'uses' => 'App\\Http\\Controllers\\StockController@edit',
-          'controller' => 'App\\Http\\Controllers\\StockController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'stocks.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'stocks/{stock}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'stocks.update',
-          'uses' => 'App\\Http\\Controllers\\StockController@update',
-          'controller' => 'App\\Http\\Controllers\\StockController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'stocks.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'stocks/{stock}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'stocks.destroy',
-          'uses' => 'App\\Http\\Controllers\\StockController@destroy',
-          'controller' => 'App\\Http\\Controllers\\StockController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'discounts.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'discounts',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'discounts.index',
-          'uses' => 'App\\Http\\Controllers\\DiscountController@index',
-          'controller' => 'App\\Http\\Controllers\\DiscountController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'discounts.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'discounts/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'discounts.create',
-          'uses' => 'App\\Http\\Controllers\\DiscountController@create',
-          'controller' => 'App\\Http\\Controllers\\DiscountController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'discounts.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'discounts',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'discounts.store',
-          'uses' => 'App\\Http\\Controllers\\DiscountController@store',
-          'controller' => 'App\\Http\\Controllers\\DiscountController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'discounts.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'discounts/{discount}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'discounts.show',
-          'uses' => 'App\\Http\\Controllers\\DiscountController@show',
-          'controller' => 'App\\Http\\Controllers\\DiscountController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'discounts.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'discounts/{discount}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'discounts.edit',
-          'uses' => 'App\\Http\\Controllers\\DiscountController@edit',
-          'controller' => 'App\\Http\\Controllers\\DiscountController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'discounts.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'discounts/{discount}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'discounts.update',
-          'uses' => 'App\\Http\\Controllers\\DiscountController@update',
-          'controller' => 'App\\Http\\Controllers\\DiscountController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'discounts.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'discounts/{discount}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'discounts.destroy',
-          'uses' => 'App\\Http\\Controllers\\DiscountController@destroy',
-          'controller' => 'App\\Http\\Controllers\\DiscountController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'sales_order.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'sales_order',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'sales_order.index',
-          'uses' => 'App\\Http\\Controllers\\SalesOrderController@index',
-          'controller' => 'App\\Http\\Controllers\\SalesOrderController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'sales_order.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'sales_order/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'sales_order.create',
-          'uses' => 'App\\Http\\Controllers\\SalesOrderController@create',
-          'controller' => 'App\\Http\\Controllers\\SalesOrderController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'sales_order.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'sales_order',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'sales_order.store',
-          'uses' => 'App\\Http\\Controllers\\SalesOrderController@store',
-          'controller' => 'App\\Http\\Controllers\\SalesOrderController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'sales_order.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'sales_order/{sales_order}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'sales_order.show',
-          'uses' => 'App\\Http\\Controllers\\SalesOrderController@show',
-          'controller' => 'App\\Http\\Controllers\\SalesOrderController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'sales_order.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'sales_order/{sales_order}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'sales_order.edit',
-          'uses' => 'App\\Http\\Controllers\\SalesOrderController@edit',
-          'controller' => 'App\\Http\\Controllers\\SalesOrderController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'sales_order.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'sales_order/{sales_order}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'sales_order.update',
-          'uses' => 'App\\Http\\Controllers\\SalesOrderController@update',
-          'controller' => 'App\\Http\\Controllers\\SalesOrderController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'sales_order.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'sales_order/{sales_order}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'sales_order.destroy',
-          'uses' => 'App\\Http\\Controllers\\SalesOrderController@destroy',
-          'controller' => 'App\\Http\\Controllers\\SalesOrderController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'check_stock.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'check_stock',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'check_stock.index',
-          'uses' => 'App\\Http\\Controllers\\CheckStockController@index',
-          'controller' => 'App\\Http\\Controllers\\CheckStockController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'check_stock.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'check_stock/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'check_stock.create',
-          'uses' => 'App\\Http\\Controllers\\CheckStockController@create',
-          'controller' => 'App\\Http\\Controllers\\CheckStockController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'check_stock.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'check_stock',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'check_stock.store',
-          'uses' => 'App\\Http\\Controllers\\CheckStockController@store',
-          'controller' => 'App\\Http\\Controllers\\CheckStockController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'check_stock.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'check_stock/{check_stock}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'check_stock.show',
-          'uses' => 'App\\Http\\Controllers\\CheckStockController@show',
-          'controller' => 'App\\Http\\Controllers\\CheckStockController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'check_stock.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'check_stock/{check_stock}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'check_stock.edit',
-          'uses' => 'App\\Http\\Controllers\\CheckStockController@edit',
-          'controller' => 'App\\Http\\Controllers\\CheckStockController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'check_stock.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'check_stock/{check_stock}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'check_stock.update',
-          'uses' => 'App\\Http\\Controllers\\CheckStockController@update',
-          'controller' => 'App\\Http\\Controllers\\CheckStockController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'check_stock.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'check_stock/{check_stock}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'check_stock.destroy',
-          'uses' => 'App\\Http\\Controllers\\CheckStockController@destroy',
-          'controller' => 'App\\Http\\Controllers\\CheckStockController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'purchase_orders.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'purchase_orders',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'purchase_orders.index',
-          'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@index',
-          'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'purchase_orders.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'purchase_orders/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'purchase_orders.create',
-          'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@create',
-          'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'purchase_orders.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'purchase_orders',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'purchase_orders.store',
-          'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@store',
-          'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'purchase_orders.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'purchase_orders/{purchase_order}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'purchase_orders.show',
-          'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@show',
-          'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'purchase_orders.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'purchase_orders/{purchase_order}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'purchase_orders.edit',
-          'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@edit',
-          'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'purchase_orders.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'purchase_orders/{purchase_order}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'purchase_orders.update',
-          'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@update',
-          'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'purchase_orders.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'purchase_orders/{purchase_order}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'purchase_orders.destroy',
-          'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@destroy',
-          'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'file_invoice.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'file_invoice',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'file_invoice.index',
-          'uses' => 'App\\Http\\Controllers\\FilesController@index',
-          'controller' => 'App\\Http\\Controllers\\FilesController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'file_invoice.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'file_invoice/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'file_invoice.create',
-          'uses' => 'App\\Http\\Controllers\\FilesController@create',
-          'controller' => 'App\\Http\\Controllers\\FilesController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'file_invoice.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'file_invoice',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'file_invoice.store',
-          'uses' => 'App\\Http\\Controllers\\FilesController@store',
-          'controller' => 'App\\Http\\Controllers\\FilesController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'file_invoice.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'file_invoice/{file_invoice}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'file_invoice.show',
-          'uses' => 'App\\Http\\Controllers\\FilesController@show',
-          'controller' => 'App\\Http\\Controllers\\FilesController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'file_invoice.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'file_invoice/{file_invoice}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'file_invoice.edit',
-          'uses' => 'App\\Http\\Controllers\\FilesController@edit',
-          'controller' => 'App\\Http\\Controllers\\FilesController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'file_invoice.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'file_invoice/{file_invoice}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'file_invoice.update',
-          'uses' => 'App\\Http\\Controllers\\FilesController@update',
-          'controller' => 'App\\Http\\Controllers\\FilesController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'file_invoice.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'file_invoice/{file_invoice}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'file_invoice.destroy',
-          'uses' => 'App\\Http\\Controllers\\FilesController@destroy',
-          'controller' => 'App\\Http\\Controllers\\FilesController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'claim.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'claim',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'claim.index',
-          'uses' => 'App\\Http\\Controllers\\ClaimController@index',
-          'controller' => 'App\\Http\\Controllers\\ClaimController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'claim.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'claim/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'claim.create',
-          'uses' => 'App\\Http\\Controllers\\ClaimController@create',
-          'controller' => 'App\\Http\\Controllers\\ClaimController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'claim.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'claim',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'claim.store',
-          'uses' => 'App\\Http\\Controllers\\ClaimController@store',
-          'controller' => 'App\\Http\\Controllers\\ClaimController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'claim.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'claim/{claim}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'claim.show',
-          'uses' => 'App\\Http\\Controllers\\ClaimController@show',
-          'controller' => 'App\\Http\\Controllers\\ClaimController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'claim.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'claim/{claim}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'claim.edit',
-          'uses' => 'App\\Http\\Controllers\\ClaimController@edit',
-          'controller' => 'App\\Http\\Controllers\\ClaimController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'claim.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'claim/{claim}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'claim.update',
-          'uses' => 'App\\Http\\Controllers\\ClaimController@update',
-          'controller' => 'App\\Http\\Controllers\\ClaimController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'claim.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'claim/{claim}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'claim.destroy',
-          'uses' => 'App\\Http\\Controllers\\ClaimController@destroy',
-          'controller' => 'App\\Http\\Controllers\\ClaimController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouse_types.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouse_types',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'warehouse_types.index',
-          'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@index',
-          'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouse_types.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouse_types/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'warehouse_types.create',
-          'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@create',
-          'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouse_types.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'warehouse_types',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'warehouse_types.store',
-          'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@store',
-          'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouse_types.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouse_types/{warehouse_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'warehouse_types.show',
-          'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@show',
-          'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouse_types.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'warehouse_types/{warehouse_type}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'warehouse_types.edit',
-          'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@edit',
-          'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouse_types.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'warehouse_types/{warehouse_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'warehouse_types.update',
-          'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@update',
-          'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'warehouse_types.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'warehouse_types/{warehouse_type}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'warehouse_types.destroy',
-          'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@destroy',
-          'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset.index',
-          'uses' => 'App\\Http\\Controllers\\AssetController@index',
-          'controller' => 'App\\Http\\Controllers\\AssetController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset.create',
-          'uses' => 'App\\Http\\Controllers\\AssetController@create',
-          'controller' => 'App\\Http\\Controllers\\AssetController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'asset',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset.store',
-          'uses' => 'App\\Http\\Controllers\\AssetController@store',
-          'controller' => 'App\\Http\\Controllers\\AssetController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset/{asset}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset.show',
-          'uses' => 'App\\Http\\Controllers\\AssetController@show',
-          'controller' => 'App\\Http\\Controllers\\AssetController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset/{asset}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset.edit',
-          'uses' => 'App\\Http\\Controllers\\AssetController@edit',
-          'controller' => 'App\\Http\\Controllers\\AssetController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'asset/{asset}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset.update',
-          'uses' => 'App\\Http\\Controllers\\AssetController@update',
-          'controller' => 'App\\Http\\Controllers\\AssetController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'asset/{asset}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset.destroy',
-          'uses' => 'App\\Http\\Controllers\\AssetController@destroy',
-          'controller' => 'App\\Http\\Controllers\\AssetController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'retail_second_products.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'retail_second_products',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'retail_second_products.index',
-          'uses' => 'App\\Http\\Controllers\\SecondSaleController@index',
-          'controller' => 'App\\Http\\Controllers\\SecondSaleController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'retail_second_products.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'retail_second_products/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'retail_second_products.create',
-          'uses' => 'App\\Http\\Controllers\\SecondSaleController@create',
-          'controller' => 'App\\Http\\Controllers\\SecondSaleController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'retail_second_products.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'retail_second_products',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'retail_second_products.store',
-          'uses' => 'App\\Http\\Controllers\\SecondSaleController@store',
-          'controller' => 'App\\Http\\Controllers\\SecondSaleController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'retail_second_products.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'retail_second_products/{retail_second_product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'retail_second_products.show',
-          'uses' => 'App\\Http\\Controllers\\SecondSaleController@show',
-          'controller' => 'App\\Http\\Controllers\\SecondSaleController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'retail_second_products.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'retail_second_products/{retail_second_product}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'retail_second_products.edit',
-          'uses' => 'App\\Http\\Controllers\\SecondSaleController@edit',
-          'controller' => 'App\\Http\\Controllers\\SecondSaleController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'retail_second_products.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'retail_second_products/{retail_second_product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'retail_second_products.update',
-          'uses' => 'App\\Http\\Controllers\\SecondSaleController@update',
-          'controller' => 'App\\Http\\Controllers\\SecondSaleController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'retail_second_products.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'retail_second_products/{retail_second_product}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'retail_second_products.destroy',
-          'uses' => 'App\\Http\\Controllers\\SecondSaleController@destroy',
-          'controller' => 'App\\Http\\Controllers\\SecondSaleController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'prospective_employees.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'prospective_employees',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'prospective_employees.index',
-          'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@index',
-          'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'prospective_employees.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'prospective_employees/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'prospective_employees.create',
-          'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@create',
-          'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'prospective_employees.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'prospective_employees',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'prospective_employees.store',
-          'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@store',
-          'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'prospective_employees.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'prospective_employees/{prospective_employee}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'prospective_employees.edit',
-          'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@edit',
-          'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'prospective_employees.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'prospective_employees/{prospective_employee}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'prospective_employees.update',
-          'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@update',
-          'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'prospective_employees.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'prospective_employees/{prospective_employee}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'prospective_employees.destroy',
-          'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@destroy',
-          'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset_category.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset_category',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset_category.index',
-          'uses' => 'App\\Http\\Controllers\\AssetCategoryController@index',
-          'controller' => 'App\\Http\\Controllers\\AssetCategoryController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset_category.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset_category/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset_category.create',
-          'uses' => 'App\\Http\\Controllers\\AssetCategoryController@create',
-          'controller' => 'App\\Http\\Controllers\\AssetCategoryController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset_category.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'asset_category',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset_category.store',
-          'uses' => 'App\\Http\\Controllers\\AssetCategoryController@store',
-          'controller' => 'App\\Http\\Controllers\\AssetCategoryController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset_category.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset_category/{asset_category}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset_category.show',
-          'uses' => 'App\\Http\\Controllers\\AssetCategoryController@show',
-          'controller' => 'App\\Http\\Controllers\\AssetCategoryController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset_category.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'asset_category/{asset_category}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset_category.edit',
-          'uses' => 'App\\Http\\Controllers\\AssetCategoryController@edit',
-          'controller' => 'App\\Http\\Controllers\\AssetCategoryController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset_category.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'asset_category/{asset_category}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset_category.update',
-          'uses' => 'App\\Http\\Controllers\\AssetCategoryController@update',
-          'controller' => 'App\\Http\\Controllers\\AssetCategoryController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'asset_category.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'asset_category/{asset_category}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'asset_category.destroy',
-          'uses' => 'App\\Http\\Controllers\\AssetCategoryController@destroy',
-          'controller' => 'App\\Http\\Controllers\\AssetCategoryController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'employee.index' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'employee',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'employee.index',
-          'uses' => 'App\\Http\\Controllers\\EmployeeController@index',
-          'controller' => 'App\\Http\\Controllers\\EmployeeController@index',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'employee.create' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'employee/create',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'employee.create',
-          'uses' => 'App\\Http\\Controllers\\EmployeeController@create',
-          'controller' => 'App\\Http\\Controllers\\EmployeeController@create',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'employee.store' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'POST',
-        ),
-        'uri' => 'employee',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'employee.store',
-          'uses' => 'App\\Http\\Controllers\\EmployeeController@store',
-          'controller' => 'App\\Http\\Controllers\\EmployeeController@store',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'employee.show' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'employee/{employee}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'employee.show',
-          'uses' => 'App\\Http\\Controllers\\EmployeeController@show',
-          'controller' => 'App\\Http\\Controllers\\EmployeeController@show',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'employee.edit' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'GET',
-          1 => 'HEAD',
-        ),
-        'uri' => 'employee/{employee}/edit',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'employee.edit',
-          'uses' => 'App\\Http\\Controllers\\EmployeeController@edit',
-          'controller' => 'App\\Http\\Controllers\\EmployeeController@edit',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'employee.update' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'PUT',
-          1 => 'PATCH',
-        ),
-        'uri' => 'employee/{employee}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'employee.update',
-          'uses' => 'App\\Http\\Controllers\\EmployeeController@update',
-          'controller' => 'App\\Http\\Controllers\\EmployeeController@update',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
-        ),
-        'fallback' => false,
-        'defaults' =>
-        array(),
-        'wheres' =>
-        array(),
-        'bindingFields' =>
-        array(),
-        'lockSeconds' => NULL,
-        'waitSeconds' => NULL,
-        'withTrashed' => false,
-      ),
-      'employee.destroy' =>
-      array(
-        'methods' =>
-        array(
-          0 => 'DELETE',
-        ),
-        'uri' => 'employee/{employee}',
-        'action' =>
-        array(
-          'middleware' =>
-          array(
-            0 => 'web',
-            1 => 'auth',
-          ),
-          'as' => 'employee.destroy',
-          'uses' => 'App\\Http\\Controllers\\EmployeeController@destroy',
-          'controller' => 'App\\Http\\Controllers\\EmployeeController@destroy',
-          'namespace' => NULL,
-          'prefix' => '/',
-          'where' =>
-          array(),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'stocks.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'stocks/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'stocks.create',
+        'uses' => 'App\\Http\\Controllers\\StockController@create',
+        'controller' => 'App\\Http\\Controllers\\StockController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'stocks.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'stocks',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'stocks.store',
+        'uses' => 'App\\Http\\Controllers\\StockController@store',
+        'controller' => 'App\\Http\\Controllers\\StockController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'stocks.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'stocks/{stock}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'stocks.show',
+        'uses' => 'App\\Http\\Controllers\\StockController@show',
+        'controller' => 'App\\Http\\Controllers\\StockController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'stocks.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'stocks/{stock}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'stocks.edit',
+        'uses' => 'App\\Http\\Controllers\\StockController@edit',
+        'controller' => 'App\\Http\\Controllers\\StockController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'stocks.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'stocks/{stock}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'stocks.update',
+        'uses' => 'App\\Http\\Controllers\\StockController@update',
+        'controller' => 'App\\Http\\Controllers\\StockController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'stocks.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'stocks/{stock}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'stocks.destroy',
+        'uses' => 'App\\Http\\Controllers\\StockController@destroy',
+        'controller' => 'App\\Http\\Controllers\\StockController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'discounts.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'discounts',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'discounts.index',
+        'uses' => 'App\\Http\\Controllers\\DiscountController@index',
+        'controller' => 'App\\Http\\Controllers\\DiscountController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'discounts.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'discounts/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'discounts.create',
+        'uses' => 'App\\Http\\Controllers\\DiscountController@create',
+        'controller' => 'App\\Http\\Controllers\\DiscountController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'discounts.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'discounts',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'discounts.store',
+        'uses' => 'App\\Http\\Controllers\\DiscountController@store',
+        'controller' => 'App\\Http\\Controllers\\DiscountController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'discounts.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'discounts/{discount}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'discounts.show',
+        'uses' => 'App\\Http\\Controllers\\DiscountController@show',
+        'controller' => 'App\\Http\\Controllers\\DiscountController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'discounts.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'discounts/{discount}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'discounts.edit',
+        'uses' => 'App\\Http\\Controllers\\DiscountController@edit',
+        'controller' => 'App\\Http\\Controllers\\DiscountController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'discounts.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'discounts/{discount}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'discounts.update',
+        'uses' => 'App\\Http\\Controllers\\DiscountController@update',
+        'controller' => 'App\\Http\\Controllers\\DiscountController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'discounts.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'discounts/{discount}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'discounts.destroy',
+        'uses' => 'App\\Http\\Controllers\\DiscountController@destroy',
+        'controller' => 'App\\Http\\Controllers\\DiscountController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'sales_order.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'sales_order',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'sales_order.index',
+        'uses' => 'App\\Http\\Controllers\\SalesOrderController@index',
+        'controller' => 'App\\Http\\Controllers\\SalesOrderController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'sales_order.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'sales_order/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'sales_order.create',
+        'uses' => 'App\\Http\\Controllers\\SalesOrderController@create',
+        'controller' => 'App\\Http\\Controllers\\SalesOrderController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'sales_order.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'sales_order',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'sales_order.store',
+        'uses' => 'App\\Http\\Controllers\\SalesOrderController@store',
+        'controller' => 'App\\Http\\Controllers\\SalesOrderController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'sales_order.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'sales_order/{sales_order}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'sales_order.show',
+        'uses' => 'App\\Http\\Controllers\\SalesOrderController@show',
+        'controller' => 'App\\Http\\Controllers\\SalesOrderController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'sales_order.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'sales_order/{sales_order}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'sales_order.edit',
+        'uses' => 'App\\Http\\Controllers\\SalesOrderController@edit',
+        'controller' => 'App\\Http\\Controllers\\SalesOrderController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'sales_order.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'sales_order/{sales_order}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'sales_order.update',
+        'uses' => 'App\\Http\\Controllers\\SalesOrderController@update',
+        'controller' => 'App\\Http\\Controllers\\SalesOrderController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'sales_order.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'sales_order/{sales_order}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'sales_order.destroy',
+        'uses' => 'App\\Http\\Controllers\\SalesOrderController@destroy',
+        'controller' => 'App\\Http\\Controllers\\SalesOrderController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'check_stock.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'check_stock',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'check_stock.index',
+        'uses' => 'App\\Http\\Controllers\\CheckStockController@index',
+        'controller' => 'App\\Http\\Controllers\\CheckStockController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'check_stock.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'check_stock/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'check_stock.create',
+        'uses' => 'App\\Http\\Controllers\\CheckStockController@create',
+        'controller' => 'App\\Http\\Controllers\\CheckStockController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'check_stock.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'check_stock',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'check_stock.store',
+        'uses' => 'App\\Http\\Controllers\\CheckStockController@store',
+        'controller' => 'App\\Http\\Controllers\\CheckStockController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'check_stock.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'check_stock/{check_stock}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'check_stock.show',
+        'uses' => 'App\\Http\\Controllers\\CheckStockController@show',
+        'controller' => 'App\\Http\\Controllers\\CheckStockController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'check_stock.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'check_stock/{check_stock}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'check_stock.edit',
+        'uses' => 'App\\Http\\Controllers\\CheckStockController@edit',
+        'controller' => 'App\\Http\\Controllers\\CheckStockController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'check_stock.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'check_stock/{check_stock}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'check_stock.update',
+        'uses' => 'App\\Http\\Controllers\\CheckStockController@update',
+        'controller' => 'App\\Http\\Controllers\\CheckStockController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'check_stock.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'check_stock/{check_stock}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'check_stock.destroy',
+        'uses' => 'App\\Http\\Controllers\\CheckStockController@destroy',
+        'controller' => 'App\\Http\\Controllers\\CheckStockController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'purchase_orders.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'purchase_orders',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'purchase_orders.index',
+        'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@index',
+        'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'purchase_orders.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'purchase_orders/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'purchase_orders.create',
+        'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@create',
+        'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'purchase_orders.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'purchase_orders',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'purchase_orders.store',
+        'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@store',
+        'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'purchase_orders.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'purchase_orders/{purchase_order}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'purchase_orders.show',
+        'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@show',
+        'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'purchase_orders.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'purchase_orders/{purchase_order}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'purchase_orders.edit',
+        'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@edit',
+        'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'purchase_orders.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'purchase_orders/{purchase_order}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'purchase_orders.update',
+        'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@update',
+        'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'purchase_orders.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'purchase_orders/{purchase_order}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'purchase_orders.destroy',
+        'uses' => 'App\\Http\\Controllers\\PurchaseOrderController@destroy',
+        'controller' => 'App\\Http\\Controllers\\PurchaseOrderController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'file_invoice.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'file_invoice',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'file_invoice.index',
+        'uses' => 'App\\Http\\Controllers\\FilesController@index',
+        'controller' => 'App\\Http\\Controllers\\FilesController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'file_invoice.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'file_invoice/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'file_invoice.create',
+        'uses' => 'App\\Http\\Controllers\\FilesController@create',
+        'controller' => 'App\\Http\\Controllers\\FilesController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'file_invoice.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'file_invoice',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'file_invoice.store',
+        'uses' => 'App\\Http\\Controllers\\FilesController@store',
+        'controller' => 'App\\Http\\Controllers\\FilesController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'file_invoice.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'file_invoice/{file_invoice}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'file_invoice.show',
+        'uses' => 'App\\Http\\Controllers\\FilesController@show',
+        'controller' => 'App\\Http\\Controllers\\FilesController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'file_invoice.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'file_invoice/{file_invoice}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'file_invoice.edit',
+        'uses' => 'App\\Http\\Controllers\\FilesController@edit',
+        'controller' => 'App\\Http\\Controllers\\FilesController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'file_invoice.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'file_invoice/{file_invoice}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'file_invoice.update',
+        'uses' => 'App\\Http\\Controllers\\FilesController@update',
+        'controller' => 'App\\Http\\Controllers\\FilesController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'file_invoice.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'file_invoice/{file_invoice}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'file_invoice.destroy',
+        'uses' => 'App\\Http\\Controllers\\FilesController@destroy',
+        'controller' => 'App\\Http\\Controllers\\FilesController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'claim.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'claim',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'claim.index',
+        'uses' => 'App\\Http\\Controllers\\ClaimController@index',
+        'controller' => 'App\\Http\\Controllers\\ClaimController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'claim.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'claim/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'claim.create',
+        'uses' => 'App\\Http\\Controllers\\ClaimController@create',
+        'controller' => 'App\\Http\\Controllers\\ClaimController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'claim.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'claim',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'claim.store',
+        'uses' => 'App\\Http\\Controllers\\ClaimController@store',
+        'controller' => 'App\\Http\\Controllers\\ClaimController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'claim.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'claim/{claim}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'claim.show',
+        'uses' => 'App\\Http\\Controllers\\ClaimController@show',
+        'controller' => 'App\\Http\\Controllers\\ClaimController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'claim.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'claim/{claim}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'claim.edit',
+        'uses' => 'App\\Http\\Controllers\\ClaimController@edit',
+        'controller' => 'App\\Http\\Controllers\\ClaimController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'claim.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'claim/{claim}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'claim.update',
+        'uses' => 'App\\Http\\Controllers\\ClaimController@update',
+        'controller' => 'App\\Http\\Controllers\\ClaimController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'claim.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'claim/{claim}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'claim.destroy',
+        'uses' => 'App\\Http\\Controllers\\ClaimController@destroy',
+        'controller' => 'App\\Http\\Controllers\\ClaimController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouse_types.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouse_types',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'warehouse_types.index',
+        'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@index',
+        'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouse_types.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouse_types/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'warehouse_types.create',
+        'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@create',
+        'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouse_types.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'warehouse_types',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'warehouse_types.store',
+        'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@store',
+        'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouse_types.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouse_types/{warehouse_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'warehouse_types.show',
+        'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@show',
+        'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouse_types.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'warehouse_types/{warehouse_type}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'warehouse_types.edit',
+        'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@edit',
+        'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouse_types.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'warehouse_types/{warehouse_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'warehouse_types.update',
+        'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@update',
+        'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'warehouse_types.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'warehouse_types/{warehouse_type}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'warehouse_types.destroy',
+        'uses' => 'App\\Http\\Controllers\\WarehouseTypeController@destroy',
+        'controller' => 'App\\Http\\Controllers\\WarehouseTypeController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset.index',
+        'uses' => 'App\\Http\\Controllers\\AssetController@index',
+        'controller' => 'App\\Http\\Controllers\\AssetController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset.create',
+        'uses' => 'App\\Http\\Controllers\\AssetController@create',
+        'controller' => 'App\\Http\\Controllers\\AssetController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'asset',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset.store',
+        'uses' => 'App\\Http\\Controllers\\AssetController@store',
+        'controller' => 'App\\Http\\Controllers\\AssetController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset/{asset}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset.show',
+        'uses' => 'App\\Http\\Controllers\\AssetController@show',
+        'controller' => 'App\\Http\\Controllers\\AssetController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset/{asset}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset.edit',
+        'uses' => 'App\\Http\\Controllers\\AssetController@edit',
+        'controller' => 'App\\Http\\Controllers\\AssetController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'asset/{asset}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset.update',
+        'uses' => 'App\\Http\\Controllers\\AssetController@update',
+        'controller' => 'App\\Http\\Controllers\\AssetController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'asset/{asset}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset.destroy',
+        'uses' => 'App\\Http\\Controllers\\AssetController@destroy',
+        'controller' => 'App\\Http\\Controllers\\AssetController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'retail_second_products.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'retail_second_products',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'retail_second_products.index',
+        'uses' => 'App\\Http\\Controllers\\SecondSaleController@index',
+        'controller' => 'App\\Http\\Controllers\\SecondSaleController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'retail_second_products.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'retail_second_products/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'retail_second_products.create',
+        'uses' => 'App\\Http\\Controllers\\SecondSaleController@create',
+        'controller' => 'App\\Http\\Controllers\\SecondSaleController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'retail_second_products.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'retail_second_products',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'retail_second_products.store',
+        'uses' => 'App\\Http\\Controllers\\SecondSaleController@store',
+        'controller' => 'App\\Http\\Controllers\\SecondSaleController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'retail_second_products.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'retail_second_products/{retail_second_product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'retail_second_products.show',
+        'uses' => 'App\\Http\\Controllers\\SecondSaleController@show',
+        'controller' => 'App\\Http\\Controllers\\SecondSaleController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'retail_second_products.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'retail_second_products/{retail_second_product}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'retail_second_products.edit',
+        'uses' => 'App\\Http\\Controllers\\SecondSaleController@edit',
+        'controller' => 'App\\Http\\Controllers\\SecondSaleController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'retail_second_products.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'retail_second_products/{retail_second_product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'retail_second_products.update',
+        'uses' => 'App\\Http\\Controllers\\SecondSaleController@update',
+        'controller' => 'App\\Http\\Controllers\\SecondSaleController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'retail_second_products.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'retail_second_products/{retail_second_product}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'retail_second_products.destroy',
+        'uses' => 'App\\Http\\Controllers\\SecondSaleController@destroy',
+        'controller' => 'App\\Http\\Controllers\\SecondSaleController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'prospective_employees.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'prospective_employees',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'prospective_employees.index',
+        'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@index',
+        'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'prospective_employees.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'prospective_employees/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'prospective_employees.create',
+        'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@create',
+        'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'prospective_employees.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'prospective_employees',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'prospective_employees.store',
+        'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@store',
+        'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'prospective_employees.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'prospective_employees/{prospective_employee}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'prospective_employees.edit',
+        'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@edit',
+        'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'prospective_employees.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'prospective_employees/{prospective_employee}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'prospective_employees.update',
+        'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@update',
+        'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'prospective_employees.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'prospective_employees/{prospective_employee}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'prospective_employees.destroy',
+        'uses' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@destroy',
+        'controller' => 'App\\Http\\Controllers\\ProspectiveEmployeeController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset_category.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset_category',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset_category.index',
+        'uses' => 'App\\Http\\Controllers\\AssetCategoryController@index',
+        'controller' => 'App\\Http\\Controllers\\AssetCategoryController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset_category.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset_category/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset_category.create',
+        'uses' => 'App\\Http\\Controllers\\AssetCategoryController@create',
+        'controller' => 'App\\Http\\Controllers\\AssetCategoryController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset_category.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'asset_category',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset_category.store',
+        'uses' => 'App\\Http\\Controllers\\AssetCategoryController@store',
+        'controller' => 'App\\Http\\Controllers\\AssetCategoryController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset_category.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset_category/{asset_category}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset_category.show',
+        'uses' => 'App\\Http\\Controllers\\AssetCategoryController@show',
+        'controller' => 'App\\Http\\Controllers\\AssetCategoryController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset_category.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'asset_category/{asset_category}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset_category.edit',
+        'uses' => 'App\\Http\\Controllers\\AssetCategoryController@edit',
+        'controller' => 'App\\Http\\Controllers\\AssetCategoryController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset_category.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'asset_category/{asset_category}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset_category.update',
+        'uses' => 'App\\Http\\Controllers\\AssetCategoryController@update',
+        'controller' => 'App\\Http\\Controllers\\AssetCategoryController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'asset_category.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'asset_category/{asset_category}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'asset_category.destroy',
+        'uses' => 'App\\Http\\Controllers\\AssetCategoryController@destroy',
+        'controller' => 'App\\Http\\Controllers\\AssetCategoryController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'employee.index' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'employee',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'employee.index',
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@index',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@index',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'employee.create' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'employee/create',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'employee.create',
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@create',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@create',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'employee.store' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'POST',
+      ),
+      'uri' => 'employee',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'employee.store',
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@store',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@store',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'employee.show' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'employee/{employee}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'employee.show',
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@show',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@show',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'employee.edit' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'GET',
+        1 => 'HEAD',
+      ),
+      'uri' => 'employee/{employee}/edit',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'employee.edit',
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@edit',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@edit',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'employee.update' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'PUT',
+        1 => 'PATCH',
+      ),
+      'uri' => 'employee/{employee}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'employee.update',
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@update',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@update',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
+        ),
+      ),
+      'fallback' => false,
+      'defaults' => 
+      array (
+      ),
+      'wheres' => 
+      array (
+      ),
+      'bindingFields' => 
+      array (
+      ),
+      'lockSeconds' => NULL,
+      'waitSeconds' => NULL,
+      'withTrashed' => false,
+    ),
+    'employee.destroy' => 
+    array (
+      'methods' => 
+      array (
+        0 => 'DELETE',
+      ),
+      'uri' => 'employee/{employee}',
+      'action' => 
+      array (
+        'middleware' => 
+        array (
+          0 => 'web',
+          1 => 'auth',
+        ),
+        'as' => 'employee.destroy',
+        'uses' => 'App\\Http\\Controllers\\EmployeeController@destroy',
+        'controller' => 'App\\Http\\Controllers\\EmployeeController@destroy',
+        'namespace' => NULL,
+        'prefix' => '/',
+        'where' => 
+        array (
         ),
       ),
       'fallback' => false,
@@ -23043,7 +23983,7 @@ app('router')->setCompiledRoutes(
       'waitSeconds' => NULL,
       'withTrashed' => false,
     ),
-    'generated::B30oKFHrQDKfP3V6' => 
+    'generated::iBWigguP89GavRc3' => 
     array (
       'methods' => 
       array (
@@ -23064,7 +24004,7 @@ app('router')->setCompiledRoutes(
         'where' => 
         array (
         ),
-        'as' => 'generated::B30oKFHrQDKfP3V6',
+        'as' => 'generated::iBWigguP89GavRc3',
       ),
       'fallback' => false,
       'defaults' => 
