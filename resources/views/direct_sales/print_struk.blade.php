@@ -47,7 +47,7 @@
         </tr>
         @php
             $total_diskon = 0;
-            $total_diskon_persen = 0;
+            $total_diskon_rp = 0;
         @endphp
         @foreach ($data->directSalesDetailBy as $item)
             <tr>
@@ -60,10 +60,10 @@
                     $diskon = $item->productBy->harga_jual * ($item->discount / 100);
                     $hargaDiskon = $item->productBy->harga_jual - $diskon;
                     
-                    $total_diskon += $hargaDiskon * $item->qty;
+                    $total_diskon += $diskon * $item->qty;
                     $discount_rp = $item->discount_rp * $item->qty;
                     
-                    $total_diskon_persen += $item->discount_rp * $item->qty;
+                    $total_diskon_rp += $item->discount_rp * $item->qty;
                     $sub_total = $item->productBy->harga_jual * $item->qty;
                     
                 @endphp
@@ -78,12 +78,12 @@
         </tr>
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">Discount</td>
-            <td style="font-size: 8pt" align="right">{{ number_format($diskon * $item->qty, 0, ',', '.') }}</td>
+            <td style="font-size: 8pt" align="right">{{ number_format($total_diskon, 0, ',', '.') }}</td>
         </tr>
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">Discount Rupiah</td>
             <td style="font-size: 8pt" align="right">
-                {{ number_format($discount_rp * $item->qty, 0, ',', '.') }}</td>
+                {{ number_format($total_diskon_rp, 0, ',', '.') }}</td>
         </tr>
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">Total Excl.</td>
@@ -104,12 +104,6 @@
     <center>
         <p style="font-size: 10pt">******* Thank you for your trust in us *******</p>
     </center>
-    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's
-        standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make
-        a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting,
-        remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing
-        Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions
-        of Lorem Ipsum.</p>
 
 </body>
 

@@ -388,7 +388,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-3 col-lg-2 form-group">
+                                            <div class="col-4 col-lg-2 form-group">
                                                 <label>Product Code</label>
                                                 <input type="text" class="form-control" required
                                                     name="retails[{{ $loop->index }}][product_code]"
@@ -399,7 +399,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-3 col-lg-1 form-group">
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label>Qty</label>
                                                 <input type="number" class="form-control" required
                                                     name="retails[{{ $loop->index }}][qty]"
@@ -410,7 +410,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="col-3 col-lg-2 form-group">
+                                            <div class="col-4 col-lg-2 form-group">
                                                 <label>Disc (%)</label>
                                                 <input type="number" class="form-control" required
                                                     name="retails[{{ $loop->index }}][discount]"
@@ -433,7 +433,7 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="col-2 col-lg-1 form-group">
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label for="">&nbsp;</label>
                                                 <a id="" href="javascript:void(0)"
                                                     class="form-control remSo-edit text-white text-center"

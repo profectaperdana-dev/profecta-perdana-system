@@ -400,9 +400,9 @@
         <script>
             $(document).ready(function() {
                 let csrf = $('meta[name="csrf-token"]').attr("content");
-                $('form').submit(function() {
-                    $(this).find('button[type="submit"]').prop('disabled', true);
-                });
+                // $('form').submit(function() {
+                //     $(this).find('button[type="submit"]').prop('disabled', true);
+                // });
             });
         </script>
     @endpush

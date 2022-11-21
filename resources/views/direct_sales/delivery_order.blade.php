@@ -116,7 +116,7 @@
                         {{ $data->cust_name }}
                     @endif
                     <br>
-                    {{ $data->customerBy->address_cust }} <br>
+                    {{ $data->address }} <br>
                     Phone Customer : {{ $data->cust_phone }}
                 </td>
                 <td>Delivery Date <br>

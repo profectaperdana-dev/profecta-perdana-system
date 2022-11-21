@@ -692,7 +692,7 @@
                         var form =
                             '<div class="mx-auto py-2 form-group row bg-primary">' +
                             '<input type="hidden" class="loop" value="' + x + '">' +
-                            '<div class="form-group col-12 col-lg-5">' +
+                            '<div class="form-group col-12 col-lg-4">' +
                             "<label>Product</label>" +
                             '<select name="retails[' +
                             x +
@@ -701,6 +701,12 @@
                             "</select>" +
                             "</div>" +
                             '<div class="col-3 col-lg-2 form-group">' +
+                            "<label> Series Code </label> " +
+                            '<input type="text" class="form-control" required name="retails[' +
+                            x +
+                            '][product_code]">' +
+                            "</div> " +
+                            '<div class="col-3 col-lg-1 form-group">' +
                             "<label> Qty </label> " +
                             '<input type="number" class="form-control" required name="retails[' +
                             x +
