@@ -4,11 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\CustomerModel;
 use App\Models\MaterialModel;
+use App\Models\ProductCostModel;
 use App\Models\ProductModel;
 use App\Models\StockModel;
 use App\Models\SubMaterialModel;
 use App\Models\SubTypeModel;
 use App\Models\UomModel;
+use App\Models\WarehouseModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Gate;
@@ -154,40 +156,8 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate(
-            [
-                'nama_barang' => 'required',
-                'no_seri' => 'required',
-                'uom' => 'required',
-                'material_grup' => 'required',
-                'sub_material' => 'required',
-                'sub_type' => 'required',
-                'berat_' => 'required',
-                'harga_beli_' => 'required',
-                'harga_jual_' => 'required',
-                'harga_jual_nonretail_' => 'required',
-                'minstok' => 'required',
-                'shown' => 'required',
-                'foto_barang' => 'required',
+        // dd($request->all());
 
-            ],
-            [
-                'nama_barang.required' => 'The Product Name is required',
-                'no_seri.required' => 'The Serial Number is required',
-                'uom.required' => 'You have to choose Unit of Measurement',
-                'material_grup.required' => 'You have to choose Product Material',
-                'sub_material.required' => 'You have to choose Product Sub Material',
-                'sub_type.required' => 'You have to choose Product Sub Material Type',
-                'berat.required' => 'The Product Weight is required',
-                'harga_beli.required' => 'The Purchase Price is required',
-                'harga_jual.required' => 'The Retail Selling Price is required',
-                'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
-                'minstok.required' => 'The Min Stock required',
-                'shown.required' => 'The Shown At required',
-                'foto_barang.required' => 'You have to choose Product Photo File',
-
-            ]
-        );
 
         $materials = MaterialModel::select('code_materials')->where('id', $request->get('material_grup'))->firstOrFail();
         $sub_materials = SubMaterialModel::select('code_sub_material')->where('id', $request->get('sub_material'))->firstOrFail();
@@ -205,19 +175,42 @@ class ProductController extends Controller
         $model->id_sub_type = $request->get('sub_type');
         $model->berat = $request->get('berat');
         $model->harga_beli = $request->get('harga_beli');
-        $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->minstok = $request->get('minstok');
         $model->shown = $request->get('shown');
-        // $model->tgl_produksi = $request->get('tgl_produksi');
         $model->status = 1;
         $file = $request->foto_barang;
         $nama_file = time() . '.' . $file->getClientOriginalExtension();
         $file->move("foto_produk/", $nama_file);
         $model->foto_barang = $nama_file;
         $model->created_by = Auth::user()->id;
-        $model->save();
-        return redirect('/products')->with('success', 'Create data product  ' . $model->nama_barang . ' is success');
+        $saved = $model->save();
+        if ($saved) {
+            foreach ($request->tradeFields as $value) {
+                $cost = new ProductCostModel();
+                $cost->id_product = $model->id;
+                $cost->id_warehouse = $value['id_warehouse'];
+                $cost->harga_jual = $value['harga_jual'];
+                //? check duplicate
+                $check_duplicate = ProductCostModel::where('id_product', $cost->id_product)
+                    ->where('id_warehouse', $cost->id_warehouse)
+                    ->count();
+                if ($check_duplicate > 0) {
+                    $message_duplicate = "You enter duplication of products. Please recheck the PO you set.";
+                    continue;
+                } else {
+                    $cost->save();
+                }
+            }
+        }
+        if (empty($message_duplicate) && $saved) {
+            return redirect()->back()->with('success', 'Create data product ' . $model->nama_barang . ' success');
+        } elseif (!empty($message_duplicate) && $saved) {
+
+            return redirect()->back()->with('info', 'Create data product success but ! ' . $message_duplicate);
+        } else {
+            return redirect()->back()->with('error', 'Create data product Fail! Please make sure you have filled all the input');
+        }
     }
 
     /**
@@ -352,5 +345,26 @@ class ProductController extends Controller
         $stock = StockModel::where('products_id', $model->id)->delete();
         $model->delete();
         return redirect('/products')->with('error', 'Delete data product  ' . $model->nama_barang . ' is success');
+    }
+
+    public function getWarehouse()
+    {
+        try {
+            $product = [];
+            if (request()->has('q')) {
+                $search = request()->q;
+                $product = WarehouseModel::select("id", "type", 'warehouses')
+                    ->where('warehouses', 'LIKE', "%$search%")
+                    ->where('type', 5)
+                    ->get();
+            } else {
+                $product = WarehouseModel::select("id", "type", 'warehouses')
+                    ->where('type', 5)
+                    ->get();
+            }
+            return response()->json($product);
+        } catch (\Throwable $th) {
+            dd($th);
+        }
     }
 }
