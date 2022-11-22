@@ -3,7 +3,7 @@
             <div class="ribbon-wrapper card">
                 <div class="card-body">
                     <div class="ribbon ribbon-bookmark ribbon-primary">Personal Data</div>
-                    <input type="hidden" value="{{ url()->current() }}" name="link">
+                    <input type="text" value="{{ url()->current() }}" name="link">
                     <div class="row font-weight-bold">
                         <div class="form-group row">
                             <div class="col-md-6 form-group">
