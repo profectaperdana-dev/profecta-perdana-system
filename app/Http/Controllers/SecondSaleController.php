@@ -176,6 +176,8 @@ class SecondSaleController extends Controller
         $model->second_sale_date = Carbon::now()->format('Y-m-d');
         $model->created_by = Auth::user()->id;
 
+
+
         //* customer 
         $model->customer_name = $request->customer;
         $model->customer_phone = $request->customer_phone;
