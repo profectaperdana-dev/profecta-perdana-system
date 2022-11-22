@@ -1,30 +1,19 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group row font-weight-bold">
+        <div class="form-group row font-weight-bold" id="formTradeIn">
             <div class="col-md-3 form-group">
                 <label>Product Name</label>
                 <input type="text" class="form-control {{ $errors->first('nama_barang') ? ' is-invalid' : '' }}"
                     placeholder="Product Name" name="nama_barang" value="{{ old('nama_barang', $data->nama_barang) }}"
                     required>
-                @error('nama_barang')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
             <div class="col-md-3 form-group">
                 <label>Serial Number</label>
                 <input type="text" class="form-control {{ $errors->first('no_seri') ? ' is-invalid' : '' }}"
                     placeholder="Serial Number" name="no_seri" value="{{ old('no_seri', $data->no_seri) }}" required>
-                @error('no_seri')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
             </div>
 
             <div class="col-md-3 form-group">
-
                 <label>
                     Unit of Measurement</label>
                 <select name="uom" id="" required
@@ -35,11 +24,7 @@
                             {{ $list_uom->satuan }}</option>
                     @endforeach
                 </select>
-                @error('uom')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
             <div class="col-md-3 form-group">
                 <label>
@@ -52,11 +37,7 @@
                             {{ $list_material->nama_material }}</option>
                     @endforeach
                 </select>
-                @error('material_grup')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
             <div class="col-md-3 form-group">
                 <label>
@@ -69,11 +50,7 @@
                         </option>
                     @endif
                 </select>
-                @error('sub_material')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
             <div class="col-md-3 form-group">
                 <label>
@@ -86,11 +63,7 @@
                         </option>
                     @endif
                 </select>
-                @error('sub_material')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
             <div class="col-md-3 form-group">
                 <label>Product Weight <span><small class="badge badge-danger">gram</small></span></label>
@@ -98,11 +71,7 @@
                     placeholder="Product Weight" id="berat"
                     value="{{ old('berat', number_format($data->berat, 0, ',', '.')) }}">
                 <input type="hidden" name="berat" id="berat_" value="{{ $data->berat }}">
-                @error('berat')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
             <div class="col-md-3 form-group">
                 <label>Purchase Price <small class="badge badge-primary">(exclude PPN)</small> </label>
@@ -110,47 +79,24 @@
                     required placeholder="Purchase Price" id="harga_beli"
                     value="{{ old('harga_beli', number_format($data->harga_beli, 0, ',', '.')) }}">
                 <input type="hidden" id="harga_beli_" name="harga_beli" value="{{ $data->harga_beli }}">
-                @error('harga_beli')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
             <div class="col-md-3 form-group">
-                <label>Retail Price <small class="badge badge-primary">(exclude PPN)</small></label>
-                <input type="text" class="form-control {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
-                    id="harga_jual" required placeholder="Retail Selling Price"
-                    value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}">
-                <input type="hidden" name="harga_jual" id="harga_jual_" value="{{ $data->harga_jual }}">
-                @error('harga_jual')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
-            <div class="col-md-3 form-group">
-                <label>Non Retail Price<small class="badge badge-primary">(exclude PPN)</small></label>
+                <label>Non Retail Price <small class="badge badge-primary">(exclude PPN)</small></label>
                 <input type="text"
-                    class="form-control {{ $errors->first('harga_jual_nonretail') ? ' is-invalid' : '' }}" required
-                    placeholder="Non Retail Selling Price" id="harga_jual_nonretail"
-                    value="{{ old('harga_jual_nonretail', number_format($data->harga_jual_nonretail, 0, ',', '.')) }}">
-                <input type="hidden" name="harga_jual_nonretail" id="harga_jual_nonretail_"
-                    value="{{ $data->harga_jual_nonretail }}">
-                @error('harga_jual_nonretail')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+                    class="form-control harga_jual_nonretail {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
+                    required placeholder="Retail Selling Price"
+                    value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}">
+                <input class="harga_jual_nonretail_" type="hidden" name="harga_jual_nonretail" id=""
+                    value="{{ $data->harga_jual }}">
+
             </div>
+
             <div class="col-md-3 form-group">
                 <label>Min Stock</label>
                 <input type="number" class="form-control {{ $errors->first('minstok') ? ' is-invalid' : '' }}"
                     required placeholder="Min Stock" name="minstok" value="{{ old('minstok', $data->minstok) }}">
-                @error('minstok')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
+
             </div>
             <div class="col-md-3 form-group">
                 <label>Shown At</label>
@@ -180,11 +126,7 @@
                         <option value="0">Non
                             Active</option>
                     </select>
-                    @error('status')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
+
                 </div>
             @endif
 
@@ -195,13 +137,35 @@
                 <input type="file" id="inputreference"
                     class="form-control {{ $errors->first('foto_barang') ? ' is-invalid' : '' }}"
                     placeholder="Product Photo" name="foto_barang" value="">
-                @error('foto_barang')
-                    <div class="invalid-feedback">
-                        {{ $message }}
-                    </div>
-                @enderror
-            </div>
 
+            </div>
+            <h5>Price Retail</h5>
+            <hr class="bg-primary">
+            <div class="mx-auto py-2 form-group row bg-primary">
+                <div class="form-group col-5">
+                    <label>Warehouse</label>
+                    <select name="tradeFields[0][id_warehouse]" class="form-control all_product_TradeIn" required>
+                        <option value="">-Choose Warehouse-</option>
+                    </select>
+
+                </div>
+                <div class="col-5 form-group">
+                    <label>Retail Price <small class="badge badge-primary">(exclude
+                            PPN)</small></label>
+                    <input type="text"
+                        class="form-control harga_jual {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
+                        required placeholder="Retail Selling Price"
+                        value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}">
+                    <input type="hidden" class="harga_jual_" name="tradeFields[0][harga_jual]"
+                        value="{{ $data->harga_jual }}">
+
+                </div>
+                <div class="col-2 col-md-2 form-group">
+                    <label for="">&nbsp;</label>
+                    <a id="addTradeIn" href="javascript:void(0)" class="form-control text-white  text-center"
+                        style="border:none; background-color:green">+</a>
+                </div>
+            </div>
         </div>
         <div class="form-row">
             <div class="form-group col-md-4 offset-md-4 text-center">
