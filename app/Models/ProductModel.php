@@ -37,6 +37,10 @@ class ProductModel extends Model
         return $this->hasOne(StockModel::class, 'products_id', 'id')->withTrashed();
     }
 
+    public function productCosts()
+    {
+        return $this->hasMany(ProductCostModel::class, 'id_product', 'id');
+    }
     public function getRouteKeyName()
     {
         return 'kode_barang';

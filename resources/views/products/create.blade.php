@@ -192,8 +192,9 @@
                 </div>
                 
                 <div class="col-5 form-group">
-                    <label>Retail Price</label>
-                    <input class="form-control total" value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}"  id="">
+                    <label>Retail Price <small class="badge badge-primary">(exclude
+                                PPN)</small></label>
+                    <input class="form-control total" required data-v-min="1" value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}"  id="">
                     <input type="hidden" name="tradeFields[${y}][harga_jual]" >
                 </div>
                 <div class="col-2 col-md-2 form-group">

@@ -255,43 +255,12 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        // dd($request->all());
+
         if (!Gate::allows('level1') && !Gate::allows('level2')) {
             abort(403);
         }
-        $request->validate(
-            [
-                'nama_barang' => 'required',
-                'no_seri' => 'required',
-                'uom' => 'required',
-                'material_grup' => 'required',
-                'sub_material' => 'required',
-                'berat' => 'required',
-                'harga_beli' => 'required',
-                'harga_jual' => 'required',
-                'harga_jual_nonretail' => 'required',
-                'minstok' => 'required',
-                'shown' => 'required',
-                'status' => 'required',
 
-
-            ],
-            [
-                'nama_barang.required' => 'The Product Name is required',
-                'no_seri.required' => 'The Serial Number is required',
-                'uom.required' => 'You have to choose Unit of Measurement',
-                'material_grup.required' => 'You have to choose Product Material',
-                'sub_material.required' => 'You have to choose Product Sub Material',
-                'berat.required' => 'The Product Weight is required',
-                'harga_beli.required' => 'The Purchase Price is required',
-                'harga_jual.required' => 'The Retail Selling Price is required',
-                'harga_jual_nonretail.required' => 'The Non Retail Selling Price is required',
-                'minstok.required' => 'The Min Stock required',
-                'shown.required' => 'The Shown At requierd',
-                'status.required' => 'The Status is required',
-
-
-            ]
-        );
         $materials = MaterialModel::select('code_materials')->where('id', $request->get('material_grup'))->firstOrFail();
         $sub_materials = SubMaterialModel::select('code_sub_material')->where('id', $request->get('sub_material'))->firstOrFail();
         $sub_types = SubTypeModel::select('code_sub_type')->where('id', $request->get('sub_type'))->firstOrFail();
@@ -306,7 +275,6 @@ class ProductController extends Controller
         $model->id_sub_type = $request->get('sub_type');
         $model->berat = $request->get('berat');
         $model->harga_beli = $request->get('harga_beli');
-        $model->harga_jual = $request->get('harga_jual');
         $model->harga_jual_nonretail = $request->get('harga_jual_nonretail');
         $model->minstok = $request->get('minstok');
         $model->shown = $request->get('shown');
@@ -324,8 +292,40 @@ class ProductController extends Controller
             $model->foto_barang = $nama_file;
         }
         $model->created_by = Auth::user()->id;
-        $model->save();
-        return redirect('/products')->with('info', 'Edit data product  ' . $model->nama_barang . ' is success');
+        $saved =  $model->save();
+
+        $products_arr = [];
+        foreach ($request->tradeFields as $check) {
+            array_push($products_arr, $check['id_warehouse']);
+        }
+        $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
+        // dd($products_arr);
+
+
+        if (!empty($duplicates)) {
+            return redirect()->back()->with('error', "You enter duplicate data 'Retail Price'! Please check again!");
+        }
+        if ($saved) {
+            foreach ($request->tradeFields as $value) {
+                $data = ProductCostModel::where('id_product', $model->id)
+                    ->where('id_warehouse', $value['id_warehouse'])
+                    ->first();
+                if ($data) {
+                    $data->id_warehouse = $value['id_warehouse'];
+                    $data->harga_jual = $value['harga_jual'];
+                    $data->save();
+                } else {
+                    $data = new ProductCostModel();
+                    $data->id_product = $model->id;
+                    $data->id_warehouse = $value['id_warehouse'];
+                    $data->harga_jual = $value['harga_jual'];
+                    $data->save();
+                }
+            }
+        }
+        ProductCostModel::where('id_product', $model->id)->whereNotIn('id_warehouse', $products_arr)->delete();
+        // dd($test);
+        return redirect()->back()->with('info', 'Edit data product  ' . $model->nama_barang . ' is success');
     }
 
     /**
