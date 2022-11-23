@@ -1,6 +1,10 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="form-group row text-black font-weight-bold" id="formTradeIn">
+        <div class="form-group row text-black  font-weight-bold" id="formTradeIn">
+
+
+
+            {{-- ! informasi produk --}}
             <div class="col-md-3 form-group">
                 <label> Product Name</label>
                 <input type="text" class="form-control text-capitalize" placeholder="Product Name" name="nama_barang"
@@ -11,7 +15,6 @@
                 <input type="text" class="form-control" placeholder="Serial Number" name="no_seri"
                     value="{{ old('no_seri', $data->no_seri) }}" required>
             </div>
-
             <div class="col-md-3 form-group">
                 <label>
                     Unit of Measurement</label>
@@ -22,8 +25,10 @@
                             {{ $list_uom->satuan }}</option>
                     @endforeach
                 </select>
-
             </div>
+            {{-- ! end informasi produk --}}
+
+            {{-- ! material produk --}}
             <div class="col-md-3 form-group">
                 <label>
                     Material</label>
@@ -34,7 +39,6 @@
                             {{ $list_material->nama_material }}</option>
                     @endforeach
                 </select>
-
             </div>
             <div class="col-md-3 form-group">
                 <label>
@@ -46,7 +50,6 @@
                         </option>
                     @endif
                 </select>
-
             </div>
             <div class="col-md-3 form-group">
                 <label>
@@ -58,42 +61,38 @@
                         </option>
                     @endif
                 </select>
-
             </div>
+            {{-- ! end material produk --}}
+
+            {{-- ! produk numeric informasi --}}
             <div class="col-md-3 form-group">
                 <label>Product Weight <span><small class="badge badge-danger">gram</small></span></label>
-                <input data-v-min="1" type="text" class="form-control berat" required placeholder="Product Weight"
-                    id="berat" value="{{ old('berat', number_format($data->berat, 0, ',', '.')) }}">
-                <input type="hidden" class="berat_" name="berat" id="berat_" value="{{ $data->berat }}">
-
+                <input type="text" class="form-control berat" required placeholder="Product Weight"
+                    value="{{ old('berat', number_format($data->berat, 0, ',', '.')) }}">
+                <input type="hidden" class="berat_" name="berat" value="{{ $data->berat }}">
             </div>
             <div class="col-md-3 form-group">
-                <label>Purchase Price <small class="badge badge-primary">(exclude PPN)</small> </label>
-                <input data-v-min="1" type="text" class="form-control harga_beli" required
-                    placeholder="Purchase Price" id="harga_beli"
+                <label>Purchase Price <small class="badge badge-primary">(ex. PPN)</small> </label>
+                <input type="text" class="form-control harga_beli" required placeholder="Purchase Price"
                     value="{{ old('harga_beli', number_format($data->harga_beli, 0, ',', '.')) }}">
-
-                <input type="hidden" class="harga_beli_" id="harga_beli_" name="harga_beli"
-                    value="{{ $data->harga_beli }}">
-
+                <input type="hidden" class="harga_beli_" name="harga_beli" value="{{ $data->harga_beli }}">
             </div>
             <div class="col-md-3 form-group">
-                <label>Non Retail Price <small class="badge badge-primary">(exclude PPN)</small></label>
-                <input type="text" data-v-min="1" class="form-control harga_jual_nonretail" required
-                    placeholder="Retail Selling Price" id="harga_jual_nonretail"
+                <label>Non Retail Price <small class="badge badge-primary">(ex. PPN)</small></label>
+                <input type="text" class="form-control harga_jual_nonretail" required
+                    placeholder="Retail Selling Price"
                     value="{{ old('harga_jual_nonretail', number_format($data->harga_jual_nonretail, 0, ',', '.')) }}">
-
-                <input class="harga_jual_nonretail_" type="hidden" name="harga_jual_nonretail" id=""
+                <input class="harga_jual_nonretail_" type="hidden" name="harga_jual_nonretail"
                     value="{{ $data->harga_jual_nonretail }}">
-
             </div>
-
             <div class="col-md-3 form-group">
                 <label>Min Stock</label>
-                <input data-v-min="1" type="number" class="form-control" required placeholder="Min Stock"
-                    name="minstok" value="{{ old('minstok', $data->minstok) }}">
-
+                <input type="number" class="form-control" required placeholder="Min Stock" name="minstok"
+                    value="{{ old('minstok', $data->minstok) }}">
             </div>
+            {{-- ! end produk numeric informasi --}}
+
+            {{-- ! status produk --}}
             <div class="col-md-3 form-group">
                 <label>Shown At</label>
                 <select name="shown" required class="form-control sub_type">
@@ -121,26 +120,34 @@
                         <option value="0">Non
                             Active</option>
                     </select>
-
                 </div>
             @endif
+            {{-- ! end status produk --}}
 
-
+            {{-- ! foto produk --}}
             <div class="col-md-3 form-group">
                 <label>Product Photo</label>
                 <input type="text" hidden value="{{ $data->foto_barang }}" name="url_lama">
                 <input type="file" id="inputreference"
                     class="form-control {{ $errors->first('foto_barang') ? ' is-invalid' : '' }}"
                     placeholder="Product Photo" name="foto_barang" value="">
-
             </div>
-            <h5>Price Retail</h5>
-            <hr class="bg-primary">
+            {{-- ! end foto produk --}}
 
+            <br>
+            <br>
+            <h5 class="f-w-600">Retail Price</h5>
+            <div>
+                <hr class="bg-primary">
+            </div>
+
+
+            {{-- ? harga retail --}}
             @if (!request()->is('products/create'))
+                {{-- ! edit data harga retail produk --}}
                 @foreach ($data->productCosts as $value)
-                    <div class="mx-auto py-2 form-group row bg-primary">
-                        <div class="form-group col-5">
+                    <div class="mx-auto py-2 form-group row bg-primary getIndex">
+                        <div class="form-group col-12 col-lg-5">
                             <label>Warehouse</label>
                             <select name="tradeFields[{{ $loop->index }}][id_warehouse]"
                                 class="form-control all_product_TradeIn" required>
@@ -151,55 +158,56 @@
                                 @endif
                                 <option value="">-Choose Warehouse-</option>
                             </select>
-
                         </div>
-                        <div class="col-5 form-group">
-                            <label>Retail Price <small class="badge badge-primary">(exclude
+                        <div class="col-10 col-lg-5 form-group">
+                            <label>Retail Price <small class="badge badge-primary">(ex.
                                     PPN)</small></label>
-                            <input type="text" data-v-min="1" class="form-control harga_jual" required
+                            <input type="text" class="form-control harga_jual" required
                                 placeholder="Retail Selling Price"
                                 value="{{ old('harga_jual', number_format($value->harga_jual, 0, ',', '.')) }}">
                             <input type="hidden" class="harga_jual_"
                                 name="tradeFields[{{ $loop->index }}][harga_jual]"
                                 value="{{ $value->harga_jual }}">
-
                         </div>
                         @if ($loop->index == 0)
-                            <div class="col-2 col-md-2 form-group">
+                            <div class="col-2 col-lg-2 form-group">
                                 <label for="">&nbsp;</label>
                                 <a id="addTradeIn" href="javascript:void(0)"
                                     class="form-control text-white  text-center"
                                     style="border:none; background-color:green">+</a>
                             </div>
                         @else
-                            <div class="col-2 col-md-2 form-group">
+                            <div class="col-2 col-lg-2 form-group">
                                 <label for="">&nbsp;</label>
                                 <a href="javascript:void(0)"class="form-control text-white remTradeIn text-center"
                                     style="border:none; background-color:red">-</a>
                             </div>
                         @endif
 
+                        {{-- ! get index terakhir  --}}
+                        <input type="hidden" class="index" value="{{ $loop->index }}">
+                        {{-- ! end get index terakhir --}}
                     </div>
                 @endforeach
+                {{-- ! end edit data harga retail produk --}}
             @else
+                {{-- ! add data harga retail produk --}}
                 <div class="mx-auto py-2 form-group row bg-primary">
-                    <div class="form-group col-5">
+                    <div class="col-12 col-lg-5 form-group">
                         <label>Warehouse</label>
                         <select name="tradeFields[0][id_warehouse]" class="form-control all_product_TradeIn" required>
                             <option value="">-Choose Warehouse-</option>
                         </select>
-
                     </div>
-                    <div class="col-5 form-group">
-                        <label>Retail Price <small class="badge badge-primary">(exclude
+                    <div class="col-10 col-lg-5 form-group">
+                        <label>Retail Price <small class="badge badge-primary">(ex.
                                 PPN)</small></label>
-                        <input type="text" data-v-min="1"
+                        <input type="text"
                             class="form-control harga_jual {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
                             required placeholder="Retail Selling Price"
                             value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}">
                         <input type="hidden" class="harga_jual_" name="tradeFields[0][harga_jual]"
                             value="{{ $data->harga_jual }}">
-
                     </div>
                     <div class="col-2 col-md-2 form-group">
                         <label for="">&nbsp;</label>
@@ -207,15 +215,20 @@
                             style="border:none; background-color:green">+</a>
                     </div>
                 </div>
+                {{-- ! end add data harga retail produk --}}
             @endif
-
+            {{-- ? end harga retail --}}
         </div>
+
+        {{-- ! preview image --}}
         <div class="form-row">
             <div class="form-group col-md-4 offset-md-4 text-center">
                 <label id="previewLabel" hidden>Preview Image</label>
                 <img src="#" id="previewimg" class="img-fluid shadow-lg" style="width:350px;" hidden />
             </div>
         </div>
+        {{-- ! end preview image --}}
+
         <div class="form-group">
             <a class="btn btn-danger" href="{{ url('products/') }}"> <i class="ti ti-arrow-left"> </i> Back
             </a>

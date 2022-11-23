@@ -58,8 +58,8 @@
         <script>
             $(document).ready(function() {
                 let csrf = $('meta[name="csrf-token"]').attr("content");
-                y = 0;
-
+                let y = $('.getIndex').last().find('.index').val();
+                // console.log(y);
                 // get warehouses
                 $(".all_product_TradeIn").select2({
                     width: "100%",
@@ -186,14 +186,14 @@
                 $("#addTradeIn").on("click", function() {
                     ++y;
                     let form = ` <div class="mx-auto py-2 form-group row bg-primary">
-                <div class="form-group col-5">
+                 <div class="col-12 col-lg-5 form-group">
                     <label>Baterry</label>
                     <select name="tradeFields[${y}][id_warehouse]" class="form-control all_product_TradeIn" required>
                         <option value="">-Choose Warehouse-</option>
                     </select>
                 </div>
                 
-                <div class="col-5 form-group">
+                 <div class="col-10 col-lg-5 form-group">
                     <label>Retail Price <small class="badge badge-primary">(exclude
                                 PPN)</small></label>
                     <input required type="text" class="form-control total" data-v-min="1" value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}"  id="">

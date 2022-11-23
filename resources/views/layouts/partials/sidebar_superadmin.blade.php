@@ -1,6 +1,9 @@
 <header class="main-nav">
+
     <div class="sidebar-user text-center"><a class="setting-primary" href="{{ url('/profiles') }}"><i
                 data-feather="settings"></i></a>
+
+        {{-- ! informasi profile --}}
         @if (Auth::user()->photo_profile == null)
             <img class="img-90 rounded-circle" src="{{ asset('images/blank.png') }}" alt="">
         @else
@@ -14,8 +17,10 @@
             {{ Auth::user()->roleBy->name }} <br> {{ Auth::user()->jobBy->job_name }} at
 
             {{ Auth::user()->warehouseBy->warehouses }}</p>
+        {{-- ! end informasi profile --}}
 
     </div>
+
     <nav>
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
@@ -41,10 +46,13 @@
                             <h6>Starter </h6>
                         </div>
                     </li>
+
+                    {{-- ! dashboard --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('home') ? 'active' : '' }}"
                             href="{{ url('/home') }}"><i data-feather="home"></i><span>Dashboard</span></a>
                     </li>
+                    {{-- ! end dashboard --}}
 
                     <li class="sidebar-main-title">
                         <div>
@@ -99,7 +107,13 @@
                     </li>
                     {{-- ! end master product --}}
 
-
+                    {{-- ! master PPN --}}
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('value_added_tax') ? 'active' : '' }}"
+                            href="{{ url('/value_added_tax') }}"><i data-feather="paperclip"></i><span>Master
+                                PPN</span></a>
+                    </li>
+                    {{-- ! end master PPN --}}
 
                     {{-- ! master stock --}}
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('stocks') ||
@@ -152,21 +166,54 @@
                     </li>
                     {{-- ! end master stock --}}
 
-                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('customers') || request()->is('customer_categories') || request()->is('customer_areas')) active @endif"
+                    {{-- ! master areas --}}
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('customer_areas') ? 'active' : '' }}"
+                            href="{{ url('/customer_areas') }}"><i data-feather="map"></i><span>Master
+                                Areas</span></a>
+                    </li>
+                    {{-- ! end master areas --}}
+
+                    {{-- ! master warehouse --}}
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('warehouse_types') || request()->is('warehouses')) active @endif"
+                            href="javascript:void(0)"><i data-feather="archive"></i><span>Master Warehouse</span></a>
+                        <ul class="nav-submenu menu-content"
+                            style="display: @if (request()->is('warehouse_types') || request()->is('warehouses')) block @else none @endif ">
+                            <li><a href="{{ url('/warehouse_types') }}"
+                                    class="{{ request()->is('warehouse_types') ? 'active' : '' }}">Type Warehouse</a>
+                            </li>
+                            <li><a href="{{ url('/warehouses') }}"
+                                    class="{{ request()->is('warehouses') ? 'active' : '' }}">Warehouses</a>
+                            </li>
+                        </ul>
+                    </li>
+                    {{-- ! end master warehouse --}}
+
+                    {{-- ! master customer --}}
+                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('customers') || request()->is('customer_categories')) active @endif"
                             href="javascript:void(0)"><i data-feather="user-check"></i><span>Master Customers</span></a>
                         <ul class="nav-submenu menu-content"
-                            style="display: @if (request()->is('customers') || request()->is('customer_categories') || request()->is('customer_areas')) block @else none @endif ">
+                            style="display: @if (request()->is('customers') || request()->is('customer_categories')) block @else none @endif ">
                             <li><a href="{{ url('/customer_categories') }}"
                                     class="{{ request()->is('customer_categories') ? 'active' : '' }}">Customer
                                     Categories</a></li>
-                            <li><a href="{{ url('/customer_areas') }}"
-                                    class="{{ request()->is('customer_areas') ? 'active' : '' }}">Customer Areas</a>
-                            </li>
                             <li><a href="{{ url('/customers') }}"
                                     class="{{ request()->is('customers') ? 'active' : '' }}">Customers</a></li>
                         </ul>
                     </li>
-                    <li class="dropdown"><a class="nav-link menu-title @if (request()->is('users') || request()->is('roles') || request()->is('jobs')) active @endif"
+                    {{-- ! end master customer --}}
+
+                    {{-- ! master discount --}}
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('discounts') ? 'active' : '' }}"
+                            href="{{ url('/discounts') }}"><i data-feather="percent"></i><span>Master
+                                Discount</span></a>
+                    </li>
+                    {{-- ! end master discount --}}
+
+                    {{-- ! master account --}}
+                    <li class="dropdown"><a
+                            class="nav-link menu-title @if (request()->is('users') || request()->is('roles') || request()->is('jobs')) active @endif"
                             href="javascript:void(0)"><i data-feather="users"></i><span>Master Accounts</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('users') || request()->is('roles') || request()->is('jobs')) block @else none @endif ">
@@ -178,40 +225,19 @@
                             </li>
                             <li><a href="{{ url('/users') }}"
                                     class="{{ request()->is('users') ? 'active' : '' }}">Accounts</a></li>
-
                         </ul>
                     </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('discounts') ? 'active' : '' }}"
-                            href="{{ url('/discounts') }}"><i data-feather="percent"></i><span>Master
-                                Discount</span></a>
-                    </li>
-                    <li>
-                        <a class="nav-link menu-title link-nav {{ request()->is('value_added_tax') ? 'active' : '' }}"
-                            href="{{ url('/value_added_tax') }}"><i data-feather="percent"></i><span>Master
-                                Value-added Tax</span></a>
-                    </li>
+                    {{-- ! end master account --}}
 
-                    <li class="dropdown"><a
-                            class="nav-link menu-title @if (request()->is('warehouse_types') || request()->is('warehouses')) active @endif"
-                            href="javascript:void(0)"><i data-feather="server"></i><span>Master Warehouse</span></a>
-                        <ul class="nav-submenu menu-content"
-                            style="display: @if (request()->is('warehouse_types') || request()->is('warehouses')) block @else none @endif ">
-                            <li><a href="{{ url('/warehouse_types') }}"
-                                    class="{{ request()->is('warehouse_types') ? 'active' : '' }}">Type Warehouse</a>
-                            </li>
-                            <li><a href="{{ url('/warehouses') }}"
-                                    class="{{ request()->is('warehouses') ? 'active' : '' }}">Warehouses</a>
-                            </li>
-
-
-                        </ul>
-                    </li>
+                    {{-- ! master supplier --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('supliers') ? 'active' : '' }}"
                             href="{{ url('/supliers') }}"><i data-feather="battery"></i><span>Master
                                 Suppliers</span></a>
                     </li>
+                    {{-- ! end master supplier --}}
+
+                    {{-- ! master kendaraan --}}
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('') || request()->is('motorcycle') || request()->is('motorcycle_type')) active @endif"
                             href="javascript:void(0)"><i data-feather="airplay"></i><span>Master Vehicle</span></a>
@@ -234,10 +260,11 @@
                             <li><a href="{{ url('/motorcycle_type') }}"
                                     class="{{ request()->is('motorcycle_type') ? 'active' : '' }}">Motorcycle Type</a>
                             </li>
-
-
                         </ul>
                     </li>
+                    {{-- ! end master kendaraan --}}
+
+                    {{-- ! master accounting --}}
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('account_sub_type') || request()->is('account') || request()->is('account_sub')) active @endif"
                             href="javascript:void(0)"><i data-feather="book-open"></i><span>Master
@@ -253,9 +280,11 @@
                             <li><a href="{{ url('/account_sub_type') }}"
                                     class="{{ request()->is('account_sub_type') ? 'active' : '' }}">Accounts Sub
                                     Type</a></li>
-
                         </ul>
                     </li>
+                    {{-- ! end master accounting --}}
+
+                    {{-- ! master Asset --}}
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('asset') || request()->is('asset_category')) active @endif"
                             href="javascript:void(0)"><i data-feather="book-open"></i><span>Master
@@ -270,11 +299,17 @@
                             </li>
                         </ul>
                     </li>
+                    {{-- ! end master Asset --}}
+
+                    {{-- ! master employee --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('employee') ? 'active' : '' }}"
                             href="{{ url('/employee') }}"><i data-feather="percent"></i><span>Master
                                 Employees</span></a>
                     </li>
+                    {{-- ! end master employee --}}
+
+
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Information</h6>

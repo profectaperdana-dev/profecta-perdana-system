@@ -26,6 +26,8 @@
                         <hr class="bg-primary">
                     </div>
                     <div class="card-body">
+
+                        {{-- ! create data --}}
                         <form class="form-label-left input_mask" method="post" action="{{ url('/product_sub_types') }}"
                             enctype="multipart/form-data">
                             @csrf
@@ -82,9 +84,10 @@
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </form>
+                        {{-- ! end create data --}}
+
                     </div>
                 </div>
             </div>
@@ -93,7 +96,6 @@
                     <div class="card-header pb-0">
                         <h5>All Data</h5>
                         <hr class="bg-primary">
-
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
@@ -109,6 +111,8 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                    {{-- ! read data --}}
                                     @foreach ($sub_types as $key => $value)
                                         <tr>
                                             <td style="width: 10%">
@@ -124,7 +128,7 @@
                                                         data-bs-target="#deleteData{{ $value->id }}">Delete</a>
                                                 </div>
                                             </td>
-                                            {{-- Modul Edit UOM --}}
+                                            {{-- ! Modul Edit  --}}
                                             <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -209,8 +213,8 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            {{-- End Modal Edit UOM --}}
-                                            {{-- Modul Delete UOM --}}
+                                            {{-- ! End Modal Edit  --}}
+                                            {{-- ! Modul Delete  --}}
                                             <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -245,15 +249,15 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            {{-- End Modal Delete UOM --}}
+                                            {{-- ! End Modal Delete  --}}
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->type_name }}</td>
                                             <td>{{ $value->nama_sub_material }}</td>
                                             <td class="text-uppercase">{{ $value->code_sub_type }}</td>
-
-
                                         </tr>
                                     @endforeach
+                                    {{-- ! end read data --}}
+
                                 </tbody>
                             </table>
                         </div>
