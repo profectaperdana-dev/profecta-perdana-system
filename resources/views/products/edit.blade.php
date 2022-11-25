@@ -104,7 +104,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.berat_').val(input);
+                    $this.next().val(input);
                 });
 
                 // format harga beli
@@ -125,7 +125,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.harga_beli_').val(input);
+                    $this.next().val(input);
 
                 });
 
@@ -147,7 +147,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.harga_jual_').val(input);
+                    $this.next().val(input);
                 });
                 $('.harga_jual_nonretail').on('keyup', function() {
                     var selection = window.getSelection().toString();
@@ -166,7 +166,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.harga_jual_nonretail_').val(input);
+                    $this.next().val(input);
                 });
                 const imgInput = document.getElementById('inputreference');
                 const imgEl = document.getElementById('previewimg');
@@ -192,11 +192,11 @@
                         <option value="">-Choose Warehouse-</option>
                     </select>
                 </div>
-                
+                 
                  <div class="col-10 col-lg-5 form-group">
                     <label>Retail Price <small class="badge badge-primary">(exclude
                                 PPN)</small></label>
-                    <input required type="text" class="form-control total" data-v-min="1" value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}"  id="">
+                    <input required type="text" class="form-control total"  placeholder="0">
                     <input type="hidden" name="tradeFields[${y}][harga_jual]">
                 </div>
                 <div class="col-2 col-md-2 form-group">
@@ -215,6 +215,7 @@
                     });
                     //reload instance after dynamic element is added
                     validator.reload();
+
                     $('.total').on('keyup', function() {
                         var selection = window.getSelection().toString();
                         if (selection !== '') {

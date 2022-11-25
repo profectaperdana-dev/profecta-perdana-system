@@ -202,10 +202,7 @@
                     <div class="col-10 col-lg-5 form-group">
                         <label>Retail Price <small class="badge badge-primary">(ex.
                                 PPN)</small></label>
-                        <input type="text"
-                            class="form-control harga_jual {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"
-                            required placeholder="Retail Selling Price"
-                            value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}">
+                        <input type="text" class="form-control harga_jual" required placeholder="0">
                         <input type="hidden" class="harga_jual_" name="tradeFields[0][harga_jual]"
                             value="{{ $data->harga_jual }}">
                     </div>

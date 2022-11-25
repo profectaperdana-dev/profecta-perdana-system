@@ -42,7 +42,7 @@
                                             </div>
                                         </div>
                                         <div class="mx-auto py-2 form-group row bg-primary rounded">
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-12 col-lg-4">
                                                 <label class="font-weight-bold">Account</label>
                                                 <select name="accountFields[0][account]"
                                                     class="account form-control text-capitalize required">
@@ -54,18 +54,18 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-4 col-md-3 form-group">
+                                            <div class="col-12 col-lg-3 form-group">
                                                 <label class="font-weight-bold">Memo</label>
                                                 <input type="text" required class="form-control text-capitalize"
                                                     name="accountFields[0][memo]" placeholder="Enter Memo">
                                             </div>
-                                            <div class="col-3 col-md-3 form-group">
+                                            <div class="col-10 col-lg-3 form-group">
                                                 <label class="font-weight-bold">Total</label>
                                                 <input type="text" required class="total form-control text-capitalize"
                                                     placeholder="Enter Total">
                                                 <input type="hidden" name="accountFields[0][total]" class="total_">
                                             </div>
-                                            <div class="col-1 col-md-2 form-group">
+                                            <div class="col-2 col-lg-2 form-group">
                                                 <label for="">&nbsp;</label>
                                                 <a id="addfields" href="javascript:void(0)"
                                                     class="form-control text-white  text-center"
@@ -128,25 +128,25 @@
                     ++y;
 
                     let form = `<div class="mx-auto py-2 form-group row bg-primary rounded">
-                                            <div class="form-group col-4">
+                                            <div class="form-group col-12 col-lg-4">
                                                 <label class="font-weight-bold">Account</label>
                                                 <select name="accountFields[${y}][account]"
                                                     class="account subType form-control text-capitalize required">
                                                     <option value="">--Select Account--</option>
                                                 </select>
                                             </div>
-                                            <div class="col-4 col-md-3 form-group">
+                                            <div class="col-12 col-lg-3 form-group">
                                                 <label class="font-weight-bold">Memo</label>
                                                 <input type="text" required class="form-control text-capitalize"
                                                     name="accountFields[${y}][memo]" placeholder="Enter Memo">
                                             </div>
-                                            <div class="col-3 col-md-3 form-group">
+                                            <div class="col-10 col-lg-3 form-group">
                                                 <label class="font-weight-bold">Total</label>
                                                 <input type="text" required class="form-control text-capitalize total"
                                                      placeholder="Enter Total">
                                                 <input type="hidden" class="total_" name="accountFields[${y}][total]">
                                             </div>
-                                            <div class="col-1 col-md-2 form-group">
+                                            <div class="col-2 col-lg-2 form-group">
                                                 <label for="">&nbsp;</label>
                                                 <a href="javascript:void(0)"
                                                     class="form-control text-white remTradeIn text-center"

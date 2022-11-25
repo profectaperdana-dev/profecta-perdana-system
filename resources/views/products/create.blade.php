@@ -103,7 +103,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.berat_').val(input);
+                    $this.next().val(input);
                 });
                 // format harga beli
                 $('.harga_beli').on('keyup', function() {
@@ -143,7 +143,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.harga_jual_').val(input);
+                    $this.next().val(input);
                 });
                 $('.harga_jual_nonretail').on('keyup', function() {
                     var selection = window.getSelection().toString();
@@ -162,7 +162,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.harga_jual_nonretail_').val(input);
+                    $this.next().val(input);
                 });
                 const imgInput = document.getElementById('inputreference');
                 const imgEl = document.getElementById('previewimg');
@@ -194,7 +194,7 @@
                 <div class="col-10 col-lg-5 form-group">
                     <label>Retail Price <small class="badge badge-primary">(exclude
                                 PPN)</small></label>
-                    <input class="form-control total" required data-v-min="1" value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}"  id="">
+                    <input class="form-control total" required  placeholder="0">
                     <input type="hidden" name="tradeFields[${y}][harga_jual]" >
                 </div>
                 <div class="col-2 col-md-2 form-group">

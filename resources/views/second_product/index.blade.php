@@ -43,7 +43,7 @@
                                 <div class="col-md-12">
                                     <div class="col-md-12" id="formdynamic">
                                         <div class="form-group row">
-                                            <div class="form-group col-md-12">
+                                            <div class="form-group col-12 col-lg-12">
                                                 @if (Gate::check('isSuperAdmin') || Gate::check('isWarehouseKeeper'))
                                                     <div class="form-group col-md-12">
                                                         <label>Warehouse</label>
@@ -53,7 +53,9 @@
                                                             <option value="">Choose Warehouse</option>
                                                             @foreach ($warehouse as $warehouses)
                                                                 <option value="{{ $warehouses->id }}">
-                                                                    {{ $warehouses->warehouses }}</option>
+                                                                    {{ $warehouses->warehouses }}
+                                                                    {{-- /{{ $warehouses->typeBy->name }} --}}
+                                                                </option>
                                                             @endforeach
                                                         </select>
                                                         @error('warehouses_id')
@@ -65,13 +67,13 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="form-group col-md-5">
-                                                <label>Battery</label>
+                                        <div class="form-group row py-2 bg-primary" style="margin-top: -40px">
+                                            <div class="form-group col-12 col-lg-12">
+                                                <label>Product</label>
                                                 <select name="stockFields[0][product_id]"
                                                     class="form-control @error('stockFields[0][product_id]') is-invalid @enderror all_product_TradeIn"
                                                     required>
-                                                    <option value="">-Choose Battery-</option>
+                                                    <option value="">Choose Product</option>
                                                 </select>
                                                 @error('stockFields[0][product_id]')
                                                     <div class="invalid-feedback">
@@ -79,7 +81,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-5">
+                                            <div class="form-group col-12 col-lg-12">
                                                 <label>Stock</label>
                                                 <input type="number" name="stockFields[0][stock]" id="stock"
                                                     class="form-control @error('stockFields[0][stock]') is-invalid @enderror"
@@ -294,22 +296,18 @@
                 $("#addStocks").on("click", function() {
                     ++y;
                     let form =
-                        '<div class="mx-auto py-2 form-group row"> <div class="form-group col-5">' +
-                        '<label>Baterry</label> <select name="stockFields[' +
+                        '<div class="form-group row bg-primary py-2"> <div class="form-group col-12 col-lg-12"> <label> Product </label> <select name="stockFields[' +
                         y +
-                        '][product_id]" class="form-control all_product_TradeIn" required>' +
-                        '<option value="">-Choose Battery-</option> ' +
-                        "</select>" +
-                        '</div>' +
-                        '<div class="col-3 col-md-5 form-group">' +
-                        "<label> Stock </label> " +
-                        '<input placeholder="Enter stock" class="form-control cekQty" required name="stockFields[' +
+                        '][product_id]"' +
+                        'class="form-control all_product_TradeIn" required> <option value=""> Choose Product </option> </select>' +
+                        '</div> <div class="form-group col-10 col-lg-10">' +
+                        '<label> Stock </label> <input type="number" name="stockFields[' +
                         y +
-                        '][stock]">' +
-                        "</div>" +
-                        '<div class="col-2 col-md-2 form-group">' +
+                        '][stock]" id="discount"' +
+                        'class="form-control" placeholder="Enter Stocks" required>' +
+                        '</div>  <div class="form-group col-2 col-lg-2">' +
                         '<label for="">&nbsp;</label>' +
-                        '<a href="javascript:void(0)" class="form-control text-white remTradeIn text-center" style="border:none; background-color:red">X</a></div></div>';
+                        '<a href="javascript:void(0)" class="form-control text-white remStock text-center" style="border:none; background-color:red">X</a></div></div>'
 
                     $("#formdynamic").append(form);
                     $(".all_product_TradeIn").select2({

@@ -287,7 +287,7 @@
                     {{-- ! master Asset --}}
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('asset') || request()->is('asset_category')) active @endif"
-                            href="javascript:void(0)"><i data-feather="book-open"></i><span>Master
+                            href="javascript:void(0)"><i data-feather="scissors"></i><span>Master
                                 Assets</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('asset') || request()->is('asset_category')) block @else none @endif ">
@@ -304,7 +304,7 @@
                     {{-- ! master employee --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('employee') ? 'active' : '' }}"
-                            href="{{ url('/employee') }}"><i data-feather="percent"></i><span>Master
+                            href="{{ url('/employee') }}"><i data-feather="eye"></i><span>Master
                                 Employees</span></a>
                     </li>
                     {{-- ! end master employee --}}
@@ -312,53 +312,64 @@
 
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Information</h6>
+                            <h6>Information Stock</h6>
                         </div>
                     </li>
 
+                    {{-- ! informasi stok --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('check_stock') ? 'active' : '' }}"
                             href="{{ url('/check_stock') }}"><i data-feather="inbox"></i><span>Check
-                                Stock
+                                Stock Now
                             </span></a>
                     </li>
+                    {{-- ! end informasi stok --}}
+
                     <li class="sidebar-main-title">
                         <div>
                             <h6>Report Accounting</h6>
                         </div>
                     </li>
+
+                    {{-- !  accounting --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('expenses/create') ? 'active' : '' }}"
-                            href="{{ url('/expenses/create') }}"><i data-feather="inbox"></i><span>Input Expenses
+                            href="{{ url('/expenses/create') }}"><i data-feather="upload-cloud"></i><span>Input
+                                Expenses
                             </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('jurnal') ? 'active' : '' }}"
-                            href="{{ url('/jurnal') }}"><i data-feather="inbox"></i><span>Journal
+                            href="{{ url('/jurnal') }}"><i data-feather="calendar"></i><span>Journal
                             </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('profit_loss') ? 'active' : '' }}"
-                            href="{{ url('/profit_loss') }}"><i data-feather="inbox"></i><span>Profit & Loss
+                            href="{{ url('/profit_loss') }}"><i data-feather="dollar-sign"></i><span>Profit & Loss
                             </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('depreciation') ? 'active' : '' }}"
-                            href="{{ url('/depreciation') }}"><i data-feather="inbox"></i><span>
+                            href="{{ url('/depreciation') }}"><i data-feather="trending-down"></i><span>
                                 Depreciation
                             </span></a>
                     </li>
+                    {{-- ! end accounting --}}
+
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Prospective Employees</h6>
+                            <h6>Candidate Employees</h6>
                         </div>
                     </li>
+
+                    {{-- ! candidate employee --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('prospective_employees') ? 'active' : '' }}"
-                            href="{{ url('/prospective_employees/') }}"><i data-feather="inbox"></i><span>Form
-                                Prospective Employees
+                            href="{{ url('/prospective_employees/') }}"><i data-feather="check-square"></i><span>Form
+                                Candidate
                             </span></a>
                     </li>
+                    {{-- ! end candidate employee --}}
 
                     <li class="sidebar-main-title">
                         <div>

@@ -172,16 +172,16 @@ $(document).ready(function () {
     $("#addStock").on("click", function () {
         ++y;
         let form =
-            '<div class="form-group row"> <div class="form-group col-7"> <label> Product </label> <select name="stockFields[' +
+            '<div class="form-group row bg-primary py-2"> <div class="form-group col-12 col-lg-12"> <label> Product </label> <select name="stockFields[' +
             y +
             '][product_id]"' +
             'class="form-control product-append-all" required> <option value=""> Choose Product </option> </select>' +
-            '</div> <div class="form-group col-3">' +
+            '</div> <div class="form-group col-10 col-lg-10">' +
             '<label> Stock </label> <input type="number" name="stockFields[' +
             y +
             '][stock]" id="discount"' +
             'class="form-control" placeholder="Enter Stocks" required>' +
-            '</div>  <div class="form-group col-2">' +
+            '</div>  <div class="form-group col-2 col-lg-2">' +
             '<label for="">&nbsp;</label>' +
             '<a href="javascript:void(0)" class="form-control text-white remStock text-center" style="border:none; background-color:red">X</a></div></div>';
 
