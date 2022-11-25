@@ -42,6 +42,12 @@
                                     Email: {{ $direct->cust_email }}
                                 </div>
                             </div>
+                            <div class="row mt-3">
+                                <div class="form-group col-6">
+                                    <label for="">Remark</label>
+                                    <input class="form-control" value="{{ $direct->remark }}" readonly>
+                                </div>
+                            </div>
                             <div class="row" id="formReturn">
                                 @foreach ($direct->directSalesDetailBy as $item)
                                     <div class="row mx-auto py-2 form-group bg-primary">
@@ -67,9 +73,17 @@
                                         </div>
 
                                         @php
+                                            $retail_price = 0;
+                                            foreach ($item->retailPriceBy as $value) {
+                                                if ($value->id_warehouse == Auth::user()->warehouse_id) {
+                                                    $retail_price = $value->harga_jual;
+                                                }
+                                            }
+                                            $ppn_cost = $retail_price * 0.11;
+                                            $ppn_total = $retail_price + $ppn_cost;
                                             $disc = $item->discount / 100;
-                                            $hargadisc = $item->productBy->harga_jual * $disc;
-                                            $harga = $item->productBy->harga_jual - $hargadisc;
+                                            $hargadisc = $ppn_total * $disc;
+                                            $harga = $ppn_total - $hargadisc - $item->discount_rp;
                                             $total = $harga * $item->qty;
                                         @endphp
                                         <div class="col-4 col-lg-3 form-group">
@@ -84,7 +98,7 @@
                             <hr>
                             <div class="row justify-content-between">
                                 <div class="form-group col-3">
-                                    <strong>Total:</strong>
+                                    <strong>Total (Excl. PPN):</strong>
 
                                 </div>
                                 <div class="form-group col-4 col-lg-2">
@@ -103,17 +117,11 @@
                             <hr>
                             <div class="row justify-content-between">
                                 <div class="form-group col-3">
-                                    <h5>total (Include PPN):</h5>
+                                    <h5><strong>Total (Include PPN):</strong></h5>
 
                                 </div>
                                 <div class="form-group col-4 col-lg-2">
-                                    <h5>Rp. {{ number_format($direct->total_incl, 0, ',', '.') }}</h5>
-                                </div>
-                            </div>
-                            <div class="row mt-3">
-                                <div class="form-group col-6">
-                                    <label for="">Remark</label>
-                                    <input class="form-control" value="{{ $direct->remark }}" readonly>
+                                    <h5><strong>Rp. {{ number_format($direct->total_incl, 0, ',', '.') }}</strong></h5>
                                 </div>
                             </div>
                         </div>
@@ -425,7 +433,7 @@
                                                 <label>Disc (Rp)</label>
                                                 <input type="number" class="form-control" required
                                                     name="retails[{{ $loop->index }}][discount_rp]"
-                                                    value="{{ $item->discount }}" id="">
+                                                    value="{{ $item->discount_rp }}" id="">
                                                 @error('retails[{{ $loop->index }}][discount_rp]')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}

@@ -670,7 +670,7 @@
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="right"
                                                                                                         valign="top">
-                                                                                                        {{ number_format($value->productSales->harga_jual_nonretail) }}
+                                                                                                        {{ number_format($value->productSales->harga_jual_nonretail, 0, ',', '.') }}
                                                                                                     </td>
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
@@ -688,13 +688,17 @@
                                                                                                         {{ $value->qty }}
                                                                                                     </td>
                                                                                                     @php
-                                                                                                        $sub_total = $value->productSales->harga_jual_nonretail * $value->qty;
+                                                                                                        $ppn_cost = $ppn * $value->productSales->harga_jual_nonretail;
+                                                                                                        $ppn_total = $value->productSales->harga_jual_nonretail + $ppn_cost;
+                                                                                                        $disc = ($value->discount / 100) * $ppn_total;
+                                                                                                        $harga_diskon = $ppn_total - $disc - $value->discount_rp;
+                                                                                                        $sub_total = $harga_diskon * $value->qty;
                                                                                                         $total = $total + $sub_total;
                                                                                                     @endphp
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="right"
                                                                                                         valign="top">
-                                                                                                        {{ number_format($sub_total) }}
+                                                                                                        {{ number_format($sub_total, 0, ',', '.') }}
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 {{-- @endfor --}}
@@ -712,7 +716,7 @@
                                                                                                 <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
-                                                                                                    {{ number_format($data->total) }}
+                                                                                                    {{ number_format($data->total, 0, ',', '.') }}
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
@@ -725,7 +729,7 @@
                                                                                                 <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
-                                                                                                    {{ number_format($data->ppn) }}
+                                                                                                    {{ number_format($data->ppn, 0, ',', '.') }}
                                                                                                 </td>
                                                                                             </tr>
                                                                                             <tr>
@@ -738,7 +742,7 @@
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
-                                                                                                    {{ number_format($data->total_after_ppn) }}
+                                                                                                    {{ number_format($data->total_after_ppn, 0, ',', '.') }}
                                                                                                 </th>
                                                                                             </tr>
                                                                                         </tfoot>

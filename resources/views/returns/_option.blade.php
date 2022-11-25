@@ -69,16 +69,17 @@
                                                     $diskon_rp = $dis->discount_rp;
                                                 }
                                             }
-                                            $hargaDiskon = $item->productBy->harga_jual_nonretail * $diskon;
-                                            $hargaAfterDiskon = $item->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
+                                            $ppn_cost = $item->productBy->harga_jual_nonretail * $ppn;
+                                            $ppn_total = $item->productBy->harga_jual_nonretail + $ppn_cost;
+                                            $hargaDiskon = $ppn_total * $diskon;
+                                            $hargaAfterDiskon = $ppn_total - $hargaDiskon - $diskon_rp;
                                             $sub_total = $hargaAfterDiskon * $item->qty;
-                                            $ppn_total = $ppn * $sub_total;
-                                            $total = $sub_total + $ppn_total;
+                                            
                                         @endphp
                                         <div class="col-4 col-md-3 form-group">
                                             <label>Amount (Rp)</label>
                                             <input type="text" class="form-control" readonly
-                                                value="{{ number_format($total, 0, ',', '.') }}" id="">
+                                                value="{{ number_format($sub_total, 0, ',', '.') }}" id="">
                                         </div>
 
                                     </div>

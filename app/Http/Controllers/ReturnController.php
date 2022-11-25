@@ -299,13 +299,15 @@ class ReturnController extends Controller
             //Count Total
             $product = ProductModel::where('id', $detail->product_id)->first();
             $diskon =  $selected_sod->discount / 100;
-            $hargaDiskon = $product->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = ($product->harga_jual_nonretail -  $hargaDiskon) - $selected_sod->discount_rp;
+            $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $product->harga_jual_nonretail;
+            $ppn_cost = $product->harga_jual_nonretail + $ppn;
+            $hargaDiskon = $ppn_cost * $diskon;
+            $hargaAfterDiskon = ($ppn_cost -  $hargaDiskon) - $selected_sod->discount_rp;
             $total = $total + ($hargaAfterDiskon * $detail->qty);
             $hpp = $hpp + ($product->harga_beli * $detail->qty);
         }
-        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
-        $model->total = $total + $ppn;
+        $ppn = $total / 1.11 * (ValueAddedTaxModel::first()->ppn / 100);
+        $model->total = $total;
         $model->save();
         //* choose account type 
         $account_type = AccountSubTypeModel::where('id', 48)->first();
@@ -570,12 +572,14 @@ class ReturnController extends Controller
             //Count Total
             $products = ProductModel::where('id', $product['product_id'])->first();
             $diskon =  $selected_sod->discount / 100;
-            $hargaDiskon = $products->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = ($products->harga_jual_nonretail -  $hargaDiskon)  - $selected_sod->discount_rp;
+            $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $products->harga_jual_nonretail;
+            $ppn_cost = $products->harga_jual_nonretail + $ppn;
+            $hargaDiskon = $ppn_cost * $diskon;
+            $hargaAfterDiskon = ($ppn_cost -  $hargaDiskon) - $selected_sod->discount_rp;
             $total = $total + ($hargaAfterDiskon * $product['qty']);
         }
-        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
-        $selected_return->total = $total + $ppn;
+        $ppn = $total / 1.11 * (ValueAddedTaxModel::first()->ppn / 100);
+        $selected_return->total = $total;
         $saved = $selected_return->save();
 
         //Change Stock

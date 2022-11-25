@@ -19,4 +19,9 @@ class DirectSalesDetailModel extends Model
     {
         return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
     }
+
+    public function retailPriceBy()
+    {
+        return $this->hasMany(ProductCostModel::class, 'id_product', 'product_id');
+    }
 }

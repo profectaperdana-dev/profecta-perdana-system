@@ -139,7 +139,7 @@
                     placeholder="Product Photo" name="foto_barang" value="">
 
             </div>
-            <h5>Price Retail</h5>
+            <h5>Retail Price</h5>
             <hr class="bg-primary">
             <div class="mx-auto py-2 form-group row bg-primary">
                 <div class="form-group col-5">
@@ -150,7 +150,7 @@
 
                 </div>
                 <div class="col-5 form-group">
-                    <label>Retail Price <small class="badge badge-primary">(exclude
+                    <label>Price <small class="badge badge-primary">(exclude
                             PPN)</small></label>
                     <input type="text"
                         class="form-control harga_jual {{ $errors->first('harga_jual') ? ' is-invalid' : '' }}"

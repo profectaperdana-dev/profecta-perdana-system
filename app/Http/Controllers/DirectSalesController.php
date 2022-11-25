@@ -8,6 +8,7 @@ use App\Models\DirectSalesDetailModel;
 use App\Models\DirectSalesModel;
 use App\Models\DistrictModel;
 use App\Models\MotorBrandModel;
+use App\Models\ProductCostModel;
 use App\Models\ProductModel;
 use App\Models\StockModel;
 use App\Models\SubMaterialModel;
@@ -34,15 +35,13 @@ class DirectSalesController extends Controller
                 ->where('warehouses.id', Auth::user()->warehouse_id)
                 ->first();
             if (!empty($request->from_date)) {
-
-                $direct = DirectSalesModel::with('createdBy', 'carBrandBy', 'carTypeBy', 'motorBrandBy', 'motorTypeBy')
+                $direct = DirectSalesModel::with('createdBy', 'carBrandBy', 'carTypeBy', 'motorBrandBy', 'motorTypeBy', 'directSalesDetailBy', 'directSalesDetailBy.productBy', 'directSalesDetailBy.retailPriceBy')
                     ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->whereBetween('order_date', array($request->from_date, $request->to_date))
                     ->latest()
                     ->get();
             } else {
-
-                $direct = DirectSalesModel::with('createdBy', 'carBrandBy', 'carTypeBy', 'motorBrandBy', 'motorTypeBy')
+                $direct = DirectSalesModel::with('createdBy', 'carBrandBy', 'carTypeBy', 'motorBrandBy', 'motorTypeBy', 'directSalesDetailBy', 'directSalesDetailBy.productBy', 'directSalesDetailBy.retailPriceBy')
                     ->where('order_number', 'like', "%$kode_area->area_code%")
                     ->latest()
                     ->get();
@@ -129,11 +128,12 @@ class DirectSalesController extends Controller
 
     public function create()
     {
-        $retail_products = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
-            ->whereIn('shown', ['all', 'retail'])
-            ->whereHas('stockBy', function ($query) {
-                $query->where('warehouses_id', Auth::user()->warehouse_id);
-            })->get();
+        $retail_products = ProductCostModel::with(['productBy', 'warehouseBy', 'productBy.sub_materials', 'productBy.stockBy', 'productBy.sub_types', 'productBy.uoms'])
+            ->whereHas('productBy', function ($query) {
+                $query->whereIn('shown', ['all', 'retail']);
+            })
+            ->where('id_warehouse', Auth::user()->warehouse_id)
+            ->get();
         $car_brands = CarBrandModel::with('typeBy')->oldest('car_brand')->get();
         $motor_brands = MotorBrandModel::with('typeBy')->oldest('name_brand')->get();
         $sub_materials = SubMaterialModel::all();
@@ -170,7 +170,6 @@ class DirectSalesController extends Controller
                 'address' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
-                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -183,7 +182,6 @@ class DirectSalesController extends Controller
                 'cust_name' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
-                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -282,7 +280,9 @@ class DirectSalesController extends Controller
             $detail = new DirectSalesDetailModel();
             $detail->direct_id = $model->id;
             $detail->product_id = $item['product_id'];
-            $detail->product_code = $item['product_code'];
+            if ($item['product_code'] == null) {
+                $detail->product_code = "-";
+            } else $detail->product_code = $item['product_code'];
             $detail->qty = $item['qty'];
             $detail->discount = $item['discount'];
             $detail->discount_rp = $item['discount_rp'];
@@ -353,18 +353,21 @@ class DirectSalesController extends Controller
         $sub_materials = [];
         $search = request()->q;
         if (!empty($search)) {
-            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
-                ->whereIn('shown', ['all', 'retail'])
-                ->whereHas('stockBy', function ($query) {
-                    $query->where('warehouses_id', Auth::user()->warehouse_id);
-                })->where('nama_barang', 'LIKE', "%$search%")
+            $sub_materials = ProductCostModel::with(['productBy', 'warehouseBy', 'productBy.materials', 'productBy.sub_materials', 'productBy.stockBy', 'productBy.sub_types', 'productBy.uoms'])
+                ->whereHas('productBy', function ($query) {
+                    $query->whereIn('shown', ['all', 'retail']);
+                })
+                ->where('id_warehouse', Auth::user()->warehouse_id)
+                ->whereHas('productBy', function ($query) use ($search) {
+                    $query->where('nama_barang', 'LIKE', "%$search%");
+                })
                 ->get();
         } else {
-            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
-                ->whereIn('shown', ['all', 'retail'])
-                ->whereHas('stockBy', function ($query) {
-                    $query->where('warehouses_id', Auth::user()->warehouse_id);
+            $sub_materials = ProductCostModel::with(['productBy', 'warehouseBy', 'productBy.sub_materials', 'productBy.materials', 'productBy.stockBy', 'productBy.sub_types', 'productBy.uoms'])
+                ->whereHas('productBy', function ($query) {
+                    $query->whereIn('shown', ['all', 'retail']);
                 })
+                ->where('id_warehouse', Auth::user()->warehouse_id)
                 ->get();
         }
 
@@ -377,22 +380,23 @@ class DirectSalesController extends Controller
         $sub_materials = [];
         $search = request()->s;
         if ($search != "all") {
-            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
-                ->whereIn('shown', ['all', 'retail'])
-                ->whereHas('stockBy', function ($query) {
-                    $query->where('warehouses_id', Auth::user()->warehouse_id);
-                })->where('id_sub_material', $search)
-                ->get();
-        } else {
-            $sub_materials = ProductModel::with(['stockBy', 'materials', 'sub_materials', 'sub_types', 'uoms'])
-                ->whereIn('shown', ['all', 'retail'])
-                ->whereHas('stockBy', function ($query) {
-                    $query->where('warehouses_id', Auth::user()->warehouse_id);
+            $sub_materials = ProductCostModel::with(['productBy', 'warehouseBy', 'productBy.materials', 'productBy.sub_materials', 'productBy.stockBy', 'productBy.sub_types', 'productBy.uoms'])
+                ->whereHas('productBy', function ($query) {
+                    $query->whereIn('shown', ['all', 'retail']);
+                })
+                ->where('id_warehouse', Auth::user()->warehouse_id)
+                ->whereHas('productBy', function ($query) use ($search) {
+                    $query->where('id_sub_material', $search);
                 })
                 ->get();
+        } else {
+            $sub_materials = ProductCostModel::with(['productBy', 'warehouseBy', 'productBy.sub_materials', 'productBy.materials', 'productBy.stockBy', 'productBy.sub_types', 'productBy.uoms'])
+                ->whereHas('productBy', function ($query) {
+                    $query->whereIn('shown', ['all', 'retail']);
+                })
+                ->where('id_warehouse', Auth::user()->warehouse_id)
+                ->get();
         }
-
-
         return response()->json($sub_materials);
     }
 
@@ -469,7 +473,6 @@ class DirectSalesController extends Controller
                 'address' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
-                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -479,7 +482,6 @@ class DirectSalesController extends Controller
                 'cust_name' => 'required',
                 'remark' => 'required',
                 'retails.*.product_id' => 'required',
-                'retails.*.product_code' => 'required',
                 'retails.*.qty' => 'required',
                 'retails.*.discount' => 'required',
                 'retails.*.discount_rp' => 'required',
@@ -584,6 +586,9 @@ class DirectSalesController extends Controller
             if ($product_exist != null) {
                 $old_qty = $product_exist->qty;
                 $product_exist->qty = $product['qty'];
+                if ($product['product_code'] == null) {
+                    $product_exist->product_code = '-';
+                } else $product_exist->product_code = $product['product_code'];
                 $product_exist->product_code = $product['product_code'];
                 $product_exist->discount = $product['discount'];
                 $product_exist->discount_rp = $product['discount_rp'];
@@ -592,17 +597,32 @@ class DirectSalesController extends Controller
                 $new_product = new DirectSalesDetailModel();
                 $new_product->direct_id = $id;
                 $new_product->product_id = $product['product_id'];
-                $new_product->product_code = $product['product_code'];
+                if ($product['product_code'] == null) {
+                    $new_product->product_code = '-';
+                } else $new_product->product_code = $product['product_code'];
                 $new_product->qty = $product['qty'];
                 $new_product->discount = $product['discount'];
                 $new_product->discount_rp = $product['discount_rp'];
                 $new_product->save();
             }
+
+            //Delete product that not in Detail Input
+            $del = DirectSalesDetailModel::where('direct_id', $id)
+                ->whereNotIn('product_id', $products_arr)->delete();
+
             //Count Total
             $products = ProductModel::where('id', $product['product_id'])->first();
+            $retail_price = 0;
+            foreach ($products->retailPriceBy as $value) {
+                if ($value->id_warehouse == Auth::user()->warehouse_id) {
+                    $retail_price = $value->harga_jual;
+                }
+            }
+            $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $retail_price;
+            $ppn_cost = $retail_price + $ppn;
             $diskon =  $product['discount'] / 100;
-            $hargaDiskon = $products->harga_jual * $diskon;
-            $hargaAfterDiskon = ($products->harga_jual -  $hargaDiskon) - $product['discount_rp'];
+            $hargaDiskon = $ppn_cost * $diskon;
+            $hargaAfterDiskon = ($ppn_cost -  $hargaDiskon) - $product['discount_rp'];
             $total = $total + ($hargaAfterDiskon * $product['qty']);
 
             //Change Stock
@@ -614,10 +634,10 @@ class DirectSalesController extends Controller
             $getStock->save();
         }
 
-        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
-        $selected_direct->total_excl = $total;
-        $selected_direct->total_ppn = $ppn;
-        $selected_direct->total_incl = $total + $ppn;
+
+        $selected_direct->total_excl = $total / 1.11;
+        $selected_direct->total_ppn = $total / 1.11 * (ValueAddedTaxModel::first()->ppn / 100);
+        $selected_direct->total_incl = $total;
         $saved = $selected_direct->save();
 
         return redirect('/retail')->with('success', 'Edit Invoice Retail Success!');

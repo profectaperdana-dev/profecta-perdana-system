@@ -72,7 +72,8 @@ class SalesOrderController extends Controller
             "payment_method" => "required|numeric",
             "editProduct.*.products_id" => "required|numeric",
             "editProduct.*.qty" => "required|numeric",
-            "editProduct.*.discount" => "required|numeric",
+            "editProduct.*.discount" => "numeric",
+            "editProduct.*.discount_rp" => "numeric",
             "remark" => "required"
         ]);
 
@@ -124,6 +125,7 @@ class SalesOrderController extends Controller
             if ($product_exist != null) {
                 $product_exist->qty = $product['qty'];
                 $product_exist->discount = $product['discount'];
+                $product_exist->discount_rp = $product['discount_rp'];
                 $product_exist->save();
             } else {
                 $new_product = new SalesOrderDetailModel();
@@ -131,13 +133,17 @@ class SalesOrderController extends Controller
                 $new_product->products_id = $product['products_id'];
                 $new_product->qty = $product['qty'];
                 $new_product->discount = $product['discount'];
+                $new_product->discount_rp = $product['discount_rp'];
                 $new_product->created_by = Auth::user()->id;
                 $new_product->save();
             }
+
             $harga = ProductModel::where('id', $product['products_id'])->first();
             $diskon =  $product['discount'] / 100;
-            $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+            $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $harga->harga_jual_nonretail;
+            $ppn_cost = $harga->harga_jual_nonretail + $ppn;
+            $hargaDiskon = $ppn_cost * $diskon;
+            $hargaAfterDiskon = $ppn_cost -  $hargaDiskon - $product['discount_rp'];
             $total = $total + ($hargaAfterDiskon * $product['qty']);
 
             $harga_awal = $harga->harga_beli * $product['qty'];
@@ -148,10 +154,9 @@ class SalesOrderController extends Controller
             ->whereNotIn('products_id', $products_arr)->delete();
 
         //Count PPN and Total
-        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
-        $model->ppn = $ppn;
-        $model->total = $total;
-        $model->total_after_ppn = $total + $ppn;
+        $model->ppn = $total / 1.11 * (ValueAddedTaxModel::first()->ppn / 100);
+        $model->total = $total / 1.11;
+        $model->total_after_ppn = $total;
         $model->profit = $model->total_after_ppn - $harga_awal;
 
         //Verify
@@ -177,8 +182,6 @@ class SalesOrderController extends Controller
                 $getStock->save();
             }
 
-
-
             $checkoverplafone = checkOverPlafone($model->customers_id);
             $checkoverdue = checkOverDueByCustomer($model->customers_id);
         }
@@ -193,7 +196,7 @@ class SalesOrderController extends Controller
             if ($model->pdf_invoice != '') {
                 $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $model->pdf_invoice);
             }
-            return redirect('/invoice')->with('Info', "Invoice success update !");
+            return redirect('/invoice')->with('info', "Invoice success update !");
         } else {
             return redirect('/invoice')->with('error', "Invoice update Fail! Please check again!");
         }
@@ -223,7 +226,9 @@ class SalesOrderController extends Controller
         $data->pdf_invoice = $data->order_number . '.pdf';
         $data->save();
 
-        $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
+
+        $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
 
 
 
@@ -425,17 +430,19 @@ class SalesOrderController extends Controller
                 } else {
                     $harga = ProductModel::where('id', $data->products_id)->first();
                     $diskon =  $value['discount'] / 100;
-                    $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
-                    $hargaAfterDiskon = $harga->harga_jual_nonretail -  $hargaDiskon;
+                    $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $harga->harga_jual_nonretail;
+                    $ppn_cost = $harga->harga_jual_nonretail + $ppn;
+                    $hargaDiskon = $ppn_cost * $diskon;
+                    $hargaAfterDiskon = $ppn_cost -  $hargaDiskon;
                     $total = $total + ($hargaAfterDiskon * $data->qty);
                     $data->save();
                 }
             }
         }
-        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
-        $model->ppn = $ppn;
-        $model->total = $total;
-        $model->total_after_ppn = $total + $ppn;
+
+        $model->ppn = $total / 1.11 * (ValueAddedTaxModel::first()->ppn / 100);
+        $model->total = $total / 1.11;
+        $model->total_after_ppn = $total;
         $saved = $model->save();
 
         if (empty($message_duplicate) && $saved) {
@@ -594,8 +601,10 @@ class SalesOrderController extends Controller
             }
             $harga = ProductModel::where('id', $product['products_id'])->first();
             $diskon =  $product['discount'] / 100;
-            $hargaDiskon = $harga->harga_jual_nonretail * $diskon;
-            $hargaAfterDiskon = ($harga->harga_jual_nonretail -  $hargaDiskon) - $product['discount_rp'];
+            $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $harga->harga_jual_nonretail;
+            $ppn_cost = $harga->harga_jual_nonretail + $ppn;
+            $hargaDiskon = $ppn_cost * $diskon;
+            $hargaAfterDiskon = ($ppn_cost -  $hargaDiskon) - $product['discount_rp'];
             $total = $total + ($hargaAfterDiskon * $product['qty']);
 
             $harga_awal = $harga->harga_beli * $product['qty'];
@@ -609,10 +618,9 @@ class SalesOrderController extends Controller
             ->whereNotIn('products_id', $products_arr)->delete();
 
         //Count PPN and Total
-        $ppn = (ValueAddedTaxModel::first()->ppn / 100) * $total;
-        $model->ppn = $ppn;
-        $model->total = $total;
-        $model->total_after_ppn = $total + $ppn;
+        $model->ppn = $total / 1.11 * (ValueAddedTaxModel::first()->ppn / 100);
+        $model->total = $total / 1.11;
+        $model->total_after_ppn = $total;
         $model->profit = $model->total_after_ppn - $harga_awal;
 
         //Verify

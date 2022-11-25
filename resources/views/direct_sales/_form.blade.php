@@ -26,7 +26,8 @@
                         <div class="card">
                             <div class="product-box">
                                 <div class="product-img"><img class="img-fluid" style="width: 100%;height:229px"
-                                        src="{{ asset('foto_produk/' . $item->foto_barang) }}" alt="">
+                                        src="{{ asset('foto_produk/' . $item->productBy->foto_barang) }}"
+                                        alt="">
                                     <div class="product-hover">
                                         <ul>
                                             <li><a data-bs-toggle="modal"
@@ -41,11 +42,11 @@
                                             <div class="modal-header">
                                                 <div class="product-box row">
                                                     <div class="product-img col-lg-6"><img class="img-fluid"
-                                                            src="{{ asset('foto_produk/' . $item->foto_barang) }}"
+                                                            src="{{ asset('foto_produk/' . $item->productBy->foto_barang) }}"
                                                             alt="">
                                                     </div>
                                                     <div class="product-details col-lg-6 text-start">
-                                                        <h4>{{ $item->nama_barang }}</h4>
+                                                        <h4>{{ $item->productBy->nama_barang }}</h4>
 
                                                         <div class="product-price">Rp.
                                                             {{ number_format($item->harga_jual, 0, ',', '.') }}
@@ -55,20 +56,22 @@
                                                             <p class="mb-0">
                                                             <ul>
                                                                 <li><strong>Material</strong>:
-                                                                    {{ $item->materials->nama_material }}</li>
+                                                                    {{ $item->productBy->materials->nama_material }}
+                                                                </li>
                                                                 <li><strong>Sub-Material</strong>:
-                                                                    {{ $item->sub_materials->nama_sub_material }}</li>
+                                                                    {{ $item->productBy->sub_materials->nama_sub_material }}
+                                                                </li>
                                                                 <li><strong>Type</strong>:
-                                                                    {{ $item->sub_types->type_name }}</li>
+                                                                    {{ $item->productBy->sub_types->type_name }}</li>
                                                                 <li><strong>Weight</strong>:
-                                                                    {{ $item->berat }} gr</li>
+                                                                    {{ $item->productBy->berat }} gr</li>
                                                             </ul>
                                                             </p>
                                                         </div>
                                                         <br>
                                                         <div class="product-qnty">
                                                             <h6 class="f-w-600">Stock:
-                                                                {{ $item->stockBy->stock . ' ' . $item->uoms->satuan }}
+                                                                {{ $item->productBy->stockBy->stock . ' ' . $item->productBy->uoms->satuan }}
                                                             </h6>
                                                         </div>
 
@@ -81,11 +84,11 @@
                                     </div>
                                 </div>
                                 <div class="product-details">
-                                    <h4>{{ $item->nama_barang }} </h4>
+                                    <h4>{{ $item->productBy->nama_barang }} </h4>
 
-                                    <p>{{ $item->materials->nama_material }} -
-                                        {{ $item->sub_materials->nama_sub_material }}
-                                        {{ $item->sub_types->type_name }}</p>
+                                    <p>{{ $item->productBy->materials->nama_material }} -
+                                        {{ $item->productBy->sub_materials->nama_sub_material }}
+                                        {{ $item->productBy->sub_types->type_name }}</p>
                                     <div class="product-price">Rp.
                                         {{ number_format($item->harga_jual, 0, ',', '.') }}
                                     </div>
@@ -94,13 +97,15 @@
                                     <button type="button" class="btn btn-primary me-3 addProduct">Add
                                     </button>
                                     <!-- Start Parsing Data -->
-                                    <input type="hidden" class="product_id" value="{{ $item->id }}">
-                                    <input type="hidden" class="product_name" value="{{ $item->nama_barang }}">
+                                    <input type="hidden" class="product_id" value="{{ $item->id_product }}">
+                                    <input type="hidden" class="product_name"
+                                        value="{{ $item->productBy->nama_barang }}">
                                     <input type="hidden" class="material"
-                                        value="{{ $item->materials->nama_material }}">
+                                        value="{{ $item->productBy->materials->nama_material }}">
                                     <input type="hidden" class="sub-material"
-                                        value="{{ $item->sub_materials->nama_sub_material }}">
-                                    <input type="hidden" class="sub-type" value="{{ $item->sub_types->type_name }}">
+                                        value="{{ $item->productBy->sub_materials->nama_sub_material }}">
+                                    <input type="hidden" class="sub-type"
+                                        value="{{ $item->productBy->sub_types->type_name }}">
                                     <input type="hidden" class="harga" value="{{ $item->harga_jual }}">
                                     <!-- End Parsing Data -->
                                 </div>
