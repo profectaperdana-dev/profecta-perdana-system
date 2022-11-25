@@ -26,6 +26,7 @@
                         <hr class="bg-primary">
                     </div>
                     <div class="card-body">
+                        {{-- ! create data --}}
                         <form class="form-label-left input_mask" method="post" action="{{ url('/product_uoms') }}"
                             enctype="multipart/form-data">
                             @csrf
@@ -56,6 +57,7 @@
 
                             </div>
                         </form>
+                        {{-- ! end create data --}}
                     </div>
                 </div>
             </div>
@@ -77,6 +79,7 @@
 
                                     </tr>
                                 </thead>
+                                {{-- ! read data --}}
                                 <tbody>
                                     @foreach ($data as $key => $value)
                                         <tr>
@@ -93,7 +96,7 @@
                                                         data-bs-target="#deleteData{{ $value->id }}">Delete</a>
                                                 </div>
                                             </td>
-                                            {{-- Modul Edit UOM --}}
+                                            {{-- !Modul Edit UOM --}}
                                             <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -139,8 +142,8 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            {{-- End Modal Edit UOM --}}
-                                            {{-- Modul Delete UOM --}}
+                                            {{-- !End Modal Edit UOM --}}
+                                            {{-- ! Modul Delete UOM --}}
                                             <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
                                                 role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                 <div class="modal-dialog" role="document">
@@ -174,13 +177,14 @@
                                                     </form>
                                                 </div>
                                             </div>
-                                            {{-- End Modal Delete UOM --}}
+                                            {{-- ! End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
                                             <td>{{ $value->satuan }}</td>
 
 
                                         </tr>
                                     @endforeach
+                                    {{-- ! end read data --}}
                                 </tbody>
                             </table>
                         </div>

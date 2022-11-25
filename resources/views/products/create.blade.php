@@ -93,7 +93,7 @@
                     },
                 });
                 //* format harga_beli
-                $('#berat').on('keyup', function() {
+                $('.berat').on('keyup', function() {
                     var selection = window.getSelection().toString();
                     if (selection !== '') {
                         return;
@@ -110,10 +110,10 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('#berat_').val(input);
+                    $this.next().val(input);
                 });
                 // format harga beli
-                $('#harga_beli').on('keyup', function() {
+                $('.harga_beli').on('keyup', function() {
                     var selection = window.getSelection().toString();
                     if (selection !== '') {
                         return;
@@ -130,7 +130,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('#harga_beli_').val(input);
+                    $this.next().val(input);
                 });
                 // format harga beli
                 $('.harga_jual').on('keyup', function() {
@@ -150,7 +150,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.harga_jual_').val(input);
+                    $this.next().val(input);
                 });
                 $('.harga_jual_nonretail').on('keyup', function() {
                     var selection = window.getSelection().toString();
@@ -169,7 +169,7 @@
                     $this.val(function() {
                         return (input === 0) ? "" : input.toLocaleString("id-ID");
                     });
-                    $('.harga_jual_nonretail_').val(input);
+                    $this.next().val(input);
                 });
                 const imgInput = document.getElementById('inputreference');
                 const imgEl = document.getElementById('previewimg');
@@ -191,17 +191,17 @@
                 $("#addTradeIn").on("click", function() {
                     ++y;
                     let form = ` <div class="mx-auto py-2 form-group row bg-primary">
-                <div class="form-group col-5">
+                <div class="col-12 col-lg-5 form-group">
                     <label>Baterry</label>
                     <select name="tradeFields[${y}][id_warehouse]" class="form-control all_product_TradeIn" required>
                         <option value="">-Choose Warehouse-</option>
                     </select>
                 </div>
                 
-                <div class="col-5 form-group">
+                <div class="col-10 col-lg-5 form-group">
                     <label>Retail Price <small class="badge badge-primary">(exclude
                                 PPN)</small></label>
-                    <input class="form-control total" required data-v-min="1" value="{{ old('harga_jual', number_format($data->harga_jual, 0, ',', '.')) }}"  id="">
+                    <input class="form-control total" required  placeholder="0">
                     <input type="hidden" name="tradeFields[${y}][harga_jual]" >
                 </div>
                 <div class="col-2 col-md-2 form-group">

@@ -27,6 +27,10 @@ class SubMaterialController extends Controller
         return view('submaterials.index', compact('title', 'data', 'materials'));
     }
 
+    public function create()
+    {
+        abort(404);
+    }
     public function select($id)
     {
         $sub_materials = [];

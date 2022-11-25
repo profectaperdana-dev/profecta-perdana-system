@@ -63,7 +63,7 @@ use PhpParser\Node\Stmt\Return_;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//! route for form employee
 Route::post('/prospective_employees/store_form', [ProspectiveEmployeeController::class, 'store_form']);
 Route::get('/customers/getProvince', [CustomerController::class, 'getProvince']);
 Route::get('/customers/getCity/{province_id}', [CustomerController::class, 'getCity']);
@@ -251,9 +251,9 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
+    //! Route for Superadmin
     Route::group(['middleware' => 'can:isSuperAdmin'], function () {
         Route::post('/purchase_orders/{id}/manage', [PurchaseOrderController::class, 'manage']);
-
         Route::resource('/customer_categories', CustomerCategoriesController::class);
         Route::resource('/customer_areas', CustomerAreasController::class);
         Route::resource('/warehouses', WarehouseController::class);

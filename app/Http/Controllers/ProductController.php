@@ -302,6 +302,7 @@ class ProductController extends Controller
         // dd($products_arr);
 
 
+
         if (!empty($duplicates)) {
             return redirect()->back()->with('error', "You enter duplicate data 'Retail Price'! Please check again!");
         }

@@ -69,8 +69,8 @@
                                                 @endif
                                             </div>
                                         </div>
-                                        <div class="form-group row">
-                                            <div class="form-group col-md-7">
+                                        <div class="form-group row py-2 bg-primary" style="margin-top: -40px">
+                                            <div class="form-group col-12 col-lg-12">
                                                 <label>Product</label>
                                                 <select name="stockFields[0][product_id]"
                                                     class="form-control @error('stockFields[0][product_id]') is-invalid @enderror product-append-all"
@@ -83,7 +83,7 @@
                                                     </div>
                                                 @enderror
                                             </div>
-                                            <div class="form-group col-md-5">
+                                            <div class="form-group col-12 col-lg-12">
                                                 <label>Stock</label>
                                                 <input type="number" name="stockFields[0][stock]" id="stock"
                                                     class="form-control @error('stockFields[0][stock]') is-invalid @enderror"
@@ -267,14 +267,6 @@
                 $('#example').DataTable({
                     dom: 'Bfrtip',
                     buttons: [{
-                            title: 'RAB',
-                            extend: 'pdf',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
                             title: 'Data Stock Profecta ',
                             extend: 'print',
                             exportOptions: {
@@ -290,35 +282,7 @@
                         'colvis'
                     ]
                 });
-                //     var table = ,
-                //         "columnDefs": [{
-                //             "visible": false,
-                //             "targets": 2
-                //         }],
-                //         "order": [
-                //             [2, 'asc']
-                //         ],
-                //         "displayLength": 25,
-                //         "drawCallback": function(settings) {
-                //             var api = this.api();
-                //             var rows = api.rows({
-                //                 page: 'current'
-                //             }).nodes();
-                //             var last = null;
 
-                //             api.column(2, {
-                //                 page: 'current'
-                //             }).data().each(function(group, i) {
-                //                 if (last !== group) {
-                //                     $(rows).eq(i).before(
-                //                         '<tr class="group"><td colspan="4">' + group + '</td></tr>'
-                //                     );
-
-                //                     last = group;
-                //                 }
-                //             });
-                //         }
-                // });
                 // Order by the grouping
                 $('#example tbody').on('click', 'tr.group', function() {
                     var currentOrder = table.order()[0];
