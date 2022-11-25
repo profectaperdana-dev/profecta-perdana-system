@@ -184,8 +184,10 @@
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
                         @php
                             $disc = $value->discount / 100;
-                            $disc_cost = $value->productSales->harga_jual_nonretail * $disc;
-                            $sub_total = ($value->productSales->harga_jual_nonretail - $disc_cost - $value->discount_rp) * $value->qty;
+                            $ppn_cost = $value->productSales->harga_jual_nonretail * $ppn;
+                            $ppn_total = $value->productSales->harga_jual_nonretail + $ppn_cost;
+                            $disc_cost = $ppn_total * $disc;
+                            $sub_total = ($ppn_total - $disc_cost - $value->discount_rp) * $value->qty;
                         @endphp
                         <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>
                     </tr>
@@ -218,7 +220,7 @@
                     <td style="text-align: right">@currency($data->total)</td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="text-align: right">PPN 11%</td>
+                    <td colspan="4" style="text-align: right">PPN {{ $ppn * 100 }}%</td>
                     <td style="text-align: right">@currency($data->ppn)</td>
                 </tr>
                 </tr>

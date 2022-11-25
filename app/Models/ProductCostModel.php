@@ -15,12 +15,12 @@ class ProductCostModel extends Model
     protected $table = 'product_costs';
 
 
-    public function product()
+    public function productBy()
     {
         return $this->belongsTo(ProductModel::class, 'id_product')->withTrashed();
     }
 
-    public function warehouse()
+    public function warehouseBy()
     {
         return $this->belongsTo(WarehouseModel::class, 'id_warehouse')->withTrashed();
     }

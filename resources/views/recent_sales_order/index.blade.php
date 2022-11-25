@@ -379,7 +379,7 @@
                                     <div class="form-group col-12">
                                         <button type="button" class="col-12 btn btn-outline-success btn-reload">--
                                             Click this to
-                                            reload total
+                                            view total
                                             --</button>
                                     </div>
                                 </div>
@@ -611,7 +611,7 @@
                                     <div class="form-group col-12">
                                         <button type="button" class="col-12 btn btn-outline-success btn-reload">--
                                             Click this to
-                                            reload total
+                                            view total
                                             --</button>
                                     </div>
                                 </div>
@@ -842,7 +842,7 @@
                                     <div class="form-group col-12">
                                         <button type="button" class="col-12 btn btn-outline-success btn-reload">--
                                             Click this to
-                                            reload total
+                                            view total
                                             --</button>
                                     </div>
                                 </div>
@@ -1260,21 +1260,25 @@
                             let qty = $(this).parent().siblings().find('.cekQty-edit').val();
                             let disc = $(this).parent().siblings().find('.discount-append-edit')
                                 .val() / 100;
-                            let disc_rp = $(this).parent().siblings().find('.discount_rp').val()
-                            let disc_cost = cost * disc;
-                            let cost_after_disc = (cost - disc_cost) - disc_rp;
+                            let disc_rp = $(this).parent().siblings().find('.discount_rp')
+                                .val();
+                            ppn = cost * $('#ppn').val();
+                            let ppn_cost = cost + ppn;
+                            let disc_cost = ppn_cost * disc;
+                            let cost_after_disc = (ppn_cost - disc_cost) - disc_rp;
                             total = total + (cost_after_disc * qty);
                             //   alert($(this).parent().siblings().find('.cekQty-edit').val());
                         });
 
-                        ppn = total * $('#ppn').val();
-                        total_after_ppn = total + ppn;
-                        $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math.round(ppn)
+                        total_after_ppn = total;
+                        $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math.round(
+                                total_after_ppn / 1.11 * $('#ppn').val())
                             .toLocaleString('id', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
-                        $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math.round(total)
+                        $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math.round(
+                                total_after_ppn / 1.11)
                             .toLocaleString(
                                 'id', {
                                     minimumFractionDigits: 0,

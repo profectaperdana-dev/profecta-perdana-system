@@ -160,6 +160,12 @@
                     {{-- @for ($i = 0; $i < 6; $i++) --}}
                     <?php
                     $y++;
+                    $retail_cost = 0;
+                    foreach ($value->retailPriceBy as $retail) {
+                        if ($retail->id_warehouse == Auth::user()->warehouse_id) {
+                            $retail_cost = $retail->harga_jual;
+                        }
+                    }
                     ?>
                     <tr>
                         <td style="text-align:center;padding:5px">{{ $key + 1 }}.
@@ -169,12 +175,14 @@
                             {{ $value->productBy->sub_types->type_name }}&nbsp;
                             {{ $value->productBy->nama_barang }}
                         </td>
-                        <td style="text-align:right;padding:5px">@currency($value->productBy->harga_jual)</td>
+                        <td style="text-align:right;padding:5px">@currency($retail_cost)</td>
                         <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
                         <td style="text-align:center;padding:5px">{{ $value->discount }}</td>
                         @php
-                            $diskon = $value->productBy->harga_jual * ($value->discount / 100);
-                            $hargaDiskon = $value->productBy->harga_jual - $diskon;
+                            $cost_ppn = $ppn * $retail_cost;
+                            $total_ppn = $retail_cost + $cost_ppn;
+                            $diskon = $total_ppn * ($value->discount / 100);
+                            $hargaDiskon = $total_ppn - $diskon - $value->discount_rp;
                             $sub_total = $hargaDiskon * $value->qty;
                         @endphp
                         <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>

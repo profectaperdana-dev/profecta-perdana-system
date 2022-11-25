@@ -396,7 +396,7 @@
                         </div>
                         <div class="row mx-2">
                             <div class="col">
-                                <label for="">Series Code</label>
+                                <label for="">Series Code <small class="text-danger">*optional</small></label>
                                 <input type="text" placeholder="Enter Series Code" class="form-control" name="" id="code${product_id}">
                             </div>
                         </div>
@@ -415,23 +415,7 @@
                             </div>
                         </div>
                     </div>`;
-                    // let addCart = '<tr class="form-group"><td>' +
-                    //     '<button type="button" class="btn btn-sm p-3 text-center text-danger fs-5 remProduct">' +
-                    //     '<i class="fa fa-trash" aria-hidden="true"></i>' +
-                    //     '</button>' +
-                    //     '<input type="hidden" class="product-id-cart" value="' + product_id + '">' +
-                    //     '</td>' +
-                    //     '<td><small>' +
-                    //     sub_material + ' ' + sub_type + ': ' +
-                    //     '<strong>' + product_name + '</strong>' +
-                    //     '</small></td>' +
-                    //     '<td><input type="number" value="0" class="form-control" name="" id="qty' +
-                    //     product_id +
-                    //     '"></td>' +
-                    //     '<td><input type="number" value="0" class="form-control" name="" id="disc' +
-                    //     product_id +
-                    //     '"></td>' +
-                    //     '</tr>';
+
 
                     $(document).find('#table-cart').append(addCart);
                 });
@@ -683,8 +667,11 @@
                             maximumFractionDigits: 0
                         });
 
-                        let diskon = parseInt(arr_harga_jual[index]) * (disc / 100);
-                        let hargaDiskon = parseInt(arr_harga_jual[index]) - diskon - disc_rp;
+                        let cost_ppn = $(document).find('#ppn').val() * parseInt(arr_harga_jual[index]);
+                        let cost_after_ppn = parseInt(arr_harga_jual[index]) + cost_ppn;
+
+                        let diskon = cost_after_ppn * (disc / 100);
+                        let hargaDiskon = cost_after_ppn - diskon - disc_rp;
 
                         let format_harga = (hargaDiskon * qty).toLocaleString('id', {
                             minimumFractionDigits: 0,
@@ -708,22 +695,22 @@
                     }
 
 
-                    $(modal_id).find('#products-detail').find('#total-exl').text('Rp. ' + total_all
+                    $(modal_id).find('#products-detail').find('#total-exl').text('Rp. ' + (total_all / 1.11)
                         .toLocaleString(
                             'id', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
 
-                    let total_ppn = $(document).find('#ppn').val() * total_all;
-                    $(modal_id).find('#products-detail').find('#ppn-total').text('Rp. ' + total_ppn
+                    $(modal_id).find('#products-detail').find('#ppn-total').text('Rp. ' + (total_all / 1.11 *
+                            $(document).find('#ppn').val())
                         .toLocaleString(
                             'id', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
 
-                    let total_incl = total_all + total_ppn;
+                    let total_incl = total_all;
                     $(modal_id).find('#products-detail').find('#total').text('Rp. ' + total_incl.toLocaleString(
                         'id', {
                             minimumFractionDigits: 0,
@@ -731,8 +718,9 @@
                         }));
 
                     let input_total = `
-                    <input type="hidden" name="total_excl" value="${total_all}">
-                    <input type="hidden" name="total_ppn" value="${total_ppn}">
+                    <input type="hidden" name="total_excl" value="${total_all / 1.11}">
+                    <input type="hidden" name="total_ppn" value="${total_all / 1.11 *
+                        $(document).find('#ppn').val()}">
                     <input type="hidden" name="total_incl" value="${total_incl}">
                     `;
 
@@ -794,7 +782,7 @@
                                     <div class="card">
                                         <div class="product-box">
                                             <div class="product-img"><img class="img-fluid" style="width: 100%;height:229px"
-                                                    src="../foto_produk/${value.foto_barang}" alt="">
+                                                    src="../foto_produk/${value.product_by.foto_barang}" alt="">
                                                 <div class="product-hover">
                                                     <ul>
                                                         <li><a data-bs-toggle="modal"
@@ -809,34 +797,37 @@
                                                         <div class="modal-header">
                                                             <div class="product-box row">
                                                                 <div class="product-img col-lg-6"><img class="img-fluid"
-                                                                        src="../foto_produk/${value.foto_barang}"
+                                                                        src="../foto_produk/${value.product_by.foto_barang}"
                                                                         alt="">
                                                                 </div>
                                                                 <div class="product-details col-lg-6 text-start">
-                                                                    <h4>${value.nama_barang}</h4>
+                                                                    <h4>${value.product_by.nama_barang}</h4>
 
                                                                     <div class="product-price">Rp.
-                                                                        ${value.harga_jual}
+                                                                        ${value.harga_jual.toLocaleString('id', {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })}
                                                                     </div>
                                                                     <div class="product-view">
                                                                         <h6 class="f-w-600">Product Details</h6>
                                                                         <p class="mb-0">
                                                                         <ul>
                                                                             <li><strong>Material</strong>:
-                                                                                ${value.materials.nama_material}</li>
+                                                                                ${value.product_by.materials.nama_material}</li>
                                                                             <li><strong>Sub-Material</strong>:
-                                                                                ${value.sub_materials.nama_sub_material}</li>
+                                                                                ${value.product_by.sub_materials.nama_sub_material}</li>
                                                                             <li><strong>Type</strong>:
-                                                                                ${value.sub_types.type_name}</li>
+                                                                                ${value.product_by.sub_types.type_name}</li>
                                                                             <li><strong>Weight</strong>:
-                                                                                ${value.berat} gr</li>
+                                                                                ${value.product_by.berat} gr</li>
                                                                         </ul>
                                                                         </p>
                                                                     </div>
                                                                     <br>
                                                                     <div class="product-qnty">
                                                                         <h6 class="f-w-600">Stock:
-                                                                            ${value.stock_by.stock} ${value.uoms.satuan}
+                                                                            ${value.product_by.stock_by.stock} ${value.product_by.uoms.satuan}
                                                                         </h6>
                                                                     </div>
                                                                     <div class="product-qnty">
@@ -854,26 +845,29 @@
                                                 </div>
                                             </div>
                                             <div class="product-details">
-                                                <h4>${value.nama_barang} </h4>
+                                                <h4>${value.product_by.nama_barang} </h4>
 
-                                                <p>${value.materials.nama_material} -
-                                                    ${value.sub_materials.nama_sub_material}
-                                                    ${value.sub_types.type_name}</p>
+                                                <p>${value.product_by.materials.nama_material} -
+                                                    ${value.product_by.sub_materials.nama_sub_material}
+                                                    ${value.product_by.sub_types.type_name}</p>
                                                 <div class="product-price">Rp.
-                                                    ${value.harga_jual}
+                                                    ${value.harga_jual.toLocaleString('id', {
+                                                        minimumFractionDigits: 0,
+                                                        maximumFractionDigits: 0
+                                                    })}
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row-reverse m-1 nodeButton">
                                                 <button type="button" class="btn btn-primary me-3 addProduct">Add
                                                 </button>
                                                 <!-- Start Parsing Data -->
-                                                <input type="hidden" class="product_id" value="${value.id}">
-                                                <input type="hidden" class="product_name" value="${value.nama_barang}">
+                                                <input type="hidden" class="product_id" value="${value.id_product}">
+                                                <input type="hidden" class="product_name" value="${value.product_by.nama_barang}">
                                                 <input type="hidden" class="material"
-                                                    value="${value.materials.nama_material}">
+                                                    value="${value.product_by.materials.nama_material}">
                                                 <input type="hidden" class="sub-material"
-                                                    value="${value.sub_materials.nama_sub_material}">
-                                                <input type="hidden" class="sub-type" value="${value.sub_types.type_name}">
+                                                    value="${value.product_by.sub_materials.nama_sub_material}">
+                                                <input type="hidden" class="sub-type" value="${value.product_by.sub_types.type_name}">
                                                 <input type="hidden" class="harga" value="${value.harga_jual}">
                                                 <!-- End Parsing Data -->
                                             </div>
@@ -913,7 +907,7 @@
                                     <div class="card">
                                         <div class="product-box">
                                             <div class="product-img"><img class="img-fluid" style="width: 100%;height:229px"
-                                                    src="../foto_produk/${value.foto_barang}" alt="">
+                                                    src="../foto_produk/${value.product_by.foto_barang}" alt="">
                                                 <div class="product-hover">
                                                     <ul>
                                                         <li><a data-bs-toggle="modal"
@@ -928,34 +922,37 @@
                                                         <div class="modal-header">
                                                             <div class="product-box row">
                                                                 <div class="product-img col-lg-6"><img class="img-fluid"
-                                                                        src="../foto_produk/${value.foto_barang}"
+                                                                        src="../foto_produk/${value.product_by.foto_barang}"
                                                                         alt="">
                                                                 </div>
                                                                 <div class="product-details col-lg-6 text-start">
-                                                                    <h4>${value.nama_barang}</h4>
+                                                                    <h4>${value.product_by.nama_barang}</h4>
 
                                                                     <div class="product-price">Rp.
-                                                                        ${value.harga_jual}
+                                                                        ${value.harga_jual.toLocaleString('id', {
+                                                                            minimumFractionDigits: 0,
+                                                                            maximumFractionDigits: 0
+                                                                        })}
                                                                     </div>
                                                                     <div class="product-view">
                                                                         <h6 class="f-w-600">Product Details</h6>
                                                                         <p class="mb-0">
                                                                         <ul>
                                                                             <li><strong>Material</strong>:
-                                                                                ${value.materials.nama_material}</li>
+                                                                                ${value.product_by.materials.nama_material}</li>
                                                                             <li><strong>Sub-Material</strong>:
-                                                                                ${value.sub_materials.nama_sub_material}</li>
+                                                                                ${value.product_by.sub_materials.nama_sub_material}</li>
                                                                             <li><strong>Type</strong>:
-                                                                                ${value.sub_types.type_name}</li>
+                                                                                ${value.product_by.sub_types.type_name}</li>
                                                                             <li><strong>Weight</strong>:
-                                                                                ${value.berat} gr</li>
+                                                                                ${value.product_by.berat} gr</li>
                                                                         </ul>
                                                                         </p>
                                                                     </div>
                                                                     <br>
                                                                     <div class="product-qnty">
                                                                         <h6 class="f-w-600">Stock:
-                                                                            ${value.stock_by.stock} ${value.uoms.satuan}
+                                                                            ${value.product_by.stock_by.stock} ${value.product_by.uoms.satuan}
                                                                         </h6>
                                                                     </div>
                                                                     <div class="product-qnty">
@@ -973,26 +970,29 @@
                                                 </div>
                                             </div>
                                             <div class="product-details">
-                                                <h4>${value.nama_barang} </h4>
+                                                <h4>${value.product_by.nama_barang} </h4>
 
-                                                <p>${value.materials.nama_material} -
-                                                    ${value.sub_materials.nama_sub_material}
-                                                    ${value.sub_types.type_name}</p>
+                                                <p>${value.product_by.materials.nama_material} -
+                                                    ${value.product_by.sub_materials.nama_sub_material}
+                                                    ${value.product_by.sub_types.type_name}</p>
                                                 <div class="product-price">Rp.
-                                                    ${value.harga_jual}
+                                                    ${value.harga_jual.toLocaleString('id', {
+                                                        minimumFractionDigits: 0,  
+                                                        maximumFractionDigits: 0
+                                                    })}
                                                 </div>
                                             </div>
                                             <div class="d-flex flex-row-reverse m-1 nodeButton">
                                                 <button type="button" class="btn btn-primary me-3 addProduct">Add
                                                 </button>
                                                 <!-- Start Parsing Data -->
-                                                <input type="hidden" class="product_id" value="${value.id}">
-                                                <input type="hidden" class="product_name" value="${value.nama_barang}">
+                                                <input type="hidden" class="product_id" value="${value.id_product}">
+                                                <input type="hidden" class="product_name" value="${value.product_by.nama_barang}">
                                                 <input type="hidden" class="material"
-                                                    value="${value.materials.nama_material}">
+                                                    value="${value.product_by.materials.nama_material}">
                                                 <input type="hidden" class="sub-material"
-                                                    value="${value.sub_materials.nama_sub_material}">
-                                                <input type="hidden" class="sub-type" value="${value.sub_types.type_name}">
+                                                    value="${value.product_by.sub_materials.nama_sub_material}">
+                                                <input type="hidden" class="sub-type" value="${value.product_by.sub_types.type_name}">
                                                 <input type="hidden" class="harga" value="${value.harga_jual}">
                                                 <!-- End Parsing Data -->
                                             </div>

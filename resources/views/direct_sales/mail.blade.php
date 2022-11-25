@@ -545,6 +545,11 @@
                                                                                                     (%)
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                    align="center"
+                                                                                                    valign="top">Disc
+                                                                                                    (Rp)
+                                                                                                </th>
+                                                                                                <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
                                                                                                     Total</th>
@@ -578,9 +583,23 @@
                                                                                                         valign="top">
                                                                                                         {{ $value->discount }}
                                                                                                     </td>
+                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                        align="center"
+                                                                                                        valign="top">
+                                                                                                        {{ $value->discount_rp }}
+                                                                                                    </td>
                                                                                                     @php
-                                                                                                        $diskon = $value->productBy->harga_jual * ($value->discount / 100);
-                                                                                                        $hargaDiskon = $value->productBy->harga_jual - $diskon;
+                                                                                                        $retail_price = 0;
+                                                                                                        foreach ($value->retailPriceBy as $retail) {
+                                                                                                            if ($retail->id_warehouse == Auth::user()->warehouse_id) {
+                                                                                                                $retail_price = $retail->harga_jual;
+                                                                                                            }
+                                                                                                        }
+                                                                                                        $ppn_cost = $ppn * $retail_price;
+                                                                                                        $ppn_total = $retail_price + $ppn_cost;
+                                                                                                        $diskon_ = $value->discount / 100;
+                                                                                                        $diskon = $ppn_total * $diskon_;
+                                                                                                        $hargaDiskon = $ppn_total - $diskon - $value->discount_rp;
                                                                                                         $total = $hargaDiskon * $value->qty;
                                                                                                     @endphp
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"

@@ -15,7 +15,7 @@
 
 <div class="modal fade" id="manageData{{ $invoice->id }}" data-bs-keyboard="false" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
+    <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Sales
@@ -77,7 +77,7 @@
                             @foreach ($invoice->salesOrderDetailsBy as $detail)
                                 <div class="mx-auto py-2 form-group row bg-primary">
                                     <input type="hidden" class="loop" value="{{ $loop->index }}">
-                                    <div class="form-group col-12 col-lg-6">
+                                    <div class="form-group col-8 col-lg-5">
                                         <label>Product</label>
                                         <select name="editProduct[{{ $loop->index }}][products_id]" required
                                             class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
@@ -126,14 +126,26 @@
                                         @enderror
                                     </div>
 
+                                    <div class="col-4 col-lg-2 form-group">
+                                        <label>Disc (Rp)</label>
+                                        <input type="number" class="form-control discount_rp" placeholder="Disc"
+                                            name="editProduct[{{ $loop->index }}][discount_rp]"
+                                            value="{{ $detail->discount_rp }}" />
+                                        @error('editProduct[{{ $loop->index }}][discount_rp]')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}
+                                            </div>
+                                        @enderror
+                                    </div>
+
                                     @if ($loop->index == 0)
-                                        <div class="col-1 col-md-2 form-group">
+                                        <div class="col-1 col-lg-1 form-group">
                                             <label for="">&nbsp;</label>
                                             <a href="javascript:void(0)"
                                                 class="btn btn-success form-control text-white addSo-edit">+</a>
                                         </div>
                                     @else
-                                        <div class="col-1 col-md-2 form-group">
+                                        <div class="col-1 col-lg-1 form-group">
                                             <label for="">&nbsp;</label>
                                             <a href="javascript:void(0)"
                                                 class="btn btn-danger form-control text-white remSo-edit">-</a>
@@ -153,7 +165,7 @@
                             <div class="form-group col-12">
                                 <button type="button" class="col-12 btn btn-outline-success btn-reload">--
                                     Click this to
-                                    reload total
+                                    view total
                                     --</button>
                             </div>
                         </div>

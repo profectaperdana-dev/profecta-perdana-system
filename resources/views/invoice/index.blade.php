@@ -383,7 +383,7 @@
                         var form =
                             '<div class="mx-auto py-2 form-group row bg-primary">' +
                             '<input type="hidden" class="loop" value="' + x + '">' +
-                            '<div class="form-group col-12 col-lg-6">' +
+                            '<div class="form-group col-8 col-lg-5">' +
                             "<label>Product</label>" +
                             '<select name="editProduct[' +
                             x +
@@ -404,7 +404,13 @@
                             x +
                             '][discount]" id="">' +
                             "</div>" +
-                            '<div class="col-1 col-md-2 form-group">' +
+                            '<div class="col-4 col-lg-2 form-group">' +
+                            '<label>Disc (Rp)</label>' +
+                            '<input type="number" class="form-control" placeholder="Disc (Rp)"' +
+                            'name="editProduct[' + x + '][discount_rp]"' +
+                            '/>' +
+                            '</div>' +
+                            '<div class="col-1 col-lg-1 form-group">' +
                             '<label for=""> &nbsp; </label>' +
                             '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
                             "- </a> " +
@@ -483,22 +489,25 @@
                             let disc = $(this).parent().siblings().find(
                                     '.discount-append-edit')
                                 .val() / 100;
-                            let disc_cost = cost * disc;
-                            let cost_after_disc = cost - disc_cost;
+                            let disc_rp = $(this).parent().siblings().find('.discount_rp')
+                                .val();
+                            ppn = cost * $('#ppn').val();
+                            let ppn_cost = cost + ppn;
+                            let disc_cost = ppn_cost * disc;
+                            let cost_after_disc = ppn_cost - disc_cost - disc_rp;
                             total = total + (cost_after_disc * qty);
                             //   alert($(this).parent().siblings().find('.cekQty-edit').val());
                         });
 
-                        ppn = total * $('#ppn').val();
-                        total_after_ppn = total + ppn;
+                        total_after_ppn = total;
                         $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math
-                            .round(ppn)
+                            .round(total_after_ppn / 1.11 * $('#ppn').val())
                             .toLocaleString('id', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
                         $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
-                            .round(total)
+                            .round(total_after_ppn / 1.11)
                             .toLocaleString(
                                 'id', {
                                     minimumFractionDigits: 0,

@@ -50,21 +50,31 @@
             $total_diskon_rp = 0;
         @endphp
         @foreach ($data->directSalesDetailBy as $item)
+            @php
+                $retail_price = 0;
+                foreach ($item->retailPriceBy as $retail) {
+                    if ($retail->id_warehouse == Auth::user()->warehouse_id) {
+                        $retail_price = $retail->harga_jual;
+                    }
+                }
+            @endphp
             <tr>
                 <td style="font-size: 8pt"> {{ $item->productBy->nama_barang }}
                 </td>
-                <td align="right" style="font-size: 8pt">{{ number_format($item->productBy->harga_jual, 0, ',', '.') }}
+                <td align="right" style="font-size: 8pt">{{ number_format($retail_price, 0, ',', '.') }}
                 </td>
                 <td align="center" style="font-size: 8pt">{{ $item->qty }}</td>
                 @php
-                    $diskon = $item->productBy->harga_jual * ($item->discount / 100);
-                    $hargaDiskon = $item->productBy->harga_jual - $diskon;
+                    $ppn_cost = $retail_price * ($ppn_ / 100);
+                    $total_ppn = $retail_price + $ppn_cost;
+                    $diskon = $total_ppn * ($item->discount / 100);
+                    $hargaDiskon = $total_ppn - $diskon;
                     
                     $total_diskon += $diskon * $item->qty;
                     $discount_rp = $item->discount_rp * $item->qty;
                     
                     $total_diskon_rp += $item->discount_rp * $item->qty;
-                    $sub_total = $item->productBy->harga_jual * $item->qty;
+                    $sub_total = $total_ppn * $item->qty;
                     
                 @endphp
                 <td style="font-size: 8pt" align="right">{{ number_format($sub_total, 0, ',', '.') }}</td>

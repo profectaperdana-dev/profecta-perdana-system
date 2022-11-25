@@ -18,10 +18,12 @@ class InvoiceMail extends Mailable
      */
     protected $data;
     protected $warehouse;
-    public function __construct($warehouse, $data)
+    protected $ppn;
+    public function __construct($warehouse, $data, $ppn)
     {
         $this->data = $data;
         $this->warehouse = $warehouse;
+        $this->ppn = $ppn;
     }
 
     /**
@@ -34,7 +36,7 @@ class InvoiceMail extends Mailable
         return $this->view('invoice.mail_invoice')
             ->from('noreply@profectaperdana.com', 'PROFECTA PERDANA')
             ->subject('INVOICE ' . $this->data->order_number)
-            ->with(['data' => $this->data, 'warehouse' => $this->warehouse])
+            ->with(['data' => $this->data, 'warehouse' => $this->warehouse, 'ppn' => $this->ppn])
             ->attach(public_path('pdf/' . $this->data->order_number . '.pdf'));
     }
 }

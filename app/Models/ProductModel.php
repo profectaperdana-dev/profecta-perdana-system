@@ -41,6 +41,11 @@ class ProductModel extends Model
     {
         return $this->hasMany(ProductCostModel::class, 'id_product', 'id');
     }
+    public function retailPriceBy()
+    {
+        return $this->hasMany(ProductCostModel::class, 'id_product');
+    }
+
     public function getRouteKeyName()
     {
         return 'kode_barang';

@@ -38,13 +38,14 @@ class SendEmailController extends Controller
         }
         $data = SalesOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = PDF::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
+        $ppn = ValueAddedTaxModel::first()->ppn / 100;
+        $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
 
         $name = $data->customerBy->email_cust;
         if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
             return redirect('invoice')->with('error', ' Invalid email format');
         } else {
-            Mail::to($data->customerBy->email_cust)->queue(new InvoiceMail($warehouse, $data));
+            Mail::to($data->customerBy->email_cust)->queue(new InvoiceMail($warehouse, $data, $ppn));
         }
 
         if (Mail::failures()) {
@@ -60,7 +61,7 @@ class SendEmailController extends Controller
         }
         $data = PurchaseOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = PDF::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
+        $pdf = FacadePdf::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
 
         Mail::to($data->supplierBy->email)->queue(new PoMail($warehouse, $data));
 
@@ -132,7 +133,7 @@ class SendEmailController extends Controller
         }
         $data = AccuClaimModel::where('id', $id)->first();
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = PDF::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim/' . $data->claim_number . '.pdf');
+        $pdf = FacadePdf::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim/' . $data->claim_number . '.pdf');
 
         $name = $data->email;
         if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
@@ -158,7 +159,7 @@ class SendEmailController extends Controller
         }
         $data = AccuClaimModel::where('id', $id)->first();
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
-        $pdf = PDF::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim_finish/' . $data->claim_number . '.pdf');
+        $pdf = FacadePdf::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim_finish/' . $data->claim_number . '.pdf');
 
         $name = $data->email;
         if (!filter_var($name, FILTER_VALIDATE_EMAIL)) {
