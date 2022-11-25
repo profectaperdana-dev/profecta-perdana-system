@@ -45,13 +45,20 @@
         <script>
             $(function() {
 
+
                 let validator = $('form.needs-validation').jbvalidator({
                     errorMessage: true,
                     successClass: true,
                     language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
                 });
                 //reload instance after dynamic element is added
-                validator.reload();
+                // validator.reload();
+                $('form').submit(function(e) {
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                    if (validator.checkAll() != 0) {
+                        $(this).find('button[type="submit"]').prop('disabled', false);
+                    }
+                });
             })
         </script>
         <script>

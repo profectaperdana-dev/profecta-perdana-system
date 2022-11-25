@@ -195,8 +195,8 @@
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script>
             $(document).ready(function() {
-                $('form').submit(function() {
-                    $(this).find('button[type="submit"]').prop('disabled', true);
+                $('form').submit(function(e) {
+                    e.stopPropagation();
                 });
             });
         </script>

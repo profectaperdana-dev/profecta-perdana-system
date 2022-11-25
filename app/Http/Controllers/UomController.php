@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\UomModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
@@ -49,7 +50,9 @@ class UomController extends Controller
         $model = new UomModel();
         $model->satuan = $request->get('uom');
         $model->created_by = Auth::user()->id;
-        $model->save();
+        DB::transaction(function () use ($model) {
+            $model->save();
+        });
 
         return redirect('/product_uoms')->with('success', 'Add Data Unit of Measurement Success');
     }
