@@ -365,7 +365,7 @@
                     {{-- ! candidate employee --}}
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('prospective_employees') ? 'active' : '' }}"
-                            href="{{ url('/prospective_employees/') }}"><i data-feather="check-square"></i><span>Form
+                            href="{{ url('/prospective_employees/') }}"><i data-feather="cast"></i><span>Form
                                 Candidate
                             </span></a>
                     </li>

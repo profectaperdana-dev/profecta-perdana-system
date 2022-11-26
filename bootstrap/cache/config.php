@@ -190,7 +190,7 @@
       'file' => 
       array (
         'driver' => 'file',
-        'path' => 'D:\\Projects\\profecta-perdana-system\\storage\\framework/cache/data',
+        'path' => 'D:\\profecta-perdana-system\\storage\\framework/cache/data',
       ),
       'memcached' => 
       array (
@@ -360,10 +360,10 @@
     'convert_entities' => true,
     'options' => 
     array (
-      'font_dir' => 'D:\\Projects\\profecta-perdana-system\\storage\\fonts',
-      'font_cache' => 'D:\\Projects\\profecta-perdana-system\\storage\\fonts',
-      'temp_dir' => 'C:\\Users\\PROFEC~1\\AppData\\Local\\Temp',
-      'chroot' => 'D:\\Projects\\profecta-perdana-system',
+      'font_dir' => 'D:\\profecta-perdana-system\\storage\\fonts',
+      'font_cache' => 'D:\\profecta-perdana-system\\storage\\fonts',
+      'temp_dir' => 'C:\\Users\\ASUS\\AppData\\Local\\Temp',
+      'chroot' => 'D:\\profecta-perdana-system',
       'allowed_protocols' => 
       array (
         'file://' => 
@@ -408,12 +408,12 @@
       'local' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\Projects\\profecta-perdana-system\\storage\\app',
+        'root' => 'D:\\profecta-perdana-system\\storage\\app',
       ),
       'public' => 
       array (
         'driver' => 'local',
-        'root' => 'D:\\Projects\\profecta-perdana-system\\storage\\app/public',
+        'root' => 'D:\\profecta-perdana-system\\storage\\app/public',
         'url' => 'http://localhost/storage',
         'visibility' => 'public',
       ),
@@ -431,7 +431,7 @@
     ),
     'links' => 
     array (
-      'D:\\Projects\\profecta-perdana-system\\public\\storage' => 'D:\\Projects\\profecta-perdana-system\\storage\\app/public',
+      'D:\\profecta-perdana-system\\public\\storage' => 'D:\\profecta-perdana-system\\storage\\app/public',
     ),
   ),
   'hashing' => 
@@ -466,13 +466,13 @@
       'single' => 
       array (
         'driver' => 'single',
-        'path' => 'D:\\Projects\\profecta-perdana-system\\storage\\logs/laravel.log',
+        'path' => 'D:\\profecta-perdana-system\\storage\\logs/laravel.log',
         'level' => 'debug',
       ),
       'daily' => 
       array (
         'driver' => 'daily',
-        'path' => 'D:\\Projects\\profecta-perdana-system\\storage\\logs/laravel.log',
+        'path' => 'D:\\profecta-perdana-system\\storage\\logs/laravel.log',
         'level' => 'debug',
         'days' => 14,
       ),
@@ -523,7 +523,7 @@
       ),
       'emergency' => 
       array (
-        'path' => 'D:\\Projects\\profecta-perdana-system\\storage\\logs/laravel.log',
+        'path' => 'D:\\profecta-perdana-system\\storage\\logs/laravel.log',
       ),
     ),
   ),
@@ -589,7 +589,7 @@
       'theme' => 'default',
       'paths' => 
       array (
-        0 => 'D:\\Projects\\profecta-perdana-system\\resources\\views/vendor/mail',
+        0 => 'D:\\profecta-perdana-system\\resources\\views/vendor/mail',
       ),
     ),
   ),
@@ -746,7 +746,7 @@
     'lifetime' => '120',
     'expire_on_close' => false,
     'encrypt' => false,
-    'files' => 'D:\\Projects\\profecta-perdana-system\\storage\\framework/sessions',
+    'files' => 'D:\\profecta-perdana-system\\storage\\framework/sessions',
     'connection' => NULL,
     'table' => 'sessions',
     'store' => NULL,
@@ -766,9 +766,9 @@
   array (
     'paths' => 
     array (
-      0 => 'D:\\Projects\\profecta-perdana-system\\resources\\views',
+      0 => 'D:\\profecta-perdana-system\\resources\\views',
     ),
-    'compiled' => 'D:\\Projects\\profecta-perdana-system\\storage\\framework\\views',
+    'compiled' => 'D:\\profecta-perdana-system\\storage\\framework\\views',
   ),
   'websockets' => 
   array (
@@ -971,9 +971,9 @@
     ),
     'collect_data_always' => false,
     'storage' => 'files',
-    'storage_files_path' => 'D:\\Projects\\profecta-perdana-system\\storage\\clockwork',
+    'storage_files_path' => 'D:\\profecta-perdana-system\\storage\\clockwork',
     'storage_files_compress' => false,
-    'storage_sql_database' => 'D:\\Projects\\profecta-perdana-system\\storage\\clockwork.sqlite',
+    'storage_sql_database' => 'D:\\profecta-perdana-system\\storage\\clockwork.sqlite',
     'storage_sql_table' => 'clockwork',
     'storage_expiration' => 10080,
     'authentication' => false,

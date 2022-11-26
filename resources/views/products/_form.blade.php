@@ -67,7 +67,7 @@
             {{-- ! produk numeric informasi --}}
             <div class="col-md-3 form-group">
                 <label>Product Weight <span><small class="badge badge-danger">gram</small></span></label>
-                <input type="text" class="form-control berat" required placeholder="Product Weight"
+                <input required type="text" class="form-control berat" required placeholder="Product Weight"
                     value="{{ old('berat', number_format($data->berat, 0, ',', '.')) }}">
                 <input type="hidden" class="berat_" name="berat" value="{{ $data->berat }}">
             </div>
