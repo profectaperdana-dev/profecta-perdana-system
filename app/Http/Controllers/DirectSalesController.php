@@ -292,13 +292,16 @@ class DirectSalesController extends Controller
             $getStock = StockModel::where('products_id', $item['product_id'])
                 ->where('warehouses_id', Auth::user()->warehouse_id)
                 ->first();
+            if ($getStock == null) {
+                return Redirect::back()->with('error', 'Order Fail! Not enough stock. Please re-confirm to the customer.');
+            }
 
             $old_stock = $getStock->stock;
             $getStock->stock = $old_stock - $item['qty'];
             if ($getStock->stock < 0) {
                 DirectSalesDetailModel::where('direct_id', $model->id)->delete();
                 DirectSalesModel::where('id', $model->id)->delete();
-                return Redirect::back()->with('error', 'Verification Fail! Not enough stock. Please re-confirm to the customer.');
+                return Redirect::back()->with('error', 'Order Fail! Not enough stock. Please re-confirm to the customer.');
             } else {
                 $getStock->save();
             }

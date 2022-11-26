@@ -71,7 +71,11 @@
                                                         <br>
                                                         <div class="product-qnty">
                                                             <h6 class="f-w-600">Stock:
-                                                                {{ $item->productBy->stockBy->stock . ' ' . $item->productBy->uoms->satuan }}
+                                                                @if ($item->productBy->stockBy == null)
+                                                                    {{ '0' . ' ' . $item->productBy->uoms->satuan }}
+                                                                @else
+                                                                    {{ $item->productBy->stockBy->stock . ' ' . $item->productBy->uoms->satuan }}
+                                                                @endif
                                                             </h6>
                                                         </div>
 
