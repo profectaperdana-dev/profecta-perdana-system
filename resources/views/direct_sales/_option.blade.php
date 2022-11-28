@@ -431,9 +431,13 @@
                                             </div>
                                             <div class="col-4 col-lg-2 form-group">
                                                 <label>Disc (Rp)</label>
-                                                <input type="number" class="form-control" required
-                                                    name="retails[{{ $loop->index }}][discount_rp]"
-                                                    value="{{ $item->discount_rp }}" id="">
+                                                <input type="text"
+                                                    value="{{ number_format($item->discount_rp, 0, ',', '.') }}"
+                                                    class="form-control diskon" required>
+                                                <input type="hidden" value="{{ $item->discount_rp }}"
+                                                    name="retails[{{ $loop->index }}][discount_rp]">
+
+
                                                 @error('retails[{{ $loop->index }}][discount_rp]')
                                                     <div class="invalid-feedback">
                                                         {{ $message }}

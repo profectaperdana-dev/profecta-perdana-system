@@ -679,7 +679,26 @@
                         });
                     }
 
+                    $('.diskon').on('keyup', function() {
+                        var selection = window.getSelection().toString();
+                        if (selection !== '') {
+                            return;
+                        }
+                        // When the arrow keys are pressed, abort.
+                        if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                            return;
+                        }
+                        var $this = $(this);
+                        // Get the value.
+                        var input = $this.val();
+                        var input = input.replace(/[\D\s\._\-]+/g, "");
+                        input = input ? parseInt(input, 10) : 0;
+                        $this.val(function() {
+                            return (input === 0) ? "" : input.toLocaleString("id-ID");
+                        });
+                        $this.next().val(input);
 
+                    });
                     let x = $(modal_id)
                         .find('.modal-body')
                         .find('#formRetail')
@@ -721,7 +740,8 @@
                             "</div>" +
                             '<div class="col-4 col-lg-2 form-group">' +
                             "<label>Disc (Rp)</label>" +
-                            '<input type="number" class="form-control" name="retails[' +
+                            '<input type="text" class="form-control diskon" >' +
+                            '<input type="hidden" class="form-control" name="retails[' +
                             x +
                             '][discount_rp]" id="">' +
                             "</div>" +
@@ -732,7 +752,27 @@
                             "</div>" +
                             " </div>";
                         $(modal_id).find("#formRetail").append(form);
+                        $('.diskon').on('keyup', function() {
+                            var selection = window.getSelection().toString();
+                            if (selection !== '') {
+                                return;
+                            }
+                            // When the arrow keys are pressed, abort.
+                            if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                                return;
+                            }
+                            var $this = $(this);
+                            // Get the value.
+                            var input = $this.val();
+                            var input = input.replace(/[\D\s\._\-]+/g, "");
+                            input = input ? parseInt(input, 10) : 0;
+                            $this.val(function() {
+                                return (input === 0) ? "" : input.toLocaleString(
+                                    "id-ID");
+                            });
+                            $this.next().val(input);
 
+                        });
                         $(modal_id).find(".productRetail").select2({
                             width: "100%",
                             dropdownParent: modal_id,
