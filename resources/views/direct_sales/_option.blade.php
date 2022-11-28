@@ -69,7 +69,8 @@
                                         <div class="col-4 col-lg-2 form-group">
                                             <label>Disc (Rp)</label>
                                             <input type="number" class="form-control" readonly
-                                                value="{{ $item->discount_rp }}" id="">
+                                                value="{{ number_format($item->discount_rp, 0, ',', '.') }}"
+                                                id="">
                                         </div>
 
                                         @php
