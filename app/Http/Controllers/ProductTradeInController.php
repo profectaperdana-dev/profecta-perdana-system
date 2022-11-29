@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\DirectSalesModel;
 use App\Models\ProductTradeInModel;
 use App\Models\SecondProductModel;
 use App\Models\StockModel;
@@ -134,7 +135,8 @@ class ProductTradeInController extends Controller
         //create trade in
         $title = 'Create Trade In';
         $data = ProductTradeInModel::all();
-        return  view('product_trade_in.create_trade_in', compact('title', 'data'));
+        $retail = DirectSalesModel::whereDay('order_date', Carbon::now()->day)->get();
+        return  view('product_trade_in.create_trade_in', compact('title', 'data', 'retail'));
     }
     public function product_trade_in_all()
     {
@@ -160,13 +162,7 @@ class ProductTradeInController extends Controller
             abort(403);
         }
 
-        //* validator
-        $request->validate([
-            "customer" => "required",
-            "customer_phone" => "required",
-            "tradeFields.*.product_trade_in" => "required",
-            "tradeFields.*.qty" => "required",
-        ]);
+        // dd($request->all());
 
 
         //* save data trade in
@@ -189,20 +185,44 @@ class ProductTradeInController extends Controller
         //* get trade date
         $model->trade_in_date = Carbon::now()->format('Y-m-d');
 
-        //* get customer 
-        $model->customer = $request->customer;
-        $model->customer_phone = $request->customer_phone;
 
-        if ($request->customer_email) {
-            $model->customer_email = $request->customer_email;
+
+        //* get customer
+        if (is_numeric($request->id_retail)) {
+            $getData = DirectSalesModel::where('id', $request->id_retail)->first();
+            if (is_numeric($getData->cust_name)) {
+                $model->customer = $getData->customerBy->name_cust . ' Ref. ' . $getData->order_number;
+            } else {
+                $model->customer = $getData->cust_name . ' Ref. ' . $getData->order_number;
+            }
+            $model->customer_phone = $getData->cust_phone;
+
+            if ($getData->cust_email) {
+                $model->customer_email = $getData->cust_email;
+            } else {
+                $model->customer_email = '-';
+            }
+            if ($getData->cust_ktp) {
+                $model->customer_nik = $getData->cust_ktp;
+            } else {
+                $model->customer_nik = '-';
+            }
         } else {
-            $model->customer_email = '-';
+            $model->customer = $request->customer;
+            $model->customer_phone = $request->customer_phone;
+
+            if ($request->customer_email) {
+                $model->customer_email = $request->customer_email;
+            } else {
+                $model->customer_email = '-';
+            }
+            if ($request->customer_nik) {
+                $model->customer_nik = $request->customer_nik;
+            } else {
+                $model->customer_nik = '-';
+            }
         }
-        if ($request->customer_nik) {
-            $model->customer_nik = $request->customer_nik;
-        } else {
-            $model->customer_nik = '-';
-        }
+
 
         //* created by
         $model->createdBy = Auth::user()->id;

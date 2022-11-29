@@ -249,6 +249,26 @@
                 // Edit Invoice
                 $(document).on("click", ".modal-btn2", function(event) {
 
+
+                    $('.split_rp').on('keyup', function() {
+                        var selection = window.getSelection().toString();
+                        if (selection !== '') {
+                            return;
+                        }
+                        // When the arrow keys are pressed, abort.
+                        if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                            return;
+                        }
+                        var $this = $(this);
+                        // Get the value.
+                        var input = $this.val();
+                        var input = input.replace(/[\D\s\._\-]+/g, "");
+                        input = input ? parseInt(input, 10) : 0;
+                        $this.val(function() {
+                            return (input === 0) ? "" : input.toLocaleString("id-ID");
+                        });
+                        $this.next().val(input);
+                    });
                     let validator = $('form.needs-validation').jbvalidator({
                         errorMessage: true,
                         successClass: true,
@@ -371,35 +391,54 @@
 
                         ++x;
                         var form = ` <div class="mx-auto py-2 form-group row bg-primary">
-                <div class="form-group col-6 col-md-4">
-                    <label>Baterry</label>
-                    <select name="tradeFields[${x}][product_trade_in]" class="form-control productSo-edit id_product" required>
-                        <option value="">--Choose Battery--</option>
-                    </select>
-                </div>
-                <div class="col-6 col-md-2 form-group">
-                    <label>Qty</label>
-                    <input required class="form-control cekQty-edit cek_stock" required name="tradeFields[${x}][qty]" id="">
-                    <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
+                                         <div class="form-group col-6 col-md-4">
+                                            <label>Baterry</label>
+                                            <select name="tradeFields[${x}][product_trade_in]" class="form-control productSo-edit id_product" required>
+                                             <option value="">--Choose Battery--</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 col-md-2 form-group">
+                                            <label>Qty</label>
+                                            <input required class="form-control cekQty-edit cek_stock" required name="tradeFields[${x}][qty]" id="">
+                                            <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
+                                        </div>
+                                        <div class="col-5 col-md-2 form-group">
+                                            <label>Disc (%)</label>
+                                            <input type="number" required value="0" class="form-control disc_persen"  name="tradeFields[${x}][disc_percent]">
+                                        </div>
+                                        <div class="col-5 col-md-2 form-group">
+                                            <label>Disc (Rp)</label>
+                                            <input  type="text" value="0" required class="form-control disc_rp split_rp" class="" >
+                                            <input type="hidden" value="0" name="tradeFields[${x}][disc_rp]" class="discountRp">
+                                        </div>
+                                        <div class="col-2 col-md-2 form-group">
+                                            <label for="">&nbsp;</label>
+                                            <a href="javascript:void(0)"class="form-control text-white remSo-edit text-center"
+                                            style="border:none; background-color:red">-</a>
+                                        </div>
 
-                </div>
-                <div class="col-5 col-md-2 form-group">
-                    <label>Disc (%)</label>
-                    <input required type="number" class="form-control disc_persen"  name="tradeFields[${x}][disc_percent]">
-                </div>
-                <div class="col-5 col-md-2 form-group">
-                    <label>Disc (Rp)</label>
-                    <input required type="number" class="form-control disc_rp" class="" name="tradeFields[${x}][disc_rp]">
-                </div>
-                <div class="col-2 col-md-2 form-group">
-                    <label for="">&nbsp;</label>
-                    <a href="javascript:void(0)"class="form-control text-white remSo-edit text-center"
-                     style="border:none; background-color:red">-</a>
-                </div>
-
-            </div>`;
+                                    </div>`;
                         $(modal_id).find(".formSo-edit").append(form);
-
+                        $('.split_rp').on('keyup', function() {
+                            var selection = window.getSelection().toString();
+                            if (selection !== '') {
+                                return;
+                            }
+                            // When the arrow keys are pressed, abort.
+                            if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                                return;
+                            }
+                            var $this = $(this);
+                            // Get the value.
+                            var input = $this.val();
+                            var input = input.replace(/[\D\s\._\-]+/g, "");
+                            input = input ? parseInt(input, 10) : 0;
+                            $this.val(function() {
+                                return (input === 0) ? "" : input.toLocaleString(
+                                    "id-ID");
+                            });
+                            $this.next().val(input);
+                        });
                         $(modal_id).find(".productSo-edit").select2({
                             width: "100%",
                             dropdownParent: modal_id,
@@ -460,7 +499,7 @@
                             var disc_persen = $(this).closest('.row').find('.disc_persen')
                                 .val();
                             var disc_rp = $(this).parent().siblings().find(
-                                '.disc_rp').val();
+                                '.discountRp').val();
                             let qty = $(this).parent().siblings().find(
                                 '.cekQty-edit').val();
                             // console.log(qty);
@@ -485,7 +524,7 @@
                             // console.log(total);
                         });
 
-
+                        $(this).closest('.row').siblings().find('.total_save').val(total);
                         $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
                             .round(total)
                             .toLocaleString(

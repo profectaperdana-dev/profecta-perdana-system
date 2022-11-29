@@ -43,12 +43,13 @@
                 </div>
                 <div class="col-5 col-md-2 form-group">
                     <label>Disc (%)</label>
-                    <input type="number" class="form-control " name="tradeFields[0][disc_percent]" id="">
+                    <input value="0" type="number" class="form-control " name="tradeFields[0][disc_percent]"
+                        id="">
                 </div>
                 <div class="col-5 col-md-2 form-group">
                     <label>Disc (Rp)</label>
-                    <input class="form-control " id="">
-                    <input type="hidden" name="tradeFields[0][disc_rp]">
+                    <input value="0" class="form-control total" id="">
+                    <input value="0" type="hidden" name="tradeFields[0][disc_rp]">
                 </div>
                 <div class="col-2 col-md-2 form-group">
                     <label for="">&nbsp;</label>

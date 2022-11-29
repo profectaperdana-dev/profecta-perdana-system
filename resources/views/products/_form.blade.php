@@ -68,20 +68,20 @@
             <div class="col-md-3 form-group">
                 <label>Product Weight <span><small class="badge badge-danger">gram</small></span></label>
                 <input required type="text" class="form-control berat" required placeholder="Product Weight"
-                    value="{{ old('berat', number_format($data->berat, 0, ',', '.')) }}">
+                    value="{{ number_format($data->berat, 0, ',', '.') }}">
                 <input type="hidden" class="berat_" name="berat" value="{{ $data->berat }}">
             </div>
             <div class="col-md-3 form-group">
                 <label>Purchase Price <small class="badge badge-primary">(ex. PPN)</small> </label>
                 <input type="text" class="form-control harga_beli" required placeholder="Purchase Price"
-                    value="{{ old('harga_beli', number_format($data->harga_beli, 0, ',', '.')) }}">
+                    value="{{ number_format($data->harga_beli, 0, ',', '.') }}">
                 <input type="hidden" class="harga_beli_" name="harga_beli" value="{{ $data->harga_beli }}">
             </div>
             <div class="col-md-3 form-group">
                 <label>Non Retail Price <small class="badge badge-primary">(ex. PPN)</small></label>
                 <input type="text" class="form-control harga_jual_nonretail" required
                     placeholder="Retail Selling Price"
-                    value="{{ old('harga_jual_nonretail', number_format($data->harga_jual_nonretail, 0, ',', '.')) }}">
+                    value="{{ number_format($data->harga_jual_nonretail, 0, ',', '.') }}">
                 <input class="harga_jual_nonretail_" type="hidden" name="harga_jual_nonretail"
                     value="{{ $data->harga_jual_nonretail }}">
             </div>
@@ -153,7 +153,7 @@
                                 class="form-control all_product_TradeIn" required>
                                 @if ($value->id_warehouse != null)
                                     <option value="{{ $value->id_warehouse }}" selected>
-                                        {{ $value->warehouse->warehouses }}
+                                        {{ $value->warehouseBy->warehouses }}
                                     </option>
                                 @endif
                                 <option value="">-Choose Warehouse-</option>

@@ -373,33 +373,33 @@
 
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Retail Seconds Product</h6>
+                            <h6>Sales Seconds Product</h6>
                         </div>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products/create') ? 'active' : '' }}"
                             href="{{ url('/retail_second_products/create') }}"><i
-                                data-feather="inbox"></i><span>Create Order
+                                data-feather="edit"></i><span>Create Order
                             </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('retail_second_products') ? 'active' : '' }}"
-                            href="{{ url('/retail_second_products') }}"><i data-feather="inbox"></i><span>Invoicing
+                            href="{{ url('/retail_second_products') }}"><i data-feather="folder"></i><span>Invoicing
                             </span></a>
                     </li>
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Retail</h6>
+                            <h6>Sales Retail</h6>
                         </div>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('retail/create') ? 'active' : '' }}"
-                            href="{{ url('/retail/create') }}"><i data-feather="inbox"></i><span>Create Order
+                            href="{{ url('/retail/create') }}"><i data-feather="edit"></i><span>Create Order
                             </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('retail') ? 'active' : '' }}"
-                            href="{{ url('/retail') }}"><i data-feather="inbox"></i><span>Invoicing
+                            href="{{ url('/retail') }}"><i data-feather="folder"></i><span>Invoicing
                             </span></a>
                     </li>
 
@@ -418,7 +418,7 @@
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('trade_invoice') ? 'active' : '' }}"
-                            href="{{ url('/trade_invoice') }}"><i data-feather="clipboard"></i><span>Trade-In
+                            href="{{ url('/trade_invoice') }}"><i data-feather="folder"></i><span>Trade-In
                                 Invoicing
                             </span>
                         </a>

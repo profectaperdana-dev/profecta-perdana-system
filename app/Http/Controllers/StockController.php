@@ -24,7 +24,7 @@ class StockController extends Controller
         if (Gate::allows('warehouse_keeper')) {
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%Profecta Perdana%');
+                $query->where('warehouses', 'like', '%PROFECTA PERDANA%');
                 $query->where('warehouses_id', Auth::user()->warehouseBy->id);
             })->latest()->get();
             $product = ProductModel::latest()->get();
@@ -34,7 +34,7 @@ class StockController extends Controller
         } else {
             $title = 'Data Stocks Product All Warehouse';
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%Profecta Perdana%');
+                $query->where('warehouses', 'like', '%PROFECTA PERDANA%');
             })->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::whereIn('type', [5])->latest()->get();
@@ -50,7 +50,7 @@ class StockController extends Controller
             $id = Auth::user()->warehouseBy->id;
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(C0-1)%');
+                $query->where('warehouses', 'like', '%(C01)%');
                 $query->where('warehouses_id', Auth::user()->warehouseBy->id);
             })->latest()->get();
             $product = ProductModel::latest()->get();
@@ -60,7 +60,7 @@ class StockController extends Controller
         } else {
             $title = 'Data Stocks Product All Warehouse';
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(C0-1)%');
+                $query->where('warehouses', 'like', '%(C01)%');
             })->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::whereIn('type', [1])->latest()->get();
@@ -74,7 +74,7 @@ class StockController extends Controller
         if (Gate::allows('warehouse_keeper')) {
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(C0-2)%');
+                $query->where('warehouses', 'like', '%(C02)%');
                 $query->where('warehouses_id', Auth::user()->warehouseBy->id);
             })->latest()->get();
             $product = ProductModel::latest()->get();
@@ -84,7 +84,7 @@ class StockController extends Controller
         } else {
             $title = 'Data Stocks Product All Warehouse';
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(C0-2)%');
+                $query->where('warehouses', 'like', '%(C02)%');
             })->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::whereIn('type', [2])->latest()->get();
@@ -98,7 +98,7 @@ class StockController extends Controller
         if (Gate::allows('warehouse_keeper')) {
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(C0-3)%');
+                $query->where('warehouses', 'like', '%(C03)%');
                 $query->where('warehouses_id', Auth::user()->warehouseBy->id);
             })->latest()->get();
             $product = ProductModel::latest()->get();
@@ -108,7 +108,7 @@ class StockController extends Controller
         } else {
             $title = 'Data Stocks Product All Warehouse';
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(C0-3)%');
+                $query->where('warehouses', 'like', '%(C03)%');
             })->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::whereIn('type', [3])->latest()->get();
@@ -122,7 +122,7 @@ class StockController extends Controller
         if (Gate::allows('warehouse_keeper')) {
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(SS-01)%');
+                $query->where('warehouses', 'like', '%(SS01)%');
                 $query->where('warehouses_id', Auth::user()->warehouseBy->id);
             })->latest()->get();
             $product = ProductModel::latest()->get();
@@ -132,7 +132,7 @@ class StockController extends Controller
         } else {
             $title = 'Data Stocks Product All Warehouse';
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(SS-01)%');
+                $query->where('warehouses', 'like', '%(SS01)%');
             })->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::whereIn('type', [4])->latest()->get();
@@ -146,7 +146,7 @@ class StockController extends Controller
         if (Gate::allows('warehouse_keeper')) {
             $title = 'Data Stocks Product ' . Auth::user()->warehouseBy->warehouses;
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(supplier)%');
+                $query->where('warehouses', 'like', '%(SUPPLIER)%');
                 $query->where('warehouses_id', Auth::user()->warehouseBy->id);
             })->latest()->get();
             $product = ProductModel::latest()->get();
@@ -156,7 +156,7 @@ class StockController extends Controller
         } else {
             $title = 'Data Stocks Product All Warehouse';
             $data = StockModel::with('warehouseBy', 'productBy')->whereHas('warehouseBy', function ($query) {
-                $query->where('warehouses', 'like', '%(supplier)%');
+                $query->where('warehouses', 'like', '%(SUPPLIER)%');
             })->latest()->get();
             $product = ProductModel::latest()->get();
             $warehouse = WarehouseModel::whereIn('type', [6])->latest()->get();

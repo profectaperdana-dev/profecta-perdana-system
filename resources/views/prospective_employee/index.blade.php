@@ -79,9 +79,9 @@
                                                                     <div class="form-group row">
                                                                         <div class="col-md-12">
                                                                             <h5>Are you sure delete this link form ?</h5>
-                                                                            <input type="text"
-                                                                                class="form-control text-info"
-                                                                                value="{{ $value->link }}" readonly>
+                                                                            <span class="form-control code text-info"
+                                                                                type="text">
+                                                                                {{ url()->current() . '/fill_form/' . $value->code }}</span>
 
                                                                         </div>
                                                                     </div>
@@ -98,15 +98,15 @@
                                                 </div>
                                             </div>
                                             {{-- End Modal Delete UOM --}}
-                                            <td style="width: 3%">{{ $loop->iteration }}.</td>
-                                            <td style="width: 50%">
-                                                <div class="input-group pill-input-group"> <input
-                                                        class="form-control code text-info" type="text "
-                                                        value="{{ url()->current() . '/fill_form/' . $value->code }}">
+                                            <td>{{ $loop->iteration }}.</td>
+                                            <td>
+                                                <div class="input-group pill-input-group">
+                                                    <span class="form-control code text-info" type="text">
+                                                        {{ url()->current() . '/fill_form/' . $value->code }}</span>
+
                                                     <span class="input-group-text"><a href="#" class="copy_code">
                                                             <i class="icofont icofont-ui-copy"></i></a>
                                                     </span>
-
                                                 </div>
                                             </td>
 
@@ -118,7 +118,7 @@
                                                 @endif
 
                                             </td>
-                                            <td style="width: 10%">
+                                            <td>
                                                 @if ($value->status == 1)
                                                     <span class="badge badge-success">Form Filled</span>
                                                 @else
@@ -143,15 +143,15 @@
         <script>
             $(document).ready(function() {
                 $('.copy_code').click(function() {
-                    var code = $(this).closest('td').find('.code').val();
+                    var code = $(this).closest('td').find('.code').text();
                     var $temp = $("<input>");
                     $("body").append($temp);
                     $temp.val(code).select();
                     document.execCommand("copy");
                     $temp.remove();
                     $.notify({
-                        title: 'Copied Code Success',
-                        message: code
+                        title: 'Success !',
+                        message: 'Code Copied'
                     }, {
                         type: 'success',
                         allow_dismiss: true,

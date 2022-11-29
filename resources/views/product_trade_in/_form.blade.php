@@ -2,34 +2,47 @@
     <div class="col-md-12">
         <div class="row font-weight-bold " id="formTradeIn">
             <div class="form-group row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-12 form-group">
                     <label>
-                        Customers</label>
-                    <input type="text" name="customer" class="form-control text-capitalize" placeholder="Name Customer"
-                        required>
+                        Customer Data Sources
+                    </label>
+                    <select name="id_retail" class="form-select uoms valCust" id="">
+                        <option value="" selected>--Select Refrence--</option>
+                        @foreach ($retail as $value)
+                            <option value="{{ $value->id }}">{{ $value->order_number }} -
+                                @if (is_numeric($value->cust_name))
+                                    {{ $value->customerBy->name_cust }}
+                                @else
+                                    {{ $value->cust_name }}
+                                @endif
+                            </option>
+                        @endforeach
+                        <option value="other">Other Refrence</option>
+
+                    </select>
+                    <input type="text" name="customer" class="form-control nameCustomer text-capitalize"
+                        placeholder="Name Customer" required>
 
                 </div>
-                <div class="col-md-6 form-group">
-                    <label>
-                        Customers NIK</label>
-                    <input type="number" name="customer_nik" data-v-min-length="16" data-v-max-length="16" number
-                        class="form-control" placeholder="Customer NIK">
-
+                <div class="row otherCustomer" hidden>
+                    <div class="col-md-4 form-group">
+                        <label>
+                            Customers NIK</label>
+                        <input type="number" name="customer_nik" data-v-min-length="16" data-v-max-length="16" number
+                            class="form-control" placeholder="Customer NIK">
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>
+                            Customers Phone</label>
+                        <input type="text" data-v-min-length="9" data-v-max-length="13" number name="customer_phone"
+                            class="form-control phone" placeholder="Customer Phone" required>
+                    </div>
+                    <div class="col-md-4 form-group">
+                        <label>
+                            Customers Email</label>
+                        <input type="email" name="customer_email" class="form-control" placeholder="Customer Email">
+                    </div>
                 </div>
-                <div class="col-md-6 form-group">
-                    <label>
-                        Customers Phone</label>
-                    <input type="text" data-v-min-length="9" data-v-max-length="13" number name="customer_phone"
-                        class="form-control" placeholder="Customer Phone" required>
-
-                </div>
-                <div class="col-md-6 form-group">
-                    <label>
-                        Customers Email</label>
-                    <input type="email" name="customer_email" class="form-control" placeholder="Customer Email">
-
-                </div>
-
             </div>
 
             <div class="mx-auto py-2 form-group row bg-primary">

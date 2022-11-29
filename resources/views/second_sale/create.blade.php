@@ -45,13 +45,20 @@
         <script>
             $(function() {
 
+
                 let validator = $('form.needs-validation').jbvalidator({
                     errorMessage: true,
                     successClass: true,
                     language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
                 });
                 //reload instance after dynamic element is added
-                validator.reload();
+                // validator.reload();
+                $('form').submit(function(e) {
+                    $(this).find('button[type="submit"]').prop('disabled', true);
+                    if (validator.checkAll() != 0) {
+                        $(this).find('button[type="submit"]').prop('disabled', false);
+                    }
+                });
             })
         </script>
         <script>
@@ -154,13 +161,13 @@
                 </div>
                 <div class="col-5 col-md-2 form-group">
                     <label>Disc (%)</label>
-                    <input type="number" class="form-control"  name="tradeFields[${y}][disc_percent]"
+                    <input type="number" value="0" class="form-control"  name="tradeFields[${y}][disc_percent]"
                         id="">
                 </div>
                 <div class="col-5 col-md-2 form-group">
                     <label>Disc (Rp)</label>
-                    <input class="form-control total"  id="">
-                    <input type="hidden" name="tradeFields[${y}][disc_rp]" >
+                    <input class="form-control total" id="" value="0">
+                    <input type="hidden" value="0" name="tradeFields[${y}][disc_rp]" >
                 </div>
                 <div class="col-2 col-md-2 form-group">
                     <label for="">&nbsp;</label>

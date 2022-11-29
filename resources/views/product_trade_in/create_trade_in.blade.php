@@ -45,6 +45,21 @@
         <script>
             $(function() {
 
+                $('.nameCustomer').attr('hidden', 'hidden');
+                $('.valCust').on('change', function() {
+                    var val = $(this).val();
+                    if (val == 'other') {
+                        $('.otherCustomer').removeAttr('hidden');
+                        $('.nameCustomer').removeAttr('hidden');
+                        $('.nameCustomer').attr('required', 'required');
+                        $('.phone').attr('required', 'required');
+                    } else {
+                        $('.otherCustomer').attr('hidden', 'hidden');
+                        $('.nameCustomer').attr('hidden', 'hidden');
+                        $('.nameCustomer').removeAttr('required');
+                        $('.phone').removeAttr('required');
+                    }
+                });
 
                 let validator = $('form.needs-validation').jbvalidator({
                     errorMessage: true,
@@ -64,9 +79,9 @@
         <script>
             $(document).ready(function() {
                 let csrf = $('meta[name="csrf-token"]').attr("content");
-
-
                 y = 0;
+
+
 
                 $(".all_product_TradeIn").select2({
                     width: "100%",

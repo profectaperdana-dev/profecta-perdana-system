@@ -20,7 +20,7 @@ class ProspectiveEmployeeController extends Controller
     public function index()
     {
         //* index
-        $title = 'Prospective Employees';
+        $title = 'Candidate Employees';
         $data = ProspectiveEmployeeModel::latest()->get();
         return view('prospective_employee.index', compact('title', 'data'));
     }

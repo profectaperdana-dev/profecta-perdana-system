@@ -21,7 +21,7 @@
     <div class="modal-dialog modal-lg modal-dialog-scrollable" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Trade-In
+                <h5 class="modal-title" id="exampleModalLabel">Second Sale
                     Order
                     :
                     {{ $invoice->second_sale_number }}</h5>
@@ -81,20 +81,20 @@
                                         <input class="form-control cek_stock cekQty-edit" required
                                             name="tradeFields[{{ $loop->index }}][qty]" id=""
                                             value="{{ $detail->qty }}">
-
                                     </div>
                                     <div class="col-5 col-md-2 form-group">
                                         <label>Disc (%)</label>
-                                        <input type="number" class="form-control disc_persen"
+                                        <input type="number" class="form-control disc_persen" required
                                             name="tradeFields[{{ $loop->index }}][disc_percent]" id=""
                                             value="{{ $detail->discount }}">
                                     </div>
                                     <div class="col-5 col-md-2 form-group">
                                         <label>Disc (Rp)</label>
-                                        <input class="form-control disc_rp" id=""
-                                            name="tradeFields[{{ $loop->index }}][disc_rp]"
-                                            value="{{ $detail->discount_rp }}">
-
+                                        <input type="text" class="form-control disc_rp split_rp" id=""
+                                            placeholder="0"
+                                            value="{{ number_format($detail->discount_rp, 0, ',', '.') }}">
+                                        <input type="hidden" class="discountRp" value="{{ $detail->discount_rp }}"
+                                            name="tradeFields[{{ $loop->index }}][disc_rp]">
                                     </div>
                                     @if ($loop->index == 0)
                                         <div class="col-2 col-md-2 form-group">
@@ -110,7 +110,6 @@
                                                 class="btn btn-danger form-control text-white remSo-edit">-</a>
                                         </div>
                                     @endif
-
                                 </div>
                             @endforeach
                         </div>
@@ -120,6 +119,7 @@
                                 <input class="form-control total"
                                     value="{{ 'Rp. ' . number_format($invoice->total, 0, ',', '.') }}" id=""
                                     readonly>
+                                <input type="hidden" class="total_save" name="total">
                             </div>
                         </div>
                     </div>

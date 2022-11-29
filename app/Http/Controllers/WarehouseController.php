@@ -52,7 +52,9 @@ class WarehouseController extends Controller
 
         ]);
         $model = new WarehouseModel();
-        $model->warehouses = $request->get('warehouses');
+        $model->type = $request->get('type');
+        $getType = WarehouseTypeModel::where('id', $request->get('type'))->first();
+        $model->warehouses = $request->get('warehouses') . ' (' . $getType->name . ')';
         $model->type = $request->get('type');
         $model->alamat = $request->get('alamat');
         $model->id_area = $request->get('id_area');

@@ -320,11 +320,11 @@ class SecondSaleController extends Controller
         // save purchase order details
         $total = 0;
 
-        //Check Duplicate
         $products_arr = [];
         foreach ($request->tradeFields as $check) {
             array_push($products_arr, $check['product_trade_in']);
         }
+        // dd($products_arr);
         $duplicates = array_unique(array_diff_assoc($products_arr, array_unique($products_arr)));
 
         if (!empty($duplicates)) {
@@ -342,13 +342,14 @@ class SecondSaleController extends Controller
         }
 
 
+        $total = 0;
 
         if ($saved) {
             foreach ($request->tradeFields as $value) {
-                $data = SecondSaleDetailModel::where('second_sale_id', $model->id)
+                $data = SecondSaleDetailModel::where('second_sale_id', $id)
                     ->where('product_second_id', $value['product_trade_in'])
                     ->first();
-                if ($data) {
+                if ($data != null) {
                     $data->product_second_id = $value['product_trade_in'];
                     $data->discount = $value['disc_percent'];
                     $data->discount_rp = $value['disc_rp'];
@@ -356,15 +357,21 @@ class SecondSaleController extends Controller
                     $data->save();
                 } else {
                     $detail = new SecondSaleDetailModel();
-                    $detail->second_sale_id = $model->id;
+                    $detail->second_sale_id = $id;
+                    $detail->product_second_id = $value['product_trade_in'];
                     $detail->discount = $value['disc_percent'];
                     $detail->discount_rp = $value['disc_rp'];
                     $detail->qty = $value['qty'];
                     $detail->save();
                 }
 
-                $harga = ProductTradeInModel::where('id', $value['product_trade_in'])->first();
-                $total = $total + ($harga->price_product_trade_in * $value['qty']);
+                //? GET HARGA
+                $get_harga = ProductTradeInModel::where('id', $value['product_trade_in'])->first();
+                $diskon =  $value['disc_percent'] / 100;
+                $harga_diskon = $get_harga->price_product_trade_in * $diskon;
+                $diskon_rupiah = $value['disc_rp'];
+                $harga_akhir = $get_harga->price_product_trade_in - ($harga_diskon  + $diskon_rupiah);
+                $total += $harga_akhir * $value['qty'];
 
                 $type = Auth::user()->warehouseBy->id_area;
                 $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->first();

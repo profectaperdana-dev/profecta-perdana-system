@@ -75,15 +75,22 @@
             </td>
 
         </tr>
-        <tr>
-            <td align="right" colspan="3" style="font-size: 8pt">Discount</td>
-            <td style="font-size: 8pt" align="right">{{ number_format($diskon * $item->qty, 0, ',', '.') }}</td>
-        </tr>
-        <tr>
-            <td align="right" colspan="3" style="font-size: 8pt">Discount Rupiah</td>
-            <td style="font-size: 8pt" align="right">
-                {{ number_format($item->discount_rp * $item->qty, 0, ',', '.') }}</td>
-        </tr>
+        @if ($data->discount > 0)
+            <tr>
+                <td align="right" colspan="3" style="font-size: 8pt">Discount</td>
+                <td style="font-size: 8pt" align="right">{{ number_format($diskon * $item->qty, 0, ',', '.') }}</td>
+            </tr>
+        @endif
+
+
+        @if ($item->discount_rp != 0)
+            <tr>
+                <td align="right" colspan="3" style="font-size: 8pt">Discount Rupiah</td>
+                <td style="font-size: 8pt" align="right">
+                    {{ number_format($item->discount_rp * $item->qty, 0, ',', '.') }}</td>
+            </tr>
+        @endif
+
 
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">TOTAL</td>
