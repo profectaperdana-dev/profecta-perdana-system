@@ -9,7 +9,7 @@
                     <select name="id_retail" class="form-select uoms valCust" id="">
                         <option value="" selected>--Select Refrence--</option>
                         @foreach ($retail as $value)
-                            <option value="{{ $value->id }}">{{ $value->order_number }} -
+                            <option value="{{ $value->id }}">{{ $value->order_number }} /
                                 @if (is_numeric($value->cust_name))
                                     {{ $value->customerBy->name_cust }}
                                 @else

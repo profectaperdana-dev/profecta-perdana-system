@@ -29,15 +29,45 @@ class AccountingController extends Controller
         $title = 'Jurnal';
         return view('accounting.index', compact('data'));
     }
-    public function jurnal()
+    public function jurnal(Request $request)
     {
         if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
-        //* view data from database
-        $data = JurnalModel::orderBy('date', 'DESC')->get();
-        $title = 'Journal';
-        return view('accounting.jurnal', compact('data', 'title'));
+        //! view data from database
+        if ($request->ajax()) {
+
+            if (!empty($request->from_date)) {
+                $invoice = JurnalModel::whereBetween('date', array($request->from_date, $request->to_date))
+                    ->latest()
+                    ->get();
+            } else {
+                $invoice = JurnalModel::orderBy('date', 'DESC')
+                    ->latest()
+                    ->get();
+            }
+            return datatables()->of($invoice)
+                ->editColumn('total', function ($data) {
+                    return  'Rp ' . number_format($data->total, 0, ',', '.');
+                })
+                ->editColumn('date', function ($data) {
+                    return date('d M Y', strtotime($data->date));
+                })
+
+                // ->addIndexColumn() //memberikan penomoran
+                // ->addColumn('action', function ($invoice) {
+
+                //     return view('second_sale._option', compact('invoice'))->render();
+                // })
+                // ->rawColumns(['action'], ['createdBy'])
+                // ->rawColumns()
+                ->addIndexColumn()
+                ->make(true);
+        }
+        $data = [
+            'title' => "Journal in : " . Auth::user()->warehouseBy->warehouses,
+        ];
+        return view('accounting.jurnal', $data);
     }
 
     public function createExpenses()

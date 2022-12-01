@@ -120,7 +120,7 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
+                            <table id="basic-2" class="display expandable-table " style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="width: 10%"></th>
@@ -343,7 +343,7 @@
                 $(document).on("click", ".modal-btn", function(event) {
                     let modal_id = $(this).attr('data-bs-target');
 
-                    $(modal_id).find(".role-acc, .job-acc").select2({
+                    $(modal_id).find(".role-acc, .job-acc, .warehouse-acc").select2({
                         width: "100%",
                         dropdownParent: modal_id,
                     });
