@@ -4,7 +4,6 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
     @endpush
 
-    @include('accounting.detail')
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
@@ -259,97 +258,7 @@
                                         </td>
                                         <td></td>
                                     </tr>
-                                    {{-- <tr>
-                                        <td colspan="5" class="text-start fw-bold"> Non Operational Expense :</td>
 
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Depreciation Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Interest Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Entertainment Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Bank Service Charge</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">PPN</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Income Tax Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Return Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Magazine Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-start">Car GPS Renewal Expense</td>
-                                        <td class="text-end">@currency($biaya_pembelian)</td>
-                                        <td class="text-end"></td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <th class="text-start">Total Non Operational Expense
-                                        </th>
-                                        <td class="text-end"></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor)
-                                        </td>
-                                        </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <th class="text-start">Total Expense (@currency($total_operational) )
-                                        </th>
-                                        <td></td>
-
-                                        <td class="text-end"></td>
-
-                                        </td>
-                                        <td></td>
-                                        <td class="text-end fw-bold">
-                                            @currency($biaya_pembelian + $biaya_komunikasi + $biaya_gaji + $biaya_promosi + $biaya_kendaraan + $biaya_gedung + $biaya_penjualan + $biaya_kantor)
-                                        </td>
-                                    </tr> --}}
                                     <tr>
                                         <th class="text-start">Net Profit
                                         </th>
@@ -363,16 +272,20 @@
                                             @currency($gross_profit - $total_operational)
                                         </td>
                                     </tr>
+
                                 </tbody>
+
                             </table>
                         </div>
                         <br>
+                        @include('accounting.detail')
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Container-fluid Ends-->
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>

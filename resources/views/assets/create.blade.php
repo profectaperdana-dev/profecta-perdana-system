@@ -95,9 +95,10 @@
 
                                         <div class="form-group col-md-4">
                                             <label class="font-weight-bold">Cost of Acquisition</label>
-                                            <input type="number"
-                                                class="form-control {{ $errors->first('acquisition_cost') ? ' is-invalid' : '' }}"
-                                                name="acquisition_cost" placeholder="Enter Cost of Acquisition" required>
+                                            <input type="text"
+                                                class="form-control total {{ $errors->first('acquisition_cost') ? ' is-invalid' : '' }}"
+                                                placeholder="Enter Cost of Acquisition" required>
+                                            <input type="hidden" name="acquisition_cost">
                                             @error('acquisition_cost')
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
@@ -129,7 +130,25 @@
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
                 });
-
+                $('.total').on('keyup', function() {
+                    var selection = window.getSelection().toString();
+                    if (selection !== '') {
+                        return;
+                    }
+                    // When the arrow keys are pressed, abort.
+                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                        return;
+                    }
+                    var $this = $(this);
+                    // Get the value.
+                    var input = $this.val();
+                    var input = input.replace(/[\D\s\._\-]+/g, "");
+                    input = input ? parseInt(input, 10) : 0;
+                    $this.val(function() {
+                        return (input === 0) ? "" : input.toLocaleString("id-ID");
+                    });
+                    $this.next().val(input);
+                });
             });
         </script>
     @endpush

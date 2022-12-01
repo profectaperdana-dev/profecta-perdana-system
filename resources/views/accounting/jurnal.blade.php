@@ -68,6 +68,7 @@
                             <table id="example1" class="display expandable-table text-capitalize" style="width:100%">
                                 <thead>
                                     <tr>
+                                        <th>Action</th>
                                         <th>#</th>
                                         <th>date</th>
                                         <th>Code - Name Transaction</th>
@@ -123,16 +124,12 @@
                             }
                         },
                         columnDefs: [{
-                                "targets": 0,
-                                "className": "text-center"
-                            },
-                            {
                                 "targets": 1,
                                 "className": "text-center"
                             },
                             {
                                 "targets": 2,
-                                "className": "text-left"
+                                "className": "text-center"
                             },
                             {
                                 "targets": 3,
@@ -140,10 +137,19 @@
                             },
                             {
                                 "targets": 4,
+                                "className": "text-left"
+                            },
+                            {
+                                "targets": 5,
                                 "className": "text-end"
                             },
                         ],
                         columns: [{
+                                width: '5%',
+                                data: 'action',
+                                name: 'action',
+                                orderable: false,
+                            }, {
                                 width: '5%',
                                 data: 'DT_RowIndex',
                                 name: 'DT_Row_Index',
@@ -241,6 +247,50 @@
                 });
                 $('form').submit(function() {
                     $(this).find('button[type="submit"]').prop('disabled', true);
+                });
+                $(document).on("click", ".modal-btn2", function(event) {
+                    let csrf = $('meta[name="csrf-token"]').attr("content");
+                    let modal_id = $(this).attr('data-bs-target');
+                    $(function() {
+
+                        let validator = $('form.needs-validation').jbvalidator({
+                            errorMessage: true,
+                            successClass: true,
+                            language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+                        });
+
+                        validator.reload();
+                    })
+                    $(modal_id).find(".role-acc, .job-acc, .warehouse-acc").select2({
+                        width: "100%",
+                        dropdownParent: modal_id,
+                    });
+                    $('.total').on('keyup', function() {
+                        var selection = window.getSelection().toString();
+                        if (selection !== '') {
+                            return;
+                        }
+                        // When the arrow keys are pressed, abort.
+                        if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                            return;
+                        }
+                        var $this = $(this);
+                        // Get the value.
+                        var input = $this.val();
+                        var input = input.replace(/[\D\s\._\-]+/g, "");
+                        input = input ? parseInt(input, 10) : 0;
+                        $this.val(function() {
+                            return (input === 0) ? "" : input.toLocaleString("id-ID");
+                        });
+                        $this.next().val(input);
+
+                    });
+
+
+                    $(".account").select2({
+                        width: "100%",
+                        dropdownParent: modal_id,
+                    });
                 });
             });
         </script>

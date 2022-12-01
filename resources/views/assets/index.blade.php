@@ -153,10 +153,12 @@
 
                                     <div class="form-group col-md-6">
                                         <label class="font-weight-bold">Cost of Acquisition</label>
-                                        <input type="number"
-                                            class="form-control {{ $errors->first('acquisition_cost') ? ' is-invalid' : '' }}"
-                                            name="acquisition_cost" placeholder="Enter Cost of Acquisition"
-                                            value="{{ $value->acquisition_cost }}" required>
+                                        <input type="text"
+                                            class="form-control total {{ $errors->first('acquisition_cost') ? ' is-invalid' : '' }}"
+                                            placeholder="Enter Cost of Acquisition"
+                                            value="{{ number_format($value->acquisition_cost, 0, ',', '.') }}" required>
+                                        <input type="hidden" value="{{ $value->acquisition_cost }}"
+                                            name="acquisition_cost">
                                         @error('acquisition_cost')
                                             <small class="text-danger">{{ $message }}.</small>
                                         @enderror
@@ -219,6 +221,25 @@
                 let csrf = $('meta[name="csrf-token"]').attr("content");
 
                 $(document).on('click', '.modal-btn', function() {
+                    $('.total').on('keyup', function() {
+                        var selection = window.getSelection().toString();
+                        if (selection !== '') {
+                            return;
+                        }
+                        // When the arrow keys are pressed, abort.
+                        if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                            return;
+                        }
+                        var $this = $(this);
+                        // Get the value.
+                        var input = $this.val();
+                        var input = input.replace(/[\D\s\._\-]+/g, "");
+                        input = input ? parseInt(input, 10) : 0;
+                        $this.val(function() {
+                            return (input === 0) ? "" : input.toLocaleString("id-ID");
+                        });
+                        $this.next().val(input);
+                    });
                     let modal_id = $(this).attr('data-bs-target');
                     let customer_id = $(modal_id).find('.modal-body').find('.id').val();
                     let node_form = $(modal_id).find('.modal-body').find('.total-credit');

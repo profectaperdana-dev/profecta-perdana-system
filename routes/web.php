@@ -182,6 +182,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/trade_in/{id}/edit_superadmin', [ProductTradeInController::class, 'editSuperadmin']);
     Route::post('/second_sale/{id}/edit_superadmin', [SecondSaleController::class, 'editSuperadmin']);
     Route::get('/get_warehouse/', [ProductController::class, 'getWarehouse']);
+    Route::post('/journal/{id}/edit_superadmin', [AccountingController::class, 'editSuperadmin']);
+
 
 
     Route::prefix('expenses')->group(function () {
