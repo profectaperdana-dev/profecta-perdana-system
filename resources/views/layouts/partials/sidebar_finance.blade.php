@@ -1,10 +1,10 @@
 <header class="main-nav">
     <div class="sidebar-user text-center"><a class="setting-primary" href="{{ url('/profiles') }}"><i
                 data-feather="settings"></i></a>
-        @if (Auth::user()->photo_profile == null)
+        @if (Auth::user()->employeeBy->photo == 'blank')
             <img class="img-90 rounded-circle" src="{{ asset('images/blank.png') }}" alt="">
         @else
-            <img class="img-90 rounded-circle" src="{{ asset('foto_profile/' . Auth::user()->photo_profile) }}"
+            <img class="img-90 rounded-circle" src="{{ asset('images/employees/' . Auth::user()->employeeBy->photo) }}"
                 alt="">
         @endif
         <div class="badge-bottom"></div><a href="user-profile.html">
