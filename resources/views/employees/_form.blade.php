@@ -384,7 +384,7 @@
                             value="{{ old('salary', number_format($employee->salary, 0, ',', '.')) }}"
                             class="form-control total @error('salary') is-invalid @enderror"
                             placeholder="Enter Employee Salary" required>
-                        <input type="text" name="salary" value="{{ $employee->salary }}">
+                        <input type="hidden" name="salary" value="{{ $employee->salary }}">
                         @error('salary')
                             <div class="invalid-feedback">
                                 {{ $message }}
