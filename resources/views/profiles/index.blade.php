@@ -25,11 +25,11 @@
                             alt="">
                     </div>
                     <div class="card-profile">
-                        @if (Auth::user()->photo_profile == null)
+                        @if (Auth::user()->employeeBy->photo == 'blank')
                             <img class="rounded-circle" src="{{ asset('images/blank.png') }}" alt="">
                         @else
-                            <img class="rounded-circle" src="{{ asset('foto_profile/' . Auth::user()->photo_profile) }}"
-                                alt="">
+                            <img class="rounded-circle"
+                                src="{{ asset('images/employees/' . Auth::user()->employeeBy->photo) }}" alt="">
                         @endif
                     </div>
 
