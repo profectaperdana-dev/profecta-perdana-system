@@ -60,6 +60,7 @@ class EmployeeController extends Controller
             'birth_date' => 'required',
             'phone' => 'required',
             'emergency_phone' => 'required',
+            'emergency_relation' => 'required',
             'email' => 'required',
             'province' => 'required',
             'district' => 'required',
@@ -99,6 +100,7 @@ class EmployeeController extends Controller
 
         $selected_employee->phone = $request->phone;
         $selected_employee->emergency_phone = $request->emergency_phone;
+        $selected_employee->emergency_relation = $request->emergency_relation;
         $selected_employee->email = $request->email;
 
         //Get Province, City, District, Village
@@ -187,6 +189,7 @@ class EmployeeController extends Controller
             'birth_date' => 'required',
             'phone' => 'required',
             'emergency_phone' => 'required',
+            'emergency_relation' => 'required',
             'email' => 'required',
             'province' => 'required',
             'district' => 'required',
@@ -216,6 +219,7 @@ class EmployeeController extends Controller
         $selected_employee->birth_date = $request->birth_date;
         $selected_employee->phone = $request->phone;
         $selected_employee->emergency_phone = $request->emergency_phone;
+        $selected_employee->emergency_relation = $request->emergency_relation;
         $selected_employee->email = $request->email;
 
         //Get Province, City, District, Village

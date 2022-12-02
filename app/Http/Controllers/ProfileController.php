@@ -122,13 +122,9 @@ class ProfileController extends Controller
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'required',
-            'phone_number' => 'required',
         ]);
         $model = User::find($id);
         $model->name = $request->get('name');
-        $model->email = $request->get('email');
-        $model->phone_number = $request->get('phone_number');
         $model->save();
         return redirect('profiles')->with('info', 'Changes Data Profile is Success');
     }

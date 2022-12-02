@@ -93,12 +93,12 @@
                             data-bs-target="#changeFoto"><i data-feather="edit"></i></a></div>
                     <div class="card-footer row">
                         <div class="col-6 col-sm-6">
-                            <h6>Email</h6>
-                            <h3 class="counter">{{ Auth::user()->email }}</h3>
+                            <h6>Username</h6>
+                            <h3 class="counter">{{ Auth::user()->username }}</h3>
                         </div>
                         <div class="col-6 col-sm-6">
                             <h6>Number Phone</h6>
-                            <h3><span class="counter">{{ Auth::user()->phone_number }}</span></h3>
+                            <h3><span class="counter">{{ Auth::user()->employeeBy->phone }}</span></h3>
                         </div>
 
                     </div>
@@ -125,28 +125,6 @@
                                     class="form-control {{ $errors->first('name') ? ' is-invalid' : '' }}"
                                     value="{{ Auth::user()->name }}">
                                 @error('name')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 font-weight-bold">
-                                <label class="form-label">Email</label>
-                                <input name="email" type="email"
-                                    class="form-control {{ $errors->first('name') ? ' is-invalid' : '' }}"
-                                    value="{{ Auth::user()->email }}">
-                                @error('email')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
-                            <div class="mb-3 font-weight-bold">
-                                <label class="form-label">Phone Number</label>
-                                <input name="phone_number" type="text"
-                                    class="form-control {{ $errors->first('phone_number') ? ' is-invalid' : '' }}"
-                                    value="{{ Auth::user()->phone_number }}">
-                                @error('phone_number')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>

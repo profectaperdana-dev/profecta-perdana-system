@@ -16,21 +16,16 @@ class LoginController extends Controller
     public function authenticate(Request $request)
     {
         $credentials = $request->validate([
-            'email' => 'required',
+            'username' => 'required',
             'password' => 'required'
         ]);
 
-        $getIdByEmail = EmployeeModel::where('email', $request->email)->first();
-        if ($getIdByEmail == null) {
-            return back()->with('error', 'Login failed! Please check your email and password');
-        }
-
-        if (Auth::attempt(['employee_id' => $getIdByEmail->id, 'password' => $request->password])) {
+        if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
             $request->session()->regenerate();
             return redirect()->intended('home');
         }
 
-        return back()->with('error', 'Login failed! Please check your email and password');
+        return back()->with('error', 'Login failed! Please check your Username and Password');
     }
 
     public function logout(Request $request)

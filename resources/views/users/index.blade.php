@@ -120,13 +120,13 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
+                            <table id="basic-2" class="display expandable-table" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th style="width: 10%"></th>
                                         <th>#</th>
                                         <th>Name</th>
-                                        <th>Email</th>
+                                        <th>Username</th>
                                         <th>Job</th>
                                         <th>Role</th>
                                         <th>Warehouse</th>
@@ -313,8 +313,8 @@
                                             </div>
                                             {{-- End Modal Delete UOM --}}
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->name }}</td>
-                                            <td>{{ $value->email }}</td>
+                                            <td class="text-capitalize">{{ $value->name }}</td>
+                                            <td>{{ $value->username }}</td>
                                             <td>{{ $value->job_name }}</td>
                                             <td>{{ $value->role_name }}</td>
                                             <td>{{ $value->warehouse_name }}</td>

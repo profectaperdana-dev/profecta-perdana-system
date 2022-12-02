@@ -126,7 +126,7 @@
 
                                                                                 <div
                                                                                     class="form-group row font-weight-bold">
-                                                                                    <div class="form-group col-lg-4">
+                                                                                    <div class="form-group col-lg-6">
                                                                                         <label>Phone Number</label>
                                                                                         <input type="text"
                                                                                             class="form-control"
@@ -134,14 +134,33 @@
                                                                                             value="{{ $value->phone }}"
                                                                                             readonly>
                                                                                     </div>
-                                                                                    <div class="form-group col-lg-4">
-                                                                                        <label>Emergency Number</label>
-                                                                                        <input type="text"
+                                                                                    <div class="form-group col-lg-6">
+                                                                                        <label>Emergency Contact</label>
+                                                                                        <div class="input-group">
+                                                                                            <input type="text"
+                                                                                                aria-label="First name"
+                                                                                                class="form-control"
+                                                                                                value="{{ $value->emergency_phone }}"
+                                                                                                readonly>
+                                                                                            <span
+                                                                                                class="input-group-text">|</span>
+                                                                                            <input type="text"
+                                                                                                aria-label="Last name"
+                                                                                                class="form-control"
+                                                                                                value="{{ $value->emergency_relation }}"
+                                                                                                readonly>
+                                                                                        </div>
+                                                                                        {{-- <input type="text"
                                                                                             class="form-control"
                                                                                             name="" id=""
                                                                                             value="{{ $value->emergency_phone }}"
-                                                                                            readonly>
+                                                                                            readonly> --}}
                                                                                     </div>
+
+                                                                                </div>
+
+                                                                                <div
+                                                                                    class="form-group row font-weight-bold">
                                                                                     <div class="form-group col-lg-4">
                                                                                         <label>Email</label>
                                                                                         <input type="text"
@@ -150,18 +169,14 @@
                                                                                             value="{{ $value->email }}"
                                                                                             readonly>
                                                                                     </div>
-                                                                                </div>
-
-                                                                                <div
-                                                                                    class="form-group row font-weight-bold">
-                                                                                    <div class="form-group col-lg-6">
+                                                                                    <div class="form-group col-lg-4">
                                                                                         <label>Birth Place</label>
                                                                                         <input type="text"
                                                                                             class="form-control"
                                                                                             value="{{ $value->birth_place }}"
                                                                                             readonly>
                                                                                     </div>
-                                                                                    <div class="form-group col-lg-6">
+                                                                                    <div class="form-group col-lg-4">
                                                                                         <label>Birth Date</label>
                                                                                         <input type="text"
                                                                                             class="form-control"

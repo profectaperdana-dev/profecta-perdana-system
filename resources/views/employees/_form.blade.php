@@ -40,7 +40,7 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label>Birth Place</label>
                         <input type="text" name="birth_place"
                             value="{{ old('birth_place', $employee->birth_place) }}"
@@ -53,38 +53,13 @@
                             </div>
                         @enderror
                     </div>
-                    <div class="form-group col-md-6">
+                    <div class="form-group col-md-4">
                         <label>Birth Date</label>
                         <input type="date" name="birth_date" value="{{ old('birth_date', $employee->birth_date) }}"
                             class="form-control
                   @error('birth_date') is-invalid @enderror"
                             placeholder="Employee Birth Date" required>
                         @error('birth_date')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="form-group col-md-4">
-                        <label>Phone Number</label>
-                        <input type="text" name="phone" value="{{ old('phone', $employee->phone) }}"
-                            class="form-control @error('phone') is-invalid @enderror"
-                            placeholder="Employee Phone Number" required>
-                        @error('phone')
-                            <div class="invalid-feedback">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label>Emergency Phone Number</label>
-                        <input type="text" name="emergency_phone"
-                            value="{{ old('emergency_phone', $employee->emergency_phone) }}"
-                            class="form-control @error('emergency_phone') is-invalid @enderror"
-                            placeholder="Employee Emergency Phone Number" required>
-                        @error('emergency_phone')
                             <div class="invalid-feedback">
                                 {{ $message }}
                             </div>
@@ -101,6 +76,69 @@
                             </div>
                         @enderror
                     </div>
+                </div>
+                <div class="row">
+                    <div class="form-group col-md-6">
+                        <label>Phone Number</label>
+                        <input type="text" name="phone" value="{{ old('phone', $employee->phone) }}"
+                            class="form-control @error('phone') is-invalid @enderror"
+                            placeholder="Employee Phone Number" required>
+                        @error('phone')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label>Emergency Contact</label>
+                        <div class="input-group">
+                            <input type="text" name="emergency_phone" class="form-control"
+                                value="{{ old('emergency_phone', $employee->emergency_phone) }}"
+                                placeholder="Enter Phone Number" required>
+                            <select name="emergency_relation"
+                                class="form-control emergency @error('emergency_relation') is-invalid @enderror"
+                                required>
+                                <option selected value="">
+                                    -- Choose The Relationship --
+                                </option>
+                                <option value="Brother" @if ($employee->emergency_relation == 'Brother') selected @endif>
+                                    Brother
+                                </option>
+                                <option value="Sister" @if ($employee->emergency_relation == 'Sister') selected @endif>
+                                    Sister
+                                </option>
+                                <option value="Mother" @if ($employee->emergency_relation == 'Mother') selected @endif>
+                                    Mother
+                                </option>
+                                <option value="Father" @if ($employee->emergency_relation == 'Father') selected @endif>
+                                    Father
+                                </option>
+                                <option value="Uncle" @if ($employee->emergency_relation == 'Uncle') selected @endif>
+                                    Uncle
+                                </option>
+                                <option value="Aunt" @if ($employee->emergency_relation == 'Aunt') selected @endif>
+                                    Aunt
+                                </option>
+                                <option value="Husband" @if ($employee->emergency_relation == 'Husband') selected @endif>
+                                    Husband
+                                </option>
+                                <option value="Wife" @if ($employee->emergency_relation == 'Wife') selected @endif>
+                                    Wife
+                                </option>
+                            </select>
+                        </div>
+                        {{-- <label>Emergency Phone Number</label>
+                        <input type="text" name="emergency_phone"
+                            value="{{ old('emergency_phone', $employee->emergency_phone) }}"
+                            class="form-control @error('emergency_phone') is-invalid @enderror"
+                            placeholder="Employee Emergency Phone Number" required>
+                        @error('emergency_phone')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror --}}
+                    </div>
+
                 </div>
                 <div class="row">
                     <div class="form-group col-md-4">

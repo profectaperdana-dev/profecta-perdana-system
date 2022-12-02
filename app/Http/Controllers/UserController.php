@@ -62,12 +62,27 @@ class UserController extends Controller
 
         $selected_employee = EmployeeModel::where('id', $validated_data['employee_id'])->first();
         $validated_data['name'] = $selected_employee->name;
-        $validated_data['email'] = $selected_employee->email;
+
+        //Create username
+        $lowercase_name = strtolower($selected_employee->name);
+        $split_name = explode(" ", $lowercase_name);
+        $remove_nonalphabet_name = array_map(function ($val) {
+            return preg_replace('/[^a-z0-9]/i', '', $val);
+        }, $split_name);
+        $get_three_char = array_map(function ($val) {
+            return substr($val, 0, 3);
+        }, $remove_nonalphabet_name);
+        $implode_name = implode("", $get_three_char);
+        $get_birth = date('md', strtotime($selected_employee->birth_date));
+        $username = $implode_name . $get_birth;
+        $validated_data['username'] = $username;
+
         $validated_data['password'] = bcrypt('profecta123');
 
-        User::create($validated_data);
-
-        return redirect('/users')->with('success', 'User Account Add Success');
+        $saved = User::create($validated_data);
+        if ($saved) {
+            return redirect('/users')->with('success', 'User Account Add Success');
+        } else return redirect('/users')->with('fail', 'The employee already has an account!');
     }
 
     /**
@@ -90,6 +105,27 @@ class UserController extends Controller
         ]);
 
         $current_user = User::where('id', $id)->firstOrFail();
+        $old_employee = $current_user->employee_id;
+
+        if ($old_employee != $validated_data['employee_id_edit']) {
+            $selected_employee = EmployeeModel::where('id', $validated_data['employee_id_edit'])->first();
+
+            //Create username
+            $lowercase_name = strtolower($selected_employee->name);
+            $split_name = explode(" ", $lowercase_name);
+            $remove_nonalphabet_name = array_map(function ($val) {
+                return preg_replace('/[^a-z0-9]/i', '', $val);
+            }, $split_name);
+            $get_three_char = array_map(function ($val) {
+                return substr($val, 0, 3);
+            }, $remove_nonalphabet_name);
+            $implode_name = implode("", $get_three_char);
+            $get_birth = date('md', strtotime($selected_employee->birth_date));
+            $username = $implode_name . $get_birth;
+            $current_user->username = $username;
+            $current_user->name = $selected_employee->name;
+        }
+
         $current_user->employee_id = $validated_data['employee_id_edit'];
         $current_user->role_id = $validated_data['role_id_edit'];
         $current_user->job_id = $validated_data['job_id_edit'];

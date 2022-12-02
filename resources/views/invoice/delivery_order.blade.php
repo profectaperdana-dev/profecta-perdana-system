@@ -199,7 +199,7 @@
                     <td>&nbsp;</td>
 
                     <th style="text-align: left">Qty Total</th>
-                    <th style="text-align: center;border:1px solid black"> {{ $total_qty }} PCS</th>
+                    <th style="text-align: center;"> {{ $total_qty }} PCS</th>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
 
@@ -209,7 +209,7 @@
                     <td>&nbsp;</td>
 
                     <th style="text-align: left">Weight Total</th>
-                    <th style="text-align: center;border:1px solid black"> {{ $total }} Kg</th>
+                    <th style="text-align: center;"> {{ $total }} Kg</th>
                     <td>&nbsp;</td>
                     <td>&nbsp;</td>
 

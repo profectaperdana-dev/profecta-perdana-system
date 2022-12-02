@@ -50,6 +50,11 @@
                         $(this).find('button[type="submit"]').prop('disabled', true);
                     }
                 });
+                $(
+                    ".emergency"
+                ).select2({
+                    width: "50%",
+                });
                 $(".province").select2({
                     width: "100%",
                     placeholder: "Select Province",
