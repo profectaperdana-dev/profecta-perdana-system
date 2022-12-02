@@ -29,15 +29,43 @@ class AccountingController extends Controller
         $title = 'Jurnal';
         return view('accounting.index', compact('data'));
     }
-    public function jurnal()
+    public function jurnal(Request $request)
     {
         if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
             abort(403);
         }
-        //* view data from database
-        $data = JurnalModel::orderBy('date', 'DESC')->get();
-        $title = 'Journal';
-        return view('accounting.jurnal', compact('data', 'title'));
+        //! view data from database
+        if ($request->ajax()) {
+
+            if (!empty($request->from_date)) {
+                $invoice = JurnalModel::whereBetween('date', array($request->from_date, $request->to_date))
+                    ->latest()
+                    ->get();
+            } else {
+                $invoice = JurnalModel::orderBy('date', 'DESC')
+                    ->latest()
+                    ->get();
+            }
+            return datatables()->of($invoice)
+                ->editColumn('total', function ($data) {
+                    return  'Rp ' . number_format($data->total, 0, ',', '.');
+                })
+                ->editColumn('date', function ($data) {
+                    return date('d M Y', strtotime($data->date));
+                })
+
+                ->addIndexColumn() //memberikan penomoran
+                ->addColumn('action', function ($invoice) {
+                    $account = AccountSubTypeModel::latest()->get();
+                    return view('accounting._option', compact('invoice', 'account'))->render();
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
+        $data = [
+            'title' => "Journal in : " . Auth::user()->warehouseBy->warehouses,
+        ];
+        return view('accounting.jurnal', $data);
     }
 
     public function createExpenses()
@@ -186,13 +214,34 @@ class AccountingController extends Controller
             $type = AccountSubTypeModel::where('id', $value['account'])->first();
             $type_acccount = AccountSubModel::where('id', $type->account_sub_id)->first();
             $jurnal->date = $date;
+            $jurnal->code_type = $type->code;
             $jurnal->code = $type->code . ' -- ' . $type->name;
             $jurnal->memo = $value['memo'];
             $jurnal->account_code = $type_acccount->code;
             $jurnal->total = $value['total'];
             $jurnal->save();
         }
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
+        return redirect()->back()->with('success', 'Data has been saved');
+    }
+
+    public function editSuperadmin(Request $request, $id)
+    {
+        $data = JurnalModel::find($id);
+        $data->date = $request->date;
+        $type = AccountSubTypeModel::where('id', $request->account)->first();
+        $type_acccount = AccountSubModel::where('id', $type->account_sub_id)->first();
+        $data->code = $type->code . ' -- ' . $type->name;
+        $data->memo = $request->memo;
+        $data->total = $request->total;
+        $data->account_code = $type_acccount->code;
+        $data->code_type = $type->code;
+        $saved = $data->save();
+
+        if ($saved) {
+            return redirect()->back()->with('success', 'Data has been updated');
+        } else {
+            return redirect()->back()->with('error', 'Data failed to update');
+        }
     }
 
     public function depreciation()

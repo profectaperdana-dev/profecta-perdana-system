@@ -343,7 +343,7 @@
                 $(document).on("click", ".modal-btn", function(event) {
                     let modal_id = $(this).attr('data-bs-target');
 
-                    $(modal_id).find(".role-acc, .job-acc").select2({
+                    $(modal_id).find(".role-acc, .job-acc, .warehouse-acc").select2({
                         width: "100%",
                         dropdownParent: modal_id,
                     });

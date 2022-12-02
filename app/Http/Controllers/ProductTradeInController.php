@@ -191,9 +191,9 @@ class ProductTradeInController extends Controller
         if (is_numeric($request->id_retail)) {
             $getData = DirectSalesModel::where('id', $request->id_retail)->first();
             if (is_numeric($getData->cust_name)) {
-                $model->customer = $getData->customerBy->name_cust . ' Ref. ' . $getData->order_number;
+                $model->customer = $getData->customerBy->name_cust . ' / Ref. ' . $getData->order_number;
             } else {
-                $model->customer = $getData->cust_name . ' Ref. ' . $getData->order_number;
+                $model->customer = $getData->cust_name . ' / Ref. ' . $getData->order_number;
             }
             $model->customer_phone = $getData->cust_phone;
 
@@ -255,6 +255,10 @@ class ProductTradeInController extends Controller
                 }
                 $type = Auth::user()->warehouseBy->id_area;
                 $warehouse = WarehouseModel::where('type', 7)->where('id_area', $type)->first();
+
+                if ($warehouse == null) {
+                    return redirect()->back()->with('error', 'Please create warehouse for trade in because the warehouse to accommodate used goods does not yet exist');
+                }
 
                 $second_stock = SecondProductModel::where('warehouses_id', $warehouse->id)->where('products_id', $data->product_trade_in)->first();
 

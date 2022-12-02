@@ -139,7 +139,7 @@
                                 name: 'DT_Row_Index',
                                 "className": "text-center",
                                 orderable: false,
-                                searchable: false
+                                searchable: true
                             },
                             {
                                 data: 'second_sale_number',
@@ -402,7 +402,7 @@
                                             <input required class="form-control cekQty-edit cek_stock" required name="tradeFields[${x}][qty]" id="">
                                             <small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>
                                         </div>
-                                        <div class="col-5 col-md-2 form-group">
+                                        <div class="col-4 col-md-2 form-group">
                                             <label>Disc (%)</label>
                                             <input type="number" required value="0" class="form-control disc_persen"  name="tradeFields[${x}][disc_percent]">
                                         </div>
@@ -411,7 +411,7 @@
                                             <input  type="text" value="0" required class="form-control disc_rp split_rp" class="" >
                                             <input type="hidden" value="0" name="tradeFields[${x}][disc_rp]" class="discountRp">
                                         </div>
-                                        <div class="col-2 col-md-2 form-group">
+                                        <div class="col-3 col-md-2 form-group">
                                             <label for="">&nbsp;</label>
                                             <a href="javascript:void(0)"class="form-control text-white remSo-edit text-center"
                                             style="border:none; background-color:red">-</a>

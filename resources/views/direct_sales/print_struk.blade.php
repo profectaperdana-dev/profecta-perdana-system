@@ -48,6 +48,8 @@
         @php
             $total_diskon = 0;
             $total_diskon_rp = 0;
+            $total_diskon_rp = 0;
+            $total_diskonPersen = 0;
         @endphp
         @foreach ($data->directSalesDetailBy as $item)
             @php
@@ -78,6 +80,7 @@
                     
                 @endphp
                 <td style="font-size: 8pt" align="right">{{ number_format($sub_total, 0, ',', '.') }}</td>
+
             </tr>
         @endforeach
         <tr>
@@ -86,15 +89,20 @@
             </td>
 
         </tr>
-        <tr>
-            <td align="right" colspan="3" style="font-size: 8pt">Discount</td>
-            <td style="font-size: 8pt" align="right">{{ number_format($total_diskon, 0, ',', '.') }}</td>
-        </tr>
-        <tr>
-            <td align="right" colspan="3" style="font-size: 8pt">Discount Rupiah</td>
-            <td style="font-size: 8pt" align="right">
-                {{ number_format($total_diskon_rp, 0, ',', '.') }}</td>
-        </tr>
+        @if ($item->discount != 0)
+            <tr>
+                <td align="right" colspan="3" style="font-size: 8pt">Discount (%)</td>
+                <td style="font-size: 8pt" align="right">{{ number_format($total_diskon, 0, ',', '.') }}</td>
+            </tr>
+        @endif
+
+        @if ($item->discount_rp != 0)
+            <tr>
+                <td align="right" colspan="3" style="font-size: 8pt">Discount Rp</td>
+                <td style="font-size: 8pt" align="right">{{ number_format($total_diskon_rp, 0, ',', '.') }}</td>
+            </tr>
+        @endif
+
         <tr>
             <td align="right" colspan="3" style="font-size: 8pt">Total Excl.</td>
             <td style="font-size: 8pt" align="right">

@@ -42,9 +42,9 @@
                                             </div>
                                         </div>
                                         <div class="mx-auto py-2 form-group row bg-primary rounded">
-                                            <div class="form-group col-12 col-lg-4">
+                                            <div class="form-group col-12 col-lg-5">
                                                 <label class="font-weight-bold">Account</label>
-                                                <select name="accountFields[0][account]"
+                                                <select name="accountFields[0][account]" required
                                                     class="account form-control text-capitalize required">
                                                     <option value="">--Select Account--</option>
                                                     @foreach ($account as $type_account)
@@ -54,12 +54,8 @@
                                                     @endforeach
                                                 </select>
                                             </div>
-                                            <div class="col-12 col-lg-3 form-group">
-                                                <label class="font-weight-bold">Memo</label>
-                                                <input type="text" required class="form-control text-capitalize"
-                                                    name="accountFields[0][memo]" placeholder="Enter Memo">
-                                            </div>
-                                            <div class="col-10 col-lg-3 form-group">
+
+                                            <div class="col-10 col-lg-5 form-group">
                                                 <label class="font-weight-bold">Total</label>
                                                 <input type="text" required class="total form-control text-capitalize"
                                                     placeholder="Enter Total">
@@ -71,6 +67,12 @@
                                                     class="form-control text-white  text-center"
                                                     style="border:none; background-color:green">+</a>
                                             </div>
+                                            <div class="col-12 col-lg-12 form-group">
+                                                <label class="font-weight-bold">Memo</label>
+                                                <textarea class="form-control text-capitalize" required id="" cols="30" rows="3"
+                                                    name="accountFields[0][memo]"></textarea>
+                                            </div>
+
                                         </div>
                                     </div>
 
@@ -128,30 +130,31 @@
                     ++y;
 
                     let form = `<div class="mx-auto py-2 form-group row bg-primary rounded">
-                                            <div class="form-group col-12 col-lg-4">
+                                            <div class="form-group col-12 col-lg-5">
                                                 <label class="font-weight-bold">Account</label>
                                                 <select name="accountFields[${y}][account]"
                                                     class="account subType form-control text-capitalize required">
                                                     <option value="">--Select Account--</option>
                                                 </select>
                                             </div>
-                                            <div class="col-12 col-lg-3 form-group">
-                                                <label class="font-weight-bold">Memo</label>
-                                                <input type="text" required class="form-control text-capitalize"
-                                                    name="accountFields[${y}][memo]" placeholder="Enter Memo">
-                                            </div>
-                                            <div class="col-10 col-lg-3 form-group">
+                                           
+                                            <div class="col-10 col-lg-5 form-group">
                                                 <label class="font-weight-bold">Total</label>
                                                 <input type="text" required class="form-control text-capitalize total"
                                                      placeholder="Enter Total">
                                                 <input type="hidden" class="total_" name="accountFields[${y}][total]">
                                             </div>
-                                            <div class="col-2 col-lg-2 form-group">
+                                             <div class="col-2 col-lg-2 form-group">
                                                 <label for="">&nbsp;</label>
                                                 <a href="javascript:void(0)"
                                                     class="form-control text-white remTradeIn text-center"
                                                     style="border:none; background-color:red">-</a>
                                             </div>
+                                             <div class="col-12 col-lg-12 form-group">
+                                                <label class="font-weight-bold">Memo</label>
+                                                <textarea class="form-control" required id="" cols="30" rows="3" name="accountFields[${y}][memo]"></textarea>
+                                            </div>
+                                           
                                         </div>`;
 
                     $("#formTradeIn").append(form);

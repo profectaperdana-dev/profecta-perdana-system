@@ -48,6 +48,8 @@
         @php
             $total_diskon = 0;
             $total_diskon_persen = 0;
+            $total_diskon_rp = 0;
+            $total_diskonPersen = 0;
         @endphp
         @foreach ($data->second_sale_details as $item)
             <tr>
@@ -67,6 +69,13 @@
                     
                 @endphp
                 <td style="font-size: 8pt" align="right">{{ number_format($sub_total, 0, ',', '.') }}</td>
+                @php
+                    // hitung total diskon rupiah
+                    $total_diskon_rp += $item->discount_rp * $item->qty;
+                    
+                    // hitung total diskon persen
+                    $total_diskonPersen += $diskon * $item->qty;
+                @endphp
             </tr>
         @endforeach
         <tr>
@@ -75,19 +84,19 @@
             </td>
 
         </tr>
-        @if ($data->discount > 0)
+        @if ($item->discount != 0)
             <tr>
-                <td align="right" colspan="3" style="font-size: 8pt">Discount</td>
-                <td style="font-size: 8pt" align="right">{{ number_format($diskon * $item->qty, 0, ',', '.') }}</td>
+                <td align="right" colspan="3" style="font-size: 8pt">Discount (%)</td>
+                <td style="font-size: 8pt" align="right">{{ number_format($total_diskonPersen, 0, ',', '.') }}</td>
             </tr>
         @endif
 
 
-        @if ($item->discount_rp != 0)
+        @if ($item->discount_rp > 0)
             <tr>
                 <td align="right" colspan="3" style="font-size: 8pt">Discount Rupiah</td>
                 <td style="font-size: 8pt" align="right">
-                    {{ number_format($item->discount_rp * $item->qty, 0, ',', '.') }}</td>
+                    {{ number_format($total_diskon_rp, 0, ',', '.') }}</td>
             </tr>
         @endif
 

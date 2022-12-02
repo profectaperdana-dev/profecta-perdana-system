@@ -49,6 +49,7 @@
                                 </div>
                             </div>
                             <div class="row" id="formReturn">
+
                                 @foreach ($direct->directSalesDetailBy as $item)
                                     <div class="row mx-auto py-2 form-group bg-primary">
                                         <div class="form-group col-9 col-lg-4">

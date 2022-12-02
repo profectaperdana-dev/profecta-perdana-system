@@ -13,7 +13,7 @@
                 <div class="container-fluid">
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <table class="table table-striped table-responsive">
+                            <table class="table table-striped table-responsive" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -145,7 +145,7 @@
                 <div class="container-fluid">
                     <div class="form-group row">
                         <div class="col-md-12">
-                            <table class="table table-striped table-responsive">
+                            <table class="table table-striped table-responsive" style="width:100%">
                                 <thead>
                                     <tr>
                                         <th>#</th>

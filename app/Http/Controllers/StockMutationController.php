@@ -74,7 +74,7 @@ class StockMutationController extends Controller
         ) {
             abort(403);
         }
-        $all_warehouses = WarehouseModel::all();
+        $all_warehouses = WarehouseModel::where('type', '!=', 7)->get();
 
         $data = [
             'title' => 'Create Stock Mutation ',

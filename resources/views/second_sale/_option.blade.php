@@ -82,7 +82,7 @@
                                             name="tradeFields[{{ $loop->index }}][qty]" id=""
                                             value="{{ $detail->qty }}">
                                     </div>
-                                    <div class="col-5 col-md-2 form-group">
+                                    <div class="col-4 col-md-2 form-group">
                                         <label>Disc (%)</label>
                                         <input type="number" class="form-control disc_persen" required
                                             name="tradeFields[{{ $loop->index }}][disc_percent]" id=""
@@ -97,14 +97,14 @@
                                             name="tradeFields[{{ $loop->index }}][disc_rp]">
                                     </div>
                                     @if ($loop->index == 0)
-                                        <div class="col-2 col-md-2 form-group">
+                                        <div class="col-3 col-md-2 form-group">
                                             <label for="">&nbsp;</label>
                                             <a href="javascript:void(0)"
                                                 class="form-control addSo-edit text-white  text-center"
-                                                style="border:none; background-color:green">+</a>
+                                                style="border:none; background-color:green"> + </a>
                                         </div>
                                     @else
-                                        <div class="col-2 col-md-2 form-group">
+                                        <div class="col-3 col-md-2 form-group">
                                             <label for="">&nbsp;</label>
                                             <a href="javascript:void(0)"
                                                 class="btn btn-danger form-control text-white remSo-edit">-</a>

@@ -35,7 +35,7 @@
                         <div class="form-group row">
                             <div class="col-md-6 form-group">
                                 <label>
-                                    Customers Name</label>
+                                    Customers</label>
                                 <input type="text" name="customer" required class="form-control"
                                     value="{{ $invoice->customer }}">
                             </div>
