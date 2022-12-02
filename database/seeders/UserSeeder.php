@@ -15,7 +15,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $superAdmin = User::create([
-            'employee_id' => '3',
+            'employee_id' => '2',
+            'username' => 'adminpalembang',
             'password' => bcrypt('12345678'),
             'role_id' => 1,
             'job_id' => 3,
@@ -23,7 +24,5 @@ class UserSeeder extends Seeder
             'warehouse_id' => 1,
             'photo_profile' => '-',
         ]);
-
-        $superAdmin->assignRole('super admin');
     }
 }

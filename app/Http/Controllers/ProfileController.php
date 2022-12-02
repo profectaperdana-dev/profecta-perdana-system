@@ -68,7 +68,7 @@ class ProfileController extends Controller
             $model->save();
             return redirect('profiles')->with('info', 'Changes Photo Profile is Success');
         } else {
-            unlink('foto_profile/' . $request->get('url_lama'));
+            // unlink('foto_profile/' . $request->get('url_lama'));
             $file = $request->photo_profile;
             $nama_file = time() . '.' . $file->getClientOriginalExtension();
             $file->move("foto_profile/", $nama_file);
