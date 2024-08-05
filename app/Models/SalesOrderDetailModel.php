@@ -9,7 +9,7 @@ class SalesOrderDetailModel extends Model
 {
     use HasFactory;
     protected $table = 'sales_order_details';
-    protected $hidden = ['created_at', 'updated_at'];
+    // protected $hidden = ['created_at', 'updated_at'];
 
 
     public function productSales()
@@ -22,6 +22,11 @@ class SalesOrderDetailModel extends Model
     }
     public function salesorders()
     {
-        return $this->belongsTo(SalesOrderModel::class, 'id', 'sales_orders_id');
+        return $this->belongsTo(SalesOrderModel::class, 'sales_orders_id', 'id');
+    }
+
+    public function salesOrderDotBy()
+    {
+        return $this->hasMany(SalesOrderDotModel::class, 'sales_order_detail_id');
     }
 }

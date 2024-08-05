@@ -36,9 +36,14 @@
                                         <div class="form-group row">
                                             <div class="col-md-12 form-group">
                                                 <label class="text-black">
-                                                    Date</label>
-                                                <input type="date" name="date" class="form-control text-capitalize"
-                                                    placeholder="Enter Date" required>
+                                                    Date
+                                                    @php
+                                                        $now = date('Y-m-d', strtotime('now'));
+                                                    @endphp
+                                                    {{ $now }}
+                                                </label>
+                                                <input type="date" name="date" max="{{ $now }}"
+                                                    class="form-control text-capitalize" placeholder="Enter Date" required>
                                             </div>
                                         </div>
                                         <div class="mx-auto py-2 form-group row bg-primary rounded">

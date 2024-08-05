@@ -18,32 +18,97 @@
 
 <body>
     <center>
-        <img style="width: 50%;" src="https://iili.io/tTHjV9.png" alt="">
+        <img style="width: 50%;" src="{{ url('images/logo.png') }}" alt="">
         <br>
         <p style="font-size: 10pt">{{ $warehouse->alamat }} <br>
-            Phone : 0713-82536</p>
+            Phone : {{ $warehouse->telp1 . ' / ' . $warehouse->telp2 }}</p>
 
     </center>
     <table style="width: 100%">
         <tr>
-            <td style="font-size: 10pt">No. Invoice</td>
-            <td style="font-size: 10pt">:</td>
-            <td style="font-size: 10pt">{{ $data->order_number }}</td>
+            <td style="font-size: 8pt;white-space:nowrap;">No. Invoice</td>
+            <td style="font-size: 8pt">:</td>
+            <td style="font-size: 8pt">{{ $data->order_number }}</td>
         </tr>
         <tr>
-            <td style="font-size: 10pt">Date</td>
-            <td style="font-size: 10pt">:</td>
-            <td style="font-size: 10pt">{{ date('d-m-Y H:i:s', strtotime($data->created_at)) }}</td>
+            <td style="font-size: 8pt;white-space:nowrap;">Date / Time</td>
+            <td style="font-size: 8pt">:</td>
+            <td style="font-size: 8pt">{{ date('d F Y / H:i:s', strtotime($data->created_at)) }}</td>
         </tr>
+        <tr>
+            <td style="font-size: 8pt;white-space:nowrap;">Customer</td>
+            <td style="font-size: 8pt">:</td>
+            <td style="font-size: 8pt;white-space:nowrap;">
+                @if (is_numeric($data->cust_name))
+                    {{ $data->customerBy->name_cust }}
+                @else
+                    {{ $data->cust_name }}
+                @endif
+            </td>
+            </td>
+        </tr>
+        <tr>
+            <td style="font-size: 8pt;white-space:nowrap;">Phone Number</td>
+            <td style="font-size: 8pt">:</td>
+            <td style="font-size: 8pt">
+
+                @if (is_numeric($data->cust_name))
+                    {{ $data->customerBy->phone_cust }}
+                @else
+                    {{ $data->cust_phone }}
+                @endif
+
+            </td>
+            </td>
+        </tr>
+        @if (!is_numeric($data->cust_name))
+            <tr>
+                <td style="font-size: 8pt;white-space:nowrap;">Machine</td>
+                <td style="font-size: 8pt">:</td>
+                <td style="font-size: 8pt;">
+                    @if ($data->car_brand_id != null)
+                        @if (is_numeric($data->car_brand_id) && is_numeric($data->car_type_id))
+                            {{ $data->carBrandBy->car_brand }} {{ $data->carTypeBy->car_type }}
+                        @else
+                            {{ $data->car_brand_id }} {{ $data->car_type_id }}
+                        @endif
+                    @elseif($data->motor_brand_id != null)
+                        @if (is_numeric($data->motor_brand_id) && is_numeric($data->motor_type_id))
+                            {{ $data->motorBrandBy->name_brand }} {{ $data->motorTypeBy->name_type }}
+                        @else
+                            {{ $data->motor_brand_id }} {{ $data->motor_type_id }}
+                        @endif
+                    @else
+                        {{ $data->other }}
+                    @endif
+
+                    {{-- @if ($data->plate_number != '-')
+                        - {{ $data->plate_number }}
+                    @endif --}}
+                </td>
+                </td>
+            </tr>
+            <tr>
+                <td style="font-size: 8pt;white-space:nowrap;">Plate Number</td>
+                <td style="font-size: 8pt">:</td>
+                <td style="font-size: 8pt">
+
+                    {{ $data->plate_number }}
+
+                </td>
+                </td>
+            </tr>
+        @endif
+
     </table>
-    <hr>
-    <table style="width: 100%">
+    {{-- <hr> --}}
+    <table style="width: 100%;border-top:1px solid black;border-bottom:1px solid black">
 
         <tr>
-            <td style="font-size: 10pt">Item</td>
-            <td align="right" style="font-size: 10pt">Price</td>
-            <td align="center" style="font-size: 10pt">Qty</td>
-            <td align="right" style="font-size: 10pt">Sub Total</td>
+            <td align="center" style="font-size: 8pt">Item</td>
+            <td align="center" style="font-size: 8pt">Price</td>
+            <td align="center" style="font-size: 8pt">Qty</td>
+            <td align="center" style="font-size: 8pt">Sub Total</td>
         </tr>
         @php
             $total_diskon = 0;
@@ -53,74 +118,65 @@
         @endphp
         @foreach ($data->directSalesDetailBy as $item)
             @php
-                $retail_price = 0;
-                foreach ($item->retailPriceBy as $retail) {
-                    if ($retail->id_warehouse == Auth::user()->warehouse_id) {
-                        $retail_price = $retail->harga_jual;
-                    }
+                $retail_price = $item->price;
+                
+                if ($item->price == 0 || $item->price == null) {
+                    $retail_price = $item->getPrice($data->warehouse_id);
+                    $ppns = (float) $retail_price * 0.11;
+                    $retail_price = (float) $retail_price + (float) $ppns;
                 }
+                
             @endphp
             <tr>
-                <td style="font-size: 8pt"> {{ $item->productBy->nama_barang }}
+                <td style="font-size: 8pt">
+                    {{ $item->productBy->sub_materials->nama_sub_material }}
+                    {{ $item->productBy->sub_types->type_name }}
+                    <br />
+                    {{ $item->productBy->nama_barang }}
+                    <br />
+                    @foreach ($item->directSalesCodeBy as $code)
+                        @if ($loop->last)
+                            {{ $code->product_code }}
+                        @else
+                            {{ $code->product_code . ', ' }}
+                        @endif
+                        {{-- {{ $code->product_code  }} --}}
+                    @endforeach
                 </td>
-                <td align="right" style="font-size: 8pt">{{ number_format($retail_price, 0, ',', '.') }}
+                <td align="right" style="font-size: 8pt">
+                    {{ number_format((float) $retail_price - $item->discount / 100 - $item->discount_rp, 0, ',', '.') }}
                 </td>
                 <td align="center" style="font-size: 8pt">{{ $item->qty }}</td>
                 @php
-                    $ppn_cost = $retail_price * ($ppn_ / 100);
-                    $total_ppn = $retail_price + $ppn_cost;
-                    $diskon = $total_ppn * ($item->discount / 100);
-                    $hargaDiskon = $total_ppn - $diskon;
+                    // $harga_ppn = $retail_price
+                    $diskon = $retail_price * ($item->discount / 100);
+                    $hargaDiskon = $retail_price - $diskon;
                     
                     $total_diskon += $diskon * $item->qty;
-                    $discount_rp = $item->discount_rp * $item->qty;
+                    // $discount_rp = $item->discount_rp * $item->qty;
                     
                     $total_diskon_rp += $item->discount_rp * $item->qty;
-                    $sub_total = $total_ppn * $item->qty;
+                    $sub_total = ($hargaDiskon - $item->discount_rp) * $item->qty;
                     
                 @endphp
-                <td style="font-size: 8pt" align="right">{{ number_format($sub_total, 0, ',', '.') }}</td>
+                <td style="font-size: 8pt" align="right">{{ number_format((float) $sub_total, 0, ',', '.') }}</td>
 
             </tr>
         @endforeach
-        <tr>
-            <td colspan="4">
-                <hr>
-            </td>
 
-        </tr>
-        @if ($item->discount != 0)
-            <tr>
-                <td align="right" colspan="3" style="font-size: 8pt">Discount (%)</td>
-                <td style="font-size: 8pt" align="right">{{ number_format($total_diskon, 0, ',', '.') }}</td>
-            </tr>
-        @endif
 
-        @if ($item->discount_rp != 0)
-            <tr>
-                <td align="right" colspan="3" style="font-size: 8pt">Discount Rp</td>
-                <td style="font-size: 8pt" align="right">{{ number_format($total_diskon_rp, 0, ',', '.') }}</td>
-            </tr>
-        @endif
-
+    </table>
+    <table style="width:100%">
         <tr>
-            <td align="right" colspan="3" style="font-size: 8pt">Total Excl.</td>
-            <td style="font-size: 8pt" align="right">
-                {{ number_format($data->total_excl, 0, ',', '.') }}</td>
-        </tr>
-        <tr>
-            <td align="right" colspan="3" style="font-size: 8pt">PPN {{ $ppn_ }}%</td>
-            <td style="font-size: 8pt" align="right">
-                {{ number_format($data->total_ppn, 0, ',', '.') }}</td>
-        </tr>
-        <tr>
-            <td align="right" colspan="3" style="font-size: 8pt">TOTAL</td>
-            <td style="font-size: 8pt;border:1px solid black"" align="right">
-                {{ number_format($data->total_incl, 0, ',', '.') }}</td>
+            {{-- <td style="width:25%"></td>
+            <td style="width:25%"></td> --}}
+            <td colspan="3" align="right" style="font-size: 8pt;width: 70%">TOTAL</td>
+            <td style="font-size: 8pt;width: 30%;" align="right">
+                @currency($data->total_incl)</td>
         </tr>
     </table>
     <center>
-        <p style="font-size: 10pt">******* Thank you for your trust in us *******</p>
+        <p style="font-size: 8pt">******** Thank you for trusting us ********</p>
     </center>
 
 </body>

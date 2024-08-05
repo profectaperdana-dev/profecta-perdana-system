@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AccountSubModel;
 use App\Models\AccountSubTypeModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class AccountSubTypeController extends Controller
@@ -16,9 +17,6 @@ class AccountSubTypeController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         //* view all account sub types
         $title = 'Account Sub Type';
         $data = AccountSubTypeModel::orderBy('code', 'asc')->get();
@@ -54,33 +52,48 @@ class AccountSubTypeController extends Controller
             // "subFields.*.description" => "required",
         ]);
 
-        $message_duplicate = "";
-        $issaved = false;
-        foreach ($request->subFields as $key => $value) {
-            $model = new AccountSubTypeModel();
-            $getCode = AccountSubModel::where('id', $request->account_sub_id)->first();
-            $model->account_sub_id = $request->get('account_sub_id');
-            $model->code = $value['code'];
-            $model->name = $value['name'];
-            $model->biaya = $value['biaya'];
-            $cek = AccountSubTypeModel::where('code', $value['code'])
-                ->where('account_sub_id', $request->get('account_sub_id'))
-                ->count();
+        // dd($request->all());
 
-            if ($cek > 0) {
-                $message_duplicate = "You enter duplication of sub account. Please recheck the type you enter.";
-                continue;
-            } else {
-                $issaved = $model->save();
+        try {
+            DB::beginTransaction();
+
+            $message_duplicate = "";
+            $issaved = false;
+            foreach ($request->subFields as $key => $value) {
+                $model = new AccountSubTypeModel();
+                $getCode = AccountSubModel::where('id', $request->account_sub_id)->first();
+                $model->account_sub_id = $request->get('account_sub_id');
+                $model->code = $value['code'];
+                $model->name = $value['name'];
+                // $model->biaya = $value['biaya'];
+                $cek = AccountSubTypeModel::where('code', $value['code'])
+                    ->where('account_sub_id', $request->get('account_sub_id'))
+                    ->count();
+
+                if ($cek > 0) {
+                    $message_duplicate = "You enter duplication of sub account. Please recheck the type you enter.";
+                    continue;
+                } else {
+                    $issaved = $model->save();
+                }
             }
-        }
 
-        if (empty($message_duplicate) && $issaved == true) {
-            return redirect('/account_sub_type')->with('success', 'Create account sub Success');
-        } elseif (!empty($message_duplicate) && $issaved == true) {
-            return redirect('/account_sub_type')->with('success', 'Some of account sub add maybe Success! ' . $message_duplicate);
-        } else {
-            return redirect('/account_sub_type')->with('error', 'Create account sub Fail! Please make sure you have filled all the input');
+            if (empty($message_duplicate) && $issaved == true) {
+
+                DB::commit();
+                return redirect('/account_sub_type')->with('success', 'Create account sub Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+
+                DB::commit();
+                return redirect('/account_sub_type')->with('success', 'Some of account sub add maybe Success! ' . $message_duplicate);
+            } else {
+
+                DB::rollback();
+                return redirect('/account_sub_type')->with('error', 'Create account sub Fail! Please make sure you have filled all the input');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/account_sub_type')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -125,17 +138,28 @@ class AccountSubTypeController extends Controller
             "names" => "required",
             // "description" => "required",
         ]);
-        //* update
-        $model = AccountSubTypeModel::find($id);
-        $model->account_sub_id = $request->get('account_ids');
-        $model->code = $request->get('codes');
-        $model->name = $request->get('names');
-        $model->biaya = $request->get('biaya');
-        $saved = $model->save();
-        if ($saved) {
-            return redirect('/account_sub_type')->with('success', 'Update account sub Success');
-        } else {
-            return redirect('/account_sub_type')->with('error', 'Update account sub Fail');
+
+        try {
+            DB::beginTransaction();
+            //* update
+            $model = AccountSubTypeModel::find($id);
+            $model->account_sub_id = $request->get('account_ids');
+            $model->code = $request->get('codes');
+            $model->name = $request->get('names');
+            $model->biaya = $request->get('biaya');
+            $saved = $model->save();
+            if ($saved) {
+
+                DB::commit();
+                return redirect('/account_sub_type')->with('success', 'Update account sub Success');
+            } else {
+
+                DB::rollback();
+                return redirect('/account_sub_type')->with('error', 'Update account sub Fail');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/account_sub_type')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 

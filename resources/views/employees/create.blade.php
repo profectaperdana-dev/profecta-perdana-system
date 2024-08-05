@@ -40,14 +40,30 @@
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script src="{{ asset('js/custom.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/datepicker/1.0.10/datepicker.min.js"
+            integrity="sha512-RCgrAvvoLpP7KVgTkTctrUdv7C6t7Un3p1iaoPr1++3pybCyCsCZZN7QEHMZTcJTmcJ7jzexTO+eFpHk4OCFAg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             let csrf = $('meta[name="csrf-token"]').attr("content");
 
             $(document).ready(function() {
-                $('form').submit(function(e) {
-                    if (e.result == true) {
-                        $(this).find('button[type="submit"]').prop('disabled', true);
+
+                $(document).on('submit', 'form', function() {
+                    // console.log('click');
+                    var form = $(this);
+                    var button = form.find('button[type="submit"]');
+                    // console.log(form.html());
+
+                    if (form[0].checkValidity()) { // check if form has input values
+                        button.prop('disabled', true);
+
                     }
+                });
+                // regex phone number
+                $('#phone').on('keyup', function() {
+                    var string = $(this).val();
+                    var phone = string.replace(/\D*(\d{3})\D*(\d{4})\D*(\d{4})\D*/, '$1 $2 $3');
+                    $(this).val(phone);
                 });
                 $('.total').on('keyup', function() {
                     var selection = window.getSelection().toString();

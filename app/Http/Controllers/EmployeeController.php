@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Http;
@@ -20,7 +21,7 @@ class EmployeeController extends Controller
     {
         $all_employees = EmployeeModel::oldest('name')->get();
         $data = [
-            'title' => 'Employees Data',
+            'title' => 'Master Employees',
             'employees' => $all_employees
         ];
 
@@ -52,96 +53,116 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
 
-        $request->validate([
-            'name' => 'required',
-            'gender' => 'required',
-            'birth_place' => 'required',
-            'birth_date' => 'required',
-            'phone' => 'required',
-            'emergency_phone' => 'required',
-            'emergency_relation' => 'required',
-            'email' => 'required',
-            'province' => 'required',
-            'district' => 'required',
-            'sub_district' => 'required',
-            'address' => 'required',
-            'last_edu_first' => 'required',
-            'school_name_first' => 'required',
-            'from_first' => 'required',
-            'to_first' => 'required',
-            'last_edu_sec' => 'required',
-            'school_name_sec' => 'required',
-            'from_sec' => 'required',
-            'to_sec' => 'required',
-            'mom_name' => 'required',
-            'mom_phone' => 'required',
-            'father_name' => 'required',
-            'father_phone' => 'required',
-            'salary' => 'required',
-            'work_date' => 'required',
-            'photo' => 'image|mimes:jpg,png,jpeg|max:2048',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'gender' => 'required',
+        //     'birth_place' => 'required',
+        //     'birth_date' => 'required',
+        //     'phone' => 'required',
+        //     'nik' => 'required',
+        //     'emergency_phone' => 'required',
+        //     'emergency_relation' => 'required',
+        //     'emergency_phone_' => 'required',
+        //     'emergency_relation_' => 'required',
+        //     'email' => 'required',
+        //     'province' => 'required',
+        //     'district' => 'required',
+        //     'sub_district' => 'required',
+        //     'address' => 'required',
+        //     'address_identity' => 'required',
+        //     'last_edu_first' => 'required',
+        //     'school_name_first' => 'required',
+        //     'from_first' => 'required',
+        //     'to_first' => 'required',
+        //     'last_edu_sec' => 'required',
+        //     'school_name_sec' => 'required',
+        //     'from_sec' => 'required',
+        //     'to_sec' => 'required',
+        //     'mom_name' => 'required',
+        //     'mom_phone' => 'required',
+        //     'father_name' => 'required',
+        //     'father_phone' => 'required',
+        //     'salary' => 'required',
+        //     'work_date' => 'required',
+        //     'photo' => 'image|mimes:jpg,png,jpeg|max:2048',
+        // ]);
+        try {
+            DB::beginTransaction();
+            $selected_employee = new EmployeeModel();
+            $selected_employee->name = $request->name;
+            $selected_employee->gender = $request->gender;
+            $selected_employee->birth_place = $request->birth_place;
+            $selected_employee->nik = $request->nik;
+            $selected_employee->birth_date = $request->birth_date;
 
-        $selected_employee = new EmployeeModel();
-        $selected_employee->name = $request->name;
-        $selected_employee->gender = $request->gender;
-        $selected_employee->birth_place = $request->birth_place;
-        $selected_employee->birth_date = $request->birth_date;
+            //Create Employee ID
+            $birth_date = $request->birth_date;
+            $month = date('m', strtotime($birth_date));
+            $day = date('d', strtotime($birth_date));
+            $count_employee = EmployeeModel::max('id') + 1;
+            $padding = str_pad($count_employee, 4, '0', STR_PAD_LEFT);
+            $employee_id = $month . $day . $padding;
+            $selected_employee->employee_id = $employee_id;
 
-        //Create Employee ID
-        $birth_date = $request->birth_date;
-        $month = date('m', strtotime($birth_date));
-        $day = date('d', strtotime($birth_date));
-        $count_employee = EmployeeModel::max('id') + 1;
-        $padding = str_pad($count_employee, 4, '0', STR_PAD_LEFT);
-        $employee_id = $month . $day . $padding;
-        $selected_employee->employee_id = $employee_id;
+            $selected_employee->phone = $request->phone;
+            $selected_employee->emergency_phone = $request->emergency_phone;
+            $selected_employee->emergency_relation = $request->emergency_relation;
+            $selected_employee->emergency_phone_ = $request->emergency_phone_;
+            $selected_employee->emergency_relation_ = $request->emergency_relation_;
+            $selected_employee->email = $request->email;
 
-        $selected_employee->phone = $request->phone;
-        $selected_employee->emergency_phone = $request->emergency_phone;
-        $selected_employee->emergency_relation = $request->emergency_relation;
-        $selected_employee->email = $request->email;
+            //Get Province, City, District, Village
+            $province_name = $this->getNameProvince($request->province);
+            $selected_employee->province = ucwords(strtolower($province_name));
+            $district_name = $this->getNameCity($request->district);
+            $selected_employee->district = ucwords(strtolower($district_name));
+            $sub_district = $this->getNameDistrict($request->sub_district);
+            $selected_employee->sub_district = ucwords(strtolower($sub_district));
 
-        //Get Province, City, District, Village
-        $province_name = $this->getNameProvince($request->province);
-        $selected_employee->province = ucwords(strtolower($province_name));
-        $district_name = $this->getNameCity($request->district);
-        $selected_employee->district = ucwords(strtolower($district_name));
-        $sub_district = $this->getNameDistrict($request->sub_district);
-        $selected_employee->sub_district = ucwords(strtolower($sub_district));
+            $selected_employee->address = $request->address;
+            $selected_employee->address_identity = $request->address_identity;
+            $selected_employee->last_edu_first = $request->last_edu_first;
+            $selected_employee->school_name_first = $request->school_name_first;
+            $selected_employee->from_first = $request->from_first;
+            $selected_employee->to_first = $request->to_first;
+            $selected_employee->last_edu_sec = $request->last_edu_sec;
+            $selected_employee->school_name_sec = $request->school_name_sec;
+            $selected_employee->from_sec = $request->from_sec;
+            $selected_employee->to_sec = $request->to_sec;
+            $selected_employee->mom_name = $request->mom_name;
+            $selected_employee->mom_phone = $request->mom_phone;
+            $selected_employee->father_name = $request->father_name;
+            $selected_employee->father_phone = $request->father_phone;
+            $selected_employee->work_date = $request->work_date;
+            $selected_employee->status = $request->status;
 
-        $selected_employee->address = $request->address;
-        $selected_employee->last_edu_first = $request->last_edu_first;
-        $selected_employee->school_name_first = $request->school_name_first;
-        $selected_employee->from_first = $request->from_first;
-        $selected_employee->to_first = $request->to_first;
-        $selected_employee->last_edu_sec = $request->last_edu_sec;
-        $selected_employee->school_name_sec = $request->school_name_sec;
-        $selected_employee->from_sec = $request->from_sec;
-        $selected_employee->to_sec = $request->to_sec;
-        $selected_employee->mom_name = $request->mom_name;
-        $selected_employee->mom_phone = $request->mom_phone;
-        $selected_employee->father_name = $request->father_name;
-        $selected_employee->father_phone = $request->father_phone;
-        $selected_employee->work_date = $request->work_date;
-        $selected_employee->salary = $request->salary;
-        $selected_employee->job = $request->job;
-        $selected_employee->created_by = Auth::user()->id;
+            if ($request->salary == null) {
+                $selected_employee->salary = 0;
+            } else $selected_employee->salary = $request->salary;
+            $selected_employee->job = $request->job;
+            // $selected_employee->vacation = $request->vacation;
+            $selected_employee->created_by = Auth::user()->id;
 
-        //Process Image
-        $file = $request->file('photo');
-        if ($file) {
-            $name_file = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('images/employees'), $name_file);
-        } else {
-            $name_file = "blank";
+            //Process Image
+            $file = $request->file('photo');
+            if ($file) {
+                $name_file = time() . '_' . $file->getClientOriginalName();
+                $file->move(public_path('images/employees'), $name_file);
+            } else {
+                $name_file = "blank";
+            }
+            $selected_employee->photo = $name_file;
+
+            $saved = $selected_employee->save();
+
+            DB::commit();
+            return redirect('/employee')->with('success', 'Employee Add Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/employee')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
-        $selected_employee->photo = $name_file;
-
-        $saved = $selected_employee->save();
-
-        return redirect('/employee')->with('success', 'Employee Add Success');
     }
 
     /**
@@ -182,87 +203,106 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'name' => 'required',
-            'gender' => 'required',
-            'birth_place' => 'required',
-            'birth_date' => 'required',
-            'phone' => 'required',
-            'emergency_phone' => 'required',
-            'emergency_relation' => 'required',
-            'email' => 'required',
-            'province' => 'required',
-            'district' => 'required',
-            'sub_district' => 'required',
-            'address' => 'required',
-            'last_edu_first' => 'required',
-            'school_name_first' => 'required',
-            'from_first' => 'required',
-            'to_first' => 'required',
-            'last_edu_sec' => 'required',
-            'school_name_sec' => 'required',
-            'from_sec' => 'required',
-            'to_sec' => 'required',
-            'mom_name' => 'required',
-            'mom_phone' => 'required',
-            'father_name' => 'required',
-            'father_phone' => 'required',
-            'salary' => 'required',
-            'work_date' => 'required',
-            'photo' => 'image|mimes:jpg,png,jpeg|max:2048',
-        ]);
+        // $request->validate([
+        //     'name' => 'required',
+        //     'gender' => 'required',
+        //     'birth_place' => 'required',
+        //     'birth_date' => 'required',
+        //     'phone' => 'required',
+        //     'emergency_phone' => 'required',
+        //     'emergency_relation' => 'required',
+        //     'emergency_phone_' => 'required',
+        //     'emergency_relation_' => 'required',
+        //     'email' => 'required',
+        //     'province' => 'required',
+        //     'district' => 'required',
+        //     'sub_district' => 'required',
+        //     'address' => 'required',
+        //     'address_identity' => 'required',
+        //     'last_edu_first' => 'required',
+        //     'school_name_first' => 'required',
+        //     'from_first' => 'required',
+        //     'to_first' => 'required',
+        //     'last_edu_sec' => 'required',
+        //     'school_name_sec' => 'required',
+        //     'from_sec' => 'required',
+        //     'to_sec' => 'required',
+        //     'mom_name' => 'required',
+        //     'mom_phone' => 'required',
+        //     'father_name' => 'required',
+        //     'father_phone' => 'required',
+        //     'salary' => 'required',
+        //     'work_date' => 'required',
+        //     'photo' => 'image|mimes:jpg,png,jpeg|max:2048',
+        // ]);
+        try {
+            DB::beginTransaction();
+            // dd($request->all());
+            $selected_employee = EmployeeModel::where('id', $id)->first();
+            $selected_employee->name = $request->name;
+            $selected_employee->gender = $request->gender;
+            $selected_employee->birth_place = $request->birth_place;
+            $selected_employee->birth_date = $request->birth_date;
+            $selected_employee->phone = $request->phone;
+            $selected_employee->nik = $request->nik;
+            $selected_employee->emergency_phone = $request->emergency_phone;
+            $selected_employee->emergency_relation = $request->emergency_relation;
+            $selected_employee->emergency_phone_ = $request->emergency_phone_;
+            $selected_employee->emergency_relation_ = $request->emergency_relation_;
+            $selected_employee->email = $request->email;
 
-        $selected_employee = EmployeeModel::where('id', $id)->first();
-        $selected_employee->name = $request->name;
-        $selected_employee->gender = $request->gender;
-        $selected_employee->birth_place = $request->birth_place;
-        $selected_employee->birth_date = $request->birth_date;
-        $selected_employee->phone = $request->phone;
-        $selected_employee->emergency_phone = $request->emergency_phone;
-        $selected_employee->emergency_relation = $request->emergency_relation;
-        $selected_employee->email = $request->email;
-
-        //Get Province, City, District, Village
-        if ($selected_employee->province != $request->province) {
-            $province_name = $this->getNameProvince($request->province);
-            $selected_employee->province = ucwords(strtolower($province_name));
-            $district_name = $this->getNameCity($request->district);
-            $selected_employee->district = ucwords(strtolower($district_name));
-            $sub_district = $this->getNameDistrict($request->sub_district);
-            $selected_employee->sub_district = ucwords(strtolower($sub_district));
-        }
-
-        $selected_employee->address = $request->address;
-        $selected_employee->last_edu_first = $request->last_edu_first;
-        $selected_employee->school_name_first = $request->school_name_first;
-        $selected_employee->from_first = $request->from_first;
-        $selected_employee->to_first = $request->to_first;
-        $selected_employee->last_edu_sec = $request->last_edu_sec;
-        $selected_employee->school_name_sec = $request->school_name_sec;
-        $selected_employee->from_sec = $request->from_sec;
-        $selected_employee->to_sec = $request->to_sec;
-        $selected_employee->mom_name = $request->mom_name;
-        $selected_employee->mom_phone = $request->mom_phone;
-        $selected_employee->father_name = $request->father_name;
-        $selected_employee->father_phone = $request->father_phone;
-        $selected_employee->work_date = $request->work_date;
-        $selected_employee->salary = $request->salary;
-        $selected_employee->job = $request->job;
-
-        //Process Image
-        $file = $request->file('photo');
-        if ($file) {
-            $name_file = time() . '_' . $file->getClientOriginalName();
-            $path = public_path('images/employees/') . $selected_employee->photo;
-            if (File::exists($path)) {
-                File::delete($path);
+            //Get Province, City, District, Village
+            if ($selected_employee->province != $request->province) {
+                $province_name = $this->getNameProvince($request->province);
+                $selected_employee->province = ucwords(strtolower($province_name));
+                $district_name = $this->getNameCity($request->district);
+                $selected_employee->district = ucwords(strtolower($district_name));
+                $sub_district = $this->getNameDistrict($request->sub_district);
+                $selected_employee->sub_district = ucwords(strtolower($sub_district));
             }
-            $file->move(public_path('images/employees'), $name_file);
-            $selected_employee->photo = $name_file;
-        }
-        $saved = $selected_employee->save();
 
-        return redirect('/employee')->with('success', 'Employee Add Success');
+            $selected_employee->address = $request->address;
+            $selected_employee->address_identity = $request->address_identity;
+            $selected_employee->last_edu_first = $request->last_edu_first;
+            $selected_employee->school_name_first = $request->school_name_first;
+            $selected_employee->from_first = $request->from_first;
+            $selected_employee->to_first = $request->to_first;
+            $selected_employee->last_edu_sec = $request->last_edu_sec;
+            $selected_employee->school_name_sec = $request->school_name_sec;
+            $selected_employee->from_sec = $request->from_sec;
+            $selected_employee->to_sec = $request->to_sec;
+            $selected_employee->mom_name = $request->mom_name;
+            $selected_employee->mom_phone = $request->mom_phone;
+            $selected_employee->father_name = $request->father_name;
+            $selected_employee->father_phone = $request->father_phone;
+            $selected_employee->work_date = $request->work_date;
+            $selected_employee->status = $request->status;
+            if ($request->salary == null) {
+                $selected_employee->salary = 0;
+            } else $selected_employee->salary = $request->salary;
+            $selected_employee->job = $request->job;
+            $selected_employee->vacation = $request->vacation;
+
+            //Process Image
+            $file = $request->file('photo');
+            if ($file) {
+                $name_file = time() . '_' . $file->getClientOriginalName();
+                $path = public_path('images/employees/') . $selected_employee->photo;
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+                $file->move(public_path('images/employees'), $name_file);
+                $selected_employee->photo = $name_file;
+            }
+            // dd($selected_employee);
+            $saved = $selected_employee->save();
+
+            DB::commit();
+            return redirect('/employee')->with('success', 'Employee Add Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/employee')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -273,16 +313,21 @@ class EmployeeController extends Controller
      */
     public function destroy($id)
     {
-        if (!Gate::allows('level1')) {
-            abort(403);
+        try {
+            DB::beginTransaction();
+            $employee_current = EmployeeModel::where('id', $id)->firstOrFail();
+            $path = public_path('images/employees/') . $employee_current->photo;
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+            $employee_current->delete();
+
+            DB::commit();
+            return redirect('/employee')->with('error', 'Employee Delete Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/employee')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
-        $employee_current = EmployeeModel::where('id', $id)->firstOrFail();
-        $path = public_path('images/employees/') . $employee_current->photo;
-        if (File::exists($path)) {
-            File::delete($path);
-        }
-        $employee_current->delete();
-        return redirect('/employee')->with('error', 'Employee Delete Success');
     }
 
     public function getNameProvince($id)

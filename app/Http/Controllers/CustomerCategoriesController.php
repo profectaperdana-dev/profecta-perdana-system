@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerCategoriesModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class CustomerCategoriesController extends Controller
@@ -18,7 +19,7 @@ class CustomerCategoriesController extends Controller
     {
         $all_customer_categories = CustomerCategoriesModel::all();
         $data = [
-            'title' => "Data Customer Categories",
+            'title' => " Customer Category",
             'customer_categories' => $all_customer_categories
         ];
 
@@ -36,11 +37,19 @@ class CustomerCategoriesController extends Controller
         $validated_data = $request->validate([
             'category_name' => 'required'
         ]);
-        $validated_data['created_by'] = Auth::user()->id;
 
-        CustomerCategoriesModel::create($validated_data);
+        try {
+            DB::beginTransaction();
+            $validated_data['created_by'] = Auth::user()->id;
 
-        return redirect('/customer_categories')->with('success', 'Customer Category Add Success');
+            CustomerCategoriesModel::create($validated_data);
+
+            DB::commit();
+            return redirect('/customer_categories')->with('success', 'Customer Category Add Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/customer_categories')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -59,11 +68,18 @@ class CustomerCategoriesController extends Controller
             'category_name_edit' => 'required'
         ]);
 
-        $customer_category = CustomerCategoriesModel::where('id', $id)->firstOrFail();
-        $customer_category->category_name = $validateData['category_name_edit'];
-        $customer_category->save();
+        try {
+            DB::beginTransaction();
+            $customer_category = CustomerCategoriesModel::where('id', $id)->firstOrFail();
+            $customer_category->category_name = $validateData['category_name_edit'];
+            $customer_category->save();
 
-        return redirect('/customer_categories')->with('success', 'Customer Categories Edit Success');
+            DB::commit();
+            return redirect('/customer_categories')->with('success', 'Customer Categories Edit Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/customer_categories')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -77,8 +93,15 @@ class CustomerCategoriesController extends Controller
         if (!Gate::allows('level1')) {
             abort(403);
         }
-        CustomerCategoriesModel::where('id', $id)->delete();
+        try {
+            DB::beginTransaction();
+            CustomerCategoriesModel::where('id', $id)->delete();
 
-        return redirect('/customer_categories')->with('error', 'Customer Categories Delete Success');
+            DB::commit();
+            return redirect('/customer_categories')->with('error', 'Customer Categories Delete Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/customer_categories')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 }

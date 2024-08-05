@@ -18,4 +18,17 @@ class TradeInModel extends Model
     {
         return $this->hasMany(TradeInDetailModel::class, 'trade_in_id');
     }
+    // warehouse
+    public function warehouse()
+    {
+        return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id');
+    }
+    public function retailBy()
+    {
+        return $this->hasOne(DirectSalesModel::class, 'order_number', 'retail_order_number');
+    }
+     public function returnBy()
+    {
+        return $this->hasOne(ReturnTradePurchaseModel::class, 'trade_in_id', 'id');
+    }
 }

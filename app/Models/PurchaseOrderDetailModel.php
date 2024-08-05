@@ -19,4 +19,9 @@ class PurchaseOrderDetailModel extends Model
     {
         return $this->belongsTo(PurchaseOrderModel::class, 'purchase_order_id');
     }
+
+    public function purchaseOrderCodeBy()
+    {
+        return $this->hasMany(PurchaseOrderCodeModel::class, 'purchase_detail_id');
+    }
 }

@@ -32,9 +32,9 @@ class AccuClaimFinishMail extends Mailable
     public function build()
     {
         return $this->view('claim.pdf_accu_claims_mail_finish')
-            ->from('noreply@profectaperdana.com', 'PROFECTA PERDANA')
+            ->from('information@profectaperdana.com', 'PROFECTA PERDANA')
             ->subject('FINISH CLAIM INFORMATION ' . $this->data->claim_number)
             ->with(['data' => $this->data, 'warehouse' => $this->warehouse])
-            ->attach(public_path('pdf_claim_finish/' . $this->data->claim_number . '.pdf'));
+            ->attach(url('pdf_claim_finish/' . $this->data->claim_number . '.pdf'));
     }
 }

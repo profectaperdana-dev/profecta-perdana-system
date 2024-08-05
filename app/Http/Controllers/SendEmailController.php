@@ -11,6 +11,7 @@ use App\Mail\RetailMail;
 use App\Mail\ReturnMail;
 use App\Mail\TradeInMail;
 use App\Models\AccuClaimModel;
+use App\Models\CustomerModel;
 use App\Models\DirectSalesModel;
 use App\Models\PurchaseOrderModel;
 use App\Models\ReturnModel;
@@ -30,14 +31,8 @@ class SendEmailController extends Controller
 {
     public function index($id)
     {
-        if (
-            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
-            && !Gate::allows('isFinance')
-        ) {
-            abort(403);
-        }
         $data = SalesOrderModel::find($id);
-        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $warehouse = WarehouseModel::where('id', $data->warehouse_id)->first();
         $ppn = ValueAddedTaxModel::first()->ppn / 100;
         $pdf = FacadePdf::loadView('invoice.invoice_with_ppn', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
 
@@ -51,14 +46,15 @@ class SendEmailController extends Controller
         if (Mail::failures()) {
             return redirect('/invoice')->with('error', 'Send Invoice By Email Failed !');
         } else {
+            $date = date('Y-m-d H:i:s');
+            $data->status_mail = $date;
+            $data->save();
             return redirect('/invoice')->with('success', 'Send Invoice ' . $data->order_number . ' to ' . $data->customerBy->name_cust . ' by Email Success !');
         }
     }
     public function sendPo($id)
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isWarehouseKeeper')) {
-            abort(403);
-        }
+
         $data = PurchaseOrderModel::find($id);
         $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
         $pdf = FacadePdf::loadView('purchase_orders.print_po', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
@@ -73,13 +69,9 @@ class SendEmailController extends Controller
     }
     public function send_return($id)
     {
-        if (
-            !Gate::allows('isSuperAdmin') &&  !Gate::allows('isFinance')
-        ) {
-            abort(403);
-        }
         $data = ReturnModel::find($id);
-        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $customer = CustomerModel::where('id', $data->salesOrderBy->customers_id)->first();
+        $warehouse = WarehouseModel::where('id_area', $customer->area_cust_id)->where('type', 5)->first();
         $ppn = ValueAddedTaxModel::first()->ppn / 100;
         $pdf = FacadePdf::loadView('returns.print_return', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->return_number . '.pdf');
 
@@ -99,13 +91,8 @@ class SendEmailController extends Controller
 
     public function send_mail_retail($id)
     {
-        if (
-            !Gate::allows('isSuperAdmin') &&  !Gate::allows('isFinance')
-        ) {
-            abort(403);
-        }
         $data = DirectSalesModel::find($id);
-        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $warehouse = WarehouseModel::where('id', $data->warehouse_id)->first();
         $ppn = ValueAddedTaxModel::first()->ppn / 100;
         $pdf = FacadePdf::loadView('direct_sales.print_invoice', compact('warehouse', 'data', 'ppn'))->setPaper('A5', 'landscape')->save('pdf/' . $data->order_number . '.pdf');
 
@@ -119,20 +106,17 @@ class SendEmailController extends Controller
         if (Mail::failures()) {
             return redirect('/retail')->with('error', 'Send Invoice By Email Failed !');
         } else {
+            $date = date('Y-m-d H:i:s');
+            $data->status_mail = $date;
+            $data->save();
             return redirect('/retail')->with('success', 'Send Invoice ' . $data->order_number . ' to ' . $data->cust_name . ' by Email Success !');
         }
     }
 
     public function sendEarlyAccuClaim($id)
     {
-        if (
-            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
-            && !Gate::allows('isFinance') && !Gate::allows('isTeknisi')
-        ) {
-            abort(403);
-        }
         $data = AccuClaimModel::where('id', $id)->first();
-        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $warehouse = WarehouseModel::where('id', $data->warehouse_id)->first();
         $pdf = FacadePdf::loadView('claim.pdf_accu_claims', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim/' . $data->claim_number . '.pdf');
 
         $name = $data->email;
@@ -151,14 +135,8 @@ class SendEmailController extends Controller
 
     public function sendEarlyAccuClaimFinish($id)
     {
-        if (
-            !Gate::allows('isSuperAdmin') && !Gate::allows('isSales') && !Gate::allows('isVerificator')
-            && !Gate::allows('isFinance') && !Gate::allows('isTeknisi')
-        ) {
-            abort(403);
-        }
         $data = AccuClaimModel::where('id', $id)->first();
-        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $warehouse = WarehouseModel::where('id', $data->warehouse_id)->first();
         $pdf = FacadePdf::loadView('claim.pdf_accu_claims_finish', compact('warehouse', 'data'))->setPaper('legal', 'potrait')->save('pdf_claim_finish/' . $data->claim_number . '.pdf');
 
         $name = $data->email;
@@ -177,13 +155,8 @@ class SendEmailController extends Controller
 
     public function sendTradeInvoice($id)
     {
-        if (
-            !Gate::allows('isSuperAdmin') &&  !Gate::allows('isFinance')
-        ) {
-            abort(403);
-        }
         $data = TradeInModel::find($id);
-        $warehouse = WarehouseModel::where('id', Auth::user()->warehouse_id)->first();
+        $warehouse = WarehouseModel::where('id', $data->warehouse_id)->first();
         $pdf = FacadePdf::loadView('product_trade_in.print_trade_in', compact('warehouse', 'data'))->setPaper('A5', 'landscape')->save('pdf_trade_in/' . $data->trade_in_number . '.pdf');
 
         $name = $data->customer_email;

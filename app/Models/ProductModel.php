@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Crypt;
 
 class ProductModel extends Model
 {
@@ -49,5 +50,25 @@ class ProductModel extends Model
     public function getRouteKeyName()
     {
         return 'kode_barang';
+    }
+
+    public function decryptPrice()
+    {
+        if ($this->harga_beli != null) {
+            return Crypt::decryptString($this->harga_beli);
+        } else return 0;
+    }
+    
+    public function dotSeparator($harga)
+    {
+        $harga_s = (float) $harga;
+        $explode = explode(',', $harga_s);
+        if (sizeof($explode) > 1) {
+            $dotSeparator = number_format(intval($explode[0]), 0, ',', '.');
+            $separated = $dotSeparator . ',' . $explode[1];
+            return $separated;
+        } else {
+            return number_format($harga_s, 0, ',', '.');
+        }
     }
 }

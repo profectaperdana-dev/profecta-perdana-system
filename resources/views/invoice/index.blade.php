@@ -4,10 +4,25 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">
+        @include('report.style')
         <style>
-            .table {
-                background-color: rgba(211, 225, 222, 255);
-                -webkit-print-color-adjust: exact;
+            table .table-non-border {
+                border: none !important;
+            }
+
+            @media print {
+                h6 .no-print {
+                    display: none !important;
+                }
+            }
+
+            .example1 .dataTables_filter {
+                float: left !important;
+                text-align: left !important;
+            }
+
+            .example1 .dataTables_filter input[type="search"] {
+                width: 100% !important;
             }
         </style>
     @endpush
@@ -16,9 +31,7 @@
             <div class="row">
                 <div class="col-sm-12">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    {{-- <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        {{ $title }}
-                    </h6> --}}
+
                 </div>
             </div>
         </div>
@@ -27,65 +40,74 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12 col-xl-12 xl-100">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5></h5>
-                    </div>
+                <div class=" rounded shadow card">
                     <div class="card-body">
-
-                        <div class="form-group row col-12">
-                            <div class="col-4">
+                        <div class="form-group row ">
+                            <div class="col-lg-4 col-12">
                                 <label class="col-form-label text-end">Start Date</label>
                                 <div class="input-group">
-                                    <input class="form-control digits" type="date" data-language="en" placeholder="Start"
-                                        name="from_date" id="from_date">
+                                    <input class="datepicker-here form-control digits" data-position="bottom left"
+                                        type="text" data-language="en" id="from_date" data-value="{{ date('d-m-Y') }}"
+                                        name="from_date" autocomplete="off">
+
                                 </div>
                             </div>
-                            <div class="col-4">
+                            <div class="col-lg-4 col-12">
                                 <label class="col-form-label text-end">End Date</label>
                                 <div class="input-group">
-                                    <input class="form-control digits" type="date" data-language="en" placeholder="Start"
-                                        name="to_date" id="to_date">
+                                    <input class="datepicker-here form-control digits" data-position="bottom left"
+                                        type="text" data-language="en" id="to_date" data-value="{{ date('d-m-Y') }}"
+                                        name="to_date" autocomplete="on">
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-lg-2">
                                 <label class="col-form-label text-end">&nbsp;</label>
                                 <div class="input-group">
-                                    <button class="btn btn-primary" name="filter" id="filter">Filter</button>
+                                    <button class="btn btn-primary form-control text-white" name="filter"
+                                        id="filter">Filter</button>
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-6 col-lg-2">
                                 <label class="col-form-label text-end">&nbsp;</label>
                                 <div class="input-group">
-                                    <button class="btn btn-warning" name="refresh" id="refresh">Refresh</button>
+                                    <button class="btn btn-warning form-control text-white" name="refresh"
+                                        id="refresh">Refresh</button>
                                 </div>
                             </div>
                         </div>
                         <input type="hidden" name="ppn" id="ppn" value="{{ $ppn }}">
                         <div class="table-responsive">
-                            <table id="example1" class="table text-capitalize" style="width:100%">
+                            <table id="" class="example1 table table-sm table-borderless table-striped"
+                                style="width:100%">
                                 <thead>
-                                    <tr>
-                                        <th style="2%">action</th>
+                                    <tr class="text-center text-nowrap">
                                         <th>No</th>
-                                        <th>SO Number</th>
-                                        <th>Order Date</th>
-                                        <th>Due Date</th>
+                                        <th><span hidden>Detail</span></th>
+                                        <th>Invoice&nbsp;Number </th>
+                                        <th>Date</th>
                                         <th>Customer</th>
-                                        <th>Remark</th>
-                                        <th>By</th>
                                         <th>TOP</th>
-                                        <th>PPN</th>
-                                        <th>Total</th>
-                                        <th>Total After PPN</th>
-                                        <th>Payment Method</th>
-                                        <th>Paid Status</th>
+                                        <th>Total&nbsp;(Incl.&nbsp;PPN)</th>
+                                        <th>Payment</th>
+                                        <th>Status</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                 </tbody>
+                                <tfoot>
+                                    <tr class="table-info">
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                        <th class="text-center">Total</th>
+                                        <th></th>
+                                        <th></th>
+                                        <th></th>
+                                    </tr>
+                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -93,11 +115,9 @@
             </div>
         </div>
     </div>
-    {{-- <input type="text" hidden value="{{ $ }}"> --}}
     <!-- Container-fluid Ends-->
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-        {{-- <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script> --}}
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
@@ -107,184 +127,351 @@
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
         <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
-        <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
+        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
+        <script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
         <script>
             $(document).ready(function() {
+                //set date
+                $('.datepicker-here').datepicker({
+                    onSelect: function(formattedDate, date, inst) {
+                        inst.hide();
+                    },
+                });
+                
+                // Mendapatkan query string dari URL
+                let queryString = window.location.search;
+                
+                // Parse query string ke dalam objek
+                let queryParams = new URLSearchParams(queryString);
+                
+                // Mendapatkan nilai dari parameter "filter"
+                let filterValue = queryParams.get("filter");
+                
+
+                function parseDate(date) {
+                    let now = date;
+                    // Format the date as "dd-mm-yyyy"
+                    let day = now.getDate().toString().padStart(2, '0');
+                    let month = (now.getMonth() + 1).toString().padStart(2, '0');
+                    let year = now.getFullYear();
+                    let formattedDate = `${day}-${month}-${year}`;
+                    return formattedDate;
+                }
+                // Get the current date
+
+
+                // Set the value of the input element
+                if(filterValue == 'this_month'){
+                    // Buat objek Date untuk tanggal saat ini
+                    var currentDate = new Date();
+                    
+                    // Untuk mendapatkan awal bulan, atur tanggal ke 1
+                    var firstDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth(), 1);
+                    
+                    // Untuk mendapatkan akhir bulan ini, atur tanggal ke 0 (hari sebelum tanggal 1 bulan ini)
+                    var lastDayOfMonth = new Date(currentDate.getFullYear(), currentDate.getMonth() + 1, 0);
+                    
+                    // Format tanggal dalam bentuk string (dd/mm/yyyy)
+                    var startDateString = (firstDayOfMonth.getDate() < 10 ? '0' : '') + firstDayOfMonth.getDate() + '-' + ((firstDayOfMonth.getMonth() + 1) < 10 ? '0' : '') + (firstDayOfMonth.getMonth() + 1) + '-' + firstDayOfMonth.getFullYear();
+                    var endDateString = (lastDayOfMonth.getDate() < 10 ? '0' : '') + lastDayOfMonth.getDate() + '-' + ((lastDayOfMonth.getMonth() + 1) < 10 ? '0' : '') + (lastDayOfMonth.getMonth() + 1) + '-' + lastDayOfMonth.getFullYear();
+                    
+                    document.querySelector('input[name="from_date"]').value = startDateString;
+                    document.querySelector('input[name="to_date"]').value = endDateString;
+                }else{
+                    document.querySelector('input[name="from_date"]').value = parseDate(new Date());
+                    document.querySelector('input[name="to_date"]').value = parseDate(new Date());
+                }
+
                 $.ajaxSetup({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
 
+                const format = (d) => {
+                    return `
+                            <div style="margin-left:2px;" class="row col-lg-3 card shadow">
+                                    <table class="table fw-bold" style="border:0;" border="0">
+                                        <tr>
+                                            <td>Remark</td>
+                                            <td>:</td>
+                                            <td>${d.remark}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status mail</td>
+                                            <td>:</td>
+                                            <td>${d.status_mail}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Created by</td>
+                                            <td>:</td>
+                                            <td>${d.created_by}</td>
+                                        </tr>
+                                    </table>
+                            </div>
+                        `;
+                };
+
+                // load data from server
                 load_data();
 
                 function load_data(from_date = '', to_date = '') {
-                    $('#example1').DataTable({
+                    $('.example1').DataTable({
+                        "language": {
+                            "processing": `<i class="fa text-success fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
+                        },
+                        "lengthChange": false,
+                        "paging": false,
+                        "bPaginate": false, // disable pagination
+                        "bLengthChange": false, // disable show entries dropdown
+                        "searching": true,
+                        "ordering": true,
+                        "info": false,
+                        "autoWidth": false,
+
                         processing: true,
                         serverSide: true,
+                        pageLength: -1,
                         ajax: {
                             url: "{{ url('/invoice') }}",
                             data: {
                                 from_date: from_date,
-                                to_date: to_date
+                                to_date: to_date,
+                                filter: filterValue
                             }
                         },
                         columns: [{
-                                width: '5%',
-                                data: 'action',
-                                name: 'action',
-                                orderable: false,
-                            }, {
-                                width: '5%',
-                                data: 'DT_RowIndex',
-                                name: 'DT_Row_Index',
-                                "className": "text-center",
-                                orderable: false,
-                                searchable: false
-                            },
-                            {
-                                data: 'order_number',
-                                name: 'order_number'
-
-                            },
-                            {
-                                data: 'order_date',
-                                name: 'order_date'
-
-                            },
-                            {
-                                data: 'duedate',
-                                name: 'duedate'
-
-                            },
-                            {
-                                data: 'customers_id',
-                                name: 'customers_id',
-                            },
-                            {
-                                data: 'remark',
-                                name: 'remark',
-                            },
-                            {
-                                data: 'created_by',
-                                name: 'created_by',
-                            },
-                            {
-                                data: 'top',
-                                name: 'top',
-
-                            },
-                            {
-                                data: 'ppn',
-                                name: 'ppn',
-                            },
-                            {
-                                data: 'total',
-                                name: 'total',
-                            },
-                            {
-                                data: 'total_after_ppn',
-                                name: 'total_after_ppn',
-                            },
-                            {
-                                data: 'payment_method',
-                                name: 'payment_method',
-                            },
-                            {
-                                data: 'isPaid',
-                                name: 'isPaid',
-                            },
-                        ],
-                        order: [
-                            [0, 'desc']
-                        ],
-                        dom: 'Bfrtip',
-                        lengthMenu: [
-                            [10, 25, 50, -1],
-                            ['10 rows', '25 rows', '50 rows', 'Show All']
-                        ],
-                        buttons: ['pageLength',
-                            {
-                                title: 'Data Invoice',
-                                messageTop: '<h5>{{ $title }} ({{ date('l H:i A, d F Y ') }})</h5><br>',
-                                messageBottom: '<strong style="color:red;">*Please select only the type of column needed when printing so that the print is neater</strong>',
-                                extend: 'print',
-                                customize: function(win) {
-                                    $(win.document.body)
-                                        .css('font-size', '10pt')
-                                        .prepend(
-                                            '<img src="{{ asset('images/logo.png') }}" style="position:absolute; top:300; left:150; bottom:; opacity: 0.2;"/>'
-                                        );
-                                    $(win.document.body)
-                                        .find('thead')
-                                        .css('background-color', 'rgba(211,225,222,255)')
-                                        .css('font-size', '8pt')
-                                    $(win.document.body)
-                                        .find('tbody')
-                                        .css('background-color', 'rgba(211,225,222,255)')
-                                        .css('font-size', '8pt')
-                                    $(win.document.body)
-                                        .find('table')
-                                        .css('width', '100%')
+                                    width: '5%',
+                                    data: 'DT_RowIndex',
+                                    name: 'DT_Row_Index',
+                                    "className": "text-center fw-bold",
+                                }, {
+                                    data: null,
+                                    orderable: false,
+                                    searchable: false,
+                                    className: 'details-control',
+                                    defaultContent: '<i data-feather="plus"></i>'
                                 },
-                                orientation: 'landscape',
-                                pageSize: 'legal',
-                                exportOptions: {
-                                    columns: ':visible'
+
+                                {
+                                    width: '5%',
+                                    data: 'action',
+                                    name: 'action',
+                                    orderable: true,
+                                    searchable: true,
+
+                                }, {
+                                    className: "text-nowrap",
+                                    data: 'order_date',
+                                    name: 'order_date'
+
+                                }, {
+                                    className: "text-nowrap",
+                                    data: 'customers_id',
+                                    name: 'customers_id',
+                                    search: function(searchTerm, cellData) {
+                                        // console.log(searchTerm);
+                                        return cellData.toLowerCase().includes(searchTerm.toLowerCase());
+                                    }
                                 },
-                            },
-                            {
-                                extend: 'excel',
-                                exportOptions: {
-                                    columns: ':visible'
+
+                                {
+                                    className: "text-center text-nowrap",
+                                    data: 'top',
+                                    name: 'top',
+                                },
+
+                                {
+                                    className: "text-end",
+                                    data: 'total_after_ppn',
+                                    name: 'total_after_ppn',
+                                }, {
+                                    className: "text-center text-nowrap",
+                                    data: 'payment_method',
+                                    name: 'payment_method',
+                                }, {
+                                    className: "text-nowrap text-center",
+                                    data: 'isPaid',
+                                    name: 'isPaid',
+                                },
+                            ]
+
+                            ,
+                        footerCallback: function(row, data, start, end, display) {
+                            var api = this.api();
+
+                            // PPN
+                            var visibleData = api.column(6).nodes().to$().map(function() {
+                                return $(this).text();
+                            }).toArray();
+                            var visibleColumns = api.columns().visible();
+                            var filteredData = visibleData.filter(function(data) {
+                                return data.trim() !== '';
+                            });
+                            var totalPPN = 0;
+                            filteredData.forEach(function(data) {
+                                if (data != '') {
+                                    let raw1 = data.split(",");
+                                    // let raw2 = raw1[0].split(".");
+                                    raw2 = raw1.join('');
+                                    // raw2 = raw2 + '.' + raw1[1];
+                                    totalPPN += parseInt(raw2);
                                 }
-                            },
-                            'colvis'
-                        ],
+                            });
+
+
+                            $(api.column(6).footer()).html(totalPPN.toLocaleString('en', {}));
+                        },
+
+
+                        initComplete: function() {
+                            var table = $('.example1').DataTable();
+                            $(document).find('.example1 tbody').off().on('click', 'td.details-control',
+                                function() {
+                                    var tr = $(this).closest('tr');
+                                    var row = table.row(tr);
+
+                                    if (row.child.isShown()) {
+                                        // This row is already open - close it
+                                        row.child.hide();
+                                        tr.removeClass('shown');
+                                    } else {
+                                        // Open this row
+                                        row.child(format(row.data())).show();
+                                        tr.addClass('shown');
+                                    }
+                                });
+                        },
+                        drawCallback: function(settings) {
+                            // Kode yang akan dijalankan setelah DataTable selesai dikerjakan
+                            $('#thisModal').html('');
+                            $('.currentModal').each(function(){
+                                let currentModal = $(this).html();
+                                $(this).html('');
+                                $('#thisModal').append(currentModal);
+                            });
+                            
+                            // console.log($('#currentModal').html());
+                            // Lakukan tindakan lain yang Anda inginkan di sini
+                        },
 
                     });
+
                 }
+
+                // filter data
                 $('#filter').click(function() {
-                    var from_date = $('#from_date').val();
-                    var to_date = $('#to_date').val();
+
+
+
+                    function formatDate(date) {
+                        // Split the date string into day, month, and year components
+                        let dateParts = date.split('-');
+
+                        // Create a new Date object using the year, month, and day components
+                        let dateObject = new Date(dateParts[2], dateParts[1] - 1, dateParts[0]);
+
+                        // Format the date as "yyyy-mm-dd"
+                        let year = dateObject.getFullYear();
+                        let month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+                        let day = dateObject.getDate().toString().padStart(2, '0');
+                        let formattedDate = `${year}-${month}-${day}`;
+
+                        return formattedDate;
+                    }
+
+                    var from_date = formatDate($('#from_date').val());
+                    var to_date = formatDate($('#to_date').val());
                     if (from_date != '' && to_date != '') {
-                        $('#example1').DataTable().destroy();
+                        $('.example1').DataTable().destroy();
+
                         load_data(from_date, to_date);
                     } else {
-                        alert('Both Date is required');
+                        $.notify({
+                            title: 'Warning !',
+                            message: 'Please Select Start Date & End Date'
+                        }, {
+                            type: 'warning',
+                            allow_dismiss: true,
+                            newest_on_top: true,
+                            mouse_over: true,
+                            showProgressbar: false,
+                            spacing: 10,
+                            timer: 3000,
+                            placement: {
+                                from: 'top',
+                                align: 'right'
+                            },
+                            offset: {
+                                x: 30,
+                                y: 30
+                            },
+                            delay: 1000,
+                            z_index: 3000,
+                            animate: {
+                                enter: 'animated swing',
+                                exit: 'animated swing'
+                            }
+                        });
                     }
                 });
 
+                // refresh data
                 $('#refresh').click(function() {
-                    $('#from_date').val('');
-                    $('#to_date').val('');
-                    $('#example1').DataTable().destroy();
+                    $('#from_date').val(parseDate(new Date()));
+                    $('#to_date').val(parseDate(new Date()));
+                    $('.example1').DataTable().destroy();
                     load_data();
                 });
-
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
                 $(document).on("click", ".modal-btn2", function(event) {
                     let csrf = $('meta[name="csrf-token"]').attr("content");
-
+                    $(document).on('click', '.btn-delete', function() {
+                        $(this).addClass('disabled');
+                    });
+                    $('form').submit(function(e) {
+                        var form = $(this);
+                        var button = form.find('button[type="submit"]');
+                        if (form[0].checkValidity()) {
+                            button.prop('disabled', true);
+                            $(this).find('.spinner-border').removeClass('d-none');
+                            $(this).find('span:not(.spinner-border)').addClass('d-none');
+                            $(this).off('click');
+                        }
+                    });
                     // $(document).on("click", ".modal-btn2", function() {
 
                     let modal_id = $(this).attr('data-bs-target');
+                    let warehouse_id = $(modal_id).find('.warehouse').val();
                     //Get Customer ID
-                    $(modal_id).find(".customer-select, .warehouse-select").select2({
-                        width: "100%",
+                    $(modal_id).find(" .warehouse-select").select2({
+                        dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
                     });
                     let customer_id = $(modal_id).find('.customer-append').val();
-                    $(modal_id).find(".productSo-edit").select2({
-                        width: "100%",
+
+                    // get customer data
+                    $(modal_id).find('.customer-select').select2({
                         dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        width: '100%',
                         ajax: {
                             context: this,
                             type: "GET",
-                            url: "/products/select",
+                            url: "/customer/select/",
                             data: function(params) {
                                 return {
                                     _token: csrf,
-                                    q: params.term, // search term
-                                    c: customer_id
                                 };
                             },
                             dataType: "json",
@@ -293,12 +480,46 @@
                                 return {
                                     results: $.map(data, function(item) {
                                         return [{
-                                            text: item.nama_barang +
-                                                " (" +
-                                                item.type_name +
-                                                ", " +
-                                                item.nama_sub_material +
-                                                ")",
+                                            text: item
+                                                .code_cust +
+                                                ' - ' +
+                                                item.name_cust,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+
+                    $(modal_id).find(".productSo-edit").select2({
+                        width: "100%",
+                        dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        ajax: {
+                            context: this,
+                            type: "GET",
+                            url: "/products/select",
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                    w: warehouse_id
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item
+                                                .nama_sub_material +
+                                                ' ' +
+                                                item.type_name + ' ' +
+                                                item.nama_barang,
                                             id: item.id,
                                         }, ];
                                     }),
@@ -310,6 +531,7 @@
                     //Get Customer ID
                     $(modal_id).find(".customer-append").change(function() {
                         customer_id = $(modal_id).find(".customer-append").val();
+                        console.log(customer_id);
                     });
                     let x = $(modal_id)
                         .find('.modal-body')
@@ -352,7 +574,7 @@
                             url: "/stocks/cekQty/" + product_id,
                             data: {
                                 _token: csrf,
-                                c: id,
+                                w: warehouse_id,
                             },
                             dataType: "json",
                             delay: 250,
@@ -371,48 +593,53 @@
                                     $(this).removeClass("is-invalid");
                                 }
                             },
-                            error: function(XMLHttpRequest, textStatus,
-                                errorThrown) {
+                            error: function(XMLHttpRequest, textStatus, errorThrown) {
                                 alert("Status: " + textStatus);
                                 alert("Error: " + errorThrown);
                             },
                         });
                     });
-                    $(modal_id).on("click", ".addSo-edit", function() {
+                    $(document).off("click", ".addSo-edit");
+                    $(document).on("click", ".addSo-edit", function() {
                         ++x;
                         var form =
-                            '<div class="mx-auto py-2 form-group row bg-primary">' +
+                            '<div class="mx-auto py-2 form-group rounded row " style="background-color: #f0e194">' +
                             '<input type="hidden" class="loop" value="' + x + '">' +
-                            '<div class="form-group col-8 col-lg-5">' +
+                            '<div class="form-group col-12 col-lg-4">' +
                             "<label>Product</label>" +
-                            '<select name="editProduct[' +
+                            '<select multiple name="editProduct[' +
                             x +
                             '][products_id]" class="form-control productSo-edit" required>' +
-                            '<option value="">Choose Product</option> ' +
+
                             "</select>" +
                             "</div>" +
                             '<div class="col-4 col-lg-2 form-group">' +
                             "<label> Qty </label> " +
-                            '<input type="number" class="form-control cekQty-edit" required name="editProduct[' +
+                            '<input type="number" class="form-control cekQty-edit" value="0" placeholder="Qty" required name="editProduct[' +
                             x +
                             '][qty]">' +
                             '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
                             "</div> " +
                             '<div class="col-4 col-lg-2 form-group">' +
                             "<label>Disc (%)</label>" +
-                            '<input type="number" class="form-control discount-append-edit" name="editProduct[' +
+                            '<input type="text" value="0" class="form-control  discount-append-edit" name="editProduct[' +
                             x +
                             '][discount]" id="">' +
                             "</div>" +
                             '<div class="col-4 col-lg-2 form-group">' +
                             '<label>Disc (Rp)</label>' +
-                            '<input type="number" class="form-control" placeholder="Disc (Rp)"' +
+                            '<input value="0" type="number" class="form-control discount_rp" placeholder="Disc (Rp)"' +
                             'name="editProduct[' + x + '][discount_rp]"' +
                             '/>' +
                             '</div>' +
-                            '<div class="col-1 col-lg-1 form-group">' +
+                            '<div class="col-6 col-lg-1 form-group">' +
                             '<label for=""> &nbsp; </label>' +
-                            '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
+                            '<a class="btn form-control text-white addSo-edit text-center" style="border:none; background-color:#276e61">' +
+                            "+ </a> " +
+                            "</div>" +
+                            '<div class="col-6 col-lg-1 form-group">' +
+                            '<label for=""> &nbsp; </label>' +
+                            '<a class="btn form-control text-white remSo-edit text-center" style="border:none; background-color:#d94f5c">' +
                             "- </a> " +
                             "</div>" +
                             " </div>";
@@ -421,6 +648,9 @@
                         $(modal_id).find(".productSo-edit").select2({
                             width: "100%",
                             dropdownParent: modal_id,
+                            placeholder: 'Select an option',
+                            allowClear: true,
+                            maximumSelectionLength: 1,
                             ajax: {
                                 type: "GET",
                                 url: "/products/select",
@@ -428,7 +658,7 @@
                                     return {
                                         _token: csrf,
                                         q: params.term, // search term
-                                        c: customer_id
+                                        w: warehouse_id
                                     };
                                 },
                                 dataType: "json",
@@ -438,21 +668,21 @@
                                         results: $.map(data, function(item) {
                                             return [{
                                                 text: item
-                                                    .nama_barang +
-                                                    " (" +
-                                                    item
-                                                    .type_name +
-                                                    ", " +
-                                                    item
                                                     .nama_sub_material +
-                                                    ")",
+                                                    ' ' +
+                                                    item.type_name + ' ' +
+                                                    item.nama_barang,
                                                 id: item.id,
+
+
                                             }, ];
                                         }),
                                     };
                                 },
                             },
                         });
+                        $(modal_id).find(".productSo-edit").last().select2("open");
+
                     });
 
                     //remove Sales Order fields
@@ -462,6 +692,7 @@
 
                     //reload total
                     $(modal_id).on('click', '.btn-reload', function() {
+                        console.log('test')
                         let ppn = 0;
                         let total = 0;
                         let total_after_ppn = 0;
@@ -477,8 +708,8 @@
                                         product_id,
                                     dataType: "json",
                                     success: function(data) {
-                                        temp = data
-                                            .harga_jual_nonretail
+                                        temp = parseInt(data
+                                            .harga_jual_nonretail)
                                     },
                                 });
                                 return temp;
@@ -486,9 +717,9 @@
 
                             let qty = $(this).parent().siblings().find(
                                 '.cekQty-edit').val();
-                            let disc = $(this).parent().siblings().find(
+                            let disc = parseFloat($(this).parent().siblings().find(
                                     '.discount-append-edit')
-                                .val() / 100;
+                                .val().replace(",", ".")) / 100;
                             let disc_rp = $(this).parent().siblings().find('.discount_rp')
                                 .val();
                             ppn = cost * $('#ppn').val();
@@ -502,21 +733,21 @@
                         total_after_ppn = total;
                         $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math
                             .round(total_after_ppn / 1.11 * $('#ppn').val())
-                            .toLocaleString('id', {
+                            .toLocaleString('en', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
                         $(this).closest('.row').siblings().find('.total').val('Rp. ' + Math
                             .round(total_after_ppn / 1.11)
                             .toLocaleString(
-                                'id', {
+                                'en', {
                                     minimumFractionDigits: 0,
                                     maximumFractionDigits: 0
                                 }));
                         $(this).closest('.row').siblings().find('.total-after-ppn').val(
                             'Rp. ' + Math
                             .round(
-                                total_after_ppn).toLocaleString('id', {
+                                total_after_ppn).toLocaleString('en', {
                                 minimumFractionDigits: 0,
                                 maximumFractionDigits: 0
                             }));
@@ -525,7 +756,6 @@
                         $(modal_id).unbind();
                     });
                 });
-                // });
             });
         </script>
     @endpush

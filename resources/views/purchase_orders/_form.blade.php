@@ -1,13 +1,14 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="row font-weight-bold " id="formPo">
+        <div class="font-weight-bold " id="formPo">
             <div class="form-group row">
-                <div class="col-md-6 form-group">
+                <div class="col-md-4 form-group">
                     <label>
-                        Supplier</label>
+                        Vendor</label>
                     <select name="supplier_id" id="" required
-                        class="form-control supplier-select {{ $errors->first('supplier_id') ? ' is-invalid' : '' }}">
-                        <option value="" selected>-Choose Supplier-</option>
+                        class="form-control multiSelect  {{ $errors->first('supplier_id') ? ' is-invalid' : '' }}"
+                        multiple>
+                        {{-- <option value="" selected>-Choose Vendor-</option> --}}
                         @foreach ($suppliers as $supplier)
                             <option value="{{ $supplier->id }}">{{ $supplier->nama_supplier }}
                             </option>
@@ -19,21 +20,16 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-md-6 form-group mr-5">
+                <div class="col-md-4 form-group mr-5">
                     <label>Warehouse</label>
                     <select name="warehouse_id" required
-                        class="form-control warehouse-select {{ $errors->first('warehouse_id') ? ' is-invalid' : '' }}">
-                        @can('isSuperAdmin')
-                            <option value="" selected>-Choose Warehouse-</option>
-                            @foreach ($warehouses as $warehouse)
-                                <option value="{{ $warehouse->id }}">{{ $warehouse->warehouses }}
-                                </option>
-                            @endforeach
-                        @elsecan('isWarehouseKeeper')
-                            <option value="{{ Auth::user()->warehouse_id }}" selected>
-                                {{ Auth::user()->warehouseBy->warehouses }}
+                        class="form-control multiSelect warehouse-select {{ $errors->first('warehouse_id') ? ' is-invalid' : '' }}"
+                        multiple>
+                        {{-- <option value="" selected>-Choose Warehouse-</option> --}}
+                        @foreach ($warehouses as $warehouse)
+                            <option value="{{ $warehouse->warehouse_id }}">{{ $warehouse->warehouseBy->warehouses }}
                             </option>
-                        @endcan
+                        @endforeach
 
                     </select>
                     @error('warehouse_id')
@@ -42,13 +38,32 @@
                         </div>
                     @enderror
                 </div>
+                <div class="col-md-4 form-group mr-5">
+                    <label>Payment Method</label>
+                    <select name="payment_method" required
+                        class="form-control multiSelect {{ $errors->first('payment_method') ? ' is-invalid' : '' }}"
+                        multiple>
+
+                        <option value="cash">
+                            Cash
+                        </option>
+                        <option value="credit">
+                            Credit
+                        </option>
+                    </select>
+                    @error('payment_method')
+                        <div class="invalid-feedback">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                </div>
             </div>
 
-            <div class="form-group row">
-                <div class="form-group col-7">
+            <div class="mx-auto py-2 form-group rounded row" style="background-color: #f0e194">
+                <div class="mb-2 col-12 col-lg-7">
                     <label>Product</label>
-                    <select name="poFields[0][product_id]" class="form-control productPo" required>
-                        <option value="">Choose Product</option>
+                    <select name="poFieldss[0][product_id]" class="form-control productPo" required multiple>
+                        {{-- <option value="">Choose the warehouse first</option> --}}
                     </select>
                     @error('poFields[0][product_id]')
                         <div class="invalid-feedback">
@@ -56,9 +71,9 @@
                         </div>
                     @enderror
                 </div>
-                <div class="col-3 col-md-3 form-group">
+                <div class="col-6 col-lg-3 mb-2">
                     <label>Qty</label>
-                    <input type="number" class="form-control" required name="poFields[0][qty]" id="">
+                    <input type="number" class="form-control qty" required name="poFieldss[0][qty]">
                     @error('poFields[0][qty]')
                         <div class="invalid-feedback">
                             {{ $message }}
@@ -66,10 +81,10 @@
                     @enderror
                 </div>
 
-                <div class="col-2 col-md-2 form-group">
+                <div class="col-6 col-lg-2 mb-2">
                     <label for="">&nbsp;</label>
-                    <a id="addPo" href="javascript:void(0)" class="form-control text-white  text-center"
-                        style="border:none; background-color:green">+</a>
+                    <a href="javascript:void(0)" class="form-control addPo text-white  text-center"
+                        style="border:none; background-color:#276e61">+</a>
                 </div>
 
             </div>

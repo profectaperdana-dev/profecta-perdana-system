@@ -4,19 +4,13 @@
             <div class="form-group row">
                 <div class="col-md-6 form-group mr-5">
                     <label>From Warehouse</label>
-                    <select name="from" required
-                        class="form-control uoms {{ $errors->first('from') ? ' is-invalid' : '' }}" id="from_warehouse">
-                        @can('isSuperAdmin')
-                            <option value="" selected>-Choose Warehouse From-</option>
-                            @foreach ($warehouses as $warehouse)
-                                <option value="{{ $warehouse->id }}">{{ $warehouse->warehouses }}
-                                </option>
-                            @endforeach
-                        @elsecan('isWarehouseKeeper')
-                            <option value="{{ Auth::user()->warehouse_id }}" selected>
-                                {{ Auth::user()->warehouseBy->warehouses }}
+                    <select name="from" required multiple
+                        class="form-control selectMulti {{ $errors->first('from') ? ' is-invalid' : '' }}"
+                        id="from_warehouse">
+                        @foreach ($from_warehouse as $warehouse)
+                            <option value="{{ $warehouse->id }}">{{ $warehouse->warehouses }}
                             </option>
-                        @endcan
+                        @endforeach
 
                     </select>
                     @error('from')
@@ -28,10 +22,9 @@
                 <div class="col-md-6 form-group">
                     <label>
                         To Warehouse</label>
-                    <select name="to" id="" required
-                        class="form-control uoms {{ $errors->first('to') ? ' is-invalid' : '' }}">
-                        <option value="" selected>-Choose Warehouse To -</option>
-                        @foreach ($warehouses as $warehouse)
+                    <select name="to" id="" required multiple
+                        class="form-control selectMulti {{ $errors->first('to') ? ' is-invalid' : '' }}">
+                        @foreach ($to_warehouse as $warehouse)
                             <option value="{{ $warehouse->id }}">{{ $warehouse->warehouses }}
                             </option>
                         @endforeach
@@ -51,35 +44,70 @@
                 </div>
             </div>
 
-            <div class="form-group row" id="formMutation">
-                <div class="form-group col-7">
-                    <label>Product</label>
-                    <select name="mutationFields[0][product_id]" class="form-control productM" required>
-                        <option value="">Choose Product</option>
-                    </select>
-                    @error('mutationFields[0][product_id]')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
-                <div class="col-3 col-md-3 form-group">
-                    <label>Qty</label>
-                    <input type="number" class="form-control" required name="mutationFields[0][qty]" id="">
-                    <small class="from-stock" hidden>Stock : 0</small>
-                    @error('mutationFields[0][qty]')
-                        <div class="invalid-feedback">
-                            {{ $message }}
-                        </div>
-                    @enderror
-                </div>
+            <div id="formMutation">
+                <div class="form-group row bg-primary pt-2 mb-3">
+                    <div class="form-group col-12 col-lg-5">
+                        <label>Product</label>
+                        <select name="mutationFields[0][product_id]" class="form-control productM" multiple required>
+                            <option value="">Choose Product</option>
+                        </select>
+                        @error('mutationFields[0][product_id]')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="col-9 col-lg-2 form-group">
+                        <label>Qty</label>
+                        <input type="number" class="form-control" required name="mutationFields[0][qty]"
+                            id="">
+                        <small class="from-stock" hidden>Stock : 0</small>
+                        @error('mutationFields[0][qty]')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
+                    <div class="col-9 col-lg-3 form-group">
+                        <label>Note</label>
+                        <input type="text" class="form-control" required name="mutationFields[0][note]"
+                            id="">
+                        @error('mutationFields[0][note]')
+                            <div class="invalid-feedback">
+                                {{ $message }}
+                            </div>
+                        @enderror
+                    </div>
 
-                <div class="col-2 col-md-2 form-group">
-                    <label for="">&nbsp;</label>
-                    <a id="addM" href="javascript:void(0)" class="form-control text-white  text-center"
-                        style="border:none; background-color:green">+</a>
-                </div>
+                    <div class="col-3 col-lg-2 form-group">
+                        <label for="">&nbsp;</label>
+                        <a id="" href="javascript:void(0)" class="form-control addM text-white  text-center"
+                            style="border:none; background-color:green">+</a>
+                    </div>
 
+                    <div class="parentDot" data-index="0" hidden>
+                        <div class="row ">
+                            <div class="col-3 form-group">
+                                <label for="">DOT</label>
+                                <select name="mutationFields[0][0][Dot]" id=""
+                                    class="form-control dotProduct" multiple></select>
+                            </div>
+                            <div class="col-2 form-group">
+                                <label for="">Qty</label>
+                                <input type="text" name="mutationFields[0][0][qtyDot]"
+                                    class="form-control text-center qtyDot" id="inputGroup-sizing-sm" value="0"
+                                    placeholder="Qty" aria-label="Qty">
+
+                            </div>
+                            <div class="col-1 form-group">
+                                <label for="">&nbsp;</label>
+                                <a href="javascript:void(0)" class="form-control text-white text-center addDot"
+                                    style="border:none; background-color:green">+</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
 
 

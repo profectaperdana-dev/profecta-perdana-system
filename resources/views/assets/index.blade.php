@@ -9,8 +9,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
-                        {{ $title }}
+
                 </div>
 
             </div>
@@ -30,23 +29,58 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
+                            <table id="basic3" class="table table-sm table-hover" style="width:100%">
                                 <thead>
-                                    <tr>
-                                        <th></th>
+                                    <tr class="text-nowrap text-center">
+                                        <th>No.</th>
                                         <th>#</th>
+                                        <th>QR</th>
                                         <th>Code</th>
                                         <th>Name</th>
-                                        <th>Amount</th>
-                                        <th>Lifetime (In Month)</th>
+                                        <th>Qty</th>
+                                        {{-- <th>Lifetime (In Month)</th>
                                         <th>Year of Acquisition</th>
                                         <th>Cost of Acquisition (Rp)</th>
+                                        <th>Maintenance Date</th>
+                                        <th>Maintenance Distance</th>
+                                        <th>Next Maintenance Date</th>
+                                        <th>Status</th> --}}
                                         <th>Created By</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($assets as $key => $value)
-                                        <tr>
+                                    {{-- @foreach ($assets as $key => $value)
+                                        <tr class="text-nowrap">
+                                            <td>{{ $key + 1 }}</td>
+                                            <td> {!! QrCode::size(100)->generate(url('asset/information/' . $value->id)) !!}</td>
+                                            <td>{{ $value->asset_code }}</td>
+                                            <td>{{ $value->asset_name }}</td>
+                                            <td>{{ $value->amount }}</td>
+                                            <td class="text-center">{{ $value->lifetime }}</td>
+                                            <td class="text-center">
+                                                {{ date('d M Y', strtotime($value->acquisition_year)) }}</td>
+                                            <td class="text-end">{{ number_format($value->acquisition_cost, 0, ',', '.') }}
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($value->service_date == null)
+                                                    <span class="badge bg-danger">Not Set</span>
+                                                @else
+                                                    {{ date('d M Y', strtotime($value->service_date)) }}
+                                                @endif
+                                            </td>
+                                            <td class="text-center">{{ $value->range }}
+                                            </td>
+                                            <td class="text-center">
+                                                @if ($value->next_service == null)
+                                                    <span class="badge bg-danger">Not Set</span>
+                                                @else
+                                                    {{ date('d M Y', strtotime($value->next_service)) }}
+                                                @endif
+                                            <td>
+                                                {{ $value->status }}
+                                            </td>
+                                            <td>{{ $value->createdBy->name }}</td>
                                             <td style="width: 10%">
                                                 <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false"><i data-feather="settings"></i></a>
@@ -64,19 +98,8 @@
                                                     @endcan
                                                 </div>
                                             </td>
-
-
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->asset_code }}</td>
-                                            <td>{{ $value->asset_name }}</td>
-                                            <td>{{ $value->amount }}</td>
-                                            <td>{{ $value->lifetime }}</td>
-                                            <td>{{ date('d M Y', strtotime($value->acquisition_year)) }}</td>
-                                            <td>{{ number_format($value->acquisition_cost, 0, ',', '.') }}</td>
-                                            <td>{{ $value->createdBy->name }}</td>
-
                                         </tr>
-                                    @endforeach
+                                    @endforeach --}}
                                 </tbody>
                             </table>
                         </div>
@@ -87,130 +110,6 @@
     </div>
 
     @foreach ($assets as $value)
-        {{-- Modul Detail --}}
-        <div class="modal fade" id="editData{{ $value->id }}" tabindex="-1" role="dialog"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Detail Data
-                            {{ $value->asset_name }} | Code: {{ $value->asset_code }}</h5>
-                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form method="POST" action="{{ url('asset/' . $value->id) }}">
-                            @csrf
-                            @method('PUT')
-                            <div class="container-fluid">
-                                <div class=" row">
-                                    <div class="form-group col-md-4">
-                                        <label class="font-weight-bold">Name of Asset</label>
-                                        <input type="text"
-                                            class="form-control {{ $errors->first('asset_name') ? ' is-invalid' : '' }}"
-                                            name="asset_name" value="{{ $value->asset_name }}"
-                                            placeholder="Enter Name of Asset" required>
-                                        @error('asset_name')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        <label class="font-weight-bold">Amount</label>
-                                        <input type="number"
-                                            class="form-control {{ $errors->first('amount') ? ' is-invalid' : '' }}"
-                                            name="amount" value="{{ $value->amount }}" placeholder="Enter Amount of Asset"
-                                            required>
-                                        @error('amount')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-4">
-                                        <label class="font-weight-bold">Lifetime (In Month)</label>
-                                        <input type="number"
-                                            class="form-control {{ $errors->first('lifetime') ? ' is-invalid' : '' }}"
-                                            name="lifetime" value="{{ $value->lifetime }}"
-                                            placeholder="Enter Lifetime of Asset" required>
-                                        @error('lifetime')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
-
-                                </div>
-
-                                <div class=" row">
-
-
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Year of Acquisition</label>
-                                        <input type="date"
-                                            class="form-control {{ $errors->first('acquisition_year') ? ' is-invalid' : '' }}"
-                                            name="acquisition_year" value="{{ $value->acquisition_year }}" required>
-                                        @error('acquisition_year')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
-
-                                    <div class="form-group col-md-6">
-                                        <label class="font-weight-bold">Cost of Acquisition</label>
-                                        <input type="text"
-                                            class="form-control total {{ $errors->first('acquisition_cost') ? ' is-invalid' : '' }}"
-                                            placeholder="Enter Cost of Acquisition"
-                                            value="{{ number_format($value->acquisition_cost, 0, ',', '.') }}" required>
-                                        <input type="hidden" value="{{ $value->acquisition_cost }}"
-                                            name="acquisition_cost">
-                                        @error('acquisition_cost')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-primary" type="submit">Save</button>
-                                <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        {{-- End Modal Detail --}}
-
-        @can('level1')
-            {{-- Modul Delete UOM --}}
-            <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
-                aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <form method="post" action="{{ url('asset/' . $value->id) }}" enctype="multipart/form-data">
-                        @csrf
-                        @method('delete')
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                    {{ $value->asset_name }} | Code: {{ $value->asset_code }}</h5>
-                                <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                    aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <div class="container-fluid">
-                                    <div class="form-group row">
-                                        <div class="col-md-12">
-                                            <h5>Are you sure delete this data ?</h5>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                                <button class="btn btn-primary" type="submit">Yes, delete
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-            </div>
-            {{-- End Modal Delete UOM --}}
-        @endcan
     @endforeach
     <!-- Container-fluid Ends-->
     @push('scripts')
@@ -218,7 +117,166 @@
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script>
             $(document).ready(function() {
+                $(document).on('submit', 'form', function() {
+                    var form = $(this);
+                    var button = form.find('button[type="submit"]');
+                    // console.log(form.html());
+
+                    if (form[0].checkValidity()) { // check if form has input values
+                        button.prop('disabled', true);
+
+                    }
+                });
+
                 let csrf = $('meta[name="csrf-token"]').attr("content");
+
+                function parseDate(date) {
+                    let splitted = date.split('-');
+                    return splitted[2] + '-' + splitted[1] + '-' + splitted[0];
+                }
+
+                const format = (d) => {
+                    let cost = parseInt(d.acquisition_cost).toLocaleString('en', {
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0
+                    });
+                    let status = (d.status == 1) ? 'Active' : 'Non-active';
+                    // console.log(typeof cost);
+                    return `
+                            <div style="margin-left:2px;" class="row col-lg-3 card shadow">
+                                    <table class="table fw-bold" style="border:0;" border="0">
+                                        <tr>
+                                            <td>Year of Acquisition</td>
+                                            <td>:</td>
+                                            <td>${parseDate(d.acquisition_year)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Cost of Acquisition (Rp)</td>
+                                            <td>:</td>
+                                            <td>${cost}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Lifetime (In Month)</td>
+                                            <td>:</td>
+                                            <td>${d.lifetime}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maintenance Date</td>
+                                            <td>:</td>
+                                            <td>${parseDate(d.service_date)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Maintenance Distance</td>
+                                            <td>:</td>
+                                            <td>${d.range}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Next Maintenance Date</td>
+                                            <td>:</td>
+                                            <td>${parseDate(d.next_service)}</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Status</td>
+                                            <td>:</td>
+                                            <td>${status}</td>
+                                        </tr>
+                                    </table>
+                            </div>
+                        `;
+                };
+                load_data();
+
+                function load_data() {
+                    $('#basic3').DataTable({
+                        "language": {
+                            "processing": `<i class="fa text-success fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
+                        },
+                        "lengthChange": false,
+                        "paging": false,
+                        "bPaginate": false, // disable pagination
+                        "bLengthChange": false, // disable show entries dropdown
+                        "searching": true,
+                        "ordering": true,
+                        "info": false,
+                        "autoWidth": false,
+                        processing: true,
+                        serverSide: true,
+                        ajax: {
+                            url: "{{ url('/asset') }}",
+                            // data: {
+                            //     from_date: from_date,
+                            //     to_date: to_date
+                            // }
+                        },
+                        columns: [{
+                                data: 'DT_RowIndex',
+                                name: 'DT_Row_Index',
+                                "className": "text-center fw-bold align-middle",
+                                orderable: false,
+                                searchable: false
+                            }, {
+                                data: null,
+                                orderable: false,
+                                searchable: false,
+                                className: 'details-control',
+                                defaultContent: '<i data-feather="plus"></i>'
+                            },
+                            {
+                                className: 'text-center',
+                                data: 'qr',
+                                name: 'qr',
+                            },
+                            {
+                                className: 'text-center align-middle',
+                                data: 'asset_code',
+                                name: 'asset_code'
+                            },
+                            {
+                                className: 'align-middle',
+                                data: 'asset_name',
+                                name: 'asset_name',
+                            },
+                            {
+                                className: 'text-center align-middle',
+                                data: 'amount',
+                                name: 'amount',
+                            },
+                            {
+                                className: 'align-middle',
+                                data: 'created_by',
+                                name: 'created_by',
+                            },
+                            {
+                                className: 'align-middle',
+                                data: 'action',
+                                name: 'action',
+                                orderable: true,
+                                searchable: true
+                            },
+                        ],
+
+                        initComplete: function() {
+                            var table = $('#basic3').DataTable();
+                            $(document).find('#basic3 tbody').off().on('click', 'td.details-control',
+                                function() {
+                                    var tr = $(this).closest('tr');
+                                    var row = table.row(tr);
+
+                                    if (row.child.isShown()) {
+                                        // This row is already open - close it
+                                        row.child.hide();
+                                        tr.removeClass('shown');
+                                    } else {
+                                        // Open this row
+                                        row.child(format(row.data())).show();
+                                        tr.addClass('shown');
+                                    }
+                                });
+                        },
+
+
+                    });
+                }
 
                 $(document).on('click', '.modal-btn', function() {
                     $('.total').on('keyup', function() {
@@ -236,7 +294,7 @@
                         var input = input.replace(/[\D\s\._\-]+/g, "");
                         input = input ? parseInt(input, 10) : 0;
                         $this.val(function() {
-                            return (input === 0) ? "" : input.toLocaleString("id-ID");
+                            return (input === 0) ? "" : input.toLocaleString();
                         });
                         $this.next().val(input);
                     });

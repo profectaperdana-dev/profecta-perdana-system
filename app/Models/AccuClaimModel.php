@@ -38,4 +38,19 @@ class AccuClaimModel extends Model
     {
         return $this->hasMany(AccuClaimDetailModel::class, 'id_accu_claim');
     }
+
+    // motor
+    public function motorBrandBy()
+    {
+        return $this->hasOne(MotorBrandModel::class, 'id', 'motor_brand_id');
+    }
+    public function motorTypeBy()
+    {
+        return $this->hasOne(MotorTypeModel::class, 'id', 'motor_type_id');
+    }
+
+    public function claimCredit()
+    {
+        return $this->hasMany(ClaimCreditModel::class, 'id_claim');
+    }
 }

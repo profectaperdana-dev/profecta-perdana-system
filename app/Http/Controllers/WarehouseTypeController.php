@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\WarehouseTypeModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class WarehouseTypeController extends Controller
 {
@@ -15,7 +16,7 @@ class WarehouseTypeController extends Controller
     public function index()
     {
         //* Get all warehouse types
-        $title = 'Warehouse Types';
+        $title = 'Warehouse Type';
         $data = WarehouseTypeModel::all();
         return view('warehouse_type.index', compact('data', 'title'));
     }
@@ -41,16 +42,25 @@ class WarehouseTypeController extends Controller
             'name' => 'required',
             'detail' => 'required',
         ]);
+        try {
+            DB::beginTransaction();
+            // * Insert data
+            $model = new WarehouseTypeModel();
+            $model->name = $request->name;
+            $model->detail = $request->detail;
+            $saved = $model->save();
+            if ($saved) {
 
-        // * Insert data
-        $model = new WarehouseTypeModel();
-        $model->name = $request->name;
-        $model->detail = $request->detail;
-        $saved = $model->save();
-        if ($saved) {
-            return redirect()->route('warehouse_types.index')->with('success', 'Warehouse Type created successfully.');
-        } else {
-            return redirect()->route('warehouse_types.index')->with('error', 'Warehouse Type created failed.');
+                DB::commit();
+                return redirect()->route('warehouse_types.index')->with('success', 'Warehouse Type created successfully.');
+            } else {
+
+                DB::rollback();
+                return redirect()->route('warehouse_types.index')->with('error', 'Warehouse Type created failed.');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('warehouse_types.index')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -90,15 +100,25 @@ class WarehouseTypeController extends Controller
             'detail_' => 'required',
         ]);
 
-        // * Update data
-        $model = WarehouseTypeModel::find($id);
-        $model->name = $request->name_;
-        $model->detail = $request->detail_;
-        $saved = $model->save();
-        if ($saved) {
-            return redirect()->route('warehouse_types.index')->with('success', 'Warehouse Type updated successfully.');
-        } else {
-            return redirect()->route('warehouse_types.index')->with('error', 'Warehouse Type updated failed.');
+        try {
+            DB::beginTransaction();
+            // * Update data
+            $model = WarehouseTypeModel::find($id);
+            $model->name = $request->name_;
+            $model->detail = $request->detail_;
+            $saved = $model->save();
+            if ($saved) {
+
+                DB::commit();
+                return redirect()->route('warehouse_types.index')->with('success', 'Warehouse Type updated successfully.');
+            } else {
+
+                DB::rollback();
+                return redirect()->route('warehouse_types.index')->with('error', 'Warehouse Type updated failed.');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('warehouse_types.index')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -110,13 +130,23 @@ class WarehouseTypeController extends Controller
      */
     public function destroy($id)
     {
-        // * Delete data
-        $model = WarehouseTypeModel::find($id);
-        $deleted = $model->delete();
-        if ($deleted) {
-            return redirect()->route('warehouse_types.index')->with('success', 'Warehouse Type deleted successfully.');
-        } else {
-            return redirect()->route('warehouse_types.index')->with('error', 'Warehouse Type deleted failed.');
+        try {
+            DB::beginTransaction();
+            // * Delete data
+            $model = WarehouseTypeModel::find($id);
+            $deleted = $model->delete();
+            if ($deleted) {
+
+                DB::commit();
+                return redirect()->route('warehouse_types.index')->with('success', 'Warehouse Type deleted successfully.');
+            } else {
+
+                DB::rollback();
+                return redirect()->route('warehouse_types.index')->with('error', 'Warehouse Type deleted failed.');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect()->route('warehouse_types.index')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 }

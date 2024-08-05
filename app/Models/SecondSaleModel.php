@@ -19,8 +19,10 @@ class SecondSaleModel extends Model
     {
         return $this->hasOne(User::class, 'id', 'created_by');
     }
-    public function tradeBy()
+
+    // warehouse
+    public function warehouse()
     {
-        return $this->hasOne(User::class, 'id', 'createdBy')->withTrashed();
+        return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id');
     }
 }

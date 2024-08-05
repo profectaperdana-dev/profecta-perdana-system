@@ -21,9 +21,6 @@ class AccountingController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         //* view data from database
         $data = JurnalModel::latest()->get();
         $title = 'Jurnal';
@@ -31,9 +28,6 @@ class AccountingController extends Controller
     }
     public function jurnal(Request $request)
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         //! view data from database
         if ($request->ajax()) {
 
@@ -70,9 +64,6 @@ class AccountingController extends Controller
 
     public function createExpenses()
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         $title = 'Create Expenses';
         $account = AccountSubTypeModel::latest()->get();
         return view('accounting.create_expanse', compact('title', 'account'));
@@ -97,9 +88,6 @@ class AccountingController extends Controller
 
     public function profit_loss(Request $request)
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         if (!empty($request->from_date)) {
             $income = JurnalModel::where('account_code', '1')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
             $load_discount = JurnalModel::where('account_code', '2.2.703.804.102')->whereBetween('date', array($request->from_date, $request->to_date))->sum('total');
@@ -246,9 +234,6 @@ class AccountingController extends Controller
 
     public function depreciation()
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         $all_depreciation = AssetModel::latest()->get();
 
         $smallest_date = AssetModel::all('acquisition_year')->min('acquisition_year');

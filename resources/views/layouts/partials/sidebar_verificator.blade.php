@@ -5,7 +5,8 @@
             <img class="img-90 rounded-circle" src="{{ asset('images/blank.png') }}" alt="">
         @else
             <img class="img-90 rounded-circle" src="{{ asset('images/employees/' . Auth::user()->employeeBy->photo) }}"
-                alt="">
+                alt=""
+                style="width:100%;height:90px;object-fit:cover;object-position: 50% 50%;image-rendering:smooth;filter:blur(0.4px)">
         @endif
         <div class="badge-bottom"></div><a href="user-profile.html">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>

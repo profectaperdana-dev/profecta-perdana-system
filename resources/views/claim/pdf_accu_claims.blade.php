@@ -10,9 +10,9 @@
     <meta name="format-detection" content="telephone=no, date=no, address=no, email=no">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <style type="text/css">
-        @page {
+        /* @page {
             size: 80mm 80mm portrait;
-        }
+        } */
 
         body,
         table,
@@ -157,7 +157,7 @@
                                                                     <div class="fw-800 text-white text-center"
                                                                         style="color: #ffffff; font-weight: 500 !important; margin-bottom:0px;"
                                                                         align="center">
-                                                                        <h4>EARLY CLAIM INFORMATION</h4>
+                                                                        <h4>PRIOR CLAIM INFORMATION</h4>
                                                                     </div>
                                                                 </td>
 
@@ -178,7 +178,7 @@
                                                                 <td class="text-xs"
                                                                     style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
-                                                                    {{ date('d F y', strtotime($data->claim_date)) }}
+                                                                    {{ date('d F Y', strtotime($data->claim_date)) }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -210,12 +210,27 @@
                                                                     {{ $data->plate_number }}</td>
                                                                 <td class="text-xs"
                                                                     style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">Car Type</td>
+                                                                    align="left" valign="top">Vehicle</td>
                                                                 <td class="text-xs"
                                                                     style="text-transform: uppercase !important;line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
-                                                                    {{ $data->carBrandBy->car_brand }}
-                                                                    {{ $data->carTypeBy->car_type }}
+                                                                    @if ($data->other_machine != null)
+                                                                        {{ $data->other_machine }}
+                                                                    @elseif ($data->car_brand_id)
+                                                                        {{ $data->carBrandBy->car_brand }} -
+                                                                        @if (is_numeric($data->car_type_id))
+                                                                            {{ $data->carTypeBy->car_type }}
+                                                                        @else
+                                                                            {{ $data->car_type_id }}
+                                                                        @endif
+                                                                    @else
+                                                                        {{ $data->motorBrandBy->name_brand }} -
+                                                                        @if (is_numeric($data->motor_type_id))
+                                                                            {{ $data->motorTypeBy->name_type }}
+                                                                        @else
+                                                                            {{ $data->motor_type_id }}
+                                                                        @endif
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                             <tr>
@@ -225,24 +240,48 @@
                                                                 <td class="text-xs"
                                                                     style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
-                                                                    ({{ $data->material }}/{{ $data->type_material }})
-                                                                    -
-                                                                    {{ $data->productSales->nama_barang }}
+                                                                    {{ $data->material . ' ' . $data->type_material . ' ' . $data->productSales->nama_barang }}
                                                                 </td>
+                                                                @if ($data->loan_product_id != '')
+                                                                    <td class="text-xs"
+                                                                        style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                        align="left" valign="top">Lended Battery
+                                                                    </td>
+
+                                                                    <td class="text-xs"
+                                                                        style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                        align="left" valign="top">:
+                                                                        {{ $data->loanBy->sub_materials->nama_sub_material . ' ' . $data->loanBy->sub_types->type_name . ' ' . $data->loanBy->nama_barang }}
+                                                                    </td>
+                                                                @endif
+
+                                                            </tr>
+                                                            <tr>
                                                                 <td class="text-xs"
                                                                     style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">Loaned Battery</td>
+                                                                    align="left" valign="top">Product Code</td>
                                                                 <td class="text-xs"
                                                                     style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
-                                                                    ({{ $data->loanBy->sub_materials->nama_sub_material }}/{{ $data->loanBy->sub_types->type_name }}
-                                                                    ) - {{ $data->loanBy->nama_barang }}</td>
+                                                                    {{ $data->product_code }}
+                                                                </td>
+
+                                                                <td class="text-xs"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">&nbsp;</td>
+
+
+                                                                <td class="text-xs"
+                                                                    style="line-height:80%; font-size: 12px; border-top-width: 0px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">&nbsp;</td>
+
+
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="4"
                                                                     style="border-top-width: 1px;border-top-color: #e2e8f0; margin-top:-500px;line-height:80%;">
                                                                     <center>
-                                                                        <p><b> Early Battery Test</b></p>
+                                                                        <p><b> Prior Battery Test</b></p>
                                                                     </center>
                                                                     {{-- <div class="fw-800 text-white text-center"
                                                                         style="color: #fbfafa; font-weight: 800 !important;margin-bottom: 7px;"
@@ -306,7 +345,7 @@
                                                                     style="line-height:1.6; font-size: 12px; border-top-width: 2px; border-top-color: #e2e8f0; border-top-style: solid; margin-bottom: 10px; "
                                                                     align="left" valign="top">
                                                                     <center>
-                                                                        <h3>Early Diagnostic</h3>
+                                                                        <h3>Prior Diagnostic</h3>
                                                                     </center>
                                                                     @foreach ($data->accuClaimDetailsBy as $key => $row)
                                                                         <div
@@ -346,7 +385,7 @@
                                                                                     <div class="">
                                                                                         <img class="img-fluid"
                                                                                             style="width: 200px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; max-width: 100%; border-style: none; border-width: 0;"
-                                                                                            src="{{ public_path('file_evidence/' . $data->e_foto) }}"
+                                                                                            src="{{ url('file_evidence/' . $data->e_foto) }}"
                                                                                             alt="Some Image"
                                                                                             width="100%">
                                                                                     </div>
@@ -380,7 +419,7 @@
                                                                         <h5>Submitted By,</h5>
                                                                         <img class="img-fluid"
                                                                             style="width: 200px; height: auto; line-height: 100%; outline: none; text-decoration: none; display: block; max-width: 100%; border-style: none; border-width: 0;"
-                                                                            src="{{ public_path('file_signature/' . $data->e_receivedBy) }}"
+                                                                            src="{{ url('file_signature/' . $data->e_receivedBy) }}"
                                                                             alt="Some Image" width="100%">
                                                                     </div>
                                                                 </td>

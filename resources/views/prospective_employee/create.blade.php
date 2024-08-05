@@ -1,222 +1,163 @@
-@extends('prospective_employee.master')
-@section('content')
-    <div class="container-fluid">
-        <div class="page-header">
-            <div class="row">
-                <div class="col-sm-6">
-                    <h3 class="font-weight-bold"> </h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                    </h6>
-                </div>
+<!DOCTYPE html>
+<html lang="en">
 
-            </div>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="viho admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords"
+        content="admin template, viho admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="pixelstrap">
+    <link rel="icon" href="{{ asset('assets') }}/images/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="{{ asset('assets') }}/images/favicon.png" type="image/x-icon">
+    <title>Profecta Perdana | Candidate Employee Form</title>
+    <!-- Google font-->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&amp;display=swap"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&amp;display=swap"
+        rel="stylesheet">
+    <!-- Font Awesome-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/fontawesome.css">
+    <!-- ico-font-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/icofont.css">
+    <!-- Themify icon-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/themify.css">
+    <!-- Flag icon-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/flag-icon.css">
+    <!-- Feather icon-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/feather-icon.css">
+    <!-- Plugins css start-->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- Plugins css Ends-->
+    <!-- Bootstrap css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/bootstrap.css">
+    <!-- App css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/style.css">
+    <link id="color" rel="stylesheet" href="{{ asset('assets') }}/css/color-1.css" media="screen">
+    <!-- Responsive css-->
+    <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/responsive.css">
+</head>
+
+<body>
+    <!-- Loader starts-->
+    <div class="loader-wrapper">
+        <div class="theme-loader">
+            <div class="loader-p"></div>
         </div>
     </div>
-    <!-- Container-fluid starts-->
-    <div class="container-fluid">
-        <div class="row">
+    <!-- Loader ends-->
+    <!-- page-wrapper Start-->
 
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>{{ $title }}</h5>
-                        <hr class="bg-primary">
-                    </div>
-                    <div class="card-body">
-                        <form class="needs-validation" novalidate method="post"
-                            action="{{ url('prospective_employees/store_form') }}" enctype="multipart/form-data">
-                            @csrf
-                            @include('prospective_employee._form')
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <!-- Page Sidebar Start-->
+
+    <!-- Page Sidebar Ends-->
+    <div class="page-body mt-5">
+        @include('prospective_employee._form')
+        <!-- Container-fluid Ends-->
     </div>
-    <!-- Container-fluid Ends-->
-    @push('scripts')
-        <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
+
+
+    <!-- latest jquery-->
+    <script src="{{ asset('assets') }}/js/jquery-3.5.1.min.js"></script>
+    <!-- feather icon js-->
+    <script src="{{ asset('assets') }}/js/icons/feather-icon/feather.min.js"></script>
+    <script src="{{ asset('assets') }}/js/icons/feather-icon/feather-icon.js"></script>
+    <!-- Sidebar jquery-->
+    <script src="{{ asset('assets') }}/js/sidebar-menu.js"></script>
+    <script src="{{ asset('assets') }}/js/config.js"></script>
+    <!-- Bootstrap js-->
+    <script src="{{ asset('assets') }}/js/bootstrap/popper.min.js"></script>
+    <script src="{{ asset('assets') }}/js/bootstrap/bootstrap.min.js"></script>
+    <!-- Plugins JS start-->
+    <script src="{{ asset('assets') }}/js/form-wizard/form-wizard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
+    <script src="{{ asset('assets') }}/js/script.js"></script>
+
+    @include('prospective_employee.tab-0-js')
+    @include('prospective_employee.tab-1-js')
+    @include('prospective_employee.tab-2-js')
+    <script>
+        $(document).ready(function() {
+
+
+
+
+            $('.select2').select2(
+
+            );
+
+
+
+
+
+
+
+
+        });
+
+
+        $(function() {
+            let validator = $('form.needs-validation').jbvalidator({
+                errorMessage: true,
+                successClass: false,
+                language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+            });
+
+            //reload instance after dynamic element is added
+
+            $('input').on('keyup', function() {
+
+                if (validator.checkAll() == 0) {
+                    $('form').find('#nextBtn').attr('disabled', false);
+                } else {
+                    $('form').find('#nextBtn').attr('disabled', true);
+                }
+                console.log(validator.checkAll());
+                // validator.reload();
+            });
+            console.log(validator.checkAll());
+
+
+        })
+    </script>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
+        integrity="sha512-AA1Bzp5Q0K1KanKKmvN/4d3IRKVlv9PYgwFPvm32nPO6QS8yH1HO7LbgB1pgiOxPtfeg5zEn2ba64MUcqJx6CA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    @if (Session::has('success'))
         <script>
-            $(function() {
-
-                let validator = $('form.needs-validation').jbvalidator({
-                    errorMessage: true,
-                    successClass: true,
-                    language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
-                });
-                //reload instance after dynamic element is added
-                validator.reload();
-            })
-        </script>
-
-        <script>
-            $(document).ready(function() {
-                let csrf = $('meta[name="csrf-token"]').attr("content");
-
-                $('.last_salary_1').on('keyup', function() {
-                    var selection = window.getSelection().toString();
-                    if (selection !== '') {
-                        return;
-                    }
-                    // When the arrow keys are pressed, abort.
-                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
-                        return;
-                    }
-                    var $this = $(this);
-                    // Get the value.
-                    var input = $this.val();
-                    var input = input.replace(/[\D\s\._\-]+/g, "");
-                    input = input ? parseInt(input, 10) : 0;
-                    $this.val(function() {
-                        return (input === 0) ? "" : input.toLocaleString("id-ID");
-                    });
-                    $this.next().val(input);
-                });
-                $('.last_salary_2').on('keyup', function() {
-                    var selection = window.getSelection().toString();
-                    if (selection !== '') {
-                        return;
-                    }
-                    // When the arrow keys are pressed, abort.
-                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
-                        return;
-                    }
-                    var $this = $(this);
-                    // Get the value.
-                    var input = $this.val();
-                    var input = input.replace(/[\D\s\._\-]+/g, "");
-                    input = input ? parseInt(input, 10) : 0;
-                    $this.val(function() {
-                        return (input === 0) ? "" : input.toLocaleString("id-ID");
-                    });
-                    $this.next().val(input);
-                });
-                $('.salary_expected').on('keyup', function() {
-                    var selection = window.getSelection().toString();
-                    if (selection !== '') {
-                        return;
-                    }
-                    // When the arrow keys are pressed, abort.
-                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
-                        return;
-                    }
-                    var $this = $(this);
-                    // Get the value.
-                    var input = $this.val();
-                    var input = input.replace(/[\D\s\._\-]+/g, "");
-                    input = input ? parseInt(input, 10) : 0;
-                    $this.val(function() {
-                        return (input === 0) ? "" : input.toLocaleString("id-ID");
-                    });
-                    $this.next().val(input);
-                });
-
-
-                $('.check_status').attr('hidden', true);
-                $(document).on('change', '.marital', function() {
-                    var val = $(this).val();
-                    if (val == 'Marry') {
-                        $('.check_status').attr('hidden', false);
-                    } else {
-                        $('.check_status').attr('hidden', true);
-                    }
-                });
-
-                $(".province").select2({
-                    width: "100%",
-                    placeholder: "Select Customer Province",
-                    minimumResultsForSearch: -1,
-                    sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
-                    ajax: {
-                        type: "GET",
-                        url: "/customers/getProvince",
-                        data: function(params) {
-                            return {
-                                _token: csrf,
-                                q: params.term, // search term
-                            };
-                        },
-                        dataType: "json",
-                        delay: 250,
-                        processResults: function(data) {
-                            return {
-                                results: $.map(data, function(item) {
-                                    return [{
-                                        text: item.name,
-                                        id: item.id,
-                                    }, ];
-                                }),
-                            };
-                        },
-                    },
-                });
-
-                $('.province').change(function() {
-                    let province_value = $('.province').val();
-
-                    $(".city").select2({
-                        width: "100%",
-                        minimumResultsForSearch: -1,
-                        placeholder: "Select Customer City",
-                        sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
-                        ajax: {
-                            type: "GET",
-                            url: "/customers/getCity/" + province_value,
-                            data: function(params) {
-                                return {
-                                    _token: csrf,
-                                    q: params.term, // search term
-                                };
-                            },
-                            dataType: "json",
-                            delay: 250,
-                            processResults: function(data) {
-                                return {
-                                    results: $.map(data, function(item) {
-                                        return [{
-                                            text: item.name,
-                                            id: item.id,
-                                        }, ];
-                                    }),
-                                };
-                            },
-                        },
-                    });
-                });
-
-                $('.city').change(function() {
-                    let city_value = $('.city').val();
-
-                    $(".district").select2({
-                        width: "100%",
-                        minimumResultsForSearch: -1,
-                        placeholder: "Select Customer District",
-                        sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
-                        ajax: {
-                            type: "GET",
-                            url: "/customers/getDistrict/" + city_value,
-                            data: function(params) {
-                                return {
-                                    _token: csrf,
-                                    q: params.term, // search term
-                                };
-                            },
-                            dataType: "json",
-                            delay: 250,
-                            processResults: function(data) {
-                                return {
-                                    results: $.map(data, function(item) {
-                                        return [{
-                                            text: item.name,
-                                            id: item.id,
-                                        }, ];
-                                    }),
-                                };
-                            },
-                        },
-                    });
-                });
+            swal("Success !", "{!! Session::get('success') !!}", "success", {
+                button: "Close",
             });
         </script>
-    @endpush
-@endsection
+    @endif
+    @if (Session::has('info'))
+        <script>
+            swal("For you information !", "{!! Session::get('info') !!}", "info", {
+                button: "Close",
+            });
+        </script>
+    @endif
+    @if (Session::has('error'))
+        <script>
+            swal("Attention !", "{!! Session::get('error') !!}", "error", {
+                button: "Close",
+            });
+        </script>
+    @endif
+
+</body>
+
+</html>

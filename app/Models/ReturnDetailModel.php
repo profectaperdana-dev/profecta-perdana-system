@@ -20,4 +20,9 @@ class ReturnDetailModel extends Model
     {
         return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
     }
+    
+    public function getPrice($invoice){
+        $price_ = SalesOrderDetailModel::where('sales_orders_id', $invoice)->where('products_id', $this->product_id)->first();
+        return $price_;
+    }
 }

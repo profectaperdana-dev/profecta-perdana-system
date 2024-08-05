@@ -30,4 +30,8 @@ class StockMutationModel extends Model
     {
         return $this->hasOne(User::class, 'id', 'created_by')->withTrashed();
     }
+    
+    public function getProductCode(){
+        return $this->hasOne(AccuClaimModel::class,'mutation_number','mutation_number');
+    }
 }

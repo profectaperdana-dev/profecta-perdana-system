@@ -3,11 +3,11 @@
 </a>
 <div class="dropdown-menu" aria-labelledby="">
     <h5 class="dropdown-header">Actions</h5>
-    @can('isSuperAdmin')
+    @canany(['level1', 'level2'])
         <a class="dropdown-item modal-btn2" href="#" data-bs-toggle="modal" data-original-title="test"
             data-bs-target="#manageData{{ $invoice->id }}">Edit </a>
         <a class="dropdown-item" href="{{ url('second_sale/print_struk/' . $invoice->id . '/print') }}">Delete</a>
-    @endcan
+    @endcanany
 </div>
 
 {{-- ! Modal Edit Invoice Trade In --}}

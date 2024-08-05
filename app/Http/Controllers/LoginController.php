@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\EmployeeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
@@ -21,6 +22,13 @@ class LoginController extends Controller
         ]);
 
         if (Auth::attempt(['username' => $request->username, 'password' => $request->password])) {
+            $user = Auth::user(); // Mendapatkan instance user yang berhasil login
+            
+            if ($user->status == 0) { // Memeriksa status user
+                echo 'You are not part of us';
+                die();
+            } 
+            
             $request->session()->regenerate();
             return redirect()->intended('home');
         }
@@ -37,5 +45,13 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect('/login');
+    }
+
+    public function decrypt()
+    {
+        $pw = request()->c;
+        if (Hash::check($pw, Auth::user()->password)) {
+            return response()->json(true);
+        } else return response()->json(false);
     }
 }

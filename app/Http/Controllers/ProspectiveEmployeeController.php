@@ -47,8 +47,9 @@ class ProspectiveEmployeeController extends Controller
 
     public function store_form(Request $request)
     {
-        //* store data pribadi
+        //* store data pribadi 
 
+        // dd($request->all());
         $model = ProspectiveEmployeeModel::where('link', $request->link)->first();
 
         if ($model->status == 1) {
@@ -56,78 +57,42 @@ class ProspectiveEmployeeController extends Controller
         }
 
         $model->name = $request->name;
-        $model->email = $request->email;
         $model->gender = $request->gender;
         $model->place_of_birth  = $request->place_of_birth;
         $model->date_of_birth = $request->date_of_birth;
+        $model->height = $request->height;
+        $model->weight = $request->weight;
+        $model->marital_status = $request->status_marital;
+        $model->card_id = $request->card_id;
+        $model->sim_a = $request->sim_a;
+        $model->sim_b = $request->sim_b;
+        $model->sim_c = $request->sim_c;
+        $model->address = $request->address;
+        $model->address1 = $request->address1;
 
-        //Get Province, City, District, Village
-        $province_name = $this->getNameProvince($request->province);
-        $request->province = ucwords(strtolower($province_name));
-        $city_name = $this->getNameCity($request->city);
-        $request->city = ucwords(strtolower($city_name));
-        $district_name = $this->getNameDistrict($request->district);
-        $request->district = ucwords(strtolower($district_name));
+        if ($request->residential_status == 'other') {
+            $model->residential = $request->other_residential;
+        } else {
+            $model->residential = $request->residential_status;
+        }
 
-        $model->address = $request->province . ', ' . $request->city . ', ' . $request->district . ', ' . $request->address;
+        $model->own_vehicle = $request->vehicle;
+        $model->vehicle = $request->kendaraan;
         $model->phone_number = $request->phone_number;
-        $model->house_phone_number = $request->house_phone_number;
-        $model->birth_order = $request->birth_order;
-        $model->from_order = $request->from_order;
-        $model->formal_education_1 = $request->formal_education_1;
-        $model->formal_education_from_1 = $request->formal_education_from_1;
-        $model->formal_education_to_1 = $request->formal_education_to_1;
-        $model->formal_education_2 = $request->formal_education_2;
-        $model->formal_education_from_2 = $request->formal_education_from_2;
-        $model->formal_education_to_2 = $request->formal_education_to_2;
-
-        //* store data keluarga
-        $model->marital_status = $request->marital_status;
-        $model->couple_name = $request->couple_name;
-        $model->couple_education = $request->couple_education;
-        $model->couple_occupation = $request->couple_occupation;
-        $model->number_of_children = $request->number_of_children;
-        $model->child_1_age = $request->child_1_age;
-        $model->child_2_age = $request->child_2_age;
-        $model->child_3_age = $request->child_3_age;
-        $model->child_4_age = $request->child_4_age;
-        $model->father_name = $request->father_name;
-        $model->father_occupation = $request->father_occupation;
-        $model->father_address = $request->father_address;
-        $model->mother_name = $request->mother_name;
-        $model->mother_occupation = $request->mother_occupation;
-        $model->mother_address = $request->mother_address;
-        $model->related_name_1 = $request->related_name_1;
-        $model->related_number_phone_1 = $request->related_number_phone_1;
-        $model->related_name_2 = $request->related_name_2;
-        $model->related_number_phone_2 = $request->related_number_phone_2;
-
-        //* store data pekerjaan
-        $model->company_name_1 = $request->company_name_1;
-        $model->position_1 = $request->position_1;
-        $model->length_of_work_1 = $request->length_of_work_1;
-        $model->last_salary_1 = $request->last_salary_1;
-        $model->reason_stop_1 = $request->reason_stop_1;
-
-        $model->company_name_2 = $request->company_name_2;
-        $model->position_2 = $request->position_2;
-        $model->length_of_work_2 = $request->length_of_work_2;
-        $model->last_salary_2 = $request->last_salary_2;
-        $model->reason_stop_2 = $request->reason_stop_2;
-
-        $model->language_skill_1 = $request->language_skill_1;
-        $model->language_skill_2 = $request->language_skill_2;
-        $model->language_skill_3 = $request->language_skill_3;
-
-        $model->computer_skill = $request->computer_skill;
-        $model->placement = $request->placement;
-        $model->salary_expected = $request->salary_expected;
-
-        $model->status = '1';
+        $model->phone_number1 = $request->phone_number1;
+        $model->email = $request->email;
+        $model->e_contact = $request->e_contact;
+        $model->relation = $request->relation;
+        $model->status_tab_0 = 1;
         $saved = $model->save();
+        $data = [
+            'success' => 'Data has been saved!',
+            'current_tab' => $request->tabNum,
+        ];
+
 
         if ($saved) {
-            return redirect('/form_filled_successfully');
+            return redirect()->back()->with($data);
         } else {
             return redirect()->back()->with('error', 'Data has been failed to save!');
         }

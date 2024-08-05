@@ -3,9 +3,30 @@ $(document).ready(function () {
     //     $(this).find('button[type="submit"]').prop("disabled", true);
     // });
 
-    $('.format-number').on('keyup', function() {
+    // $(document).on('click', '.close-modal', function(){
+    //     setTimeout(() => {
+    //         $(".modal-backdrop").remove();
+    //     }, 2000);
+
+    // });
+
+    $(document).on("click", "button, a", function () {
+        setTimeout(() => {
+            if ($(this).attr("data-bs-target")) {
+                if ($(document).find(".modal-backdrop").length > 1) {
+                    $(document)
+                        .find(".modal-backdrop")
+                        .slice(1)
+                        .toggleClass("modal-backdrop fade show x");
+                    $(document).find(".x").remove();
+                }
+            }
+        }, 600);
+    });
+
+    $(".format-number").on("keyup", function () {
         var selection = window.getSelection().toString();
-        if (selection !== '') {
+        if (selection !== "") {
             return;
         }
         // When the arrow keys are pressed, abort.
@@ -17,8 +38,8 @@ $(document).ready(function () {
         var input = $this.val();
         var input = input.replace(/[\D\s\._\-]+/g, "");
         input = input ? parseInt(input, 10) : 0;
-        $this.val(function() {
-            return (input === 0) ? "" : input.toLocaleString("id-ID");
+        $this.val(function () {
+            return input === 0 ? "" : input.toLocaleString("id-ID");
         });
     });
 
@@ -55,7 +76,7 @@ $(document).ready(function () {
     });
 
     //  Event on change select material:start
-    $("#material").change(function () { 
+    $("#material").change(function () {
         //clear select
         $("#sub-material").empty();
         $("#sub-type").empty();
@@ -95,7 +116,7 @@ $(document).ready(function () {
         }
     });
     //  Event on change select material:end
- 
+
     //  Event on change select regency:start
     $("#sub-material").change(function () {
         //clear select
@@ -155,12 +176,16 @@ $(document).ready(function () {
             processResults: function (data) {
                 return {
                     results: $.map(data, function (item) {
-                        return [ 
+                        return [
                             {
                                 text:
-                                    "("+ item.nama_sub_material + "/" + item.type_name + ") - " + item.nama_barang,
+                                    "(" +
+                                    item.nama_sub_material +
+                                    "/" +
+                                    item.type_name +
+                                    ") - " +
+                                    item.nama_barang,
 
-                                  
                                 id: item.id,
                             },
                         ];
@@ -192,12 +217,12 @@ $(document).ready(function () {
                 type: "GET",
                 url: "/products/selectAll",
                 data: function (params) {
-                return {
-                    _token: csrf,
-                    q: params.term, // search term
-                    // c: customer_id,
-                };
-              },
+                    return {
+                        _token: csrf,
+                        q: params.term, // search term
+                        // c: customer_id,
+                    };
+                },
                 dataType: "json",
                 delay: 250,
                 processResults: function (data) {
@@ -205,8 +230,13 @@ $(document).ready(function () {
                         results: $.map(data, function (item) {
                             return [
                                 {
-                                     text:
-                                   "("+ item.nama_sub_material + "/" + item.type_name + ") - " + item.nama_barang,
+                                    text:
+                                        "(" +
+                                        item.nama_sub_material +
+                                        "/" +
+                                        item.type_name +
+                                        ") - " +
+                                        item.nama_barang,
                                     id: item.id,
                                 },
                             ];
@@ -214,7 +244,7 @@ $(document).ready(function () {
                     };
                 },
             },
-        }); 
+        });
     });
 
     $(document).on("click", ".remStock", function () {
@@ -233,6 +263,11 @@ $(document).ready(function () {
         customer_id = $(".customer-append").val();
     });
 
+    let warehouse_id = $("#warehouse").val();
+    $("#warehouse").change(function () {
+        warehouse_id = $("#warehouse").val();
+    });
+
     $(".productSo").select2({
         width: "100%",
         ajax: {
@@ -242,7 +277,7 @@ $(document).ready(function () {
                 return {
                     _token: csrf,
                     q: params.term, // search term
-                    c: customer_id,
+                    w: warehouse_id,
                 };
             },
             dataType: "json",
@@ -253,12 +288,11 @@ $(document).ready(function () {
                         return [
                             {
                                 text:
-                                    item.nama_barang +
-                                    " (" +
-                                    item.type_name +
-                                    ", " +
                                     item.nama_sub_material +
-                                    ")",
+                                    " " +
+                                    item.type_name +
+                                    " " +
+                                    item.nama_barang,
                                 id: item.id,
                             },
                         ];
@@ -297,7 +331,7 @@ $(document).ready(function () {
             url: "/stocks/cekQty/" + product_id,
             data: {
                 _token: csrf,
-                c: customer_id,
+                w: warehouse_id,
             },
             dataType: "json",
             success: function (data) {
@@ -357,7 +391,7 @@ $(document).ready(function () {
                     return {
                         _token: csrf,
                         q: params.term, // search term
-                        c: customer_id,
+                        w: warehouse_id,
                     };
                 },
                 dataType: "json",
@@ -368,12 +402,11 @@ $(document).ready(function () {
                             return [
                                 {
                                     text:
-                                        item.nama_barang +
-                                        " (" +
-                                        item.type_name +
-                                        ", " +
                                         item.nama_sub_material +
-                                        ")",
+                                        " " +
+                                        item.type_name +
+                                        " " +
+                                        item.nama_barang,
                                     id: item.id,
                                 },
                             ];

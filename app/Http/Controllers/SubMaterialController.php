@@ -6,6 +6,7 @@ use App\Models\MaterialModel;
 use App\Models\SubMaterialModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class SubMaterialController extends Controller
@@ -17,12 +18,12 @@ class SubMaterialController extends Controller
      */
     public function index()
     {
-        $title = 'Data Product Sub Material';
+        $title = ' Product Sub Material';
         $data = SubMaterialModel::join('product_materials', 'product_sub_materials.material_id', '=', 'product_materials.id')
             ->select('product_sub_materials.*', 'product_materials.nama_material')
             ->latest()
             ->get();
-        $materials = MaterialModel::latest()->get();
+        $materials = MaterialModel::oldest('nama_material')->get();
 
         return view('submaterials.index', compact('title', 'data', 'materials'));
     }
@@ -59,17 +60,31 @@ class SubMaterialController extends Controller
         $request->validate([
             'nama_sub_material' => 'required',
             'material_id' => 'required|numeric',
-            'code_sub_material' => 'required|max:3|min:2'
+            // 'code_sub_material' => 'required|max:4'
+
 
         ]);
-        $model = new SubMaterialModel();
-        $model->nama_sub_material = $request->get('nama_sub_material');
-        $model->material_id = $request->get('material_id');
-        $model->code_sub_material = $request->get('code_sub_material');
-        $model->created_by = Auth::user()->id;
-        $model->save();
+        // $checked = SubMaterialModel::where('code_sub_material', $request->get('code_sub_material'))->count();
+        // if ($checked > 0) {
+        //     return redirect('/product_sub_materials')->with('error', 'You Have Entered Duplicate Code');
+        // }
+        try {
+            DB::beginTransaction();
+            $model = new SubMaterialModel();
+            $model->nama_sub_material = $request->get('nama_sub_material');
+            $model->material_id = $request->get('material_id');
+            // $model->code_sub_material = $request->get('code_sub_material');
+            $model->code_sub_material = '-';
 
-        return redirect('/product_sub_materials')->with('success', 'Create data sub product material ' . $model->nama_sub_material . ' is success');
+            $model->created_by = Auth::user()->id;
+            $model->save();
+
+            DB::commit();
+            return redirect('/product_sub_materials')->with('success', 'Create data sub product material ' . $model->nama_sub_material . ' is success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/product_sub_materials')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -108,16 +123,35 @@ class SubMaterialController extends Controller
         }
         $request->validate([
             'editnama_submaterial' => 'required',
-            'material_id_edit' => 'required|numeric'
+            'material_id_edit' => 'required|numeric',
+            // 'editcode_sub_material' => 'required|unique:product_sub_materials'
 
         ]);
-        $model = SubMaterialModel::find($id);
-        $model->nama_sub_material = $request->get('editnama_submaterial');
-        $model->material_id = $request->get('material_id_edit');
-        $model->code_sub_material = $request->get('editcode_sub_material');
-        $model->created_by = Auth::user()->id;
-        $model->save();
-        return redirect('/product_sub_materials')->with('info', 'Edit data sub product material ' . $model->nama_sub_material . ' is success');
+        try {
+            DB::beginTransaction();
+            $model = SubMaterialModel::find($id);
+            // $old = $model->code_sub_material;
+            // $model->code_sub_material = '';
+            // $model->save();
+            // $checked = SubMaterialModel::where('code_sub_material', $request->get('editcode_sub_material'))->count();
+            // if ($checked > 0) {
+            //     $model->code_sub_material = $old;
+            //     $model->save();
+            //     return redirect('/product_sub_materials')->with('error', 'You Have Entered Duplicate Code');
+            // }
+
+            $model->nama_sub_material = $request->get('editnama_submaterial');
+            $model->material_id = $request->get('material_id_edit');
+            // $model->code_sub_material = $request->get('editcode_sub_material');
+            $model->created_by = Auth::user()->id;
+            $model->save();
+
+            DB::commit();
+            return redirect('/product_sub_materials')->with('info', 'Edit data sub product material ' . $model->nama_sub_material . ' is success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/product_sub_materials')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -131,8 +165,16 @@ class SubMaterialController extends Controller
         if (!Gate::allows('level1')) {
             abort(403);
         }
-        $model = SubMaterialModel::find($id);
-        $model->delete();
-        return redirect('/product_sub_materials')->with('error', 'Delete data sub product material ' . $model->nama_sub_material . ' is success');
+        try {
+            DB::beginTransaction();
+            $model = SubMaterialModel::find($id);
+            $model->delete();
+
+            DB::commit();
+            return redirect('/product_sub_materials')->with('error', 'Delete data sub product material ' . $model->nama_sub_material . ' is success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/product_sub_materials')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 }

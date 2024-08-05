@@ -83,18 +83,26 @@
                         </div>
                         <div class="form-group">
                             <label>Password</label>
-                            <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="icon-lock"></i></span>
+                                <input type="password" id="pw"
+                                    class="form-control @error('password') is-invalid @enderror" name="password"
+                                    required autocomplete="current-password" placeholder="Password">
+                                <span class="btn pb-0 pt-2 px-2" id="show-pw"><i data-feather="eye"
+                                        class="fs-5 m-0 opacity-25"></i></button>
+                            </div>
+                            {{-- <div class="input-group"><span class="input-group-text"><i class="icon-lock"></i></span>
                                 <input class="form-control @error('password') is-invalid @enderror" name="password"
                                     required autocomplete="current-password" placeholder="Password" type="password">
                                 <div class="invalid-tooltip">Please enter password.</div>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="form-group">
                             <button class="text-white btn btn-primary form-control" type="submit">Sign in</button>
                         </div>
                         <div class="login-social-title">
-                            <h5>Wellcome </h5>
+                            <h5>Welcome </h5>
                         </div>
 
                     </form>
@@ -149,6 +157,16 @@
             });
         </script>
     @endif
+
+    <script>
+        $('#show-pw').on('pointerdown', function() {
+            $('#pw').attr('type', 'text');
+        });
+
+        $('#show-pw').on('pointerup', function() {
+            $('#pw').attr('type', 'password');
+        });
+    </script>
 
 </body>
 

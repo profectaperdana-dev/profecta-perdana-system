@@ -4,15 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\ValueAddedTaxModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class ValueAddedTaxController extends Controller
 {
     public function index()
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         $all_taxes = ValueAddedTaxModel::all();
         $data = [
             'title' => 'Master Value-added Tax (PPN)',
@@ -31,10 +29,17 @@ class ValueAddedTaxController extends Controller
             'ppn' => 'required',
         ]);
 
-        $current_user = ValueAddedTaxModel::where('id', $id)->first();
-        $current_user->ppn = $validated_data['ppn'];
-        $current_user->save();
+        try {
+            DB::beginTransaction();
+            $current_user = ValueAddedTaxModel::where('id', $id)->first();
+            $current_user->ppn = $validated_data['ppn'];
+            $current_user->save();
 
-        return redirect('/value_added_tax')->with('success', 'Value-added Tax Change Success!');
+            DB::commit();
+            return redirect('/value_added_tax')->with('success', 'Value-added Tax Change Success!');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/value_added_tax')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 }

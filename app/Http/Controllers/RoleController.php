@@ -16,7 +16,7 @@ class RoleController extends Controller
      */
     public function index()
     {
-        $all_roles = RoleModel::latest()->get();
+        $all_roles = RoleModel::oldest()->get();
         $data = [
             'title' => "Data Accounts Role",
             'roles' => $all_roles

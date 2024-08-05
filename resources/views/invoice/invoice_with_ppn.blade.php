@@ -8,23 +8,47 @@
                 can be of the full height and width !
              **/
         @page {
-            margin: 0.5cm 1cm 1cm;
-            width: 100%;
+            size: 22cm 14cm;
+            margin-top: 0.5cm;
+            margin-left: 0.5cm;
+            margin-right: 0.5cm;
+            margin-bottom: 1cm;
+            font-family: Helvetica;
         }
+
+        /* table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        } */
+
 
         /** Define now the real margins of every page in the PDF **/
         body {
-            margin-top: 5cm;
+            margin-top: 4.3cm;
             margin-left: 0cm;
             margin-right: 0cm;
-            margin-bottom: 1cm;
-            font-size: 9.5pt;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            margin-bottom: 2cm;
+            font-size: 10pt;
+            font-family: Helvetica;
         }
 
         .page-break {
-            page-break-before: always;
+            /* page-break-before: always; */
+            page-break-after: auto;
+
         }
+
+        .page-braek {
+            page-break-before: always;
+            /* page-break-after: always; */
+
+        }
+
+        /* .page-break {
+        } */
+
 
         /** Define the header rules **/
         header {
@@ -32,13 +56,13 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 5cm;
+            height: 4.2cm;
             /** Extra personal styles **/
             background-color: #ffffff;
             color: rgb(0, 0, 0);
             text-align: left;
-            font-size: 9.5pt;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-size: 10pt;
+            font-family: Helvetica;
 
             /* line-height: 1.5cm; */
         }
@@ -49,7 +73,7 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 1cm;
+            height: 1.8cm;
 
             /** Extra personal styles **/
             background-color: #ffffff;
@@ -63,79 +87,74 @@
         }
 
         #watermark {
-            position: fixed;
-
-            /**
-                    Set a position in the page for your image
-                    This should center it vertically
-                **/
-            bottom: 1cm;
-            left: 6cm;
-            opacity: 0.5;
-
-            /** Change image dimensions**/
-            width: 7cm;
-            height: 6cm;
-
-            /** Your watermark should be behind every content**/
-            z-index: -1000;
+            z-index: -1;
+            text-align: center;
+            font-size: 50pt;
+            font-weight: 700;
+            margin-top: 70pt;
+            margin-left: 40pt;
+            transform: rotate(-15);
+            color: rgb(247, 5, 5);
+            position: absolute;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
+@if ($data->isPaid == 1)
+    <div id="watermark" style="position:fixed; opacity:0.2;">
+        PAID {{ date('d M Y', strtotime($data->order_date)) }}
+    </div>
+@endif
 
 <body>
-    {{-- <div id="watermark">
-        @if ($data->isPaid == 1)
-            <img src="{{ public_path('images/paid.png') }}" height="100%" width="100%" /> jabdjhasbd
-        @endif
-    </div> --}}
-    {{-- HEADER --}}
     <header>
         <table style="width: 100%">
             <tr>
-                <td style="width: 20%"><img style="width: 100px;margin-top:15px;"
-                        src="{{ public_path('images/logo.png') }}" alt=""></td>
-                <td style="width: 34%;text-align:left">
+                <td style="width: 20%;text-align: center;"><img style="width: 120px;margin-top:0px;"
+                        src="{{ url('images/logo.png') }}" alt=""></td>
+                <td style="width: 40%;text-align:left">
                     <b>CV. Profecta Perdana</b> <br>
                     {{ $warehouse->alamat }} <br>
-                    Phone : 0713-82536
+                    Phone : {{ $warehouse->telp1 . ' / ' . $warehouse->telp2 }}
                 </td>
-                <td></td>
-                <td style="width: 5%;text-align:left">
+                {{-- <td></td> --}}
+                <td style="width: 20%;text-align:left">
+                    Date <br>
                     Invoice <br>
+                    Due Date <br>
                     Revision <br>
+
                 </td>
                 <td style="width: 20%">
+                    : {{ date('d F Y', strtotime($data->order_date)) }} <br>
                     : {{ $data->order_number }}<br>
+                    : @if ($data->payment_method == 3)
+                        {{ date('d F Y', strtotime('+30 days', strtotime($data->order_date))) }} <br>
+                    @else
+                        @if ($data->duedate != null)
+                            {{ date('d F Y', strtotime($data->duedate)) }} <br>
+                        @else
+                            - <br>
+                        @endif
+                    @endif
                     : 0<br>
                 </td>
             </tr>
             <tr>
-                <th colspan="6">
-                    <hr>
-                </th>
-            </tr>
-            <tr>
-                <th colspan="6" style="text-align: center">INVOICE
+                <th colspan="6" style="text-align: center;border-top:1px solid black ">INVOICE
 
                 </th>
             </tr>
             <tr>
-                <td colspan="3" style="width: 90%;text-align:left">Invoice To : <br>
+                <td colspan="6" style="width: 90%;text-align:left">Invoice to : <br>
                     {{ $data->customerBy->name_cust }} - {{ $data->customerBy->code_cust }} <br>
-                    {{ $data->customerBy->address_cust }} <br>
+                    {{ $data->customerBy->address_cust }} ({{ $data->customerBy->phone_cust }} /
+                    {{ $data->customerBy->office_number }}) <br>
+
                     Remarks : {{ $data->remark }}
+
                 </td>
-                <td style="width: 10%">Date <br>
-                    Due Date
-                </td>
-                <td style="text-align:left">
-                    : {{ date('d-m-Y', strtotime($data->order_date)) }} <br>
-                    : @if ($data->due_date != null)
-                        {{ date('d-m-Y', strtotime($data->due_date)) }}
-                    @else
-                        -
-                    @endif
                 </td>
             </tr>
         </table>
@@ -143,114 +162,117 @@
     {{-- END HEADER --}}
 
     {{-- FOOTER --}}
-    <footer>
-    </footer>
+
     {{-- END FOOTER --}}
 
     {{-- CONTENT --}}
     <main>
+
         <table style="width:100%;">
-            <thead style="border-bottom:1px solid black">
+            <thead style="border-top:1px solid black">
                 <tr style="">
                     <th style="text-align:center;padding:5px">No</th>
-                    <th style="text-align:left;padding:5px">Item Description</th>
-                    <th style="text-align:right;padding:5px">Price</th>
-                    <th style="text-align:right;padding:5px">Disc (%)</th>
-                    <th style="text-align:right;padding:5px">Disc (Rp)</th>
+                    <th style="text-align:center;padding:5px">Item Description</th>
+                    <th style="text-align:center;padding:5px">Price</th>
                     <th style="text-align:center;padding:5px">Qty</th>
-                    <th style="text-align:right;padding:5px;margin-right:30px";>Total</th>
+                    <th style="text-align:center;padding:5px;">Total</th>
+                    <th>&nbsp;</th>
                 </tr>
             </thead>
             <tbody>
                 @php
                     $y = 0;
+                    $total_iterations = count($data->salesOrderDetailsBy);
+                    $current_iteration = 0;
                 @endphp
                 @foreach ($data->salesOrderDetailsBy as $key => $value)
-                    {{-- @for ($i = 0; $i < 6; $i++) --}}
+                    {{-- @for ($i = 0; $i < 2; $i++) --}}
                     <?php
                     $y++;
+                    $current_iteration++;
+                    
                     ?>
+                    @php
+                        $price = $value->price;
+                        if ($value->price == null || $value->price == 0) {
+                            $ppn_cost = (float) $value->productSales->harga_jual_nonretail * (float) $ppn;
+                            $price = (float) $value->productSales->harga_jual_nonretail + $ppn_cost;
+                        }
+                        $disc = (float) $value->discount / 100.0;
+                        $disc_cost = (float) $price * $disc;
+                        $price_disc = (float) ($price - $disc_cost - $value->discount_rp);
+                        $sub_total = round(($price - $disc_cost - $value->discount_rp) * $value->qty);
+                    @endphp
                     <tr>
-                        <td style="text-align:center;padding:5px">{{ $key + 1 }}.
+                        <td style="text-align:center;">{{ $key + 1 }}.
                         </td>
-                        <td style="text-align:left;padding:5px">
+                        <td style="text-align:left;">
                             {{ $value->productSales->sub_materials->nama_sub_material }}&nbsp;
                             {{ $value->productSales->sub_types->type_name }}&nbsp;
                             {{ $value->productSales->nama_barang }}
                         </td>
-                        <td style="text-align:right;padding:5px">@currency($value->productSales->harga_jual_nonretail)</td>
-                        <td style="text-align: center">{{ $value->discount }}</td>
-                        <td style="text-align: center">{{ $value->discount_rp }}</td>
-                        <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
-                        @php
-                            $disc = $value->discount / 100;
-                            $ppn_cost = $value->productSales->harga_jual_nonretail * $ppn;
-                            $ppn_total = $value->productSales->harga_jual_nonretail + $ppn_cost;
-                            $disc_cost = $ppn_total * $disc;
-                            $sub_total = ($ppn_total - $disc_cost - $value->discount_rp) * $value->qty;
-                        @endphp
-                        <td style="text-align:right;margin-right:30px">@currency($sub_total)</td>
+                        <td style="text-align:right;">
+                            {{ number_format(round($price_disc), 0, ',', '.') }}
+                        </td>
+                        <td style="text-align:center;">{{ $value->qty }}</td>
+
+                        <td style="text-align:right;">
+                            <span
+                                style="margin-right: 60px">{{ number_format((float) $sub_total, 0, ',', '.') }}</span>
+                        </td>
+                        <td>&nbsp;</td>
                     </tr>
-                    @if ($y % 5 == 0)
-                        <div class="page-break"></div>
+                    @if ($y % 7 == 0 && $y != $total_iterations)
+                        <div class="page-braek"></div>
                     @endif
                     {{-- @endfor --}}
                 @endforeach
-                <tr>
-                    <td colspan="7" style="text-align: right">
-                        <hr>
-                    </td>
-
-                </tr>
             </tbody>
-        </table>
-        <table style="width: 100%">
-            <thead>
+            <tfoot style="border-top:1px solid black">
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td colspan="4" style="text-align: right">Total net value excl. tax</td>
-                    <td style="text-align: right">@currency($data->total)</td>
+                    <td colspan="4" style="text-align: right">Total net value excl. PPN</td>
+                    <td style="text-align: right"><span
+                            style="margin-right: 60px">{{ number_format((float) $data->total, 0, ',', '.') }}</span>
+                    </td>
                 </tr>
                 <tr>
                     <td colspan="4" style="text-align: right">PPN {{ $ppn * 100 }}%</td>
-                    <td style="text-align: right">@currency($data->ppn)</td>
-                </tr>
+                    <td style="text-align: right"><span
+                            style="margin-right: 60px">{{ number_format((float) $data->ppn, 0, ',', '.') }}</span></td>
                 </tr>
                 <tr>
                     <th colspan="4" style="text-align: right">Total Due</th>
-                    <th style="text-align: right;border:1px solid black">@currency($data->total_after_ppn)</th>
+                    <th style="text-align: right;"><span
+                            style="margin-right: 60px;border:1pt solid black;padding: 3pt">@currency($data->total_after_ppn)</span></th>
                 </tr>
-                <tr>
-                    <th colspan="4">&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <tr>
-                    <td colspan="3" style="text-align: left">Payment Method :
-                        @if ($data->payment_method == 1)
-                            Cash On Delivery <br>
-                        @elseif ($data->payment_method == 2)
-                            Cash Before Delivery <br>
-                        @else
-                            Credit with Terms of Payment <br>
-                        @endif
-                        Bank Mandiri 113-00-7779777-1 : an. CV Profecta Perdana <br>
-                        Bank BCA 853-085-3099 : an. CV Profecta Perdana <br>
-                        Thank You ! <br>
-                        We're looking forward to working with you again
-                    </td>
-                    <th colspan="2" style="text-align: left"><i>Sincerely Yours,</i></th>
-                </tr>
-            </tbody>
+            </tfoot>
         </table>
+
     </main>
+    <div class="page-break">
+
+        <footer>
+            <table class="total" style="width: 100%">
+                <tbody>
+
+                    <tr>
+                        <td colspan="3" style="text-align: left">
+                            Direct transfer to CV. Profecta Perdana <br>
+                            Bank Mandiri {{ $warehouse->rek_1 }}<br>
+                            Bank BCA {{ $warehouse->rek_2 }}<br>
+                            Thank You! We're looking forward to working with you again<br>
+
+                        </td>
+                        <th colspan="2" style="text-align: left">
+                            <p style="line-height:1.2;margin-top: -30px"><i style="padding-top:0;">Sincerely Yours,</i>
+                            </p>
+                        </th>
+                    </tr>
+
+                </tbody>
+            </table>
+        </footer>
+    </div>
     {{-- END CONTENT --}}
 
     {{-- PAGE NUMBER --}}
@@ -277,21 +299,7 @@
             ');
         }
     </script>
-    {{-- END PAGE NUMBER --}}
-    @if ($data->isPaid == 1)
-        <script type="text/php">
-        if (isset($pdf)) {
-            $pdf->page_script('
-            $height = $pdf->get_height();
-            $width = $pdf->get_width();
-            $text = "PAID "."{{ date('d-m-Y', strtotime($data->paid_date)) }}";
-            $pdf->set_opacity(.2, "Multiply");
-            $pdf->set_opacity(.2);
-            $pdf->page_text($width / 5, $height / 1.5, $text , null, 50, array(216, 0, 0), 2, 2, -15);
-            ');
-        }
-    </script>
-    @endif
+
 
 
 </body>

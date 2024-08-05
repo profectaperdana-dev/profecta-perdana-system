@@ -1,278 +1,218 @@
-<div class="row text-dark">
+<div class="row">
     <div class="col-sm-14 col-md-12 col-lg-12">
-        <div class="ribbon-wrapper card">
+        <div class="shadow card">
             <div class="card-body">
-                <div class="ribbon ribbon-clip ribbon-primary">Information Claim</div>
-                <div class="row form-group col-md-12" style="color: black !important">
-                    {{-- customer --}}
-                    <div class="col-lg-12 col-md-12 form-group">
-                        <label>Customer</label>
-                        <select name="customer_id" id="cust" required class="form-select select2">
-                            <option value="" selected>-Choose Customer-</option>
-                            <option value="Other Customer">Other Customer</option>
-                            @foreach ($customer as $row)
-                                <option value="{{ $row->code_cust }} - {{ $row->name_cust }}">
-                                    {{ $row->code_cust }} - {{ $row->name_cust }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div hidden id="other_name" class="col-lg-4 col-md-12 form-group">
-                        <label for="">Sub Customer Name/Phone/Email</label>
-                        {{-- Sub Name Customer --}}
-                        <input name="sub_name" type="text" required class="form-control text-capitalize fw-bold"
-                            placeholder="Enter Name" aria-label="Username">
-                        {{-- End Sub Name Customer --}}
-                    </div>
-                    <div hidden id="other_phone" class="col-lg-4 col-md-12 form-group">
-                        <label for="">&nbsp;</label>
-                        {{-- SUb Phone Customer --}}
-                        <input name="sub_phone" number data-v-min-length="9" data-v-max-length="13" type="text"
-                            required class="form-control fw-bold " placeholder="Enter Phone" aria-label="Server">
-                        {{-- End Sub Phone Customer --}}
-                    </div>
-                    <div hidden id="other_email" class="col-lg-4 col-md-12 form-group">
-                        <label for="">&nbsp;</label>
-                        {{-- SUb email Customer --}}
-                        <input name="sub_email" type="email" class="form-control fw-bold "
-                            placeholder="Email is Optional" aria-label="Server">
-                        <small class="text-primary">*e-mail is optional</small>
-                        {{-- End Sub email Customer --}}
-                    </div>
-                    {{-- End Customer --}}
-                    {{-- Product --}}
-                    <div class="col-lg-12 col-md-12 form-group">
+                <div class="row mb-3 col-md-12" style="color: black !important">
+                    <div class="col-lg-6 col-md-12 mb-3">
                         <label>Battery Type </label>
-                        <select name="product_id" id="product_id" required class="form-select select2">
-                            <option value="" selected>-Choose Battery-</option>
+                        <select multiple name="product_id" required class="form-select selectMulti">
                             @foreach ($product as $row)
-                                <option value="{{ $row->id }}"
-                                    data-material="{{ $row->sub_materials->nama_sub_material }}"
-                                    data-type_material="{{ $row->sub_types->type_name }}"
-                                    data-parent_material="{{ $row->materials->nama_material }}">
-                                    ({{ $row->sub_materials->nama_sub_material }}/{{ $row->sub_types->type_name }})
-                                    - {{ $row->nama_barang }}
+                                <option value="{{ $row->id }}">
+                                    {{ $row->sub_materials->nama_sub_material }} {{ $row->sub_types->type_name }}
+                                    {{ $row->nama_barang }}
                                 </option>
                             @endforeach
-                            <input type="hidden" name="material" id="material">
-                            <input type="hidden" name="type_material" id="type_material">
-                            <input type="hidden" name="parent_material" id="parent_material">
                         </select>
                     </div>
-                    {{-- End Product --}}
+                    <div class="col-lg-6 col-12  mb-3">
+                        <label>Product Code</label>
+                        <input type="text" placeholder="Enter Product Code" required
+                            class="form-control text-uppercase" name="product_code">
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-3">
+                        <label>Voltage</label>
+                        <input required type="text" placeholder="Enter Voltage" class="form-control"
+                            name="e_voltage">
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-3">
+                        <label>CCA</label>
+                        <input required type="text" placeholder="Enter CCA" class="form-control" name="e_cca">
+                    </div>
+                    <div class="col-lg-3  col-md-12 mb-3">
+                        <label>Starting</label>
+                        <input required type="text" placeholder="Enter Starting" class="form-control"
+                            name="e_starting">
+                    </div>
+                    <div class="col-lg-3 col-md-12 mb-3">
+                        <label>Charging</label>
+                        <input required type="text" placeholder="Enter Charging" class="form-control"
+                            name="e_charging">
+                    </div>
 
-                    {{-- Information Car --}}
-                    <div class="col-12 col-md-4  form-group">
-                        <label>Plate Number</label>
-                        <input type="text" placeholder="Enter Plat Number" required
-                            class="form-control text-uppercase " name="plate_number">
+                    <div class="col-lg-12 col-md-12 mb-3">
+                        <label>Diagnostic :<span class="text-danger" style="font-size: 9pt">
+                                *Please check diagnostic
+                                suitably</span>
+                        </label>
                     </div>
-                    <div class="col-12 col-md-4  form-group">
-                        <label>Car Brands</label>
-                        <select name="car_brand_id" id="brand" required class="form-control select2">
-                            <option value="" selected>-Choose Car Brands-</option>
-                            @foreach ($brand as $value)
-                                <option value="{{ $value->id }}">
-                                    {{ $value->car_brand }}</option>
-                            @endforeach
-                        </select>
+                    <div class="row" style="font-size: 9pt" data-checkbox-group data-v-min-select="1"
+                        data-v-required>
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="d-block" for="chk-ani">
+                                <input class="checkbox_animated" id="chk-ani" type="checkbox" value="Starting problem"
+                                    name="diagnosa[]">
+                                Starting problem
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+
+                            <label class="d-block" for="chk-ani1">
+                                <input class="checkbox_animated" id="chk-ani1" type="checkbox" name="diagnosa[]"
+                                    value="Charging Problem">
+                                Charging Problem
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="d-block" for="chk-ani2">
+                                <input class="checkbox_animated" id="chk-ani2" type="checkbox" name="diagnosa[]"
+                                    value="Current Leakage">
+                                Current Leakage
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="d-block" for="chk-ani3">
+                                <input class="checkbox_animated" id="chk-ani3" type="checkbox" name="diagnosa[]"
+                                    value="Forgot to turn off the vehicle electricity">
+                                Forgot to turn off the vehicle electricity
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+
+                            <label class="d-block" for="chk-ani4">
+                                <input class="checkbox_animated" id="chk-ani4" type="checkbox" name="diagnosa[]"
+                                    value="Loose or dirty battery fastener">
+                                Loose or dirty
+                                battery fastener
+                            </label>
+                        </div>
+
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="d-block" for="chk-ani5">
+                                <input class="checkbox_animated" id="chk-ani5" type="checkbox" Ignition problem
+                                    name="diagnosa[]" value="Ignition problem">
+                                Ignition problem
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+
+                            <label class="d-block" for="chk-ani6">
+                                <input class="checkbox_animated" id="chk-ani6" type="checkbox" name="diagnosa[]"
+                                    value="Negative Cable is non standard">
+                                Negative Cable is non standard
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="d-block" for="chk-ani7">
+                                <input class="checkbox_animated" id="chk-ani7" type="checkbox" name="diagnosa[]"
+                                    value="Broken or damaged battery">
+                                Broken or damaged battery
+                            </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="d-block" for="chk-ani8">
+                                <input class="checkbox_animated" id="chk-ani8" type="checkbox" name="diagnosa[]"
+                                    value="Product defects">
+                                Product defects </label>
+                        </div>
+                        <div class="col-lg-6 col-md-12 mb-3">
+                            <label class="d-block" for="chk-ani9">
+                                <input class="checkbox_animated" id="cekDiagnosa" type="checkbox" check
+                                    value="">
+                                Other Diagnostic
+                            </label>
+
+                        </div>
+                        <div hidden class="col-lg-12 col-md-12 mb-3" id="otherDiagnosa">
+                            <input type="text" class="form-control reqdiag" placeholder="Enter other diagnosa"
+                                name="other_diagnosa" required>
+                        </div>
                     </div>
-                    <div class="col-12 col-md-4  form-group">
-                        <label>Car Type</label>
-                        <select name="car_type_id" id="carType" required class="form-select select2 ">
-                            <option value="" selected>-Choose Car Brands-</option>
-                        </select>
+                    <div class="animate-chk row" style="font-size: 9pt">
+                        <div class="col-6 col-lg-6 mb-3">
+                            <label class="d-block" for="edo-ani">
+                                <input required class="radio_animated" id="edo-ani" value="Annual Leave"
+                                    type="radio" name="select_necess">Lended
+
+                            </label>
+                        </div>
+                        <div class="col-6 col-lg-6 mb-3">
+                            <label class="d-block" for="edo-ani1">
+                                <input class="radio_animated" id="edo-ani1" value="Special Leave" type="radio"
+                                    name="select_necess">Not Lended
+                            </label>
+                        </div>
                     </div>
-                    {{-- End Information Car --}}
+                    <div id="lended" hidden>
+                        <div class="row">
+                            @if ($user_warehouse->count() == 1)
+                                <div class="col-12 col-lg-6 mb-3">
+                                    <label>Warehouse</label>
+                                    <select name="loan_warehouses" class="form-control warehouse" required>
+                                        <option value="{{ $user_warehouse->first()->id }}" selected>{{ $user_warehouse->first()->warehouses }}</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-12 mb-3">
+                                    <label>Lended Battery</label>
+                                    <select name="loan_product_id" class="form-select batLend multiSelect" multiple
+                                        required>
+
+                                    </select>
+                                </div>
+                            @else
+                                <div class="col-12 col-lg-6 mb-3">
+                                    <label>Warehouse</label>
+                                    <select multiple name="loan_warehouses" class="form-control warehouse" required>
+                                        @foreach ($user_warehouse as $item)
+                                            <option value="{{ $item->id }}">{{ $item->warehouses }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <div class="col-lg-6 col-12 mb-3">
+                                    <label>Lended Battery</label>
+                                    <select name="loan_product_id" class="form-select batLend multiSelect" multiple
+                                        required>
+
+                                    </select>
+                                </div>
+                            @endif
+                        </div>
+
+                    </div>
+                    {{-- end loaned battery --}}
+                </div>
+                <div class="col-lg-12 col-md-12 mb-3">
+                    <label for="">Cost</label>
+                    <input type="text" required class="form-control text-capitalize fw-bold cost"
+                        placeholder="Enter Cost" aria-label="Username" autocomplete="off">
+                    <input type="hidden" name="cost">
+                </div>
+                <div class="col-lg-12 col-md-12 mb-3">
+                    <label>Claim Evidence</label>
+                    <input type="file" class="form-control" required name="gambar" id="inputreference">
 
                 </div>
-            </div>
-        </div>
-        {{-- CLAIM FORM --}}
-        <div class="col-sm-14 col-md-12 col-lg-12" style="color: black !important">
-            <div class="ribbon-wrapper card">
-                <div class="card-body">
-                    <div class="col-lg-12 col-md-12 form-group">
-                        <h5 class="text-center"><span class="bg-primary text-white form-control"><strong>BATTERY
-                                    COMPLAINT FORM</strong>
-                            </span> </h5>
+                <div class="form-row">
+                    <div class="mb-3 col-md-4 offset-md-4 text-center">
+                        <label id="previewLabel" hidden>Preview Image</label>
+                        <img src="#" id="previewimg" class="img-fluid shadow-lg" style="width:350px;"
+                            hidden />
                     </div>
-                    <div class="ribbon ribbon-clip ribbon-warning">Early Checking</div>
-                    <div class="col-md-12">
-                        {{-- FORM CLAIM Battery --}}
-                        <div class="form-group row font-weight-bold">
-
-                            <div class="col-lg-3 col-md-12 form-group">
-                                <label>Voltage</label>
-                                <input data-v-min="1" required type="text" placeholder="Enter Voltage"
-                                    class="form-control" name="e_voltage">
-
-                            </div>
-                            <div class="col-lg-3 col-md-12 form-group">
-                                <label>CCA</label>
-                                <input data-v-min="1" required type="text" placeholder="Enter CCA"
-                                    class="form-control" name="e_cca">
-
-                            </div>
-
-                            <div class="col-lg-3  col-md-12 form-group">
-                                <label>Starting</label>
-                                <input data-v-min="1" required type="text" placeholder="Enter Starting"
-                                    class="form-control" name="e_starting">
-
-                            </div>
-                            <div class="col-lg-3 col-md-12 form-group">
-                                <label>Charging</label>
-                                <input data-v-min="1" required type="text" placeholder="Enter Charging"
-                                    class="form-control" name="e_charging">
-
-                            </div>
-                            <div class="row" data-checkbox-group data-v-min-select="1" data-v-required>
-                                <div class="col-lg-12 col-md-12 form-group">
-                                    <label>Diagnostic :<span class="text-danger">
-                                            *Please checklist diagnostic
-                                            suitably</span>
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-                                    <label class="d-block" for="chk-ani">
-                                        <input class="checkbox_animated" id="chk-ani" type="checkbox"
-                                            value="Starting problem" name="diagnosa[]">
-                                        Starting problem
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-
-                                    <label class="d-block" for="chk-ani3">
-                                        <input class="checkbox_animated" id="chk-ani3" type="checkbox"
-                                            name="diagnosa[]" value="Charging Problem">
-                                        Charging Problem
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-                                    <label class="d-block" for="chk-ani1">
-                                        <input class="checkbox_animated" id="chk-ani1" type="checkbox"
-                                            name="diagnosa[]" value="Current Leakage">
-                                        Current Leakage
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-                                    <label class="d-block" for="chk-ani2">
-                                        <input class="checkbox_animated" id="chk-ani2" type="checkbox"
-                                            name="diagnosa[]" value="Forgot to turn off the vehicle electricity">
-                                        Forgot to turn off the vehicle electricity
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-
-                                    <label class="d-block" for="chk-ani3">
-                                        <input class="checkbox_animated" id="chk-ani3" type="checkbox"
-                                            name="diagnosa[]" value="Loose or dirty battery fastener">
-                                        Loose or dirty
-                                        battery fastener
-                                    </label>
-                                </div>
-
-                                <div class="col-lg-6 col-md-12 form-group">
-
-                                    <label class="d-block" for="chk-ani3">
-                                        <input class="checkbox_animated" id="chk-ani3" type="checkbox" Ignition
-                                            problem name="diagnosa[]" value="Ignition problem">
-                                        Ignition problem
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-
-                                    <label class="d-block" for="chk-ani3">
-                                        <input class="checkbox_animated" id="chk-ani3" type="checkbox"
-                                            name="diagnosa[]" value="Negative Cable is non standard or damaged">
-                                        Negative Cable is non standard or damaged
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-                                    <label class="d-block" for="chk-ani3">
-                                        <input class="checkbox_animated" id="chk-ani3" type="checkbox"
-                                            name="diagnosa[]" value="Broken or damaged battery">
-                                        Broken or damaged battery
-                                    </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-                                    <label class="d-block" for="chk-ani3">
-                                        <input class="checkbox_animated" id="chk-ani3" type="checkbox"
-                                            name="diagnosa[]" value="Product defects">
-                                        Product defects </label>
-                                </div>
-                                <div class="col-lg-6 col-md-12 form-group">
-                                    <label class="d-block" for="chk-ani2">
-                                        <input class="checkbox_animated" id="cekDiagnosa" type="checkbox" check
-                                            value="">
-                                        Other Diagnosa
-                                    </label>
-
-                                </div>
-                                <div hidden class="col-lg-12 col-md-12 form-group" id="otherDiagnosa">
-                                    <input type="text" class="form-control reqdiag"
-                                        placeholder="Enter other diagnosa" name="other_diagnosa" required>
-                                </div>
-                            </div>
-                            {{-- loaned battery --}}
-                            <div class="col-lg-12 col-md-12 form-group">
-                                <label>Loaned Battery</label>
-                                <select name="loan_product_id" id="" class="form-select select2" required>
-                                    <option value="">-Select Loaned Battery-</option>
-                                    @foreach ($stock as $row)
-                                        <option value="{{ $row->productBy->id }}">
-                                            ({{ $row->productBy->sub_materials->nama_sub_material }}/{{ $row->productBy->sub_types->type_name }})
-                                            - {{ $row->productBy->nama_barang }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
-                            {{-- end loaned battery --}}
-                        </div>
-                        {{-- END CLAIM Battery --}}
-
-
-
-                        {{-- FORM RECEIVED --}}
-                        <div class="col-lg-12 col-md-12 form-group">
-                            <label>Claim Evidence</label>
-                            <input type="file" class="form-control" required name="file" id="inputreference">
-
-                        </div>
-                        <div class="form-row">
-                            <div class="form-group col-md-4 offset-md-4 text-center">
-                                <label id="previewLabel" hidden>Preview Image</label>
-                                <img src="#" id="previewimg" class="img-fluid shadow-lg" style="width:350px;"
-                                    hidden />
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-12 form-group">
-                                <label class="" for="">Submitted By</label>
-                                <br />
-                                <div id="sig"></div>
-                                <br />
-                                <textarea id="signature64" name="signed" style="display: none"></textarea>
-                                <br>
-                                <button id="clear" class="btn btn-warning">Clear Signature</button>
-                            </div>
-                        </div>
-                        {{-- END FORM RECEIVED --}}
-
-                        {{-- BUTTON --}}
-                        <div class="form-group">
-                            <a class="btn btn-danger" href="{{ url('claim/') }}"> <i class="ti ti-arrow-left"> </i>
-                                Back
-                            </a>
-                            <button type="reset" class="btn btn-warning">Reset</button>
-                            <button type="submit" class="btn btn-primary">Next</button>
-                        </div>
-                        {{-- END BUTTON --}}
-
-                    </div>
+                </div>
+                <div class="col-12 mb-3">
+                    <label class="" for="">Submitted By</label>
+                    <br />
+                    <div id="sig"></div>
+                    <br />
+                    <textarea id="signature64" name="signed" style="display: none"></textarea>
+                    <br>
+                    <button id="clear" class="btn btn-warning">Clear Signature</button>
+                </div>
+                <div class="mb-3">
+                    <button type="reset" class="btn btn-warning">Reset</button>
+                    <button type="submit" class="btn btn-primary btnSubmit">Save</button>
                 </div>
             </div>
         </div>
     </div>
-    {{-- END CLAIM FORM --}}
+    {{-- CLAIM FORM --}}
 </div>

@@ -16,8 +16,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
-                        {{ $title }}
+                  
                 </div>
 
             </div>
@@ -26,7 +25,7 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>Create Data</h5>
@@ -44,30 +43,28 @@
                                     <div class="col-md-12" id="formdynamic">
                                         <div class="form-group row">
                                             <div class="form-group col-12 col-lg-12">
-                                                @if (Gate::check('isSuperAdmin') || Gate::check('isWarehouseKeeper'))
-                                                    <div class="form-group col-md-12">
-                                                        <label>Warehouse</label>
-                                                        <select name="warehouses_id"
-                                                            class="form-control role-acc @error('warehouses_id') is-invalid @enderror"
-                                                            required>
-                                                            <option value="">Choose Warehouse</option>
-                                                            @foreach ($warehouse as $warehouses)
-                                                                <option value="{{ $warehouses->id }}">
-                                                                    {{ $warehouses->warehouses }}
-                                                                    {{-- /{{ $warehouses->typeBy->name }} --}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('warehouses_id')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                @endif
+                                                <div class="form-group col-md-12">
+                                                    <label>Warehouse</label>
+                                                    <select name="warehouses_id"
+                                                        class="form-control role-acc @error('warehouses_id') is-invalid @enderror"
+                                                        required>
+                                                        <option value="">Choose Warehouse</option>
+                                                        @foreach ($warehouse as $warehouses)
+                                                            <option value="{{ $warehouses->id }}">
+                                                                {{ $warehouses->warehouses }}
+                                                                {{-- /{{ $warehouses->typeBy->name }} --}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('warehouses_id')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group row py-2 bg-primary" style="margin-top: -40px">
+                                        <div class="form-group row rounded py-2 bg-primary" style="margin-top: -40px">
                                             <div class="form-group col-12 col-lg-12">
                                                 <label>Product</label>
                                                 <select name="stockFields[0][product_id]"
@@ -109,7 +106,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>All Data</h5>
@@ -118,14 +115,14 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="example" class="display expandable-table text-capitalize table-hover"
-                                style="width:100%">
+                                                      <table id="basics" class="table display expandable-table table-striped table-sm text-capitalize" style="width:100%">
+
                                 <thead>
-                                    <tr>
-                                        <th style="width: 10%">Action</th>
+                                    <tr class="text-center">
+                                        <th >Action</th>
                                         <th>#</th>
                                         <th>Warehouse</th>
-                                        <th>Products</th>
+                                        <th>Product</th>
                                         <th>Qty</th>
 
                                     </tr>
@@ -133,7 +130,7 @@
                                 <tbody>
                                     @foreach ($data as $key => $value)
                                         <tr>
-                                            <td style="width: 10%">
+                                            <td style="width: 5%">
                                                 <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false"><i data-feather="settings"></i></a>
                                                 <div class="dropdown-menu" aria-labelledby="">
@@ -167,7 +164,7 @@
                                                                     <div class="form-group row">
                                                                         <div class="form-group col-md-12">
                                                                             <label class="font-weight-bold ">Qty Second
-                                                                                Products</label>
+                                                                                Product</label>
                                                                             <input type="number"
                                                                                 class="form-control text-capitalize {{ $errors->first('stock_') ? ' is-invalid' : '' }}"
                                                                                 name="stock_"
@@ -232,10 +229,10 @@
                                                 </div>
                                             </div>
                                             {{-- End Modal Delete UOM --}}
-                                            <td>{{ $key + 1 }}</td>
+                                            <td class="text-end" style="width: 5%">{{ $key + 1 }}</td>
                                             <td>{{ $value->warehouseStockBy->warehouses }}</td>
-                                            <td>{{ $value->productTradeBy->name_product_trade_in }}</td>
-                                            <td>{{ $value->qty }}</td>
+                                            <td class="text-center">{{ $value->productTradeBy->name_product_trade_in }}</td>
+                                            <td class="text-center">{{ $value->qty }}</td>
 
 
                                         </tr>
@@ -296,7 +293,7 @@
                 $("#addStocks").on("click", function() {
                     ++y;
                     let form =
-                        '<div class="form-group row bg-primary py-2"> <div class="form-group col-12 col-lg-12"> <label> Product </label> <select name="stockFields[' +
+                        '<div class="form-group row bg-primary rounded py-2"> <div class="form-group col-12 col-lg-12"> <label> Product </label> <select name="stockFields[' +
                         y +
                         '][product_id]"' +
                         'class="form-control all_product_TradeIn" required> <option value=""> Choose Product </option> </select>' +
@@ -342,35 +339,37 @@
                 $(document).on("click", ".remTradeIn", function() {
                     $(this).parents(".form-group").remove();
                 });
-                $('#example').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            title: 'Data Stock Profecta ',
-                            extend: 'print',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            extend: 'excel',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        'colvis'
-                    ]
-                });
-
-                // Order by the grouping
-                $('#example tbody').on('click', 'tr.group', function() {
-                    var currentOrder = table.order()[0];
-                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                        table.order([2, 'desc']).draw();
-                    } else {
-                        table.order([2, 'asc']).draw();
-                    }
-                });
+               
             });
+        </script>
+         <script>
+            $(document).ready(function() {
+               
+               var t = $('#basics').DataTable({
+                   "pageLength" : 100,
+                        dom: 'lpftrip',
+                        columnDefs: [
+                        {
+                            searchable: false,
+                            orderable: false,
+                            targets: 0,
+                        },{
+                            searchable: false,
+                            orderable: false,
+                            targets: 1,
+                        },
+                    ],
+                });
+             
+                t.on('order.dt search.dt', function () {
+                    let i = 1;
+             
+                    t.cells(null, 1, { search: 'applied', order: 'applied' }).every(function (cell) {
+                        this.data(i++);
+                    });
+                }).draw();
+            });
+            
         </script>
     @endpush
 @endsection

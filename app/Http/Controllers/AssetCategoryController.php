@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\AssetCategoryModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class AssetCategoryController extends Controller
@@ -18,7 +19,7 @@ class AssetCategoryController extends Controller
     {
         $all_asset_categories = AssetCategoryModel::latest()->get();
         $data = [
-            'title' => 'Asset Category Data',
+            'title' => 'Master Asset Category',
             'asset_categories' => $all_asset_categories
         ];
 
@@ -47,14 +48,20 @@ class AssetCategoryController extends Controller
             'name' => 'required',
             'code' => 'required|unique:asset_categories|max:3'
         ]);
+        try {
+            DB::beginTransaction();
+            $model = new AssetCategoryModel();
+            $model->name = $request->name;
+            $model->code = $request->code;
+            $model->created_by = Auth::user()->id;
+            $model->save();
 
-        $model = new AssetCategoryModel();
-        $model->name = $request->name;
-        $model->code = $request->code;
-        $model->created_by = Auth::user()->id;
-        $model->save();
-
-        return redirect('/asset_category')->with('success', 'Asset Category Add Success');
+            DB::commit();
+            return redirect('/asset_category')->with('success', 'Asset Category Add Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/asset_category')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -95,11 +102,18 @@ class AssetCategoryController extends Controller
             'name_edit' => 'required',
         ]);
 
-        $selected_category = AssetCategoryModel::where('id', $id)->firstOrFail();
-        $selected_category->name = $request->name_edit;
-        $selected_category->save();
+        try {
+            DB::beginTransaction();
+            $selected_category = AssetCategoryModel::where('id', $id)->firstOrFail();
+            $selected_category->name = $request->name_edit;
+            $selected_category->save();
 
-        return redirect('/asset_category')->with('success', 'Asset Category Edit Success');
+            DB::commit();
+            return redirect('/asset_category')->with('success', 'Asset Category Edit Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/asset_category')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -113,8 +127,16 @@ class AssetCategoryController extends Controller
         if (!Gate::allows('level1')) {
             abort(403);
         }
-        AssetCategoryModel::where('id', $id)->delete();
 
-        return redirect('/asset_category')->with('error', 'Asset Category Delete Success');
+        try {
+            DB::beginTransaction();
+            AssetCategoryModel::where('id', $id)->delete();
+
+            DB::commit();
+            return redirect('/asset_category')->with('error', 'Asset Category Delete Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/asset_category')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 }

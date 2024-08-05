@@ -21,4 +21,8 @@ class WarehouseModel extends Model
     {
         return $this->hasOne(WarehouseTypeModel::class, 'id', 'type');
     }
+    public function areaBy()
+    {
+        return $this->hasOne(CustomerAreaModel::class, 'id', 'id_area')->withTrashed();
+    }
 }

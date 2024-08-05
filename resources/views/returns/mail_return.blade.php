@@ -604,20 +604,20 @@
                                                                                                         $getdiskon = $value->returnBy->salesOrderBy->salesOrderDetailsBy;
                                                                                                         foreach ($getdiskon as $dis) {
                                                                                                             if ($dis->products_id == $value->product_id) {
-                                                                                                                $diskon = $dis->discount / 100;
-                                                                                                                $diskon_rp = $dis->discount_rp;
+                                                                                                                (float) ($diskon = $dis->discount / 100);
+                                                                                                                (float) ($diskon_rp = $dis->discount_rp);
                                                                                                             }
                                                                                                         }
-                                                                                                        $hargaDiskon = $value->productBy->harga_jual_nonretail * $diskon;
-                                                                                                        $hargaAfterDiskon = $value->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
-                                                                                                        $sub_total = $hargaAfterDiskon * $value->qty;
-                                                                                                        $ppn_total = $ppn * $sub_total;
-                                                                                                        $total = $sub_total + $ppn_total;
+                                                                                                        $hargaDiskon = (float) $value->productBy->harga_jual_nonretail * (float) $diskon;
+                                                                                                        $hargaAfterDiskon = (float) $value->productBy->harga_jual_nonretail - (float) $hargaDiskon - (float) $diskon_rp;
+                                                                                                        $sub_total = (float) $hargaAfterDiskon * $value->qty;
+                                                                                                        $ppn_total = (float) $ppn * (float) $sub_total;
+                                                                                                        $total = (float) $sub_total + (float) $ppn_total;
                                                                                                     @endphp
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="right"
                                                                                                         valign="top">
-                                                                                                        {{ number_format($total, 0, ',', '.') }}
+                                                                                                        {{ number_format((float) $total, 0, ',', '.') }}
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 {{-- @endfor --}}
@@ -634,7 +634,7 @@
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
-                                                                                                    {{ number_format($data->total, 0, ',', '.') }}
+                                                                                                    {{ number_format((float) $data->total, 0, ',', '.') }}
                                                                                                 </th>
                                                                                             </tr>
                                                                                         </tfoot>

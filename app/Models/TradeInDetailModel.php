@@ -19,4 +19,8 @@ class TradeInDetailModel extends Model
     {
         return $this->belongsTo(TradeInModel::class, 'trade_in_id', 'id');
     }
+    public function priceBy()
+    {
+        return $this->hasMany(ProductCostSecondModel::class, 'id_product_trade_in', 'product_trade_in');
+    }
 }

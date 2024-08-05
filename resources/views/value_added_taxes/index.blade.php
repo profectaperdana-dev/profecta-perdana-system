@@ -9,8 +9,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
-                        {{ $title }}
+                    
                 </div>
 
             </div>
@@ -19,9 +18,9 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-7">
+            <div class="col-sm-5">
                 <div class="card">
-                    <div class="card-header pb-0">
+                    <div class="card-header">
                         <h5>Change Data</h5>
                         <hr class="bg-primary">
                     </div>
@@ -58,7 +57,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-5">
+            <div class="col-sm-7">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>All Data</h5>
@@ -69,9 +68,9 @@
                         <div class="table-responsive">
                             <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center">
                                         <th>#</th>
-                                        <th>Value-added Tax Value (%)</th>
+                                        <th>PPN</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -94,5 +93,18 @@
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script>
+            $(document).on('submit', 'form', function() {
+                // console.log('click');
+                var form = $(this);
+                var button = form.find('button[type="submit"]');
+                // console.log(form.html());
+
+                if (form[0].checkValidity()) { // check if form has input values
+                    button.prop('disabled', true);
+
+                }
+            });
+        </script>
     @endpush
 @endsection

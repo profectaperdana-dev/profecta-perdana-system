@@ -1,10 +1,8 @@
 @extends('layouts.master')
 @section('content')
     @push('css')
-        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
-            rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+        <link rel="stylesheet" type="text/css" href={{ url('css/jquery.signature.css') }}>
+        @include('report.style')
         <style>
             .kbw-signature {
                 width: 100%;
@@ -23,8 +21,6 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold"> {{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create Claim
-                        {{ $title }}</h6>
                 </div>
 
             </div>
@@ -32,53 +28,130 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-        <div class="row">
+        {{--  action="{{ url('claim/' . $data->id . '/store/prior') }} --}}
 
-            <form class="needs-validation" novalidate method="post" action="{{ url('claim/') }}"
-                enctype="multipart/form-data">
-                @csrf
-                @include('claim._form_early')
-            </form>
+        <form class="needs-validation priorClaim" novalidate method="POST" enctype="multipart/form-data">
+            @csrf
+            @include('claim._form_early')
 
-        </div>
+        </form>
+
     </div>
     <!-- Container-fluid Ends-->
     @push('scripts')
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
-        <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js/jquery.signature.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script>
-            $(document).ready(function() {
-                // SELECT2
-                $('.select2').select2({
-
-                    width: '100%'
+            $(function() {
+                let validator = $('form.needs-validation').jbvalidator({
+                    errorMessage: true,
+                    successClass: false,
+                    language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
                 });
 
-                // customer
-
-                $('#cust').change(function() {
-                    var val_cust = $('#cust').val();
-                    if (val_cust == 'Other Customer') {
-                        $('#other_name').attr('hidden', false);
-                        $('#other_phone').attr('hidden', false);
-                        $('#other_email').attr('hidden', false);
-                    } else if (val_cust != '') {
-                        $('#other_name').attr('hidden', false);
-                        $('#other_phone').attr('hidden', false);
-                        $('#other_email').attr('hidden', false);
-
-                    } else {
-                        $('#other_name').attr('hidden', true);
-                        $('#other_phone').attr('hidden', true);
-                        $('#other_email').attr('hidden', true);
-
+                //custom validate methode
+                validator.validator.custom = function(el, event) {
+                    if ($(el).is('[name=signed]') && $(el).val().length < 1) {
+                        return "<span class='text-danger'>Please don't leave the signature form blank </span>";
                     }
+                }
+                //reload instance after dynamic element is added
+                validator.reload();
+
+                // SIGNATURE
+                var sig = $('#sig').signature({
+                    syncField: '#signature64',
+                    syncFormat: 'PNG',
+                });
+                // CLEAR SIGNATURE
+                $('#clear').click(function(e) {
+                    e.preventDefault();
+                    sig.signature('clear');
+                    $("#signature64").val('');
+                });
+            });
+            $(document).ready(function() {
+                let csrf = $('meta[name="csrf-token"]').attr("content");
+                $('.selectMulti,.warehouse').select2({
+                    placeholder: 'Select an option',
+                    allowClear: true,
+                    maximumSelectionLength: 1,
+                    width: '100%',
                 });
 
+                $('.cost').on('input', function(event) {
+                    var selection = window.getSelection().toString();
+                    if (selection !== '') {
+                        return;
+                    }
+                    // When the arrow keys are pressed, abort.
+                    if ($.inArray(event.keyCode, [38, 40, 37, 39]) !== -1) {
+                        return;
+                    }
+                    var $this = $(this);
+                    // Get the value.
+                    var input = $this.val();
+                    input = input.replace(/[\D\s\._\-]+/g, "");
+                    input = input ? parseInt(input, 10) : 0;
+                    $this.val(function() {
+                        return input.toLocaleString("EN-en");
+                    });
+                    $this.next().val(input);
+                });
+                let warehouse = $('.warehouse').val();
+                $('.warehouse').change(function() {
+                    warehouse = $(this).val();
+                });
+
+                $('.batLend').select2({
+                    allowClear: true,
+                    maximumSelectionLength: 1,
+                    width: '100%',
+                    placeholder: 'Select Loaned Battery',
+                    ajax: {
+                        type: "GET",
+                        url: "/claim/selectProduct",
+                        data: function(params) {
+                            return {
+                                _token: csrf,
+                                q: params.term, // search term
+                                w: warehouse
+                            };
+                        },
+                        dataType: "json",
+                        delay: 250,
+                        processResults: function(data) {
+                            return {
+                                results: $.map(data, function(item) {
+                                    return [{
+                                        text: item.nama_sub_material + " " +
+                                            item.type_name + " " + item.nama_barang + " " +
+                                            "(" + item.stock + ")",
+                                        id: item.id,
+                                    }, ];
+                                }),
+                            };
+                        },
+                    },
+                });
+            });
+            $(document).ready(function() {
+                let csrf = $('meta[name="csrf-token"]').attr("content");
+                $('#edo-ani,#edo-ani1').on('change', function() {
+                    let lended = $(this).val();
+                    if (lended == 'Annual Leave') {
+                        $('#lended').attr('hidden', false);
+                        $('.warehouse').attr('required', true);
+                        $('.batLend').attr('required', true);
+                    } else {
+                        $('#lended').attr('hidden', true);
+                        $('.warehouse').attr('required', false);
+                        $('.batLend').attr('required', false);
+                    }
+                })
 
 
                 // OTHER DIAGNOSE
@@ -95,77 +168,6 @@
 
                     }
                 });
-                // PRODUCT
-                $('#accu_claims').hide();
-                $(document).on('change', '#product_id', function() {
-                    var material = $(this).find('option:selected').attr('data-material');
-                    var type_material = $(this).find('option:selected').attr('data-type_material');
-                    var parent_material = $(this).find('option:selected').attr('data-parent_material');
-                    $('#material').val(material);
-                    $('#type_material').val(type_material);
-                    $('#parent_material').val(parent_material);
-                    if (parent_material == 'Battery') {
-                        $('#accu_claims').show();
-                    } else {
-                        $('#accu_claims').hide();
-                    }
-                });
-                // CHOOSE CAR
-                $("#brand").change(function() {
-                    //clear select
-                    $("#carType").empty();
-                    //set id
-                    let host = window.location.host;
-                    let brand_id = $("#brand").val();
-                    let csrf = $('meta[name="csrf-token"]').attr("content");
-                    if (brand_id) {
-                        $("#carType").select2({
-                            width: "100%",
-                            ajax: {
-                                type: "GET",
-                                url: "/car_brand/select/" + brand_id,
-                                data: function(params) {
-                                    return {
-                                        _token: csrf,
-                                        q: params.term, // search term
-                                    };
-                                },
-                                dataType: "json",
-                                delay: 250,
-                                processResults: function(data) {
-                                    return {
-                                        results: $.map(data, function(item) {
-                                            return {
-                                                text: item.car_type,
-                                                id: item.id,
-                                            };
-                                        }),
-                                    };
-                                },
-                            },
-                        });
-                    } else {
-                        $("#carType").empty();
-                    }
-                });
-
-                // SIGNATURE
-                var sig = $('#sig').signature({
-                    syncField: '#signature64',
-                    syncFormat: 'PNG',
-                });
-                // SELECT2
-                $('.receipt').select2({
-                    placeholder: '-Select Method-',
-                    allowClear: true
-                });
-                // CLEAR SIGNATURE
-                $('#clear').click(function(e) {
-                    e.preventDefault();
-                    sig.signature('clear');
-                    $("#signature64").val('');
-                });
-
                 //    PREVIEW IMAGE
                 const imgInput = document.getElementById('inputreference');
                 const imgEl = document.getElementById('previewimg');
@@ -182,26 +184,48 @@
                     }
                 });
             });
-        </script>
-        <script>
-            $(function() {
 
-                let validator = $('form.needs-validation').jbvalidator({
-                    errorMessage: true,
-                    successClass: true,
-                    language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
-                });
-                //custom validate methode
-                validator.validator.custom = function(el, event) {
-                    if ($(el).is('[name=signed]') && $(el).val().length < 1) {
-                        return "<span class='text-danger'>Please don't leave the signature form blank </span>";
+
+            $(document).on('submit', '.priorClaim', function(event) {
+                // console.log('ok');
+                event.preventDefault();
+                var form_data = new FormData($(this)[0]);
+                var formElement = $(this);
+                var id = `{{ $data->id }}`;
+                let url = `{{ url('claim/final/check') }}`;
+                $.ajax({
+                    url: `{{ url('claim/${id}/store/prior') }}`,
+                    type: "POST",
+                    dataType: "json",
+                    data: form_data,
+                    processData: false, // prevent jQuery from processing the data
+                    contentType: false, // prevent jQuery from setting the content type
+                    beforeSend: function() {
+                        $('.btnSubmit').attr('disabled', true);
+                        $('.btnSubmit').html(
+                            `<i class="fa fa-spinner fa-spin"></i> Processing...`
+                        );
+                    },
+                    success: function(response) {
+                        console.log(form_data);
+                        swal("Success !", response.message, "success", {
+                            button: "Close",
+                        });
+                        $('#cust').val(null).trigger('change');
+                        formElement[0].reset();
+                        window.location.href = url;
+
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        swal("Error !", 'Error : Please call your Most Valuable IT Team. ', "error", {
+                            button: "Close",
+                        });
+                    },
+                    complete: function() { // menambahkan fungsi complete untuk mengubah tampilan tombol kembali ke tampilan semula
+                        $('.btnSubmit').attr('disabled', false);
+                        $('.btnSubmit').html('Save');
                     }
-                }
-
-
-
-                //reload instance after dynamic element is added
-                validator.reload();
+                });
             })
         </script>
     @endpush

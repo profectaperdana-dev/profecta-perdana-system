@@ -26,7 +26,7 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <div class="col-sm-5">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>Create Data</h5>
@@ -46,27 +46,25 @@
                                     <div class="col-md-12" id="formdynamic">
                                         <div class="form-group row">
                                             <div class="form-group col-md-12">
-                                                @if (Gate::check('isSuperAdmin') || Gate::check('isWarehouseKeeper'))
-                                                    <div class="form-group col-md-12">
-                                                        <label>Warehouse</label>
-                                                        <select name="warehouses_id"
-                                                            class="form-control role-acc @error('warehouses_id') is-invalid @enderror"
-                                                            required>
-                                                            <option value="">Choose Warehouse</option>
-                                                            @foreach ($warehouse as $warehouses)
-                                                                <option value="{{ $warehouses->id }}">
-                                                                    {{ $warehouses->warehouses }}
-                                                                    {{-- /{{ $warehouses->typeBy->name }} --}}
-                                                                </option>
-                                                            @endforeach
-                                                        </select>
-                                                        @error('warehouses_id')
-                                                            <div class="invalid-feedback">
-                                                                {{ $message }}
-                                                            </div>
-                                                        @enderror
-                                                    </div>
-                                                @endif
+                                                <div class="form-group col-md-12">
+                                                    <label>Warehouse</label>
+                                                    <select name="warehouses_id"
+                                                        class="form-control role-acc @error('warehouses_id') is-invalid @enderror"
+                                                        required>
+                                                        <option value="">Choose Warehouse</option>
+                                                        @foreach ($warehouse as $warehouses)
+                                                            <option value="{{ $warehouses->id }}">
+                                                                {{ $warehouses->warehouses }}
+                                                                {{-- /{{ $warehouses->typeBy->name }} --}}
+                                                            </option>
+                                                        @endforeach
+                                                    </select>
+                                                    @error('warehouses_id')
+                                                        <div class="invalid-feedback">
+                                                            {{ $message }}
+                                                        </div>
+                                                    @enderror
+                                                </div>
                                             </div>
                                         </div>
                                         <div class="form-group row py-2 bg-primary" style="margin-top: -40px">
@@ -111,7 +109,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-7">
+            <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header pb-0">
                         <h5>All Data</h5>
@@ -235,8 +233,8 @@
                                             <td>{{ $value->warehouseBy->warehouses }}
                                                 {{-- /{{ $value->warehouseBy->typeBy->name }} --}}
                                             </td>
-                                            <td>({{ $value->productBy->sub_materials->nama_sub_material }}/{{ $value->productBy->sub_types->type_name }})
-                                                - {{ $value->productBy->nama_barang }}
+                                            <td>{{ $value->productBy->sub_materials->nama_sub_material }} {{ $value->productBy->sub_types->type_name }}
+                                                 {{ $value->productBy->nama_barang }}
                                             </td>
                                             <td>{{ $value->stock }}</td>
 

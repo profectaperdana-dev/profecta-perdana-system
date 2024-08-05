@@ -29,4 +29,14 @@ class PurchaseOrderModel extends Model
     {
         return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id')->withTrashed();
     }
+
+    public function purchaseOrderCreditsBy()
+    {
+        return $this->hasMany(PurchaseOrderCreditModel::class, 'purchase_order_id');
+    }
+
+    public function purchaseOrderReturnBy()
+    {
+        return $this->hasMany(ReturnPurchaseModel::class, 'purchase_order_id');
+    }
 }

@@ -12,19 +12,40 @@
             width: 100%;
         }
 
+
+        /* table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+        } */
+
+
         /** Define now the real margins of every page in the PDF **/
         body {
-            margin-top: 5cm;
+            margin-top: 4cm;
             margin-left: 0cm;
             margin-right: 0cm;
-            margin-bottom: 1cm;
+            margin-bottom: 4cm;
             font-size: 9.5pt;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-family: Helvetica;
         }
 
         .page-break {
-            page-break-before: always;
+            /* page-break-before: always; */
+            page-break-after: auto;
+
         }
+
+        .page-braek {
+            page-break-before: always;
+            /* page-break-after: always; */
+
+        }
+
+        /* .page-break {
+        } */
+
 
         /** Define the header rules **/
         header {
@@ -32,13 +53,13 @@
             top: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 5cm;
+            height: 4cm;
             /** Extra personal styles **/
             background-color: #ffffff;
             color: rgb(0, 0, 0);
             text-align: left;
             font-size: 9.5pt;
-            font-family: Verdana, Geneva, Tahoma, sans-serif;
+            font-family: Helvetica;
 
             /* line-height: 1.5cm; */
         }
@@ -49,7 +70,7 @@
             bottom: 0cm;
             left: 0cm;
             right: 0cm;
-            height: 1cm;
+            height: 4cm;
 
             /** Extra personal styles **/
             background-color: #ffffff;
@@ -64,11 +85,6 @@
 
         #watermark {
             position: fixed;
-
-            /**
-                    Set a position in the page for your image
-                    This should center it vertically
-                **/
             bottom: 1cm;
             left: 6cm;
             opacity: 0.5;
@@ -84,155 +100,158 @@
 </head>
 
 <body>
-    {{-- <div id="watermark">
-        @if ($data->isPaid == 1)
-            <img src="{{ public_path('images/paid.png') }}" height="100%" width="100%" /> jabdjhasbd
-        @endif
-    </div> --}}
+
     {{-- HEADER --}}
     <header>
         <table style="width: 100%">
             <tr>
-                <td style="width: 20%"><img style="width: 100px;margin-top:15px;"
-                        src="{{ public_path('images/logo.png') }}" alt=""></td>
+                <td style="width: 20%;text-align: center;">
+                    <img style="width: 120px;margin-top:0px;" src="{{ url('images/logo.png') }}" alt="">
+                </td>
                 <td style="width: 34%;text-align:left">
                     <b>CV. Profecta Perdana</b> <br>
                     {{ $warehouse->alamat }} <br>
-                    Phone : 0713-82536
+                    Phone : {{ $warehouse->telp1 . ' / ' . $warehouse->telp2 }}
                 </td>
                 <td></td>
                 <td style="width: 5%;text-align:left">
+                    Date <br>
                     Return <br>
-                    Invoice <br>
+                    Invoice
                 </td>
                 <td style="width: 20%">
+                    : {{ date('d F Y', strtotime($data->return_date)) }} <br>
                     : {{ $data->return_number }}<br>
                     : {{ $data->salesOrderBy->order_number }}<br>
                 </td>
             </tr>
+
             <tr>
-                <th colspan="6">
-                    <hr>
-                </th>
-            </tr>
-            <tr>
-                <th colspan="6" style="text-align: center">RETURN SALES
+                <th colspan="6" style="text-align: center;border-top:1px solid black ">RETURN SALES
 
                 </th>
             </tr>
             <tr>
-                <td colspan="3" style="width: 90%;text-align:left">Return From : <br>
+                <td colspan="6" style="width: 90%;text-align:left">Return from : <br>
                     {{ $data->salesOrderBy->customerBy->name_cust }} - {{ $data->salesOrderBy->customerBy->code_cust }}
                     <br>
                     {{ $data->salesOrderBy->customerBy->address_cust }} <br>
                     Reason : {{ $data->return_reason }}
                 </td>
-                <td style="width: 10%">Date
-                </td>
-                <td style="text-align:left">
-                    : {{ date('d-m-Y', strtotime($data->return_date)) }} <br>
-                </td>
+
             </tr>
         </table>
     </header>
     {{-- END HEADER --}}
 
-    {{-- FOOTER --}}
-    <footer>
-    </footer>
-    {{-- END FOOTER --}}
+
 
     {{-- CONTENT --}}
     <main>
         <table style="width:100%;">
             <thead style="border-bottom:1px solid black">
                 <tr style="">
-                    <th style="text-align:center;padding:5px">No</th>
-                    <th style="text-align:left;padding:5px">Item Description</th>
-                    <th style="text-align:center;padding:5px">Qty</th>
-                    <th style="text-align:right;padding:5px;margin-right:30px";>Total</th>
+                    <th style="text-align:center;">No</th>
+                    <th style="text-align:center;">Item Description</th>
+                    <th style="text-align:center;">Qty</th>
+                    {{-- <th style="text-align:center;;margin-right:30px";>Total</th> --}}
                 </tr>
             </thead>
             <tbody>
                 @php
                     $y = 0;
+                    $total_iterations = count($data->returnDetailsBy);
+                    $current_iteration = 0;
+                    $total_qty = 0;
                 @endphp
                 @foreach ($data->returnDetailsBy as $key => $value)
                     {{-- @for ($i = 0; $i < 6; $i++) --}}
                     <?php
                     $y++;
+                    $current_iteration++;
+
                     ?>
                     <tr>
-                        <td style="text-align:center;padding:5px">{{ $key + 1 }}.
+                        <td style="text-align:center;">{{ $key + 1 }}.
                         </td>
-                        <td style="text-align:left;padding:5px">
+                        <td style="text-align:left;">
                             {{ $value->productBy->sub_materials->nama_sub_material }}&nbsp;
                             {{ $value->productBy->sub_types->type_name }}&nbsp;
                             {{ $value->productBy->nama_barang }}
                         </td>
-                        <td style="text-align:center;padding:5px">{{ $value->qty }}</td>
+                        <td style="text-align:center;">{{ $value->qty }}</td>
                         @php
                             $diskon = 0;
                             $diskon_rp = 0;
                             $getdiskon = $value->returnBy->salesOrderBy->salesOrderDetailsBy;
                             foreach ($getdiskon as $dis) {
                                 if ($dis->products_id == $value->product_id) {
-                                    $diskon = $dis->discount / 100;
-                                    $diskon_rp = $dis->discount_rp;
+                                    (float) ($diskon = $dis->discount / 100);
+                                    (float) ($diskon_rp = $dis->discount_rp);
                                 }
                             }
-                            $hargaDiskon = $value->productBy->harga_jual_nonretail * $diskon;
-                            $hargaAfterDiskon = $value->productBy->harga_jual_nonretail - $hargaDiskon - $diskon_rp;
-                            $sub_total = $hargaAfterDiskon * $value->qty;
-                            $ppn_total = $ppn * $sub_total;
-                            $total = $sub_total + $ppn_total;
+                            $hargaDiskon = (float) $value->productBy->harga_jual_nonretail * (float) $diskon;
+                            $hargaAfterDiskon = (float) $value->productBy->harga_jual_nonretail - (float) $hargaDiskon - (float) $diskon_rp;
+                            $sub_total = (float) $hargaAfterDiskon * $value->qty;
+                            $ppn_total = (float) $ppn * (float) $sub_total;
+                            $total = (float) $sub_total + (float) $ppn_total;
+                            $total_qty += $value->qty;
                         @endphp
-                        <td style="text-align:right;margin-right:30px">{{ number_format($total, 0, ',', '.') }}
-                        </td>
+                        {{-- <td style="text-align:right;margin-right:30px">{{ number_format((float) $total, 0, ',', '.') }}
+                        </td> --}}
                     </tr>
-                    @if ($y % 5 == 0)
-                        <div class="page-break"></div>
+                    @if ($y % 7 == 0 && $y != $total_iterations)
+                        <div class="page-braek"></div>
                     @endif
                     {{-- @endfor --}}
                 @endforeach
-                <tr>
-                    <td colspan="7" style="text-align: right">
-                        <hr>
-                    </td>
-
-                </tr>
             </tbody>
-        </table>
-        <table style="width: 100%">
-            <thead>
+            <tfoot style="border-top:1px solid black">
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <th colspan="4"></th>
                 </tr>
-            </thead>
-            <tbody>
+                <tr>
+                    <th colspan="2" style="text-align: right">Total Qty</th>
+                    <th style="text-align: center;border:2px solid black">{{ $total_qty }}</th>
+                </tr>
 
-                <tr>
-                    <th colspan="9" style="text-align: right">Total Return</th>
-                    <th style="text-align: right;border:1px solid black">@currency($data->total)</th>
-                </tr>
-                <tr>
-                    <th colspan="4">&nbsp;</th>
-                    <th>&nbsp;</th>
-                </tr>
-                <tr>
-                    <th colspan="2" style="text-align: center"><i>Created By,</i></th>
-                    <th colspan="2" style="text-align: left"><i>&nbsp;</i></th>
-                    <th colspan="2" style="text-align: center"><i>Proposed By,</i></th>
-                    <th colspan="2" style="text-align: right"><i>&nbsp;</i></th>
-                    <th colspan="2" style="text-align: center"><i>Acknowledge By,</i></th>
-                </tr>
-            </tbody>
+            </tfoot>
         </table>
     </main>
     {{-- END CONTENT --}}
+    {{-- FOOTER --}}
+    <div class="page-break">
+        <footer>
+            <table style="width: 100%">
+                <thead>
 
+                    <tr>
+                        <th style="text-align: center;width: 33%"><i>Created By,</i> </th>
+                        <th style="text-align: center;width: 33%"><i>Proposed By,</i> </th>
+                        <th style="text-align: center;width: 33%"><i>Acknowledge By,</i></th>
+
+
+                    </tr>
+                    <tr>
+                        <th style="width: 33%">&nbsp;</th>
+                        <th style="width: 33%">&nbsp;</th>
+                        <th style="width: 33%">&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th style="width: 33%">&nbsp;</th>
+                        <th style="width: 33%">&nbsp;</th>
+                        <th style="width: 33%">&nbsp;</th>
+                    </tr>
+                    <tr>
+                        <th style="text-align: center;width: 33%"><i>( {{ $data->createdBy->name }} )</i> </th>
+                        <th style="width: 33%">&nbsp;</th>
+                        <th style="width: 33%">&nbsp;</th>
+                    </tr>
+                </thead>
+            </table>
+        </footer>
+    </div>
+    {{-- END FOOTER --}}
     {{-- PAGE NUMBER --}}
     <script type="text/php">
         if (isset($pdf)) {

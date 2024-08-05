@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\AccountModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class AccountController extends Controller
@@ -15,9 +16,6 @@ class AccountController extends Controller
      */
     public function index()
     {
-        if (!Gate::allows('isSuperAdmin') && !Gate::allows('isFinance')) {
-            abort(403);
-        }
         $title = 'Account';
         $data = AccountModel::orderBy('code', 'asc')->get();
         return view('account.index', compact('title', 'data'));
@@ -48,16 +46,27 @@ class AccountController extends Controller
             'name' => 'required',
             // 'biaya' => 'required',
         ]);
-        //* Save data
-        $model = new AccountModel();
-        $model->code = $request->code;
-        $model->name = $request->name;
-        $model->biaya = $request->biaya;
-        $saved = $model->save();
-        if ($saved) {
-            return redirect('account')->with('success', 'Data Has Been Saved');
-        } else {
-            return redirect('account')->with('error', 'Data Failed To Save');
+
+        try {
+            DB::beginTransaction();
+            //* Save data
+            $model = new AccountModel();
+            $model->code = $request->code;
+            $model->name = $request->name;
+            $model->biaya = $request->biaya;
+            $saved = $model->save();
+            if ($saved) {
+
+                DB::commit();
+                return redirect('account')->with('success', 'Data Has Been Saved');
+            } else {
+
+                DB::rollback();
+                return redirect('account')->with('error', 'Data Failed To Save');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('account')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -92,9 +101,6 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        if (!Gate::allows('level1') && !Gate::allows('level2')) {
-            abort(403);
-        }
         //* Validate
         $request->validate([
             'codes' => 'required',
@@ -102,16 +108,27 @@ class AccountController extends Controller
             // 'descriptions' => 'required',
         ]);
 
-        //* Update data
-        $model = AccountModel::find($id);
-        $model->code = $request->codes;
-        $model->name = $request->names;
-        $model->biaya = $request->biayas;
-        $saved = $model->save();
-        if ($saved) {
-            return redirect('account')->with('success', 'Data Has Been Updated');
-        } else {
-            return redirect('account')->with('error', 'Data Failed To Update');
+        try {
+            DB::beginTransaction();
+
+            //* Update data
+            $model = AccountModel::find($id);
+            $model->code = $request->codes;
+            $model->name = $request->names;
+            $model->biaya = $request->biayas;
+            $saved = $model->save();
+            if ($saved) {
+
+                DB::commit();
+                return redirect('account')->with('success', 'Data Has Been Updated');
+            } else {
+
+                DB::rollback();
+                return redirect('account')->with('error', 'Data Failed To Update');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('account')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -126,13 +143,25 @@ class AccountController extends Controller
         if (!Gate::allows('level1')) {
             abort(403);
         }
-        //* Delete data
-        $model = AccountModel::find($id);
-        $deleted = $model->delete();
-        if ($deleted) {
-            return redirect('account')->with('success', 'Data Has Been Deleted');
-        } else {
-            return redirect('account')->with('error', 'Data Failed To Delete');
+
+        try {
+            DB::beginTransaction();
+
+            //* Delete data
+            $model = AccountModel::find($id);
+            $deleted = $model->delete();
+            if ($deleted) {
+
+                DB::commit();
+                return redirect('account')->with('success', 'Data Has Been Deleted');
+            } else {
+
+                DB::rollback();
+                return redirect('account')->with('error', 'Data Failed To Delete');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('account')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 }

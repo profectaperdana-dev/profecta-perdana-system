@@ -6,6 +6,7 @@ use App\Models\SubMaterialModel;
 use App\Models\SubTypeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class SubTypeController extends Controller
@@ -21,10 +22,10 @@ class SubTypeController extends Controller
             ->select('product_sub_types.*', 'product_sub_materials.nama_sub_material')
             ->latest()
             ->get();
-        $all_sub_materials = SubMaterialModel::latest()->get();
+        $all_sub_materials = SubMaterialModel::oldest('nama_sub_material')->get();
 
         $data = [
-            'title' => 'Material Sub Types',
+            'title' => 'Product Material Sub Type',
             'sub_types' => $all_sub_types,
             'sub_materials' => $all_sub_materials
         ];
@@ -43,9 +44,11 @@ class SubTypeController extends Controller
                 $sub_types = SubTypeModel::select("id", "type_name")
                     ->where('type_name', 'LIKE', "%$search%")
                     ->where('sub_material_id', $id)
+                    ->oldest('type_name')
                     ->get();
             } else {
-                $sub_types = SubTypeModel::where('sub_material_id', $sub_material_id)->get();
+                $sub_types = SubTypeModel::where('sub_material_id', $sub_material_id)->oldest('type_name')
+                    ->get();
             }
             return response()->json($sub_types);
         } catch (\Throwable $th) {
@@ -64,12 +67,13 @@ class SubTypeController extends Controller
                     ->join('product_materials', 'product_materials.id', '=', 'product_sub_materials.material_id')
                     ->select("product_sub_types.*", "product_sub_materials.nama_sub_material", "product_materials.nama_material")
                     ->where('type_name', 'LIKE', "%$search%")
+                    ->oldest('product_sub_materials.nama_sub_material')
                     ->get();
             } else {
                 $sub_types = SubTypeModel::join('product_sub_materials', 'product_sub_materials.id', '=', 'product_sub_types.sub_material_id')
                     ->join('product_materials', 'product_materials.id', '=', 'product_sub_materials.material_id')
                     ->select("product_sub_types.*", "product_sub_materials.nama_sub_material", "product_materials.nama_material")
-                    ->latest()
+                    ->oldest('product_sub_materials.nama_sub_material')
                     ->get();
             }
             return response()->json($sub_types);
@@ -90,16 +94,30 @@ class SubTypeController extends Controller
         $request->validate([
             'sub_material_id' => 'required|numeric',
             'type_name' => 'required',
-            'code_sub_type' => 'required|max:3|min:2'
+            // 'code_sub_type' => 'required|max:5'
 
         ]);
-        $model = new SubTypeModel();
-        $model->sub_material_id = $request->get('sub_material_id');
-        $model->type_name = $request->get('type_name');
-        $model->code_sub_type = $request->get('code_sub_type');
-        $model->created_by = Auth::user()->id;
-        $model->save();
-        return redirect('/product_sub_types')->with('success', 'Create data sub product type ' . $model->type_name . ' is success');
+        // $checked = SubTypeModel::where('code_sub_type', $request->get('code_sub_type'))->count();
+        // if ($checked > 0) {
+        //     return redirect('/product_sub_types')->with('error', 'You Have Entered Duplicate Code');
+        // }
+        try {
+            DB::beginTransaction();
+            $model = new SubTypeModel();
+            $model->sub_material_id = $request->get('sub_material_id');
+            $model->type_name = $request->get('type_name');
+            // $model->code_sub_type = $request->get('code_sub_type');
+            $model->code_sub_type = '-';
+
+            $model->created_by = Auth::user()->id;
+            $model->save();
+
+            DB::commit();
+            return redirect('/product_sub_types')->with('success', 'Create data sub product type ' . $model->type_name . ' is success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/product_sub_types')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -139,16 +157,32 @@ class SubTypeController extends Controller
         $validated_data = $request->validate([
             'sub_material_id_edit' => 'required|numeric',
             'type_name_edit' => 'required',
-            'code_sub_type_edit' => 'required|max:3|min:2',
+            // 'code_sub_type_edit' => 'required|max:5',
         ]);
 
-        $current_type = SubTypeModel::where('id', $id)->firstOrFail();
-        $current_type->sub_material_id = $validated_data['sub_material_id_edit'];
-        $current_type->type_name = $validated_data['type_name_edit'];
-        $current_type->code_sub_type = $validated_data['code_sub_type_edit'];
-        $current_type->save();
+        try {
+            DB::beginTransaction();
+            $current_type = SubTypeModel::where('id', $id)->firstOrFail();
+            // $old = $current_type->code_sub_type;
+            // $current_type->code_sub_type = '';
+            // $current_type->save();
+            // $checked = SubTypeModel::where('code_sub_type', $request->get('code_sub_type_edit'))->count();
+            // if ($checked > 0) {
+            //     $current_type->code_sub_type = $old;
+            //     $current_type->save();
+            //     return redirect('/product_sub_types')->with('error', 'You Have Entered Duplicate Code');
+            // }
+            $current_type->sub_material_id = $validated_data['sub_material_id_edit'];
+            $current_type->type_name = $validated_data['type_name_edit'];
+            // $current_type->code_sub_type = $validated_data['code_sub_type_edit'];
+            $current_type->save();
 
-        return redirect('/product_sub_types')->with('info', 'Create data sub product type ' . $current_type->type_name . ' is success');
+            DB::commit();
+            return redirect('/product_sub_types')->with('info', 'Create data sub product type ' . $current_type->type_name . ' is success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/product_sub_types')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -162,9 +196,16 @@ class SubTypeController extends Controller
         if (!Gate::allows('level1')) {
             abort(403);
         }
-        $current_type = SubTypeModel::find($id);
-        $current_type->delete();
+        try {
+            DB::beginTransaction();
+            $current_type = SubTypeModel::find($id);
+            $current_type->delete();
 
-        return redirect('/product_sub_types')->with('error', 'Create data sub product type ' . $current_type->type_name . ' is success');
+            DB::commit();
+            return redirect('/product_sub_types')->with('error', 'Create data sub product type ' . $current_type->type_name . ' is success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/product_sub_types')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 }

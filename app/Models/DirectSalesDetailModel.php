@@ -17,11 +17,22 @@ class DirectSalesDetailModel extends Model
 
     public function productBy()
     {
-        return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
+        return $this->hasOne(ProductModel::class, 'id', 'product_id');
     }
 
     public function retailPriceBy()
     {
         return $this->hasMany(ProductCostModel::class, 'id_product', 'product_id');
+    }
+
+    public function directSalesCodeBy()
+    {
+        return $this->hasMany(DirectSalesCodesModel::class, 'direct_detail_id');
+    }
+
+    public function getPrice($warehouse)
+    {
+        $product = ProductCostModel::where('id_product', $this->product_id)->where('id_warehouse', $warehouse)->first();
+        return $product->harga_jual;
     }
 }

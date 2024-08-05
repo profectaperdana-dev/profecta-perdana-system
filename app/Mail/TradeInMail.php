@@ -32,9 +32,9 @@ class TradeInMail extends Mailable
     public function build()
     {
         return $this->view('product_trade_in.mail_trade_in')
-            ->from('noreply@profectaperdana.com', 'PROFECTA PERDANA')
+            ->from(env('MAIL_USERNAME'), 'PROFECTA PERDANA')
             ->subject('INVOICE TRADE-IN ' . $this->data->trade_in_number)
             ->with(['data' => $this->data, 'warehouse' => $this->warehouse])
-            ->attach(public_path('pdf_trade_in/' . $this->data->trade_in_number . '.pdf'));
+            ->attach(url('pdf_trade_in/' . $this->data->trade_in_number . '.pdf'));
     }
 }

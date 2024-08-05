@@ -45,9 +45,15 @@
             let csrf = $('meta[name="csrf-token"]').attr("content");
 
             $(document).ready(function() {
-                $('form').submit(function(e) {
-                    if (e.result == true) {
-                        $(this).find('button[type="submit"]').prop('disabled', true);
+                $(document).on('submit', 'form', function() {
+                    // console.log('click');
+                    var form = $(this);
+                    var button = form.find('button[type="submit"]');
+                    // console.log(form.html());
+
+                    if (form[0].checkValidity()) { // check if form has input values
+                        button.prop('disabled', true);
+
                     }
                 });
                 $(

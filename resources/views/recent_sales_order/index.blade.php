@@ -3,10 +3,26 @@
     @push('css')
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">
+        @include('report.style')
+
         <style>
-            tr.group,
-            tr.group:hover {
-                background-color: #ddd !important;
+            .table {
+                background-color: rgba(211, 225, 222, 255);
+                -webkit-print-color-adjust: exact;
+            }
+
+            .nav-new {
+                display: block;
+                padding: 0.5rem 1rem;
+                color: #24695c !important;
+                text-decoration: none;
+                transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+            }
+
+            .nav-pills .nav-new.active,
+            .nav-pills .show>.nav-new {
+                background-color: #d0efe9 !important;
             }
         </style>
     @endpush
@@ -16,8 +32,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Check
-                        {{ $title }}
+
                 </div>
 
             </div>
@@ -25,218 +40,129 @@
     </div>
     <!-- Container-fluid starts-->
     <div class="container-fluid">
-        <div class="row">
-            <div class="col-sm-12 col-xl-12 xl-100">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>All Data Sales Order Not Verified</h5>
-                    </div>
-                    <div class="card-body">
-
-                        <ul class="nav nav-tabs nav-primary" id="pills-warningtab" role="tablist">
-                            <li class="nav-item"><a class="nav-link active" id="pills-warninghome-tab" data-bs-toggle="pill"
-                                    href="#pills-warninghome" role="tab" aria-controls="pills-warninghome"
-                                    aria-selected="true">No
-                                    Debt</a></li>
-                            <li class="nav-item"><a class="nav-link" id="pills-warningprofile-tab" data-bs-toggle="pill"
-                                    href="#pills-warningprofile" role="tab" aria-controls="pills-warningprofile"
-                                    aria-selected="false">Debt</a></li>
-
-                        </ul>
-                        <div class="tab-content" id="pills-warningtabContent">
-                            <div class="tab-pane fade show active" id="pills-warninghome" role="tabpanel"
-                                aria-labelledby="pills-warninghome-tab">
-                                <p class="mb-0 m-t-30">
-                                <div class="table-responsive">
-                                    <table id="example" class="display expandable-table text-capitalize table-hover"
-                                        style="width:100%">
-                                        <thead>
+        <div class="col-12 col-lg-12">
+            <div class="card shadow">
+                <div class="card-body">
+                    <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                        <li class="nav-item"><a class="nav-link nav-new active" id="pills-home-tab" data-bs-toggle="pill"
+                                href="#pills-home" role="tab" aria-controls="pills-home"
+                                aria-selected="true">Verification
+                                <div class="media"></div>
+                            </a></li>
+                        <li class="nav-item"><a class="nav-link nav-new" id="pills-profile-tab" data-bs-toggle="pill"
+                                href="#pills-profile" role="tab" aria-controls="pills-profile"
+                                aria-selected="false">Reject</a></li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active" id="pills-home" role="tabpanel"
+                            aria-labelledby="pills-home-tab">
+                            <div class="table-responsive">
+                                <table id="example"
+                                    class="display expandable-table table table-borderless text-capitalize table-striped table-sm text-nowrap"
+                                    style="width:100%">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Order Number</th>
+                                            <th>Order Date</th>
+                                            <th>Customer</th>
+                                            <th>Payment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($dataSalesOrder as $value)
                                             <tr>
-                                                <th style="width: 5%">Action</th>
-                                                <th>#</th>
-                                                <th>SO Number</th>
-                                                <th>Order Date</th>
-                                                <th>Customer</th>
-                                                <th>Payment</th>
-                                                <th>Verified</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($dataSalesOrder as $value)
-                                                <tr>
-                                                    <td style="width: 5%">
-                                                        <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false"><i data-feather="settings"></i></a>
-                                                        <div class="dropdown-menu" aria-labelledby="">
-                                                            <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item" href="javascript:void(0)"
-                                                                data-bs-toggle="modal"
-                                                                data-bs-target="#deleteData{{ $value->id }}">Delete
-                                                                Sales Order</a>
-                                                        </div>
-                                                    </td>
-
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $value->order_number }}</td>
-                                                    <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
-                                                    <td>{{ $value->customerBy->name_cust . ' (' . $value->customerBy->code_cust . ')' }}
-                                                    </td>
+                                                <td class="text-center fw-bold">{{ $loop->iteration }}</td>
+                                                <td class="text-center">
+                                                    <a class="fw-bold text-nowrap modal-btn" href="javascript:void(0)"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#verifyData{{ $value->id }}">{{ $value->order_number }}</a>
+                                                </td>
+                                                <td class="text-center">{{ date('d F Y', strtotime($value->order_date)) }}
+                                                </td>
+                                                <td>
+                                                    {{ $value->customerBy->code_cust . ' - ' . $value->customerBy->name_cust }}
+                                                </td>
+                                                <td class="text-center">
                                                     @if ($value->payment_method == 1)
-                                                        <td>COD</td>
+                                                        COD
+                                                    @elseif ($value->payment_method == 2)
+                                                        CBD
                                                     @else
-                                                        <td>CBD</td>
+                                                        Credit
                                                     @endif
-                                                    <td class="text-center"><a class="btn btn-primary btn-sm modal-btn"
-                                                            href="javascript:void(0)" data-bs-toggle="modal"
-                                                            data-bs-target="#verifyData{{ $value->id }}">Verify</a>
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                </p>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                             <input type="hidden" name="ppn" id="ppn" value="{{ $ppn }}">
-                            <div class="tab-pane fade" id="pills-warningprofile" role="tabpanel"
-                                aria-labelledby="pills-warningprofile-tab">
-                                <p class="mb-0 m-t-30">
-                                <div class="table-responsive">
-                                    <table id="example1" class="display expandable-table text-capitalize table-hover"
-                                        style="width:100%">
-                                        <thead>
-                                            <tr>
-                                                <th style="width: 3%">Action</th>
-                                                <th>#</th>
-                                                <th>SO Number</th>
-                                                <th>Order Date</th>
-                                                <th>Due Date</th>
-                                                <th>Customer</th>
-                                                <th>Verified</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($dataSalesOrderDebt as $value)
-                                                <tr>
-                                                    <td style="width: 3%">
-                                                        <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                            aria-expanded="false"><i data-feather="settings"></i></a>
-                                                        <div class="dropdown-menu" aria-labelledby="">
-                                                            <h5 class="dropdown-header">Actions</h5>
-                                                            <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                                data-original-title="test"
-                                                                data-bs-target="#deleteData{{ $value->id }}">Delete
-                                                                Sales Order</a>
-                                                        </div>
-
-                                                    </td>
-                                                    <td>{{ $loop->iteration }}</td>
-                                                    <td>{{ $value->order_number }}</td>
-                                                    <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
-                                                    <td>{{ date('d-M-Y', strtotime($value->duedate)) }}</td>
-                                                    <td>{{ $value->customerBy->name_cust . ' (' . $value->customerBy->code_cust . ')' }}
-                                                    </td>
-                                                    <td class="text-center"><a type="button"
-                                                            class="btn btn-primary btn-sm modal-btn"
-                                                            href="javascript:void(0)" data-bs-toggle="modal"
-                                                            data-bs-target="#verifyData{{ $value->id }}">Verify</a>
-                                                    </td>
-
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                                </p>
-                            </div>
-
                         </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="row">
-            <div class="col-sm-12 col-xl-12 xl-100">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>All Data Sales Order Rejected</h5>
-                    </div>
-                    <div class="card-body">
-
-                        <p class="mb-0 m-t-30">
-                        <div class="table-responsive">
-                            <table id="example2" class="display expandable-table text-capitalize table-hover"
-                                style="width:100%">
-                                <thead>
-                                    <tr>
-                                        <th style="width: 5%">Action</th>
-                                        <th>#</th>
-                                        <th>SO Number</th>
-                                        <th>Order Date</th>
-                                        <th>Customer</th>
-                                        <th>Payment</th>
-                                        <th>Verified</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($dataSalesOrderReject as $value)
-                                        <tr>
-                                            <td style="width: 5%">
-                                                <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i data-feather="settings"></i></a>
-                                                <div class="dropdown-menu" aria-labelledby="">
-                                                    <h5 class="dropdown-header">Actions</h5>
-                                                    <a class="dropdown-item" href="javascript:void(0)"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#deleteData{{ $value->id }}">Delete
-                                                        Sales Order</a>
-                                                </div>
-                                            </td>
-
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $value->order_number }}</td>
-                                            <td>{{ date('d-M-Y', strtotime($value->order_date)) }}</td>
-                                            <td>{{ $value->customerBy->name_cust . ' (' . $value->customerBy->code_cust . ')' }}
-                                            </td>
-                                            @if ($value->payment_method == 1)
-                                                <td>COD</td>
-                                            @else
-                                                <td>CBD</td>
-                                            @endif
-                                            <td class="text-center"><a class="btn btn-primary btn-sm modal-btn"
-                                                    href="javascript:void(0)" data-bs-toggle="modal"
-                                                    data-bs-target="#verifyData{{ $value->id }}">Verify</a>
-                                            </td>
+                        <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+                            <div class="table-responsive">
+                                <table id="example1"
+                                    class="display expandable-table table table-borderless text-capitalize table-striped table-sm text-nowrap"
+                                    style="width:100%">
+                                    <thead>
+                                        <tr class="text-center">
+                                            <th>#</th>
+                                            <th>Order Number</th>
+                                            <th>Order Date</th>
+                                            <th>Customer</th>
+                                            <th>Payment</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($dataSalesOrderReject as $value)
+                                            <tr>
+                                                <td class="text-center fw-bold">{{ $loop->iteration }}</td>
+                                                <td class="text-center">
+                                                    <a class="fw-bold text-nowrap modal-btn" href="javascript:void(0)"
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#verifyData{{ $value->id }}">{{ $value->order_number }}</a>
+                                                </td>
+                                                <td class="text-center">{{ date('d F Y', strtotime($value->order_date)) }}
+                                                </td>
+                                                <td>
+                                                    {{ $value->customerBy->code_cust . ' - ' . $value->customerBy->name_cust }}
+                                                </td>
+                                                <td class="text-center">
+                                                    @if ($value->payment_method == 1)
+                                                        COD
+                                                    @elseif ($value->payment_method == 2)
+                                                        CBD
+                                                    @else
+                                                        Credit
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                        </p>
 
                     </div>
+
                 </div>
             </div>
-
         </div>
 
     </div>
 
+
     @foreach ($dataSalesOrder as $value)
         <!-- Verify Product Modal Start -->
-        <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal" id="verifyData{{ $value->id }}" tabindex="-1" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog modal-fullscreen modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sales
+                        <h6 class="modal-title" id="exampleModalLabel">Sales
                             Order
-                            :
-                            {{ $value->order_number }}</h5>
-                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                            {{ $value->order_number }}</h6>
                     </div>
                     <div class="modal-body">
                         <form action="{{ url('sales_orders/' . $value->id . '/verify') }}" method="POST"
@@ -244,31 +170,24 @@
                             @csrf
                             <div class="container-fluid">
                                 <div class="form-group row">
-                                    <div class="col-md-6 form-group">
+                                    <input type="hidden" name="warehouse_id" class="warehouse"
+                                        value="{{ $value->warehouse_id }}">
+                                    <div class=" col-md-4 mb-3">
                                         <label>
                                             Customers</label>
                                         <select name="customer_id" id="" required
-                                            class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
-                                            <option value="" selected>-Choose Customers-</option>
-                                            @foreach ($customer as $cust)
-                                                <option value="{{ $cust->id }}"
-                                                    @if ($cust->id == $value->customers_id) selected @endif>
-                                                    {{ $cust->code_cust }} |
-                                                    {{ $cust->name_cust }}
-                                                </option>
-                                            @endforeach
+                                            class="form-control customer-select customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}"
+                                            multiple>
+                                            <option value="{{ $value->customerBy->id }}" selected>
+                                                {{ $value->customerBy->name_cust }}</option>
                                         </select>
-                                        @error('customer_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+
                                     </div>
-                                    <div class="col-md-6 form-group mr-5">
+                                    <div class="col-md-4 mb-3 mr-5">
                                         <label>Payment Method</label>
                                         <select name="payment_method" required
-                                            class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
-                                            <option value="" selected>-Choose Payment-</option>
+                                            class="form-control multi-select {{ $errors->first('payment_method') ? ' is-invalid' : '' }}"
+                                            multiple>
                                             <option value="1" @if ($value->payment_method == 1) selected @endif>
                                                 Cash On Delivery
                                             </option>
@@ -285,40 +204,46 @@
                                             </div>
                                         @enderror
                                     </div>
+                                    <div class="col-md-4 mb-3 mr-5">
+                                        <label>Order Date</label>
+                                        {{-- <input type="text" value="{{ $value->order_date }}"> --}}
+                                        <input class="datepicker-here form-control digits" data-position="bottom left"
+                                            type="text" data-language="en"
+                                            data-value="{{ date('d-m-Y', strtotime($value->order_date)) }}"
+                                            name="order_date" autocomplete="off">
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label>Remarks</label>
+                                        <textarea class="form-control" name="remark" id="" cols="30" rows="1">{{ $value->remark }}</textarea>
+                                    </div>
                                 </div>
-                                <hr>
-                                <div class="form-group row formSo-edit">
+                                <div class="form-group formSo-edit">
                                     @foreach ($value->salesOrderDetailsBy as $detail)
-                                        <div class="mx-auto py-2 form-group row bg-primary">
+                                        <div class="mx-auto py-2 rounded form-group row"
+                                            style="background-color: #f0e194">
                                             <input type="hidden" class="loop" value="{{ $loop->index }}">
-                                            <div class="form-group col-8 col-lg-5">
+                                            <div class="form-group col-12 col-lg-3">
                                                 <label>Product</label>
-                                                <select name="editProduct[{{ $loop->index }}][products_id]" required
+                                                <select multiple name="editProduct[{{ $loop->index }}][products_id]"
+                                                    required
                                                     class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
                                                     @if ($detail->products_id != null)
                                                         <option value="{{ $detail->products_id }}" selected>
-                                                            {{ $detail->productSales->nama_barang .
-                                                                ' (' .
-                                                                $detail->productSales->sub_types->type_name .
-                                                                ', ' .
-                                                                $detail->productSales->sub_materials->nama_sub_material .
-                                                                ')' }}
+                                                            {{ $detail->productSales->sub_materials->nama_sub_material . ' ' . $detail->productSales->sub_types->type_name . ' ' . $detail->productSales->nama_barang }}
                                                         </option>
                                                     @endif
                                                 </select>
-                                                @error('editProduct[' . $loop->index . '][products_id]')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
 
-                                            <div class="col-4 col-lg-2 form-group">
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label>Qty</label>
-                                                <input type="number" class="form-control cekQty-edit"
+                                                <input type="number" class="form-control cekQty-edit jumlahQty"
                                                     name="editProduct[{{ $loop->index }}][qty]"
                                                     value="{{ $detail->qty }}" />
-                                                <small class="text-danger qty-warning" hidden>The number of items exceeds
+                                                <small class="text-danger qty-warning" hidden>The number of items
+                                                    exceeds
                                                     the
                                                     stock</small>
                                                 @error('top')
@@ -327,10 +252,29 @@
                                                     </div>
                                                 @enderror
                                             </div>
-
+                                            @php
+                                                $price = $detail->price;
+                                                if ($price == 0 || $price == null) {
+                                                    $price = $detail->productSales->harga_jual_nonretail;
+                                                    $price = $price + ($price * $ppn) / 100;
+                                                }
+                                                // $price = str_replace(',', '.', $detail->productSales->harga_jual_nonretail);
+                                                // $sub_total = (float) $price * (float) $ppn;
+                                                // (float) ($harga = (float) $price + (float) $sub_total);
+                                            @endphp
                                             <div class="col-4 col-lg-2 form-group">
+                                                <label>Price</label>
+                                                <input type="hidden" class="price" name="editProduct[{{ $loop->index }}][price]"
+                                                    value="{{ number_format(round($price)) }}"
+                                                    class="hargaNonRetail">
+                                                <input type="text" class="form-control price hargaNonRetail" disabled
+                                                    value="{{ number_format(round($price)) }}" />
+                                            </div>
+
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label>Disc (%)</label>
-                                                <input type="number" class="form-control discount-append-edit"
+                                                <input type="text"
+                                                    class="form-control discount-append-edit discountPersen"
                                                     placeholder="Disc" name="editProduct[{{ $loop->index }}][discount]"
                                                     value="{{ $detail->discount }}" />
                                                 @error('editProduct[{{ $loop->index }}][discount]')
@@ -340,9 +284,10 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="col-4 col-lg-2 form-group">
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label>Disc (Rp)</label>
-                                                <input type="number" class="form-control discount_rp" placeholder="Disc"
+                                                <input type="number" class="form-control discount_rp discountRupiah"
+                                                    placeholder="Disc"
                                                     name="editProduct[{{ $loop->index }}][discount_rp]"
                                                     value="{{ $detail->discount_rp }}" />
                                                 @error('editProduct[{{ $loop->index }}][discount_rp]')
@@ -351,33 +296,47 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                            @php
+                                                $disc = (float) $detail->discount / 100.0;
+                                                // $ppn_cost = (float) $price * (float) $ppn;
+                                                // $ppn_total = (float) $price + $ppn_cost;
+                                                $disc_cost = (float) $price * $disc;
+                                                $price_disc = (float) ($price - $disc_cost - $detail->discount_rp) * $detail->qty;
+                                            @endphp
+                                            <div class="col-4 col-lg-2 form-group">
+                                                <label>Disc Price</label>
+                                                <input type="text" class="form-control priceDiscount" readonly
+                                                    value="{{ number_format(round($price_disc)) }}" />
+                                            </div>
 
                                             @if ($loop->index == 0)
-                                                <div class="col-1 col-md-1 form-group">
+                                                <div class="col-12 col-lg-2 form-group">
                                                     <label for="">&nbsp;</label>
                                                     <a href="javascript:void(0)"
-                                                        class="btn btn-success form-control text-white addSo-edit">+</a>
+                                                        style="border:none; background-color:#276e61"
+                                                        class="form-control text-center fw-bold text-white addSo-edit">+</a>
                                                 </div>
                                             @else
-                                                <div class="col-1 col-md-1 form-group">
+                                                <div class="col-4 col-lg-1 form-group">
                                                     <label for="">&nbsp;</label>
                                                     <a href="javascript:void(0)"
-                                                        class="btn btn-danger form-control text-white remSo-edit">-</a>
+                                                        style="border:none; background-color:#276e61"
+                                                        class="form-control text-center fw-bold text-white addSo-edit">+</a>
+                                                </div>
+                                                <div class="col-4 col-lg-1 form-group">
+                                                    <label for="">&nbsp;</label>
+                                                    <a href="javascript:void(0)"
+                                                        style="border:none; background-color:#d94f5c"
+                                                        class="btn form-control text-white remSo-edit">-</a>
                                                 </div>
                                             @endif
                                         </div>
                                     @endforeach
                                 </div>
-                                <hr>
-                                <div class="form-group row">
-                                    <div class="col-12 form-group">
-                                        <label>Remarks</label>
-                                        <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
-                                    </div>
-                                </div>
+
                                 <div class="form-group row">
                                     <div class="form-group col-12">
-                                        <button type="button" class="col-12 btn btn-outline-success btn-reload">--
+                                        <button type="button" class="col-12 btn btn-outline-primary btn-reload">--
                                             Click this to
                                             view total
                                             --</button>
@@ -387,298 +346,76 @@
                                     <div class="form-group col-lg-4">
                                         <label>PPN</label>
                                         <input class="form-control ppn"
-                                            value="{{ 'Rp. ' . number_format($value->ppn, 0, ',', '.') }}" id=""
+                                            value="{{ 'Rp. ' . number_format($value->ppn) }}" id=""
                                             readonly>
                                     </div>
 
                                     <div class="col-lg-4 form-group">
                                         <label>Total (Before PPN)</label>
                                         <input class="form-control total"
-                                            value="{{ 'Rp. ' . number_format($value->total, 0, ',', '.') }}" readonly>
+                                            value="{{ 'Rp. ' . number_format($value->total) }}" readonly>
                                     </div>
 
                                     <div class="col-lg-4 form-group">
                                         <label>Total (After PPN)</label>
                                         <input class="form-control total-after-ppn"
-                                            value="{{ 'Rp. ' . number_format($value->total_after_ppn, 0, ',', '.') }}"
+                                            value="{{ 'Rp. ' . number_format($value->total_after_ppn) }}"
                                             readonly>
                                     </div>
                                 </div>
-
                             </div>
+                            <div class="modal-footer">
 
+                                    <button type="button" class="btn btn-secondary" href="javascript:void(0)"
+                                        data-bs-toggle="modal"
+                                        data-bs-target="#deleteData{{ $value->id }}">Reject</button>
+
+                                <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary" id="saveBtn">
+                                    <span class="spinner-border spinner-border-sm d-none" role="status"
+                                        aria-hidden="true"></span>
+                                    <span class="sr-only">Loading...</span>
+                                    Save
+                                </button>
+                            </div>
+                        </form>
                     </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="submit">Yes,
-                            verify
-                        </button>
-                    </div>
-                    </form>
                 </div>
             </div>
         </div>
         <!-- Verify Product Modal End -->
 
         <!-- Delete Product Modal Start -->
-        <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
-                    @csrf
-                    @method('delete')
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                                Delete Data:
-                                {{ $value->order_number }}</h5>
-                            <button class="btn-close" type="button" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <h5>Are you sure delete this data ?
-                                        </h5>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit">Yes, delete
-                            </button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        <!-- Delete Product Modal End -->
-    @endforeach
-
-    @foreach ($dataSalesOrderDebt as $value)
-        <!-- Verify Product Modal Start -->
-        <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sales
-                            Order
-                            :
-                            {{ $value->order_number }}</h5>
-                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">
-                        <form action="{{ url('sales_orders/' . $value->id . '/verify') }}" method="POST"
-                            enctype="multipart/form-data">
-                            @csrf
-                            <div class="container-fluid">
-                                <div class="form-group row">
-                                    <div class="col-md-6 form-group">
-                                        <label>
-                                            Customers</label>
-                                        <select name="customer_id" id="" required
-                                            class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
-                                            <option value="" selected>-Choose Customers-</option>
-                                            @foreach ($customer as $cust)
-                                                <option value="{{ $cust->id }}"
-                                                    @if ($cust->id == $value->customers_id) selected @endif>
-                                                    {{ $cust->code_cust }} |
-                                                    {{ $cust->name_cust }}
-                                                </option>
-                                            @endforeach
-                                        </select>
-                                        @error('customer_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                    <div class="col-md-6 form-group mr-5">
-                                        <label>Payment Method</label>
-                                        <select name="payment_method" required
-                                            class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
-                                            <option value="" selected>-Choose Payment-</option>
-                                            <option value="1" @if ($value->payment_method == 1) selected @endif>
-                                                Cash On Delivery
-                                            </option>
-                                            <option value="2" @if ($value->payment_method == 2) selected @endif>
-                                                Cash Before Delivery
-                                            </option>
-                                            <option value="3" @if ($value->payment_method == 3) selected @endif>
-                                                Credit
-                                            </option>
-                                        </select>
-                                        @error('payment_method')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
-                                    </div>
-                                </div>
-                                <hr>
-                                <div class="form-group row formSo-edit">
-                                    @foreach ($value->salesOrderDetailsBy as $detail)
-                                        <div class="mx-auto py-2 form-group row bg-primary">
-                                            <input type="hidden" class="loop" value="{{ $loop->index }}">
-                                            <div class="form-group col-8 col-lg-5">
-                                                <label>Product</label>
-                                                <select name="editProduct[{{ $loop->index }}][products_id]" required
-                                                    class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
-                                                    @if ($detail->products_id != null)
-                                                        <option value="{{ $detail->products_id }}" selected>
-                                                            {{ $detail->productSales->nama_barang .
-                                                                ' (' .
-                                                                $detail->productSales->sub_types->type_name .
-                                                                ', ' .
-                                                                $detail->productSales->sub_materials->nama_sub_material .
-                                                                ')' }}
-                                                        </option>
-                                                    @endif
-                                                </select>
-                                                @error('editProduct[' . $loop->index . '][products_id]')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-4 col-lg-2 form-group">
-                                                <label>Qty</label>
-                                                <input type="number" class="form-control cekQty-edit"
-                                                    name="editProduct[{{ $loop->index }}][qty]"
-                                                    value="{{ $detail->qty }}" />
-                                                <small class="text-danger qty-warning" hidden>The number of items exceeds
-                                                    the
-                                                    stock</small>
-                                                @error('top')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-4 col-lg-2 form-group">
-                                                <label>Disc (%)</label>
-                                                <input type="number" class="form-control discount-append-edit"
-                                                    placeholder="Disc" name="editProduct[{{ $loop->index }}][discount]"
-                                                    value="{{ $detail->discount }}" />
-                                                @error('editProduct[{{ $loop->index }}][discount]')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                            <div class="col-4 col-lg-2 form-group">
-                                                <label>Disc (Rp)</label>
-                                                <input type="number" class="form-control discount_rp" placeholder="Disc"
-                                                    name="editProduct[{{ $loop->index }}][discount_rp]"
-                                                    value="{{ $detail->discount_rp }}" />
-                                                @error('editProduct[{{ $loop->index }}][discount_rp]')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
-                                            </div>
-
-                                            @if ($loop->index == 0)
-                                                <div class="col-1 col-md-1 form-group">
-                                                    <label for="">&nbsp;</label>
-                                                    <a href="javascript:void(0)"
-                                                        class="btn btn-success form-control text-white addSo-edit">+</a>
-                                                </div>
-                                            @else
-                                                <div class="col-1 col-md-1 form-group">
-                                                    <label for="">&nbsp;</label>
-                                                    <a href="javascript:void(0)"
-                                                        class="btn btn-danger form-control text-white remSo-edit">-</a>
-                                                </div>
-                                            @endif
-                                        </div>
-                                    @endforeach
-                                </div>
-                                <hr>
-                                <div class="form-group row">
-                                    <div class="col-12 form-group">
-                                        <label>Remarks</label>
-                                        <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="form-group col-12">
-                                        <button type="button" class="col-12 btn btn-outline-success btn-reload">--
-                                            Click this to
-                                            view total
-                                            --</button>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <div class="form-group col-lg-4">
-                                        <label>PPN</label>
-                                        <input class="form-control ppn"
-                                            value="{{ 'Rp. ' . number_format($value->ppn, 0, ',', '.') }}" id=""
-                                            readonly>
-                                    </div>
-
-                                    <div class="col-lg-4 form-group">
-                                        <label>Total (Before PPN)</label>
-                                        <input class="form-control total"
-                                            value="{{ 'Rp. ' . number_format($value->total, 0, ',', '.') }}" readonly>
-                                    </div>
-
-                                    <div class="col-lg-4 form-group">
-                                        <label>Total (After PPN)</label>
-                                        <input class="form-control total-after-ppn"
-                                            value="{{ 'Rp. ' . number_format($value->total_after_ppn, 0, ',', '.') }}"
-                                            readonly>
-                                    </div>
-                                </div>
-
-                            </div>
-
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="submit">Yes,
-                            verify
-                        </button>
-                    </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-        <!-- Verify Product Modal End -->
-
-        <!-- Delete Product Modal Start -->
-        <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog" role="document">
-                <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ url('sales_order/' . $value->id . '/reject_from_verification') }}"
+                    enctype="multipart/form-data">
                     @csrf
-                    @method('delete')
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                                Delete Data:
-                                {{ $value->order_number }}</h5>
+                            <h6 class="modal-title" id="exampleModalLabel">
+                                Reject
+                                {{ $value->order_number }}</h6>
                             <button class="btn-close" type="button" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <h5>Are you sure delete this data ?</h5>
-                                    </div>
+                            <div> Are you sure to reject this order?
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">Reason</label>
+                                    <input type="text" name="reason" placeholder="Write your reason..."
+                                        id="" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            {{-- <button class="btn btn-secondary" type="button" data-bs-toggle="modal"/> data-bs-target="#verifyData{{ $value->id }}">Back</button> --}}
                             <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit">Yes, delete
+                            <button class="btn btn-primary btn-delete" type="submit">Yes, reject
                             </button>
                         </div>
                     </div>
@@ -687,51 +424,46 @@
         </div>
         <!-- Delete Product Modal End -->
     @endforeach
+
+
 
     @foreach ($dataSalesOrderReject as $value)
         <!-- Verify Product Modal Start -->
-        <div class="modal fade" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
-            aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl modal-dialog-scrollable" role="document">
+        <div class="modal" id="verifyData{{ $value->id }}" data-bs-keyboard="false"
+            aria-labelledby="exampleModalLabel" aria-hidden="true" data-bs-backdrop="static">
+            <div class="modal-dialog modal-fullscreen modal-dialog-scrollable" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Sales
-                            Order
-                            :
-                            {{ $value->order_number }}</h5>
-                        <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <h6 class="modal-title" id="exampleModalLabel">Sales
+                            Order {{ $value->order_number }}</h6>
+                        {{-- <button class="btn-close" type="button" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                     </div>
                     <div class="modal-body">
                         <form action="{{ url('sales_orders/' . $value->id . '/verify') }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
                             <div class="container-fluid">
+                                <input type="hidden" name="warehouse_id" class="warehouse"
+                                    value="{{ $value->warehouse_id }}">
                                 <div class="form-group row">
-                                    <div class="col-md-6 form-group">
+                                    <input type="hidden" name="warehouse_id" class="warehouse"
+                                        value="{{ $value->warehouse_id }}">
+                                    <div class=" col-md-4 mb-3">
                                         <label>
                                             Customers</label>
                                         <select name="customer_id" id="" required
-                                            class="form-control sub_type customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}">
-                                            <option value="" selected>-Choose Customers-</option>
-                                            @foreach ($customer as $cust)
-                                                <option value="{{ $cust->id }}"
-                                                    @if ($cust->id == $value->customers_id) selected @endif>
-                                                    {{ $cust->code_cust }} |
-                                                    {{ $cust->name_cust }}
-                                                </option>
-                                            @endforeach
+                                            class="form-control customer-select customer-append {{ $errors->first('customer_id') ? ' is-invalid' : '' }}"
+                                            multiple>
+                                            <option value="{{ $value->customerBy->id }}" selected>
+                                                {{ $value->customerBy->name_cust }}</option>
                                         </select>
-                                        @error('customer_id')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
-                                        @enderror
+
                                     </div>
-                                    <div class="col-md-6 form-group mr-5">
+                                    <div class="col-md-4 mb-3 mr-5">
                                         <label>Payment Method</label>
                                         <select name="payment_method" required
-                                            class="form-control sub_type {{ $errors->first('payment_method') ? ' is-invalid' : '' }}">
-                                            <option value="" selected>-Choose Payment-</option>
+                                            class="form-control multi-select {{ $errors->first('payment_method') ? ' is-invalid' : '' }}"
+                                            multiple>
                                             <option value="1" @if ($value->payment_method == 1) selected @endif>
                                                 Cash On Delivery
                                             </option>
@@ -748,40 +480,46 @@
                                             </div>
                                         @enderror
                                     </div>
+                                    <div class="col-md-4 mb-3 mr-5">
+                                        <label>Order Date</label>
+                                        {{-- <input type="text" value="{{ $value->order_date }}"> --}}
+                                        <input class="datepicker-here form-control digits" data-position="bottom left"
+                                            type="text" data-language="en"
+                                            data-value="{{ date('d-m-Y', strtotime($value->order_date)) }}"
+                                            name="order_date" autocomplete="off">
+                                    </div>
+
+                                    <div class="col-12 mb-3">
+                                        <label>Remarks</label>
+                                        <textarea class="form-control" name="remark" id="" cols="30" rows="1">{{ $value->remark }}</textarea>
+                                    </div>
                                 </div>
-                                <hr>
-                                <div class="form-group row formSo-edit">
+                                <div class="form-group formSo-edit">
                                     @foreach ($value->salesOrderDetailsBy as $detail)
-                                        <div class="mx-auto py-2 form-group row bg-primary">
+                                        <div class="mx-auto py-2 rounded form-group row"
+                                            style="background-color: #f0e194">
                                             <input type="hidden" class="loop" value="{{ $loop->index }}">
-                                            <div class="form-group col-8 col-lg-5">
+                                            <div class="form-group col-12 col-lg-3">
                                                 <label>Product</label>
-                                                <select name="editProduct[{{ $loop->index }}][products_id]" required
+                                                <select multiple name="editProduct[{{ $loop->index }}][products_id]"
+                                                    required
                                                     class="form-control productSo-edit {{ $errors->first('editProduct[' . $loop->index . '][products_id]') ? ' is-invalid' : '' }}">
                                                     @if ($detail->products_id != null)
                                                         <option value="{{ $detail->products_id }}" selected>
-                                                            {{ $detail->productSales->nama_barang .
-                                                                ' (' .
-                                                                $detail->productSales->sub_types->type_name .
-                                                                ', ' .
-                                                                $detail->productSales->sub_materials->nama_sub_material .
-                                                                ')' }}
+                                                            {{ $detail->productSales->sub_materials->nama_sub_material . ' ' . $detail->productSales->sub_types->type_name . ' ' . $detail->productSales->nama_barang }}
                                                         </option>
                                                     @endif
                                                 </select>
-                                                @error('editProduct[' . $loop->index . '][products_id]')
-                                                    <div class="invalid-feedback">
-                                                        {{ $message }}
-                                                    </div>
-                                                @enderror
+
                                             </div>
 
-                                            <div class="col-4 col-lg-2 form-group">
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label>Qty</label>
-                                                <input type="number" class="form-control cekQty-edit"
+                                                <input type="number" class="form-control cekQty-edit jumlahQty"
                                                     name="editProduct[{{ $loop->index }}][qty]"
                                                     value="{{ $detail->qty }}" />
-                                                <small class="text-danger qty-warning" hidden>The number of items exceeds
+                                                <small class="text-danger qty-warning" hidden>The number of items
+                                                    exceeds
                                                     the
                                                     stock</small>
                                                 @error('top')
@@ -790,10 +528,27 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                            @php
 
+                                                $price = $detail->price;
+                                                if ($price == 0 || $price == null) {
+                                                    $price = $detail->productSales->harga_jual_nonretail;
+                                                    $price = $price + ($price * $ppn) / 100;
+                                                }
+                                            @endphp
                                             <div class="col-4 col-lg-2 form-group">
+                                                <label>Price</label>
+                                                <input type="hidden" name="editProduct[{{ $loop->index }}][price]"
+                                                    value="{{ number_format(round($price)) }}"
+                                                    class="hargaNonRetail">
+                                                <input type="text" class="form-control price hargaNonRetail" disabled
+                                                    value="{{ number_format(round($price)) }}" />
+                                            </div>
+
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label>Disc (%)</label>
-                                                <input type="number" class="form-control discount-append-edit"
+                                                <input type="text"
+                                                    class="form-control discount-append-edit discountPersen"
                                                     placeholder="Disc" name="editProduct[{{ $loop->index }}][discount]"
                                                     value="{{ $detail->discount }}" />
                                                 @error('editProduct[{{ $loop->index }}][discount]')
@@ -803,9 +558,10 @@
                                                 @enderror
                                             </div>
 
-                                            <div class="col-4 col-lg-2 form-group">
+                                            <div class="col-4 col-lg-1 form-group">
                                                 <label>Disc (Rp)</label>
-                                                <input type="number" class="form-control discount_rp" placeholder="Disc"
+                                                <input type="number" class="form-control discount_rp discountRupiah"
+                                                    placeholder="Disc"
                                                     name="editProduct[{{ $loop->index }}][discount_rp]"
                                                     value="{{ $detail->discount_rp }}" />
                                                 @error('editProduct[{{ $loop->index }}][discount_rp]')
@@ -814,30 +570,45 @@
                                                     </div>
                                                 @enderror
                                             </div>
+                                            @php
+                                                $disc = (float) $detail->discount / 100.0;
+                                                // $ppn_cost = (float) $price * (float) $ppn;
+                                                // $ppn_total = (float) $price + $ppn_cost;
+                                                $disc_cost = (float) $price * $disc;
+                                                $price_disc = (float) ($price - $disc_cost - $detail->discount_rp) * $detail->qty;
+                                            @endphp
+                                            <div class="col-4 col-lg-2 form-group">
+                                                <label>Disc Price</label>
+                                                <input type="text" class="form-control priceDiscount" readonly
+                                                    value="{{ number_format(round($price_disc)) }}" />
+                                                <small class="text-danger">*Click here after choose product</small>
+                                            </div>
 
                                             @if ($loop->index == 0)
-                                                <div class="col-1 col-md-1 form-group">
+                                                <div class="col-12 col-lg-2 form-group">
                                                     <label for="">&nbsp;</label>
                                                     <a href="javascript:void(0)"
-                                                        class="btn btn-success form-control text-white addSo-edit">+</a>
+                                                        style="border:none; background-color:#276e61"
+                                                        class="form-control text-center fw-bold text-white addSo-edit">+</a>
                                                 </div>
                                             @else
-                                                <div class="col-1 col-md-1 form-group">
+                                                <div class="col-4 col-lg-1 form-group">
                                                     <label for="">&nbsp;</label>
                                                     <a href="javascript:void(0)"
-                                                        class="btn btn-danger form-control text-white remSo-edit">-</a>
+                                                        style="border:none; background-color:#276e61"
+                                                        class="form-control text-center fw-bold text-white addSo-edit">+</a>
+                                                </div>
+                                                <div class="col-4 col-lg-1 form-group">
+                                                    <label for="">&nbsp;</label>
+                                                    <a href="javascript:void(0)"
+                                                        style="border:none; background-color:#d94f5c"
+                                                        class="btn form-control text-white remSo-edit">-</a>
                                                 </div>
                                             @endif
                                         </div>
                                     @endforeach
                                 </div>
-                                <hr>
-                                <div class="form-group row">
-                                    <div class="col-12 form-group">
-                                        <label>Remarks</label>
-                                        <textarea class="form-control" name="remark" id="" cols="30" rows="5">{{ $value->remark }}</textarea>
-                                    </div>
-                                </div>
+
                                 <div class="form-group row">
                                     <div class="form-group col-12">
                                         <button type="button" class="col-12 btn btn-outline-success btn-reload">--
@@ -850,20 +621,20 @@
                                     <div class="form-group col-lg-4">
                                         <label>PPN</label>
                                         <input class="form-control ppn"
-                                            value="{{ 'Rp. ' . number_format($value->ppn, 0, ',', '.') }}"
-                                            id="" readonly>
+                                            value="{{ 'Rp. ' . number_format($value->ppn) }}" id=""
+                                            readonly>
                                     </div>
 
                                     <div class="col-lg-4 form-group">
                                         <label>Total (Before PPN)</label>
                                         <input class="form-control total"
-                                            value="{{ 'Rp. ' . number_format($value->total, 0, ',', '.') }}" readonly>
+                                            value="{{ 'Rp. ' . number_format($value->total) }}" readonly>
                                     </div>
 
                                     <div class="col-lg-4 form-group">
                                         <label>Total (After PPN)</label>
                                         <input class="form-control total-after-ppn"
-                                            value="{{ 'Rp. ' . number_format($value->total_after_ppn, 0, ',', '.') }}"
+                                            value="{{ 'Rp. ' . number_format($value->total_after_ppn) }}"
                                             readonly>
                                     </div>
                                 </div>
@@ -872,9 +643,16 @@
 
                     </div>
                     <div class="modal-footer">
+
+                            <button type="button" class="btn btn-secondary" href="javascript:void(0)"
+                                data-bs-toggle="modal" data-bs-target="#deleteData{{ $value->id }}">Reject</button>
+
                         <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                        <button class="btn btn-primary" type="submit">Yes,
-                            verify
+                        <button type="submit" class="btn btn-primary" id="saveBtn">
+                            <span class="spinner-border spinner-border-sm d-none" role="status"
+                                aria-hidden="true"></span>
+                            <span class="sr-only">Loading...</span>
+                            Save
                         </button>
                     </div>
                     </form>
@@ -884,32 +662,36 @@
         <!-- Verify Product Modal End -->
 
         <!-- Delete Product Modal Start -->
-        <div class="modal fade" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal" id="deleteData{{ $value->id }}" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true" data-bs-backdrop="static">
             <div class="modal-dialog" role="document">
-                <form method="post" action="{{ url('sales_order/' . $value->id) }}" enctype="multipart/form-data">
+                <form method="post" action="{{ url('sales_order/' . $value->id . '/reject_from_verification') }}"
+                    enctype="multipart/form-data">
                     @csrf
-                    @method('delete')
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">
-                                Delete Data:
-                                {{ $value->order_number }}</h5>
+                            <h6 class="modal-title" id="exampleModalLabel">
+                                Reject
+                                {{ $value->order_number }}</h6>
                             <button class="btn-close" type="button" data-bs-dismiss="modal"
                                 aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <div class="container-fluid">
-                                <div class="form-group row">
-                                    <div class="col-md-12">
-                                        <h5>Are you sure delete this data ?</h5>
-                                    </div>
+                            <div> Are you sure to reject this order?
+                            </div>
+                            <br>
+                            <div class="row">
+                                <div class="col">
+                                    <label for="">Reason</label>
+                                    <input type="text" name="reason" placeholder="Write your reason..."
+                                        id="" class="form-control" required>
                                 </div>
                             </div>
                         </div>
                         <div class="modal-footer">
+                            {{-- <button class="btn btn-secondary" type="button" data-bs-toggle="modal"/> data-bs-target="#verifyData{{ $value->id }}">Back</button> --}}
                             <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
-                            <button class="btn btn-primary" type="submit">Yes, delete
+                            <button class="btn btn-primary btn-delete" type="submit">Yes, reject
                             </button>
                         </div>
                     </div>
@@ -930,122 +712,80 @@
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.print.min.js"></script>
         <script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.colVis.min.js"></script>
+        <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.js') }}"></script>
+        <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.en.js') }}"></script>
+        <script src="{{ asset('assets/js/datepicker/date-picker/datepicker.custom.js') }}"></script>
         <script>
             $(document).ready(function() {
                 let date = new Date();
                 let date_now = date.getDate() + '-' + (date.getMonth() + 1) + '-' + date.getFullYear();
-                $('#example').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            title: 'Unverified Sales Orders Non-credit (' + date_now + ')',
-                            extend: 'pdf',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                            customize: function(doc) {
-                                doc.styles.tableHeader.alignment = 'left';
-                                doc.content[1].table.widths = Array(doc.content[1].table.body[0]
-                                    .length + 1).join('*').split(
-                                    '');
-                            },
-                        },
-                        {
-                            title: 'Unverified Sales Orders Non-credit (' + date_now + ')',
-                            extend: 'print',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            title: 'Unverified Sales Orders Non-credit (' + date_now + ')',
-                            extend: 'excel',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        'colvis'
-                    ]
-
-                });
-                $('#example1').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            title: 'Unverified Sales Orders Credit (' + date_now + ')',
-                            extend: 'pdf',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                            customize: function(doc) {
-                                doc.styles.tableHeader.alignment = 'left';
-                                doc.content[1].table.widths = Array(doc.content[1].table.body[0]
-                                    .length + 1).join('*').split(
-                                    '');
-                            },
-                        },
-                        {
-                            title: 'Unverified Sales Orders Credit (' + date_now + ')',
-                            extend: 'print',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            title: 'Unverified Sales Orders Credit (' + date_now + ')',
-                            extend: 'excel',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        'colvis'
-                    ]
+                var t = $('#example').DataTable({
+                    "lengthChange": false,
+                    "paging": false,
+                    "bPaginate": false, // disable pagination
+                    "bLengthChange": false, // disable show entries dropdown
+                    "searching": true,
+                    "ordering": true,
+                    "info": false,
+                    "autoWidth": false,
+                    dom: 'lpftrip',
+                    pageLength: -1,
+                    columnDefs: [{
+                        searchable: false,
+                        orderable: false,
+                        targets: 0
+                    }, {
+                        searchable: false,
+                        orderable: false,
+                        targets: 1,
+                    }, ],
                 });
 
-                $('#example2').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [{
-                            title: 'Rejected Sales Orders (' + date_now + ')',
-                            extend: 'pdf',
-                            pageSize: 'A4',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                            customize: function(doc) {
-                                doc.styles.tableHeader.alignment = 'left';
-                                doc.content[1].table.widths = Array(doc.content[1].table.body[0]
-                                    .length + 1).join('*').split(
-                                    '');
-                            },
-                        },
-                        {
-                            title: 'Rejected Sales Orders (' + date_now + ')',
-                            extend: 'print',
-                            exportOptions: {
-                                columns: ':visible'
-                            },
-                        },
-                        {
-                            title: 'Rejected Sales Orders (' + date_now + ')',
-                            extend: 'excel',
-                            exportOptions: {
-                                columns: ':visible'
-                            }
-                        },
-                        'colvis'
-                    ]
+                t.on('order.dt search.dt', function() {
+                    let i = 1;
 
-                });
+                    t.cells(null, 0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).every(function(cell) {
+                        this.data(i++);
+                    });
+                }).draw();
 
-                // Order by the grouping
-                $('#example tbody').on('click', 'tr.group', function() {
-                    var currentOrder = table.order()[0];
-                    if (currentOrder[0] === 2 && currentOrder[1] === 'asc') {
-                        table.order([2, 'desc']).draw();
-                    } else {
-                        table.order([2, 'asc']).draw();
-                    }
+                var t_ = $('#example1').DataTable({
+                    "lengthChange": false,
+                    "paging": false,
+                    "bPaginate": false, // disable pagination
+                    "bLengthChange": false, // disable show entries dropdown
+                    "searching": true,
+                    "ordering": true,
+                    "info": false,
+                    pageLength: -1,
+                    "autoWidth": false,
+                    dom: 'lpftrip',
+                    columnDefs: [{
+                        searchable: false,
+                        orderable: false,
+                        targets: 0,
+                    }, {
+                        searchable: false,
+                        orderable: false,
+                        targets: 1,
+                    }, ],
                 });
+                t_.on('order.dt search.dt', function() {
+                    let i = 1;
+
+                    t.cells(null, 0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).every(function(cell) {
+                        this.data(i++);
+                    });
+                }).draw();
+
+
+
             });
         </script>
         <script>
@@ -1053,22 +793,43 @@
                 let csrf = $('meta[name="csrf-token"]').attr("content");
 
                 $(document).on("click", ".modal-btn", function() {
-
                     let modal_id = $(this).attr('data-bs-target');
-                    //Get Customer ID
-                    let customer_id = $(modal_id).find('.customer-append').val();
-                    $(modal_id).find(".productSo-edit").select2({
-                        width: "100%",
+                    $(document).on('click', '.btn-delete', function() {
+                        $(this).addClass('disabled');
+                    });
+                    $('form').submit(function(e) {
+                        var form = $(this);
+                        var button = form.find('button[type="submit"]');
+                        if (form[0].checkValidity()) {
+                            button.prop('disabled', true);
+                            $(this).find('.spinner-border').removeClass('d-none');
+                            $(this).find('span:not(.spinner-border)').addClass('d-none');
+                            $(this).off('click');
+                        }
+                    });
+
+
+                    let warehouse_id = $(modal_id).find('.warehouse').val();
+                    $(modal_id).find('.multi-select').select2({
                         dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        width: '100%'
+                    });
+                    $(modal_id).find('.customer-select').select2({
+                        dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        width: '100%',
                         ajax: {
                             context: this,
                             type: "GET",
-                            url: "/products/select",
+                            url: "/customer/select/",
                             data: function(params) {
                                 return {
                                     _token: csrf,
-                                    q: params.term, // search term
-                                    c: customer_id
                                 };
                             },
                             dataType: "json",
@@ -1077,12 +838,137 @@
                                 return {
                                     results: $.map(data, function(item) {
                                         return [{
-                                            text: item.nama_barang +
-                                                " (" +
+                                            text: item
+                                                .code_cust +
+                                                ' - ' +
+                                                item.name_cust,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+                    $(modal_id).find('.datepicker-here').datepicker({
+                        dropdownParent: $(modal_id),
+                        onSelect: function(formattedDate, date, inst) {
+                            inst.hide();
+                        },
+                    });
+                    $(modal_id).find('.datepicker-here').val(
+                        $(modal_id).find('.datepicker-here').attr('data-value'));
+
+                    $(modal_id).find(".productSo-edit").select2({
+                        dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        width: '100%',
+                        ajax: {
+                            context: this,
+                            type: "GET",
+                            url: "/products/select",
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                    w: warehouse_id
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item
+                                                .nama_sub_material +
+                                                " " +
                                                 item.type_name +
-                                                ", " +
-                                                item.nama_sub_material +
-                                                ")",
+                                                " " + item.nama_barang,
+                                            id: item.id,
+                                        }, ];
+                                    }),
+                                };
+                            },
+                        },
+                    });
+
+
+
+                    $(modal_id).find('.productSo-edit').change(function() {
+                        let product_id = $(this).val();
+                        let parent_product = $(this).parent('.form-group').siblings(
+                            '.form-group').find(
+                            ".price");
+                        $.ajax({
+                            context: this,
+                            type: "GET",
+                            url: "/products/selectPrice" + "/" + product_id,
+                            dataType: "json",
+                            success: function(data) {
+                                if (data != null) {
+                                    parent_product.val(data.replace(/\./g,
+                                            ','));
+                                } else {
+                                    parent_product.val(0);
+                                }
+                            },
+                        });
+                    });
+
+                    $(modal_id).find('.priceDiscount').on('click', function() {
+                        let price = $(this).parent('.form-group').siblings('.form-group').find(
+                            ".price").val().replace(/\,/g, '');
+                        console.log(price);
+                        let qty = $(this).parent('.form-group').siblings('.form-group').find(
+                            ".jumlahQty").val();
+                        console.log(qty);
+                        let discountPersen = $(this).parent('.form-group').siblings('.form-group').find(
+                            ".discountPersen").val() / 100;
+                        console.log(discountPersen);
+                        let discountRupiah = $(this).parent('.form-group').siblings('.form-group').find(
+                            ".discountRupiah").val();
+                        console.log(discountRupiah);
+
+
+                        let hDiskon = price * discountPersen;
+                        let totalDiskon = parseInt(hDiskon) + parseInt(discountRupiah);
+                        let total = (price - totalDiskon) * qty;
+
+                        $(this).val(total.toLocaleString('en'));
+                    });
+
+                    //Get Customer ID
+                    let customer_id = $(modal_id).find('.customer-append').val();
+                    $(modal_id).find(".productSo-edit").select2({
+                        dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        width: '100%',
+                        ajax: {
+                            context: this,
+                            type: "GET",
+                            url: "/products/select",
+                            data: function(params) {
+                                return {
+                                    _token: csrf,
+                                    q: params.term, // search term
+                                    w: warehouse_id
+                                };
+                            },
+                            dataType: "json",
+                            delay: 250,
+                            processResults: function(data) {
+                                return {
+                                    results: $.map(data, function(item) {
+                                        return [{
+                                            text: item
+                                                .nama_sub_material +
+                                                " " +
+                                                item.type_name +
+                                                " " + item.nama_barang,
                                             id: item.id,
                                         }, ];
                                     }),
@@ -1133,7 +1019,7 @@
                             url: "/stocks/cekQty/" + product_id,
                             data: {
                                 _token: csrf,
-                                c: id,
+                                w: warehouse_id,
                             },
                             dataType: "json",
                             delay: 250,
@@ -1156,49 +1042,83 @@
                             },
                         });
                     });
-                    $(modal_id).on("click", ".addSo-edit", function() {
+                    $(document).off("click", ".addSo-edit");
+                    $(document).on("click", ".addSo-edit", function() {
                         ++x;
-                        var form =
-                            '<div class="mx-auto py-2 form-group row bg-primary">' +
-                            '<input type="hidden" class="loop" value="' + x + '">' +
-                            '<div class="form-group col-8 col-lg-5">' +
-                            "<label>Product</label>" +
-                            '<select name="editProduct[' +
-                            x +
-                            '][products_id]" class="form-control productSo-edit" required>' +
-                            '<option value="">Choose Product</option> ' +
-                            "</select>" +
-                            "</div>" +
-                            '<div class="col-4 col-lg-2 form-group">' +
-                            "<label> Qty </label> " +
-                            '<input type="number" class="form-control cekQty-edit" placeholder="Qty" required name="editProduct[' +
-                            x +
-                            '][qty]">' +
-                            '<small class="text-danger qty-warning" hidden>The number of items exceeds the stock</small>' +
-                            "</div> " +
-                            '<div class="col-4 col-lg-2 form-group">' +
-                            "<label>Disc (%)</label>" +
-                            '<input type="number" class="form-control discount-append-edit" placeholder="Disc (%)" name="editProduct[' +
-                            x +
-                            '][discount]" id="">' +
-                            "</div>" +
-                            '<div class="col-4 col-lg-2 form-group">' +
-                            '<label>Disc (Rp)</label>' +
-                            '<input type="number" class="form-control" placeholder="Disc (Rp)"' +
-                            'name="editProduct[' + x + '][discount_rp]"' +
-                            '/>' +
-                            '</div>' +
-                            '<div class="col-1 col-md-1 form-group">' +
-                            '<label for=""> &nbsp; </label>' +
-                            '<a class="btn btn-danger form-control text-white remSo-edit text-center">' +
-                            "- </a> " +
-                            "</div>" +
-                            " </div>";
+                        var form = ` <div class="mx-auto py-2 rounded form-group row" style="background-color: #f0e194">
+                                            <input type="hidden" class="loop" value="${x}">
+                                            <div class="form-group col-12 col-lg-3">
+                                                <label>Product</label>
+                                                <select name="editProduct[${x}][products_id]" required multiple
+                                                    class="form-control productSo-edit ">
+                                                </select>
+
+                                            </div>
+
+                                            <div class="col-4 col-lg-1 form-group">
+                                                <label>Qty</label>
+                                                <input type="number" class="form-control cekQty-edit jumlahQty"
+                                                    name="editProduct[${x}][qty]"
+                                                    value="0" />
+                                                <small class="text-danger qty-warning" hidden>The number of items exceeds
+                                                    the
+                                                    stock</small>
+
+                                            </div>
+
+                                            <div class="col-4 col-lg-2 form-group">
+                                                <label>Price</label>
+                                                <input type="hidden" class="hargaNonRetail price" name="editProduct[${x}][price]">
+                                                <input type="text" class="form-control price hargaNonRetail" disabled
+                                                    value="0" />
+                                            </div>
+
+                                            <div class="col-4 col-lg-1 form-group">
+                                                <label>Disc (%)</label>
+                                                <input type="text"
+                                                    class="form-control discount-append-edit discountPersen"
+                                                    placeholder="Disc" name="editProduct[${x}][discount]"
+                                                    value="0" />
+
+                                            </div>
+
+                                            <div class="col-4 col-lg-1 form-group">
+                                                <label>Disc (Rp)</label>
+                                                <input type="number" class="form-control discount_rp discountRupiah"
+                                                    placeholder="Disc"
+                                                    name="editProduct[${x}][discount_rp]"
+                                                    value="0" />
+
+                                            </div>
+
+                                            <div class="col-4 col-lg-2 form-group">
+                                                <label>Disc Price</label>
+                                                <input type="text" placeholder="click here" class="form-control priceDiscount" readonly
+                                                    value="" />
+                                                <small class="text-danger">*Click here after choose product</small>
+                                            </div>
+
+
+                                                <div class="col-4 col-lg-1 form-group">
+                                                    <label for="">&nbsp;</label>
+                                                    <a href="javascript:void(0)"
+                                                        class="btn text-center fw-bold form-control text-white addSo-edit" style="border:none; background-color:#276e61">+</a>
+                                                </div>
+                                                <div class="col-4 col-lg-1 form-group">
+                                                    <label for="">&nbsp;</label>
+                                                    <a href="javascript:void(0)" style="border:none; background-color:#d94f5c"
+                                                        class="btn text-center fw-bold form-control text-white remSo-edit">-</a>
+                                                </div>
+                                        </div>`;
+
                         $(modal_id).find(".formSo-edit").append(form);
 
                         $(modal_id).find(".productSo-edit").select2({
-                            width: "100%",
                             dropdownParent: modal_id,
+                            placeholder: 'Select an option',
+                            allowClear: true,
+                            maximumSelectionLength: 1,
+                            width: '100%',
                             ajax: {
                                 type: "GET",
                                 url: "/products/select",
@@ -1206,7 +1126,7 @@
                                     return {
                                         _token: csrf,
                                         q: params.term, // search term
-                                        c: customer_id
+                                        w: warehouse_id
                                     };
                                 },
                                 dataType: "json",
@@ -1215,12 +1135,11 @@
                                     return {
                                         results: $.map(data, function(item) {
                                             return [{
-                                                text: item.nama_barang +
-                                                    " (" +
+                                                text: item
+                                                    .nama_sub_material +
+                                                    " " +
                                                     item.type_name +
-                                                    ", " +
-                                                    item.nama_sub_material +
-                                                    ")",
+                                                    " " + item.nama_barang,
                                                 id: item.id,
                                             }, ];
                                         }),
@@ -1228,7 +1147,56 @@
                                 },
                             },
                         });
+                        $(modal_id).find('.priceDiscount').on('click', function() {
+                            let price = $(this).parent('.form-group').siblings('.form-group')
+                                .find(
+                                    ".price").val().replace(/\,/g, '');
+                            console.log(price);
+                            let qty = $(this).parent('.form-group').siblings('.form-group')
+                                .find(
+                                    ".jumlahQty").val();
+                            console.log(qty);
+                            let discountPersen = $(this).parent('.form-group').siblings(
+                                '.form-group').find(
+                                ".discountPersen").val() / 100;
+                            console.log(discountPersen);
+                            let discountRupiah = $(this).parent('.form-group').siblings(
+                                '.form-group').find(
+                                ".discountRupiah").val();
+                            console.log(discountRupiah);
+
+
+                            let hDiskon = price * discountPersen;
+                            let totalDiskon = parseInt(hDiskon) + parseInt(discountRupiah);
+                            let total = (price - totalDiskon) * qty;
+
+                            $(this).val(total.toLocaleString('en'));
+                        });
+                        $(modal_id).find('.productSo-edit').change(function() {
+                            let product_id = $(this).val();
+                            let parent_product = $(this).parent('.form-group').siblings(
+                                '.form-group').find(
+                                ".price");
+                            $.ajax({
+                                context: this,
+                                type: "GET",
+                                url: "/products/selectPrice" + "/" + product_id,
+                                dataType: "json",
+                                success: function(data) {
+                                    if (data != null) {
+                                        parent_product.val(data.replace(/\./g,
+                                            ','));
+                                    } else {
+                                        parent_product.val(0);
+                                    }
+                                },
+                            });
+                        });
+
+                        $(modal_id).find(".productSo-edit").last().select2("open");
+
                     });
+
 
                     //remove Sales Order fields
                     $(modal_id).on("click", ".remSo-edit", function() {
@@ -1240,36 +1208,26 @@
                         let ppn = 0;
                         let total = 0;
                         let total_after_ppn = 0;
-                        $(modal_id).find('.productSo-edit').each(function() {
+                        $(this).closest('.row').siblings('.formSo-edit').find('.productSo-edit').each(function() {
                             let product_id = $(this).val();
-                            let cost = function() {
-                                let temp = 0;
-                                $.ajax({
-                                    async: false,
-                                    context: this,
-                                    type: "GET",
-                                    url: "/products/selectCost/" + product_id,
-                                    dataType: "json",
-                                    success: function(data) {
-                                        temp = data.harga_jual_nonretail
-                                    },
-                                });
-                                return temp;
-                            }();
-
+                            let cost = $(this).parent().siblings().find('.priceDiscount').val()
+                                .replace(
+                                    /\,/g, '');
+                           // console.log('cost: ' + cost);
                             let qty = $(this).parent().siblings().find('.cekQty-edit').val();
-                            let disc = $(this).parent().siblings().find('.discount-append-edit')
-                                .val() / 100;
+                            let disc = parseFloat($(this).parent().siblings().find(
+                                    '.discount-append-edit')
+                                .val()) / 100;
                             let disc_rp = $(this).parent().siblings().find('.discount_rp')
                                 .val();
-                            ppn = cost * $('#ppn').val();
-                            let ppn_cost = cost + ppn;
+                            ppn = parseFloat(cost) * $('#ppn').val();
+                            let ppn_cost = parseFloat(cost);
                             let disc_cost = ppn_cost * disc;
                             let cost_after_disc = (ppn_cost - disc_cost) - disc_rp;
-                            total = total + (cost_after_disc * qty);
-                            //   alert($(this).parent().siblings().find('.cekQty-edit').val());
-                        });
+                            total = parseFloat(total) + parseFloat(cost);
+                            //console.log('Total: ' + total);
 
+                        });
                         total_after_ppn = total;
                         $(this).closest('.row').siblings().find('.ppn').val('Rp. ' + Math.round(
                                 total_after_ppn / 1.11 * $('#ppn').val())

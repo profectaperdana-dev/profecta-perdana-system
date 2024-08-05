@@ -26,10 +26,12 @@
                     </div>
                     <div class="card-profile">
                         @if (Auth::user()->employeeBy->photo == 'blank')
-                            <img class="rounded-circle" src="{{ asset('images/blank.png') }}" alt="">
+                            <img class="rounded-circle" src="{{ url('/public/images/blank.png') }}" alt="">
                         @else
                             <img class="rounded-circle"
-                                src="{{ asset('images/employees/' . Auth::user()->employeeBy->photo) }}" alt="">
+                                src="{{ url('/public/images/employees/' . Auth::user()->employeeBy->photo) }}"
+                                alt=""
+                                style="width:100px;height:100px;object-fit:cover;object-position: 50% 50%;image-rendering:smooth;filter:blur(0.4px)">
                         @endif
                     </div>
 
@@ -79,7 +81,6 @@
                     </div>
                     {{-- End Modal Edit UOM --}}
                     <div class="text-center">
-                        <h4><a href="javascript:void(0)">{{ Auth::user()->warehouseBy->warehouses }}</a></h4>
 
                     </div>
 
@@ -154,33 +155,56 @@
                             @method('PATCH')
                             <div class="mb-3">
                                 <label class="form-label">Old Password</label>
-                                <input name="old_password"
+                                <div class="input-group">
+                                    <input type="password"
+                                        class="form-control pw {{ $errors->first('old_password') ? ' is-invalid' : '' }}"
+                                        name="old_password" value="{{ old('old_password') }}"
+                                        placeholder="Enter old password">
+                                    <span class="btn pb-0 pt-2 px-2 show-pw"><i data-feather="eye"
+                                            class="fs-5 m-0 opacity-25"></i></button>
+                                </div>
+                                {{-- <input name="old_password"
                                     class="form-control {{ $errors->first('old_password') ? ' is-invalid' : '' }}"
-                                    type="password" value="{{ old('old_password') }}">
+                                    type="password" value="{{ old('old_password') }}"> --}}
                                 @error('old_password')
-                                    <div class="invalid-feedback">
+                                    <div class="text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">New Password</label>
-                                <input name="new_password"
+                                <div class="input-group">
+                                    <input name="new_password"
+                                        class="form-control pw {{ $errors->first('new_password') ? ' is-invalid' : '' }}"
+                                        type="password" value="{{ old('new_password') }}"
+                                        placeholder="Enter new password">
+                                    <span class="btn pb-0 pt-2 px-2 show-pw"><i data-feather="eye"
+                                            class="fs-5 m-0 opacity-25"></i></button>
+                                </div>
+                                {{-- <input name="new_password"
                                     class="form-control {{ $errors->first('new_password') ? ' is-invalid' : '' }}"
-                                    type="password" value="{{ old('new_password') }}">
+                                    type="password" value="{{ old('new_password') }}"> --}}
                                 @error('new_password')
-                                    <div class="invalid-feedback">
+                                    <div class="text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
                             </div>
                             <div class="mb-3">
                                 <label class="form-label">Confirm New Password</label>
-                                <input name="password_confirmation"
+                                <div class="input-group">
+                                    <input name="password_confirmation"
+                                        class="form-control pw {{ $errors->first('password_confirmation') ? ' is-invalid' : '' }}"
+                                        type="password" value="" placeholder="Confirm new password">
+                                    <span class="btn pb-0 pt-2 px-2 show-pw"><i data-feather="eye"
+                                            class="fs-5 m-0 opacity-25"></i></button>
+                                </div>
+                                {{-- <input name="password_confirmation"
                                     class="form-control {{ $errors->first('password_confirmation') ? ' is-invalid' : '' }}"
-                                    type="password" value="">
+                                    type="password" value=""> --}}
                                 @error('password_confirmation')
-                                    <div class="invalid-feedback">
+                                    <div class="text-danger">
                                         {{ $message }}
                                     </div>
                                 @enderror
@@ -200,5 +224,14 @@
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script>
+            $('.show-pw').on('pointerdown', function() {
+                $(this).parent().find('.pw').attr('type', 'text');
+            });
+
+            $('.show-pw').on('pointerup', function() {
+                $(this).parent().find('.pw').attr('type', 'password');
+            });
+        </script>
     @endpush
 @endsection

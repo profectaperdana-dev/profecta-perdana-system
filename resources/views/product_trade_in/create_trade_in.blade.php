@@ -2,6 +2,7 @@
 @section('content')
     @push('css')
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+        @include('report.style')
     @endpush
 
     <div class="container-fluid">
@@ -9,8 +10,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold"> {{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">
-                        {{ $title }}
+
                 </div>
 
             </div>
@@ -22,10 +22,7 @@
 
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Create Data</h5>
-                        <hr class="bg-primary">
-                    </div>
+
                     <div class="card-body">
                         <form class="needs-validation" novalidate method="post" action="{{ url('trade_in/store') }}"
                             enctype="multipart/form-data" id="">
@@ -44,7 +41,22 @@
         <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script>
             $(function() {
+                $('.multiSelect').select2({
+                    placeholder: 'Select an product',
+                    allowClear: true,
+                    maximumSelectionLength: 1,
+                    width: '100%',
+                });
 
+                $('form').submit(function() {
+                    var form = $(this);
+                    var button = form.find('button[type="submit"]');
+
+                    if (form[0].checkValidity()) { // check if form has input values
+                        button.prop('disabled', true);
+                        // e.preventDefault(); // prevent form submission
+                    }
+                });
                 $('.nameCustomer').attr('hidden', 'hidden');
                 $('.valCust').on('change', function() {
                     var val = $(this).val();
@@ -74,7 +86,7 @@
                         $(this).find('button[type="submit"]').prop('disabled', false);
                     }
                 });
-            })
+            });
         </script>
         <script>
             $(document).ready(function() {
@@ -84,7 +96,10 @@
 
 
                 $(".all_product_TradeIn").select2({
-                    width: "100%",
+                    placeholder: 'Select an warehouse',
+                    allowClear: true,
+                    maximumSelectionLength: 1,
+                    width: '100%',
                     ajax: {
                         type: "GET",
                         url: "/all_product_trade_in",
@@ -101,36 +116,42 @@
                                 results: $.map(data, function(item) {
                                     return [{
                                         text: item.name_product_trade_in,
-
-
                                         id: item.id,
                                     }, ];
                                 }),
                             };
                         },
                     },
+                }).on("select2:select", function() {
+                    $(".qty").focus();
                 });
 
 
-                $("#addTradeIn").on("click", function() {
+                $(document).on("click", ".addTradeIn", function() {
                     ++y;
-                    let form =
-                        '<div class="mx-auto py-2 form-group row bg-primary"> <div class="form-group col-7">' +
-                        '<label>Baterry</label> <select name="tradeFields[' +
-                        y +
-                        '][product_trade_in]" class="form-control all_product_TradeIn" required>' +
-                        '<option value="">-Choose Battery-</option> ' +
-                        "</select>" +
-                        '</div>' +
-                        '<div class="col-3 col-md-3 form-group">' +
-                        "<label> Qty </label> " +
-                        '<input class="form-control cekQty" required name="tradeFields[' +
-                        y +
-                        '][qty]">' +
-                        "</div>" +
-                        '<div class="col-2 col-md-2 form-group">' +
-                        '<label for="">&nbsp;</label>' +
-                        '<a href="javascript:void(0)" class="form-control text-white remTradeIn text-center" style="border:none; background-color:red">X</a></div></div>';
+                    let form = `<div class="mx-auto py-2 form-group row rounded" style="background-color: #f0e194">
+                                    <div class="form-group col-12 col-lg-7">
+                                        <label>Baterry</label>
+                                        <select name="tradeFields[${y}][product_trade_in]" class="form-control all_product_TradeIn" required
+                                            multiple>
+                                        </select>
+                                    </div>
+                                    <div class="col-6 col-lg-3 form-group">
+                                        <label>Qty</label>
+                                        <input class="form-control qty" required name="tradeFields[${y}][qty]" id="">
+                                    </div>
+                                    <div class="col-3 col-lg-1 form-group">
+                                        <label for="">&nbsp;</label>
+                                        <a id="" href="javascript:void(0)" class="form-control addTradeIn text-white  text-center"
+                                            style="border:none; background-color:#276e61">+</a>
+                                    </div>
+                                    <div class="col-3 col-lg-1 form-group">
+                                        <label for="">&nbsp;</label>
+                                        <a id="" href="javascript:void(0)" class="form-control remTradeIn text-white  text-center"
+                                        style="border:none; background-color:#d94f5c">-</a>
+                                    </div>
+                                </div>`;
+
 
                     $("#formTradeIn").append(form);
                     $(".all_product_TradeIn").select2({
@@ -159,7 +180,10 @@
                                 };
                             },
                         },
+                    }).on("select2:select", function() {
+                        $(".qty").focus();
                     });
+                    $(".all_product_TradeIn").last().select2("open");
 
                 });
                 $(document).on("click", ".remTradeIn", function() {

@@ -2,6 +2,7 @@
 @section('content')
     @push('css')
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
+        @include('report.style')
     @endpush
 
     <div class="container-fluid">
@@ -17,13 +18,8 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-
             <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        <h5>Create Return</h5>
-                        <hr class="bg-primary">
-                    </div>
+                <div class="card shadow">
                     <div class="card-body">
                         <div class="mb-3 row box-select-all justify-content-end">
                             <button class="col-1 me-3 btn btn-sm btn-primary" id="addReturn">+</button>
@@ -48,9 +44,20 @@
 
             $(document).ready(function() {
                 $('form').submit(function() {
-                    $(this).find('button[type="submit"]').prop('disabled', true);
-                });
+                    var form = $(this);
+                    var button = form.find('button[type="submit"]');
 
+                    if (form[0].checkValidity()) { // check if form has input values
+                        button.prop('disabled', true);
+                        // e.preventDefault(); // prevent form submission
+                    }
+                });
+                $('.multi-select').select2({
+                    placeholder: 'Select an option',
+                    allowClear: true,
+                    maximumSelectionLength: 1,
+                    width: '100%'
+                });
                 $('.return_reason1').change(function() {
                     let return_reason1 = $(this).val();
                     if (return_reason1 == "Wrong Quantity" || return_reason1 == "Wrong Product Type") {
@@ -74,7 +81,10 @@
                 let po_id = $('#po_id').val();
 
                 $(".productReturn").select2({
-                    width: "100%",
+                    placeholder: 'Select an option',
+                    allowClear: true,
+                    maximumSelectionLength: 1,
+                    width: '100%',
                     ajax: {
                         type: "GET",
                         url: "/purchase_order/selectReturn",
@@ -91,12 +101,10 @@
                             return {
                                 results: $.map(data, function(item) {
                                     return [{
-                                        text: item.nama_barang +
-                                            " (" +
-                                            item.type_name +
-                                            ", " +
-                                            item.nama_sub_material +
-                                            ")",
+                                        text: item.nama_sub_material + ' ' + item
+                                            .type_name + ' ' + item.nama_barang,
+
+
                                         id: item.id,
                                     }, ];
                                 }),
@@ -144,17 +152,16 @@
                 $("#addReturn").on("click", function() {
                     ++x;
                     let form =
-                        '<div class="form-group row">' +
-                        '<div class="form-group col-7">' +
+                        '<div class="form-group row rounded pt-2 mb-3" style="background-color: #f0e194">' +
+                        '<div class="form-group col-12 col-lg-7">' +
                         "<label>Product</label>" +
-                        '<select name="returnFields[' +
+                        '<select multiple name="returnFields[' +
                         x +
                         '][product_id]" class="form-control productReturn" required>' +
-                        '<option value=""> Choose Product </option> ' +
 
                         '</select>' +
                         '</div>' +
-                        '<div class="col-3 col-md-3 form-group">' +
+                        '<div class="col-9 col-lg-3 form-group">' +
                         '<label> Qty </label> ' +
                         '<input class="form-control" required name="returnFields[' +
                         x +
@@ -162,16 +169,19 @@
                         '<small class="text-xs box-order-amount" hidden>Order Amount: <span class="order-amount">0</span></small>' +
                         '<small class="text-xs box-return-amount" hidden> | Returned: <span class="return-amount">0</span></small>' +
                         '</div>' +
-                        '<div class="col-2 col-md-2 form-group">' +
+                        '<div class="col-3 col-md-2 form-group">' +
                         '<label for=""> &nbsp; </label>' +
-                        '<a class="form-control text-white remReturn text-center" style="border:none; background-color:red">' +
+                        '<a href="javascript:void(0)" class="form-control text-white remReturn text-center" style="border:none; background-color:red">' +
                         '- </a> ' +
                         '</div>' +
                         ' </div>';
                     $("#formReturn").append(form);
 
                     $(".productReturn").select2({
-                        width: "100%",
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        width: '100%',
                         ajax: {
                             type: "GET",
                             url: "/purchase_order/selectReturn",
@@ -188,12 +198,9 @@
                                 return {
                                     results: $.map(data, function(item) {
                                         return [{
-                                            text: item.nama_barang +
-                                                " (" +
-                                                item.type_name +
-                                                ", " +
-                                                item.nama_sub_material +
-                                                ")",
+                                            text: item.nama_sub_material + ' ' +
+                                                item
+                                                .type_name + ' ' + item.nama_barang,
                                             id: item.id,
                                         }, ];
                                     }),

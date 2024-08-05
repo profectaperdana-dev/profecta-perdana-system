@@ -130,7 +130,7 @@
                 <td style="width: 10%">Date
                 </td>
                 <td style="text-align:left">
-                    : {{ date('d-m-Y', strtotime($data->return_date)) }} <br>
+                    : {{ date('d F Y', strtotime($data->return_date)) }} <br>
                 </td>
             </tr>
         </table>
@@ -154,12 +154,16 @@
             </thead>
             <tbody>
                 @php
+
                     $y = 0;
+
                 @endphp
                 @foreach ($data->returnDetailsBy as $key => $value)
                     {{-- @for ($i = 0; $i < 6; $i++) --}}
                     <?php
+
                     $y++;
+
                     ?>
                     <tr>
                         <td style="text-align:center;padding:5px">{{ $key + 1 }}.

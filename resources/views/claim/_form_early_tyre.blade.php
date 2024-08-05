@@ -64,13 +64,13 @@
                     {{-- Information Car --}}
                     <div class="col-12 col-md-4  form-group">
                         <label>Plate Number</label>
-                        <input type="text" placeholder="Enter Plat Number" required
+                        <input type="text" placeholder="Enter Plate Number" required
                             class="form-control text-uppercase " name="plate_number">
                     </div>
                     <div class="col-12 col-md-4  form-group">
-                        <label>Car Brands</label>
+                        <label>Car Brand</label>
                         <select name="car_brand_id" id="brand" required class="form-control select2">
-                            <option value="" selected>-Choose Car Brands-</option>
+                            <option value="" selected>-Choose Car Brand-</option>
                             @foreach ($brand as $value)
                                 <option value="{{ $value->id }}">
                                     {{ $value->car_brand }}</option>
@@ -85,7 +85,7 @@
                     <div class="col-12 col-md-4  form-group">
                         <label>Car Type</label>
                         <select name="car_type_id" id="carType" required class="form-control select2">
-                            <option value="" selected>-Choose Car Brands-</option>
+                            <option value="" selected>-Choose Car Type-</option>
                         </select>
                         @error('car_type_id')
                             <div class="invalid-feedback">
@@ -102,7 +102,7 @@
         <div class="col-sm-14 col-md-12 col-lg-12">
             <div class="ribbon-wrapper card">
                 <div class="card-body">
-                    <div class="ribbon ribbon-clip ribbon-warning">Early Checking</div>
+                    <div class="ribbon ribbon-clip ribbon-warning">Prior Checking</div>
                     <div class="col-md-12">
                         {{-- FORM TYRE CLAIM --}}
                         <div class="form-group row font-weight-bold">
@@ -149,9 +149,9 @@
 
                             </div>
                             <div class="col-lg-6 col-md-12 form-group">
-                                <label for="">Complaint Area</label>
+                                <label for="">Complaint Part</label>
                                 <select name="complaint_area" id="" class="form-select uoms" required>
-                                    <option value="">-Choose Area-</option>
+                                    <option value="">-Choose Part-</option>
                                     <option value="Inner Tire"></option>
                                     <option value="Belt Package">Belt Package</option>
                                     <option value="Tread">Tread</option>

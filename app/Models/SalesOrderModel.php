@@ -15,6 +15,11 @@ class SalesOrderModel extends Model
     {
         return $this->hasOne(CustomerModel::class, 'id', 'customers_id')->withTrashed();
     }
+    
+    public function warehouseBy()
+    {
+        return $this->hasOne(WarehouseModel::class, 'id', 'warehouse_id')->withTrashed();
+    }
 
     public function salesOrderDetailsBy()
     {
@@ -34,5 +39,10 @@ class SalesOrderModel extends Model
     public function returnBy()
     {
         return $this->hasMany(ReturnModel::class, 'sales_order_id');
+    }
+
+    public function deliveryHistoriesBy()
+    {
+        return $this->hasMany(DeliveryHistoriesModel::class, 'order_id');
     }
 }

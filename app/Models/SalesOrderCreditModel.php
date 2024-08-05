@@ -12,6 +12,11 @@ class SalesOrderCreditModel extends Model
 
     public function salesorders()
     {
-        return $this->belongsTo(SalesOrderModel::class, 'id', 'sales_order_id');
+        return $this->belongsTo(SalesOrderModel::class, 'sales_order_id', 'id');
+    }
+    
+    public function createdBy()
+    {
+        return $this->hasOne(User::class, 'id', 'updated_by')->withTrashed();
     }
 }

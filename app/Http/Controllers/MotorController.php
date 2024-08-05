@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\MotorBrandModel;
 use App\Models\MotorTypeModel;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MotorController extends Controller
 {
@@ -15,8 +16,8 @@ class MotorController extends Controller
      */
     public function index()
     {
-        $title = 'Motorcycle';
-        $data = MotorBrandModel::latest()->get();
+        $title = 'Create Motorcycle Brand';
+        $data = MotorBrandModel::oldest('name_brand')->get();
         return view('motor.index', compact('title', 'data'));
     }
 
@@ -42,14 +43,25 @@ class MotorController extends Controller
         $request->validate([
             'name_brands' => 'required',
         ]);
-        // save data
-        $data = new MotorBrandModel();
-        $data->name_brand = $request->name_brands;
-        $saved = $data->save();
-        if ($saved) {
-            return redirect('motorcycle')->with('success', 'Data has been saved');
-        } else {
-            return redirect('motorcycle')->with('error', 'Data failed to save');
+
+        try {
+            DB::beginTransaction();
+            // save data
+            $data = new MotorBrandModel();
+            $data->name_brand = $request->name_brands;
+            $saved = $data->save();
+            if ($saved) {
+
+                DB::commit();
+                return redirect('motorcycle')->with('success', 'Data has been saved');
+            } else {
+
+                DB::rollback();
+                return redirect('motorcycle')->with('error', 'Data failed to save');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('motorcycle')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -88,15 +100,24 @@ class MotorController extends Controller
         $request->validate([
             'edit_brands' => 'required',
         ]);
+        try {
+            DB::beginTransaction();
+            // update data
+            $data = MotorBrandModel::find($id);
+            $data->name_brand = $request->edit_brands;
+            $saved = $data->save();
+            if ($saved) {
 
-        // update data
-        $data = MotorBrandModel::find($id);
-        $data->name_brand = $request->edit_brands;
-        $saved = $data->save();
-        if ($saved) {
-            return redirect('motorcycle')->with('success', 'Data has been updated');
-        } else {
-            return redirect('motorcycle')->with('error', 'Data failed to update');
+                DB::commit();
+                return redirect('motorcycle')->with('success', 'Data has been updated');
+            } else {
+
+                DB::rollback();
+                return redirect('motorcycle')->with('error', 'Data failed to update');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('motorcycle')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -108,21 +129,33 @@ class MotorController extends Controller
      */
     public function destroy($id)
     {
-        // delete data
-        $data = MotorBrandModel::find($id);
-        $saved = $data->delete();
-        if ($saved) {
-            return redirect('motorcycle')->with('success', 'Data has been deleted');
-        } else {
-            return redirect('motorcycle')->with('error', 'Data failed to delete');
+        try {
+            DB::beginTransaction();
+            // delete data
+            $data = MotorBrandModel::find($id);
+            $saved = $data->delete();
+            if ($saved) {
+
+                DB::commit();
+                return redirect('motorcycle')->with('success', 'Data has been deleted');
+            } else {
+
+                DB::rollback();
+                return redirect('motorcycle')->with('error', 'Data failed to delete');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('motorcycle')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
     public function motorcycleType()
     {
-        $title = 'Motorcycle Type';
+        $title = 'Create Motorcycle Type';
         $brand = MotorBrandModel::latest()->get();
-        $data = MotorTypeModel::latest()->get();
+        $data = MotorTypeModel::with('brandBy')->whereHas('brandBy', function ($query) {
+            $query->oldest('name_brand');
+        })->get();
         return view('motor.motorcycle_type', compact('title', 'data', 'brand'));
     }
 
@@ -130,33 +163,47 @@ class MotorController extends Controller
     {
         $request->validate([
             "brand_id" => "required|numeric",
-            "typeFields.*.type" => "required"
+            "typeFields.*.type" => "required",
+            "typeFields.*.accu_type" => "required",
         ]);
 
-        $message_duplicate = "";
-        $issaved = false;
-        foreach ($request->typeFields as $key => $value) {
-            $model = new MotorTypeModel();
-            $model->id_motor_brand = $request->get('brand_id');
-            $model->name_type = $value['type'];
-            $cek = MotorTypeModel::where('name_type', $value['type'])
-                ->where('id_motor_brand', $request->get('brand_id'))
-                ->count();
+        try {
+            DB::beginTransaction();
+            $message_duplicate = "";
+            $issaved = true;
+            foreach ($request->typeFields as $key => $value) {
+                $model = new MotorTypeModel();
+                $model->id_motor_brand = $request->get('brand_id');
+                $model->name_type = $value['type'];
+                $model->accu_type = $value['accu_type'];
+                $cek = MotorTypeModel::where('name_type', $value['type'])
+                    ->where('id_motor_brand', $request->get('brand_id'))
+                    ->count();
 
-            if ($cek > 0) {
-                $message_duplicate = "You enter duplication of type. Please recheck the type you enter.";
-                continue;
-            } else {
-                $issaved = $model->save();
+                if ($cek > 0) {
+                    $message_duplicate = "You enter duplication of type. Please recheck the type you enter.";
+                    continue;
+                } else {
+                    $issaved = $model->save();
+                }
             }
-        }
 
-        if (empty($message_duplicate) && $issaved == true) {
-            return redirect('/motorcycle_type')->with('success', 'Create type Success');
-        } elseif (!empty($message_duplicate) && $issaved == true) {
-            return redirect('/motorcycle_type')->with('success', 'Some of type add maybe Success! ' . $message_duplicate);
-        } else {
-            return redirect('/motorcycle_type')->with('error', 'Create type Fail! Please make sure you have filled all the input');
+            if (empty($message_duplicate) && $issaved == true) {
+
+                DB::commit();
+                return redirect('/motorcycle_type')->with('success', 'Create type Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+
+                DB::commit();
+                return redirect('/motorcycle_type')->with('success', 'Some of type add maybe Success! ' . $message_duplicate);
+            } else {
+
+                DB::rollback();
+                return redirect('/motorcycle_type')->with('error', 'Create type Fail! Please make sure you have filled all the input');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/motorcycle_type')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -164,43 +211,60 @@ class MotorController extends Controller
     {
         $request->validate([
             "brands_id" => "required|numeric",
-            "types" => "required"
+            "types" => "required",
+            "accu_types" => "required"
         ]);
 
-        $message_duplicate = "";
-        $issaved = false;
-        $model = MotorTypeModel::find($id);
-        $model->id_motor_brand = $request->get('brands_id');
-        $model->name_type =  $request->get('types');
-        $cek = MotorTypeModel::where('name_type',  $request->get('types'))
-            ->where('id_motor_brand',  $request->get('brands_id'))
-            ->count();
-
-        if ($cek > 0) {
-            $message_duplicate = "You enter duplication of type. Please recheck the type you enter.";
-        } else {
+        try {
+            DB::beginTransaction();
+            $message_duplicate = "";
+            $issaved = false;
+            $model = MotorTypeModel::find($id);
+            $model->id_motor_brand = $request->get('brands_id');
+            $model->name_type =  $request->get('types');
+            $model->accu_type =  $request->get('accu_types');
             $issaved = $model->save();
-        }
 
 
-        if (empty($message_duplicate) && $issaved == true) {
-            return redirect('/motorcycle_type')->with('success', 'Update type Success');
-        } elseif (!empty($message_duplicate) && $issaved == true) {
-            return redirect('/motorcycle_type')->with('success', 'Some of type update maybe Success! ' . $message_duplicate);
-        } else {
-            return redirect('/motorcycle_type')->with('error', 'Update type Fail! Please make sure you have filled all the input');
+
+            if (empty($message_duplicate) && $issaved == true) {
+
+                DB::commit();
+                return redirect('/motorcycle_type')->with('success', 'Update type Success');
+            } elseif (!empty($message_duplicate) && $issaved == true) {
+
+                DB::commit();
+                return redirect('/motorcycle_type')->with('success', 'Some of type update maybe Success! ' . $message_duplicate);
+            } else {
+
+                DB::rollback();
+                return redirect('/motorcycle_type')->with('error', 'Update type Fail! Please make sure you have filled all the input');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/motorcycle_type')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
     // delete
     public function deleteMotorcycleType($id)
     {
-        $data = MotorTypeModel::find($id);
-        $saved = $data->delete();
-        if ($saved) {
-            return redirect('motorcycle_type')->with('success', 'Data has been deleted');
-        } else {
-            return redirect('motorcycle_type')->with('error', 'Data failed to delete');
+        try {
+            DB::beginTransaction();
+            $data = MotorTypeModel::find($id);
+            $saved = $data->delete();
+            if ($saved) {
+
+                DB::commit();
+                return redirect('motorcycle_type')->with('success', 'Data has been deleted');
+            } else {
+
+                DB::rollback();
+                return redirect('motorcycle_type')->with('error', 'Data failed to delete');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/motorcycle_type')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 

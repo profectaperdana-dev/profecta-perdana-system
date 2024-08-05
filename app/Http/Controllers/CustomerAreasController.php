@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CustomerAreaModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class CustomerAreasController extends Controller
@@ -18,7 +19,7 @@ class CustomerAreasController extends Controller
     {
         $all_customer_areas = CustomerAreaModel::all();
         $data = [
-            'title' => 'Data Customer Area',
+            'title' => 'Master Area',
             'customer_areas' => $all_customer_areas
         ];
 
@@ -33,16 +34,23 @@ class CustomerAreasController extends Controller
      */
     public function store(Request $request)
     {
+
         $validated_data = $request->validate([
             'area_name' => 'required',
             'area_code' => 'required|unique:customer_areas|max:3'
         ]);
+        try {
+            DB::beginTransaction();
+            $validated_data['created_by'] = Auth::user()->id;
 
-        $validated_data['created_by'] = Auth::user()->id;
+            CustomerAreaModel::create($validated_data);
 
-        CustomerAreaModel::create($validated_data);
-
-        return redirect('/customer_areas')->with('success', 'Customer Area Add Success');
+            DB::commit();
+            return redirect('/customer_areas')->with('success', 'Customer Area Add Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/customer_areas')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -61,11 +69,18 @@ class CustomerAreasController extends Controller
             'area_name_edit' => 'required',
         ]);
 
-        $customer_area = CustomerAreaModel::where('id', $id)->firstOrFail();
-        $customer_area->area_name = $validateData['area_name_edit'];
-        $customer_area->save();
+        try {
+            DB::beginTransaction();
+            $customer_area = CustomerAreaModel::where('id', $id)->firstOrFail();
+            $customer_area->area_name = $validateData['area_name_edit'];
+            $customer_area->save();
 
-        return redirect('/customer_areas')->with('success', 'Customer Areas Edit Success');
+            DB::commit();
+            return redirect('/customer_areas')->with('success', 'Customer Areas Edit Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/customer_areas')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -79,8 +94,16 @@ class CustomerAreasController extends Controller
         if (!Gate::allows('level1')) {
             abort(403);
         }
-        CustomerAreaModel::where('id', $id)->delete();
 
-        return redirect('/customer_areas')->with('error', 'Customer Areas Delete Success');
+        try {
+            DB::beginTransaction();
+            CustomerAreaModel::where('id', $id)->delete();
+
+            DB::commit();
+            return redirect('/customer_areas')->with('error', 'Customer Areas Delete Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/customer_areas')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 }

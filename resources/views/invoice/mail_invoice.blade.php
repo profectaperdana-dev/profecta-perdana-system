@@ -418,7 +418,7 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            {{ $data->order_date }}
+                                                                                                            {{ date('d M y', strtotime($data->order_date)) }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -536,7 +536,7 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            {{ $data->duedate }}
+                                                                                                            {{ date('d M y', strtotime($data->duedate)) }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
@@ -629,15 +629,15 @@
                                                                                                     align="right"
                                                                                                     valign="top">
                                                                                                     Price</th>
-                                                                                                <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                {{-- <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="center"
                                                                                                     valign="top">Disc
                                                                                                     (%)
-                                                                                                </th>
+                                                                                                </th> --}}
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="center"
-                                                                                                    valign="top">Disc
-                                                                                                    (Rp)
+                                                                                                    valign="top">
+                                                                                                    &nbsp;
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="center"
@@ -656,6 +656,16 @@
                                                                                             @endphp
                                                                                             @foreach ($data->salesOrderDetailsBy as $key => $value)
                                                                                                 {{-- @for ($i = 0; $i < 6; $i++) --}}
+                                                                                                @php
+                                                                                                    $price = $value->price;
+                                                                                                    if ($value->price) {
+                                                                                                        $ppn_cost = (float) $value->productSales->harga_jual_nonretail * $ppn;
+                                                                                                        $price = (float) $value->productSales->harga_jual_nonretail + $ppn_cost;
+                                                                                                    }
+                                                                                                    $disc = $value->discount / 100;
+                                                                                                    $disc_cost = (float) $price * $disc;
+                                                                                                    $sub_total = ($price - $disc_cost - $value->discount_rp) * $value->qty;
+                                                                                                @endphp
                                                                                                 <tr>
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="left"
@@ -665,36 +675,31 @@
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="left"
                                                                                                         valign="top">
+                                                                                                        {{ $value->productSales->sub_materials->nama_sub_material }}&nbsp;
+                                                                                                        {{ $value->productSales->sub_types->type_name }}&nbsp;
                                                                                                         {{ $value->productSales->nama_barang }}
                                                                                                     </td>
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="right"
                                                                                                         valign="top">
-                                                                                                        {{ number_format($value->productSales->harga_jual_nonretail, 0, ',', '.') }}
+                                                                                                        {{ number_format((float) $price - $disc_cost - $value->discount_rp, 0, ',', '.') }}
+
                                                                                                     </td>
-                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                    {{-- <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
                                                                                                         valign="top">
                                                                                                         {{ $value->discount }}
-                                                                                                    </td>
+                                                                                                    </td> --}}
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
                                                                                                         valign="top">
-                                                                                                        {{ $value->discount_rp }}
+                                                                                                        &nbsp;
                                                                                                     </td>
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
                                                                                                         valign="top">
                                                                                                         {{ $value->qty }}
                                                                                                     </td>
-                                                                                                    @php
-                                                                                                        $ppn_cost = $ppn * $value->productSales->harga_jual_nonretail;
-                                                                                                        $ppn_total = $value->productSales->harga_jual_nonretail + $ppn_cost;
-                                                                                                        $disc = ($value->discount / 100) * $ppn_total;
-                                                                                                        $harga_diskon = $ppn_total - $disc - $value->discount_rp;
-                                                                                                        $sub_total = $harga_diskon * $value->qty;
-                                                                                                        $total = $total + $sub_total;
-                                                                                                    @endphp
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="right"
                                                                                                         valign="top">
@@ -764,6 +769,9 @@
                                                                                             </tr>
                                                                                         </tbody>
                                                                                     </table>
+                                                                                    {{-- @php
+                                                                                        dd($price);
+                                                                                    @endphp --}}
                                                                                 </td>
                                                                             </tr>
                                                                         </tbody>

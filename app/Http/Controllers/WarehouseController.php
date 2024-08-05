@@ -7,6 +7,7 @@ use App\Models\WarehouseModel;
 use App\Models\WarehouseTypeModel;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 
 class WarehouseController extends Controller
@@ -18,11 +19,12 @@ class WarehouseController extends Controller
      */
     public function index()
     {
-        $title = 'Data Warehouses';
+        $title = 'Create Warehouse';
 
         $data = WarehouseModel::join('customer_areas', 'customer_areas.id', '=', 'warehouses.id_area')
-            ->latest('warehouses.id')
+            ->oldest('warehouses.warehouses')
             ->get(['warehouses.*', 'customer_areas.area_name']);
+        // dd($data);
         $warehouse_types = WarehouseTypeModel::get();
         $areas = CustomerAreaModel::latest()->get();
         return view('warehouses.index', compact('title', 'data', 'areas', 'warehouse_types'));
@@ -51,20 +53,32 @@ class WarehouseController extends Controller
             'id_area' => 'required',
 
         ]);
-        $model = new WarehouseModel();
-        $model->type = $request->get('type');
-        $getType = WarehouseTypeModel::where('id', $request->get('type'))->first();
-        $model->warehouses = $request->get('warehouses') . ' (' . $getType->name . ')';
-        $model->type = $request->get('type');
-        $model->alamat = $request->get('alamat');
-        $model->id_area = $request->get('id_area');
-        $model->latitude = '-';
-        $model->longitude = '-';
-        $model->status = 1;
-        $model->created_by = Auth::user()->id;
-        $model->save();
 
-        return redirect('/warehouses')->with('success', 'Create Data Warehouses Success');
+        try {
+            DB::beginTransaction();
+            $model = new WarehouseModel();
+            $model->type = $request->get('type');
+            $getType = WarehouseTypeModel::where('id', $request->get('type'))->first();
+            $model->warehouses = $request->get('warehouses');
+            $model->type = $request->get('type');
+            $model->alamat = $request->get('alamat');
+            $model->id_area = $request->get('id_area');
+            $model->telp1 = $request->get('telp1');
+            $model->telp2 = $request->get('telp2');
+            $model->rek_1 = $request->get('acn1');
+            $model->rek_2 = $request->get('acn2');
+            $model->latitude = '-';
+            $model->longitude = '-';
+            $model->status = 1;
+            $model->created_by = Auth::user()->id;
+            $model->save();
+
+            DB::commit();
+            return redirect('/warehouses')->with('success', 'Create Data Warehouse Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/warehouses')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -107,17 +121,28 @@ class WarehouseController extends Controller
             'id_area_' => 'required',
 
         ]);
-        $model =  WarehouseModel::find($id);
-        $model->warehouses = $request->get('warehouses_');
-        $model->type = $request->get('type_');
-        $model->alamat = $request->get('alamat_');
-        $model->id_area = $request->get('id_area_');
 
-        $model->status = $request->get('status');
-        $model->created_by = Auth::user()->id;
-        $model->save();
+        try {
+            DB::beginTransaction();
+            $model =  WarehouseModel::find($id);
+            $model->warehouses = $request->get('warehouses_');
+            $model->type = $request->get('type_');
+            $model->alamat = $request->get('alamat_');
+            $model->id_area = $request->get('id_area_');
+            $model->telp1 = $request->get('telp1_');
+            $model->telp2 = $request->get('telp2_');
+            $model->status = $request->get('status');
+            $model->rek_1 = $request->get('acn1_');
+            $model->rek_2 = $request->get('acn2_');
+            $model->created_by = Auth::user()->id;
+            $model->save();
 
-        return redirect('/warehouses')->with('info', 'Change Data Warehouses Success');
+            DB::commit();
+            return redirect('/warehouses')->with('info', 'Change Data Warehouse Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/warehouses')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 
     /**
@@ -131,8 +156,16 @@ class WarehouseController extends Controller
         if (!Gate::allows('level1')) {
             abort(403);
         }
-        $model =  WarehouseModel::find($id);
-        $model->delete();
-        return redirect('/warehouses')->with('error', 'Delete Data Warehouses Success');
+        try {
+            DB::beginTransaction();
+            $model =  WarehouseModel::find($id);
+            $model->delete();
+
+            DB::commit();
+            return redirect('/warehouses')->with('error', 'Delete Data Warehouse Success');
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/warehouses')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
+        }
     }
 }

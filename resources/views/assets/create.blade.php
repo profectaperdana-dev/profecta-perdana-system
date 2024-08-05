@@ -1,7 +1,6 @@
 @extends('layouts.master')
 @section('content')
     @push('css')
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
     @endpush
 
     <div class="container-fluid">
@@ -86,7 +85,7 @@
                                         <div class="form-group col-md-4">
                                             <label class="font-weight-bold">Year of Acquisition</label>
                                             <input type="date"
-                                                class="form-control {{ $errors->first('acquisition_year') ? ' is-invalid' : '' }}"
+                                                class="form-control  {{ $errors->first('acquisition_year') ? ' is-invalid' : '' }}"
                                                 name="acquisition_year" required>
                                             @error('acquisition_year')
                                                 <small class="text-danger">{{ $message }}.</small>
@@ -96,13 +95,41 @@
                                         <div class="form-group col-md-4">
                                             <label class="font-weight-bold">Cost of Acquisition</label>
                                             <input type="text"
-                                                class="form-control total {{ $errors->first('acquisition_cost') ? ' is-invalid' : '' }}"
-                                                placeholder="Enter Cost of Acquisition" required>
+                                                class="form-control  total {{ $errors->first('acquisition_cost') ? ' is-invalid' : '' }}"
+                                                placeholder="Enter Cost of Acquisition">
                                             <input type="hidden" name="acquisition_cost">
                                             @error('acquisition_cost')
                                                 <small class="text-danger">{{ $message }}.</small>
                                             @enderror
                                         </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="font-weight-bold">Maintenance Last Date</label>
+                                            <input type="date"
+                                                class="form-control start_date {{ $errors->first('service_date') ? ' is-invalid' : '' }}"
+                                                placeholder="" name="service_date">
+                                            @error('service_date')
+                                                <small class="text-danger">{{ $message }}.</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="font-weight-bold">Maintenance Distance</label>
+                                            <input type="number"
+                                                class="form-control days {{ $errors->first('range') ? ' is-invalid' : '' }}"
+                                                placeholder="Enter Maintenance Distance" name="range">
+                                            @error('range')
+                                                <small class="text-danger">{{ $message }}.</small>
+                                            @enderror
+                                        </div>
+                                        <div class="form-group col-md-4">
+                                            <label class="font-weight-bold">Maintenance Next Date</label>
+                                            <input type="text" readonly
+                                                class="form-control end_date {{ $errors->first('next_service') ? ' is-invalid' : '' }}"
+                                                placeholder="" name="next_service">
+                                            @error('next_service')
+                                                <small class="text-danger">{{ $message }}.</small>
+                                            @enderror
+                                        </div>
+
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
@@ -123,13 +150,26 @@
     </div>
     <!-- Container-fluid Ends-->
     @push('scripts')
-        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
+        <script src="{{ asset('js/date_convert.js') }}"></script>
         <script>
             $(document).ready(function() {
-                $('form').submit(function() {
-                    $(this).find('button[type="submit"]').prop('disabled', true);
+                $(document).on('submit', 'form', function() {
+                    var form = $(this);
+                    var button = form.find('button[type="submit"]');
+                    // console.log(form.html());
+
+                    if (form[0].checkValidity()) { // check if form has input values
+                        button.prop('disabled', true);
+
+                    }
                 });
+                $('.days').on('input', function() {
+                    let start_date = $('.start_date').val();
+                    let days = $(this).val();
+                    let end_date = new Date(new Date(start_date).setDate(new Date(start_date)
+                        .getDate() + parseInt(days)));
+                    $('.end_date').val(convertDate(end_date));
+                })
                 $('.total').on('keyup', function() {
                     var selection = window.getSelection().toString();
                     if (selection !== '') {

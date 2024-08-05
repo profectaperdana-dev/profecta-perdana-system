@@ -1,348 +1,55 @@
 @extends('layouts.master')
 @section('content')
     @push('css')
-        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
-            rel="stylesheet">
-
-        <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/fixedcolumns/4.2.2/css/fixedColumns.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.3.2/css/fixedHeader.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.4.1/css/responsive.dataTables.min.css">
         <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/date-picker.css') }}">
+        @include('report.style')
         <style>
-            .kbw-signature {
-                width: 100%;
-                height: 300px;
-            }
-
-            #sig canvas {
-                width: 100% !important;
-                height: auto;
+            table.dataTable thead tr>.dtfc-fixed-left,
+            table.dataTable thead tr>.dtfc-fixed-right,
+            table.dataTable tfoot tr>.dtfc-fixed-left,
+            table.dataTable tfoot tr>.dtfc-fixed-right {
+                background-color: #c0deef !important;
             }
         </style>
     @endpush
-
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Early Checking
-                        {{ $title }}
                 </div>
-
             </div>
         </div>
     </div>
+
+
+
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
             <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header pb-0">
-                        {{-- <h5>All Data</h5> --}}
-                        <a class="btn btn-primary" href="{{ url('claim/create') }}">
-                            + Create Battery Claim
-                        </a>
-                        <hr class="bg-primary">
-
-                    </div>
+                <div class="card shadow">
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
+                            <table class="dataTable display table table-striped row-border order-column table-sm"
+                                style="width:100%">
                                 <thead>
-                                    <tr>
+                                    <tr class="text-center text-nowrap">
                                         <th></th>
                                         <th>#</th>
                                         <th>Claim Number</th>
+                                        <th>Name</th>
                                         <th>Customer</th>
-                                        <th>Battery Type</th>
-                                        <th>Finish Claim</th>
+                                        <th>Phone</th>
+                                        <th>Date</th>
+
                                     </tr>
-
                                 </thead>
-                                <tbody>
-                                    @foreach ($data as $key => $value)
-                                        <tr>
-                                            <td style="width: 10%">
-                                                <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
-                                                    aria-expanded="false"><i data-feather="settings"></i></a>
-                                                <div class="dropdown-menu" aria-labelledby="">
-                                                    <h5 class="dropdown-header">Actions</h5>
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-original-title="test"
-                                                        data-bs-target="#detailData{{ $value->id }}">Early Check</a>
-                                                    <a class="dropdown-item"
-                                                        href="{{ url('/pdf_claim_accu/' . $value->id) }}">Download
-                                                        PDF</a>
-                                                    <a class="dropdown-item"
-                                                        href="my.bluetoothprint.scheme://{{ url('/pdf_claim_accu/' . $value->id) }}">Download
-                                                        New</a>
-                                                    @if ($value->email != null)
-                                                        <a class="dropdown-item"
-                                                            href="{{ url('/send_early_accu_claim/' . $value->id) }}">Send By
-                                                            Email</a>
-                                                    @endif
-
-                                                    <a class="dropdown-item" href="#" data-bs-toggle="modal"
-                                                        data-original-title="test"
-                                                        data-bs-target="#deleteData{{ $value->id }}">Delete</a>
-                                                </div>
-                                            </td>
-                                            {{-- early check --}}
-                                            <div class="modal fade" id="detailData{{ $value->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog modal-xl" role="document">
-
-                                                    <div class="container-fluid">
-                                                        <div class="row">
-                                                            <div class="col-sm-14 col-md-12 col-lg-12">
-                                                                <div class="ribbon-wrapper card">
-                                                                    <div class="card-body shadow">
-                                                                        <div class="ribbon ribbon-clip ribbon-warning">
-                                                                            Early Checking</div>
-                                                                        <div class="col-md-12">
-                                                                            <div class="form-group row font-weight-bold">
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>Claim number</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control "
-                                                                                        placeholder="Product Name" readonly
-                                                                                        value="{{ $value->claim_number }}">
-                                                                                </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>
-                                                                                        Claim date</label>
-                                                                                    <input type="date"
-                                                                                        class="form-control"
-                                                                                        placeholder="Serial Number" readonly
-                                                                                        value="{{ $value->claim_date }}">
-                                                                                </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>
-                                                                                        Customer Source</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control"
-                                                                                        placeholder="Serial Number" readonly
-                                                                                        value="{{ $value->customer_id }}">
-
-                                                                                </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label for="">Name
-                                                                                        Customer</label>
-                                                                                    {{-- Sub Name Customer --}}
-                                                                                    <input name="sub_name" type="text"
-                                                                                        id="other_name" readonly
-                                                                                        class="form-control text-capitalize fw-bold "
-                                                                                        placeholder="Enter Name"
-                                                                                        aria-label="Username"
-                                                                                        value="{{ $value->sub_name }}">
-
-                                                                                    {{-- End Sub Name Customer --}}
-
-                                                                                </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label for="">Phone/Email
-                                                                                        Customer</label>
-                                                                                    {{-- SUb Phone Customer --}}
-                                                                                    <input name="sub_phone" type=""
-                                                                                        id="other_phone"
-                                                                                        class="form-control fw-bold "
-                                                                                        readonly placeholder="Enter Phone"
-                                                                                        aria-label="Server"
-                                                                                        value="{{ $value->sub_phone }}@if ($value->email != null) / {{ $value->email }} @endif">
-                                                                                    {{-- End Sub Phone Customer --}}
-                                                                                </div>
-
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label for="">Loaned
-                                                                                        Battery Type</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control" disabled
-                                                                                        readonly
-                                                                                        value="{{ $value->loanBy->sub_materials->nama_sub_material }}/{{ $value->loanBy->sub_types->type_name }}/{{ $value->loanBy->nama_barang }}">
-                                                                                </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>Car Type</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control text-capitalize"
-                                                                                        placeholder="Serial Number"
-                                                                                        readonly
-                                                                                        value="{{ $value->carBrandBy->car_brand }} / {{ $value->carTypeBy->car_type }}">
-
-                                                                                </div>
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>Battery type</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control text-uppercase"
-                                                                                        placeholder="Product Code" readonly
-                                                                                        value="{{ $value->material }}/{{ $value->type_material }}/{{ $value->productSales->nama_barang }}">
-                                                                                </div>
-
-                                                                                <div class="form-group col-lg-4 col-md-12">
-                                                                                    <label>
-                                                                                        Plate Number</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control text-uppercase"
-                                                                                        placeholder="Serial Number"
-                                                                                        readonly
-                                                                                        value="{{ $value->plate_number }}">
-                                                                                </div>
-
-
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>
-                                                                                        Voltage
-                                                                                    </label>
-                                                                                    <input type="text" readonly
-                                                                                        class="form-control"
-                                                                                        value="{{ $value->e_voltage }}">
-                                                                                </div>
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>CCA </label>
-                                                                                    <input type="text"
-                                                                                        class="form-control" readonly
-                                                                                        placeholder="Retail Selling Price"
-                                                                                        value="{{ $value->e_cca }}">
-
-                                                                                </div>
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>Starting</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control" readonly
-                                                                                        placeholder="Non Retail Selling Price"
-                                                                                        value="{{ $value->e_starting }}">
-                                                                                </div>
-
-                                                                                <div class="form-group col-md-3">
-                                                                                    <label>Charging</label>
-                                                                                    <input type="text"
-                                                                                        class="form-control" readonly
-                                                                                        value="{{ $value->e_charging }}">
-                                                                                </div>
-
-                                                                                <div class="form-group col-md-12">
-                                                                                    <label
-                                                                                        for="">Diagnostic</label>
-                                                                                    @foreach ($value->accuClaimDetailsBy as $key => $row)
-                                                                                        <div>{{ $key + 1 }}.
-                                                                                            {{ $row->diagnosa }}
-                                                                                        </div>
-                                                                                    @endforeach
-                                                                                </div>
-                                                                                <div
-                                                                                    class="form-group col-lg-4 col-md-12 text-center">
-                                                                                    <label class="text-center">
-                                                                                        Submitted By,</label>
-                                                                                    <br>
-                                                                                    <div class="text-center"> <img
-                                                                                            class="img-fluid img-rotate"
-                                                                                            style="width: 200px"
-                                                                                            id="img"
-                                                                                            src="{{ asset('file_signature/' . $value->e_receivedBy) }}"
-                                                                                            alt="">
-                                                                                    </div>
-                                                                                </div>
-                                                                                <div
-                                                                                    class="form-group col-lg-4 col-md-12 text-center">
-                                                                                    <label class="text-center">
-                                                                                        Evidence,</label>
-                                                                                    <br>
-                                                                                    <div class="text-center"> <img
-                                                                                            class="img-fluid shadow"
-                                                                                            style="width: 200px"
-                                                                                            id="img"
-                                                                                            src="{{ asset('file_evidence/' . $value->e_foto) }}"
-                                                                                            alt="">
-                                                                                    </div>
-
-                                                                                </div>
-                                                                                <div
-                                                                                    class="form-group col-lg-4 col-md-12 text-center">
-                                                                                    <label class="text-center">
-                                                                                        Received By,</label>
-                                                                                    <br>
-                                                                                    <p class="text-center">
-                                                                                        <strong>{{ $value->createdBy->name }}</strong>
-                                                                                    </p>
-
-
-                                                                                </div>
-                                                                                <hr>
-                                                                                <a class="btn btn-danger" href="#"
-                                                                                    data-bs-dismiss="modal">Close</a>
-
-                                                                            </div>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-
-                                                        </div>
-                                                    </div>
-                                                    {{-- </div> --}}
-
-                                                    {{-- </div> --}}
-                                                </div>
-                                            </div>
-                                            {{-- End early check --}}
-                                            {{-- Modul Delete UOM --}}
-                                            <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <form method="post" action="{{ url('claim/' . $value->id) }}"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input name="_method" type="hidden" value="DELETE">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Delete
-                                                                    Data
-                                                                    {{ $value->claim_number }}</h5>
-                                                                <button class="btn-close" type="button"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="container-fluid">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <h5>Are you sure delete this data ?
-                                                                            </h5>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-danger" type="button"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button class="btn btn-primary" type="submit">Yes,
-                                                                    delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            {{-- End Modal Delete UOM --}}
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td class="text-uppercase">{{ $value->claim_number }}</td>
-                                            <td>{{ $value->customer_id }}/{{ $value->sub_name }}</td>
-                                            <td>
-                                                @if ($value->material == null)
-                                                    {{ $value->product_id }}
-                                                @else
-                                                    {{ $value->material }}/{{ $value->type_material }}/{{ $value->productSales->nama_barang }}
-                                                @endif
-
-
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-sm btn-primary"
-                                                    href="{{ url('/claim/' . $value->id . '/edit') }}">Finish
-                                                    Claim</a>
-                                            </td>
-
-                                        </tr>
-                                    @endforeach
-                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -350,57 +57,265 @@
             </div>
         </div>
     </div>
+
+
     <!-- Container-fluid Ends-->
     @push('scripts')
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
-        <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
-        <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
-
+        <script src="https://cdn.datatables.net/responsive/2.4.1/js/dataTables.responsive.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script>
             $(document).ready(function() {
-                $('form').submit(function() {
-                    $(this).find('button[type="submit"]').prop('disabled', true);
-                });
-                var sig = $('#sig').signature({
-                    syncField: '#signature64',
-                    syncFormat: 'PNG',
-                    // distance: 0
+                $(document).on("click", ".modalItem", function(event) {
+                    let modal_id = $(this).attr('data-bs-target');
+                    $(function() {
+                        let validator = $('form.needs-validation').jbvalidator({
+                            errorMessage: true,
+                            successClass: false,
+                            language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+                        });
+                    });
+                    $('.selectMulti').select2({
+                        dropdownParent: modal_id,
+                        placeholder: 'Select an option',
+                        allowClear: true,
+                        maximumSelectionLength: 1,
+                        width: '100%',
+                    });
+                    $(modal_id).find('.vehicle').change(function() {
+                        if ($(this).val() == "Car") {
+                            $(modal_id).find('#car').attr('hidden', false);
+                            $(modal_id).find('#motor').attr('hidden', true);
+                            $(modal_id).find('#other').attr('hidden', true);
+                            $(modal_id).find('.car-brand').prop('required', true);
+                            $(modal_id).find('.car-type').prop('required', true);
+                        } else if ($(this).val() == "Motocycle") {
+                            $(modal_id).find('#car').attr('hidden', true);
+                            $(modal_id).find('#motor').attr('hidden', false);
+                            $(modal_id).find('#other').attr('hidden', true);
+                            $(modal_id).find('.motor-brand').prop('required', true);
+                            $(modal_id).find('.motor-type').prop('required', true);
+                        } else {
+                            $(modal_id).find('#car').attr('hidden', true);
+                            $(modal_id).find('#motor').attr('hidden', true);
+                            $(modal_id).find('#other').attr('hidden', false);
+                            $(modal_id).find('.other-brand').prop('required', true);
+                        }
+                    });
+                    $(".car-brand").change(function() {
+                        $(".car-type").empty();
+                        let car_brand = $(this).val();
+                        if (car_brand) {
+                            $(".car-type").select2({
+                                dropdownParent: modal_id,
+                                placeholder: 'Select an option',
+                                allowClear: true,
+                                maximumSelectionLength: 1,
+                                width: '100%',
+                                ajax: {
+                                    type: "GET",
+                                    url: "/car_brand/select/" + car_brand,
+                                    data: function(params) {
+                                        return {
+                                            _token: `{{ csrf_token() }}`,
+                                            q: params.term, // search term
+                                        };
+                                    },
+                                    dataType: "json",
+                                    delay: 250,
+                                    processResults: function(data) {
+                                        return {
+                                            results: $.map(data, function(item) {
+                                                return {
+                                                    text: item.car_type,
+                                                    id: item.id,
+                                                };
+                                            }),
+                                        };
+                                    },
+                                },
+                            });
+                        } else {
+                            $(".car-type").empty();
+                        }
+                    });
 
+                    $(".motor-brand").change(function() {
+                        $(".motor-type").empty();
+                        let motor_brand = $(this).val();
+                        if (motor_brand) {
+                            $(".motor-type").select2({
+                                dropdownParent: modal_id,
+                                placeholder: 'Select an option',
+                                allowClear: true,
+                                maximumSelectionLength: 1,
+                                width: '100%',
+                                ajax: {
+                                    type: "GET",
+                                    url: "/motocycle_brand/select/" + motor_brand,
+                                    data: function(params) {
+                                        return {
+                                            _token: `{{ csrf_token() }}`,
+                                            q: params.term, // search term
+                                        };
+                                    },
+                                    dataType: "json",
+                                    delay: 250,
+                                    processResults: function(data) {
+                                        return {
+                                            results: $.map(data, function(item) {
+                                                return {
+                                                    text: item.name_type,
+                                                    id: item.id,
+                                                };
+                                            }),
+                                        };
+                                    },
+                                },
+                            });
+                        } else {
+                            $(".motor-type").empty();
+                        }
+                    });
+                    $(".car-type").change(function() {
+                        if ($(this).val() == 'other_car') {
+                            $("#other-car").attr('hidden', false);
+                        } else {
+                            $("#other-car").attr('hidden', true);
+                            $("#other_car_input").val(null);
+                        }
+                    });
+                    $(".motor-type").change(function() {
+                        if ($(this).val() == 'other_motor') {
+                            $("#other-motor").attr('hidden', false);
+                        } else {
+                            $("#other-motor").attr('hidden', true);
+                            $("#other_motor_input").val(null);
+                        }
+                    });
                 });
-                $('#clear').click(function(e) {
+
+                var table = $('.dataTable').DataTable({
+                    "responsive": true,
+                    "language": {
+                        "processing": `<i class="fa text-success fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
+                    },
+                    "lengthChange": false,
+                    "bPaginate": false, // disable pagination
+                    "bLengthChange": false, // disable show entries dropdown
+                    "searching": true,
+                    "ordering": true,
+                    "info": false,
+                    "autoWidth": false, // disable automatic column width
+                    fixedColumns: {
+                        leftColumns: 0,
+                        rightColumns: 0
+                    },
+                    scrollY: 400,
+                    scrollX: true,
+                    scrollCollapse: true,
+                    paging: false,
+                    "fixedHeader": true,
+                    processing: true,
+                    serverSide: true,
+                    pageLength: -1,
+                    ajax: "{{ url('/claim') }}",
+                    columns: [{
+                            className: 'dtr-control',
+                            orderable: false,
+                            data: null,
+                            defaultContent: ''
+                        }, {
+                            className: 'text-end fw-bold',
+                            data: 'DT_RowIndex',
+                            name: 'DT_RowIndex',
+                        },
+                        {
+                            data: 'claim_number',
+                            name: 'claim_number',
+                        },
+                        {
+                            data: 'sub_name',
+                            name: 'sub_name',
+                        },
+                        {
+                            className: 'text-nowrap',
+                            data: 'customer_id',
+                            name: 'customer_id',
+                        },
+
+                        {
+                            data: 'sub_phone',
+                            name: 'sub_phone',
+                        }, {
+                            className: 'text-nowrap',
+                            data: 'claim_date',
+                            name: 'claim_date',
+                        },
+
+                    ],
+                    responsive: {
+                        details: {
+                            type: 'column'
+                        }
+                    },
+                    drawCallback: function(settings) {
+                        // Kode yang akan dijalankan setelah DataTable selesai dikerjakan
+                        $('#thisModal').html('');
+                        $('.currentModal').each(function(){
+                            let currentModal = $(this).html();
+                            $(this).html('');
+                            $('#thisModal').append(currentModal);
+                        });
+                        
+                        // console.log($('#currentModal').html());
+                        // Lakukan tindakan lain yang Anda inginkan di sini
+                    },
+                });
+
+
+                $(document).on('submit', '.processClaim', function(e) {
+                    console.log('test');
                     e.preventDefault();
-                    sig.signature('clear');
-                    $("#signature64").val('');
-                });
-                $('#otheCustomer').hide();
-                $('#cust').change(function() {
-                    var val_cust = $('#cust').val();
+                    let id = $(this).attr('id');
+                    console.log(id);
+                    let form = $(this);
+                    let data = form.serialize();
+                    let url = `{{ url('claim/${id}/create/prior') }}`;
+                    $.ajax({
+                        url: `{{ url('claim/${id}/update/initial') }}`,
+                        type: 'POST',
+                        dataType: 'json',
+                        data: data,
+                        beforeSend: function() {
+                            $('.btnSubmit').attr('disabled', true);
+                            $('.btnSubmit').html(
+                                `<i class="fa fa-spinner fa-spin"></i> Processing...`
+                            );
+                        },
+                        success: function(data) {
+                            swal("Success !", data.message, "success", {
+                                button: "Close",
+                            });
+                            $('.dataTable').DataTable().ajax.reload();
+                            $('.hideModalEdit').click();
+                            window.location.href = url;
 
-                    if (val_cust == 'other') {
-                        $('#otheCustomer').show();
-                    } else {
-                        $('#otheCustomer').hide();
-
-                    }
+                        },
+                        error: function(xhr, status, error) {
+                            swal("Error !", error, "error", {
+                                button: "Close",
+                            });
+                        },
+                        complete: function() { // menambahkan fungsi complete untuk mengubah tampilan tombol kembali ke tampilan semula
+                            $('.btnSubmit').attr('disabled', false);
+                            $('.btnSubmit').html('Process');
+                        }
+                    });
                 });
-                $('#file_received').hide();
-                $('#ttd_received').hide();
-                $('#choose_received').change(function() {
-                    var val_cust = $('#choose_received').val();
 
-                    if (val_cust == 'file') {
-                        $('#file_received').show();
-                        $('#ttd_received').hide();
-                    } else if (val_cust == 'signature') {
-                        $('#file_received').hide();
-                        $('#ttd_received').show();
-                    } else {
-                        $('#file_received').hide();
-                        $('#ttd_received').hide();
-                    }
-                });
+
             });
         </script>
     @endpush

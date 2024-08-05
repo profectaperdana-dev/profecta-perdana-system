@@ -93,12 +93,12 @@
     <header>
         <table style="width: 100%">
             <tr>
-                <td style="width: 20%"><img style="width: 100px;margin-top:15px;"
-                        src="{{ public_path('images/logo.png') }}" alt=""></td>
+                <td style="width: 20%"><img style="width: 100px;margin-top:15px;" src="https://iili.io/tTHjV9.png"
+                        alt=""></td>
                 <td style="width: 34%;text-align:left">
                     <b>CV. Profecta Perdana</b> <br>
                     {{ $warehouse->alamat }} <br>
-                    Phone : 0713-82536
+                    Phone : {{ $warehouse->telp1 . ' / ' . $warehouse->telp2 }}
                 </td>
                 <td></td>
                 <td style="width: 5%;text-align:left">
@@ -119,10 +119,8 @@
                 </th>
             </tr>
             <tr>
-                <td colspan="3" style="width: 90%;text-align:left">Customer :
-                    {{ $data->customer }} <br>
-                    Phone :
-                    {{ $data->customer_phone }} <br>
+                <td colspan="3" style="width: 90%;text-align:left">Ref. Invoice :
+                    {{ $data->retail_order_number }} <br>
 
                 </td>
                 <td style="width: 10%">Date
@@ -154,7 +152,7 @@
             <tbody>
                 @php
                     $total = 0;
-                    
+
                     $y = 0;
                 @endphp
                 @foreach ($data->tradeInDetailBy as $key => $value)

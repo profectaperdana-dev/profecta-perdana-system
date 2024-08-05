@@ -1,6 +1,6 @@
 <header class="main-nav">
 
-    <div class="sidebar-user text-center"><a class="setting-primary" href="{{ url('/profiles') }}"><i
+    <div class="sidebar-user text-center pb-1"><a class="setting-primary" href="{{ url('/profiles') }}"><i
                 data-feather="settings"></i></a>
 
         {{-- ! informasi profile --}}
@@ -8,7 +8,8 @@
             <img class="img-90 rounded-circle" src="{{ asset('images/blank.png') }}" alt="">
         @else
             <img class="img-90 rounded-circle" src="{{ asset('images/employees/' . Auth::user()->employeeBy->photo) }}"
-                alt="">
+                alt=""
+                style="width:100%;height:90px;object-fit:cover;object-position: 50% 50%;image-rendering:smooth;filter:blur(0.4px)">
         @endif
         <div class="badge-bottom"></div><a href="user-profile.html">
             <h6 class="mt-3 f-14 f-w-600">{{ Auth::user()->name }}</h6>
@@ -25,8 +26,8 @@
         <div class="main-navbar">
             <div class="left-arrow" id="left-arrow"><i data-feather="arrow-left"></i></div>
             <div id="mainnav">
-                <ul>
-                    <li class="ms-3">
+                <ul class="text-center">
+                    <li>
                         <form class="form-inline search-form">
                             <div class="search-bg">
                                 <input class="form-control-plaintext" placeholder="Search here....." id="searchLink">
@@ -67,7 +68,7 @@
                         request()->is('product_sub_materials') ||
                         request()->is('product_sub_types') ||
                         request()->is('product_uoms')) active @endif"
-                            href="javascript:void(0)"><i data-feather="box"></i><span>Master Products</span></a>
+                            href="javascript:void(0)"><i data-feather="box"></i><span>Master Product</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('product_materials') ||
                                 request()->is('products') ||
@@ -77,30 +78,30 @@
                                 request()->is('product_uoms')) block @else none @endif ">
                             <li>
                                 <a href="{{ url('/product_uoms') }}"
-                                    class="{{ request()->is('product_uoms') ? 'active' : '' }}">Products Uoms</a>
+                                    class="{{ request()->is('product_uoms') ? 'active' : '' }}">Product Uom</a>
                             </li>
                             <li>
                                 <a href="{{ url('/product_materials') }}"
-                                    class="{{ request()->is('product_materials') ? 'active' : '' }}">Products
-                                    Materials</a>
+                                    class="{{ request()->is('product_materials') ? 'active' : '' }}">Product
+                                    Material</a>
                             </li>
                             <li>
                                 <a href="{{ url('/product_sub_materials') }}"
-                                    class="{{ request()->is('product_sub_materials') ? 'active' : '' }}">Products Sub
-                                    Materials</a>
+                                    class="{{ request()->is('product_sub_materials') ? 'active' : '' }}">Product Sub
+                                    Material</a>
                             </li>
                             <li>
                                 <a href="{{ url('/product_sub_types') }}"
-                                    class="{{ request()->is('product_sub_types') ? 'active' : '' }}">Products Type
-                                    Materials</a>
+                                    class="{{ request()->is('product_sub_types') ? 'active' : '' }}">Product Type
+                                    Material</a>
                             </li>
                             <li>
                                 <a href="{{ url('/products') }}"
-                                    class="{{ request()->is('products') ? 'active' : '' }}">Products</a>
+                                    class="{{ request()->is('products') ? 'active' : '' }}">Create Product</a>
                             </li>
                             <li>
                                 <a href="{{ url('/trade_in') }}"
-                                    class="{{ request()->is('trade_in') ? 'active' : '' }}">Products Trade In</a>
+                                    class="{{ request()->is('trade_in') ? 'active' : '' }}">Product Trade In</a>
                             </li>
 
                         </ul>
@@ -170,7 +171,7 @@
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('customer_areas') ? 'active' : '' }}"
                             href="{{ url('/customer_areas') }}"><i data-feather="map"></i><span>Master
-                                Areas</span></a>
+                                Area</span></a>
                     </li>
                     {{-- ! end master areas --}}
 
@@ -180,10 +181,10 @@
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('warehouse_types') || request()->is('warehouses')) block @else none @endif ">
                             <li><a href="{{ url('/warehouse_types') }}"
-                                    class="{{ request()->is('warehouse_types') ? 'active' : '' }}">Type Warehouse</a>
+                                    class="{{ request()->is('warehouse_types') ? 'active' : '' }}">Warehouse Type</a>
                             </li>
                             <li><a href="{{ url('/warehouses') }}"
-                                    class="{{ request()->is('warehouses') ? 'active' : '' }}">Warehouses</a>
+                                    class="{{ request()->is('warehouses') ? 'active' : '' }}">Create Warehouse</a>
                             </li>
                         </ul>
                     </li>
@@ -191,14 +192,14 @@
 
                     {{-- ! master customer --}}
                     <li class="dropdown"><a class="nav-link menu-title @if (request()->is('customers') || request()->is('customer_categories')) active @endif"
-                            href="javascript:void(0)"><i data-feather="user-check"></i><span>Master Customers</span></a>
+                            href="javascript:void(0)"><i data-feather="user-check"></i><span>Master Customer</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('customers') || request()->is('customer_categories')) block @else none @endif ">
                             <li><a href="{{ url('/customer_categories') }}"
                                     class="{{ request()->is('customer_categories') ? 'active' : '' }}">Customer
-                                    Categories</a></li>
+                                    Category</a></li>
                             <li><a href="{{ url('/customers') }}"
-                                    class="{{ request()->is('customers') ? 'active' : '' }}">Customers</a></li>
+                                    class="{{ request()->is('customers') ? 'active' : '' }}">Create Customer</a></li>
                         </ul>
                     </li>
                     {{-- ! end master customer --}}
@@ -214,17 +215,17 @@
                     {{-- ! master account --}}
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('users') || request()->is('roles') || request()->is('jobs')) active @endif"
-                            href="javascript:void(0)"><i data-feather="users"></i><span>Master Accounts</span></a>
+                            href="javascript:void(0)"><i data-feather="users"></i><span>Master Account</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('users') || request()->is('roles') || request()->is('jobs')) block @else none @endif ">
-                            <li><a href="{{ url('/roles') }}"
-                                    class="{{ request()->is('roles') ? 'active' : '' }}">Accounts Role</a>
-                            </li>
+                            <!--<li><a href="{{ url('/roles') }}"-->
+                            <!--        class="{{ request()->is('roles') ? 'active' : '' }}">Account Role</a>-->
+                            <!--</li>-->
                             <li><a href="{{ url('/jobs') }}"
-                                    class="{{ request()->is('jobs') ? 'active' : '' }}">Accounts Job</a>
+                                    class="{{ request()->is('jobs') ? 'active' : '' }}">Account Job</a>
                             </li>
                             <li><a href="{{ url('/users') }}"
-                                    class="{{ request()->is('users') ? 'active' : '' }}">Accounts</a></li>
+                                    class="{{ request()->is('users') ? 'active' : '' }}">Create Account</a></li>
                         </ul>
                     </li>
                     {{-- ! end master account --}}
@@ -233,7 +234,7 @@
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('supliers') ? 'active' : '' }}"
                             href="{{ url('/supliers') }}"><i data-feather="battery"></i><span>Master
-                                Suppliers</span></a>
+                                Vendor</span></a>
                     </li>
                     {{-- ! end master supplier --}}
 
@@ -247,18 +248,20 @@
                                 request()->is('motorcycle') ||
                                 request()->is('motorcycle_type')) block @else none @endif ">
                             <li><a href="{{ url('cars/') }}"
-                                    class="{{ request()->is('cars') ? 'active' : '' }}">Car
+                                    class="{{ request()->is('cars') ? 'active' : '' }}">Create Car
                                     Brand</a>
                             </li>
                             <li><a href="{{ url('cars_type/') }}"
-                                    class="{{ request()->is('cars_type') ? 'active' : '' }}">Car
+                                    class="{{ request()->is('cars_type') ? 'active' : '' }}">Create Car
                                     Type</a>
                             </li>
                             <li><a href="{{ url('/motorcycle') }}"
-                                    class="{{ request()->is('motorcycle') ? 'active' : '' }}">Motorcycle Brand</a>
+                                    class="{{ request()->is('motorcycle') ? 'active' : '' }}">Create Motorcycle
+                                    Brand</a>
                             </li>
                             <li><a href="{{ url('/motorcycle_type') }}"
-                                    class="{{ request()->is('motorcycle_type') ? 'active' : '' }}">Motorcycle Type</a>
+                                    class="{{ request()->is('motorcycle_type') ? 'active' : '' }}">Create Motorcycle
+                                    Type</a>
                             </li>
                         </ul>
                     </li>
@@ -272,13 +275,13 @@
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('account_sub_type') || request()->is('account') || request()->is('account_sub')) block @else none @endif ">
                             <li><a href="{{ url('/account') }}"
-                                    class="{{ request()->is('account') ? 'active' : '' }}">Accounts</a>
+                                    class="{{ request()->is('account') ? 'active' : '' }}">Create Account</a>
                             </li>
                             <li><a href="{{ url('/account_sub') }}"
-                                    class="{{ request()->is('account_sub') ? 'active' : '' }}">Accounts Sub</a>
+                                    class="{{ request()->is('account_sub') ? 'active' : '' }}">Account Sub</a>
                             </li>
                             <li><a href="{{ url('/account_sub_type') }}"
-                                    class="{{ request()->is('account_sub_type') ? 'active' : '' }}">Accounts Sub
+                                    class="{{ request()->is('account_sub_type') ? 'active' : '' }}">Account Sub
                                     Type</a></li>
                         </ul>
                     </li>
@@ -288,14 +291,14 @@
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('asset') || request()->is('asset_category')) active @endif"
                             href="javascript:void(0)"><i data-feather="scissors"></i><span>Master
-                                Assets</span></a>
+                                Asset</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('asset') || request()->is('asset_category')) block @else none @endif ">
                             <li><a href="{{ url('/asset_category') }}"
-                                    class="{{ request()->is('asset_category') ? 'active' : '' }}">Asset Categories</a>
+                                    class="{{ request()->is('asset_category') ? 'active' : '' }}">Asset Category</a>
                             </li>
                             <li><a href="{{ url('/asset') }}"
-                                    class="{{ request()->is('asset') ? 'active' : '' }}">Assets</a>
+                                    class="{{ request()->is('asset') ? 'active' : '' }}">Create Asset</a>
                             </li>
                         </ul>
                     </li>
@@ -305,10 +308,14 @@
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('employee') ? 'active' : '' }}"
                             href="{{ url('/employee') }}"><i data-feather="eye"></i><span>Master
-                                Employees</span></a>
+                                Employee</span></a>
                     </li>
                     {{-- ! end master employee --}}
-
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('authorization') ? 'active' : '' }}"
+                            href="{{ url('/authorization') }}"><i data-feather="paperclip"></i><span>Master
+                                Authorization</span></a>
+                    </li>
 
                     <li class="sidebar-main-title">
                         <div>
@@ -324,6 +331,7 @@
                             </span></a>
                     </li>
                     {{-- ! end informasi stok --}}
+
 
                     <li class="sidebar-main-title">
                         <div>
@@ -358,7 +366,7 @@
 
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Candidate Employees</h6>
+                            <h6>Candidate Employee</h6>
                         </div>
                     </li>
 
@@ -373,7 +381,7 @@
 
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Sales Seconds Product</h6>
+                            <h6>Second Product Sales</h6>
                         </div>
                     </li>
                     <li>
@@ -389,7 +397,7 @@
                     </li>
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Sales Retail</h6>
+                            <h6>Retail Sales</h6>
                         </div>
                     </li>
                     <li>
@@ -405,7 +413,7 @@
 
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Transaction Trade-In</h6>
+                            <h6>Trade In Transaction</h6>
                         </div>
                     </li>
 
@@ -425,7 +433,7 @@
                     </li>
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Transaction Purchase</h6>
+                            <h6>Purchase Transaction</h6>
                         </div>
                     </li>
                     <li>
@@ -450,13 +458,20 @@
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/receiving') ? 'active' : '' }}"
                             href="{{ url('/purchase_orders/receiving') }}"><i
-                                data-feather="folder-plus"></i><span>Receiving PO
+                                data-feather="folder-plus"></i><span>Product Receival
+                            </span></a>
+                    </li>
+                    <li>
+                        <a class="nav-link menu-title link-nav {{ request()->is('purchase_orders/manage_payment') ? 'active' : '' }}"
+                            href="{{ url('/purchase_orders/manage_payment') }}"><i
+                                data-feather="credit-card"></i><span>Manage
+                                Payment
                             </span></a>
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('return_purchase') ? 'active' : '' }}"
                             href="{{ url('/return_purchase') }}"><i data-feather="rotate-cw"></i><span>Return
-                                Purchases
+                                Purchase
                             </span></a>
                     </li>
                     <li class="sidebar-main-title">
@@ -485,7 +500,7 @@
                         <a class="nav-link menu-title link-nav {{ request()->is('invoice/manage_payment') ? 'active' : '' }}"
                             href="{{ url('/invoice/manage_payment') }}"><i
                                 data-feather="credit-card"></i><span>Manage
-                                Payments
+                                Payment
                             </span></a>
                     </li>
                     <li>
@@ -501,7 +516,7 @@
 
                     <li class="sidebar-main-title">
                         <div>
-                            <h6>Stock Mutations</h6>
+                            <h6>Stock Mutation</h6>
                         </div>
                     </li>
                     <li>
@@ -522,7 +537,7 @@
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('stock_mutation') ? 'active' : '' }}"
                             href="{{ url('/stock_mutation') }}"><i data-feather="clipboard"></i><span>Stock
-                                Mutations List
+                                Mutation List
                             </span>
                         </a>
                     </li>
@@ -550,16 +565,16 @@
                     </li>
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('claim') || request()->is('claim_tyre')) active @endif"
-                            href="javascript:void(0)"><i data-feather="clipboard"></i><span>Early Checking
+                            href="javascript:void(0)"><i data-feather="clipboard"></i><span>Prior Checking
                                 List</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('claim') || request()->is('claim_tyre')) block @else none @endif ">
                             <li><a href="{{ url('/claim') }}"
-                                    class="{{ request()->is('claim') ? 'active' : '' }}">Early Checking Accu</a>
+                                    class="{{ request()->is('claim') ? 'active' : '' }}">Prior Checking Accu</a>
                             </li>
                             <li><a href="{{ url('/claim_tyre') }}"
                                     class="{{ request()->is('claim_tyre') ? 'active' : '' }}">
-                                    Early Checking Tyre</a>
+                                    Prior Checking Tyre</a>
                             </li>
                         </ul>
                     </li>
@@ -590,25 +605,57 @@
                     </li>
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('report_sales') ||
+                                request()->is('report_retail') ||
+                                request()->is('report_employee') ||
+                                request()->is('report_stock') ||
                                 request()->is('report_purchase') ||
                                 request()->is('report_trade_in') ||
                                 request()->is('report_claim') ||
+                                request()->is('report_receivable') ||
+                                request()->is('report_debt') ||
+                                request()->is('report_vendor') ||
                                 request()->is('report_return_invoice') ||
                                 request()->is('report_return_purchases')) active @endif"
                             href="javascript:void(0)"><i data-feather="book-open"></i><span>Report</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('report_sales') ||
+                                request()->is('report_retail') ||
+                                request()->is('report_employee') ||
+                                request()->is('report_stock') ||
                                 request()->is('report_trade_in') ||
                                 request()->is('report_purchase') ||
+                                request()->is('report_receivable') ||
+                                request()->is('report_debt') ||
+                                request()->is('report_vendor') ||
                                 request()->is('report_claim')) block @else none @endif ">
+                            <li><a href="{{ url('/report_stock') }}"
+                                    class="{{ request()->is('report_stock') ? 'active' : '' }}">Report Stock</a>
+                            </li>
                             <li><a href="{{ url('/report_sales') }}"
-                                    class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Invoice</a>
+                                    class="{{ request()->is('report_sales') ? 'active' : '' }}">Report Invoice
+                                    Non-Retail</a>
+                            </li>
+                            <li><a href="{{ url('/report_retail') }}"
+                                    class="{{ request()->is('report_retail') ? 'active' : '' }}">Report Invoice
+                                    Retail</a>
                             </li>
                             <li><a href="{{ url('/report_purchase') }}"
                                     class="{{ request()->is('report_purchase') ? 'active' : '' }}">Report Purchase
                                 </a></li>
+                            <li><a href="{{ url('/report_receivable') }}"
+                                    class="{{ request()->is('report_receivable') ? 'active' : '' }}">Report
+                                    Receivable</a>
+                            </li>
+                            <li><a href="{{ url('/report_debt') }}"
+                                    class="{{ request()->is('report_debt') ? 'active' : '' }}">Report
+                                    Debt</a>
+                            </li>
                             <li><a href="{{ url('/report_claim') }}"
                                     class="{{ request()->is('report_claim') ? 'active' : '' }}">Report Claim</a>
+                            </li>
+                            <li><a href="{{ url('/report_mutation') }}"
+                                    class="{{ request()->is('report_mutation') ? 'active' : '' }}">Report
+                                    Mutation</a>
                             </li>
                             <li><a href="{{ url('/report_return_invoice') }}"
                                     class="{{ request()->is('report_return_invoice') ? 'active' : '' }}">Report
@@ -625,17 +672,28 @@
                                     Trade-In
                                 </a>
                             </li>
+                            <li><a href="{{ url('/report_vendor') }}"
+                                    class="{{ request()->is('report_vendor') ? 'active' : '' }}">Report
+                                    Vendor
+                                </a>
+                            </li>
+                            <li><a href="{{ url('/report_employee') }}"
+                                    class="{{ request()->is('report_employee') ? 'active' : '' }}">Report
+                                    Employee
+                                </a>
+                            </li>
                         </ul>
 
                     </li>
                     <li>
                         <a class="nav-link menu-title link-nav {{ request()->is('analytics') ? 'active' : '' }}"
-                            href="{{ url('/analytics') }}"><i data-feather="activity"></i></i><span>Analysis
+                            href="{{ url('/analytics') }}"><i data-feather="activity"></i></i><span>Salesman
+                                Analysis
                             </span></a>
                     </li>
                     <li class="dropdown"><a
                             class="nav-link menu-title @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) active @endif"
-                            href="javascript:void(0)"><i data-feather="archive"></i><span>Files Arsip</span></a>
+                            href="javascript:void(0)"><i data-feather="archive"></i><span>File Archive</span></a>
                         <ul class="nav-submenu menu-content"
                             style="display: @if (request()->is('file_invoice') || request()->is('file_do') || request()->is('file_po')) block @else none @endif ">
                             <li><a href="{{ url('/file_invoice') }}"

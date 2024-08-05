@@ -22,17 +22,18 @@ class AnalysisController extends Controller
         $title = 'Analysis Report';
         // ALL SALES
         $record_sales = SalesOrderModel::Join('users', 'users.id', '=', 'sales_orders.created_by')
+            ->Join('employees', 'employees.id', '=', 'users.employee_id')
             ->select(
                 DB::raw('SUM(sales_orders.total_after_ppn) as total'),
                 DB::raw('DAYNAME(sales_orders.order_date) as day_name'),
                 DB::raw("sales_orders.created_by as day"),
                 DB::raw("users.name as name")
             )
-            ->where('users.job_id', '=', 4)
+            ->where('employees.job', 'LIKE', '%Sales%')
             ->where('order_number', 'like', '%IVPP%')
             ->whereMonth('order_date', date('m'))
             ->where('isapprove', 'approve')->where('isverified', 1)
-            ->groupBy('day', 'created_by')
+            ->groupBy('day', 'sales_orders.created_by')
             ->orderBy('order_date', 'ASC')
             ->get();
         $data = [];
@@ -69,7 +70,9 @@ class AnalysisController extends Controller
         $materials = MaterialModel::all();
         $sub_materials = SubMaterialModel::all();
         $sub_types = SubTypeModel::all();
-        $sales = User::where('job_id', 4)->get();
+        $sales = User::with('employeeBy')->whereHas('employeeBy', function ($query) {
+            $query->where('job', 'LIKE', '%Sales%');
+        })->get();
         //END PRODUCT
         return view('analysis.index', compact('sales', 'materials', 'sub_materials', 'sub_types', 'total_income', 'data', 'title', 'data_product'));
     }

@@ -2,441 +2,372 @@
 @section('content')
     @push('css')
         <link rel="stylesheet" type="text/css" href="{{ asset('assets') }}/css/date-picker.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.2.3/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
     @endpush
     <div class="container-fluid">
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-
                 </div>
-
             </div>
         </div>
     </div>
-
     <div class="container-fluid">
+        {{-- ! card welcome back --}}
         <div class="col-xl-12 xl-100 box-col-12">
             <div class="row">
-                <div class="col-xl-12 col-md-12 box-col-12 des-xl-50">
+                <div class="col-12 col-lg-12">
                     <div class="card profile-greeting">
                         <div class="card-header">
                             <div class="header-top">
                                 <div class="setting-list bg-primary position-unset">
-
                                 </div>
                             </div>
                         </div>
                         <div class="card-body text-center p-t-0">
-                            <h3 class="font-light">Welcome Back, {{ Auth::user()->employeeBy->name }} !!</h3>
-                            <p>Welcome to the profecta perdana system! we are glad that you are visite this dashboard. we
-                                will
-                                be happy
-                                to help you grow your work.</p>
+                            <h3 class="font-light">Hello Welcome back, {{ Auth::user()->name }} !!</h3>
+                            <h3 class="font-light">GOOD IS NOT GOOD ENOUGH WHEN BETTER IS EXPECTED</h3>
                         </div>
-                        <div class="confetti">
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-                            <div class="confetti-piece"></div>
-
-                        </div>
+                        
                     </div>
                 </div>
-
             </div>
-
         </div>
 
         <div class="row">
-            @can('isTeknisi')
-                <div class="col-sm-12 col-xl-6 col-lg-6">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="battery-charging"></i></div>
-                                <div class="media-body"><span class="m-0">Claim is complete</span>
-                                    <h4 class="mb-0 counter">{{ $complete_claim }}</h4><i class="icon-bg"
-                                        data-feather="battery-charging"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-6 col-lg-6">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
-                                <div class="media-body"><span class="m-0">Claim in progress</span>
-                                    <h4 class="mb-0 counter">{{ $claim_progress }}</h4><i class="icon-bg"
-                                        data-feather="box"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan
-            @can('isWarehouseKeeper')
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
-                                <div class="media-body"><span class="m-0">Total Type Product</span>
-                                    <h4 class="mb-0 counter">{{ $produk }}</h4><i class="icon-bg" data-feather="box"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
-                                <div class="media-body"><span class="m-0">PO Need Validation</span>
-                                    <h4 class="mb-0 counter">{{ $po_val }}</h4><i class="icon-bg" data-feather="box"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
-                                <div class="media-body"><span class="m-0">Total PO</span>
-                                    <h4 class="mb-0 counter">{{ $po }}</h4><i class="icon-bg" data-feather="box"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan
-            @can('isSales')
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="award"></i></div>
-                                <div class="media-body"><span class="m-0">Sales Goals</span>
-                                    <h4 class="mb-0 counter">{{ $so_by }}</h4><i class="icon-bg"
-                                        data-feather="award"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {{-- ! card informatio --}}
+            @include('layouts.partials.purchase')
 
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sales Today (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_day, 0, ',', '.') }}</h4><i class="icon-bg"
-                                        data-feather="credit-card"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">All Sales (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_total, 0, ',', '.') }}</h4><i
-                                        class="icon-bg" data-feather="credit-card"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan
-            @can('isVerificator')
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="award"></i></div>
-                                <div class="media-body"><span class="m-0">Verify Order Today</span>
-                                    <h4 class="mb-0 counter">{{ $so_verify }}</h4><i class="icon-bg"
-                                        data-feather="award"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="bookmark"></i></div>
-                                <div class="media-body"><span class="m-0">Unverified orders
-                                        Today</span>
-                                    <h4 class="mb-0 counter">{{ $so_no_verif }}</h4><i class="icon-bg"
-                                        data-feather="bookmark"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sales (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_today, 0, ',', '.') }}</h4><i
-                                        class="icon-bg" data-feather="credit-card"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan
-            @can('isFinance')
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="award"></i></div>
-                                <div class="media-body"><span class="m-0">Approve Today</span>
-                                    <h4 class="mb-0 counter">{{ $approve_today }}</h4><i class="icon-bg"
-                                        data-feather="award"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0"> Sales Today (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_today, 0, ',', '.') }}</h4><i
-                                        class="icon-bg" data-feather="credit-card"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="user"></i></div>
-                                <div class="media-body"><span class="m-0">Customer Over Due Today</span>
-                                    <h4 class="mb-0 counter">{{ $over_due }}</h4><i class="icon-bg"
-                                        data-feather="user"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan
-            @can('isSuperAdmin')
-                <div class="col-sm-12 col-xl-3 col-lg-3">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="battery"></i></div>
-                                <div class="media-body"><span class="m-0">Total supplier</span>
-                                    <h4 class="mb-0 counter">{{ $supplier }}</h4><i class="icon-bg"
-                                        data-feather="battery"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-3 col-lg-3">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="user-plus"></i></div>
-                                <div class="media-body"><span class="m-0">Total Customer </span>
-                                    <h4 class="mb-0 counter">{{ $customer }}</h4><i class="icon-bg"
-                                        data-feather="user-plus"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-3 col-lg-3">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="user"></i></div>
-                                <div class="media-body"><span class="m-0">Total User</span>
-                                    <h4 class="mb-0 counter">{{ $user }}</h4><i class="icon-bg"
-                                        data-feather="user"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-3 col-lg-3">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="box"></i></div>
-                                <div class="media-body"><span class="m-0">Total Type Product</span>
-                                    <h4 class="mb-0 counter">{{ $produk }}</h4><i class="icon-bg"
-                                        data-feather="box"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sales Today (IDR) </span>
-                                    <h4 class="mb-0 counter">{{ number_format($so_today, 0, ',', '.') }}</h4><i
-                                        class="icon-bg" data-feather="credit-card"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sales This Month (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($month, 0, ',', '.') }}</h4><i class="icon-bg"
-                                        data-feather="credit-card"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-12 col-xl-4 col-lg-4">
-                    <div class="card o-hidden border-0">
-                        <div class="bg-primary b-r-4 card-body">
-                            <div class="media static-top-widget">
-                                <div class="align-self-center text-center"><i data-feather="credit-card"></i></div>
-                                <div class="media-body"><span class="m-0">Sales YTD (IDR)</span>
-                                    <h4 class="mb-0 counter">{{ number_format($year) }}</h4><i class="icon-bg"
-                                        data-feather="credit-card"></i>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endcan
+            @include('layouts.partials.card_information')
+            {{-- ! PO & Return --}}
+            {{-- ! maintenance info --}}
+            @include('layouts.partials.maintenance_information')
 
+            {{-- ! PO & Return --}}
 
-            <div class="col-xl-12 box-col-12 des-xl-100">
-                <div class="row">
+            {{-- ! AR & AP --}}
+            @include('layouts.partials.debt_receivable')
 
-                    <div class="col-xl-8 box-col-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <div class="header-top d-sm-flex justify-content-between align-items-center">
-                                    <h5>last 7 days sale</h5><br>
-                                    {{-- <div class="center-content">
-                                        <ul class="week-date">
-                                            <li class="font-primary">Today</li>
-                                            <li>Month </li>
-                                        </ul>
-                                    </div> --}}
-                                </div>
-                            </div>
-
-                            <div class="card-body chart-block p-0">
-                                {{-- <div id="chart-dash-2-line"></div> --}}
-                                <div class="chart-container">
-                                    <div class="row">
-                                        <div class="col-12">
-                                            <div id="chart-dash-2-line"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-4 box-col-12">
-                        <div class="card">
-                            <div class="cal-date-widget card-body">
-                                <div class="row">
-                                    <div class="col-xl-12 col-xs-12 col-md-12 col-sm-12">
-                                        <div class="cal-datepicker">
-                                            <div class="datepicker-here" data-language="en"> </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            {{-- ! Chart Sales --}}
+            <!--@include('layouts.partials.chart_sales')-->
 
         </div>
     </div>
     <!-- Container-fluid Ends-->
     @push('scripts')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.js"></script>
-
-        <script src="{{ asset('assets') }}/js/counter/jquery.counterup.min.js"></script>
-        <script src="{{ asset('assets') }}/js/counter/counter-custom.js"></script>
+        <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
         <script src="{{ asset('assets') }}/js/custom-card/custom-card.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.en.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.custom.js"></script>
-        <script src="{{ asset('assets') }}/js/counter/jquery.counterup.min.js"></script>
-
-        <script src="{{ asset('assets') }}/js/chart/chartist/chartist.js"></script>
-        <script src="{{ asset('assets') }}/js/chart/chartist/chartist-plugin-tooltip.js"></script>
-        <script src="{{ asset('assets') }}/js/chart/knob/knob.min.js"></script>
-        <script src="{{ asset('assets') }}/js/chart/knob/knob-chart.js"></script>
-        <script src="{{ asset('assets') }}/js/chart/apex-chart/apex-chart.js"></script>
-        <script src="{{ asset('assets') }}/js/chart/apex-chart/stock-prices.js"></script>
-        <script src="{{ asset('assets') }}/js/prism/prism.min.js"></script>
-        <script src="{{ asset('assets') }}/js/clipboard/clipboard.min.js"></script>
-        <script src="{{ asset('assets') }}/js/counter/jquery.waypoints.min.js"></script>
-        <script src="{{ asset('assets') }}/js/counter/jquery.counterup.min.js"></script>
-        <script src="{{ asset('assets') }}/js/counter/counter-custom.js"></script>
-        <script src="{{ asset('assets') }}/js/custom-card/custom-card.js"></script>
         <script src="{{ asset('assets') }}/js/notify/bootstrap-notify.min.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/jquery-jvectormap-2.0.2.min.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-world-mill-en.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-us-aea-en.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-uk-mill-en.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-au-mill.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-in-mill.js"></script>
-        <script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-asia-mill.js"></script>
-        {{-- <script src="{{ asset('assets') }}/js/dashboard/default.js"></script> --}}
-        <script src="{{ asset('assets') }}/js/notify/index.js"></script>
+        <!--<script src="{{ asset('assets') }}/js/vector-map/jquery-jvectormap-2.0.2.min.js"></script>-->
+        <!--<script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-world-mill-en.js"></script>-->
+        <!--<script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-us-aea-en.js"></script>-->
+        <!--<script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-uk-mill-en.js"></script>-->
+        <!--<script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-au-mill.js"></script>-->
+        <!--<script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-chicago-mill-en.js"></script>-->
+        <!--<script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-in-mill.js"></script>-->
+        <!--<script src="{{ asset('assets') }}/js/vector-map/map/jquery-jvectormap-asia-mill.js"></script>-->
+        <script src="{{ asset('assets') }}/js/dashboard/default.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.en.js"></script>
         <script src="{{ asset('assets') }}/js/datepicker/date-picker/datepicker.custom.js"></script>
         <script>
+            $(document).ready(function() {
+                $('.maintenance').DataTable({
+                    "searching": false,
+                    "paging": false,
+                    "info": false,
+                    "ordering": false,
+                });
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                const format_rec = (d) => {
+                    return `
+                            <div style="margin-left:2px;" class="row col-lg-3 card shadow">
+                                    <table class="table fw-bold" style="border:0;" border="0">
+                                        <tr>
+                                            <td>Remark</td>
+                                            <td>:</td>
+                                            <td>${d.remark}</td>
+                                        </tr>
+                                    </table>
+                            </div>
+                        `;
+                };
+                load_data();
+
+                function load_data(from_date = '', to_date = '') {
+                    $('#dataTable1').DataTable({
+                        "language": {
+                            "processing": `<i class="fa text-success fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
+                        },
+                        "lengthChange": false,
+                        "paging": false,
+                        "bPaginate": false, // disable pagination
+                        "bLengthChange": false, // disable show entries dropdown
+                        "searching": true,
+                        "ordering": true,
+                        "info": false,
+                        "autoWidth": false,
+
+                        processing: true,
+                        serverSide: true,
+                        pageLength: -1,
+                        ajax: {
+                            url: "{{ url('/report_receivable') }}",
+                            data: {
+                                from_date: from_date,
+                                to_date: to_date
+                            }
+                        },
+                        columns: [{
+                                data: null,
+                                orderable: false,
+                                searchable: false,
+                                className: 'details-control',
+                                defaultContent: '<i data-feather="plus"></i>'
+                            },
+                            {
+                                className: 'text-center fw-bold',
+                                data: 'order_number',
+                                name: 'order_number'
+                            },
+                            {
+                                className: 'text-center',
+                                data: 'order_date',
+                                name: 'order_date'
+                            },
+                            {
+                                className: 'text-center',
+                                data: 'due_date',
+                                name: 'due_date'
+                            },
+                            {
+                                className: 'text-center',
+                                data: 'top',
+                                name: 'top'
+                            },
+                            {
+                                className: 'text-center',
+                                data: 'customer',
+                                name: 'customer'
+                            },
+                            {
+                                "className": "text-end",
+                                data: 'receivable',
+                                name: 'receivable'
+                            },
+                        ],
+                        footerCallback: function(row, data, start, end, display) {
+                            var api = this.api(),
+                                data;
+
+                            // Remove the formatting to get integer data for summation
+                            var intVal = function(i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+
+                            // Total over all pages
+                            total = api
+                                .column(6)
+                                .data()
+                                .reduce(function(a, b) {
+                                    return intVal(a) + intVal(b.replace(/\./g, ''));
+                                }, 0);
+
+
+                            // Update footer
+                            $(api.column(6).footer()).html(
+                                total.toLocaleString()
+                            );
+                        },
+                        initComplete: function() {
+                            var table = $('#dataTable1').DataTable();
+                            $(document).find('#dataTable1 tbody').off().on('click', 'td.details-control',
+                                function() {
+                                    var tr = $(this).closest('tr');
+                                    var row = table.row(tr);
+
+                                    if (row.child.isShown()) {
+                                        // This row is already open - close it
+                                        row.child.hide();
+                                        tr.removeClass('shown');
+                                    } else {
+                                        // Open this row
+                                        row.child(format_rec(row.data())).show();
+                                        tr.addClass('shown');
+                                    }
+                                });
+                        },
+                        order: [],
+                        dom: 'Bfrtip',
+                        "searching": false
+                    });
+                }
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                load_data();
+
+                // const format_debt = (d) => {
+                //     return `
+                //             <div style="margin-left:2px;" class="row col-lg-3 card shadow">
+                //                     <table class="table fw-bold" style="border:0;" border="0">
+                //                         <tr>
+                //                             <td>TOP</td>
+                //                             <td>:</td>
+                //                             <td>${d.top}</td>
+                //                         </tr>
+                //                         <tr>
+                //                             <td>Remark</td>
+                //                             <td>:</td>
+                //                             <td>${d.remark}</td>
+                //                         </tr>
+                //                     </table>
+                //             </div>
+                //         `;
+                // };
+
+                function load_data(from_date = '', to_date = '') {
+                    $('#dataTable').DataTable({
+                        "language": {
+                            "processing": `<i class="fa text-success fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
+                        },
+                        "lengthChange": false,
+                        "paging": false,
+                        "bPaginate": false, // disable pagination
+                        "bLengthChange": false, // disable show entries dropdown
+                        "searching": true,
+                        "ordering": true,
+                        "info": false,
+                        "autoWidth": false,
+
+                        processing: true,
+                        serverSide: true,
+                        pageLength: -1,
+                        ajax: {
+                            url: "{{ url('/report_debt') }}",
+                            data: {
+                                from_date: from_date,
+                                to_date: to_date
+                            }
+                        },
+                        columns: [
+                            // {
+                            //     data: null,
+                            //     orderable: false,
+                            //     searchable: false,
+                            //     className: 'details-control',
+                            //     defaultContent: '<i data-feather="plus"></i>'
+                            // },
+                            {
+                                className: 'text-center fw-bold',
+                                data: 'order_number',
+                                name: 'order_number'
+                            },
+                            {
+                                className: 'text-center',
+
+                                data: 'order_date',
+                                name: 'order_date'
+                            },
+                            {
+                                className: 'text-center',
+
+                                data: 'due_date',
+                                name: 'due_date'
+                            },
+                            {
+                                className: 'text-center',
+                                data: 'supplier_id',
+                                name: 'supplier_id'
+                            },
+                            {
+                                "className": "text-end",
+                                data: 'debt',
+                                name: 'debt'
+                            },
+                            {
+                                className: 'text-center',
+                                data: 'remark',
+                                name: 'remark'
+                            },
+                        ],
+                        footerCallback: function(row, data, start, end, display) {
+                            var api = this.api(),
+                                data;
+
+                            // Remove the formatting to get integer data for summation
+                            var intVal = function(i) {
+                                return typeof i === 'string' ?
+                                    i.replace(/[\$,]/g, '') * 1 :
+                                    typeof i === 'number' ?
+                                    i : 0;
+                            };
+
+                            // Total over all pages
+                            total = api
+                                .column(5)
+                                .data()
+                                .reduce(function(a, b) {
+                                    return intVal(a) + intVal(b.replace(/\./g, ''));
+                                }, 0);
+
+
+                            // Update footer
+                            $(api.column(5).footer()).html(
+                                total.toLocaleString()
+                            );
+                        },
+                        initComplete: function() {
+                            var table = $('#dataTable').DataTable();
+                            $(document).find('#dataTable tbody').off().on('click', 'td.details-control',
+                                function() {
+                                    var tr = $(this).closest('tr');
+                                    var row = table.row(tr);
+
+                                    if (row.child.isShown()) {
+                                        // This row is already open - close it
+                                        row.child.hide();
+                                        tr.removeClass('shown');
+                                    } else {
+                                        // Open this row
+                                        row.child(format_debt(row.data())).show();
+                                        tr.addClass('shown');
+                                    }
+                                });
+                        },
+
+                        order: [],
+                        dom: 'Bfrtip',
+                    });
+                }
+            });
+        </script>
+        <script>
             $(function() {
-                var cData = JSON.parse(`<?= $data['chart_data'] ?>`);
-                var bData = JSON.parse(`<?php echo $data_profit['chart_profit']; ?>`);
+                var cData = JSON.parse(`<?= $chart_data ?>`);
+                var bData = JSON.parse(`<?= $chart_profit ?>`);
                 var num = cData.data;
                 var text = cData.label;
                 var options = {
-
 
                     series: [{
                             name: '<span class="badge badge-warning">Income</span>',
@@ -449,7 +380,6 @@
                             data: bData.data,
                         }
                     ],
-
                     chart: {
                         animations: {
                             enabled: true,
@@ -470,14 +400,12 @@
                         toolbar: {
                             show: true,
                         },
-
                     },
                     labels: bData.label,
                     stroke: {
                         curve: 'smooth',
                         width: [5, 5],
                         dashArray: [0, 0]
-
                     },
                     fill: {
                         colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary],
@@ -492,7 +420,6 @@
                             stops: [0, 100]
                         }
                     },
-
                     markers: {
                         size: 5
                     },
@@ -518,11 +445,7 @@
                         tickAmount: 10,
                         labels: {
                             formatter: function(value) {
-                                return value.toLocaleString(
-                                    'id', {
-                                        minimumFractionDigits: 0,
-                                        maximumFractionDigits: 0
-                                    });
+                                return value.toLocaleString();
                             },
                         },
                     }, ],
@@ -532,11 +455,7 @@
                         y: {
                             formatter: function(y) {
                                 if (typeof y !== "undefined") {
-                                    return "Rp " + y.toLocaleString(
-                                        'id', {
-                                            minimumFractionDigits: 0,
-                                            maximumFractionDigits: 0
-                                        });
+                                    return "Rp " + y.toLocaleString();
                                 }
                                 return y;
                             }
@@ -547,13 +466,224 @@
                     },
                     colors: [vihoAdminConfig.primary, vihoAdminConfig.secondary]
                 };
-                // var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
-                // chart.render();
+
                 setTimeout(() => {
                     var chart = new ApexCharts(document.querySelector("#chart-dash-2-line"), options);
                     chart.render();
                     $('.main-nav').show();
                 }, 2100);
+            });
+            'use strict';
+            var notify = $.notify('<i class="fa fa-bell-o"></i><strong>Loading</strong> page Do not close this page...', {
+                type: 'theme',
+                allow_dismiss: true,
+                delay: 2000,
+                showProgressbar: true,
+                timer: 300
+            });
+
+            setTimeout(function() {
+                notify.update('message', '<i class="fa fa-bell-o"></i><strong>Loading</strong> Please Wait');
+            }, 1000);
+        </script>
+        <script>
+            $(document).ready(function() {
+                // $('#purchase').DataTable({
+                //     "language": {
+                //         "processing": `<i class="fa text-success fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
+                //     },
+                //     "lengthChange": false,
+                //     "paging": false,
+                //     "bPaginate": false, // disable pagination
+                //     "bLengthChange": false, // disable show entries dropdown
+                //     "searching": true,
+                //     "ordering": true,
+                //     "info": false,
+                //     "autoWidth": false,
+
+                //     processing: true,
+                //     serverSide: true,
+                //     pageLength: -1,
+                //     ajax: {
+                //         url: "{{ url('/purchase_home') }}",
+
+                //     },
+                //     columns: [{
+                //             className: 'text-center fw-bold',
+                //             data: 'order_number',
+                //             name: 'order_number'
+                //         },
+                //         {
+                //             className: 'text-center',
+
+                //             data: 'order_date',
+                //             name: 'order_date'
+                //         },
+                //         {
+                //             className: 'text-center',
+
+                //             data: 'vendor',
+                //             name: 'vendor'
+                //         },
+                //         {
+                //             className: 'text-center',
+                //             data: 'warehouse',
+                //             name: 'warehouse'
+                //         },
+                //         {
+                //             "className": "text-end",
+                //             data: 'total',
+                //             name: 'total'
+                //         },
+                //         {
+                //             "className": "text-end",
+                //             data: 'receive',
+                //             name: 'receive'
+                //         },
+                //         {
+                //             "className": "text-end",
+                //             data: 'settlement',
+                //             name: 'settlement'
+                //         },
+                //     ],
+                //     footerCallback: function(row, data, start, end, display) {
+                //         var api = this.api(),
+                //             data;
+
+                //         // Remove the formatting to get integer data for summation
+                //         var intVal = function(i) {
+                //             return typeof i === 'string' ?
+                //                 i.replace(/[\$,]/g, '') * 1 :
+                //                 typeof i === 'number' ?
+                //                 i : 0;
+                //         };
+
+                //         // Total over all pages
+                //         total = api
+                //             .column(5)
+                //             .data()
+                //             .reduce(function(a, b) {
+                //                 return intVal(a) + intVal(b.replace(/\./g, ''));
+                //             }, 0);
+
+
+                //         // Update footer
+                //         $(api.column(4).footer()).html(
+                //             total.toLocaleString()
+                //         );
+                //     },
+
+
+                //     order: [],
+                //     dom: 'Bfrtip',
+                // });
+
+            });
+
+            $(document).ready(function() {
+                // $('#return').DataTable({
+                //     "language": {
+                //         "processing": `<i class="fa text-success fa-refresh fa-spin fa-3x fa-fw"></i><span class="sr-only">Loading...</span>`,
+                //     },
+                //     "lengthChange": false,
+                //     "paging": false,
+                //     "bPaginate": false, // disable pagination
+                //     "bLengthChange": false, // disable show entries dropdown
+                //     "searching": true,
+                //     "ordering": true,
+                //     "info": false,
+                //     "autoWidth": false,
+
+                //     processing: true,
+                //     serverSide: true,
+                //     pageLength: -1,
+                //     ajax: {
+                //         url: "{{ url('/return_home') }}",
+
+                //     },
+                //     columns: [{
+                //             className: 'text-center fw-bold',
+                //             data: 'return_date',
+                //             name: 'return_date'
+                //         },
+                //         {
+                //             className: 'text-center',
+
+                //             data: 'return_number',
+                //             name: 'return_number'
+                //         },
+                //         {
+                //             className: 'text-center',
+
+                //             data: 'retail_id',
+                //             name: 'retail_id'
+                //         },
+                //         {
+                //             className: 'text-center',
+                //             data: 'total',
+                //             name: 'total'
+                //         },
+                //         {
+                //             "className": "text-end",
+                //             data: 'return_reason',
+                //             name: 'return_reason'
+                //         },
+                //         {
+                //             "className": "text-end",
+                //             data: 'created_by',
+                //             name: 'created_by'
+                //         },
+
+                //     ],
+                //     footerCallback: function(row, data, start, end, display) {
+                //         var api = this.api(),
+                //             data;
+
+                //         // Remove the formatting to get integer data for summation
+                //         var intVal = function(i) {
+                //             return typeof i === 'string' ?
+                //                 i.replace(/[\$,]/g, '') * 1 :
+                //                 typeof i === 'number' ?
+                //                 i : 0;
+                //         };
+
+                //         // Total over all pages
+                //         total = api
+                //             .column(5)
+                //             .data()
+                //             .reduce(function(a, b) {
+                //                 return intVal(a) + intVal(b.replace(/\./g, ''));
+                //             }, 0);
+
+
+                //         // Update footer
+                //         $(api.column(3).footer()).html(
+                //             total.toLocaleString()
+                //         );
+                //     },
+                //     // initComplete: function() {
+                //     //     var table = $('#return').DataTable();
+                //     //     $(document).find('#return tbody').off().on('click', 'td.details-control',
+                //     //         function() {
+                //     //             var tr = $(this).closest('tr');
+                //     //             var row = table.row(tr);
+
+                //     //             if (row.child.isShown()) {
+                //     //                 // This row is already open - close it
+                //     //                 row.child.hide();
+                //     //                 tr.removeClass('shown');
+                //     //             } else {
+                //     //                 // Open this row
+                //     //                 row.child(format_debt(row.data())).show();
+                //     //                 tr.addClass('shown');
+                //     //             }
+                //     //         });
+                //     // },
+
+                //     order: [],
+                //     dom: 'Bfrtip',
+                // });
+
             });
         </script>
     @endpush

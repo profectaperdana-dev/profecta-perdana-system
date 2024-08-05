@@ -23,7 +23,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold"> {{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create Claim
+                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">
                         {{ $title }}</h6>
                 </div>
 

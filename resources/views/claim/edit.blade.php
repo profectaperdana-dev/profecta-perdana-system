@@ -1,12 +1,7 @@
 @extends('layouts.master')
 @section('content')
     @push('css')
-        <link type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/south-street/jquery-ui.css"
-            rel="stylesheet">
-
-        <link rel="stylesheet" type="text/css" href="http://keith-wood.name/css/jquery.signature.css">
-        <link rel="stylesheet" type="text/css" href="{{ asset('assets/css/datatables.css') }}">
-
+        <link rel="stylesheet" type="text/css" href={{ url('css/jquery.signature.css') }}>
         <style>
             .kbw-signature {
                 width: 100%;
@@ -24,9 +19,7 @@
         <div class="page-header">
             <div class="row">
                 <div class="col-sm-6">
-                    <h3 class="font-weight-bold"> {{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
-                        {{ $title }}
+                    <h3 class="font-weight-bold">{{ $title }}</h3>
                 </div>
 
             </div>
@@ -35,10 +28,10 @@
     <!-- Container-fluid starts-->
     <div class="container-fluid">
         <div class="row">
-            <form class="needs-validation" novalidate method="post" action="{{ url('claim/' . $value->id) }}"
-                enctype="multipart/form-data">
+            <form class="needs-validation finishClaim" novalidate method="post"
+                action="{{ url('claim/' . $value->id . '/store/final') }}" enctype="multipart/form-data">
+                @method('POST')
                 @csrf
-                <input name="_method" type="hidden" value="PATCH">
                 @include('claim._form_finish')
             </form>
         </div>
@@ -47,15 +40,26 @@
     @push('scripts')
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
         <script src="{{ asset('js/jquery.ui.touch-punch.min.js') }}"></script>
-        <script type="text/javascript" src="http://keith-wood.name/js/jquery.signature.js"></script>
+        <script type="text/javascript" src="{{ asset('js/js/jquery.signature.js') }}"></script>
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
-        <script src="{{ asset('assets/js/datatable/datatables/datatable.custom.js') }}"></script>
         <script src="https://cdn.jsdelivr.net/npm/@emretulek/jbvalidator"></script>
         <script>
+            $(function() {
+                let validator = $('form.needs-validation').jbvalidator({
+                    errorMessage: true,
+                    successClass: false,
+                    language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
+                });
+                //custom validate methode
+                validator.validator.custom = function(el, event) {
+                    if ($(el).is('[name=signed]') && $(el).val().length < 1) {
+                        return "<span class='text-danger'>Please don't leave the signature form blank </span>";
+                    }
+                }
+                //reload instance after dynamic element is added
+                validator.reload();
+            });
             $(document).ready(function() {
-                // OTHER DIAGNOSE
-                // $('#otherDiagnosa').hide();
-
                 // OTHER DIAGNOSE
                 $('.reqdiag').attr('required', false);
                 $('#cekDiagnosa').click(function() {
@@ -67,43 +71,19 @@
                     } else {
                         $('#otherDiagnosa').attr('hidden', true);
                         $('.reqdiag').attr('required', false);
-
                     }
                 });
-
-
-
-
-                // SUBMIT 1x
-                // $('form').submit(function() {
-                //     $(this).find('button[type="submit"]').prop('disabled', true);
-                // });
-
                 // SIGNATURE
                 var sig = $('#sig').signature({
                     syncField: '#signature64',
                     syncFormat: 'PNG',
                     // distance: 0
                 });
-
                 // CLEAR SIGNATURE
                 $('#clear').click(function(e) {
                     e.preventDefault();
                     sig.signature('clear');
                     $("#signature64").val('');
-                });
-
-                // CUSTOMER
-                $('#otheCustomer').hide();
-                $('#cust').change(function() {
-                    var val_cust = $('#cust').val();
-
-                    if (val_cust == 'other') {
-                        $('#otheCustomer').show();
-                    } else {
-                        $('#otheCustomer').hide();
-
-                    }
                 });
 
                 //    PREVIEW IMAGE
@@ -122,26 +102,47 @@
                     }
                 });
             });
-        </script>
-        <script>
-            $(function() {
+            $(document).on('submit', '.finishClaim', function(event) {
+                event.preventDefault();
+                var form_data = new FormData($(this)[0]);
+                var formElement = $(this);
+                var id = `{{ $value->id }}`;
+                let action = $(this).attr('action');
+                console.log(action);
+                let url = `{{ url('history_claim') }}`;
+                $.ajax({
+                    url: action,
+                    type: "POST",
+                    dataType: "json",
+                    data: form_data,
+                    processData: false, // prevent jQuery from processing the data
+                    contentType: false, // prevent jQuery from setting the content type
+                    beforeSend: function() {
+                        $('.btnSubmit').attr('disabled', true);
+                        $('.btnSubmit').html(
+                            `<i class="fa fa-spinner fa-spin"></i> Processing...`
+                        );
+                    },
+                    success: function(response) {
+                        console.log(form_data);
+                        swal("Success !", response.message, "success", {
+                            button: "Close",
+                        });
+                        $('#cust').val(null).trigger('change');
+                        formElement[0].reset();
+                        window.location.href = url;
 
-                let validator = $('form.needs-validation').jbvalidator({
-                    errorMessage: true,
-                    successClass: true,
-                    language: "https://emretulek.github.io/jbvalidator/dist/lang/en.json"
-                });
-                //custom validate methode
-                validator.validator.custom = function(el, event) {
-                    if ($(el).is('[name=signed]') && $(el).val().length < 1) {
-                        return "<span class='text-danger'>Please don't leave the signature form blank </span>";
+                    },
+                    error: function(jqXHR, textStatus, errorThrown) {
+                        swal("Error !", 'Error : Please call your Most Valuable IT Team. ', "error", {
+                            button: "Close",
+                        });
+                    },
+                    complete: function() { // menambahkan fungsi complete untuk mengubah tampilan tombol kembali ke tampilan semula
+                        $('.btnSubmit').attr('disabled', false);
+                        $('.btnSubmit').html('Save');
                     }
-                }
-
-
-
-                //reload instance after dynamic element is added
-                validator.reload();
+                });
             })
         </script>
     @endpush

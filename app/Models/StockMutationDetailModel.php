@@ -20,4 +20,20 @@ class StockMutationDetailModel extends Model
     {
         return $this->hasOne(ProductModel::class, 'id', 'product_id')->withTrashed();
     }
+
+    public function productSecondBy()
+    {
+        return $this->hasOne(ProductTradeInModel::class, 'id', 'product_id')->withTrashed();
+    }
+
+    public function mutationDotBy()
+    {
+        return $this->hasMany(StockMutationDotModel::class, 'mutation_detail_id');
+    }
+
+    public function getDot($warehouse)
+    {
+        $get_dot = TyreDotModel::where('id_product', $this->product_id)->where('id_warehouse', $warehouse)->oldest('dot')->get();
+        return $get_dot;
+    }
 }

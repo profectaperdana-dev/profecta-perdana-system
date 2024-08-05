@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\AssetCategoryModel;
 use App\Models\AssetModel;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class AssetController extends Controller
 {
@@ -14,17 +18,52 @@ class AssetController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        if ($request->ajax()) {
+
+            $asset = AssetModel::with('createdBy', 'categoryBy')
+                ->oldest('asset_name')
+                ->get();
+
+            return datatables()->of($asset)
+                ->editColumn('qr', function ($data) {
+                    return QrCode::size(100)->generate(url('asset/information/' . $data->id));
+                })
+                ->editColumn('created_by', function ($data) {
+                    return $data->createdBy->name;
+                })
+
+                ->addIndexColumn() //memberikan penomoran
+                ->addColumn('action', function ($asset) {
+                    return view('assets._option', compact('asset'))->render();
+                })
+                ->rawColumns(['action'])
+                // ->rawColumns()
+                ->addIndexColumn()
+                ->make(true);
+        }
+
         $all_assets = AssetModel::with('createdBy')->latest()->get();
         $data = [
-            'title' => 'Asset Data',
+            'title' => 'Master Asset',
             'assets' => $all_assets
         ];
 
         return view('assets.index', $data);
     }
 
+
+    public function information($id)
+    {
+
+        $data = AssetModel::where('id', $id)->first();
+        // $data = [
+        //     'assets' => $data
+        // ];
+        // dd($data);
+        return view('assets.asset_info', compact('data'));
+    }
     /**
      * Show the form for creating a new resource.
      *
@@ -48,37 +87,82 @@ class AssetController extends Controller
      */
     public function store(Request $request)
     {
+        // dd(request()->all());
         //* validate
         $request->validate([
             "asset_category" => "required",
             "asset_name" => "required",
             "amount" => "required|numeric",
             "lifetime" => "required|numeric",
-            "acquisition_year" => "required",
-            "acquisition_cost" => "required|numeric"
+            // "acquisition_year" => "required",
+            "acquisition_cost" => "required|numeric",
+            // "range" => "required",
+            // "service_date" => "required",
+            // "next_service" => "required"
         ]);
 
-        $model = new AssetModel();
+        try {
+            DB::beginTransaction();
 
-        //Create Code
-        $selected_category = AssetCategoryModel::where('id', $request->asset_category)->first();
-        $code = $selected_category->code;
-        $count_asset = AssetModel::where('asset_code', 'LIKE', "%$code%")->max('id');
-        $model->asset_code = $code . ($count_asset + 1);
+            $model = new AssetModel();
 
-        $model->category_id = $request->asset_category;
-        $model->asset_name = $request->asset_name;
-        $model->amount = $request->amount;
-        $model->lifetime = $request->lifetime;
-        $model->acquisition_year = $request->acquisition_year;
-        $model->acquisition_cost = $request->acquisition_cost;
-        $model->created_by = Auth::user()->id;
-        $saved = $model->save();
+            //Create Code
+            $selected_category = AssetCategoryModel::where('id', $request->asset_category)->first();
+            $code = $selected_category->code;
+            $count_asset = AssetModel::where('asset_code', 'LIKE', "%$code%")->max('id');
+            $model->asset_code = $code . ($count_asset + 1);
+            $model->range = $request->range;
 
-        if ($saved) {
-            return redirect('/asset')->with('success', 'Add Asset Success!');
-        } else {
-            return redirect('/asset')->with('error', 'Add Asset Fail!');
+
+            $model->service_date = $request->service_date;
+            if ($model->service_date != '') {
+                $next = explode('/', $request->next_service);
+                $next_service = $next[2] . '-' . $next[1] . '-' . $next[0];
+                // dd($next_service);
+                $model->next_service = $next_service;
+                $now = date('Y-m-d');
+                $earlier = new DateTime($now);
+                $later = new DateTime($model->next_service);
+                $abs_diff = $later->diff($earlier)->format('%a'); //3
+                if ($model->next_service > $now) {
+                    if ($abs_diff > 7) {
+                        $model->status = 'Maintenance Is Complete';
+                    } else {
+                        $model->status = 'Un Maintenance';
+                    }
+                }
+            }
+
+
+
+            $model->category_id = $request->asset_category;
+            $model->asset_name = $request->asset_name;
+            $model->amount = $request->amount;
+            $model->lifetime = $request->lifetime;
+            $model->acquisition_year = $request->acquisition_year;
+            $model->acquisition_cost = $request->acquisition_cost;
+            $model->created_by = Auth::user()->id;
+
+            // $image = QrCode::format('png')
+            //     ->merge(public_path('images/1644463030.png'), 0.5, true)
+            //     ->size(500)
+            //     ->errorCorrection('H')
+            //     ->generate('A simple example of QR code!');
+            // $model->qr_code = $output_file;
+            $saved = $model->save();
+
+            if ($saved) {
+
+                DB::commit();
+                return redirect('/asset')->with('success', 'Add Asset Success!');
+            } else {
+
+                DB::rollback();
+                return redirect('/asset')->with('error', 'Add Asset Fail!');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/asset')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -122,18 +206,28 @@ class AssetController extends Controller
             "acquisition_cost" => "required|numeric"
         ]);
 
-        $model = AssetModel::where('id', $id)->first();
-        $model->asset_name = $request->asset_name;
-        $model->amount = $request->amount;
-        $model->lifetime = $request->lifetime;
-        $model->acquisition_year = $request->acquisition_year;
-        $model->acquisition_cost = $request->acquisition_cost;
-        $saved = $model->save();
+        try {
+            DB::beginTransaction();
+            $model = AssetModel::where('id', $id)->first();
+            $model->asset_name = $request->asset_name;
+            $model->amount = $request->amount;
+            $model->lifetime = $request->lifetime;
+            $model->acquisition_year = $request->acquisition_year;
+            $model->acquisition_cost = $request->acquisition_cost;
+            $saved = $model->save();
 
-        if ($saved) {
-            return redirect('/asset')->with('success', 'Update Asset Success!');
-        } else {
-            return redirect('/asset')->with('error', 'Update Asset Fail!');
+            if ($saved) {
+
+                DB::commit();
+                return redirect('/asset')->with('success', 'Update Asset Success!');
+            } else {
+
+                DB::rollback();
+                return redirect('/asset')->with('error', 'Update Asset Fail!');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/asset')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 
@@ -145,12 +239,22 @@ class AssetController extends Controller
      */
     public function destroy($id)
     {
-        $data = AssetModel::find($id);
-        $saved = $data->delete();
-        if ($saved) {
-            return redirect('/asset')->with('success', 'Data has been deleted');
-        } else {
-            return redirect('/asset')->with('error', 'Data failed to delete');
+        try {
+            DB::beginTransaction();
+            $data = AssetModel::find($id);
+            $saved = $data->delete();
+            if ($saved) {
+
+                DB::commit();
+                return redirect('/asset')->with('success', 'Data has been deleted');
+            } else {
+
+                DB::rollback();
+                return redirect('/asset')->with('error', 'Data failed to delete');
+            }
+        } catch (\Exception $e) {
+            DB::rollback();
+            return redirect('/asset')->with('error', $e->getMessage() . '. Please call your Most Valuable IT Team.');
         }
     }
 }

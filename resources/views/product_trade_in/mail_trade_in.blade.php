@@ -318,7 +318,7 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            Invoice To
+                                                                                                            Ref. Invoice
                                                                                                         </div>
                                                                                                     </td>
                                                                                                     <td class="col-1 text-left text-sm"
@@ -335,16 +335,14 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            #{{ $data->customer }}
-                                                                                                            -
-                                                                                                            {{ $data->customer_phone }}
+                                                                                                            {{ $data->retail_order_number }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
                                                                                     </div>
-                                                                                    <div class="row fw-700"
+                                                                                    {{-- <div class="row fw-700"
                                                                                         style="margin-right: -24px; font-weight: 700 !important;">
                                                                                         <table class=""
                                                                                             role="presentation"
@@ -386,7 +384,7 @@
                                                                                                 </tr>
                                                                                             </tbody>
                                                                                         </table>
-                                                                                    </div>
+                                                                                    </div> --}}
                                                                                     <div class="row fw-700"
                                                                                         style="margin-right: -24px; font-weight: 700 !important;">
                                                                                         <table class=""
@@ -420,7 +418,7 @@
                                                                                                         valign="top">
                                                                                                         <div class="text-sm"
                                                                                                             style="font-size: 14px; line-height: 16.8px;">
-                                                                                                            {{ $data->trade_in_date }}
+                                                                                                            {{ date('d M y', strtotime($data->trade_in_date)) }}
                                                                                                         </div>
                                                                                                     </td>
                                                                                                 </tr>

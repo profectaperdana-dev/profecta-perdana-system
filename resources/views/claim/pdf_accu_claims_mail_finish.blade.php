@@ -162,34 +162,34 @@
                                                         <tbody>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Claim Number</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->claim_number }}</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Claim Date</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ date('d F y', strtotime($data->claim_date)) }}
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Customer</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->sub_name }}</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Phone/Email</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->sub_phone }}@if ($data->sub_email != null)
                                                                         /{{ $data->sub_email }}
@@ -198,41 +198,92 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Plate Number</td>
                                                                 <td class="text-xs"
-                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
                                                                     {{ $data->plate_number }}</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Car Type</td>
                                                                 <td class="text-xs"
-                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="text-transform: uppercase !important;line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
-                                                                    {{ $data->carBrandBy->car_brand }}
-                                                                    {{ $data->carTypeBy->car_type }}
+                                                                    @if ($data->other_machine != null)
+                                                                        {{ $data->other_machine }}
+                                                                    @elseif ($data->car_brand_id)
+                                                                        {{ $data->carBrandBy->car_brand }} -
+                                                                        @if (is_numeric($data->car_type_id))
+                                                                            {{ $data->carTypeBy->car_type }}
+                                                                        @else
+                                                                            {{ $data->car_type_id }}
+                                                                        @endif
+                                                                    @else
+                                                                        {{ $data->motorBrandBy->name_brand }} -
+                                                                        @if (is_numeric($data->motor_type_id))
+                                                                            {{ $data->motorTypeBy->name_type }}
+                                                                        @else
+                                                                            {{ $data->motor_type_id }}
+                                                                        @endif
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">Battery Type</td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="left" valign="top">:
-                                                                    ({{ $data->material }}/{{ $data->type_material }})
-                                                                    -
-                                                                    {{ $data->productSales->nama_barang }}
+                                                                    {{ $data->material . ' ' . $data->type_material . ' ' . $data->productSales->nama_barang }}
+                                                                </td>
+                                                                @if ($data->loan_product_id != null)
+                                                                    <td class="text-xs"
+                                                                        style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                        align="left" valign="top">Lended Battery
+                                                                    </td>
+                                                                    <td class="text-xs"
+                                                                        style="line-height: 14.4px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                        align="left" valign="top">:
+                                                                        {{ $data->loanBy->sub_materials->nama_sub_material .
+                                                                            ' ' .
+                                                                            $data->loanBy->sub_types->type_name .
+                                                                            ' ' .
+                                                                            $data->loanBy->nama_barang }}
+                                                                    </td>
+                                                                @else
+                                                                    <td class="text-xs"
+                                                                        style="line-height: 10px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                        align="left" valign="top">&nbsp;
+                                                                    </td>
+                                                                    <td class="text-xs"
+                                                                        style="line-height: 10px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                        align="left" valign="top">&nbsp;
+                                                                    </td>
+                                                                @endif
+
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 10px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">Product Code</td>
+                                                                <td class="text-xs"
+                                                                    style="line-height: 10px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">:
+                                                                    {{ $data->product_code }}
+                                                                </td>
+
+                                                                <td class="text-xs"
+                                                                    style="line-height: 10px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">&nbsp;
                                                                 </td>
                                                                 <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">Loaned Battery</td>
-                                                                <td class="text-xs"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                    align="left" valign="top">:
-                                                                    ({{ $data->loanBy->sub_materials->nama_sub_material }}/{{ $data->loanBy->sub_types->type_name }}
-                                                                    ) - {{ $data->loanBy->nama_barang }}</td>
+                                                                    style="line-height: 10px; font-size: 8px;white-space:nowrap; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    align="left" valign="top">&nbsp;
+                                                                </td>
+
+
                                                             </tr>
                                                             <tr>
                                                                 <td colspan="4"
@@ -245,19 +296,19 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 10px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">Voltage :
                                                                     {{ $data->f_voltage }}</td>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 10px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">CCA :
                                                                     {{ $data->f_cca }}</td>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 10px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">Starting :
                                                                     {{ $data->f_starting }}</td>
                                                                 <td class="text-xs text-center"
-                                                                    style="line-height: 14.4px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                    style="line-height: 14.4px; font-size: 10px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                     align="center" valign="top">Charging :
                                                                     {{ $data->f_charging }}</td>
                                                             </tr>

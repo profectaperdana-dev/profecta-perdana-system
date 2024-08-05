@@ -540,14 +540,15 @@
                                                                                                     valign="top">Qty
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
-                                                                                                    align="center"
+                                                                                                    {{-- align="center"
                                                                                                     valign="top">Disc
                                                                                                     (%)
-                                                                                                </th>
-                                                                                                <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                </th> --}}
+                                                                                                    <th
+                                                                                                    style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="center"
-                                                                                                    valign="top">Disc
-                                                                                                    (Rp)
+                                                                                                    valign="top">
+                                                                                                    &nbsp;
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-bottom-width: 2px; border-bottom-color: #e2e8f0; border-bottom-style: solid; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
@@ -571,28 +572,32 @@
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="left"
                                                                                                         valign="top">
+                                                                                                        {{ $value->productBy->sub_materials->nama_sub_material }}&nbsp;
+                                                                                                        {{ $value->productBy->sub_types->type_name }}&nbsp;
                                                                                                         {{ $value->productBy->nama_barang }}
+                                                                                                        &nbsp;
+                                                                                                        {{ $value->product_code }}
                                                                                                     </td>
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
                                                                                                         valign="top">
                                                                                                         {{ $value->qty }}
                                                                                                     </td>
-                                                                                                    <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
+                                                                                                    {{-- <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
                                                                                                         valign="top">
                                                                                                         {{ $value->discount }}
-                                                                                                    </td>
+                                                                                                    </td> --}}
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="center"
                                                                                                         valign="top">
-                                                                                                        {{ $value->discount_rp }}
+                                                                                                        &nbsp;
                                                                                                     </td>
                                                                                                     @php
                                                                                                         $retail_price = 0;
                                                                                                         foreach ($value->retailPriceBy as $retail) {
                                                                                                             if ($retail->id_warehouse == Auth::user()->warehouse_id) {
-                                                                                                                $retail_price = $retail->harga_jual;
+                                                                                                                $retail_price = (int) $retail->harga_jual;
                                                                                                             }
                                                                                                         }
                                                                                                         $ppn_cost = $ppn * $retail_price;
@@ -605,7 +610,7 @@
                                                                                                     <td style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                         align="right"
                                                                                                         valign="top">
-                                                                                                        {{ number_format($total, 0, ',', '.') }}
+                                                                                                        {{ number_format((int) $total, 0, ',', '.') }}
                                                                                                     </td>
                                                                                                 </tr>
                                                                                                 {{-- @endfor --}}
@@ -618,7 +623,7 @@
                                                                                                     style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
-                                                                                                    Total (Exclude PPN)
+                                                                                                    Total (Excl PPN)
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
@@ -647,7 +652,7 @@
                                                                                                     style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"
                                                                                                     valign="top">
-                                                                                                    Total (Include PPN)
+                                                                                                    Total (Incl PPN)
                                                                                                 </th>
                                                                                                 <th style="line-height: 24px; font-size: 12px; border-top-width: 1px; border-top-color: #e2e8f0; border-top-style: solid; margin: 0; padding: 12px;"
                                                                                                     align="right"

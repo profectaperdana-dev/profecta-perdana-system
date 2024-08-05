@@ -9,8 +9,7 @@
             <div class="row">
                 <div class="col-sm-6">
                     <h3 class="font-weight-bold">{{ $title }}</h3>
-                    <h6 class="font-weight-normal mb-0 breadcrumb-item active">Create, Read, Update and Delete
-                        {{ $title }}
+                   
                 </div>
 
             </div>
@@ -36,7 +35,7 @@
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <label>
-                                                Material Source</label>
+                                                Product Material</label>
                                             <select name="material_id" required
                                                 class="form-control materials {{ $errors->first('material_id') ? ' is-invalid' : '' }}">
                                                 <option value="" selected>-Choose Material Source-</option>
@@ -55,9 +54,9 @@
                                     </div>
                                     <div class="form-group row">
                                         <div class="col-md-12">
-                                            <label class="font-weight-bold">Name Product Sub Material</label>
+                                            <label class="font-weight-bold"> Product Sub Material</label>
                                             <input type="text"
-                                                class="form-control text-capitalize {{ $errors->first('nama_sub_material') ? ' is-invalid' : '' }}"
+                                                class="form-control {{ $errors->first('nama_sub_material') ? ' is-invalid' : '' }}"
                                                 name="nama_sub_material" placeholder="Name Product Sub Material"
                                                 value="{{ old('nama_sub_material') }}">
                                             @error('nama_sub_material')
@@ -65,17 +64,19 @@
                                             @enderror
                                         </div>
                                     </div>
-                                    <div class="form-group col-md-12">
-                                        <label class="font-weight-bold ">Code Product Sub
-                                            Material</label>
-                                        <input type="text"
-                                            class="form-control text-uppercase {{ $errors->first('code_sub_material') ? ' is-invalid' : '' }}"
-                                            name="code_sub_material" placeholder="code of product sub materials"
-                                            max="3" required value="{{ old('code_sub_material') }}">
-                                        @error('code_sub_material')
-                                            <small class="text-danger">{{ $message }}.</small>
-                                        @enderror
-                                    </div>
+                                    <!--<div class="form-group col-md-12">-->
+                                    <!--    <label class="font-weight-bold ">Code Product Sub-->
+                                    <!--        Material</label>-->
+                                    <!--    <input type="text"-->
+                                    <!--        class="form-control text-uppercase {{ $errors->first('code_sub_material') ? ' is-invalid' : '' }}"-->
+                                    <!--        name="code_sub_material" placeholder="code of product sub materials"-->
+                                    <!--        max="3" required value="{{ old('code_sub_material') }}">-->
+                                    <!--    @error('code_sub_material')
+        -->
+                                        <!--        <small class="text-danger">{{ $message }}.</small>-->
+                                        <!--
+    @enderror-->
+                                    <!--</div>-->
                                     <div class="form-group row">
                                         <div class="col-md-12">
                                             <button type="reset" class="btn btn-warning"
@@ -99,20 +100,26 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table id="basic-2" class="display expandable-table text-capitalize" style="width:100%">
+                            <table id="basic2" class="display expandable-table table table-striped table-sm"
+                                style="width:100%">
                                 <thead>
-                                    <tr>
-                                        <th></th>
+                                    <tr class="text-center">
                                         <th>#</th>
                                         <th>Sub Material</th>
-                                        <th>Material Source</th>
-                                        <th>Code Sub Material</th>
+                                        <th>Product Material </th>
+                                        <th></th>
+                                        <!--<th>Code Sub Material</th>-->
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {{-- ! read data --}}
                                     @foreach ($data as $key => $value)
                                         <tr>
+
+
+                                            <td class="text-end">{{ $loop->iteration }}</td>
+                                            <td>{{ $value->nama_sub_material }}</td>
+                                            <td>{{ $value->nama_material }}</td>
                                             <td style="width: 10%">
                                                 <a href="#" data-bs-toggle="dropdown" aria-haspopup="true"
                                                     aria-expanded="false"><i data-feather="settings"></i></a>
@@ -126,131 +133,7 @@
                                                         data-bs-target="#deleteData{{ $value->id }}">Delete</a>
                                                 </div>
                                             </td>
-                                            {{-- ! Modul Edit --}}
-                                            <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <form method="post"
-                                                        action="{{ url('product_sub_materials/' . $value->id) }}"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input name="_method" type="hidden" value="PATCH">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Change Data
-                                                                    {{ $value->nama_material }}</h5>
-                                                                <button class="btn-close" type="button"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="container-fluid">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <label>
-                                                                                Material Source</label>
-                                                                            <select name="material_id_edit" required
-                                                                                class="form-control materials {{ $errors->first('material_id_edit') ? ' is-invalid' : '' }}">
-                                                                                <option value="" selected>-Choose
-                                                                                    Material
-                                                                                    Source-</option>
-                                                                                @foreach ($materials as $material)
-                                                                                    <option value="{{ $material->id }}"
-                                                                                        @if ($material->id == $value->material_id) selected @endif>
-                                                                                        {{ $material->nama_material }}
-                                                                                    </option>
-                                                                                @endforeach
-                                                                            </select>
-                                                                            @error('material_id_edit')
-                                                                                <div class="invalid-feedback">
-                                                                                    {{ $message }}.
-                                                                                </div>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <label class="font-weight-bold">Name
-                                                                                Product Sub Material</label>
-                                                                            <input type="text"
-                                                                                class="form-control text-capitalize {{ $errors->first('editnama_submaterial') ? ' is-invalid' : '' }}"
-                                                                                name="editnama_submaterial"
-                                                                                value="{{ $value->nama_sub_material }}"
-                                                                                placeholder="Name Unit of Measurement">
-                                                                            @error('editnama_submaterial')
-                                                                                <small class="text-danger">
-                                                                                    {{ $message }}.</small>
-                                                                            @enderror
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="form-group col-md-12">
-                                                                        <label class="font-weight-bold ">Code Product Sub
-                                                                            Material</label>
-                                                                        <input type="text"
-                                                                            class="form-control text-uppercase {{ $errors->first('editcode_sub_material') ? ' is-invalid' : '' }}"
-                                                                            name="editcode_sub_material"
-                                                                            placeholder="code of product sub materials"
-                                                                            max="3" required
-                                                                            value="{{ $value->editcode_sub_material }}">
-                                                                        @error('editcode_sub_material')
-                                                                            <small
-                                                                                class="text-danger">{{ $message }}.</small>
-                                                                        @enderror
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-danger" type="button"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button type="reset"
-                                                                    class="btn btn-warning">Reset</button>
-                                                                <button class="btn btn-primary" type="submit">Save
-                                                                    changes</button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            {{-- ! End Modal Edit  --}}
-                                            {{-- ! Modul Delete  --}}
-                                            <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <form method="post"
-                                                        action="{{ url('product_sub_materials/' . $value->id) }}"
-                                                        enctype="multipart/form-data">
-                                                        @csrf
-                                                        <input name="_method" type="hidden" value="DELETE">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h5 class="modal-title" id="exampleModalLabel">Delete Data
-                                                                    {{ $value->nama_material }}</h5>
-                                                                <button class="btn-close" type="button"
-                                                                    data-bs-dismiss="modal" aria-label="Close"></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="container-fluid">
-                                                                    <div class="form-group row">
-                                                                        <div class="col-md-12">
-                                                                            <h5>Are you sure delete this data ?</h5>
-                                                                        </div>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-danger" type="button"
-                                                                    data-bs-dismiss="modal">Close</button>
-                                                                <button class="btn btn-primary" type="submit">Yes, delete
-                                                                </button>
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                            {{-- ! End Modal Delete --}}
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $value->nama_sub_material }}</td>
-                                            <td>{{ $value->nama_material }}</td>
-                                            <td class="text-uppercase">{{ $value->code_sub_material }}</td>
+                                            <!--<td class="text-uppercase">{{ $value->code_sub_material }}</td>-->
                                         </tr>
                                     @endforeach
                                     {{-- ! end read data --}}
@@ -262,6 +145,125 @@
             </div>
         </div>
     </div>
+    @foreach ($data as $key => $value)
+        {{-- ! Modul Edit --}}
+        <div class="modal fade" id="changeData{{ $value->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="post" action="{{ url('product_sub_materials/' . $value->id) }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input name="_method" type="hidden" value="PATCH">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Change Data
+                                {{ $value->nama_material }}</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label>
+                                            Material Source</label>
+                                        <select name="material_id_edit" required
+                                            class="form-control materials {{ $errors->first('material_id_edit') ? ' is-invalid' : '' }}">
+                                            <option value="" selected>-Choose
+                                                Material
+                                                Source-</option>
+                                            @foreach ($materials as $material)
+                                                <option value="{{ $material->id }}"
+                                                    @if ($material->id == $value->material_id) selected @endif>
+                                                    {{ $material->nama_material }}
+                                                </option>
+                                            @endforeach
+                                        </select>
+                                        @error('material_id_edit')
+                                            <div class="invalid-feedback">
+                                                {{ $message }}.
+                                            </div>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <label class="font-weight-bold">Name
+                                            Product Sub Material</label>
+                                        <input type="text"
+                                            class="form-control{{ $errors->first('editnama_submaterial') ? ' is-invalid' : '' }}"
+                                            name="editnama_submaterial" value="{{ $value->nama_sub_material }}"
+                                            placeholder="Name Unit of Measurement">
+                                        @error('editnama_submaterial')
+                                            <small class="text-danger">
+                                                {{ $message }}.</small>
+                                        @enderror
+                                    </div>
+                                </div>
+                                <!--<div class="form-group col-md-12">-->
+                                <!--    <label class="font-weight-bold ">Code Product Sub-->
+                                <!--        Material</label>-->
+                                <!--    <input type="text"-->
+                                {{-- <!--        class="form-control text-uppercase {{ $errors->first('editcode_sub_material') ? ' is-invalid' : '' }}"--> --}}
+                                <!--        name="editcode_sub_material"-->
+                                <!--        placeholder="code of product sub materials"-->
+                                <!--        max="3" required-->
+                                {{-- <!--        value="{{ $value->editcode_sub_material }}">--> --}}
+                                {{-- <!--    @error('editcode_sub_material') --}}
+
+                                <!--        <small-->
+                                {{-- <!--            class="text-danger">{{ $message }}.</small>--> --}}
+                                <!--
+                                                            {{-- @enderror--> --}}
+                                                            </div>-->
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                            <button type="reset" class="btn btn-warning">Reset</button>
+                            <button class="btn btn-primary" type="submit">Save
+                                changes</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {{-- ! End Modal Edit  --}}
+        {{-- ! Modul Delete  --}}
+        <div class="modal fade" id="deleteData{{ $value->id }}" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <form method="post" action="{{ url('product_sub_materials/' . $value->id) }}"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <input name="_method" type="hidden" value="DELETE">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Delete Data
+                                {{ $value->nama_material }}</h5>
+                            <button class="btn-close" type="button" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="container-fluid">
+                                <div class="form-group row">
+                                    <div class="col-md-12">
+                                        <h5>Are you sure delete this data ?</h5>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button class="btn btn-danger" type="button" data-bs-dismiss="modal">Close</button>
+                            <button class="btn btn-primary" type="submit">Yes, delete
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        {{-- ! End Modal Delete --}}
+    @endforeach
     <!-- Container-fluid Ends-->
     @push('scripts')
         <script src="{{ asset('assets/js/datatable/datatables/jquery.dataTables.min.js') }}"></script>
@@ -269,13 +271,55 @@
         <script>
             $(document).on("click", ".modal-btn", function(event) {
                 let modal_id = $(this).attr('data-bs-target');
-                console.log(modal_id);
+                // console.log(modal_id);
 
                 $(modal_id).find(".materials").select2({
                     width: "100%",
                     dropdownParent: modal_id,
                 });
 
+
+
+            });
+        </script>
+        <script>
+            $(document).ready(function() {
+                $(document).on('submit', 'form', function() {
+                    // console.log('click');
+                    var form = $(this);
+                    var button = form.find('button[type="submit"]');
+                    // console.log(form.html());
+
+                    if (form[0].checkValidity()) { // check if form has input values
+                        button.prop('disabled', true);
+
+                    }
+                });
+                var t = $('#basic2').DataTable({
+                    columnDefs: [{
+                        searchable: false,
+                        orderable: false,
+                        targets: 0,
+                    }, {
+                        searchable: false,
+                        orderable: false,
+                        targets: 1,
+                    }, ],
+                    order: [
+                        [1, 'asc']
+                    ],
+                });
+
+                t.on('order.dt search.dt', function() {
+                    let i = 1;
+
+                    t.cells(null, 0, {
+                        search: 'applied',
+                        order: 'applied'
+                    }).every(function(cell) {
+                        this.data(i++);
+                    });
+                }).draw();
             });
         </script>
     @endpush

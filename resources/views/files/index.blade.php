@@ -91,10 +91,10 @@
                                                 </p>
 
                                                 <p class="text-primary">
-                                                    @php
-                                                        $fileSize = File::size(public_path('pdf/' . $value->order_number . '.pdf'));
-                                                    @endphp
-                                                    <span class="text-dark">Size : </span> {{ $fileSize / 1000 }} Kb
+                                                    {{-- @php
+                                                        $fileSize = File::size(url('pdf/' . $value->order_number . '.pdf'));
+                                                    @endphp --}}
+                                                    {{-- <span class="text-dark">Size : </span> {{ $fileSize / 1000 }} Kb --}}
                                                 </p>
                                             </div>
                                         </li>
@@ -111,8 +111,8 @@
                                                     </div>
                                                     <div class="modal-body">
 
-                                                        <iframe src="{{ asset('pdf/' . $value->pdf_invoice) }}"
-                                                            width="100%" height="500px">
+                                                        <iframe src="{{ url('pdf/' . $value->pdf_invoice) }}"
+                                                            width="100%" height="5000px">
                                                         </iframe>
 
                                                     </div>
